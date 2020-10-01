@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+}
+
+input.ltr-input,
+.ltr-input input {
+  text-align: left;
+  direction: ltr;
+}
+
+input.rtl-placeholder::placeholder,
+.rtl-placeholder input::placeholder {
+  text-align: right;
+  direction: rtl;
+}
+
+@media (max-width: 1000px) {
+  .MuiTableCell-body.MuiTableCell-root {
+    padding: 5px;
+  }
+}
+
+.MuiAlert-message {
+  width: 100%;
+}
+
+.MuiDialog-paperScrollBody.MuiDialog-paper {
+  overflow-y: hidden;
+}
