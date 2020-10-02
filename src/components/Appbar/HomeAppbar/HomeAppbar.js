@@ -101,9 +101,9 @@ function HomeAppbar() {
             <ListItem>
               <AuthItem />
             </ListItem>
-            <ListItem button>
+            {/* <ListItem button>
               <ListItemText primary={'خروج'} />
-            </ListItem>
+            </ListItem> */}
           </List>
         </Drawer>
       </Hidden>
