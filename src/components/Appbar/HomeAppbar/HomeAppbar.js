@@ -13,15 +13,10 @@ import {
   ListItemText,
 } from '@material-ui/core';
 
-import clsx from 'clsx';
-
 import { connect } from 'react-redux';
-import {
-  Menu as MenuIcon,
-  Inbox as InboxIcon,
-  Mail as MailIcon,
-} from '@material-ui/icons';
-import HideOnScroll from './HideOnScroll';
+import { Menu as MenuIcon } from '@material-ui/icons';
+import HideOnScroll from './components/HideOnScroll';
+import AuthItem from './components/AuthItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,6 +85,9 @@ function HomeAppbar() {
                 </Button>
               </Hidden>
               <div className={classes.grow} />
+              <Hidden xsDown>
+                <AuthItem />
+              </Hidden>
             </Toolbar>
           </Container>
         </AppBar>
@@ -101,17 +99,7 @@ function HomeAppbar() {
           onClose={() => setDrawerOepn(false)}>
           <List>
             <ListItem>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.space}>
-                ورود
-              </Button>
-              <Button
-                variant="contained"
-                className={clsx(classes.signUpColor, classes.space)}>
-                ثبت‌نام
-              </Button>
+              <AuthItem />
             </ListItem>
             <ListItem button>
               <ListItemText primary={'خروج'} />

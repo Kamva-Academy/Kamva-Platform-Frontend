@@ -13,6 +13,8 @@
     "notistack": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-input-verification-code": "^0.6.4",
+    "react-material-ui-form-validator": "^2.1.1",
     "react-redux": "^7.2.0",
     "react-redux-multilingual": "^2.0.4",
     "react-router": "^5.2.0",
