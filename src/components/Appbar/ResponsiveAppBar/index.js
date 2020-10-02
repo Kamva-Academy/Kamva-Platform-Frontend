@@ -5,7 +5,6 @@ import {
   Toolbar,
   IconButton,
   Container,
-  Button,
   Hidden,
   Drawer,
   List,
@@ -15,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import HideOnScroll from './components/HideOnScroll';
-import AuthItem from './components/AuthItem';
+import modes from './modes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,23 +41,19 @@ const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
-  logo: { maxWidth: 45 },
-  logoButton: { padding: 0 },
-  signUpColor: {
-    color: 'white',
-    backgroundColor: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.dark,
-    },
-  },
-  space: {
-    margin: theme.spacing(1),
-  },
 }));
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar({ mode = 'LANDING' }) {
   const classes = useStyles();
   const [drawerOepn, setDrawerOepn] = useState(false);
+
+  const {
+    desktopLeftItems,
+    desktopRightItems,
+    mobileLeftItems,
+    mobileRightItems,
+    mobileMenuListItems,
+  } = modes[mode]();
 
   return (
     <>
@@ -74,19 +69,11 @@ function ResponsiveAppBar() {
                 onClick={() => setDrawerOepn(true)}>
                 <MenuIcon />
               </IconButton>
-              <Hidden xsDown>
-                <Button className={classes.logoButton}>
-                  <img
-                    src={process.env.PUBLIC_URL + '/logo.png'}
-                    alt="logo"
-                    className={classes.logo}
-                  />
-                </Button>
-              </Hidden>
+              <Hidden xsDown>{desktopRightItems}</Hidden>
+              <Hidden smUp>{mobileRightItems}</Hidden>
               <div className={classes.grow} />
-              <Hidden xsDown>
-                <AuthItem />
-              </Hidden>
+              <Hidden xsDown>{desktopLeftItems}</Hidden>
+              <Hidden smUp>{mobileLeftItems}</Hidden>
             </Toolbar>
           </Container>
         </AppBar>
@@ -96,14 +83,11 @@ function ResponsiveAppBar() {
           anchor="left"
           open={drawerOepn}
           onClose={() => setDrawerOepn(false)}>
-          <List>
-            <ListItem>
-              <AuthItem />
-            </ListItem>
-            {/* <ListItem button>
-              <ListItemText primary={'خروج'} />
-            </ListItem> */}
-          </List>
+          {mobileMenuListItems.map((item, i) => (
+            <List key={i}>
+              <ListItem>{item}</ListItem>
+            </List>
+          ))}
         </Drawer>
       </Hidden>
     </>

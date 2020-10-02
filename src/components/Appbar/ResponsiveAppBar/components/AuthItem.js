@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 function AuthItem({ isLoggedIn }) {
   const classes = useStyles();
   const [authOpen, setAuthOpen] = useState(false);
-  if (!isLoggedIn) {
+  if (isLoggedIn) {
     return (
       <Button variant="outlined" color="inherit">
         خروج
