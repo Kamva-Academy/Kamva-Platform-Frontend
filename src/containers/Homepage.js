@@ -5,7 +5,7 @@ import { Fab, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import ResponsiveAppbar from '../components/Appbar/ResponsiveAppBar';
+import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import TextShadowMove from '../components/Transition/TextShadowMove';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,7 @@ const Homepage = (props) => {
   return (
     <Container component="main" className={classes.body}>
       <CssBaseline />
-      <ResponsiveAppbar />
+      <ResponsiveAppBar mode="LANDING" />
       <Toolbar id="back-to-top-anchor" />
       <div className={classes.centerItems}>
         <TextShadowMove in={inProp}>
