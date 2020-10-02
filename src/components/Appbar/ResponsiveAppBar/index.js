@@ -10,7 +10,6 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
 } from '@material-ui/core';
 
 import { connect } from 'react-redux';
@@ -57,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HomeAppbar() {
+function ResponsiveAppBar() {
   const classes = useStyles();
   const [drawerOepn, setDrawerOepn] = useState(false);
 
@@ -111,4 +110,4 @@ function HomeAppbar() {
   );
 }
 
-export default connect()(HomeAppbar);
+export default connect()(ResponsiveAppBar);

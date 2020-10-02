@@ -20,6 +20,13 @@ const useStyles = makeStyles((theme) => ({
 function AuthItem({ isLoggedIn }) {
   const classes = useStyles();
   const [authOpen, setAuthOpen] = useState(false);
+  if (!isLoggedIn) {
+    return (
+      <Button variant="outlined" color="inherit">
+        خروج
+      </Button>
+    );
+  }
   return (
     <>
       <Button
@@ -44,7 +51,7 @@ function AuthItem({ isLoggedIn }) {
 }
 
 const mapStateToProps = (state) => ({
-  dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
+  isLoggedIn: false,
 });
 
 export default connect(mapStateToProps)(AuthItem);
