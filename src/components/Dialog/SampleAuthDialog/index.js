@@ -33,30 +33,30 @@ function AuthDialog({ open, handleClose, auth_data, phoneAuth, isLoggedIn }) {
   const [currentPage, setCurrentPage] = useState(pages.PHONE);
 
   useEffect(() => {
-    switch (currentPage.type) {
-      case pages.PHONE.type:
-        if (!!auth_data.phone_number) {
-          if (!auth_data.registered) {
-            phoneAuth({ phone_number: auth_data.phone_number });
-            setCurrentPage(pages.CODE_AND_PASSWORD);
-          } else {
-            setCurrentPage(pages.PASSWORD);
-          }
-        }
-        break;
-      case pages.CODE_AND_PASSWORD.type:
-        if (isLoggedIn) {
-          setCurrentPage(pages.NAME_AND_EMAIL);
-        }
-        break;
-      case pages.PASSWORD.type:
-        if (auth_data.code_sent) {
-          setCurrentPage(pages.CODE);
-        }
-        break;
-      default:
-        break;
-    }
+    // switch (currentPage.type) {
+    //   case pages.PHONE.type:
+    //     if (!!auth_data.phone_number) {
+    //       if (!auth_data.registered) {
+    //         phoneAuth({ phone_number: auth_data.phone_number });
+    //         setCurrentPage(pages.CODE_AND_PASSWORD);
+    //       } else {
+    //         setCurrentPage(pages.PASSWORD);
+    //       }
+    //     }
+    //     break;
+    //   case pages.CODE_AND_PASSWORD.type:
+    //     if (isLoggedIn) {
+    //       setCurrentPage(pages.NAME_AND_EMAIL);
+    //     }
+    //     break;
+    //   case pages.PASSWORD.type:
+    //     if (auth_data.code_sent) {
+    //       setCurrentPage(pages.CODE);
+    //     }
+    //     break;
+    //   default:
+    //     break;
+    // }
   }, [auth_data, currentPage, phoneAuth, setCurrentPage, isLoggedIn]);
 
   const DialogContentCompenent = currentPage.Component;
