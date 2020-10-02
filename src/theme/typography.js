@@ -1,6 +1,6 @@
 export default {
   h1: {
-    fontWeight: 800,
+    fontWeight: 900,
     fontSize: '33px',
     lineHeight: '40px',
   },
