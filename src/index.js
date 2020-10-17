@@ -6,14 +6,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import configureStore from './redux/store/configureStore';
 import './assets/styles/App.css';
 
-const persistedState = localStorage.getItem('financeState')
-  ? JSON.parse(localStorage.getItem('financeState'))
+const persistedState = localStorage.getItem('rastaState')
+  ? JSON.parse(localStorage.getItem('rastaState'))
   : {};
 const store = configureStore(persistedState);
 store.subscribe(() => {
   const state = store.getState();
   localStorage.setItem(
-    'financeState',
+    'rastaState',
     JSON.stringify({
       account: state.account,
       Intl: state.Intl,
