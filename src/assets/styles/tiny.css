@@ -1,0 +1,49 @@
+.tox.tox-tinymce {
+  direction: rtl !important;
+}
+.tox.tox-tinymce {
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 3px 0;
+  direction: rtl;
+  border: none;
+  transition: 0.3s;
+}
+
+.tox.tox-tinymce:focus,
+.tox.tox-tinymce:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tox-notifications-container {
+  display: none;
+}
+
+.tox-statusbar {
+  border: none !important;
+  direction: ltr !important;
+}
+
+.tox-statusbar a {
+  display: none;
+}
+
+.tox .tox-tbtn--bespoke .tox-tbtn__select-label {
+  direction: ltr;
+}
+
+.tox .tox-tbtn--bespoke[title='اندازه فونت'] .tox-tbtn__select-label {
+  width: 35px;
+}
+
+.tox .tox-tbtn--bespoke[title='فونت‌ها'] .tox-tbtn__select-label {
+  width: 50px;
+}
+
+.tox .tox-tbtn--bespoke[title='Formats'] .tox-tbtn__select-label {
+  width: 50px;
+}
+
+.tox .tox-dialog {
+  direction: rtl;
+}
