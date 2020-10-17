@@ -1,5 +1,7 @@
-import Landing from './Landing';
+import LandingAppBarItems from './LandingAppBarItems';
+import WorkshopAppBarItems from './WorkshopAppBarItems';
 
 export default {
-  LANDING: Landing,
+  LANDING: LandingAppBarItems,
+  WORKSHOP: WorkshopAppBarItems,
 };

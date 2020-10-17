@@ -8,7 +8,6 @@ import {
   Hidden,
   Drawer,
   List,
-  ListItem,
 } from '@material-ui/core';
 
 import { connect } from 'react-redux';
@@ -40,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   grow: {
     flexGrow: 1,
+  },
+  list: {
+    width: 250,
   },
 }));
 
@@ -83,11 +85,13 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
           anchor="left"
           open={drawerOepn}
           onClose={() => setDrawerOepn(false)}>
-          {mobileMenuListItems.map((item, i) => (
-            <List key={i}>
-              <ListItem>{item}</ListItem>
+          <div className={classes.list}>
+            <List>
+              {mobileMenuListItems.map((item) => (
+                <>{item}</>
+              ))}
             </List>
-          ))}
+          </div>
         </Drawer>
       </Hidden>
     </>
