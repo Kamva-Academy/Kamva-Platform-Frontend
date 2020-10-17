@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
+import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog'
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
