@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Container,
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center center',
   },
   leftContainer: {
-    height: 350,
+    height: 300,
     padding: theme.spacing(2),
   },
   leftGrid: {
@@ -28,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AuthDialog({ open, handelClose }) {
+export default function AuthDialog({ open, handelClose, doLogin }) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const classes = useStyles();
   const t = useTranslate();
 
@@ -50,15 +52,35 @@ export default function AuthDialog({ open, handelClose }) {
               alignItems="stretch"
               className={classes.leftGrid}>
               <Grid item>
-                <Typography component="h3" variant="h2" align="center">
+                <Typography
+                  component="h3"
+                  variant="h2"
+                  align="center">
                   ورود
                 </Typography>
               </Grid>
               <Grid item>
-                <TextField label="آدرس ایمیل" fullWidth variant="outlined" />
+                <TextField
+                  label="آدرس ایمیل"
+                  fullWidth
+                  onChange={(e) => setEmail(e.target.value)}
+                  variant="outlined" />
               </Grid>
               <Grid item>
-                <Button fullWidth variant="contained" color="primary">
+                <TextField
+                  label="رمز عبور"
+                  fullWidth
+                  onChange={(e) => setPassword(e.target.value)}
+                  variant="outlined" />
+              </Grid>
+              <br />
+              <br />
+              <Grid item>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  onClick={() => doLogin(email, password)}
+                  color="primary">
                   {t('login')}
                 </Button>
               </Grid>
