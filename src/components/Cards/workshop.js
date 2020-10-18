@@ -10,41 +10,23 @@ import {
   Typography,
   ButtonGroup,
   CssBaseline,
-  Hidden,
 } from '@material-ui/core'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import GroupIcon from '@material-ui/icons/Group';
-import ClassIcon from '@material-ui/icons/Class';
-import { connect } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
   },
-  rightBox: {
-    padding: theme.spacing(2),
+  paper: {
+    width: '100%',
+    height: '500px',
   }
 }));
-
-
-
-const BackButton = ({ }) => {
-  return (
-    <Grid item>
-      <Button variant='outlined' fullWidth color='primary' startIcon={<ExitToAppIcon />}>
-        بازگشت
-      </Button>
-    </Grid>
-  )
-}
 
 const MentorPage = ({ }) => {
   const classes = useStyles();
   const [tabNumber, setTabNumber] = useState(0);
 
-
   console.log(tabNumber)
-
 
   return (
     <Container className={classes.root}>
@@ -53,45 +35,28 @@ const MentorPage = ({ }) => {
         <Grid container item sm={3} xs={12} direction='column' justify='space-between'>
           <Grid item>
             <ButtonGroup orientation='vertical' variant="contained" color="primary" fullWidth>
-              <Button startIcon={<ClassIcon />}>
+              <Button>
                 کارگاه‌ها
               </Button>
-              <Button startIcon={<GroupIcon />}>
-                تیم‌ها
-              </Button>
+              <Button>تیم‌ها</Button>
               <Button>درخواست‌ها</Button>
             </ButtonGroup>
           </Grid>
-          <Hidden xsDown>
-            <Grid item fullWidth>
-              <BackButton />
-            </Grid>
-          </Hidden>
+          <Grid item>
+            <Button fullWidth color='primary'>
+              بازگشت
+            </Button>
+          </Grid>
         </Grid>
 
         <Grid item sm={9} xs={12} justify='center'>
-          <Paper elevation={3} classNames={classes.rightBox}>
-            
+          <Paper className={classes.paper}>
+            salam
           </Paper>
         </Grid>
-
-        <Hidden smUp>
-          <Grid item fullWidth>
-            <BackButton />
-          </Grid>
-        </Hidden>
       </Grid>
     </Container>
   )
 }
 
-const mapStateToProps = (state) => {
-
-}
-
-export default connect(
-  mapStateToProps,
-  {
-
-  }
-)(MentorPage)
+export default MentorPage;
