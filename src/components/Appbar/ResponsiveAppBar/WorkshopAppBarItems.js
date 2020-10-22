@@ -1,7 +1,5 @@
 import React from 'react';
 import LogoButton from './components/LogoButton';
-import CustomSelect from '../../CustomSelect/CustomSelect';
-import HistoryContent from './components/HistoryContent';
 import { ExitToApp as ExitToAppIcon } from '@material-ui/icons';
 import {
   Button,
@@ -10,6 +8,8 @@ import {
   ListItemText,
   makeStyles,
 } from '@material-ui/core';
+import JitsiButton from './components/JitsiButton';
+import JitsiMicButton from './components/JitsiMicButton';
 
 const useStyles = makeStyles((theme) => ({
   backBtn: {
@@ -23,31 +23,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BackButton = () => {
+const ExitButton = () => {
   const classes = useStyles();
   return (
     <Button variant="contained" className={classes.backBtn}>
-      بازگشت
+      خروج
     </Button>
   );
 };
 
-export default () => ({
-  desktopLeftItems: [
-    <CustomSelect ContentComponent={HistoryContent} title="تاریخچه" />,
-    <BackButton />,
-  ],
-  desktopRightItems: [<LogoButton />],
-  mobileLeftItems: [<LogoButton />],
-  mobileRightItems: [],
-  mobileMenuListItems: [
-    <BackButton />,
-    <CustomSelect ContentComponent={HistoryContent} title="تاریخچه" />,
-    <ListItem button>
-      <ListItemIcon>
-        <ExitToAppIcon />
-      </ListItemIcon>
-      <ListItemText primary="خروج" />
-    </ListItem>,
-  ],
-});
+export default () => {
+  const jitsiButton = <JitsiButton />;
+  const jitsiMicButton = <JitsiMicButton />;
+  return {
+    desktopLeftItems: [jitsiMicButton, jitsiButton, <ExitButton />],
+    desktopRightItems: [<LogoButton />],
+    mobileLeftItems: [jitsiMicButton, jitsiButton, <LogoButton />],
+    mobileRightItems: [],
+    mobileMenuListItems: [
+      <ExitButton />,
+      <ListItem button>
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary="خروج" />
+      </ListItem>,
+    ],
+  };
+};
