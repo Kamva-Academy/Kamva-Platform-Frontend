@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton } from '@material-ui/core';
-import { Mic as MicIcon, MicNone as MicNoneIcon } from '@material-ui/icons';
+import { Mic as MicIcon, MicOff as MicOffIcon } from '@material-ui/icons';
 import * as jitsiFuncs from '../../../Jitsi/connection/jitsi';
 
 export default function JitsiMicButton() {
@@ -16,7 +16,7 @@ export default function JitsiMicButton() {
   return (
     <>
       <IconButton onClick={toggleAudio}>
-        {isMute ? <MicNoneIcon /> : <MicIcon />}
+        {isMute ? <MicOffIcon /> : <MicIcon />}
       </IconButton>
     </>
   );
