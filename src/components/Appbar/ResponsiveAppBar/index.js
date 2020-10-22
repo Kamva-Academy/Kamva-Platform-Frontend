@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ResponsiveAppBar({ mode = 'LANDING' }) {
   const classes = useStyles();
-  const [drawerOepn, setDrawerOepn] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const {
     desktopLeftItems,
@@ -68,7 +68,7 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
                 color="inherit"
                 aria-label="open drawer"
                 className={classes.menuButton}
-                onClick={() => setDrawerOepn(true)}>
+                onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
               </IconButton>
               <Hidden xsDown>{desktopRightItems}</Hidden>
@@ -83,8 +83,8 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
       <Hidden smUp>
         <Drawer
           anchor="left"
-          open={drawerOepn}
-          onClose={() => setDrawerOepn(false)}>
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}>
           <div className={classes.list}>
             <List>
               {mobileMenuListItems.map((item) => (
