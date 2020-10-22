@@ -9,13 +9,11 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import {
-  login
-} from '../redux/actions/account'
+import { login } from '../redux/actions/account';
 import { connect } from 'react-redux';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog'
+import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -26,10 +24,23 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: 60,
+    lineHeight: '80px',
     color: '#555',
-    marginBottom: 20,
+    textShadow: '-2px 2px #888',
     [theme.breakpoints.down('xs')]: {
       fontSize: 40,
+      lineHeight: '60px',
+      marginBottom: theme.spacing(3),
+    },
+  },
+  subtitle: {
+    fontSize: 40,
+    lineHeight: '40px',
+    color: '#555',
+    textShadow: '-1px 1px #888',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: 30,
+      marginBottom: theme.spacing(3),
     },
   },
   body: {
@@ -46,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Homepage = ({ children, login, }) => {
+const Homepage = ({ children, login }) => {
   const classes = useStyles();
   const [authDialogOpen, setAuthDialogOpen] = useState();
 
@@ -71,16 +82,30 @@ const Homepage = ({ children, login, }) => {
               justify="space-around"
               className={classes.rightGrid}>
               <Grid item>
-                <Typography component="h1" variant="h3">
+                <Typography
+                  component="h1"
+                  variant="h1"
+                  className={classes.title}>
                   کارگاه‌های رستا
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography
+                  component="h2"
+                  variant="h4"
+                  className={classes.subtitle}>
+                  جایی برای یاد‌گیری بهتر
                 </Typography>
               </Grid>
               <Grid item>
                 <Button
                   variant="contained"
                   color="primary"
+                  size="large"
                   onClick={() => setAuthDialogOpen(true)}>
-                  بزن بریم!
+                  <Typography component="span" variant="h3">
+                    بزن بریم!
+                  </Typography>
                 </Button>
               </Grid>
             </Grid>
@@ -101,13 +126,8 @@ const Homepage = ({ children, login, }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {};
 
-}
-
-export default connect(
-  mapStateToProps,
-  {
-    login,
-  }
-)(Homepage);
+export default connect(mapStateToProps, {
+  login,
+})(Homepage);
