@@ -11,6 +11,8 @@ import {
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
+import { login } from '../../../redux/actions/account';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   rightImage: {
@@ -28,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AuthDialog({ open, handelClose, doLogin }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+function AuthDialog({ open, handelClose, login }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const classes = useStyles();
   const t = useTranslate();
 
@@ -52,10 +54,7 @@ export default function AuthDialog({ open, handelClose, doLogin }) {
               alignItems="stretch"
               className={classes.leftGrid}>
               <Grid item>
-                <Typography
-                  component="h3"
-                  variant="h2"
-                  align="center">
+                <Typography component="h3" variant="h2" align="center">
                   ورود
                 </Typography>
               </Grid>
@@ -64,14 +63,16 @@ export default function AuthDialog({ open, handelClose, doLogin }) {
                   label="آدرس ایمیل"
                   fullWidth
                   onChange={(e) => setEmail(e.target.value)}
-                  variant="outlined" />
+                  variant="outlined"
+                />
               </Grid>
               <Grid item>
                 <TextField
                   label="رمز عبور"
                   fullWidth
                   onChange={(e) => setPassword(e.target.value)}
-                  variant="outlined" />
+                  variant="outlined"
+                />
               </Grid>
               <br />
               <br />
@@ -79,7 +80,7 @@ export default function AuthDialog({ open, handelClose, doLogin }) {
                 <Button
                   fullWidth
                   variant="contained"
-                  onClick={() => doLogin(email, password)}
+                  onClick={() => login(email, password)}
                   color="primary">
                   {t('login')}
                 </Button>
@@ -92,3 +93,5 @@ export default function AuthDialog({ open, handelClose, doLogin }) {
     </Dialog>
   );
 }
+
+export default connect(null, { login })(AuthDialog);

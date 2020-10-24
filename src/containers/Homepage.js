@@ -9,8 +9,6 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { login } from '../redux/actions/account';
-import { connect } from 'react-redux';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
@@ -57,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Homepage = ({ children, login }) => {
+export default function Homepage() {
   const classes = useStyles();
   const [authDialogOpen, setAuthDialogOpen] = useState();
 
@@ -111,7 +109,7 @@ const Homepage = ({ children, login }) => {
             </Grid>
           </Grid>
         </Grid>
-        <ScrollTop children={children}>
+        <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
@@ -120,14 +118,7 @@ const Homepage = ({ children, login }) => {
       <AuthDialog
         open={authDialogOpen}
         handelClose={() => setAuthDialogOpen(false)}
-        doLogin={login}
       />
     </>
   );
-};
-
-const mapStateToProps = (state, ownProps) => {};
-
-export default connect(mapStateToProps, {
-  login,
-})(Homepage);
+}
