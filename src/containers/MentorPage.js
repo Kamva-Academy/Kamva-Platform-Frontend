@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 import {
   Button,
   Container,
   makeStyles,
-  Tab,
-  Tabs,
   Grid,
   Paper,
-  Typography,
   ButtonGroup,
   CssBaseline,
   Hidden,
@@ -15,12 +12,12 @@ import {
   Badge,
   IconButton,
   Tooltip,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
-import { connect } from 'react-redux'
-import WorkShpoCard from '../components/Cards/Workshop'
+import { connect } from 'react-redux';
+import WorkshopCard from '../components/Cards/WorkshopCard';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
@@ -41,35 +38,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-const BackButton = () => {
-  return (
-    <Grid item>
-      <Button variant='contained' fullWidth color='primary' startIcon={<ExitToAppIcon />}>
-        بازگشت
-      </Button>
-    </Grid>
-  )
-}
-
 const MentorPage = ({ mentorRequestNo, isLoading }) => {
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
       <CssBaseline />
-      <Grid container spacing={2} direction='row' justify='space-around'>
-        <Grid container item sm={3} xs={12} direction='column' justify='space-between'>
+      <Grid container spacing={2} direction="row" justify="space-around">
+        <Grid
+          container
+          item
+          sm={3}
+          xs={12}
+          direction="column"
+          justify="space-between">
           <Grid item>
-            <ButtonGroup orientation='vertical' variant="contained" color="primary" fullWidth>
-              <Button startIcon={<ClassIcon />}>
-                کارگاه‌ها
-              </Button>
-              <Button startIcon={<GroupIcon />}>
-                تیم‌ها
-              </Button>
+            <ButtonGroup
+              orientation="vertical"
+              variant="contained"
+              color="primary"
+              fullWidth>
+              <Button startIcon={<ClassIcon />}>کارگاه‌ها</Button>
+              <Button startIcon={<GroupIcon />}>تیم‌ها</Button>
               <Button>
-                <Badge badgeContent={2/*mentorRequestNo* todo*/} color="secondary">
+                <Badge
+                  badgeContent={2 /*mentorRequestNo* todo*/}
+                  color="secondary">
                   درخواست‌ها
                 </Badge>
               </Button>
@@ -77,59 +71,83 @@ const MentorPage = ({ mentorRequestNo, isLoading }) => {
           </Grid>
           <Hidden xsDown>
             <Grid item fullWidth>
-              <BackButton />
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                startIcon={<ExitToAppIcon />}>
+                بازگشت
+              </Button>
             </Grid>
           </Hidden>
         </Grid>
 
-        <Grid item sm={9} xs={12} justify='center'>
+        <Grid item sm={9} xs={12} justify="center">
           <Paper elevation={3} classNames={classes.rightBox}>
             <Container className={classes.container}>
-              <Grid container item spacing={2} direction='row' justify='flex-start'>
+              <Grid
+                container
+                item
+                spacing={2}
+                direction="row"
+                justify="flex-start">
                 <Grid item xs={12} sm={4}>
-                  <WorkShpoCard
+                  <WorkshopCard
                     name={'هوش مصنوعی'}
-                    description={'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'}
+                    description={
+                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
+                    }
                     teamNo={3}
                     mentorNo={6}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <WorkShpoCard
+                  <WorkshopCard
                     name={'هوش مصنوعی'}
-                    description={'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'}
+                    description={
+                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
+                    }
                     teamNo={3}
                     mentorNo={6}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <WorkShpoCard
+                  <WorkshopCard
                     name={'هوش مصنوعی'}
-                    description={'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'}
+                    description={
+                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
+                    }
                     teamNo={3}
                     mentorNo={6}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <WorkShpoCard
+                  <WorkshopCard
                     name={'هوش مصنوعی'}
-                    description={'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'}
+                    description={
+                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
+                    }
                     teamNo={3}
                     mentorNo={6}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                  <WorkShpoCard
+                  <WorkshopCard
                     name={'هوش مصنوعی'}
-                    description={'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'}
+                    description={
+                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
+                    }
                     teamNo={3}
                     mentorNo={6}
                   />
                 </Grid>
 
-                <Tooltip arrow title={'اضافه کردن کارگاه جدید'} className={classes.absolute}>
-                  <IconButton aria-label="close" /* onClick={handelClose} todo*/>
-                    <AddCircleIcon fontSize='large' />
+                <Tooltip
+                  arrow
+                  title={'اضافه کردن کارگاه جدید'}
+                  className={classes.absolute}>
+                  <IconButton>
+                    <AddCircleIcon fontSize="large" />
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -138,23 +156,23 @@ const MentorPage = ({ mentorRequestNo, isLoading }) => {
         </Grid>
         <Hidden smUp>
           <Grid item fullWidth>
-            <BackButton />
+            <Button
+              variant="contained"
+              fullWidth
+              color="primary"
+              startIcon={<ExitToAppIcon />}>
+              بازگشت
+            </Button>
           </Grid>
         </Hidden>
       </Grid>
       <Backdrop className={classes.backdrop} open={isLoading}>
         <CircularProgress color="inherit" />
       </Backdrop>
-    </Container >
-  )
-}
+    </Container>
+  );
+};
 
-const mapStateToProps = (state) => {
-}
+const mapStateToProps = (state) => {};
 
-export default connect(
-  mapStateToProps,
-  {
-
-  }
-)(MentorPage)
+export default connect(mapStateToProps, {})(MentorPage);
