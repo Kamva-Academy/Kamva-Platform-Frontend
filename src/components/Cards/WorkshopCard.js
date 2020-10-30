@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 import {
   Button,
-  Container,
   makeStyles,
-  Tab,
-  Tabs,
   Grid,
-  Paper,
   Typography,
-  ButtonGroup,
-  CssBaseline,
   CardContent,
   CardActionArea,
   Card,
   CardMedia,
   CardActions,
   Chip,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
@@ -29,7 +23,7 @@ const useStyles = makeStyles({
   },
   icon: {
     textAlign: 'center',
-  }
+  },
 });
 
 const WorkShopCard = ({ name, description, teamNo, mentorNo }) => {
@@ -51,22 +45,30 @@ const WorkShopCard = ({ name, description, teamNo, mentorNo }) => {
             {description}
           </Typography>
         </CardContent>
-        <Grid container direction='row' justify='center'>
-          <Grid container item xs={6} justify='center'>
-            <Chip variant="outlined" icon={<EmojiPeopleIcon />} label={`${mentorNo} منتور`} />
+        <Grid container direction="row" justify="center">
+          <Grid container item xs={6} justify="center">
+            <Chip
+              variant="outlined"
+              icon={<EmojiPeopleIcon />}
+              label={`${mentorNo} منتور`}
+            />
           </Grid>
-          <Grid container item xs={6} justify='center'>
-            <Chip variant="outlined" icon={<PeopleAltIcon />} label={`${teamNo} تیم`} />
+          <Grid container item xs={6} justify="center">
+            <Chip
+              variant="outlined"
+              icon={<PeopleAltIcon />}
+              label={`${teamNo} تیم`}
+            />
           </Grid>
         </Grid>
       </CardActionArea>
       <CardActions>
-        <Button variant='outlined' fullWidth color="primary">
+        <Button variant="outlined" fullWidth color="primary">
           مشاهده
         </Button>
       </CardActions>
-    </Card >
+    </Card>
   );
-}
+};
 
 export default WorkShopCard;
