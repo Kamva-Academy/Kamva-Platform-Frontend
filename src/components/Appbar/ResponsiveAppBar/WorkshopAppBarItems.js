@@ -1,15 +1,14 @@
 import React from 'react';
-import LogoButton from './components/LogoButton';
 import { ExitToApp as ExitToAppIcon } from '@material-ui/icons';
 import {
   Button,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
+  IconButton,
   makeStyles,
 } from '@material-ui/core';
 import JitsiButton from './components/JitsiButton';
 import JitsiMicButton from './components/JitsiMicButton';
+import NotificationButton from './components/NotificationButton';
+import UsersAvatar from './components/UsersAvatar';
 
 const useStyles = makeStyles((theme) => ({
   backBtn: {
@@ -21,13 +20,28 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.error.main,
     },
   },
+  mentorButton: {
+    marginLeft: 5,
+  },
 }));
 
 const ExitButton = () => {
   const classes = useStyles();
   return (
-    <Button variant="contained" className={classes.backBtn}>
-      خروج
+    <IconButton variant="contained" className={classes.backBtn}>
+      <ExitToAppIcon />
+    </IconButton>
+  );
+};
+
+const MentorButton = () => {
+  const classes = useStyles();
+  return (
+    <Button
+      variant="contained"
+      color="primary"
+      className={classes.mentorButton}>
+      درخواست منتور
     </Button>
   );
 };
@@ -35,19 +49,12 @@ const ExitButton = () => {
 export default () => {
   const jitsiButton = <JitsiButton />;
   const jitsiMicButton = <JitsiMicButton />;
+  const notificationButton = <NotificationButton />;
   return {
-    desktopLeftItems: [jitsiMicButton, jitsiButton, <ExitButton />],
-    desktopRightItems: [<LogoButton />],
-    mobileLeftItems: [jitsiMicButton, jitsiButton, <LogoButton />],
-    mobileRightItems: [],
-    mobileMenuListItems: [
-      <ExitButton />,
-      <ListItem button>
-        <ListItemIcon>
-          <ExitToAppIcon />
-        </ListItemIcon>
-        <ListItemText primary="خروج" />
-      </ListItem>,
-    ],
+    desktopLeftItems: [notificationButton, <MentorButton />],
+    desktopRightItems: [<UsersAvatar />, jitsiMicButton, jitsiButton],
+    mobileLeftItems: [jitsiMicButton, jitsiButton, <MentorButton />],
+    mobileRightItems: [notificationButton],
+    mobileMenuListItems: [<ExitButton />],
   };
 };
