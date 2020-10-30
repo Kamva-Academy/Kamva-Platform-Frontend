@@ -105,7 +105,8 @@ body.iranyekan .ui.input > input,
 body.iranyekan .ui.card *,
 body.iranyekan .ui.card .content .header,
 body.iranyekan .ui .item *,
-body.iranyekan .ui .item .content .header {
+body.iranyekan .ui .item .content .header,
+body.iranyekan .tox .tox-button {
   font-family: iranyekan;
 }
 

@@ -47,3 +47,8 @@
 .tox .tox-dialog {
   direction: rtl;
 }
+
+.tox-dialog__body .tox-textarea {
+  direction: ltr;
+  text-align: left;
+}
