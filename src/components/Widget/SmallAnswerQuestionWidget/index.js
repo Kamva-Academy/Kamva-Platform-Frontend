@@ -1,9 +1,9 @@
-import { Box, Button, TextField } from '@material-ui/core';
-import React from 'react';
+import { Box, Button, Grid, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
-const SmallAnswerQuestionWidget = ({ content = '' }) => {
+const SmallAnswerQuestionWidget = ({ content = '', lastAnswer = '' }) => {
+  const [value, setValue] = useState(lastAnswer);
   return (
     <>
       <TinyPreview
@@ -14,12 +14,22 @@ const SmallAnswerQuestionWidget = ({ content = '' }) => {
         }}
         content={content}
       />
-      <Box my={1}>
-        <TextField fullWidth variant="outlined" />
-      </Box>
-      <Button fullWidth variant="contained" color="primary" size="small">
-        ثبت پاسخ
-      </Button>
+      <Grid container alignItems="center" spacing={1}>
+        <Grid item xs={9} sm={10} md={9}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            size="small"
+          />
+        </Grid>
+        <Grid item xs={3} sm={2} md={3}>
+          <Button fullWidth variant="contained" color="primary" size="small">
+            ثبت
+          </Button>
+        </Grid>
+      </Grid>
     </>
   );
 };

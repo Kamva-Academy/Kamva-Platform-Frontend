@@ -109,11 +109,13 @@ const mapStateToProps = (state) => {
     {
       type: 'SMALL_ANSWER_QUESTION',
       content: 'بزرگترین عدد کوچکتر از ۵ چند هستش؟',
+      lastAnswer: '۱',
     },
     {
       type: 'BIG_ANSWER_QUESTION',
       content:
         'با توجه به اطلاعات داده شده، توضیحی کلی در رابطه با جاذبه بنویسید.',
+      lastAnswer: 'جاذبه بسیار خوب و عالی است.',
     },
     {
       type: 'UPLOAD_FILE_QUESTION',
@@ -133,6 +135,7 @@ const mapStateToProps = (state) => {
         '۱۰۰ متر بر مجذور ثانیه',
         '۱۰۰۰ متر بر مجذور ثانیه',
       ],
+      lastSelected: 3,
     },
     {
       type: 'VIDEO',
