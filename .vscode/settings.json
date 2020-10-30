@@ -4,6 +4,7 @@
     "Tabbar",
     "clsx",
     "jitsi",
-    "scrollable"
+    "scrollable",
+    "tinymce"
   ]
 }
