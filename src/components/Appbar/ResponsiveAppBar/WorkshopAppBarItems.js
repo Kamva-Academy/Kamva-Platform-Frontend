@@ -1,10 +1,6 @@
 import React from 'react';
 import { ExitToApp as ExitToAppIcon } from '@material-ui/icons';
-import {
-  Button,
-  IconButton,
-  makeStyles,
-} from '@material-ui/core';
+import { Button, IconButton, makeStyles } from '@material-ui/core';
 import JitsiButton from './components/JitsiButton';
 import JitsiMicButton from './components/JitsiMicButton';
 import NotificationButton from './components/NotificationButton';
