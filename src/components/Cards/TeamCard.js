@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const WorkShopCard = ({ name, description, teamsNumber, mentorsNumber }) => {
+const TeamCard = ({ name, description, teamsNumber, mentorsNumber }) => {
   const classes = useStyles();
 
   return (
@@ -71,4 +71,4 @@ const WorkShopCard = ({ name, description, teamsNumber, mentorsNumber }) => {
   );
 };
 
-export default WorkShopCard;
+export default TeamCard;
