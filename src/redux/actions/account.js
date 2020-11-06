@@ -2,28 +2,39 @@ import * as actionTypes from './actionTypes';
 import * as URLs from './urls';
 import { CALL_API } from '../middleware/api/api';
 
-
-export const enqueueSnackbar = ({
-  key = new Date().getTime() + Math.random(),
-  ...notification
-}) => ({
-  type: actionTypes.ENQUEUE_SNACKBAR,
-  notification: {
-    ...notification,
-    key,
+export const login = (username, password) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.LOGIN_REQUEST,
+      actionTypes.LOGIN_SUCCESS,
+      actionTypes.LOGIN_FAILURE,
+    ],
+    url: URLs.LOGIN,
+    payload: {
+      username,
+    },
+    fetchOptions: {
+      method: 'POST',
+      body: { username, password },
+    },
   },
 });
 
-export const closeSnackbar = (key) => ({
-  type: actionTypes.CLOSE_SNACKBAR,
-  dismissAll: !key,
-  key,
+
+export const logout = () => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.LOGOUT_REQUEST,
+      actionTypes.LOGOUT_SUCCESS,
+      actionTypes.LOGOUT_FAILURE,
+    ],
+    url: URLs.LOGOUT,
+    fetchOptions: {
+      method: 'POST', //todo?
+    },
+  },
 });
 
-export const removeSnackbar = (key) => ({
-  type: actionTypes.REMOVE_SNACKBAR,
-  key,
-});
 
 // const fetchUser = () => ({
 //   [CALL_API]: {
@@ -52,65 +63,24 @@ export const removeSnackbar = (key) => ({
 // };
 
 
-export const login = (username, password) => ({
-  [CALL_API]: {
-    types: [
-      actionTypes.LOGIN_REQUEST,
-      actionTypes.LOGIN_SUCCESS,
-      actionTypes.LOGIN_FAILURE,
-    ],
-    url: URLs.LOGIN,
-    payload: {
-      username,
-    },
-    fetchOptions: {
-      method: 'POST',
-      body: { username, password },
-    },
+export const enqueueSnackbar = ({
+  key = new Date().getTime() + Math.random(),
+  ...notification
+}) => ({
+  type: actionTypes.ENQUEUE_SNACKBAR,
+  notification: {
+    ...notification,
+    key,
   },
 });
 
+export const closeSnackbar = (key) => ({
+  type: actionTypes.CLOSE_SNACKBAR,
+  dismissAll: !key,
+  key,
+});
 
-// export const register = (
-//   username,
-//   password,
-//   first_name,
-//   last_name,
-//   phone_number,
-//   email,
-// ) => ({
-//   [CALL_API]: {
-//     types: [
-//       actionTypes.REGISTER_REQUEST,
-//       actionTypes.REGISTER_SUCCESS,
-//       actionTypes.REGISTER_FAILURE,
-//     ],
-//     url: URLs.REGISTER_USER,
-//     fetchOptions: {
-//       method: 'POST',
-//       body: {
-//         user: { username, password },
-//         first_name,
-//         last_name,
-//         phone_number,
-//         email,
-//       },
-//     },
-//   },
-// });
-
-
-// export const logout = () => ({
-//   [CALL_API]: {
-//     types: [
-//       actionTypes.LOGOUT_REQUEST,
-//       actionTypes.LOGOUT_SUCCESS,
-//       actionTypes.LOGOUT_FAILURE,
-//     ],
-//     url: URLs.LOGOUT_USER,
-//     fetchOptions: {
-//       method: 'POST',
-//       dontContentType: true,
-//     },
-//   },
-// });
+export const removeSnackbar = (key) => ({
+  type: actionTypes.REMOVE_SNACKBAR,
+  key,
+});

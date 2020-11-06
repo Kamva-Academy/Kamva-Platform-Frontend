@@ -32,7 +32,7 @@ export default ({ getState }) => (next) => async (action) => {
     if (!!account && !!account.token) {
       fetchOptions.headers = {
         ...fetchOptions.headers,
-        Authorization: account.token,
+        Authorization: 'JWT ' + account.token,
       };
     }
     let response = await fetchApi(url, fetchOptions);
