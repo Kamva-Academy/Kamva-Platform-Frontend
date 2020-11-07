@@ -12,6 +12,7 @@ import {
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
+import CustomizedTimeline from './TimeLine'
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -25,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '80px',
     color: '#555',
     textShadow: '-2px 2px #888',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: 40,
       lineHeight: '60px',
-      marginBottom: theme.spacing(3),
+      // marginBottom: theme.spacing(3),
     },
   },
   subtitle: {
@@ -36,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '40px',
     color: '#555',
     textShadow: '-1px 1px #888',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: 30,
-      marginBottom: theme.spacing(3),
+      // marginBottom: theme.spacing(3),
     },
   },
   body: {
@@ -49,9 +50,6 @@ const useStyles = makeStyles((theme) => ({
     // [theme.breakpoints.down('xs')]: {
     //   display: 'none',
     // },
-  },
-  rightGrid: {
-    height: '100%',
   },
 }));
 
@@ -64,51 +62,69 @@ export default function Homepage() {
       <Container className={classes.body}>
         <CssBaseline />
         <Toolbar id="back-to-top-anchor" />
-        <Grid container spacing={1}>
-          <Grid item sm={7} xs={12}>
+        <Grid
+          container
+          spacing={2}
+          justify='center'
+          direction='row'
+          style={{ backgroundColor: '#ededed', color: 'black' }}
+        >
+          <Grid item xs={12} sm={8} md={6} justify='center'>
             <img
               src={process.env.PUBLIC_URL + '/first_page.png'}
               alt="edu"
               className={classes.firstPageImage}
             />
           </Grid>
-          <Grid item sm={5} xs={12}>
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              justify="space-around"
-              className={classes.rightGrid}>
-              <Grid item>
-                <Typography
-                  component="h1"
-                  variant="h1"
-                  className={classes.title}>
-                  کارگاه‌های رستا
+          <Grid
+            container item
+            xs={12} sm={8} md={6}
+            justify='center'
+            alignItems="center"
+            direction="column"
+            spacing={4}
+          >
+            <Grid item>
+              <Typography
+                component="h1"
+                variant="h1"
+                className={classes.title}>
+                کارگاه‌های رستا
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography
+                component="h2"
+                variant="h4"
+                className={classes.subtitle}>
+                جایی برای یاد‌گیری بهتر
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                onClick={() => setAuthDialogOpen(true)}>
+                <Typography component="span" variant="h3">
+                  بزن بریم!
                 </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  component="h2"
-                  variant="h4"
-                  className={classes.subtitle}>
-                  جایی برای یاد‌گیری بهتر
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  onClick={() => setAuthDialogOpen(true)}>
-                  <Typography component="span" variant="h3">
-                    بزن بریم!
-                  </Typography>
-                </Button>
-              </Grid>
+              </Button>
             </Grid>
           </Grid>
         </Grid>
+        <Grid
+          container
+          spacing={2}
+          justify='center'
+          direction='row'
+          style={{ backgroundColor: '#edece0', color: 'black' }}
+        >
+          <Grid item xs={12}>
+            <CustomizedTimeline />
+          </Grid>
+        </Grid>
+
         <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
