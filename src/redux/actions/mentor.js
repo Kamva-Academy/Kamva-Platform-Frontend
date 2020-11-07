@@ -52,7 +52,7 @@ export const getTeamAnswers = (fsmId, teamId) => ({
       actionTypes.TEAM_ANSWERS_SUCCESS,
       actionTypes.TEAM_ANSWERS_FAILURE,
     ],
-    url: URLs.TEAM,
+    url: URLs.TEAM_ANSWERS,
     fetchOptions: {
       method: 'POST',
       fsmId,

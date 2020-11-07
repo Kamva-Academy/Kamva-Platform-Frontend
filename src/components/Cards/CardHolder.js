@@ -47,10 +47,10 @@ const CardHolder = () => {
       item
       spacing={2}
       direction="row"
-      justify="flex-start"
+      justify="center"
       className={classes.cardHolder}
     >
-      <Grid item xs={12} sm={4}>
+      <Grid item xs={12} sm={4} justify="center">
         <WorkshopCard
           name={'هوش مصنوعی'}
           description={

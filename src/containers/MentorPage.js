@@ -16,6 +16,7 @@ import {
   Tab,
   Box,
   Typography,
+  LinearProgress,
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
@@ -26,6 +27,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CreateIcon from '@material-ui/icons/Create';
 import CardHolder from '../components/Cards/CardHolder'
+import {
+  getAllWorkshops,
+  getUnreadNotifications,
+  getTeamAnswers,
+  getWorkshopTeams,
+} from '../redux/actions/mentor'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,13 +51,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MentorPage = ({ mentorRequestsNumber, isLoading, cards }) => {
+const MentorPage = ({
+  isLoading,
+  getAllWorkshops,
+  getUnreadNotifications,
+  getTeamAnswers,
+  getWorkshopTeams,
+}) => {
   const classes = useStyles();
   const [tabNumber, setTabNumber] = useState(0)
-  const [pageNumber, setPageNumber] = useState(0)
+  const [workshop, setWorkshop] = useState(0)
+
+
+  useEffect(() => {
+    getAllWorkshops();
+    const interval = setInterval(() => {
+      getUnreadNotifications();
+    }, 10000)
+
+    return (() => {
+      clearInterval(interval)
+    })
+  }, [getAllWorkshops, getUnreadNotifications])
+
 
   const handleChange = (event, newValue) => {
-    setTabNumber(newValue);
+    setWorkshop(newValue);
   };
 
   console.log(tabNumber)
@@ -58,24 +84,24 @@ const MentorPage = ({ mentorRequestsNumber, isLoading, cards }) => {
   return (
     <Container className={classes.container}>
       <CssBaseline />
-      <Grid container spacing={2} direction="row" justify="space-around">
+      <Grid container spacing={2} direction="row" justify="center">
         <Grid container item sm={3} xs={12} direction="column" justify="space-between">
           <Grid item>
             <ButtonGroup orientation="vertical" variant="contained" color="primary" fullWidth>
               <Button
-                onClick={() => setPageNumber(0)}
+                onClick={() => setTabNumber(0)}
                 startIcon={<ClassIcon />}
               >
                 کارگاه‌ها
               </Button>
               <Button
-                onClick={() => setPageNumber(1)}
+                onClick={() => setTabNumber(1)}
                 startIcon={<GroupIcon />}
               >
                 تیم‌ها
               </Button>
               <Button
-                onClick={() => setPageNumber(2)}
+                onClick={() => setTabNumber(2)}
               >
                 <Badge
                   badgeContent={2 /*mentorRequestsNumber* todo*/}
@@ -84,7 +110,7 @@ const MentorPage = ({ mentorRequestsNumber, isLoading, cards }) => {
                 </Badge>
               </Button>
               <Button
-                onClick={() => setPageNumber(3)}
+                onClick={() => setTabNumber(3)}
                 startIcon={<CreateIcon />}
               >
                 پاسخ‌ها
@@ -102,23 +128,24 @@ const MentorPage = ({ mentorRequestsNumber, isLoading, cards }) => {
 
         <Grid container item sm={9} xs={12} justify="center" direction='column'>
           <Paper elevation={3} classNames={classes.rightBox}>
+            {isLoading && <LinearProgress />}
             <Grid item xs={12}>
-              <Tabs
-                value={tabNumber}
-                onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                variant="scrollable"
-                scrollButtons="auto"
-                centered
-              >
-
-                <Tab label="Item One" />
-                <Tab label="Item Two" />
-                <Tab label="Item Three" />
-              </Tabs>
+              {tabNumber != 0 && tabNumber != 3 &&
+                <Tabs
+                  value={workshop}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="scrollable"
+                  scrollButtons="auto"
+                >
+                  <Tab label="گرانش" />
+                  <Tab label="شار" />
+                  <Tab label="کدگذاری" />
+                </Tabs>
+              }
             </Grid>
-            <CardHolder tabNumber={tabNumber} />
+            <CardHolder />
           </Paper>
         </Grid>
         <Hidden smUp>
@@ -142,10 +169,14 @@ const MentorPage = ({ mentorRequestsNumber, isLoading, cards }) => {
 
 const mapStateToProps = (state) => {
 
-  return ({
-    cards: [],
-  })
-
 };
 
-export default connect(mapStateToProps, {})(MentorPage);
+export default connect(
+  mapStateToProps,
+  {
+    getAllWorkshops,
+    getUnreadNotifications,
+    getTeamAnswers,
+    getWorkshopTeams,
+  }
+)(MentorPage);
