@@ -51,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const tabTypes = ['workshops', 'teams', 'requests', 'answers']
+
 const MentorPage = ({
   isLoading,
   getAllWorkshops,
@@ -145,7 +147,7 @@ const MentorPage = ({
                 </Tabs>
               }
             </Grid>
-            <CardHolder />
+            <CardHolder type={tabTypes[tabNumber]} />
           </Paper>
         </Grid>
         <Hidden smUp>

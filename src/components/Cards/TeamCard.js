@@ -10,64 +10,54 @@ import {
   CardMedia,
   CardActions,
   Chip,
+  ButtonGroup,
+  Avatar,
 } from '@material-ui/core';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
+    maxWidth: 300,
   },
   icon: {
     textAlign: 'center',
   },
 });
 
-const TeamCard = ({ name, description, teamsNumber, mentorsNumber }) => {
+const TeamCard = ({ name, members, doesHaveMentor }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea disabled>
-        <CardMedia
-          className={classes.media}
-          image={process.env.PUBLIC_URL + '/ai.jpg'}
-          title={name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
-        </CardContent>
-        <Grid container direction="row" justify="center">
-          <Grid container item xs={6} justify="center">
-            <Chip
-              variant="outlined"
-              icon={<EmojiPeopleIcon />}
-              label={`${mentorsNumber} منتور`}
-            />
+    <Grid container item xs={12} sm={6} md={4} justify='center'>
+      <Card className={classes.root}>
+        <CardActionArea disabled>
+          <CardContent>
+            <Typography gutterBottom variant="h5">
+              {' تیم'}
+            </Typography>
+            <Typography gutterBottom variant="h3">
+              {name}
+            </Typography>
+            <Avatar className={classes.orange}>N</Avatar>
+            <Avatar className={classes.orange}>N</Avatar>
+            <Avatar className={classes.orange}>N</Avatar>
+          </CardContent>
+          <Grid container>
           </Grid>
-          <Grid container item xs={6} justify="center">
-            <Chip
-              variant="outlined"
-              icon={<PeopleAltIcon />}
-              label={`${teamsNumber} تیم`}
-            />
-          </Grid>
-        </Grid>
-      </CardActionArea>
-      <CardActions>
-        <Button variant="outlined" fullWidth color="primary">
-          مشاهده
-        </Button>
-      </CardActions>
-    </Card>
+        </CardActionArea>
+        <CardActions>
+          <ButtonGroup variant='outlined' color="primary" fullWidth>
+            <Button>
+              مشاهده
+            </Button>
+            <Button>
+              سابقه
+            </Button>
+          </ButtonGroup>
+        </CardActions>
+      </Card>
+    </Grid>
   );
 };
 

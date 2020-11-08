@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const CardHolder = () => {
+const CardHolder = ({ type, workshops, teams, }) => {
+  const [cards, setCards] = useState();
   const classes = useStyles();
 
   return (
@@ -47,59 +48,23 @@ const CardHolder = () => {
       item
       spacing={2}
       direction="row"
-      justify="center"
       className={classes.cardHolder}
     >
-      <Grid item xs={12} sm={4} justify="center">
-        <WorkshopCard
-          name={'هوش مصنوعی'}
-          description={
-            'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-          }
-          teamsNumber={3}
-          mentorsNumber={6}
-        />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <WorkshopCard
-          name={'هوش مصنوعی'}
-          description={
-            'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-          }
-          teamsNumber={3}
-          mentorsNumber={6}
-        />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <WorkshopCard
-          name={'هوش مصنوعی'}
-          description={
-            'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-          }
-          teamsNumber={3}
-          mentorsNumber={6}
-        />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <WorkshopCard
-          name={'هوش مصنوعی'}
-          description={
-            'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-          }
-          teamsNumber={3}
-          mentorsNumber={6}
-        />
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        <WorkshopCard
-          name={'هوش مصنوعی'}
-          description={
-            'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-          }
-          teamsNumber={3}
-          mentorsNumber={6}
-        />
-      </Grid>
+      {type === 'workshops' &&
+        workshops.map((workshop) => {
+          return (
+            <WorkshopCard {...workshop} />
+          )
+        })
+      }
+
+      {type === 'teams' &&
+        teams.map((team) => {
+          return (
+            <TeamCard {...team} />
+          )
+        })
+      }
 
       <Tooltip
         arrow
@@ -113,5 +78,48 @@ const CardHolder = () => {
   )
 }
 
+const mapStateToProps = (state) => {
+  const workshops = [
+    {
+      name: 'هوش مصنوعی',
+      description: 'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/',
+      teamsNumber: 3,
+      mentorsNumber: 6,
+    },
+    {
+      name: 'هوش مصنوعی',
+      description: 'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/',
+      teamsNumber: 3,
+      mentorsNumber: 6,
+    },
+    {
+      name: 'هوش مصنوعی',
+      description: 'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/',
+      teamsNumber: 3,
+      mentorsNumber: 6,
+    },
+  ]
+  const teams = [
+    {
+      name: 'ماهی‌ها',
+    },
+    {
+      name: 'ماهی‌ها',
+    },
+    {
+      name: 'ماهی‌ها',
+    },
+  ]
+  return ({
+    workshops,
+    teams,
+  })
+}
 
-export default CardHolder;
+
+
+export default connect(
+  mapStateToProps,
+  {
+
+  })(CardHolder);

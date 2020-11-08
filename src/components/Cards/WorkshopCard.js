@@ -16,10 +16,10 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 300,
   },
   media: {
-    height: 140,
+    height: 150,
   },
   icon: {
     textAlign: 'center',
@@ -30,44 +30,46 @@ const WorkShopCard = ({ name, description, teamsNumber, mentorsNumber }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea disabled>
-        <CardMedia
-          className={classes.media}
-          image={process.env.PUBLIC_URL + '/ai.jpg'}
-          title={name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
-        </CardContent>
-        <Grid container direction="row" justify="center">
-          <Grid container item xs={6} justify="center">
-            <Chip
-              variant="outlined"
-              icon={<EmojiPeopleIcon />}
-              label={`${mentorsNumber} منتور`}
-            />
+    <Grid container item xs={12} sm={6} md={4} justify='center'>
+      <Card className={classes.root}>
+        <CardActionArea disabled>
+          <CardMedia
+            className={classes.media}
+            image={process.env.PUBLIC_URL + '/ai.jpg'}
+            title={name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {description}
+            </Typography>
+          </CardContent>
+          <Grid container direction="row" justify="center">
+            <Grid container item xs={6} justify="center">
+              <Chip
+                variant="outlined"
+                icon={<EmojiPeopleIcon />}
+                label={`${mentorsNumber} منتور`}
+              />
+            </Grid>
+            <Grid container item xs={6} justify="center">
+              <Chip
+                variant="outlined"
+                icon={<PeopleAltIcon />}
+                label={`${teamsNumber} تیم`}
+              />
+            </Grid>
           </Grid>
-          <Grid container item xs={6} justify="center">
-            <Chip
-              variant="outlined"
-              icon={<PeopleAltIcon />}
-              label={`${teamsNumber} تیم`}
-            />
-          </Grid>
-        </Grid>
-      </CardActionArea>
-      <CardActions>
-        <Button variant="outlined" fullWidth color="primary">
-          مشاهده
-        </Button>
-      </CardActions>
-    </Card>
+        </CardActionArea>
+        <CardActions>
+          <Button variant="outlined" fullWidth color="primary">
+            مشاهده
+          </Button>
+        </CardActions>
+      </Card>
+    </Grid>
   );
 };
 
