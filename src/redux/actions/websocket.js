@@ -1,4 +1,5 @@
 import { connect, send } from '@giantmachines/redux-websocket';
+import { compressNodes } from '../../utils/compresstion';
 import * as wsActionTypes from './wsActionTypes';
 
 export const connectToTeam = ({ teamUUID, userUUID }) =>
@@ -11,10 +12,10 @@ export const sendWhiteboardNodes = (getState) => {
   const whiteboard = getState().whiteboard.present;
   return send({
     type: wsActionTypes.PASS_DRAWING_STATE,
-    data: {
+    data: compressNodes({
       nodes: whiteboard.nodes,
       changeCount: +whiteboard.changeCount,
-    },
+    }),
   });
 };
 

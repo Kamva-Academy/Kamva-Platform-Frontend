@@ -1,3 +1,4 @@
+import { decompressNodes } from '../../../utils/compresstion';
 import {
   REDUX_UPDATE_WHITEBOARD,
   REDUX_WEBSOCKET_MESSAGE,
@@ -26,10 +27,7 @@ export default ({ getState, dispatch }) => (next) => async (action) => {
     case PASS_DRAWING_STATE:
       return next({
         type: REDUX_UPDATE_WHITEBOARD,
-        payload: {
-          nodes: message.data.data.nodes,
-          changeCount: message.data.data.changeCount,
-        },
+        payload: decompressNodes(message.data.data),
       });
     default:
       return next(action);
