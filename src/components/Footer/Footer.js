@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import InstagramIcon from '@material-ui/icons/Instagram';
 // import { Icon } from 'semantic-ui-react';
-import '../assets/styles/footer.css';
+import '../../assets/styles/footer.css';
 
 const Footer = () => {
   return (
