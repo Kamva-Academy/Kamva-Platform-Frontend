@@ -5,13 +5,20 @@ import api from '../middleware/api/api';
 import rootReducer from '../reducers';
 import DevTools from '../../containers/DevTools';
 import reduxWebsocket from '@giantmachines/redux-websocket';
+import receiveMessage from '../middleware/socket/receiveMessage';
 
 const configureStore = (preloadedState) => {
   const store = createStore(
     rootReducer,
     { Intl: { locale: 'fa' }, ...preloadedState },
     compose(
-      applyMiddleware(thunk, api, reduxWebsocket(), createLogger()),
+      applyMiddleware(
+        thunk,
+        api,
+        receiveMessage,
+        reduxWebsocket({ reconnectOnClose: true }),
+        createLogger()
+      ),
       DevTools.instrument()
     )
   );
