@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Container,
@@ -12,6 +12,11 @@ import {
   Badge,
   IconButton,
   Tooltip,
+  Tabs,
+  Tab,
+  Box,
+  Typography,
+  LinearProgress,
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
@@ -20,6 +25,14 @@ import { connect } from 'react-redux';
 import WorkshopCard from '../components/Cards/WorkshopCard';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import CreateIcon from '@material-ui/icons/Create';
+import CardHolder from '../components/Cards/CardHolder'
+import {
+  getAllWorkshops,
+  getUnreadNotifications,
+  getTeamAnswers,
+  getWorkshopTeams,
+} from '../redux/actions/mentor'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,34 +48,68 @@ const useStyles = makeStyles((theme) => ({
   absolute: {
     position: 'absolute',
     right: theme.spacing(2),
+    zIndex: 5,
   },
 }));
 
-const MentorPage = ({ mentorRequestNo, isLoading }) => {
+const tabTypes = ['workshops', 'teams', 'requests']
+
+const MentorPage = ({
+  isLoading,
+  getAllWorkshops,
+  getUnreadNotifications,
+  getTeamAnswers,
+  getWorkshopTeams,
+  allWorkshops,
+  workshopNames,
+}) => {
   const classes = useStyles();
+  const [tabNumber, setTabNumber] = useState(0)
+  const [workshopNumber, setWorkshopNumber] = useState(0)
+
+
+  useEffect(() => {
+    getAllWorkshops();
+    const interval = setInterval(() => {
+      getUnreadNotifications();
+    }, 10000)
+
+    return (() => {
+      clearInterval(interval)
+    })
+  }, [getAllWorkshops, getUnreadNotifications])
+
+
+  const handleChange = (event, newValue) => {
+    setWorkshopNumber(newValue);
+  };
+
+  console.log(workshopNames[workshopNumber])
 
   return (
     <Container className={classes.container}>
       <CssBaseline />
-      <Grid container spacing={2} direction="row" justify="space-around">
-        <Grid
-          container
-          item
-          sm={3}
-          xs={12}
-          direction="column"
-          justify="space-between">
+      <Grid container spacing={2} direction="row" justify="center">
+        <Grid container item sm={3} xs={12} direction="column" justify="space-between">
           <Grid item>
-            <ButtonGroup
-              orientation="vertical"
-              variant="contained"
-              color="primary"
-              fullWidth>
-              <Button startIcon={<ClassIcon />}>کارگاه‌ها</Button>
-              <Button startIcon={<GroupIcon />}>تیم‌ها</Button>
-              <Button>
+            <ButtonGroup orientation="vertical" variant="contained" color="primary" fullWidth>
+              <Button
+                onClick={() => setTabNumber(0)}
+                startIcon={<ClassIcon />}
+              >
+                کارگاه‌ها
+              </Button>
+              <Button
+                onClick={() => setTabNumber(1)}
+                startIcon={<GroupIcon />}
+              >
+                تیم‌ها
+              </Button>
+              <Button
+                onClick={() => setTabNumber(2)}
+              >
                 <Badge
-                  badgeContent={2 /*mentorRequestNo* todo*/}
+                  badgeContent={'!'}
                   color="secondary">
                   درخواست‌ها
                 </Badge>
@@ -71,77 +118,33 @@ const MentorPage = ({ mentorRequestNo, isLoading }) => {
           </Grid>
           <Hidden xsDown>
             <Grid item fullWidth>
-              <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                startIcon={<ExitToAppIcon />}>
+              <Button variant="contained" fullWidth color="primary" startIcon={<ExitToAppIcon />}>
                 بازگشت
               </Button>
             </Grid>
           </Hidden>
         </Grid>
 
-        <Grid item sm={9} xs={12} justify="center">
+        <Grid container item sm={9} xs={12} direction='column'>
           <Paper elevation={3} classNames={classes.rightBox}>
-            <Container className={classes.container}>
-              <Grid
-                container
-                item
-                spacing={2}
-                direction="row"
-                justify="flex-start">
-                <Grid item xs={12} sm={4}>
-                  <WorkshopCard
-                    name={'هوش مصنوعی'}
-                    description={
-                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-                    }
-                    teamNo={3}
-                    mentorNo={6}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <WorkshopCard
-                    name={'هوش مصنوعی'}
-                    description={
-                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-                    }
-                    teamNo={3}
-                    mentorNo={6}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <WorkshopCard
-                    name={'هوش مصنوعی'}
-                    description={
-                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-                    }
-                    teamNo={3}
-                    mentorNo={6}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <WorkshopCard
-                    name={'هوش مصنوعی'}
-                    description={
-                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-                    }
-                    teamNo={3}
-                    mentorNo={6}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <WorkshopCard
-                    name={'هوش مصنوعی'}
-                    description={
-                      'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/'
-                    }
-                    teamNo={3}
-                    mentorNo={6}
-                  />
-                </Grid>
-
+            {isLoading && <LinearProgress />}
+            <Grid item xs={12}>
+              {tabNumber != 0 &&
+                <Tabs
+                  value={workshopNumber}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="scrollable"
+                  scrollButtons="auto"
+                >
+                  {workshopNames.map((workshopName) =>
+                    <Tab label={workshopName} />
+                  )}
+                </Tabs>
+              }
+              {
+                tabNumber === 0 &&
                 <Tooltip
                   arrow
                   title={'اضافه کردن کارگاه جدید'}
@@ -150,8 +153,13 @@ const MentorPage = ({ mentorRequestNo, isLoading }) => {
                     <AddCircleIcon fontSize="large" />
                   </IconButton>
                 </Tooltip>
-              </Grid>
-            </Container>
+              }
+            </Grid>
+            <CardHolder
+              key={tabTypes[tabNumber]}
+              type={tabTypes[tabNumber]}
+              workshop={workshopNames[workshopNumber]}
+            />
           </Paper>
         </Grid>
         <Hidden smUp>
@@ -173,6 +181,38 @@ const MentorPage = ({ mentorRequestNo, isLoading }) => {
   );
 };
 
-const mapStateToProps = (state) => {};
+const mapStateToProps = (state) => {
+  const allWorkshops = [{
+    "id": 1,
+    "name": "ای لیمپیاد",
+    "active": true,
+    "fsm_learning_type": "noMentor",
+    "fsm_p_type": "hybrid",
+    "first_state": 1
+  },
+  {
+    "id": 1,
+    "name": "اوی لیمپیاد",
+    "active": true,
+    "fsm_learning_type": "noMentor",
+    "fsm_p_type": "hybrid",
+    "first_state": 1
+  }]
+  const workshopNames = allWorkshops.map((workshop) => {
+    return workshop.name
+  })
+  return ({
+    workshopNames,
+    allWorkshops,//: state.mentor.allWorkshops,
+  })
+};
 
-export default connect(mapStateToProps, {})(MentorPage);
+export default connect(
+  mapStateToProps,
+  {
+    getAllWorkshops,
+    getUnreadNotifications,
+    getTeamAnswers,
+    getWorkshopTeams,
+  }
+)(MentorPage);
