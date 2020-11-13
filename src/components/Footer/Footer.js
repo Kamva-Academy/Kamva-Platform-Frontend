@@ -8,6 +8,12 @@ const Footer = () => {
   return (
     <div class="footer" >
       <div>
+        <h3>
+          خانه ریاضیات اصفهان
+        </h3>
+      </div>
+      <br />
+      <div>
         <div class="social-medias">
           <div>
             <a

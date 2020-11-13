@@ -25,7 +25,7 @@ const Accordion = withStyles({
 
 const AccordionSummary = withStyles({
   root: {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
+    // backgroundColor: '#7400B8',
     borderBottom: '1px solid rgba(0, 0, 0, .125)',
     marginBottom: -1,
     minHeight: 56,
@@ -48,7 +48,7 @@ const AccordionDetails = withStyles((theme) => ({
 }))(MuiAccordionDetails);
 
 const FAQ = () => {
-  const [expanded, setExpanded] = React.useState('panel0');
+  const [expanded, setExpanded] = React.useState();
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -58,7 +58,7 @@ const FAQ = () => {
     items.map((item, index) =>
       <Accordion square expanded={expanded === 'panel' + index} onChange={handleChange('panel' + index)}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>{item.question}</Typography>
+          <Typography variant='h6'>{item.question}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
