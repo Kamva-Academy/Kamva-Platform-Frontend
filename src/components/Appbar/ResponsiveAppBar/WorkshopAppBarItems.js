@@ -5,6 +5,7 @@ import JitsiButton from './components/JitsiButton';
 import JitsiMicButton from './components/JitsiMicButton';
 import NotificationButton from './components/NotificationButton';
 import UsersAvatar from './components/UsersAvatar';
+import WhiteboardButton from './components/WhiteboardButton';
 
 const useStyles = makeStyles((theme) => ({
   backBtn: {
@@ -42,15 +43,18 @@ const MentorButton = () => {
   );
 };
 
-export default () => {
+const WorkshopAppBarItems = () => {
   const jitsiButton = <JitsiButton />;
   const jitsiMicButton = <JitsiMicButton />;
   const notificationButton = <NotificationButton />;
+  const whiteboardButton = <WhiteboardButton />;
   return {
-    desktopLeftItems: [notificationButton, <MentorButton />],
+    desktopLeftItems: [notificationButton, whiteboardButton, <MentorButton />],
     desktopRightItems: [<UsersAvatar />, jitsiMicButton, jitsiButton],
     mobileLeftItems: [jitsiMicButton, jitsiButton, <MentorButton />],
-    mobileRightItems: [notificationButton],
+    mobileRightItems: [notificationButton, whiteboardButton],
     mobileMenuListItems: [<ExitButton />],
   };
 };
+
+export default WorkshopAppBarItems;

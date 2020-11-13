@@ -1,4 +1,4 @@
-export default {
+const typography = {
   h1: {
     fontWeight: 900,
     fontSize: '33px',
@@ -59,3 +59,5 @@ export default {
     textTransform: 'uppercase',
   },
 };
+
+export default typography;
