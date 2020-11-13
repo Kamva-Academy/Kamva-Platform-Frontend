@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { IconButton, makeStyles, withWidth } from '@material-ui/core';
 import {
   Cancel as CancelIcon,
@@ -34,7 +34,7 @@ function Jitsi({ handleClose, width }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 
-  const refresh = () => {
+  const refresh = useCallback(() => {
     jitsiFuncs.destroy();
     jitsiFuncs.initJitsi({
       roomName: '1234lkfadmRasdfqlwekfmad3f1m1fklasdffbriu',
@@ -44,14 +44,14 @@ function Jitsi({ handleClose, width }) {
         displayName: 'کاربر',
       },
     });
-  };
+  }, [width]);
 
   useEffect(() => {
     setTimeout(() => {
       refresh();
     }, 100);
     return jitsiFuncs.destroy;
-  }, []);
+  }, [refresh]);
 
   return (
     <>

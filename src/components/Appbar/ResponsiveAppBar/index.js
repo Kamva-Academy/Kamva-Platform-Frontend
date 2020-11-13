@@ -10,7 +10,6 @@ import {
   List,
 } from '@material-ui/core';
 
-import { connect } from 'react-redux';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import HideOnScroll from './components/HideOnScroll';
 import modes from './modes';
@@ -98,4 +97,4 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
   );
 }
 
-export default connect()(ResponsiveAppBar);
+export default ResponsiveAppBar;

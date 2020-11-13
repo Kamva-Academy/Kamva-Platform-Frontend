@@ -1,10 +1,12 @@
 {
   "cSpell.words": [
     "Appbar",
+    "Konva",
     "Tabbar",
     "clsx",
     "jitsi",
     "scrollable",
-    "tinymce"
+    "tinymce",
+    "undoable"
   ]
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import AuthItem from './components/AuthItem';
 import LogoButton from './components/LogoButton';
 
-export default () => ({
+const LandingAppBarItems = () => ({
   desktopLeftItems: [<AuthItem />],
   desktopRightItems: [<LogoButton />],
   mobileLeftItems: [<LogoButton />],
@@ -14,3 +14,5 @@ export default () => ({
     </ListItem>,
   ],
 });
+
+export default LandingAppBarItems;

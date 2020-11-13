@@ -4,12 +4,23 @@ import { createLogger } from 'redux-logger';
 import api from '../middleware/api/api';
 import rootReducer from '../reducers';
 import DevTools from '../../containers/DevTools';
+import reduxWebsocket from '@giantmachines/redux-websocket';
+import receiveMessage from '../middleware/socket/receiveMessage';
 
 const configureStore = (preloadedState) => {
   const store = createStore(
     rootReducer,
     { Intl: { locale: 'fa' }, ...preloadedState },
-    compose(applyMiddleware(thunk, api, createLogger()), DevTools.instrument())
+    compose(
+      applyMiddleware(
+        thunk,
+        api,
+        receiveMessage,
+        reduxWebsocket({ reconnectOnClose: true }),
+        createLogger()
+      ),
+      DevTools.instrument()
+    )
   );
 
   if (module.hot) {

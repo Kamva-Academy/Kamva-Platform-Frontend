@@ -134,9 +134,12 @@ export default function Homepage() {
           <Grid item xs={12} sm={8} md={6} justify='center' />
 
           <Grid
-            container item
-            xs={12} sm={8} md={6}
-            justify='center'
+            container
+            item
+            xs={12}
+            sm={8}
+            md={6}
+            justify="center"
             alignItems="center"
             direction="column"
             spacing={4}>

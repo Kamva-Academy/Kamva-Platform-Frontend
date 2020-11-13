@@ -1,4 +1,4 @@
-export default {
+const jitsiConfig = {
   roomName: 'rastaihasdfj1alskfja2341skdfj',
   parentNode: document.querySelector('#jit-si-meet'),
   width: '100%',
@@ -39,3 +39,5 @@ export default {
     ],
   },
 };
+
+export default jitsiConfig;
