@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved, import/no-webpack-loader-syntax */
 import vars from '!!sass-vars-to-js-loader!../assets/core/_variables-mui.scss';
-export default {
+
+const theme = {
   palette: {
     primary: {
       main: vars.primary,
@@ -58,3 +59,5 @@ export default {
     },
   },
 };
+
+export default theme;

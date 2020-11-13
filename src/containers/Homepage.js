@@ -12,7 +12,6 @@ import {
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
-import Whiteboard from '../components/Whiteboard';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {

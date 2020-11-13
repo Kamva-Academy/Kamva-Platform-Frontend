@@ -1,12 +1,10 @@
 import { Grid, IconButton, makeStyles } from '@material-ui/core';
 import {
   Delete as DeleteIcon,
-  FiberManualRecordOutlined as FiberManualRecordOutlinedIcon,
   Gesture as GestureIcon,
   PanTool as PanToolIcon,
   Redo as RedoIcon,
   Save as SaveIcon,
-  StopOutlined as StopOutlinedIcon,
   TextFields as TextFieldsIcon,
   Undo as UndoIcon,
 } from '@material-ui/icons';

@@ -4,6 +4,7 @@ import { normalize } from 'normalizr';
 
 export const CALL_API = 'Call API';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default ({ getState }) => (next) => async (action) => {
   const callAPI = action[CALL_API];
   if (typeof callAPI === 'undefined') {

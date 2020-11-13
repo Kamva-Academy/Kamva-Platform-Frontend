@@ -4,7 +4,7 @@ const defaultState = {
   notifications: [],
 };
 
-export default (state = defaultState, action) => {
+export default function notifications(state = defaultState, action) {
   switch (action.type) {
     case actionTypes.ENQUEUE_SNACKBAR:
       return enquequeSnackbar({ state, ...action });

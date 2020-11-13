@@ -23,7 +23,7 @@ function Drawing({
       onSetStage(node);
     }
     stageEl.current = node;
-  }, []);
+  }, [onSetStage]);
 
   const backgroundEl = useRef();
   const [isRemoving, setIsRemoving] = useState();
