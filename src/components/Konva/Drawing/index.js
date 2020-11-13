@@ -17,7 +17,6 @@ function Drawing({
   onSetStage,
 }) {
   const stageEl = useRef();
-
   const setStage = useCallback(
     (node) => {
       if (node) {

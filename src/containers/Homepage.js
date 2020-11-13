@@ -65,11 +65,10 @@ export default function Homepage() {
         <Grid
           container
           spacing={2}
-          justify='center'
-          direction='row'
-          style={{ backgroundColor: '#ededed', color: 'black' }}
-        >
-          <Grid item xs={12} sm={8} md={6} justify='center'>
+          justify="center"
+          direction="row"
+          style={{ backgroundColor: '#ededed', color: 'black' }}>
+          <Grid item xs={12} sm={8} md={6} justify="center">
             <img
               src={process.env.PUBLIC_URL + '/first_page.png'}
               alt="edu"
@@ -77,18 +76,17 @@ export default function Homepage() {
             />
           </Grid>
           <Grid
-            container item
-            xs={12} sm={8} md={6}
-            justify='center'
+            container
+            item
+            xs={12}
+            sm={8}
+            md={6}
+            justify="center"
             alignItems="center"
             direction="column"
-            spacing={4}
-          >
+            spacing={4}>
             <Grid item>
-              <Typography
-                component="h1"
-                variant="h1"
-                className={classes.title}>
+              <Typography component="h1" variant="h1" className={classes.title}>
                 کارگاه‌های رستا
               </Typography>
             </Grid>
@@ -116,10 +114,9 @@ export default function Homepage() {
         <Grid
           container
           spacing={2}
-          justify='center'
-          direction='row'
-          style={{ backgroundColor: '#edece0', color: 'black' }}
-        >
+          justify="center"
+          direction="row"
+          style={{ backgroundColor: '#edece0', color: 'black' }}>
           <Grid item xs={12}>
             <CustomizedTimeline />
           </Grid>

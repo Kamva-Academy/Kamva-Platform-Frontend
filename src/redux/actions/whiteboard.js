@@ -1,12 +1,13 @@
 import * as actionTypes from './actionTypes';
 import makeId from '../../utils/makeId';
+import { saveAndSendWhiteboardNodes } from './websocket';
 
 export const deselectNode = (node_id) => ({
   type: actionTypes.DESELECT_NODE,
   payload: { node_id },
 });
 
-export const init = () => ({
+export const initWhiteboard = () => ({
   type: actionTypes.INIT_WHITEBOARD,
 });
 
@@ -19,23 +20,19 @@ export const selectNode = (node_id) => ({
   payload: { node_id },
 });
 
-const addNode = (
-  type,
-  shapeProps = {},
-  transformerProps = {},
-  id = makeId()
-) => ({
-  type: actionTypes.ADD_NODE,
-  payload: {
-    node: {
-      isSelected: false,
-      id,
-      type,
-      shapeProps,
-      transformerProps,
+const addNode = (type, shapeProps = {}, transformerProps = {}, id = makeId()) =>
+  saveAndSendWhiteboardNodes({
+    type: actionTypes.ADD_NODE,
+    payload: {
+      node: {
+        isSelected: false,
+        id,
+        type,
+        shapeProps,
+        transformerProps,
+      },
     },
-  },
-});
+  });
 
 export const addNewLineNode = (line) =>
   addNode('LINE', {
@@ -117,13 +114,14 @@ export const addNewRectangleNode = ({ type }) => {
   return addNode('RECT', options);
 };
 
-export const updateShapeProps = (node_id, shapeProps) => ({
-  type: actionTypes.UPDATE_SHAPE_PROPS,
-  payload: {
-    node_id,
-    shapeProps,
-  },
-});
+export const updateShapeProps = (node_id, shapeProps) =>
+  saveAndSendWhiteboardNodes({
+    type: actionTypes.UPDATE_SHAPE_PROPS,
+    payload: {
+      node_id,
+      shapeProps,
+    },
+  });
 
 export const changeMode = (mode) => ({
   type: actionTypes.CHANGE_MODE,
@@ -132,13 +130,15 @@ export const changeMode = (mode) => ({
   },
 });
 
-export const removeSelectedNodes = () => ({
-  type: actionTypes.REMOVE_SELECTED_NODES,
-});
+export const removeSelectedNodes = () =>
+  saveAndSendWhiteboardNodes({
+    type: actionTypes.REMOVE_SELECTED_NODES,
+  });
 
-export const removeNode = (nodeId) => ({
-  type: actionTypes.REMOVE_NODE,
-  payload: {
-    nodeId,
-  },
-});
+export const removeNode = (nodeId) =>
+  saveAndSendWhiteboardNodes({
+    type: actionTypes.REMOVE_NODE,
+    payload: {
+      nodeId,
+    },
+  });

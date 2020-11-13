@@ -1,3 +1,13 @@
+import {
+  WEBSOCKET_BROKEN,
+  WEBSOCKET_CLOSED,
+  WEBSOCKET_CONNECT,
+  WEBSOCKET_DISCONNECT,
+  WEBSOCKET_MESSAGE,
+  WEBSOCKET_OPEN,
+  WEBSOCKET_SEND,
+} from '@giantmachines/redux-websocket';
+
 // account
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -41,7 +51,7 @@ export const GO_BACKWARD_FAILURE = 'GO_BACKWARD_FAILURE';
 // mentor
 
 ////////////// all notifications:
-export const UNREAD_NOTIFICATIONS_REQUEST = 'UNREAD_NOTIFICATIONS_REQUEST'; //utl: notifications/api/unread_list (?) method: get 
+export const UNREAD_NOTIFICATIONS_REQUEST = 'UNREAD_NOTIFICATIONS_REQUEST'; //utl: notifications/api/unread_list (?) method: get
 export const UNREAD_NOTIFICATIONS_SUCCESS = 'UNREAD_NOTIFICATIONS_SUCCESS';
 export const UNREAD_NOTIFICATIONS_FAILURE = 'UNREAD_NOTIFICATIONS_FAILURE';
 
@@ -50,24 +60,20 @@ export const ALL_WORKSHOPS_REQUEST = 'ALL_WORKSHOPS_REQUEST'; //utl: api/fsm/fsm
 export const ALL_WORKSHOPS_SUCCESS = 'ALL_WORKSHOPS_SUCCESS';
 export const ALL_WORKSHOPS_FAILURE = 'ALL_WORKSHOPS_FAILURE';
 
-
 ////////////// خود تیم‌ها
 export const WORKSHOP_TEAMS_REQUEST = 'WORKSHOP_TEAMS_REQUEST'; //url: api/fsm/teams method: post / body: {fsmId}
 export const WORKSHOP_TEAMS_SUCCESS = 'WORKSHOP_TEAMS_SUCCESS';
 export const WORKSHOP_TEAMS_FAILURE = 'WORKSHOP_TEAMS_FAILURE';
-
 
 ////////////// جواب‌های یک تیم
 export const TEAM_ANSWERS_REQUEST = 'TEAM_ANSWERS_REQUEST'; //url: api/fsm/submittedanswers method: post / body: {fsmId + teamId}
 export const TEAM_ANSWERS_SUCCESS = 'TEAM_ANSWERS_SUCCESS';
 export const TEAM_ANSWERS_FAILURE = 'TEAM_ANSWERS_FAILURE';
 
-
 ////////////// مشاهده‌ی تیم(که نوتیف رو خاموش کنه)
 export const VISIT_TEAM_REQUEST = 'VISIT_TEAM_REQUEST'; //url: api/fsm/gototeam method: post / body: {fsmId + teamId}
 export const VISIT_TEAM_SUCCESS = 'VISIT_TEAM_SUCCESS';
 export const VISIT_TEAM_FAILURE = 'VISIT_TEAM_FAILURE';
-
 
 // create workshop
 
@@ -75,7 +81,6 @@ export const VISIT_TEAM_FAILURE = 'VISIT_TEAM_FAILURE';
 export const CREATE_WIDGET_REQUEST = 'CREATE_WIDGET_REQUEST';
 export const CREATE_WIDGET_SUCCESS = 'CREATE_WIDGET_SUCCESS';
 export const CREATE_WIDGET_FAILURE = 'CREATE_WIDGET_FAILURE';
-
 
 // snackbar (بی‌ربط به بک‌اند)
 
@@ -93,3 +98,14 @@ export const CHANGE_MODE = 'CHANGE_MODE';
 export const REMOVE_SELECTED_NODES = 'REMOVE_SELECTED_NODES';
 export const REMOVE_NODE = 'REMOVE_NODE';
 export const INIT_WHITEBOARD = 'INIT_WHITEBOARD';
+
+// websocket
+export const REDUX_WEBSOCKET_BROKEN = `REDUX_WEBSOCKET::${WEBSOCKET_BROKEN}`;
+export const REDUX_WEBSOCKET_OPEN = `REDUX_WEBSOCKET::${WEBSOCKET_OPEN}`;
+export const REDUX_WEBSOCKET_CLOSED = `REDUX_WEBSOCKET::${WEBSOCKET_CLOSED}`;
+export const REDUX_WEBSOCKET_MESSAGE = `REDUX_WEBSOCKET::${WEBSOCKET_MESSAGE}`;
+export const REDUX_WEBSOCKET_CONNECT = `REDUX_WEBSOCKET::${WEBSOCKET_CONNECT}`;
+export const REDUX_WEBSOCKET_DISCONNECT = `REDUX_WEBSOCKET::${WEBSOCKET_DISCONNECT}`;
+export const REDUX_WEBSOCKET_SEND = `REDUX_WEBSOCKET::${WEBSOCKET_SEND}`;
+
+export const REDUX_UPDATE_WHITEBOARD = `REDUX_WEBSOCKET::UPDATE_WHITEBOARD`;

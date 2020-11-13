@@ -1,7 +1,9 @@
 import LandingAppBarItems from './LandingAppBarItems';
 import WorkshopAppBarItems from './WorkshopAppBarItems';
 
-export default {
+const AppbarModes = {
   LANDING: LandingAppBarItems,
   WORKSHOP: WorkshopAppBarItems,
 };
+
+export default AppbarModes;

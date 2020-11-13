@@ -12,9 +12,20 @@ const initState = {
     tension: 0.5,
   },
   nodes: [],
+  changeCount: 0,
 };
 function whiteboard(state = initState, action) {
   switch (action.type) {
+    case actionTypes.REDUX_UPDATE_WHITEBOARD:
+      if (action.payload.changeCount > state.changeCount) {
+        return {
+          ...state,
+          nodes: action.payload.nodes,
+          changeCount: action.payload.changeCount,
+        };
+      }
+      return state;
+
     case actionTypes.INIT_WHITEBOARD:
       return initState;
 
@@ -45,6 +56,7 @@ function whiteboard(state = initState, action) {
       return {
         ...state,
         nodes: [...state.nodes, action.payload.node],
+        changeCount: state.changeCount + 1,
       };
     case actionTypes.UPDATE_SHAPE_PROPS:
       return {
@@ -54,6 +66,7 @@ function whiteboard(state = initState, action) {
             ? { ...node, shapeProps: action.payload.shapeProps }
             : node
         ),
+        changeCount: state.changeCount + 1,
       };
     case actionTypes.CHANGE_MODE:
       return {
@@ -64,11 +77,13 @@ function whiteboard(state = initState, action) {
       return {
         ...state,
         nodes: state.nodes.filter((node) => !node.isSelected),
+        changeCount: state.changeCount + 1,
       };
     case actionTypes.REMOVE_NODE:
       return {
         ...state,
         nodes: state.nodes.filter((node) => node.id !== action.payload.nodeId),
+        changeCount: state.changeCount + 1,
       };
     default:
       return state;
