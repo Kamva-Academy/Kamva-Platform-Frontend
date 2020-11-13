@@ -23,12 +23,13 @@ const KonvaTextNode = (
     };
     // create textarea and style it
     let textarea = document.createElement('textarea');
-    document.body.appendChild(textarea);
+    const drawingItem = document.querySelector('.drawing') || document.body;
+    drawingItem.appendChild(textarea);
     // apply many styles to match text on canvas as close as possible
     // remember that text rendering on canvas and on the textarea can be different
     // and sometimes it is hard to make it 100% the same. But we will try...
     textarea.value = node.text();
-    textarea.style.zIndex = 100000;
+    textarea.style.zIndex = 100000000;
     textarea.style.position = 'absolute';
     textarea.style.top = areaPosition.y + 'px';
     textarea.style.left = areaPosition.x + 'px';

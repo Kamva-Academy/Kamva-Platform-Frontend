@@ -18,12 +18,15 @@ function Drawing({
 }) {
   const stageEl = useRef();
 
-  const setStage = useCallback((node) => {
-    if (node) {
-      onSetStage(node);
-    }
-    stageEl.current = node;
-  }, []);
+  const setStage = useCallback(
+    (node) => {
+      if (node) {
+        onSetStage(node);
+      }
+      stageEl.current = node;
+    },
+    [onSetStage]
+  );
 
   const backgroundEl = useRef();
   const [isRemoving, setIsRemoving] = useState();
@@ -86,51 +89,53 @@ function Drawing({
 
   return (
     // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-    <Stage
-      width={width}
-      height={height}
-      ref={setStage}
-      onMouseDown={onTouchStageStart}
-      onTouchStart={onTouchStageStart}
-      onMouseMove={onTouchStageMove}
-      onTouchMove={onTouchStageMove}
-      onMouseUp={onTouchStageEnd}
-      onTouchEnd={onTouchStageEnd}>
-      <Layer>
-        <Rect
-          ref={backgroundEl}
-          x={0}
-          y={0}
-          fill="white"
-          width={width}
-          height={height}
-        />
-        {nodes.map((node) => (
-          <KonvaNode
-            key={node.id}
-            drawingMode={drawingMode}
-            {...node}
-            onChange={(newAttrs) => updateShapeProps(node.id, newAttrs)}
-            onSelect={() => {
-              onDeselectNodes();
-              if (drawingMode === DrawingModes.DELETE) {
-                removeNode(node.id);
-              } else {
-                onSelectNode(node.id);
-              }
-            }}
-            onTouchMove={() => {
-              if (drawingMode === DrawingModes.DELETE && isRemoving) {
-                removeNode(node.id);
-              }
-            }}
+    <div className="drawing">
+      <Stage
+        width={width}
+        height={height}
+        ref={setStage}
+        onMouseDown={onTouchStageStart}
+        onTouchStart={onTouchStageStart}
+        onMouseMove={onTouchStageMove}
+        onTouchMove={onTouchStageMove}
+        onMouseUp={onTouchStageEnd}
+        onTouchEnd={onTouchStageEnd}>
+        <Layer>
+          <Rect
+            ref={backgroundEl}
+            x={0}
+            y={0}
+            fill="white"
+            width={width}
+            height={height}
           />
-        ))}
-        {activeLine && (
-          <Line {...activeLine.shapeProps} points={activeLine.points} />
-        )}
-      </Layer>
-    </Stage>
+          {nodes.map((node) => (
+            <KonvaNode
+              key={node.id}
+              drawingMode={drawingMode}
+              {...node}
+              onChange={(newAttrs) => updateShapeProps(node.id, newAttrs)}
+              onSelect={() => {
+                onDeselectNodes();
+                if (drawingMode === DrawingModes.DELETE) {
+                  removeNode(node.id);
+                } else {
+                  onSelectNode(node.id);
+                }
+              }}
+              onTouchMove={() => {
+                if (drawingMode === DrawingModes.DELETE && isRemoving) {
+                  removeNode(node.id);
+                }
+              }}
+            />
+          ))}
+          {activeLine && (
+            <Line {...activeLine.shapeProps} points={activeLine.points} />
+          )}
+        </Layer>
+      </Stage>
+    </div>
   );
 }
 
