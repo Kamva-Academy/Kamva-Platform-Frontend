@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   body: {
-    background: '#F7F9FC',
+    background: '#DCF9E2',
+    color: 'black'
   },
   firstPageImage: {
     width: '100%',
@@ -59,7 +60,7 @@ export default function Homepage() {
 
   return (
     <>
-      <Container className={classes.body}>
+      <Container className={classes.body} >
         <CssBaseline />
         <Toolbar id="back-to-top-anchor" />
         <Grid
@@ -67,7 +68,6 @@ export default function Homepage() {
           spacing={2}
           justify='center'
           direction='row'
-          style={{ backgroundColor: '#ededed', color: 'black' }}
         >
           <Grid item xs={12} sm={8} md={6} justify='center'>
             <img
