@@ -15,6 +15,7 @@ import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 import CustomizedTimeline from './TimeLine'
+import FAQ from '../components/FAQ/FAQ';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 
 
@@ -62,6 +63,15 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '30px',
     // paddingBottom: '50px',
   },
+
+  section3: {
+    opacity: '1',
+    background: '#5390D9',
+    color: 'black',
+    paddingTop: '30px',
+    // paddingBottom: '50px',
+  },
+
 
   firstPageImage: {
     width: '100%',
@@ -152,6 +162,30 @@ export default function Homepage() {
           >
             <Grid item xs={12}>
               <CustomizedTimeline />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Container className={`${classes.section3} ${classes.centerItems}`} >
+        <Grid container direction='column'>
+          <Grid item>
+            <Typography
+              component="h2"
+              variant="h1"
+            >
+              سوالات رایج:
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            container
+            spacing={2}
+            justify='center'
+            direction='row'
+          >
+            <Grid item xs={12}>
+              <FAQ />
             </Grid>
           </Grid>
         </Grid>
