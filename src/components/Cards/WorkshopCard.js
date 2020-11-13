@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import toPersianNumber from '../../utils/translateNumber'
 
 const useStyles = makeStyles({
   root: {
@@ -51,14 +52,14 @@ const WorkShopCard = ({ name, description, teamsNumber, mentorsNumber }) => {
               <Chip
                 variant="outlined"
                 icon={<EmojiPeopleIcon />}
-                label={`${mentorsNumber} منتور`}
+                label={`${mentorsNumber = 6} منتور`}
               />
             </Grid>
             <Grid container item xs={6} justify="center">
               <Chip
                 variant="outlined"
                 icon={<PeopleAltIcon />}
-                label={`${teamsNumber} تیم`}
+                label={`${teamsNumber = 3} تیم`}
               />
             </Grid>
           </Grid>

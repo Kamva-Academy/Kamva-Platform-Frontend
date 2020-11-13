@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const CardHolder = ({ type, workshops, teams, }) => {
+const CardHolder = ({ type, allWorkshops, workshopTeams, }) => {
   const [cards, setCards] = useState();
   const classes = useStyles();
 
@@ -50,8 +50,9 @@ const CardHolder = ({ type, workshops, teams, }) => {
       direction="row"
       className={classes.cardHolder}
     >
-      {type === 'workshops' &&
-        workshops.map((workshop) => {
+      {
+        type === 'workshops' &&
+        allWorkshops.map((workshop) => {
           return (
             <WorkshopCard {...workshop} />
           )
@@ -59,32 +60,23 @@ const CardHolder = ({ type, workshops, teams, }) => {
       }
 
       {type === 'teams' &&
-        teams.map((team) => {
+        workshopTeams.map((team) => {
           return (
             <TeamCard {...team} />
           )
         })
       }
 
-      <Tooltip
-        arrow
-        title={'اضافه کردن کارگاه جدید'}
-        className={classes.absolute}>
-        <IconButton>
-          <AddCircleIcon fontSize="large" />
-        </IconButton>
-      </Tooltip>
     </Grid>
   )
 }
 
 const mapStateToProps = (state) => {
-  const workshops = [
+  const allWorkshops = [
     {
       name: 'هوش مصنوعی',
       description: 'این کارگاه خیلی قشنگ است. انگشت‌های خود را هم با آن می‌خورید :/',
-      teamsNumber: 3,
-      mentorsNumber: 6,
+ 
     },
     {
       name: 'هوش مصنوعی',
@@ -99,20 +91,40 @@ const mapStateToProps = (state) => {
       mentorsNumber: 6,
     },
   ]
-  const teams = [
+  const workshopTeams = [
     {
-      name: 'ماهی‌ها',
+      "player": {
+        "player_type": "PARTICIPANT",
+        "name": "",
+        "id": 2,
+        "score": 3
+      },
+      "current_state": {
+        "id": 2,
+        "name": "ass"
+      }
     },
     {
-      name: 'ماهی‌ها',
-    },
-    {
-      name: 'ماهی‌ها',
-    },
+      "player": {
+        "player_type": "TEAM",
+        "id": 4,
+        "uuid": "c70d41a8-8151-469d-acf2-f4e4fe5ba9a9",
+        "group_name": "test team",
+        "score": 5,
+        "team_members": [
+          "faf@gmal.com"
+        ]
+      },
+      "current_state": {
+        "id": 2,
+        "name": "ass"
+      }
+    }
   ]
+  const teamMembers = {}
   return ({
-    workshops,
-    teams,
+    allWorkshops,//: state.mentor.allWorkshops,
+    workshopTeams,
   })
 }
 

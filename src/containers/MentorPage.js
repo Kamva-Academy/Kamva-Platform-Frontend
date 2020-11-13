@@ -48,10 +48,11 @@ const useStyles = makeStyles((theme) => ({
   absolute: {
     position: 'absolute',
     right: theme.spacing(2),
+    zIndex: 5,
   },
 }));
 
-const tabTypes = ['workshops', 'teams', 'requests', 'answers']
+const tabTypes = ['workshops', 'teams', 'requests']
 
 const MentorPage = ({
   isLoading,
@@ -59,10 +60,12 @@ const MentorPage = ({
   getUnreadNotifications,
   getTeamAnswers,
   getWorkshopTeams,
+  allWorkshops,
+  workshopNames,
 }) => {
   const classes = useStyles();
   const [tabNumber, setTabNumber] = useState(0)
-  const [workshop, setWorkshop] = useState(0)
+  const [workshopNumber, setWorkshopNumber] = useState(0)
 
 
   useEffect(() => {
@@ -78,10 +81,10 @@ const MentorPage = ({
 
 
   const handleChange = (event, newValue) => {
-    setWorkshop(newValue);
+    setWorkshopNumber(newValue);
   };
 
-  console.log(tabNumber)
+  console.log(workshopNames[workshopNumber])
 
   return (
     <Container className={classes.container}>
@@ -106,16 +109,10 @@ const MentorPage = ({
                 onClick={() => setTabNumber(2)}
               >
                 <Badge
-                  badgeContent={2 /*mentorRequestsNumber* todo*/}
+                  badgeContent={'!'}
                   color="secondary">
                   درخواست‌ها
                 </Badge>
-              </Button>
-              <Button
-                onClick={() => setTabNumber(3)}
-                startIcon={<CreateIcon />}
-              >
-                پاسخ‌ها
               </Button>
             </ButtonGroup>
           </Grid>
@@ -128,26 +125,41 @@ const MentorPage = ({
           </Hidden>
         </Grid>
 
-        <Grid container item sm={9} xs={12} justify="center" direction='column'>
+        <Grid container item sm={9} xs={12} direction='column'>
           <Paper elevation={3} classNames={classes.rightBox}>
             {isLoading && <LinearProgress />}
             <Grid item xs={12}>
-              {tabNumber != 0 && tabNumber != 3 &&
+              {tabNumber != 0 &&
                 <Tabs
-                  value={workshop}
+                  value={workshopNumber}
                   onChange={handleChange}
                   indicatorColor="primary"
                   textColor="primary"
                   variant="scrollable"
                   scrollButtons="auto"
                 >
-                  <Tab label="گرانش" />
-                  <Tab label="شار" />
-                  <Tab label="کدگذاری" />
+                  {workshopNames.map((workshopName) =>
+                    <Tab label={workshopName} />
+                  )}
                 </Tabs>
               }
+              {
+                tabNumber === 0 &&
+                <Tooltip
+                  arrow
+                  title={'اضافه کردن کارگاه جدید'}
+                  className={classes.absolute}>
+                  <IconButton>
+                    <AddCircleIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
+              }
             </Grid>
-            <CardHolder type={tabTypes[tabNumber]} />
+            <CardHolder
+              key={tabTypes[tabNumber]}
+              type={tabTypes[tabNumber]}
+              workshop={workshopNames[workshopNumber]}
+            />
           </Paper>
         </Grid>
         <Hidden smUp>
@@ -170,7 +182,29 @@ const MentorPage = ({
 };
 
 const mapStateToProps = (state) => {
-
+  const allWorkshops = [{
+    "id": 1,
+    "name": "ای لیمپیاد",
+    "active": true,
+    "fsm_learning_type": "noMentor",
+    "fsm_p_type": "hybrid",
+    "first_state": 1
+  },
+  {
+    "id": 1,
+    "name": "اوی لیمپیاد",
+    "active": true,
+    "fsm_learning_type": "noMentor",
+    "fsm_p_type": "hybrid",
+    "first_state": 1
+  }]
+  const workshopNames = allWorkshops.map((workshop) => {
+    return workshop.name
+  })
+  return ({
+    workshopNames,
+    allWorkshops,//: state.mentor.allWorkshops,
+  })
 };
 
 export default connect(

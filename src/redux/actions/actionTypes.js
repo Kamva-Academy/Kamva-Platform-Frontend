@@ -26,10 +26,6 @@ export const CURRENT_STATE_REQUEST = 'CURRENT_STATE_REQUEST'; //utl: api/fsm/get
 export const CURRENT_STATE_SUCCESS = 'CURRENT_STATE_SUCCESS';
 export const CURRENT_STATE_FAILURE = 'CURRENT_STATE_FAILURE';
 
-export const SUBMIT_ANSWER_REQUEST = 'SUBMIT_ANSWER_REQUEST'; //utl: api/fsm/submitanswer method: post / body : type + questionNumber + answer[1- answerType 2- answerSelf]
-export const SUBMIT_ANSWER_SUCCESS = 'SUBMIT_ANSWER_SUCCESS';
-export const SUBMIT_ANSWER_FAILURE = 'SUBMIT_ANSWER_FAILURE';
-
 export const CALL_MENTOR_REQUEST = 'CALL_MENTOR_REQUEST'; //utl: api/fsm/requestmentor method: post / body : {fsmId}
 export const CALL_MENTOR_SUCCESS = 'CALL_MENTOR_SUCCESS';
 export const CALL_MENTOR_FAILURE = 'CALL_MENTOR_FAILURE';
@@ -71,6 +67,14 @@ export const TEAM_ANSWERS_FAILURE = 'TEAM_ANSWERS_FAILURE';
 export const VISIT_TEAM_REQUEST = 'VISIT_TEAM_REQUEST'; //url: api/fsm/gototeam method: post / body: {fsmId + teamId}
 export const VISIT_TEAM_SUCCESS = 'VISIT_TEAM_SUCCESS';
 export const VISIT_TEAM_FAILURE = 'VISIT_TEAM_FAILURE';
+
+
+// create workshop
+
+//////////////// create widget
+export const CREATE_WIDGET_REQUEST = 'CREATE_WIDGET_REQUEST';
+export const CREATE_WIDGET_SUCCESS = 'CREATE_WIDGET_SUCCESS';
+export const CREATE_WIDGET_FAILURE = 'CREATE_WIDGET_FAILURE';
 
 
 // snackbar (بی‌ربط به بک‌اند)

@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TeamCard = ({ name, members, doesHaveMentor }) => {
+const TeamCard = ({ name, teamMembers, }) => {
   const classes = useStyles();
 
   return (
@@ -39,9 +39,11 @@ const TeamCard = ({ name, members, doesHaveMentor }) => {
             <Typography gutterBottom variant="h3">
               {name}
             </Typography>
-            <Avatar className={classes.orange}>N</Avatar>
-            <Avatar className={classes.orange}>N</Avatar>
-            <Avatar className={classes.orange}>N</Avatar>
+            <Grid container direction='row' justify='center'>
+              <Avatar className={classes.orange}>N</Avatar>
+              <Avatar className={classes.orange}>N</Avatar>
+              <Avatar className={classes.orange}>N</Avatar>
+            </Grid>
           </CardContent>
           <Grid container>
           </Grid>

@@ -40,7 +40,7 @@ export const getWorkshopTeams = (fsmId) => ({
     url: URLs.WORKSHOP_TEAMS,
     fetchOptions: {
       method: 'POST',
-      fsmId,
+      fsm: fsmId,
     },
   },
 });
@@ -72,8 +72,22 @@ export const visitTeam = (fsmId, teamId) => ({
     url: URLs.VISIT_TEAM,
     fetchOptions: {
       method: 'POST',
-      fsmId,
-      teamId,
+      fsm: fsmId,
+      team: teamId,
+    },
+  },
+});
+
+export const createWidget = () => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CREATE_WIDGET_REQUEST,
+      actionTypes.CREATE_WIDGET_SUCCESS,
+      actionTypes.CREATE_WIDGET_FAILURE,
+    ],
+    url: URLs.CREATE_WIDGET,
+    fetchOptions: {
+      method: 'POST',
     },
   },
 });
