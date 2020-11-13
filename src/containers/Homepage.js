@@ -8,19 +8,23 @@ import {
   makeStyles,
   Toolbar,
   Typography,
+  Paper,
 } from '@material-ui/core';
+import Footer from './Footer'
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 import CustomizedTimeline from './TimeLine'
+import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
+
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 'calc(100vh - 64px)',
   },
+
   title: {
     fontSize: 60,
     lineHeight: '80px',
@@ -28,24 +32,37 @@ const useStyles = makeStyles((theme) => ({
     textShadow: '-2px 2px #888',
     [theme.breakpoints.down('sm')]: {
       fontSize: 40,
-      lineHeight: '60px',
-      // marginBottom: theme.spacing(3),
+      lineHeight: '40px',
     },
   },
+
   subtitle: {
-    fontSize: 40,
-    lineHeight: '40px',
+    fontSize: 30,
+    // lineHeight: '40px',
     color: '#555',
-    textShadow: '-1px 1px #888',
+    textShadow: '-2px 2px #888',
     [theme.breakpoints.down('sm')]: {
-      fontSize: 30,
+      fontSize: 20,
       // marginBottom: theme.spacing(3),
     },
   },
-  body: {
-    background: '#DCF9E2',
-    color: 'black'
+
+  section1: {
+    height: '100vh',
+    // background: '#DCF9E2',
+    color: 'black',
+    paddingTop: '50px',
+    paddingBottom: '50px',
   },
+
+  section2: {
+    opacity: '1',
+    background: '#6930C3',
+    color: 'black',
+    paddingTop: '30px',
+    // paddingBottom: '50px',
+  },
+
   firstPageImage: {
     width: '100%',
     // [theme.breakpoints.down('xs')]: {
@@ -60,21 +77,23 @@ export default function Homepage() {
 
   return (
     <>
-      <Container className={classes.body} >
+      {/* <ResponsiveAppBar /> */}
+      <Container className={`${classes.section1} ${classes.centerItems}`} >
         <CssBaseline />
-        <Toolbar id="back-to-top-anchor" />
+        <div className='landing-background' />
         <Grid
           container
           spacing={2}
           justify='center'
           direction='row'
+          alignItems='center'
         >
           <Grid item xs={12} sm={8} md={6} justify='center'>
-            <img
+            {/* <img
               src={process.env.PUBLIC_URL + '/first_page.png'}
               alt="edu"
               className={classes.firstPageImage}
-            />
+            /> */}
           </Grid>
           <Grid
             container item
@@ -89,17 +108,16 @@ export default function Homepage() {
                 component="h1"
                 variant="h1"
                 className={classes.title}>
-                کارگاه‌های رستا
+                A-Lympiad
               </Typography>
-            </Grid>
-            <Grid item>
               <Typography
                 component="h2"
                 variant="h4"
                 className={classes.subtitle}>
-                جایی برای یاد‌گیری بهتر
+                چهاردمین دوره مسابقات
               </Typography>
             </Grid>
+
             <Grid item>
               <Button
                 variant="contained"
@@ -113,24 +131,39 @@ export default function Homepage() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          container
-          spacing={2}
-          justify='center'
-          direction='row'
-          style={{ backgroundColor: '#edece0', color: 'black' }}
-        >
-          <Grid item xs={12}>
-            <CustomizedTimeline />
+      </Container>
+
+      <Container className={`${classes.section2} ${classes.centerItems}`} >
+        <Grid container direction='column'>
+          <Grid item>
+            <Typography
+              component="h2"
+              variant="h1"
+            >
+              زمان‌بندی:
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            container
+            spacing={2}
+            justify='center'
+            direction='row'
+          >
+            <Grid item xs={12}>
+              <CustomizedTimeline />
+            </Grid>
           </Grid>
         </Grid>
-
-        <ScrollTop>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUpIcon />
-          </Fab>
-        </ScrollTop>
       </Container>
+
+      <ScrollTop>
+        <Fab color="secondary" size="small" aria-label="scroll back to top">
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </ScrollTop>
+      {/* <Toolbar id="back-to-top-anchor" /> */}
+      <Footer />
       <AuthDialog
         open={authDialogOpen}
         handelClose={() => setAuthDialogOpen(false)}

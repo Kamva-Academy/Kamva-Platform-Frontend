@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '6px 16px',
   },
-  secondaryTail: {
-    backgroundColor: theme.palette.secondary.main,
-  },
 }));
 
 export default function CustomizedTimeline() {
@@ -31,11 +28,11 @@ export default function CustomizedTimeline() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            9:30 am
+            ۸ صبح
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot>
+          <TimelineDot color="secondary">
             <FastfoodIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -43,20 +40,20 @@ export default function CustomizedTimeline() {
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              Eat
+              شروع روز اول مسابقه
             </Typography>
-            <Typography>Because you need strength</Typography>
+            {/* <Typography>Because you need strength</Typography> */}
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            10:00 am
+            ۱۰ صبح
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot color="primary">
+          <TimelineDot color="secondary">
             <LaptopMacIcon />
           </TimelineDot>
           <TimelineConnector />
@@ -64,29 +61,39 @@ export default function CustomizedTimeline() {
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              Code
+              میان‌وعده!
             </Typography>
-            <Typography>Because it&apos;s awesome!</Typography>
+            {/* <Typography>Because it&apos;s awesome!</Typography> */}
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            ۱۲ ظهر
+          </Typography>
+        </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot color="primary" variant="outlined">
+          <TimelineDot color="secondary" >
             <HotelIcon />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              Sleep
+              پایان روز اول
             </Typography>
-            <Typography>Because you need rest</Typography>
+            {/* <Typography>Because you need rest</Typography> */}
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            فردا
+          </Typography>
+        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="secondary">
             <RepeatIcon />
@@ -95,9 +102,9 @@ export default function CustomizedTimeline() {
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              Repeat
+              روز دوم
             </Typography>
-            <Typography>Because this is the life you love!</Typography>
+            {/* <Typography>Because this is the life you love!</Typography> */}
           </Paper>
         </TimelineContent>
       </TimelineItem>
