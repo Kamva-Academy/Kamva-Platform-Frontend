@@ -30,7 +30,7 @@ const Notifications = ({ notifications = [], removeSnackbar }) => {
         }
         if (displayed.includes(key)) return;
 
-        enqueueSnackbar(t(message.replace(/\s|\./g, '_')), {
+        enqueueSnackbar(message, {
           key,
           anchorOrigin: {
             vertical: 'top',
