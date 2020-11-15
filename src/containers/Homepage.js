@@ -123,6 +123,7 @@ export default function Homepage() {
       {/* <ResponsiveAppBar /> */}
       <Container className={`${classes.section1} ${classes.centerItems}`} >
         <CssBaseline />
+        <Toolbar id="back-to-top-anchor" />
         <div className='landing-background' />
         <Grid
           container
