@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import * as URLs from './urls';
 import { CALL_API } from '../middleware/api/api';
 
-export const login = (username, password) => ({
+export const login = ({ username, password }) => ({
   [CALL_API]: {
     types: [
       actionTypes.LOGIN_REQUEST,
@@ -10,16 +10,12 @@ export const login = (username, password) => ({
       actionTypes.LOGIN_FAILURE,
     ],
     url: URLs.LOGIN,
-    payload: {
-      username,
-    },
     fetchOptions: {
       method: 'POST',
-      body: { username, password },
+      body: JSON.stringify({ username, password }),
     },
   },
 });
-
 
 export const logout = () => ({
   [CALL_API]: {
@@ -30,11 +26,10 @@ export const logout = () => ({
     ],
     url: URLs.LOGOUT,
     fetchOptions: {
-      method: 'POST', //todo?
+      method: 'POST',
     },
   },
 });
-
 
 // const fetchUser = () => ({
 //   [CALL_API]: {
@@ -50,7 +45,6 @@ export const logout = () => ({
 //   },
 // });
 
-
 // export const loadUser = () => (
 //   dispatch,
 //   getState
@@ -61,26 +55,3 @@ export const logout = () => ({
 //   }
 //   return dispatch(fetchUser());
 // };
-
-
-export const enqueueSnackbar = ({
-  key = new Date().getTime() + Math.random(),
-  ...notification
-}) => ({
-  type: actionTypes.ENQUEUE_SNACKBAR,
-  notification: {
-    ...notification,
-    key,
-  },
-});
-
-export const closeSnackbar = (key) => ({
-  type: actionTypes.CLOSE_SNACKBAR,
-  dismissAll: !key,
-  key,
-});
-
-export const removeSnackbar = (key) => ({
-  type: actionTypes.REMOVE_SNACKBAR,
-  key,
-});

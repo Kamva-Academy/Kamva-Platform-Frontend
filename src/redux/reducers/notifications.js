@@ -4,6 +4,17 @@ const defaultState = {
   notifications: [],
 };
 
+const getMessage = (actionType, message) => {
+  switch (actionType) {
+    case actionTypes.LOGIN_SUCCESS:
+      return 'خوش‌آمدید!';
+    case actionTypes.LOGIN_FAILURE:
+      return 'نام کاربری یا رمزعبور اشتباه است!';
+    default:
+      return message;
+  }
+};
+
 export default function notifications(state = defaultState, action) {
   switch (action.type) {
     case actionTypes.ENQUEUE_SNACKBAR:
@@ -31,7 +42,7 @@ export default function notifications(state = defaultState, action) {
       return enquequeSnackbar({
         state,
         notification: {
-          message: action.error,
+          message: getMessage(action.type, action.error),
           options: {
             key: new Date().getTime() + Math.random(),
             variant: 'error',
@@ -43,7 +54,7 @@ export default function notifications(state = defaultState, action) {
       return enquequeSnackbar({
         state,
         notification: {
-          message: action.type,
+          message: getMessage(action.type, action.message),
           options: {
             key: new Date().getTime() + Math.random(),
             variant: 'success',
@@ -54,7 +65,7 @@ export default function notifications(state = defaultState, action) {
     default:
       return state;
   }
-};
+}
 
 const enquequeSnackbar = ({ state, notification }) => ({
   ...state,

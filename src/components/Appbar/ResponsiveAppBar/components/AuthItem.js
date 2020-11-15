@@ -51,7 +51,7 @@ function AuthItem({ isLoggedIn }) {
 }
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: true,
+  isLoggedIn: !!state.account.token,
 });
 
 export default connect(mapStateToProps)(AuthItem);
