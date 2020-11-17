@@ -1,10 +1,22 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  Typography
+} from '@material-ui/core';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import items from './items'
+import questions from './questions'
+
+
+const useStyles = makeStyles((theme) => ({
+  text: {
+    textAlign: 'justify',
+    textJustify: 'inter-word',
+  },
+}));
+
 
 const Accordion = withStyles({
   root: {
@@ -41,13 +53,19 @@ const AccordionSummary = withStyles({
   expanded: {},
 })(MuiAccordionSummary);
 
+
+
 const AccordionDetails = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
+    display: 'block',
   },
 }))(MuiAccordionDetails);
 
+
+
 const FAQ = () => {
+  const classes = useStyles();
   const [expanded, setExpanded] = React.useState();
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -55,17 +73,37 @@ const FAQ = () => {
   };
 
   return (
-    items.map((item, index) =>
+    questions.map((question, index) =>
       <Accordion square expanded={expanded === 'panel' + index} onChange={handleChange('panel' + index)}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography variant='h6'>{item.question}</Typography>
+          <Typography variant='h6'>{question.text}</Typography>
         </AccordionSummary>
+
         <AccordionDetails>
-          <Typography>
-            {item.answer}
-          </Typography>
+          {question.answerParagraphs &&
+            question.answerParagraphs.map((answer) => {
+              return (
+                <>
+                  <Typography className={classes.text}>
+                    {answer}
+                  </Typography>
+                </>
+              )
+            })
+          }
+          {
+            question.answerItems &&
+            question.answerItems.map((item) => {
+              return (
+                <Typography className={classes.text}>
+                  <li>{item}</li>
+                </Typography>
+              )
+            })
+          }
         </AccordionDetails>
-      </Accordion>
+
+      </Accordion >
     )
   );
 }

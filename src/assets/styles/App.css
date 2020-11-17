@@ -37,9 +37,9 @@ input.rtl-placeholder::placeholder,
   left: 0;
   background: linear-gradient(#feceab33, #feceab33),
     url('background.jpg') no-repeat center center fixed;
-  filter: blur(6px);
-  -webkit-filter: blur(6px);
-  opacity: 0.6;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  opacity: 0.8;
 
   -webkit-background-size: cover;
   -moz-background-size: cover;
