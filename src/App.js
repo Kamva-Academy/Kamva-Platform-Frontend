@@ -12,10 +12,12 @@ import Notifier from './components/Notifications/Notifications';
 import { SnackbarProvider } from 'notistack';
 
 import './assets/styles/App.css';
+import { CssBaseline } from '@material-ui/core';
 
 const AppRout = () => (
   <SnackbarProvider>
     <Notifier />
+    <CssBaseline />
     <Root />
   </SnackbarProvider>
 );
