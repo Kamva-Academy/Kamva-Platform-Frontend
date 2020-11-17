@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
-import { Button, Fab, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Button, Fab, Grid, makeStyles, Typography, Divider } from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
@@ -42,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: 'justify',
     textJustify: 'inter-word',
+  },
+
+  divider: {
+    boxShadow: '0px 1px 0px 1px #37253F',
+    marginTop: '3vh',
+    marginBottom: '3vh',
   },
 
   statImage: {
@@ -94,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: '1',
     background: '#7400B8',
     color: '#f2f2f2',
-    boxShadow: '3px 3px 3px 3px black',
+    boxShadow: '2px 2px 2px 2px black',
     paddingTop: '30px',
     paddingBottom: '30px',
   },
@@ -165,18 +171,6 @@ function Homepage({ isLoggedIn, logout }) {
                       چهاردمین دوره مسابقات
                     </Typography>
                   </Grid>
-
-                  {/* <Grid item>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="large"
-                      onClick={() => setAuthDialogOpen(true)}>
-                      <Typography component="span" variant="h3">
-                        بزن بریم!
-                      </Typography>
-                    </Button>
-                  </Grid> */}
                 </Grid>
               </Grid>
             </Grid>
@@ -219,6 +213,7 @@ function Homepage({ isLoggedIn, logout }) {
             </Grid>
             <Grid item xs={12} sm={6} className={classes.statImage}></Grid>
           </Grid>
+          <Divider variant="middle" className={classes.divider} />
           <Grid container item direction="row">
             <Grid item xs={12} sm={6} className={classes.teamWorkImage}></Grid>
             <Grid container item direciton="column" xs={12} sm={6} spacing={2}>
