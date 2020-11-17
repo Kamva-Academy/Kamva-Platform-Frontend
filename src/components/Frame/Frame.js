@@ -49,10 +49,12 @@ export default class Frame extends Component {
   }
 
   fixHeight() {
-    this.iframeEl.style.height =
-      this.state.window.document.documentElement.scrollHeight * 1.1 + 'px';
-    this.wrapper.style.height =
-      this.state.window.document.documentElement.scrollHeight * 1.1 + 'px';
+    try {
+      this.iframeEl.style.height =
+        this.state.window.document.documentElement.scrollHeight * 1.1 + 'px';
+      this.wrapper.style.height =
+        this.state.window.document.documentElement.scrollHeight * 1.1 + 'px';
+    } catch {}
   }
 
   addCSS(href) {
