@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   title: {
-    fontSize: 60,
+    fontSize: 70,
     lineHeight: '80px',
-    color: '#555',
+    color: '#37253f',
     textShadow: '-2px 2px #888',
     [theme.breakpoints.down('sm')]: {
       fontSize: 40,
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     fontSize: 30,
     // lineHeight: '40px',
-    color: '#555',
+    color: '#37253f',
     textShadow: '-2px 2px #888',
     [theme.breakpoints.down('sm')]: {
       fontSize: 20,
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   section3: {
     opacity: '1',
     boxShadow: '3px 3px 3px 3px black',
-    background: '#5390D9',
+    background: '#673CC6',
     paddingTop: '30px',
     paddingBottom: '30px',
   },
@@ -93,6 +93,7 @@ const useStyles = makeStyles((theme) => ({
   section4: {
     opacity: '1',
     background: '#7400B8',
+    color: '#f2f2f2',
     boxShadow: '3px 3px 3px 3px black',
     paddingTop: '30px',
     paddingBottom: '30px',
@@ -165,7 +166,7 @@ function Homepage({ isLoggedIn, logout }) {
                     </Typography>
                   </Grid>
 
-                  <Grid item>
+                  {/* <Grid item>
                     <Button
                       variant="contained"
                       color="primary"
@@ -175,7 +176,7 @@ function Homepage({ isLoggedIn, logout }) {
                         بزن بریم!
                       </Typography>
                     </Button>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               </Grid>
             </Grid>
