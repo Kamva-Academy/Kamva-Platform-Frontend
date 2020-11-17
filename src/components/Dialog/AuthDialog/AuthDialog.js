@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   CircularProgress,
@@ -15,6 +15,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { login } from '../../../redux/actions/account';
 import { connect } from 'react-redux';
 import { green } from '@material-ui/core/colors';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   rightImage: {
@@ -35,20 +36,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AuthDialog({ open, handelClose, login, isFetching }) {
+function AuthDialog({
+  open,
+  handleClose,
+  login,
+  isFetching,
+  isLoggedIn,
+  user,
+}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const classes = useStyles();
   const t = useTranslate();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (open && isLoggedIn) {
+      if (user.is_mentor) {
+        history.push('/mentor');
+      } else {
+        history.push('/workshops');
+      }
+    }
+  }, [isLoggedIn, user, open]);
 
   return (
-    <Dialog maxWidth="sm" fullWidth open={open} onClose={handelClose}>
+    <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <form>
         <Grid container>
           <Grid item sm={7}>
             <IconButton
               aria-label="close"
-              onClick={handelClose}
+              onClick={handleClose}
               className={classes.closeIcon}>
               <CloseIcon />
             </IconButton>
@@ -114,6 +133,8 @@ function AuthDialog({ open, handelClose, login, isFetching }) {
 
 const mapStateToProps = (state) => ({
   isFetching: state.account.isFetching,
+  isLoggedIn: !!state.account.token,
+  user: state.account.user,
 });
 
 export default connect(mapStateToProps, { login })(AuthDialog);
