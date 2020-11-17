@@ -9,6 +9,7 @@ import {
   makeStyles,
   TextField,
   Typography,
+  Hidden,
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -19,18 +20,22 @@ import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   rightImage: {
-    background: `url(${process.env.PUBLIC_URL + '/auth.png'})`,
+    background: `url(${process.env.PUBLIC_URL + '/Auth.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
+    boxShadow: '3px 3px 3px 3px black',
   },
+
   leftContainer: {
     height: 300,
     padding: theme.spacing(2),
   },
+
   leftGrid: {
     height: '100%',
   },
+
   buttonProgress: {
     color: green[500],
   },
@@ -63,14 +68,8 @@ function AuthDialog({
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <form>
-        <Grid container>
-          <Grid item sm={7}>
-            <IconButton
-              aria-label="close"
-              onClick={handleClose}
-              className={classes.closeIcon}>
-              <CloseIcon />
-            </IconButton>
+        <Grid container direction='row' justify='center'>
+          <Grid item xs={12} sm={7}>
             <Container className={classes.leftContainer}>
               <Grid
                 container
@@ -78,10 +77,21 @@ function AuthDialog({
                 justify="space-between"
                 alignItems="stretch"
                 className={classes.leftGrid}>
-                <Grid item>
-                  <Typography component="h3" variant="h2" align="center">
-                    ورود
-                  </Typography>
+                <Grid container item direction='row'>
+                  <Grid item justify='left' xs={3}>
+                    <IconButton
+                      aria-label="close"
+                      onClick={handleClose}
+                      className={classes.closeIcon}>
+                      <CloseIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography component="h3" variant="h2" align="center">
+                      ورود
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={3} />
                 </Grid>
                 <Grid item>
                   <TextField
@@ -124,7 +134,9 @@ function AuthDialog({
               </Grid>
             </Container>
           </Grid>
-          <Grid item sm={5} className={classes.rightImage}></Grid>
+          <Hidden xsDown='true'>
+            <Grid item sm={5} className={classes.rightImage}></Grid>
+          </Hidden>
         </Grid>
       </form>
     </Dialog>

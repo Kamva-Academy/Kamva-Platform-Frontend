@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   section3: {
     opacity: '1',
     boxShadow: '3px 0px 3px 0px black',
-    color: '#f2f2f2',
+    color: '#f7f2f6',
     background: '#673CC6',
     paddingTop: '30px',
     paddingBottom: '30px',
@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   section4: {
     opacity: '1',
     background: '#7400B8',
-    color: '#f2f2f2',
+    color: '#f7f2f6',
     boxShadow: '3px 0px 3px 0px black',
     paddingTop: '30px',
     paddingBottom: '30px',
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
 
   section5: {
     opacity: '1',
-    background: '#9C89C2',
+    background: '#F0DBED',
     // color: '#f2f2f2',
     boxShadow: '3px 0px 3px 0px black',
     paddingTop: '30px',
