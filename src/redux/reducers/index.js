@@ -5,6 +5,7 @@ import mentor from './mentor';
 
 import whiteboard from './whiteboard';
 import websocket from './websocket';
+import redirect from './redirect';
 import { IntlReducer as Intl } from 'react-redux-multilingual';
 
 const allReducers = combineReducers({
@@ -13,6 +14,7 @@ const allReducers = combineReducers({
   mentor,
   whiteboard,
   websocket,
+  redirect,
   Intl,
 });
 export default allReducers;
