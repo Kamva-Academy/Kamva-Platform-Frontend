@@ -1,29 +1,28 @@
-/* eslint-disable import/no-unresolved, import/no-webpack-loader-syntax */
-import vars from '!!sass-vars-to-js-loader!../assets/core/_variables-mui.scss';
+import variables from '../assets/core/MuiVariables';
 
 const theme = {
   palette: {
     primary: {
-      main: vars.primary,
+      main: variables.colors.primary,
     },
     grey: {
-      300: vars.inheritDefault1,
-      A100: vars.inheritDefault2,
+      300: variables.colors.inheritDefault1,
+      A100: variables.colors.inheritDefault2,
     },
     secondary: {
-      main: vars.secondary,
+      main: variables.colors.secondary,
     },
     error: {
-      main: vars.red,
+      main: variables.colors.red,
     },
     success: {
-      main: vars.green,
+      main: variables.colors.green,
     },
     warning: {
-      main: vars.orange,
+      main: variables.colors.orange,
     },
     helpers: {
-      primary: vars.blue,
+      primary: variables.colors.blue,
       main: 'rgba(25, 46, 91, .09)',
     },
     contrastThreshold: 3,
@@ -49,12 +48,12 @@ const theme = {
     },
     MuiTooltip: {
       tooltip: {
-        backgroundColor: vars.second,
+        backgroundColor: variables.colors.second,
         padding: '8px 16px',
         fontSize: '13px',
       },
       arrow: {
-        color: vars.second,
+        color: variables.colors.second,
       },
     },
   },

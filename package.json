@@ -56,12 +56,10 @@
   },
   "devDependencies": {
     "eslint-config-react-app": "^6.0.0",
-    "node-sass": "^5.0.0",
     "prettier": "^2.1.2",
     "redux-devtools": "^3.7.0",
     "redux-devtools-dock-monitor": "^1.2.0",
     "redux-devtools-log-monitor": "^2.1.0",
-    "redux-logger": "^3.0.6",
-    "sass-vars-to-js-loader": "^2.1.1"
+    "redux-logger": "^3.0.6"
   }
 }
