@@ -90,7 +90,8 @@ const useStyles = makeStyles((theme) => ({
 
   section3: {
     opacity: '1',
-    boxShadow: '3px 3px 3px 3px black',
+    boxShadow: '3px 0px 3px 0px black',
+    color: '#f2f2f2',
     background: '#673CC6',
     paddingTop: '30px',
     paddingBottom: '30px',
@@ -100,19 +101,18 @@ const useStyles = makeStyles((theme) => ({
     opacity: '1',
     background: '#7400B8',
     color: '#f2f2f2',
-    boxShadow: '2px 2px 2px 2px black',
+    boxShadow: '3px 0px 3px 0px black',
     paddingTop: '30px',
     paddingBottom: '30px',
   },
 
-  firstPageImage: {
-    width: '100%',
-    // [theme.breakpoints.down('xs')]: {
-    //   display: 'none',
-    // },
-  },
-  appbar: {
-    padding: theme.spacing(1, 0),
+  section5: {
+    opacity: '1',
+    background: '#9C89C2',
+    // color: '#f2f2f2',
+    boxShadow: '3px 0px 3px 0px black',
+    paddingTop: '30px',
+    paddingBottom: '30px',
   },
 }));
 
@@ -168,7 +168,7 @@ function Homepage({ isLoggedIn, logout }) {
                       component="h2"
                       variant="h3"
                       className={classes.subtitle}>
-                      چهاردمین دوره مسابقات
+                      چهاردهمین دوره مسابقات
                     </Typography>
                   </Grid>
                 </Grid>
@@ -304,7 +304,7 @@ function Homepage({ isLoggedIn, logout }) {
         <Grid container direction="column">
           <Grid item>
             <Typography component="h2" variant="h2">
-              زمان‌بندی
+              فیلم‌هایی که حتما باید ببینید!
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -326,13 +326,25 @@ function Homepage({ isLoggedIn, logout }) {
         </Grid>
       </Container>
 
+      <Container className={`${classes.section5} ${classes.centerItems}`}>
+        <Grid container direction="column" spacing={2}>
+          <Grid item>
+            <Typography component="h2" variant="h2">
+              حامیان
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Footer />
+          </Grid>
+        </Grid>
+      </Container>
+
       <ScrollTop>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
       {/* <Toolbar id="back-to-top-anchor" /> */}
-      <Footer />
       <AuthDialog
         open={authDialogOpen}
         handleClose={() => setAuthDialogOpen(false)}

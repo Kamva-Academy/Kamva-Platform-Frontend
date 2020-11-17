@@ -2,7 +2,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import {
   makeStyles,
-  Typography
+  Typography,
+  Grid,
 } from '@material-ui/core';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
@@ -80,29 +81,32 @@ const FAQ = () => {
         </AccordionSummary>
 
         <AccordionDetails>
-          {question.answerParagraphs &&
-            question.answerParagraphs.map((answer) => {
-              return (
-                <>
-                  <Typography className={classes.text}>
-                    {answer}
-                  </Typography>
-                </>
-              )
-            })
-          }
-          {
-            question.answerItems &&
-            question.answerItems.map((item) => {
-              return (
-                <Typography className={classes.text}>
-                  <li>{item}</li>
-                </Typography>
-              )
-            })
-          }
+          <Grid container direction='column' spacing={2}>
+            {question.answerParagraphs &&
+              question.answerParagraphs.map((answer) => {
+                return (
+                  <Grid item>
+                    <Typography className={classes.text}>
+                      {answer}
+                    </Typography>
+                  </Grid>
+                )
+              })
+            }
+            {
+              question.answerItems &&
+              question.answerItems.map((item) => {
+                return (
+                  <Grid item>
+                    <Typography className={classes.text}>
+                      <li>{item}</li>
+                    </Typography>
+                  </Grid>
+                )
+              })
+            }
+          </Grid>
         </AccordionDetails>
-
       </Accordion >
     )
   );
