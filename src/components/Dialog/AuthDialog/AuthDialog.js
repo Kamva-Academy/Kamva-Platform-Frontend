@@ -52,7 +52,7 @@ function AuthDialog({
   isLoggedIn,
   user,
 }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const classes = useStyles();
   const t = useTranslate();
@@ -107,10 +107,10 @@ function AuthDialog({
                   </Grid>
                   <Grid item>
                     <TextField
-                      label="آدرس ایمیل"
-                      type="email"
+                      label="نام کاربری"
+                      type="username"
                       fullWidth
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => setUsername(e.target.value)}
                       inputProps={{ className: 'ltr-input' }}
                       variant="outlined"
                     />
@@ -130,7 +130,7 @@ function AuthDialog({
                       fullWidth
                       variant="contained"
                       type="submit"
-                      onClick={() => login({ username: email, password })}
+                      onClick={() => login({ username: username, password })}
                       disabled={isFetching}
                       color="primary">
                       {isFetching ? (

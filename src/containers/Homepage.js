@@ -9,6 +9,8 @@ import {
   Typography,
   Divider,
   Paper,
+  GridList,
+  GridListTile,
 } from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -45,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: 20,
       // marginBottom: theme.spacing(3),
+    },
+  },
+
+  sectionTitle: {
+    fontSize: 26,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 20,
     },
   },
 
@@ -126,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
   video: {
     width: '100%',
     borderRadius: 10,
-    boxShadow: '5px 2px 5px 0px #111',
+    boxShadow: '3px 1px 3px 0px #111',
   },
   formPaper: {
     padding: theme.spacing(2),
@@ -195,7 +204,7 @@ function Homepage({ isLoggedIn, logout }) {
                 <Paper className={classes.formPaper}>
                   <Typography variant="h6" gutterBottom>
                     برای ارتباط تیم برگزاری با تیم‌ها، لطفا هر تیم در این فرم یک
-                    ایمیل وارد کند تا به وسیله‌ی آن ایمیل با تیم در ارتباط باشیم
+                    ایمیل وارد کند تا به وسیله‌ی آن ایمیل با تیم در ارتباط باشیم.
                   </Typography>
                   <Button
                     fullWidth
@@ -215,9 +224,40 @@ function Homepage({ isLoggedIn, logout }) {
       </Container>
 
       <Container className={`${classes.section2} ${classes.centerItems}`}>
-        <Grid container direction="column" spacing={2}>
+        <Grid
+          container
+          direction="row"
+          spacing={4}
+          alignItems="center"
+          justify="center">
+          <Grid item xs={12}>
+            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
+              فیلم‌هایی که حتما باید ببینید!
+            </Typography>
+          </Grid>
+          <Grid container xs={12} sm={8} direction='row' justify='center' spacing={1}>
+            <Grid item xs={10} sm={8}>
+              <video
+                controls
+                src="https://res.cloudinary.com/derp8mdew/video/upload/v1605688659/a-lympiad/platform_yhxza6.mp4"
+                className={classes.video}
+              />
+            </Grid>
+            <Grid item xs={8} sm={4}>
+              <video
+                controls
+                src="https://res.cloudinary.com/derp8mdew/video/upload/v1605689080/a-lympiad/pdf_xkoa0q.mp4"
+                className={classes.video}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Container className={`${classes.section3} ${classes.centerItems}`}>
+        <Grid container direction="column" spacing={4}>
           <Grid item>
-            <Typography component="h2" variant="h2">
+            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
               چرا ای‌لیمپیاد؟
             </Typography>
           </Grid>
@@ -343,32 +383,10 @@ function Homepage({ isLoggedIn, logout }) {
         </Grid>
       </Container>
 
-      <Container className={`${classes.section3} ${classes.centerItems}`}>
-        <Grid
-          container
-          direction="row"
-          spacing={3}
-          alignItems="center"
-          justify="center">
-          <Grid item xs={12}>
-            <Typography component="h2" variant="h2">
-              فیلم‌هایی که حتما باید ببینید!
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <video
-              controls
-              src="https://res.cloudinary.com/derp8mdew/video/upload/v1605688659/a-lympiad/platform_yhxza6.mp4"
-              className={classes.video}
-            />
-          </Grid>
-        </Grid>
-      </Container>
-
       <Container className={`${classes.section4} ${classes.centerItems}`}>
-        <Grid container direction="column" spacing={2}>
+        <Grid container direction="column" spacing={4}>
           <Grid item>
-            <Typography component="h2" variant="h2">
+            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
               سوالات رایج
             </Typography>
           </Grid>
@@ -379,9 +397,9 @@ function Homepage({ isLoggedIn, logout }) {
       </Container>
 
       <Container className={`${classes.section5} ${classes.centerItems}`}>
-        <Grid container direction="column" spacing={2}>
+        <Grid container direction="column" spacing={4}>
           <Grid item>
-            <Typography component="h2" variant="h2">
+            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
               حامیان
             </Typography>
           </Grid>
