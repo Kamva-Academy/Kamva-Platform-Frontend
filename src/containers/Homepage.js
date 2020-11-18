@@ -160,7 +160,7 @@ function Homepage({ isLoggedIn, logout }) {
                   variant="contained"
                   color="primary"
                   onClick={() => setAuthDialogOpen(true)}>
-                  ورود به رویداد
+                  ورود به مسابقه
                 </Button>
               </Grid>
               {isLoggedIn && (
