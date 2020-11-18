@@ -10,7 +10,7 @@ import {
   Divider,
   Paper,
   GridList,
-  GridListTile,
+  GridListTile
 } from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
