@@ -9,8 +9,7 @@ import {
   Typography,
   Divider,
   Paper,
-  GridList,
-  GridListTile
+  Hidden,
 } from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -60,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: 'justify',
     textJustify: 'inter-word',
+    paddingLeft: '20px',
   },
 
   divider: {
@@ -80,11 +80,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
-  },
-
-  img: {
-    maxWidth: '80%',
-    height: 'auto',
   },
 
   section1: {
@@ -132,11 +127,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '30px',
     paddingBottom: '30px',
   },
+
   video: {
     width: '100%',
     borderRadius: 10,
     boxShadow: '3px 1px 3px 0px #111',
   },
+
   formPaper: {
     padding: theme.spacing(2),
   },
@@ -294,11 +291,17 @@ function Homepage({ isLoggedIn, logout }) {
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item xs={12} sm={6} className={classes.statImage}></Grid>
+            <Hidden xsDown="true">
+              <Grid item sm={1} />
+              <Grid item sm={5} className={classes.statImage}></Grid>
+            </Hidden>
           </Grid>
           <Divider variant="middle" className={classes.divider} />
           <Grid container item direction="row">
-            <Grid item xs={12} sm={6} className={classes.teamWorkImage}></Grid>
+            <Hidden xsDown="true">
+              <Grid item sm={5} className={classes.teamWorkImage}></Grid>
+              <Grid item sm={1} />
+            </Hidden>
             <Grid container item direciton="column" xs={12} sm={6} spacing={2}>
               <Grid item xs={12}>
                 <Typography
