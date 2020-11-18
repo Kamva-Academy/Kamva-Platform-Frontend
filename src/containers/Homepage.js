@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
-import { Button, Fab, Grid, makeStyles, Typography, Divider } from '@material-ui/core';
+import {
+  Button,
+  Fab,
+  Grid,
+  makeStyles,
+  Typography,
+  Divider,
+} from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
@@ -192,8 +199,15 @@ function Homepage({ isLoggedIn, logout }) {
                   component="h3"
                   variant="h5"
                   className={classes.text}>
-                  A-لیمپیاد با هدف افزایش قدرت تفکر، یادگیری تکنیک‌های مدل‌سازی ریاضی، کارگروهی، تمرین نوشتن یافته‌های علمی و جمع‌بندی و ارائه مطالب در هلند و تعدادی دیگر از کشورها برگزار می‌شود.
-                  «حل مسئله» و «مدل‌سازی ریاضی» در محتوای درسی بسیاری از کشورها آورده شده است. تمرین این مهارت‌ها معمولا به ندرت انجام می‌شود زیرا کتاب‌هایی با مثال‌های خوب از مسایل مناسب کم‌تر یافت می‌شوند و نیز معلمان برای تدریس این دروس مشکلات زیادی دارند، A-لیمپیاد تلاش می‌کند بستری برای پرورش و ارتقاء این مهارت‌ها ایجاد نماید.
+                  A-لیمپیاد با هدف افزایش قدرت تفکر، یادگیری تکنیک‌های مدل‌سازی
+                  ریاضی، کارگروهی، تمرین نوشتن یافته‌های علمی و جمع‌بندی و ارائه
+                  مطالب در هلند و تعدادی دیگر از کشورها برگزار می‌شود. «حل
+                  مسئله» و «مدل‌سازی ریاضی» در محتوای درسی بسیاری از کشورها
+                  آورده شده است. تمرین این مهارت‌ها معمولا به ندرت انجام می‌شود
+                  زیرا کتاب‌هایی با مثال‌های خوب از مسایل مناسب کم‌تر یافت
+                  می‌شوند و نیز معلمان برای تدریس این دروس مشکلات زیادی دارند،
+                  A-لیمپیاد تلاش می‌کند بستری برای پرورش و ارتقاء این مهارت‌ها
+                  ایجاد نماید.
                 </Typography>
               </Grid>
               <Grid item xs={12}>
@@ -300,7 +314,7 @@ function Homepage({ isLoggedIn, logout }) {
         </Grid>
       </Container>
 
-      <Container className={`${classes.section3} ${classes.centerItems}`}>
+      {/* <Container className={`${classes.section3} ${classes.centerItems}`}>
         <Grid container direction="column">
           <Grid item>
             <Typography component="h2" variant="h2">
@@ -311,7 +325,7 @@ function Homepage({ isLoggedIn, logout }) {
             <CustomizedTimeline />
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
 
       <Container className={`${classes.section4} ${classes.centerItems}`}>
         <Grid container direction="column" spacing={2}>
