@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import React, { useState } from 'react';
 import Container from '@material-ui/core/Container';
 import {
@@ -7,6 +8,7 @@ import {
   makeStyles,
   Typography,
   Divider,
+  Paper,
 } from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -83,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   section1Grid: {
-    height: '80vh',
+    height: '50vh',
   },
 
   section2: {
@@ -120,6 +122,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '3px 0px 3px 0px black',
     paddingTop: '30px',
     paddingBottom: '30px',
+  },
+  video: {
+    width: '100%',
+    borderRadius: 10,
+    boxShadow: '5px 2px 5px 0px #111',
+  },
+  formPaper: {
+    padding: theme.spacing(2),
   },
 }));
 
@@ -179,6 +189,25 @@ function Homepage({ isLoggedIn, logout }) {
                     </Typography>
                   </Grid>
                 </Grid>
+              </Grid>
+              <Grid item sm={6} md={7}></Grid>
+              <Grid item sm={6} md={4} xs={12}>
+                <Paper className={classes.formPaper}>
+                  <Typography variant="h6" gutterBottom>
+                    برای ارتباط تیم برگزاری با تیم‌ها، لطفا هر تیم در این فرم یک
+                    ایمیل وارد کند تا به وسیله‌ی آن ایمیل با تیم در ارتباط باشیم
+                  </Typography>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    component="a"
+                    target="_blank"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfYbUEftGGA__-hUMvAgKWXf5qUi2qWhvfyHmQK0k6CoureXQ/viewform?usp=sf_link">
+                    <Typography variant="h3">فرم دریافت ایمیل</Typography>
+                  </Button>
+                </Paper>
               </Grid>
             </Grid>
           </Grid>
@@ -314,18 +343,27 @@ function Homepage({ isLoggedIn, logout }) {
         </Grid>
       </Container>
 
-      {/* <Container className={`${classes.section3} ${classes.centerItems}`}>
-        <Grid container direction="column">
-          <Grid item>
+      <Container className={`${classes.section3} ${classes.centerItems}`}>
+        <Grid
+          container
+          direction="row"
+          spacing={3}
+          alignItems="center"
+          justify="center">
+          <Grid item xs={12}>
             <Typography component="h2" variant="h2">
               فیلم‌هایی که حتما باید ببینید!
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <CustomizedTimeline />
+          <Grid item xs={12} sm={6}>
+            <video
+              controls
+              src="https://res.cloudinary.com/derp8mdew/video/upload/v1605688659/a-lympiad/platform_yhxza6.mp4"
+              className={classes.video}
+            />
           </Grid>
         </Grid>
-      </Container> */}
+      </Container>
 
       <Container className={`${classes.section4} ${classes.centerItems}`}>
         <Grid container direction="column" spacing={2}>
@@ -358,7 +396,6 @@ function Homepage({ isLoggedIn, logout }) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
-      {/* <Toolbar id="back-to-top-anchor" /> */}
       <AuthDialog
         open={authDialogOpen}
         handleClose={() => setAuthDialogOpen(false)}
