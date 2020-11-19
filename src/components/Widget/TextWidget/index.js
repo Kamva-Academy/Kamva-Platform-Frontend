@@ -1,7 +1,10 @@
 import React from 'react';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import TextEditWidget from './edit';
 
-const TextWidget = ({ content = '' }) => {
+export { TextEditWidget };
+
+const TextWidget = ({ text = '' }) => {
   return (
     <TinyPreview
       frameProps={{
@@ -9,7 +12,7 @@ const TextWidget = ({ content = '' }) => {
         scrolling: 'no',
         width: '100%',
       }}
-      content={content}
+      content={text}
     />
   );
 };

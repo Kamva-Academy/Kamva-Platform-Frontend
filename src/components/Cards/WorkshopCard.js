@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import toPersianNumber from '../../utils/translateNumber'
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -27,11 +27,17 @@ const useStyles = makeStyles({
   },
 });
 
-const WorkShopCard = ({ name, description, teamsNumber, mentorsNumber }) => {
+const WorkShopCard = ({
+  id,
+  name = '',
+  description = '',
+  teamsNumber = 0,
+  mentorsNumber = 0,
+}) => {
   const classes = useStyles();
 
   return (
-    <Grid container item xs={12} sm={6} md={4} justify='center'>
+    <Grid container item xs={12} sm={6} md={4} justify="center">
       <Card className={classes.root}>
         <CardActionArea disabled>
           <CardMedia
@@ -52,20 +58,25 @@ const WorkShopCard = ({ name, description, teamsNumber, mentorsNumber }) => {
               <Chip
                 variant="outlined"
                 icon={<EmojiPeopleIcon />}
-                label={`${mentorsNumber = 6} منتور`}
+                label={`${(mentorsNumber = 6)} منتور`}
               />
             </Grid>
             <Grid container item xs={6} justify="center">
               <Chip
                 variant="outlined"
                 icon={<PeopleAltIcon />}
-                label={`${teamsNumber = 3} تیم`}
+                label={`${(teamsNumber = 3)} تیم`}
               />
             </Grid>
           </Grid>
         </CardActionArea>
         <CardActions>
-          <Button variant="outlined" fullWidth color="primary">
+          <Button
+            variant="outlined"
+            fullWidth
+            color="primary"
+            component={Link}
+            to={`/edit_workshop/${id}`}>
             مشاهده
           </Button>
         </CardActions>

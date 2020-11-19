@@ -1,5 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import ImageEditWidget from './edit';
+
+export { ImageEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   imageWidget: {
@@ -8,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ImageWidget = ({ src = '', alt }) => {
+const ImageWidget = ({ link = '', alt }) => {
   const classes = useStyles();
-  return <img src={src} className={classes.imageWidget} alt={alt} />;
+  return <img src={link} className={classes.imageWidget} alt={alt} />;
 };
 
 export default ImageWidget;

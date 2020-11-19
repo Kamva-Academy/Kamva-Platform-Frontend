@@ -1,54 +1,33 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initState = { allWorkshops: [] };
+const initState = { workshops: [] };
 
 function mentor(state = initState, action) {
   switch (action.type) {
-    case actionTypes.WORKSHOP_TEAMS_REQUEST:
-      return {
-        isFetching: true,
-      };
-
-    case actionTypes.WORKSHOP_TEAMS_SUCCESS:
-      return {
-        isFetching: false,
-        teams: action.response.teams,
-      };
-
-    case actionTypes.LOGIN_FAILURE:
-      return {
-        isFetching: false,
-      };
-
-    case actionTypes.ALL_WORKSHOPS_REQUEST:
-      return {
-        isFetching: true,
-      };
-
     case actionTypes.ALL_WORKSHOPS_SUCCESS:
       return {
-        isFetching: false,
-        allWorkshops: action.response.allWorkshops,
+        ...state,
+        workshops: action.response,
       };
 
-    case actionTypes.ALL_WORKSHOPS_FAILURE:
+    case actionTypes.GET_WORKSHOP_SUCCESS:
+      const newWorkshops = state.workshops.filter(
+        (workshop) => workshop.id !== action.response.id
+      );
+      newWorkshops.push(action.response);
       return {
-        isFetching: false,
+        ...state,
+        workshops: newWorkshops,
       };
 
-    case actionTypes.VISIT_TEAM_REQUEST:
+    case actionTypes.CREATE_STATE_SUCCESS:
       return {
-        isFetching: true,
-      };
-
-    case actionTypes.VISIT_TEAM_SUCCESS:
-      return {
-        isFetching: false,
-      };
-
-    case actionTypes.VISIT_TEAM_FAILURE:
-      return {
-        isFetching: false,
+        ...state,
+        workshops: state.workshops.map((workshop) =>
+          workshop.id === action.payload.fsm
+            ? { ...workshop, states: [...workshop.states, action.response] }
+            : workshop
+        ),
       };
 
     default:

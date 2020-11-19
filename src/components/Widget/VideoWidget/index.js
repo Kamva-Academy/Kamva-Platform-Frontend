@@ -1,5 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import VideoEditWidget from './edit';
+
+export { VideoEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   videoWidget: {
@@ -8,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const VideoWidget = ({ src = '' }) => {
+const VideoWidget = ({ link = '' }) => {
   const classes = useStyles();
   // eslint-disable-next-line jsx-a11y/media-has-caption
-  return <video controls src={src} className={classes.videoWidget} />;
+  return <video controls src={link} className={classes.videoWidget} />;
 };
 
 export default VideoWidget;

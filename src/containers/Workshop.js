@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import {
   Fab,
@@ -59,7 +58,6 @@ const Workshop = ({ questions, notQuestions, stateName }) => {
 
   return (
     <Container component="main" className={classes.body}>
-      <CssBaseline />
       <ResponsiveAppBar mode="WORKSHOP" />
       <Toolbar id="back-to-top-anchor" />
       <Grid
@@ -154,8 +152,12 @@ const mapStateToProps = (state) => {
   ];
   return {
     stateName: 'جاذبه‌ی عجیب',
-    questions: widgets.filter((widget) => widget.type.includes('QUESTION')),
-    notQuestions: widgets.filter((widget) => !widget.type.includes('QUESTION')),
+    questions: widgets.filter((widget) =>
+      widget.widget_type.includes('Problem')
+    ),
+    notQuestions: widgets.filter(
+      (widget) => !widget.widget_type.includes('Problem')
+    ),
   };
 };
 

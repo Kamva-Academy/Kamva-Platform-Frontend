@@ -4,6 +4,9 @@ import {
   CloudUpload as CloudUploadIcon,
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@material-ui/icons';
+import UploadFileQuestionEditWidget from './edit';
+
+export { UploadFileQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   flex: {
@@ -32,16 +35,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UploadFileQuestion = ({
-  content = 'محل آپلود فایل',
-  src = '',
-  lastFile = '',
+const UploadFileQuestionWidget = ({
+  text = 'محل آپلود فایل',
+  lastFile,
+  disabled = true,
 }) => {
   const classes = useStyles({ haveFile: !!lastFile });
   return (
     <div>
       <div className={classes.flex}>
-        <Typography>{content}</Typography>
+        <Typography>{text}</Typography>
         <input
           accept="image/*"
           style={{ display: 'none' }}
@@ -50,7 +53,8 @@ const UploadFileQuestion = ({
         />
         <Button
           component="label"
-          htmlFor="raised-button-file"
+          htmlFor={disabled ? 'raised-button-file' : ''}
+          disabled={disabled}
           variant="contained"
           color="primary"
           size="small"
@@ -86,4 +90,4 @@ const UploadFileQuestion = ({
   );
 };
 
-export default UploadFileQuestion;
+export default UploadFileQuestionWidget;

@@ -30,6 +30,20 @@ export const getAllWorkshops = () => ({
   },
 });
 
+export const getWorkshop = ({ id }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GET_WORKSHOP_REQUEST,
+      actionTypes.GET_WORKSHOP_SUCCESS,
+      actionTypes.GET_WORKSHOP_FAILURE,
+    ],
+    url: URLs.GET_WORKSHOP(id),
+    fetchOptions: {
+      method: 'GET',
+    },
+  },
+});
+
 export const getWorkshopTeams = (fsmId) => ({
   [CALL_API]: {
     types: [
@@ -61,7 +75,6 @@ export const getTeamAnswers = (fsmId, teamId) => ({
   },
 });
 
-
 export const visitTeam = (fsmId, teamId) => ({
   [CALL_API]: {
     types: [
@@ -78,7 +91,54 @@ export const visitTeam = (fsmId, teamId) => ({
   },
 });
 
-export const createWidget = () => ({
+export const createWorkshop = ({ name }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CREATE_WORKSHOP_REQUEST,
+      actionTypes.CREATE_WORKSHOP_SUCCESS,
+      actionTypes.CREATE_WORKSHOP_FAILURE,
+    ],
+    url: URLs.CREATE_WORKSHOP,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ name }),
+    },
+  },
+});
+
+export const createState = ({ name, fsm }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CREATE_STATE_REQUEST,
+      actionTypes.CREATE_STATE_SUCCESS,
+      actionTypes.CREATE_STATE_FAILURE,
+    ],
+    url: URLs.CREATE_STATE,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ widgets: [], name, fsm }),
+    },
+    payload: {
+      fsm,
+    },
+  },
+});
+
+export const deleteState = ({ id }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.DELETE_STATE_REQUEST,
+      actionTypes.DELETE_STATE_SUCCESS,
+      actionTypes.DELETE_STATE_FAILURE,
+    ],
+    url: URLs.DELETE_STATE(id),
+    fetchOptions: {
+      method: 'DELETE',
+    },
+  },
+});
+
+const createWidget = (body) => ({
   [CALL_API]: {
     types: [
       actionTypes.CREATE_WIDGET_REQUEST,
@@ -88,6 +148,95 @@ export const createWidget = () => ({
     url: URLs.CREATE_WIDGET,
     fetchOptions: {
       method: 'POST',
+      body: JSON.stringify(body),
+    },
+  },
+});
+
+export const createVideoWidget = ({ state, link }) =>
+  createWidget({
+    state,
+    widget_type: 'Video',
+    link,
+  });
+
+export const createImageWidget = ({ state, link }) =>
+  createWidget({
+    state,
+    widget_type: 'Image',
+    link,
+  });
+
+export const createSmallAnswerQuestionWidget = ({ state, text, answer }) =>
+  createWidget({
+    state,
+    widget_type: 'ProblemSmallAnswer',
+    text,
+    answer: { text: answer },
+  });
+
+export const createBigAnswerQuestionWidget = ({ state, text, answer }) =>
+  createWidget({
+    state,
+    widget_type: 'ProblemBigAnswer',
+    text,
+    answer: { text: answer },
+  });
+
+export const createMultiChoicesQuestionWidget = ({
+  state,
+  text,
+  answer,
+  choices,
+}) =>
+  createWidget({
+    state,
+    widget_type: 'ProblemMultiChoice',
+    text,
+    answer: { text: answer },
+    choices,
+  });
+
+export const createTextWidget = ({ state, text }) =>
+  createWidget({
+    state,
+    widget_type: 'Description',
+    text,
+  });
+
+export const createUploadFileWidget = ({ state, text }) =>
+  createWidget({
+    state,
+    widget_type: 'ProblemUploadFileAnswer',
+    text,
+  });
+
+export const getWidget = ({ id }) => {
+  return {
+    [CALL_API]: {
+      types: [
+        actionTypes.GET_WIDGET_REQUEST,
+        actionTypes.GET_WIDGET_SUCCESS,
+        actionTypes.GET_WIDGET_FAILURE,
+      ],
+      url: URLs.DELETE_WIDGET(id),
+      fetchOptions: {
+        method: 'GET',
+      },
+    },
+  };
+};
+
+export const deleteWidget = ({ id }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.DELETE_WIDGET_REQUEST,
+      actionTypes.DELETE_WIDGET_SUCCESS,
+      actionTypes.DELETE_WIDGET_FAILURE,
+    ],
+    url: URLs.DELETE_WIDGET(id),
+    fetchOptions: {
+      method: 'DELETE',
     },
   },
 });

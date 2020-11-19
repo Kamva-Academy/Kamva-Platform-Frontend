@@ -1,31 +1,47 @@
-import React from 'react';
-import BigAnswerQuestionWidget from './BigAnswerQuestionWidget';
-import ImageWidget from './ImageWidget';
-import TextWidget from './TextWidget';
-import VideoWidget from './VideoWidget';
-import UploadFileQuestion from './UploadFileQuestion';
-import MultiChoiceQuestionWidget from './MultiChoiceQuestionWidget';
-import SmallAnswerQuestionWidget from './SmallAnswerQuestionWidget';
+import React, { useState } from 'react';
+import { IconButton } from '@material-ui/core';
+import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons';
+import DeleteWidgetDialog from './components/DeleteWidgetDialog';
+import WIDGET_TYPES from './WidgetTypes';
 
-const Widget = ({ widget, ...props }) => {
-  switch (widget.type) {
-    case 'SMALL_ANSWER_QUESTION':
-      return <SmallAnswerQuestionWidget {...widget} {...props} />;
-    case 'BIG_ANSWER_QUESTION':
-      return <BigAnswerQuestionWidget {...widget} {...props} />;
-    case 'MULTI_CHOICE_QUESTION':
-      return <MultiChoiceQuestionWidget {...widget} {...props} />;
-    case 'UPLOAD_FILE_QUESTION':
-      return <UploadFileQuestion {...widget} {...props} />;
-    case 'TEXT':
-      return <TextWidget {...widget} {...props} />;
-    case 'VIDEO':
-      return <VideoWidget {...widget} {...props} />;
-    case 'IMAGE':
-      return <ImageWidget {...widget} {...props} />;
-    default:
-      return <></>;
-  }
+export const MODES = {
+  VIEW: 'VIEW',
+  EDIT: 'EDIT',
+};
+
+const Widget = ({ widget, mode = MODES.VIEW, stateId, ...props }) => {
+  const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+
+  const { WidgetComponent, WidgetEditDialog } = WIDGET_TYPES[
+    widget.widget_type
+  ];
+
+  return (
+    <div>
+      {mode === MODES.EDIT && (
+        <>
+          <IconButton onClick={() => setOpenEditDialog(true)}>
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={() => setOpenDeleteWidgetDialog(true)}>
+            <DeleteIcon />
+          </IconButton>
+          <WidgetEditDialog
+            stateId={stateId}
+            open={openEditDialog}
+            handleClose={() => setOpenEditDialog(false)}
+          />
+          <DeleteWidgetDialog
+            id={widget.id}
+            open={openDeleteWidgetDialog}
+            handleClose={() => setOpenDeleteWidgetDialog(false)}
+          />
+        </>
+      )}
+      <WidgetComponent {...widget} {...props} disabled={mode === MODES.EDIT} />
+    </div>
+  );
 };
 
 export default Widget;

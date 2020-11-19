@@ -2,6 +2,9 @@ import React from 'react';
 import clsx from 'clsx';
 import { Button, makeStyles } from '@material-ui/core';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import MultiChoiceQuestionEditWidget from './edit';
+
+export { MultiChoiceQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   choice: {
@@ -19,7 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MultiChoiceQuestionWidget = ({ content, choices, lastSelected }) => {
+const MultiChoiceQuestionWidget = ({
+  text,
+  choices,
+  answer = { text: '' },
+  disabled = true,
+}) => {
   const classes = useStyles();
   return (
     <>
@@ -29,7 +37,7 @@ const MultiChoiceQuestionWidget = ({ content, choices, lastSelected }) => {
           scrolling: 'no',
           width: '100%',
         }}
-        content={content}
+        content={text}
       />
       {choices &&
         choices.map((choice, index) => (
@@ -37,11 +45,12 @@ const MultiChoiceQuestionWidget = ({ content, choices, lastSelected }) => {
             key={index}
             fullWidth
             variant="contained"
+            disabled={disabled}
             className={clsx(
               classes.choice,
-              index === lastSelected && classes.selected
+              +index === +answer.text && classes.selected
             )}>
-            {choice}
+            {choice.text}
           </Button>
         ))}
     </>

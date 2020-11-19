@@ -60,6 +60,11 @@ export const ALL_WORKSHOPS_REQUEST = 'ALL_WORKSHOPS_REQUEST'; //utl: api/fsm/fsm
 export const ALL_WORKSHOPS_SUCCESS = 'ALL_WORKSHOPS_SUCCESS';
 export const ALL_WORKSHOPS_FAILURE = 'ALL_WORKSHOPS_FAILURE';
 
+////////////// get workShop:
+export const GET_WORKSHOP_REQUEST = 'GET_WORKSHOP_REQUEST'; //utl: api/fsm/fsm method: get /
+export const GET_WORKSHOP_SUCCESS = 'GET_WORKSHOP_SUCCESS';
+export const GET_WORKSHOP_FAILURE = 'GET_WORKSHOP_FAILURE';
+
 ////////////// خود تیم‌ها
 export const WORKSHOP_TEAMS_REQUEST = 'WORKSHOP_TEAMS_REQUEST'; //url: api/fsm/teams method: post / body: {fsmId}
 export const WORKSHOP_TEAMS_SUCCESS = 'WORKSHOP_TEAMS_SUCCESS';
@@ -76,11 +81,34 @@ export const VISIT_TEAM_SUCCESS = 'VISIT_TEAM_SUCCESS';
 export const VISIT_TEAM_FAILURE = 'VISIT_TEAM_FAILURE';
 
 // create workshop
+export const CREATE_WORKSHOP_REQUEST = 'CREATE_WORKSHOP_REQUEST';
+export const CREATE_WORKSHOP_SUCCESS = 'CREATE_WORKSHOP_SUCCESS';
+export const CREATE_WORKSHOP_FAILURE = 'CREATE_WORKSHOP_FAILURE';
+
+// create state
+export const CREATE_STATE_REQUEST = 'CREATE_STATE_REQUEST';
+export const CREATE_STATE_SUCCESS = 'CREATE_STATE_SUCCESS';
+export const CREATE_STATE_FAILURE = 'CREATE_STATE_FAILURE';
+
+// delete state
+export const DELETE_STATE_REQUEST = 'DELETE_STATE_REQUEST';
+export const DELETE_STATE_SUCCESS = 'DELETE_STATE_SUCCESS';
+export const DELETE_STATE_FAILURE = 'DELETE_STATE_FAILURE';
 
 //////////////// create widget
 export const CREATE_WIDGET_REQUEST = 'CREATE_WIDGET_REQUEST';
 export const CREATE_WIDGET_SUCCESS = 'CREATE_WIDGET_SUCCESS';
 export const CREATE_WIDGET_FAILURE = 'CREATE_WIDGET_FAILURE';
+
+//////////////// delete widget
+export const DELETE_WIDGET_REQUEST = 'DELETE_WIDGET_REQUEST';
+export const DELETE_WIDGET_SUCCESS = 'DELETE_WIDGET_SUCCESS';
+export const DELETE_WIDGET_FAILURE = 'DELETE_WIDGET_FAILURE';
+
+//////////////// get widget
+export const GET_WIDGET_REQUEST = 'GET_WIDGET_REQUEST';
+export const GET_WIDGET_SUCCESS = 'GET_WIDGET_SUCCESS';
+export const GET_WIDGET_FAILURE = 'GET_WIDGET_FAILURE';
 
 // snackbar (بی‌ربط به بک‌اند)
 

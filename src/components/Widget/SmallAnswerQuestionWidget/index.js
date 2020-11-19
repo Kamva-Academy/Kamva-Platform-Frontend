@@ -1,9 +1,16 @@
 import { Button, Grid, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import SmallAnswerQuestionEditWidget from './edit';
 
-const SmallAnswerQuestionWidget = ({ content = '', lastAnswer = '' }) => {
-  const [value, setValue] = useState(lastAnswer);
+export { SmallAnswerQuestionEditWidget };
+
+const SmallAnswerQuestionWidget = ({
+  text = '',
+  answer = { text: '' },
+  disabled = true,
+}) => {
+  const [value, setValue] = useState(answer.text);
   return (
     <>
       <TinyPreview
@@ -12,7 +19,7 @@ const SmallAnswerQuestionWidget = ({ content = '', lastAnswer = '' }) => {
           scrolling: 'no',
           width: '100%',
         }}
-        content={content}
+        content={text}
       />
       <Grid container alignItems="center" spacing={1}>
         <Grid item xs={9} sm={10} md={9}>
@@ -25,7 +32,12 @@ const SmallAnswerQuestionWidget = ({ content = '', lastAnswer = '' }) => {
           />
         </Grid>
         <Grid item xs={3} sm={2} md={3}>
-          <Button fullWidth variant="contained" color="primary" size="small">
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            size="small"
+            disabled={disabled}>
             ثبت
           </Button>
         </Grid>
