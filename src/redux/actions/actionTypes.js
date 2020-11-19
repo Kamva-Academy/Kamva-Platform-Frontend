@@ -127,6 +127,9 @@ export const START_WORKSHOP_REQUEST = 'START_WORKSHOP_REQUEST';
 export const START_WORKSHOP_SUCCESS = 'START_WORKSHOP_SUCCESS';
 export const START_WORKSHOP_FAILURE = 'START_WORKSHOP_FAILURE';
 
+//////////////// call mentor
+export const CALL_MENTOR = 'CALL_MENTOR';
+
 // snackbar (بی‌ربط به بک‌اند)
 
 export const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';

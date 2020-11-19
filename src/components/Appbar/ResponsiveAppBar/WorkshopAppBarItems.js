@@ -1,11 +1,12 @@
 import React from 'react';
 import { ExitToApp as ExitToAppIcon } from '@material-ui/icons';
-import { Button, IconButton, makeStyles } from '@material-ui/core';
+import { IconButton, makeStyles } from '@material-ui/core';
 import JitsiButton from './components/JitsiButton';
 import JitsiMicButton from './components/JitsiMicButton';
 import NotificationButton from './components/NotificationButton';
 import UsersAvatar from './components/UsersAvatar';
 import WhiteboardButton from './components/WhiteboardButton';
+import MentorButton from './components/MentorButton';
 
 const useStyles = makeStyles((theme) => ({
   backBtn: {
@@ -17,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.error.main,
     },
   },
-  mentorButton: {
-    marginLeft: 5,
-  },
 }));
 
 const ExitButton = () => {
@@ -28,18 +26,6 @@ const ExitButton = () => {
     <IconButton variant="contained" className={classes.backBtn}>
       <ExitToAppIcon />
     </IconButton>
-  );
-};
-
-const MentorButton = () => {
-  const classes = useStyles();
-  return (
-    <Button
-      variant="contained"
-      color="primary"
-      className={classes.mentorButton}>
-      درخواست منتور
-    </Button>
   );
 };
 

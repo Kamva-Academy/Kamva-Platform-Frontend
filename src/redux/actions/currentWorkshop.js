@@ -125,3 +125,7 @@ export const startWorkshop = ({ fsm }) => ({
     },
   },
 });
+
+export const callMentor = (fsmId) => ({
+  type: actionTypes.CALL_MENTOR,
+});

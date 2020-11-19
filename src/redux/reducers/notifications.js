@@ -10,6 +10,8 @@ const getMessage = (actionType, message) => {
       return 'خوش‌آمدید!';
     case actionTypes.LOGIN_FAILURE:
       return 'نام کاربری یا رمزعبور اشتباه است!';
+    case actionTypes.CALL_MENTOR:
+      return 'امروز منتور ندارید :))';
     default:
       return message;
   }
@@ -38,6 +40,7 @@ export default function notifications(state = defaultState, action) {
         ),
       };
 
+    case actionTypes.CALL_MENTOR:
     case actionTypes.LOGIN_FAILURE:
       return enquequeSnackbar({
         state,
