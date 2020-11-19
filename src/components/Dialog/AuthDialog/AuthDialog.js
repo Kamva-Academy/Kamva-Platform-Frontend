@@ -121,7 +121,10 @@ function AuthDialog({
                     fullWidth
                     variant="contained"
                     type="submit"
-                    onClick={() => login({ username: username, password })}
+                    onClick={(e) => {
+                      login({ username, password });
+                      e.preventDefault();
+                    }}
                     disabled={isFetching}
                     color="primary">
                     {isFetching ? (
