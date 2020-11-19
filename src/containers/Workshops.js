@@ -24,7 +24,7 @@ function Workshops() {
       <Grid item>
         <Paper className={classes.card}>
           <Typography component="h3" variant="h3" gutterBottom>
-            رویداد ای‌لیمپیاد
+            تست رویداد ای‌لیمپیاد
           </Typography>
           <Button
             size="large"
@@ -32,7 +32,7 @@ function Workshops() {
             variant="contained"
             color="primary"
             component={Link}
-            to="/workshop/2">
+            to="/workshop/2/start">
             ورود
           </Button>
         </Paper>

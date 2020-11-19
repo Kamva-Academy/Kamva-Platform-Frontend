@@ -44,7 +44,7 @@ export const getWorkshop = ({ id }) => ({
   },
 });
 
-export const getWorkshopTeams = (fsmId) => ({
+export const getWorkshopTeams = ({ fsmId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.WORKSHOP_TEAMS_REQUEST,
@@ -54,7 +54,7 @@ export const getWorkshopTeams = (fsmId) => ({
     url: URLs.WORKSHOP_TEAMS,
     fetchOptions: {
       method: 'POST',
-      fsm: fsmId,
+      body: JSON.stringify({ fsm: fsmId }),
     },
   },
 });
@@ -69,8 +69,7 @@ export const getTeamAnswers = (fsmId, teamId) => ({
     url: URLs.TEAM_ANSWERS,
     fetchOptions: {
       method: 'POST',
-      fsmId,
-      teamId,
+      body: JSON.stringify({ fsmId, teamId }),
     },
   },
 });
@@ -85,8 +84,7 @@ export const visitTeam = (fsmId, teamId) => ({
     url: URLs.VISIT_TEAM,
     fetchOptions: {
       method: 'POST',
-      fsm: fsmId,
-      team: teamId,
+      body: JSON.stringify({ fsm: fsmId, team: teamId }),
     },
   },
 });

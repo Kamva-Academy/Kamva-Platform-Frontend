@@ -20,16 +20,13 @@ import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import {
   getAllWorkshops,
   getUnreadNotifications,
-  getTeamAnswers,
-  getWorkshopTeams,
 } from '../redux/actions/mentor';
-import CreateWorkshopDialog from '../components/Dialog/CreateWorkshopDialog/CreateWorkshopDialog';
 import { Link } from 'react-router-dom';
-import WorkShopCard from '../components/Cards/WorkshopCard';
+import MentorWorkshops from '../components/SpecialComponents/MentorPage/MentorWorkshops';
+import Teams from '../components/SpecialComponents/MentorPage/Teams';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,30 +39,17 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
-  absolute: {
-    position: 'absolute',
-    right: theme.spacing(2),
-    zIndex: 5,
-  },
-  cardHolder: {
-    padding: theme.spacing(2),
-  },
 }));
 
 const MentorPage = ({
   isLoading,
   getAllWorkshops,
   getUnreadNotifications,
-  getTeamAnswers,
-  getWorkshopTeams,
   workshops,
 }) => {
   const classes = useStyles();
   const [tabNumber, setTabNumber] = useState(0);
   const [workshopNumber, setWorkshopNumber] = useState(0);
-  const [openCreateWorkshopDialog, setOpenCreateWorkshopDialog] = useState(
-    false
-  );
 
   useEffect(() => {
     getAllWorkshops();
@@ -128,46 +112,11 @@ const MentorPage = ({
               </Grid>
             </Hidden>
           </Grid>
-
-          <Grid container item sm={9} xs={12} direction="column">
+          <Grid item sm={9} xs={12}>
             <Paper elevation={3} classNames={classes.rightBox}>
-              {isLoading && <LinearProgress />}
-              <Grid item xs={12}>
-                {tabNumber !== 0 && (
-                  <Tabs
-                    value={workshopNumber}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="scrollable"
-                    scrollButtons="auto">
-                    {workshops.map((workshop) => (
-                      <Tab label={workshop.name} />
-                    ))}
-                  </Tabs>
-                )}
-                {tabNumber === 0 && (
-                  <Tooltip
-                    arrow
-                    title={'اضافه کردن کارگاه جدید'}
-                    className={classes.absolute}>
-                    <IconButton
-                      onClick={() => setOpenCreateWorkshopDialog(true)}>
-                      <AddCircleIcon fontSize="large" />
-                    </IconButton>
-                  </Tooltip>
-                )}
-              </Grid>
-              <Grid
-                container
-                item
-                spacing={2}
-                direction="row"
-                className={classes.cardHolder}>
-                {workshops.map((workshop) => {
-                  return <WorkShopCard {...workshop} />;
-                })}
-              </Grid>
+              {tabNumber === 0 && <MentorWorkshops />}
+              {tabNumber === 1 && <Teams />}
+              
             </Paper>
           </Grid>
           <Hidden smUp>
@@ -186,21 +135,11 @@ const MentorPage = ({
           <CircularProgress color="inherit" />
         </Backdrop>
       </Container>
-      <CreateWorkshopDialog
-        open={openCreateWorkshopDialog}
-        handleClose={() => setOpenCreateWorkshopDialog(false)}
-      />
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  workshops: state.mentor.workshops || [],
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   getAllWorkshops,
   getUnreadNotifications,
-  getTeamAnswers,
-  getWorkshopTeams,
 })(MentorPage);

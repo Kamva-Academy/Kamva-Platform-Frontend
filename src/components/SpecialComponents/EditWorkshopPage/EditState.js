@@ -55,15 +55,16 @@ const useStyles = makeStyles((theme) => ({
 function EditState({ state }) {
   const classes = useStyles();
 
-  state.widgets.sort((a, b) => a.id - b.id);
+  const { widgets = [] } = state;
 
-  const questions = state.widgets.filter((widget) =>
+  widgets.sort((a, b) => a.id - b.id);
+
+  const questions = widgets.filter((widget) =>
     widget.widget_type.includes('Problem')
   );
-  const notQuestions = state.widgets.filter(
+  const notQuestions = widgets.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
-
   const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState();
   const [openDeleteStateDialog, setOpenDeleteStateDialog] = useState();
 

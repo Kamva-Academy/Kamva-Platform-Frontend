@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initState = { workshops: [] };
+const initState = { workshops: [], teams: [] };
 
 function mentor(state = initState, action) {
   switch (action.type) {
@@ -28,6 +28,12 @@ function mentor(state = initState, action) {
             ? { ...workshop, states: [...workshop.states, action.response] }
             : workshop
         ),
+      };
+
+    case actionTypes.WORKSHOP_TEAMS_SUCCESS:
+      return {
+        ...state,
+        teams: action.response,
       };
 
     default:

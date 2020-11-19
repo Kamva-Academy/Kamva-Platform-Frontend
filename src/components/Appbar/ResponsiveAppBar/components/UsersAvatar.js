@@ -18,9 +18,9 @@ const UsersAvatar = () => {
   const classes = useStyles();
   return (
     <AvatarGroup max={4}>
-      <Avatar>ر</Avatar>
+      {/* <Avatar>ر</Avatar>
       <Avatar className={classes.orange}>س</Avatar>
-      <Avatar className={classes.purple}>م</Avatar>
+      <Avatar className={classes.purple}>م</Avatar> */}
     </AvatarGroup>
   );
 };

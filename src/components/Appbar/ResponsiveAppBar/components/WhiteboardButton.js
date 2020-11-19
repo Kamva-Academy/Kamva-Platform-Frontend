@@ -25,7 +25,11 @@ function WhiteboardButton() {
         <BrushIcon />
       </IconButton>
       <Dialog open={open} onClose={() => setOpen(false)} fullScreen>
-        <Whiteboard width={width} height={height} />
+        <Whiteboard
+          width={width}
+          height={height}
+          handleClose={() => setOpen(false)}
+        />
       </Dialog>
     </>
   );

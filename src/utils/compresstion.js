@@ -77,11 +77,11 @@ const decompressNode = (node) => {
   }
 };
 
-export function compressNodes({ nodes, changeCount }) {
-  return jsonpack.pack({ n: nodes.map(compressNode), c: changeCount });
+export function compressNodes({ nodes, version }) {
+  return jsonpack.pack({ n: nodes.map(compressNode), v: version });
 }
 
 export function decompressNodes(gzippedString) {
-  const { n, c } = jsonpack.unpack(gzippedString);
-  return { nodes: n ? n.map(decompressNode) : {}, changeCount: c || 0 };
+  const { n, v } = jsonpack.unpack(gzippedString);
+  return { nodes: n ? n.map(decompressNode) : {}, version: v || 0 };
 }

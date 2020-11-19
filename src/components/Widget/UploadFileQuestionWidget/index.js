@@ -5,6 +5,8 @@ import {
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@material-ui/icons';
 import UploadFileQuestionEditWidget from './edit';
+import { sendFileAnswer } from '../../../redux/actions/currentWorkshop';
+import { connect } from 'react-redux';
 
 export { UploadFileQuestionEditWidget };
 
@@ -36,9 +38,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadFileQuestionWidget = ({
+  id,
   text = 'محل آپلود فایل',
   lastFile,
   disabled = true,
+  sendFileAnswer,
 }) => {
   const classes = useStyles({ haveFile: !!lastFile });
   return (
@@ -50,10 +54,17 @@ const UploadFileQuestionWidget = ({
           style={{ display: 'none' }}
           id="raised-button-file"
           type="file"
+          onChange={(e) =>
+            sendFileAnswer({
+              answer_file: e.target.files[0],
+              // player,
+              problem: id,
+            })
+          }
         />
         <Button
           component="label"
-          htmlFor={disabled ? 'raised-button-file' : ''}
+          htmlFor={disabled ? '' : 'raised-button-file'}
           disabled={disabled}
           variant="contained"
           color="primary"
@@ -90,4 +101,4 @@ const UploadFileQuestionWidget = ({
   );
 };
 
-export default UploadFileQuestionWidget;
+export default connect(null, { sendFileAnswer })(UploadFileQuestionWidget);

@@ -33,7 +33,7 @@ function DraggableJitsi({ open, handleClose, width }) {
     <div className={clsx(classes.root, !open && classes.hidden)}>
       <Draggable
         handle={
-          width === 'xs' ? '#sadfkjasd;lfkjasdf' : '#jitsi-draggable-area'
+          width === 'xs' ? '#sadfkjasdklfkjasdf' : '#jitsi-draggable-area'
         }>
         <Paper>
           <Jitsi handleClose={handleClose} />

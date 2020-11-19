@@ -26,7 +26,7 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
 
   useEffect(() => {
     getWorkshop({ id: fsmId });
-  }, []);
+  }, [getWorkshop, fsmId]);
 
   const classes = useStyles();
 
@@ -53,9 +53,9 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   workshop: state.mentor.workshops.find(
-    (workshop) => +workshop.id === +ownProps.match.params.id
+    (workshop) => +workshop.id === +ownProps.match.params.fsm_id
   ),
-  fsmId: ownProps.match.params.id,
+  fsmId: ownProps.match.params.fsm_id,
 });
 
 export default connect(mapStateToProps, { getWorkshop })(EditWorkshop);

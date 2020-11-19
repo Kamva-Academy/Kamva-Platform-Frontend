@@ -1,5 +1,6 @@
 import { Grid, IconButton, makeStyles } from '@material-ui/core';
 import {
+  Clear,
   Delete as DeleteIcon,
   Gesture as GestureIcon,
   PanTool as PanToolIcon,
@@ -10,13 +11,14 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import {
   addNewTextNode,
   addNewRectangleNode,
   changeMode,
   removeSelectedNodes,
   deselectNodes,
+  undo,
+  redo,
 } from '../../redux/actions/whiteboard';
 import downloadFromURL from '../../utils/downloadFromURL';
 import DrawingModes from '../Konva/Drawing/DrawingModes';
@@ -46,9 +48,10 @@ function WhiteboardNavbar({
   changeMode,
   removeSelectedNodes,
   deselectNodes,
-  onUndo,
-  onRedo,
+  undo,
+  redo,
   getDataURL,
+  handleClose,
 }) {
   const classes = useStyles();
 
@@ -58,6 +61,9 @@ function WhiteboardNavbar({
       justify="space-between"
       className={classes.whiteboardNavbar}>
       <Grid item>
+        <IconButton onClick={handleClose}>
+          <Clear />
+        </IconButton>
         <IconButton
           onClick={() => {
             downloadFromURL(getDataURL(), 'stage.png');
@@ -74,10 +80,10 @@ function WhiteboardNavbar({
           }}>
           <DeleteIcon />
         </IconButton>
-        <IconButton onClick={onRedo}>
+        <IconButton onClick={redo}>
           <RedoIcon />
         </IconButton>
-        <IconButton onClick={onUndo}>
+        <IconButton onClick={undo}>
           <UndoIcon />
         </IconButton>
         <IconButton
@@ -119,6 +125,6 @@ export default connect(mapStateToProps, {
   changeMode,
   removeSelectedNodes,
   deselectNodes,
-  onUndo: UndoActionCreators.undo,
-  onRedo: UndoActionCreators.redo,
+  undo,
+  redo,
 })(WhiteboardNavbar);

@@ -1,19 +1,17 @@
-import React from 'react';
-import clsx from 'clsx';
+import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
+import { Fab, makeStyles, Toolbar } from '@material-ui/core';
 import {
-  Fab,
-  Grid,
-  makeStyles,
-  Paper,
-  Toolbar,
-  Typography,
-} from '@material-ui/core';
+  getCurrentWorkshop,
+  initCurrentWorkshop,
+  startWorkshop,
+} from '../redux/actions/currentWorkshop';
 import { connect } from 'react-redux';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import Widget from '../components/Widget';
+import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -33,132 +31,93 @@ const useStyles = makeStyles((theme) => ({
   body: {
     background: '#F7F9FC',
   },
-  workshopContent: {
-    paddingTop: 30,
-  },
-  paper: {
-    padding: theme.spacing(0, 1),
-    overflow: 'hidden',
-  },
-  mainItem: {
-    margin: theme.spacing(1, 0),
-  },
-  item: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1, 0),
-    background: '#fafafa',
-  },
-  actionPaper: {
-    padding: theme.spacing(2, 1),
-  },
 }));
 
-const Workshop = ({ questions, notQuestions, stateName }) => {
+export const TeamUUIDContext = React.createContext();
+
+const Workshop = ({
+  workshop,
+  fsmId,
+  stateId,
+  teamUuid,
+  is_mentor,
+  player,
+  startWorkshop,
+  initCurrentWorkshop,
+  getCurrentWorkshop,
+}) => {
   const classes = useStyles();
 
+  const history = useHistory();
+
+  useEffect(() => {
+    initCurrentWorkshop();
+    if (teamUuid) {
+      if (is_mentor) {
+        getCurrentWorkshop({ fsmId, teamUuid });
+      } else {
+        history.push('/');
+      }
+    } else {
+      if (!player) {
+        startWorkshop({ fsm: fsmId });
+      }
+      getCurrentWorkshop({ fsmId });
+    }
+  }, [
+    fsmId,
+    teamUuid,
+    is_mentor,
+    player,
+    getCurrentWorkshop,
+    initCurrentWorkshop,
+    startWorkshop,
+    history,
+  ]);
+
+  const { states = [] } = workshop;
+
   return (
-    <Container component="main" className={classes.body}>
-      <ResponsiveAppBar mode="WORKSHOP" />
-      <Toolbar id="back-to-top-anchor" />
-      <Grid
-        container
-        spacing={2}
-        className={classes.workshopContent}
-        justify="center">
-        {notQuestions.length > 0 && (
-          <Grid item xs={12} md={7} lg={7}>
-            <Paper className={classes.paper}>
-              {notQuestions.map((widget) => (
-                <div className={classes.mainItem}>
-                  <Widget widget={widget} />
-                </div>
-              ))}
-            </Paper>
-          </Grid>
+    <TeamUUIDContext.Provider value={teamUuid || (player && player.uuid)}>
+      <Container component="main" className={classes.body}>
+        <ResponsiveAppBar mode="WORKSHOP" />
+        <Toolbar id="back-to-top-anchor" />
+        {states && stateId === 'start' ? (
+          <StatePage
+            teamUuid={teamUuid}
+            fsmId={fsmId}
+            stateId={stateId}
+            state={states.find((state) => state.name === 'شروع')}
+          />
+        ) : (
+          <StatePage
+            teamUuid={teamUuid}
+            fsmId={fsmId}
+            stateId={stateId}
+            state={states.find((state) => +state.id === +stateId)}
+          />
         )}
-        <Grid
-          item
-          xs={12}
-          md={notQuestions.length > 0 ? 4 : 6}
-          lg={notQuestions.length > 0 ? 4 : 7}>
-          <Paper className={clsx(classes.paper, classes.actionPaper)}>
-            <Typography align="center" component="h2" variant="h3" gutterBottom>
-              {stateName}
-            </Typography>
-            {questions.map((widget) => (
-              <Paper className={classes.item}>
-                <Widget widget={widget} />
-              </Paper>
-            ))}
-          </Paper>
-        </Grid>
-      </Grid>
-      <ScrollTop>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
-    </Container>
+        <ScrollTop>
+          <Fab color="secondary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
+      </Container>
+    </TeamUUIDContext.Provider>
   );
 };
 
-const mapStateToProps = (state) => {
-  const widgets = [
-    {
-      type: 'SMALL_ANSWER_QUESTION',
-      content: 'بزرگترین عدد کوچکتر از ۵ چند هستش؟',
-      lastAnswer: '۱',
-    },
-    {
-      type: 'BIG_ANSWER_QUESTION',
-      content:
-        'با توجه به اطلاعات داده شده، توضیحی کلی در رابطه با جاذبه بنویسید.',
-      lastAnswer: 'جاذبه بسیار خوب و عالی است.',
-    },
-    {
-      type: 'UPLOAD_FILE_QUESTION',
-      content: 'یک نقاشی بکشید و عکسشو برامون بفرستید.',
-      lastFile: {
-        src:
-          'https://res.cloudinary.com/dclfeq8cv/image/upload//rastaiha/gravityImage.jpg',
-        name: 'javab.png',
-      },
-    },
-    {
-      type: 'MULTI_CHOICE_QUESTION',
-      content: 'جاذبه زمین چقدره؟',
-      choices: [
-        '۱۰ متر بر مجذور ثانیه',
-        '۱ متر بر مجذور ثانیه',
-        '۱۰۰ متر بر مجذور ثانیه',
-        '۱۰۰۰ متر بر مجذور ثانیه',
-      ],
-      lastSelected: 3,
-    },
-    {
-      type: 'VIDEO',
-      src:
-        'https://res.cloudinary.com/dclfeq8cv/video/upload//rastaiha/gravity.mp4',
-    },
-    {
-      type: 'TEXT',
-      content: 'با سرچ تو اینترنت کلی اطلاعات دیگه می‌تونید پیدا کنید.',
-    },
-    {
-      type: 'IMAGE',
-      src:
-        'https://res.cloudinary.com/dclfeq8cv/image/upload//rastaiha/gravityImage.jpg',
-    },
-  ];
-  return {
-    stateName: 'جاذبه‌ی عجیب',
-    questions: widgets.filter((widget) =>
-      widget.widget_type.includes('Problem')
-    ),
-    notQuestions: widgets.filter(
-      (widget) => !widget.widget_type.includes('Problem')
-    ),
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  workshop: state.currentWorkshop.workshop,
+  fsmId: ownProps.match.params.fsm_id,
+  stateId: ownProps.match.params.state_id,
+  teamUuid: ownProps.match.params.team_uuid,
+  is_mentor: state.account.user.is_mentor,
+  player: state.currentWorkshop.player,
+});
 
-export default connect(mapStateToProps)(Workshop);
+export default connect(mapStateToProps, {
+  getCurrentWorkshop,
+  initCurrentWorkshop,
+  startWorkshop,
+})(Workshop);

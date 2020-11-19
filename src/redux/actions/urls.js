@@ -20,10 +20,14 @@ export const CREATE_STATE = ROOT.concat('fsm/state/');
 
 export const ALL_WORKSHOPS = ROOT.concat('fsm/fsm/');
 export const GET_WORKSHOP = (id) => ROOT.concat(`fsm/fsm/${id}/`);
+export const GET_MENTOR_WORKSHOP = ROOT.concat(`fsm/mentorgetplayerfsm/`);
 export const DELETE_STATE = (id) => ROOT.concat(`fsm/state/${id}/`);
 export const WORKSHOP_TEAMS = ROOT.concat('fsm/workshopplayers/');
 export const TEAM_ANSWERS = ROOT.concat('fsm/submittedanswers/');
 export const VISIT_TEAM = ROOT.concat('fsm/visitteam/');
+
+export const SEND_ANSWER = ROOT.concat('fsm/sendanswer/');
+export const START_WORKSHOP = ROOT.concat('fsm/startWorkshop/');
 
 export const CREATE_WIDGET = ROOT.concat('fsm/widget/');
 export const DELETE_WIDGET = (id) => ROOT.concat(`fsm/widget/${id}/`);

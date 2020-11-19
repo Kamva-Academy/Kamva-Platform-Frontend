@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { IconButton, makeStyles, withWidth } from '@material-ui/core';
 import {
   Cancel as CancelIcon,
   Refresh as RefreshIcon,
 } from '@material-ui/icons';
 import * as jitsiFuncs from './connection/jitsi';
+import { TeamUUIDContext } from '../../containers/Workshop';
 
 const useStyles = makeStyles((theme) => ({
   draggableArea: {
@@ -34,10 +35,12 @@ function Jitsi({ handleClose, width }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 
+  const teamUUID = useContext(TeamUUIDContext);
+  
   const refresh = useCallback(() => {
     jitsiFuncs.destroy();
     jitsiFuncs.initJitsi({
-      roomName: '1234lkfadmRasdfqlwekfmad3f1m1fklasdffbriu',
+      roomName: 'ra_' + teamUUID,
       parentNode: jitsiElement.current,
       height: width === 'xs' ? '100%' : '300px',
       userInfo: {

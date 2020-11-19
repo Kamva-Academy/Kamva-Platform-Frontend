@@ -18,6 +18,7 @@ store.subscribe(() => {
       account: {
         user: state.account.user,
         token: state.account.token,
+        team: state.account.team,
       },
       Intl: state.Intl,
     })

@@ -10,15 +10,19 @@ const Root = () => {
   return (
     <>
       <Switch>
-        <Route path="/edit_workshop/:id" component={EditWorkshop} />
-        <Route path="/workshops" component={Workshops} />
-        <Route path="/workshop">
+        <Route path="/edit_workshop/:fsm_id/" component={EditWorkshop} />
+        <Route path="/workshops/" component={Workshops} />
+        <Route path="/workshop/">
           <Switch>
-            <Route path="/workshop/:fsm_id" component={Workshop} />
-            <Route path="/workshop" component={Workshops} />
+            <Route
+              path="/workshop/:team_uuid/:fsm_id/:state_id/"
+              component={Workshop}
+            />
+            <Route path="/workshop/:fsm_id/:state_id/" component={Workshop} />
+            <Route path="/workshop/" component={Workshops} />
           </Switch>
         </Route>
-        <Route path="/mentor" component={MentorPage} />
+        <Route path="/mentor/" component={MentorPage} />
         <Route path="/" component={Homepage} />
       </Switch>
     </>

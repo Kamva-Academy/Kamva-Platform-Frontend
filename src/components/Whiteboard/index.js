@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   initWhiteboard,
   deselectNodes,
@@ -17,6 +17,7 @@ import {
   connectToTeam,
   getLastWhiteboard,
 } from '../../redux/actions/websocket';
+import { TeamUUIDContext } from '../../containers/Workshop';
 
 const useStyles = makeStyles((theme) => ({
   whiteboard: {
@@ -47,18 +48,19 @@ function Whiteboard({
   connectToTeam,
   wsDisconnect,
   getLastWhiteboard,
+  userUUID,
+  handleClose
 }) {
   const classes = useStyles();
 
   const [stage, setStage] = useState();
+  const teamUUID = useContext(TeamUUIDContext);
 
   useEffect(() => {
-    const teamUUID = 'e33227d2-7533-44c6-8978-857b4425eba8';
-    const userUUID = 'e2713a2f-ebed-4b05-82a8-36f129c49d4e';
     initWhiteboard();
     connectToTeam({ teamUUID, userUUID });
     return () => wsDisconnect();
-  }, [initWhiteboard, connectToTeam, wsDisconnect]);
+  }, [initWhiteboard, connectToTeam, wsDisconnect, teamUUID, userUUID]);
 
   useEffect(() => {
     if (wsConnected) {
@@ -68,7 +70,7 @@ function Whiteboard({
 
   return (
     <div className={classes.whiteboard}>
-      <WhiteboardNavbar getDataURL={() => stage.toDataURL()} />
+      <WhiteboardNavbar getDataURL={() => stage.toDataURL()} handleClose={handleClose} />
       <Drawing
         onSetStage={(stage) => setStage(stage)}
         width={width}
@@ -87,6 +89,7 @@ function Whiteboard({
 }
 
 const mapStateToProps = (state) => ({
+  userUUID: state.account.user.uuid,
   nodes: state.whiteboard.present.nodes,
   drawingMode: state.whiteboard.present.mode,
   paintingConfig: state.whiteboard.present.paintingConfig,

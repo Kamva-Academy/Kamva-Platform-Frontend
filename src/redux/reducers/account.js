@@ -6,11 +6,13 @@ function account(state = initState, action) {
   switch (action.type) {
     case actionTypes.LOGIN_REQUEST:
       return {
+        ...state,
         isFetching: true,
       };
 
     case actionTypes.LOGIN_SUCCESS:
       return {
+        ...state,
         isFetching: false,
         token: action.response.access,
         user: action.response.user_info,
@@ -18,6 +20,7 @@ function account(state = initState, action) {
 
     case actionTypes.LOGIN_FAILURE:
       return {
+        ...state,
         isFetching: false,
       };
 
