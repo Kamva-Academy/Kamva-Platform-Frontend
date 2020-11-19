@@ -61,7 +61,7 @@ const NotificationButton = ({ notifications }) => {
   return (
     <>
       <IconButton onClick={handlePopoverOpen}>
-        <Badge badgeContent={8} className={classes.badge}>
+        <Badge badgeContent={1} className={classes.badge}>
           <NotificationsIcon />
         </Badge>
       </IconButton>
@@ -127,122 +127,7 @@ const mapStateToProps = (state) => ({
   notifications: [
     {
       time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now(),
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: false,
-    },
-    {
-      time: Date.now() - 30000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
-      seen: true,
-    },
-    {
-      time: Date.now() - 60000,
-      message: 'زمان آزمون تا ساعت ۱۰ تمدید شد!',
+      message: 'خیلی خوش اومدید!',
       seen: true,
     },
   ],
