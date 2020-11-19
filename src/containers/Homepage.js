@@ -88,8 +88,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4, 3, 4),
   },
 
-  section1Grid: {
-    height: '50vh',
+  // section1Grid: {
+  //   height: '50vh',
+  // },
+
+  fullHeight: {
+    height: '100%',
   },
 
   section2: {
@@ -157,55 +161,62 @@ function Homepage({ isLoggedIn, logout }) {
         <div id="back-to-top-anchor"></div>
         <div className="landing-background" />
 
-        <Grid container justify="space-between" direction="column">
-          <Grid item xs={12}>
-            <Grid container spacing={2}>
+        <Grid
+          container
+          direction="column"
+          style={{ height: '100%' }}
+        >
+          <Grid container item direction='row' style={{ height: '10%' }}>
+            <Grid item>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => setAuthDialogOpen(true)}>
+                ورود به مسابقه
+              </Button>
+            </Grid>
+            {isLoggedIn && (
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => setAuthDialogOpen(true)}>
-                  ورود به مسابقه
+                <Button variant="outlined" onClick={() => logout()}>
+                  خروج
                 </Button>
               </Grid>
-              {isLoggedIn && (
-                <Grid item>
-                  <Button variant="outlined" onClick={() => logout()}>
-                    خروج
-                  </Button>
-                </Grid>
-              )}
-            </Grid>
+            )}
           </Grid>
-          <Grid item xs={12}>
-            <Grid container alignItems="center" direction="row">
-              <Grid item xs={12} sm={6} />
-              <Grid item xs={12} sm={6} >
-                <Grid
-                  container
-                  justify="center"
-                  alignItems="center"
-                  direction="column"
-                  className={classes.section1Grid}
-                  spacing={4}>
-                  <Grid item>
-                    <Typography
-                      component="h1"
-                      variant="h1"
-                      className={classes.title}>
-                      A-Lympiad
-                    </Typography>
-                    <Typography
-                      component="h2"
-                      variant="h3"
-                      className={classes.subtitle}>
-                      چهاردهمین دوره مسابقات
-                    </Typography>
-                  </Grid>
-                </Grid>
+
+          <Grid container item direction="row" style={{ height: '90%' }}>
+            <Grid
+              item container
+              xs={12} sm={7}
+              justify='center'
+              alignItems="center"
+              direction="column"
+            >
+              <Grid item>
+                <Typography
+                  component="h1"
+                  variant="h1"
+                  className={classes.title}>
+                  A-Lympiad
+                </Typography>
+                <Typography
+                  component="h2"
+                  variant="h3"
+                  className={classes.subtitle}>
+                  چهاردهمین دوره مسابقات
+                </Typography>
               </Grid>
-              <Grid item sm={6} md={7}></Grid>
-              <Grid item sm={6} md={4} xs={12}>
+            </Grid>
+
+            <Grid
+              item container
+              xs={12} sm={5}
+              justify='center'
+              alignItems="center"
+              direction='column'
+              spacing={1}
+            >
+              <Grid item>
                 <Paper className={classes.formPaper}>
                   <Typography variant="h6" gutterBottom>
                     برای ارتباط تیم برگزاری با تیم‌ها، لطفا هر تیم در این فرم یک
@@ -215,14 +226,42 @@ function Homepage({ isLoggedIn, logout }) {
                     fullWidth
                     variant="contained"
                     color="primary"
-                    size="large"
+                    size='medium'
                     component="a"
                     target="_blank"
                     href="https://docs.google.com/forms/d/e/1FAIpQLSfYbUEftGGA__-hUMvAgKWXf5qUi2qWhvfyHmQK0k6CoureXQ/viewform?usp=sf_link">
-                    <Typography variant="h3">فرم دریافت ایمیل</Typography>
+                    <Typography variant="h4">فرم دریافت ایمیل</Typography>
                   </Button>
                 </Paper>
               </Grid>
+
+              <Grid item>
+                <Paper className={classes.formPaper}>
+                  <Typography variant="h6" >
+                    در صورت برخورد با هر گونه مشکل فنی، تیم پشتیبانی در تمام طول مسابقه از طریق تلفن ۰۳۱۳۶۶۹۲۰۱۳ داخلی‌های ۱۰۲، ۱۰۳، ۱۰۴، ۱۰۵، ۱۰۸ و ۱۴۰ همراه شما خواهد بود‌.
+                  </Typography>
+                </Paper>
+              </Grid>
+
+
+              <Grid item>
+                <Paper className={classes.formPaper}>
+                  <Typography variant="h6" gutterBottom>
+                    از طریق دکمه‌ی زیر، وارد افتتاحیه شوید!
+                  </Typography>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    size='medium'
+                    component="a"
+                    target="_blank"
+                    href="https://meet.iut.ac.ir/b/ram-dek-omi-asb">
+                    <Typography variant="h4">ورود به افتتاحیه</Typography>
+                  </Button>
+                </Paper>
+              </Grid>
+
             </Grid>
           </Grid>
         </Grid>
@@ -429,14 +468,6 @@ function Homepage({ isLoggedIn, logout }) {
         open={authDialogOpen}
         handleClose={() => setAuthDialogOpen(false)}
       />
-      
-      <Grid container xs={12} sm={4} className={classes.supportAnnouncement}>
-        <Paper className={classes.formPaper}>
-          <Typography variant="h6" >
-            در صورت برخورد با هر گونه مشکل فنی، تیم پشتیبانی در تمام طول مسابقه از طریق تلفن ۰۳۱۳۶۶۹۲۰۱۳ داخلی‌های ۱۰۲، ۱۰۳، ۱۰۴، ۱۰۵، ۱۰۸ و ۱۴۰ همراه شما خواهد بود‌.
-          </Typography>
-        </Paper>
-      </Grid>
     </>
   );
 }
