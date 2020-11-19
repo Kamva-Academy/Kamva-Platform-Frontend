@@ -135,7 +135,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   formPaper: {
-    padding: theme.spacing(2    boxShadow: '1px 1px 1px 1px black',
+    padding: theme.spacing(2),
+    boxShadow: '1px 1px 1px 1px black',
   },
 
   supportAnnouncement: {
@@ -428,6 +429,7 @@ function Homepage({ isLoggedIn, logout }) {
         open={authDialogOpen}
         handleClose={() => setAuthDialogOpen(false)}
       />
+      
       <Grid container xs={12} sm={4} className={classes.supportAnnouncement}>
         <Paper className={classes.formPaper}>
           <Typography variant="h6" >
@@ -435,7 +437,6 @@ function Homepage({ isLoggedIn, logout }) {
           </Typography>
         </Paper>
       </Grid>
-
     </>
   );
 }
