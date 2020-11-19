@@ -135,8 +135,15 @@ const useStyles = makeStyles((theme) => ({
   },
 
   formPaper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2    boxShadow: '1px 1px 1px 1px black',
   },
+
+  supportAnnouncement: {
+    position: 'sticky',
+    bottom: theme.spacing(1),
+    left: theme.spacing(1),
+  }
+
 }));
 
 function Homepage({ isLoggedIn, logout }) {
@@ -171,8 +178,8 @@ function Homepage({ isLoggedIn, logout }) {
           </Grid>
           <Grid item xs={12}>
             <Grid container alignItems="center" direction="row">
-              <Grid item xs={12} sm={6} md={6} />
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} />
+              <Grid item xs={12} sm={6} >
                 <Grid
                   container
                   justify="center"
@@ -421,6 +428,14 @@ function Homepage({ isLoggedIn, logout }) {
         open={authDialogOpen}
         handleClose={() => setAuthDialogOpen(false)}
       />
+      <Grid container xs={12} sm={4} className={classes.supportAnnouncement}>
+        <Paper className={classes.formPaper}>
+          <Typography variant="h6" >
+            در صورت برخورد با هر گونه مشکل فنی، تیم پشتیبانی در تمام طول مسابقه از طریق تلفن ۰۳۱۳۶۶۹۲۰۱۳ داخلی‌های ۱۰۲، ۱۰۳، ۱۰۴، ۱۰۵، ۱۰۸ و ۱۴۰ همراه شما خواهد بود‌.
+          </Typography>
+        </Paper>
+      </Grid>
+
     </>
   );
 }
