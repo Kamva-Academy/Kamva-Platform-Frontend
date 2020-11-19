@@ -16,6 +16,7 @@
     "material-ui-popup-state": "^1.7.0",
     "normalizr": "^3.6.1",
     "notistack": "^1.0.1",
+    "pushe-webpush": "^0.8.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-draggable": "^4.4.3",

@@ -15,6 +15,9 @@ import { initRedirect } from './redux/actions/redirect';
 
 import './assets/styles/App.css';
 import { CssBaseline } from '@material-ui/core';
+import Pushe from 'pushe-webpush';
+Pushe.init('ld838ykvn2n75poe');
+Pushe.subscribe();
 
 const AppRout = () => (
   <SnackbarProvider>
