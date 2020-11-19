@@ -46,6 +46,22 @@ const UploadFileQuestionWidget = ({
   sendFileAnswer,
 }) => {
   const classes = useStyles({ haveFile: !!lastFile });
+  const onChangeFile = async (e) => {
+    e.preventDefault();
+    if (e.target.files[0]) {
+      if (e.target.files[0].size <= 8e6) {
+        sendFileAnswer({
+          answer_file: e.target.files[0],
+          player: playerId,
+          problem: id,
+        });
+      } else {
+        e.target.value = '';
+        e.target.setCustomValidity('Maximum upload file size is 8 MB.');
+        e.target.reportValidity();
+      }
+    }
+  };
 
   return (
     <div>
@@ -56,13 +72,7 @@ const UploadFileQuestionWidget = ({
           style={{ display: 'none' }}
           id="raised-button-file"
           type="file"
-          onChange={(e) =>
-            sendFileAnswer({
-              answer_file: e.target.files[0],
-              player: playerId,
-              problem: id,
-            })
-          }
+          onChange={onChangeFile}
         />
         <Button
           component="label"

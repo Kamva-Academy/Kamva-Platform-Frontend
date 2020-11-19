@@ -215,6 +215,7 @@ function Homepage({ isLoggedIn, logout }) {
               alignItems="center"
               direction='column'
               spacing={1}
+            // style={{ overflowY: 'auto', height: '90%' }}
             >
               <Grid item>
                 <Paper className={classes.formPaper}>
@@ -243,7 +244,7 @@ function Homepage({ isLoggedIn, logout }) {
                 </Paper>
               </Grid>
 
-
+              {/* 
               <Grid item>
                 <Paper className={classes.formPaper}>
                   <Typography variant="h6" gutterBottom>
@@ -260,7 +261,7 @@ function Homepage({ isLoggedIn, logout }) {
                     <Typography variant="h4">ورود به افتتاحیه</Typography>
                   </Button>
                 </Paper>
-              </Grid>
+              </Grid> */}
 
             </Grid>
           </Grid>

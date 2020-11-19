@@ -7,9 +7,13 @@ const defaultState = {
 const getMessage = (actionType, message) => {
   switch (actionType) {
     case actionTypes.LOGIN_SUCCESS:
-      return 'خوش‌آمدید!';
+      return 'خوش آمدید!';
     case actionTypes.LOGIN_FAILURE:
       return 'نام کاربری یا رمزعبور اشتباه است!';
+    case actionTypes.SEND_ANSWER_SUCCESS:
+      return 'جواب شما با موقفیت ثبت شد!';
+    case actionTypes.SEND_ANSWER_FAILURE:
+      return 'یک مشکلی هست. جواب شما ثبت نشد.';
     case actionTypes.CALL_MENTOR:
       return 'امروز منتور ندارید :))';
     default:
@@ -40,7 +44,7 @@ export default function notifications(state = defaultState, action) {
         ),
       };
 
-    case actionTypes.CALL_MENTOR:
+    case actionTypes.SEND_ANSWER_FAILURE:
     case actionTypes.LOGIN_FAILURE:
       return enquequeSnackbar({
         state,
@@ -53,6 +57,9 @@ export default function notifications(state = defaultState, action) {
           },
         },
       });
+
+    case actionTypes.CALL_MENTOR:
+    case actionTypes.SEND_ANSWER_SUCCESS:
     case actionTypes.LOGIN_SUCCESS:
       return enquequeSnackbar({
         state,
@@ -65,6 +72,7 @@ export default function notifications(state = defaultState, action) {
           },
         },
       });
+
     default:
       return state;
   }
