@@ -7,8 +7,8 @@ export const initCurrentWorkshop = () => ({
   type: actionTypes.INIT_CURRENT_WORKSHOP,
 });
 
-export const getCurrentWorkshop = ({ fsmId, teamUuid }) => {
-  if (!!teamUuid) {
+export const getCurrentWorkshop = ({ fsmId, playerUUID }) => {
+  if (!!playerUUID) {
     return {
       [CALL_API]: {
         types: [
@@ -21,7 +21,7 @@ export const getCurrentWorkshop = ({ fsmId, teamUuid }) => {
           method: 'POST',
           body: JSON.stringify({
             fsm: fsmId,
-            team_uuid: teamUuid,
+            team_uuid: playerUUID,
           }),
         },
       },

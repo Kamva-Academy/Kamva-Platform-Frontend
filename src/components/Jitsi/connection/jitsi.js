@@ -8,7 +8,7 @@ export const initJitsi = (config) => {
     if (api) {
       destroy();
     }
-    api = new JitsiMeetExternalAPI('meet.jit.si/r/', {
+    api = new JitsiMeetExternalAPI('meet.jit.si/r', {
       ...jitsiConfig,
       ...config,
     });
