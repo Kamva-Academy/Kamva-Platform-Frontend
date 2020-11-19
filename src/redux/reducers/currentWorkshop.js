@@ -6,6 +6,7 @@ function currentWorkshop(state = initState, action) {
   switch (action.type) {
     case actionTypes.INIT_CURRENT_WORKSHOP:
       return initState;
+
     case actionTypes.GET_CURRENT_WORKSHOP_SUCCESS:
       return {
         ...state,
@@ -16,7 +17,7 @@ function currentWorkshop(state = initState, action) {
       if (action.response.error) {
         return state;
       }
-      return { ...state, player: action.response.player };
+      return { ...state, player: action.response.player };      
 
     default:
       return state;
