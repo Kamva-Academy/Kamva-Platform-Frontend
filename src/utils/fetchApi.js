@@ -6,7 +6,7 @@ const checkErrorsStatusCode = (response) => {
     throw new Error('صفحه مورد نظر یافت نشد!');
   }
   if (response.status === 401) {
-    throw new Error('توکن شما منقضی شده است!');
+    throw new Error('TOKEN_EXPIRED');
   }
 };
 
