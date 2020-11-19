@@ -51,7 +51,6 @@ import mathTextToSvg from '../mathTextToSvg';
         latex: latexData,
       },
       onSubmit: (api) => {
-        alert(svgLatex.outerHTML);
         editor.execCommand(
           'mceInsertContent',
           false,
