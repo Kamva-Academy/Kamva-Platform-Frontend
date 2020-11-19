@@ -247,7 +247,7 @@ function Homepage({ isLoggedIn, logout }) {
               <Grid item>
                 <Paper className={classes.formPaper}>
                   <Typography variant="h6" gutterBottom>
-                    از طریق دکمه‌ی زیر، وارد افتتاحیه شوید!
+                    از طریق دکمه‌ی زیر، وارد افتتاحیه شوید! نام کاربری ss1-guest و رمز عبور ss11342849 است.
                   </Typography>
                   <Button
                     fullWidth
@@ -256,7 +256,7 @@ function Homepage({ isLoggedIn, logout }) {
                     size='medium'
                     component="a"
                     target="_blank"
-                    href="https://meet.iut.ac.ir/b/ram-dek-omi-asb">
+                    href="https://vc.sharif.edu/ch/ss1">
                     <Typography variant="h4">ورود به افتتاحیه</Typography>
                   </Button>
                 </Paper>
