@@ -16,7 +16,7 @@ function currentWorkshop(state = initState, action) {
       if (action.response.error) {
         return state;
       }
-      return { ...state, player: action.response };
+      return { ...state, player: action.response.player };
 
     default:
       return state;

@@ -42,9 +42,11 @@ const UploadFileQuestionWidget = ({
   text = 'محل آپلود فایل',
   lastFile,
   disabled = true,
+  playerId,
   sendFileAnswer,
 }) => {
   const classes = useStyles({ haveFile: !!lastFile });
+
   return (
     <div>
       <div className={classes.flex}>
@@ -57,7 +59,7 @@ const UploadFileQuestionWidget = ({
           onChange={(e) =>
             sendFileAnswer({
               answer_file: e.target.files[0],
-              // player,
+              player: playerId,
               problem: id,
             })
           }
@@ -101,4 +103,13 @@ const UploadFileQuestionWidget = ({
   );
 };
 
-export default connect(null, { sendFileAnswer })(UploadFileQuestionWidget);
+const mapStateToProps = (state) => ({
+  playerId:
+    state.currentWorkshop &&
+    state.currentWorkshop.player &&
+    state.currentWorkshop.player.id,
+});
+
+export default connect(mapStateToProps, { sendFileAnswer })(
+  UploadFileQuestionWidget
+);

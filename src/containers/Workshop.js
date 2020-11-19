@@ -59,21 +59,23 @@ const Workshop = ({
         history.push('/');
       }
     } else {
-      if (!player) {
-        startWorkshop({ fsm: fsmId });
-      }
       getCurrentWorkshop({ fsmId });
     }
   }, [
     fsmId,
     teamUuid,
     is_mentor,
-    player,
     getCurrentWorkshop,
     initCurrentWorkshop,
     startWorkshop,
     history,
   ]);
+
+  useEffect(() => {
+    if (!teamUuid && !player) {
+      startWorkshop({ fsm: fsmId });
+    }
+  }, [teamUuid, player, fsmId, startWorkshop]);
 
   const { states = [] } = workshop;
 
