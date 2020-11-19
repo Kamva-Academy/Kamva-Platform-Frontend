@@ -7,10 +7,10 @@ export default function JitsiButton() {
   const [open, setOpen] = useState();
   return (
     <>
-      <IconButton onClick={() => setOpen(true)} disabled>
+      <IconButton onClick={() => setOpen(true)}>
         <VideoCallIcon />
       </IconButton>
-      {/* <DraggableJitsi open={open} handleClose={() => setOpen(false)} /> */}
+      <DraggableJitsi open={open} handleClose={() => setOpen(false)} />
     </>
   );
 }

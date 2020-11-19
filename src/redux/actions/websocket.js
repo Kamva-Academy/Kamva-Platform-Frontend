@@ -3,8 +3,8 @@ import { compressNodes } from '../../utils/compresstion';
 import * as actionTypes from './actionTypes';
 import * as wsActionTypes from './wsActionTypes';
 
-export const connectToTeam = ({ teamUUID, userUUID }) =>
-  connect(`wss://a-lympiad.rastaiha.ir/ws/${teamUUID}/${userUUID}/`);
+export const connectToTeam = ({ playerUUID, userUUID }) =>
+  connect(`wss://a-lympiad.rastaiha.ir/ws/${playerUUID}/${userUUID}/`);
 
 export const getLastWhiteboard = () =>
   send({ type: wsActionTypes.JOIN_TO_GROUP_ROOM });

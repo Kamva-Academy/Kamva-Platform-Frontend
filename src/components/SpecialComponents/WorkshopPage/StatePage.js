@@ -1,16 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
-import {
-  Button,
-  Divider,
-  Grid,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import Widget from '../../Widget';
 import { Link } from 'react-router-dom';
+import { StatePageContext } from '../../../containers/Workshop';
 
 const useStyles = makeStyles((theme) => ({
   workshopContent: {
@@ -33,8 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StatePage({ state = {}, teamUuid, fsmId, stateId }) {
+function StatePage({ state = {} }) {
   const classes = useStyles();
+
+  const { playerUUID, fsmId } = useContext(StatePageContext);
 
   const { widgets = [] } = state;
 
@@ -88,8 +84,8 @@ function StatePage({ state = {}, teamUuid, fsmId, stateId }) {
                     color="primary"
                     component={Link}
                     to={
-                      teamUuid
-                        ? `/workshop/${teamUuid}/${fsmId}/${state.inward_edges[0].tail}`
+                      playerUUID
+                        ? `/workshop/${playerUUID}/${fsmId}/${state.inward_edges[0].tail}`
                         : `/workshop/${fsmId}/${state.inward_edges[0].tail}`
                     }>
                     قبلی
@@ -104,8 +100,8 @@ function StatePage({ state = {}, teamUuid, fsmId, stateId }) {
                     color="primary"
                     component={Link}
                     to={
-                      teamUuid
-                        ? `/workshop/${teamUuid}/${fsmId}/${state.outward_edges[0].head}`
+                      playerUUID
+                        ? `/workshop/${playerUUID}/${fsmId}/${state.outward_edges[0].head}`
                         : `/workshop/${fsmId}/${state.outward_edges[0].head}`
                     }>
                     بعدی

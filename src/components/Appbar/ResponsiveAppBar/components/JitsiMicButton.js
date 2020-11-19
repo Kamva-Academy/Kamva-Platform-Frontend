@@ -15,7 +15,7 @@ export default function JitsiMicButton() {
   };
   return (
     <>
-      <IconButton onClick={toggleAudio} disabled>
+      <IconButton onClick={toggleAudio}>
         {isMute ? <MicOffIcon /> : <MicIcon />}
       </IconButton>
     </>

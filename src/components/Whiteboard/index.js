@@ -17,7 +17,7 @@ import {
   connectToTeam,
   getLastWhiteboard,
 } from '../../redux/actions/websocket';
-import { TeamUUIDContext } from '../../containers/Workshop';
+import { StatePageContext } from '../../containers/Workshop';
 
 const useStyles = makeStyles((theme) => ({
   whiteboard: {
@@ -49,18 +49,24 @@ function Whiteboard({
   wsDisconnect,
   getLastWhiteboard,
   userUUID,
-  handleClose
+  handleClose,
 }) {
   const classes = useStyles();
 
   const [stage, setStage] = useState();
-  const teamUUID = useContext(TeamUUIDContext);
+  const {playerUUID} = useContext(StatePageContext);
 
   useEffect(() => {
     initWhiteboard();
-    connectToTeam({ teamUUID, userUUID });
+    connectToTeam({ playerUUID, userUUID });
     return () => wsDisconnect();
-  }, [initWhiteboard, connectToTeam, wsDisconnect, teamUUID, userUUID]);
+  }, [
+    initWhiteboard,
+    connectToTeam,
+    wsDisconnect,
+    playerUUID,
+    userUUID,
+  ]);
 
   useEffect(() => {
     if (wsConnected) {
@@ -70,7 +76,10 @@ function Whiteboard({
 
   return (
     <div className={classes.whiteboard}>
-      <WhiteboardNavbar getDataURL={() => stage.toDataURL()} handleClose={handleClose} />
+      <WhiteboardNavbar
+        getDataURL={() => stage.toDataURL()}
+        handleClose={handleClose}
+      />
       <Drawing
         onSetStage={(stage) => setStage(stage)}
         width={width}

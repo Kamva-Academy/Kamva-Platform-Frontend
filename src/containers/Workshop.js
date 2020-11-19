@@ -33,15 +33,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TeamUUIDContext = React.createContext();
+export const StatePageContext = React.createContext();
 
 const Workshop = ({
   workshop,
   fsmId,
   stateId,
-  teamUuid,
-  is_mentor,
-  player,
+  playerUUID,
+  isMentor,
   startWorkshop,
   initCurrentWorkshop,
   getCurrentWorkshop,
@@ -52,19 +51,22 @@ const Workshop = ({
 
   useEffect(() => {
     initCurrentWorkshop();
-    if (teamUuid) {
-      if (is_mentor) {
-        getCurrentWorkshop({ fsmId, teamUuid });
-      } else {
+  }, [initCurrentWorkshop]);
+
+  useEffect(() => {
+    if (isMentor) {
+      if (!playerUUID) {
         history.push('/');
+      } else {
+        getCurrentWorkshop({ fsmId, playerUUID });
       }
     } else {
       getCurrentWorkshop({ fsmId });
     }
   }, [
     fsmId,
-    teamUuid,
-    is_mentor,
+    playerUUID,
+    isMentor,
     getCurrentWorkshop,
     initCurrentWorkshop,
     startWorkshop,
@@ -72,32 +74,22 @@ const Workshop = ({
   ]);
 
   useEffect(() => {
-    if (!teamUuid && !player) {
+    if (!playerUUID && !isMentor) {
       startWorkshop({ fsm: fsmId });
     }
-  }, [teamUuid, player, fsmId, startWorkshop]);
+  }, [playerUUID, isMentor, fsmId, startWorkshop]);
 
   const { states = [] } = workshop;
 
   return (
-    <TeamUUIDContext.Provider value={teamUuid || (player && player.uuid)}>
+    <StatePageContext.Provider value={{ fsmId, stateId, playerUUID, isMentor }}>
       <Container component="main" className={classes.body}>
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
         {states && stateId === 'start' ? (
-          <StatePage
-            teamUuid={teamUuid}
-            fsmId={fsmId}
-            stateId={stateId}
-            state={states.find((state) => state.name === 'شروع')}
-          />
+          <StatePage state={states.find((state) => state.name === 'شروع')} />
         ) : (
-          <StatePage
-            teamUuid={teamUuid}
-            fsmId={fsmId}
-            stateId={stateId}
-            state={states.find((state) => +state.id === +stateId)}
-          />
+          <StatePage state={states.find((state) => +state.id === +stateId)} />
         )}
         <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
@@ -105,17 +97,18 @@ const Workshop = ({
           </Fab>
         </ScrollTop>
       </Container>
-    </TeamUUIDContext.Provider>
+    </StatePageContext.Provider>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
   workshop: state.currentWorkshop.workshop,
-  fsmId: ownProps.match.params.fsm_id,
-  stateId: ownProps.match.params.state_id,
-  teamUuid: ownProps.match.params.team_uuid,
-  is_mentor: state.account.user.is_mentor,
-  player: state.currentWorkshop.player,
+  isMentor: state.account.user.is_mentor,
+  fsmId: ownProps.match.params.fsmId,
+  stateId: ownProps.match.params.stateId,
+  playerUUID: state.account.user.is_mentor
+    ? ownProps.match.params.playerUUID
+    : state.currentWorkshop.player.uuid,
 });
 
 export default connect(mapStateToProps, {

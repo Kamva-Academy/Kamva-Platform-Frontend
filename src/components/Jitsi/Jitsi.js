@@ -5,7 +5,7 @@ import {
   Refresh as RefreshIcon,
 } from '@material-ui/icons';
 import * as jitsiFuncs from './connection/jitsi';
-import { TeamUUIDContext } from '../../containers/Workshop';
+import { StatePageContext } from '../../containers/Workshop';
 
 const useStyles = makeStyles((theme) => ({
   draggableArea: {
@@ -35,19 +35,21 @@ function Jitsi({ handleClose, width }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 
-  const teamUUID = useContext(TeamUUIDContext);
-  
+  const { playerUUID } = useContext(StatePageContext);
+
   const refresh = useCallback(() => {
-    jitsiFuncs.destroy();
-    jitsiFuncs.initJitsi({
-      roomName: 'ra_' + teamUUID,
-      parentNode: jitsiElement.current,
-      height: width === 'xs' ? '100%' : '300px',
-      userInfo: {
-        displayName: 'کاربر',
-      },
-    });
-  }, [width]);
+    if (playerUUID) {
+      jitsiFuncs.destroy();
+      jitsiFuncs.initJitsi({
+        roomName: 'ra_' + playerUUID,
+        parentNode: jitsiElement.current,
+        height: width === 'xs' ? '100%' : '300px',
+        userInfo: {
+          displayName: 'کاربر',
+        },
+      });
+    }
+  }, [width, playerUUID]);
 
   useEffect(() => {
     setTimeout(() => {

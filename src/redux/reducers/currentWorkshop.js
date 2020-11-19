@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initState = { workshop: { states: [] } };
+const initState = { workshop: { states: [] }, player: {} };
 
 function currentWorkshop(state = initState, action) {
   switch (action.type) {
