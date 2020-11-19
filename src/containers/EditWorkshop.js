@@ -53,9 +53,9 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
 
 const mapStateToProps = (state, ownProps) => ({
   workshop: state.mentor.workshops.find(
-    (workshop) => +workshop.id === +ownProps.match.params.fsm_id
+    (workshop) => +workshop.id === +ownProps.match.params.fsmId
   ),
-  fsmId: ownProps.match.params.fsm_id,
+  fsmId: ownProps.match.params.fsmId,
 });
 
 export default connect(mapStateToProps, { getWorkshop })(EditWorkshop);
