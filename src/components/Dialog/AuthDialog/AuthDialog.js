@@ -70,91 +70,81 @@ function AuthDialog({
 
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
-      {1 === 1 ? (
-        <Typography
-          align="center"
-          className={classes.notStarted}
-          variant="h2"
-          component="h4">
-          مسابقه هنوز شروع نشده :))
-        </Typography>
-      ) : (
-        <form>
-          <Grid container direction="row" justify="center">
-            <Grid item xs={12} sm={7}>
-              <Container className={classes.leftContainer}>
-                <Grid
-                  container
-                  direction="column"
-                  justify="space-between"
-                  alignItems="stretch"
-                  className={classes.leftGrid}>
-                  <Grid container item direction="row">
-                    <Grid item justify="left" xs={3}>
-                      <IconButton
-                        aria-label="close"
-                        onClick={handleClose}
-                        className={classes.closeIcon}>
-                        <CloseIcon />
-                      </IconButton>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Typography component="h3" variant="h2" align="center">
-                        ورود
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={3} />
+      <form>
+        <Grid container direction="row" justify="center">
+          <Grid item xs={12} sm={7}>
+            <Container className={classes.leftContainer}>
+              <Grid
+                container
+                direction="column"
+                justify="space-between"
+                alignItems="stretch"
+                className={classes.leftGrid}>
+                <Grid container item direction="row">
+                  <Grid item justify="left" xs={3}>
+                    <IconButton
+                      aria-label="close"
+                      onClick={handleClose}
+                      className={classes.closeIcon}>
+                      <CloseIcon />
+                    </IconButton>
                   </Grid>
-                  <Grid item>
-                    <TextField
-                      label="نام کاربری"
-                      type="username"
-                      fullWidth
-                      onChange={(e) => setUsername(e.target.value)}
-                      inputProps={{ className: 'ltr-input' }}
-                      variant="outlined"
-                    />
+                  <Grid item xs={6}>
+                    <Typography component="h3" variant="h2" align="center">
+                      ورود
+                    </Typography>
                   </Grid>
-                  <Grid item>
-                    <TextField
-                      label="رمز عبور"
-                      fullWidth
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      inputProps={{ className: 'ltr-input' }}
-                      variant="outlined"
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      type="submit"
-                      onClick={(e) => {
-                        login({ username, password });
-                        e.preventDefault();
-                      }}
-                      disabled={isFetching}
-                      color="primary">
-                      {isFetching ? (
-                        <CircularProgress
-                          size={24}
-                          className={classes.buttonProgress}
-                        />
-                      ) : (
-                        t('login')
-                      )}
-                    </Button>
-                  </Grid>
+                  <Grid item xs={3} />
                 </Grid>
-              </Container>
-            </Grid>
-            <Hidden xsDown="true">
-              <Grid item sm={5} className={classes.rightImage}></Grid>
-            </Hidden>
+                <Grid item>
+                  <TextField
+                    label="نام کاربری"
+                    type="username"
+                    fullWidth
+                    onChange={(e) => setUsername(e.target.value)}
+                    inputProps={{ className: 'ltr-input' }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    label="رمز عبور"
+                    fullWidth
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    inputProps={{ className: 'ltr-input' }}
+                    variant="outlined"
+                  />
+                </Grid>
+                <Grid item>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    type="submit"
+                    onClick={(e) => {
+                      login({ username, password });
+                      e.preventDefault();
+                    }}
+                    disabled={isFetching}
+                    color="primary">
+                    {isFetching ? (
+                      <CircularProgress
+                        size={24}
+                        className={classes.buttonProgress}
+                      />
+                    ) : (
+                      t('login')
+                    )}
+                  </Button>
+                </Grid>
+              </Grid>
+            </Container>
           </Grid>
-        </form>
-      )}
+          <Hidden xsDown="true">
+            <Grid item sm={5} className={classes.rightImage}></Grid>
+          </Hidden>
+        </Grid>
+      </form>
     </Dialog>
   );
 }
