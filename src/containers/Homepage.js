@@ -13,7 +13,10 @@ import {
 } from '@material-ui/core';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
-import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
+import {
+  Assignment,
+  KeyboardArrowUp as KeyboardArrowUpIcon,
+} from '@material-ui/icons';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 import CustomizedTimeline from '../components/TimeLine/TimeLine';
 import FAQ from '../components/FAQ/FAQ';
@@ -154,6 +157,13 @@ const useStyles = makeStyles((theme) => ({
     textShadow: '2px 2px #333',
     lineHeight: '60px',
   },
+  survey: {
+    background: '#689F38',
+    color: 'white',
+    '&:hover': {
+      color: '#689F38',
+    },
+  },
 }));
 
 function Homepage({ isLoggedIn, logout }) {
@@ -218,13 +228,25 @@ function Homepage({ isLoggedIn, logout }) {
               justify="center"
               alignItems="center"
               direction="column"
-              spacing={1}
+              spacing={5}
               // style={{ overflowY: 'auto', height: '90%' }}
             >
               <Grid item>
                 <Typography variant="h2" className={classes.end}>
                   پایان آزمون
                 </Typography>
+              </Grid>
+              <Grid item>
+                <Button
+                  size="large"
+                  variant="contained"
+                  className={classes.survey}
+                  startIcon={<Assignment />}
+                  component="a"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSfdRqjzxFBTpx9FjYP9UY4VwvaJZ-d8tqupWKOi1v3IG-qxJw/viewform?usp=sf_link"
+                  target="_blank">
+                  <Typography variant="h3">شرکت در نظرسنجی</Typography>
+                </Button>
               </Grid>
             </Grid>
           </Grid>
