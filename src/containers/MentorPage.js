@@ -12,6 +12,7 @@ import {
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
+import { getWorkshopTeams } from '../redux/actions/mentor';
 import { connect } from 'react-redux';
 import {
   getAllWorkshops,
@@ -34,7 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
+const MentorPage = ({
+  workshops,
+  teams,
+  getAllWorkshops,
+  getUnreadNotifications,
+  getWorkshopTeams,
+}) => {
   const classes = useStyles();
   const [tabNumber, setTabNumber] = useState(0);
 
@@ -44,6 +51,14 @@ const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
     }, 10000);
     return () => clearInterval(interval);
   }, [getUnreadNotifications]);
+
+  useEffect(() => {
+    workshops.forEach((workshop) => {
+      if (!teams[workshop.id]) {
+        getWorkshopTeams({ fsmId: workshop.id });
+      }
+    });
+  }, [getWorkshopTeams, workshops, teams]);
 
   useEffect(() => {
     getAllWorkshops();
@@ -116,7 +131,13 @@ const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
   );
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+  workshops: state.mentor.workshops,
+  teams: state.mentor.teams,
+});
+
+export default connect(mapStateToProps, {
   getAllWorkshops,
   getUnreadNotifications,
+  getWorkshopTeams,
 })(MentorPage);
