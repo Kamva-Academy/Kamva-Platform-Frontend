@@ -5,7 +5,7 @@ import {
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@material-ui/icons';
 import UploadFileQuestionEditWidget from './edit';
-import { sendFileAnswer } from '../../../redux/actions/currentWorkshop';
+import { sendFileAnswer } from '../../../redux/actions/currentState';
 import { connect } from 'react-redux';
 
 export { UploadFileQuestionEditWidget };

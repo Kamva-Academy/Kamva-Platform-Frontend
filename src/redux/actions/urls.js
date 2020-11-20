@@ -20,7 +20,14 @@ export const CREATE_STATE = ROOT.concat('fsm/state/');
 
 export const ALL_WORKSHOPS = ROOT.concat('fsm/fsm/');
 export const GET_WORKSHOP = (id) => ROOT.concat(`fsm/fsm/${id}/`);
-export const GET_MENTOR_WORKSHOP = ROOT.concat(`fsm/mentorgetplayerfsm/`);
+export const MENTOR_GET_WORKSHOP = ROOT.concat(`fsm/mentorgetplayerfsm/`);
+
+export const MENTOR_GET_CURRENT_STATE = ROOT.concat(
+  `fsm/mentorgetplayerstate/`
+);
+export const PARTICIPANT_GET_CURRENT_STATE = ROOT.concat(
+  `fsm/pargetplayerstate/`
+);
 export const DELETE_STATE = (id) => ROOT.concat(`fsm/state/${id}/`);
 export const WORKSHOP_TEAMS = ROOT.concat('fsm/workshopplayers/');
 export const TEAM_ANSWERS = ROOT.concat('fsm/submittedanswers/');

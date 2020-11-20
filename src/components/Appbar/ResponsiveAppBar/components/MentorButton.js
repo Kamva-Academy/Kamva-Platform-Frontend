@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { callMentor } from '../../../../redux/actions/currentWorkshop';
+import { callMentor } from '../../../../redux/actions/currentState';
 import { connect } from 'react-redux';
+import { StatePageContext } from '../../../../containers/Workshop';
 
 const useStyles = makeStyles((theme) => ({
   mentorButton: {
@@ -9,17 +10,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MentorButton({ callMentor, fsm, player }) {
+function MentorButton({ callMentor, playerId }) {
   const classes = useStyles();
+
+  const { fsmId } = useContext(StatePageContext);
+
   return (
     <Button
       variant="contained"
       color="primary"
       className={classes.mentorButton}
-      onClick={() => callMentor({ fsm, player })}>
+      onClick={() => callMentor({ fsmId, playerId })}>
       درخواست منتور
     </Button>
   );
 }
 
-export default connect(null, { callMentor })(MentorButton);
+const mapStatesToProps = (state) => ({
+  playerId: state.currentState.player.id,
+});
+
+export default connect(mapStatesToProps, { callMentor })(MentorButton);

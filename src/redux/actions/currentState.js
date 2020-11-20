@@ -3,44 +3,29 @@ import * as URLs from './urls';
 import { CALL_API } from '../middleware/api/api';
 import jsonToFormData from '../../utils/jsonToFromDate';
 
-export const initCurrentWorkshop = () => ({
-  type: actionTypes.INIT_CURRENT_WORKSHOP,
+export const initCurrentState = () => ({
+  type: actionTypes.INIT_CURRENT_STATE,
 });
 
-export const getCurrentWorkshop = ({ fsmId, playerUUID }) => {
-  if (!!playerUUID) {
-    return {
-      [CALL_API]: {
-        types: [
-          actionTypes.GET_CURRENT_WORKSHOP_REQUEST,
-          actionTypes.GET_CURRENT_WORKSHOP_SUCCESS,
-          actionTypes.GET_CURRENT_WORKSHOP_FAILURE,
-        ],
-        url: URLs.GET_MENTOR_WORKSHOP,
-        fetchOptions: {
-          method: 'POST',
-          body: JSON.stringify({
-            fsm: fsmId,
-            team_uuid: playerUUID,
-          }),
-        },
-      },
-    };
-  }
-  return {
-    [CALL_API]: {
-      types: [
-        actionTypes.GET_CURRENT_WORKSHOP_REQUEST,
-        actionTypes.GET_CURRENT_WORKSHOP_SUCCESS,
-        actionTypes.GET_CURRENT_WORKSHOP_FAILURE,
-      ],
-      url: URLs.GET_WORKSHOP(fsmId),
-      fetchOptions: {
-        method: 'GET',
-      },
+export const getCurrentState = ({ stateId, playerUUID, isMentor }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GET_CURRENT_STATE_REQUEST,
+      actionTypes.GET_CURRENT_STATE_SUCCESS,
+      actionTypes.GET_CURRENT_STATE_FAILURE,
+    ],
+    url: isMentor
+      ? URLs.MENTOR_GET_CURRENT_STATE
+      : URLs.PARTICIPANT_GET_CURRENT_STATE,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({
+        state: stateId,
+        player_uuid: playerUUID,
+      }),
     },
-  };
-};
+  },
+});
 
 const sendAnswer = (body) => ({
   [CALL_API]: {
@@ -111,7 +96,7 @@ export const sendMultiChoiceAnswer = ({ player, problem, answer }) =>
     },
   });
 
-export const startWorkshop = ({ fsm }) => ({
+export const startWorkshop = ({ fsmId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.START_WORKSHOP_REQUEST,
@@ -121,11 +106,22 @@ export const startWorkshop = ({ fsm }) => ({
     url: URLs.START_WORKSHOP,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ fsm }),
+      body: JSON.stringify({ fsm: fsmId }),
     },
   },
 });
 
-export const callMentor = (fsmId) => ({
-  type: actionTypes.CALL_MENTOR,
+export const callMentor = ({ fsmId, playerId }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CALL_MENTOR_REQUEST,
+      actionTypes.CALL_MENTOR_SUCCESS,
+      actionTypes.CALL_MENTOR_FAILURE,
+    ],
+    url: URLs.CALL_MENTOR,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ fsm: fsmId, player: playerId }),
+    },
+  },
 });
