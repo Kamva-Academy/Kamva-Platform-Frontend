@@ -61,22 +61,22 @@ const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
             direction="column"
             justify="space-between">
             <Grid item>
-              <ButtonGroup
-                orientation="vertical"
-                variant="contained"
-                color="primary"
-                fullWidth>
+              <ButtonGroup orientation="vertical" color="primary" fullWidth>
                 <Button
                   onClick={() => setTabNumber(0)}
+                  variant={tabNumber === 0 && 'contained'}
                   startIcon={<ClassIcon />}>
                   کارگاه‌ها
                 </Button>
                 <Button
                   onClick={() => setTabNumber(1)}
+                  variant={tabNumber === 1 && 'contained'}
                   startIcon={<GroupIcon />}>
                   تیم‌ها
                 </Button>
-                <Button onClick={() => setTabNumber(2)}>
+                <Button
+                  onClick={() => setTabNumber(2)}
+                  variant={tabNumber === 2 && 'contained'}>
                   <Badge badgeContent={'!'} color="secondary">
                     درخواست‌ها
                   </Badge>
@@ -86,7 +86,6 @@ const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
             <Hidden xsDown>
               <Grid item fullWidth>
                 <Button
-                  variant="contained"
                   fullWidth
                   color="primary"
                   component={Link}
@@ -101,15 +100,12 @@ const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
             <Paper elevation={3} classNames={classes.rightBox}>
               {tabNumber === 0 && <MentorWorkshops />}
               {tabNumber === 1 && <Teams />}
+              {tabNumber === 2 && <Teams mode="notifications" />}
             </Paper>
           </Grid>
           <Hidden smUp>
             <Grid item fullWidth>
-              <Button
-                variant="contained"
-                fullWidth
-                color="primary"
-                startIcon={<ExitToAppIcon />}>
+              <Button fullWidth color="primary" startIcon={<ExitToAppIcon />}>
                 بازگشت
               </Button>
             </Grid>

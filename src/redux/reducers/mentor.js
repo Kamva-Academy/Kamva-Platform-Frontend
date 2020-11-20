@@ -1,6 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initState = { workshops: [], teams: [] };
+const initState = { workshops: [], teams: {}, notifications: [] };
 
 function mentor(state = initState, action) {
   switch (action.type) {
@@ -33,7 +33,18 @@ function mentor(state = initState, action) {
     case actionTypes.WORKSHOP_TEAMS_SUCCESS:
       return {
         ...state,
-        teams: action.response,
+        teams: {
+          ...state.teams,
+          [action.payload.fsmId]: action.response,
+        },
+      };
+
+    case actionTypes.UNREAD_NOTIFICATIONS_SUCCESS:
+      return {
+        ...state,
+        notifications: action.response.unread_list.map(
+          (unread) => +unread.actor_object_id
+        ),
       };
 
     default:

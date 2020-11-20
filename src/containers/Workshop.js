@@ -56,7 +56,7 @@ const Workshop = ({
   useEffect(() => {
     if (isMentor && !playerUUID) {
       history.push('/');
-    } else {
+    } else if (playerUUID) {
       getCurrentState({ stateId, playerUUID, isMentor });
     }
   }, [stateId, playerUUID, isMentor, getCurrentState, history]);

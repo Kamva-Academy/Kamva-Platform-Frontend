@@ -4,12 +4,27 @@ import { connect } from 'react-redux';
 import TeamCard from '../../Cards/TeamCard';
 import { Grid, Tab, Tabs } from '@material-ui/core';
 
-function Teams({ workshops, teams, getWorkshopTeams }) {
+function Teams({
+  workshops,
+  teams,
+  getWorkshopTeams,
+  mode = 'normal',
+  notifications,
+}) {
   const [workshopNumber, setWorkshopNumber] = useState(0);
 
   useEffect(() => {
-    getWorkshopTeams({ fsmId: workshops[workshopNumber].id });
-  }, [getWorkshopTeams, workshops, workshopNumber]);
+    if (workshops[workshopNumber] && !teams[workshops[workshopNumber].id]) {
+      getWorkshopTeams({ fsmId: workshops[workshopNumber].id });
+    }
+  }, [getWorkshopTeams, workshops, teams, workshopNumber]);
+
+  const currentTeams = teams[workshops[workshopNumber].id] || [];
+
+  const viewTeams =
+    mode === 'notifications'
+      ? currentTeams.filter((team) => notifications.includes(+team.player.id))
+      : currentTeams;
 
   return (
     <Grid container direction="column">
@@ -28,7 +43,7 @@ function Teams({ workshops, teams, getWorkshopTeams }) {
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={2} alignItems="center" justify="center">
-          {teams.map((team) => {
+          {viewTeams.map((team) => {
             return (
               <Grid item xs={12} sm={6} md={4}>
                 <TeamCard
@@ -48,5 +63,6 @@ function Teams({ workshops, teams, getWorkshopTeams }) {
 const mapStateToProps = (state) => ({
   workshops: state.mentor.workshops,
   teams: state.mentor.teams,
+  notifications: state.mentor.notifications,
 });
 export default connect(mapStateToProps, { getWorkshopTeams })(Teams);

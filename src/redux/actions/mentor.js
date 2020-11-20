@@ -56,6 +56,7 @@ export const getWorkshopTeams = ({ fsmId }) => ({
       method: 'POST',
       body: JSON.stringify({ fsm: fsmId }),
     },
+    payload: { fsmId },
   },
 });
 
