@@ -94,12 +94,20 @@ export default class Frame extends Component {
     });
   }
 
+  fixBaseTag() {
+    const doc = this.state.window.document;
+    var base = doc.createElement('base');
+    base.target = '_blank';
+    doc.getElementsByTagName('head')[0].appendChild(base);
+  }
+
   initContent() {
     this.setContent(this.props.content);
     this.addStyles(
       'html,body{overflow:hidden;height:100%;direction: rtl; margin: 0; height:min-content; height: fit-content;height: -moz-fit-content;}'
     );
     this.addCSS('/fonts/iranyekan/iranyekan.css');
+    this.fixBaseTag();
   }
 
   componentDidUpdate(prevProps) {
