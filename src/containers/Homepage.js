@@ -147,8 +147,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'sticky',
     bottom: theme.spacing(1),
     left: theme.spacing(1),
-  }
-
+  },
+  end: {
+    fontSize: 60,
+    color: 'white',
+    textShadow: '2px 2px #333',
+    lineHeight: '60px',
+  },
 }));
 
 function Homepage({ isLoggedIn, logout }) {
@@ -161,12 +166,8 @@ function Homepage({ isLoggedIn, logout }) {
         <div id="back-to-top-anchor"></div>
         <div className="landing-background" />
 
-        <Grid
-          container
-          direction="column"
-          style={{ height: '100%' }}
-        >
-          <Grid container item direction='row' style={{ height: '10%' }}>
+        <Grid container direction="column" style={{ height: '100%' }}>
+          {/* <Grid container item direction="row" style={{ height: '10%' }}>
             <Grid item>
               <Button
                 variant="contained"
@@ -182,16 +183,17 @@ function Homepage({ isLoggedIn, logout }) {
                 </Button>
               </Grid>
             )}
-          </Grid>
+          </Grid> */}
 
           <Grid container item direction="row" style={{ height: '90%' }}>
             <Grid
-              item container
-              xs={12} sm={7}
-              justify='center'
+              item
+              container
+              xs={12}
+              sm={7}
+              justify="center"
               alignItems="center"
-              direction="column"
-            >
+              direction="column">
               <Grid item>
                 <Typography
                   component="h1"
@@ -209,60 +211,21 @@ function Homepage({ isLoggedIn, logout }) {
             </Grid>
 
             <Grid
-              item container
-              xs={12} sm={5}
-              justify='center'
+              item
+              container
+              xs={12}
+              sm={5}
+              justify="center"
               alignItems="center"
-              direction='column'
+              direction="column"
               spacing={1}
-            // style={{ overflowY: 'auto', height: '90%' }}
+              // style={{ overflowY: 'auto', height: '90%' }}
             >
               <Grid item>
-                <Paper className={classes.formPaper}>
-                  <Typography variant="h6" gutterBottom>
-                    برای ارتباط تیم برگزاری با تیم‌ها، لطفا هر تیم در این فرم یک
-                    ایمیل وارد کند تا به وسیله‌ی آن ایمیل با تیم در ارتباط باشیم.
-                  </Typography>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    size='medium'
-                    component="a"
-                    target="_blank"
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSfYbUEftGGA__-hUMvAgKWXf5qUi2qWhvfyHmQK0k6CoureXQ/viewform?usp=sf_link">
-                    <Typography variant="h4">فرم دریافت ایمیل</Typography>
-                  </Button>
-                </Paper>
+                <Typography variant="h2" className={classes.end}>
+                  پایان آزمون
+                </Typography>
               </Grid>
-
-              <Grid item>
-                <Paper className={classes.formPaper}>
-                  <Typography variant="h6" >
-                    در صورت برخورد با هر گونه مشکل فنی، تیم پشتیبانی در تمام طول مسابقه از طریق تلفن ۰۳۱۳۶۶۹۲۰۱۳ داخلی‌های ۱۰۲، ۱۰۳، ۱۰۴، ۱۰۵، ۱۰۸ و ۱۴۰ همراه شما خواهد بود‌.
-                  </Typography>
-                </Paper>
-              </Grid>
-
-              {/* 
-              <Grid item>
-                <Paper className={classes.formPaper}>
-                  <Typography variant="h6" gutterBottom>
-                    از طریق دکمه‌ی زیر، وارد افتتاحیه شوید! نام کاربری ss1-guest و رمز عبور ss11342849 است.
-                  </Typography>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    size='medium'
-                    component="a"
-                    target="_blank"
-                    href="https://vc.sharif.edu/ch/ss1">
-                    <Typography variant="h4">ورود به افتتاحیه</Typography>
-                  </Button>
-                </Paper>
-              </Grid> */}
-
             </Grid>
           </Grid>
         </Grid>
@@ -276,11 +239,20 @@ function Homepage({ isLoggedIn, logout }) {
           alignItems="center"
           justify="center">
           <Grid item xs={12}>
-            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
+            <Typography
+              component="h2"
+              variant="h2"
+              className={classes.sectionTitle}>
               فیلم‌هایی که حتما باید ببینید!
             </Typography>
           </Grid>
-          <Grid container xs={12} sm={8} direction='row' justify='center' spacing={1}>
+          <Grid
+            container
+            xs={12}
+            sm={8}
+            direction="row"
+            justify="center"
+            spacing={1}>
             <Grid item xs={10} sm={8}>
               <video
                 controls
@@ -302,7 +274,10 @@ function Homepage({ isLoggedIn, logout }) {
       <Container className={`${classes.section3} ${classes.centerItems}`}>
         <Grid container direction="column" spacing={4}>
           <Grid item>
-            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
+            <Typography
+              component="h2"
+              variant="h2"
+              className={classes.sectionTitle}>
               چرا ای‌لیمپیاد؟
             </Typography>
           </Grid>
@@ -437,7 +412,10 @@ function Homepage({ isLoggedIn, logout }) {
       <Container className={`${classes.section4} ${classes.centerItems}`}>
         <Grid container direction="column" spacing={4}>
           <Grid item>
-            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
+            <Typography
+              component="h2"
+              variant="h2"
+              className={classes.sectionTitle}>
               سوالات رایج
             </Typography>
           </Grid>
@@ -450,7 +428,10 @@ function Homepage({ isLoggedIn, logout }) {
       <Container className={`${classes.section5} ${classes.centerItems}`}>
         <Grid container direction="column" spacing={4}>
           <Grid item>
-            <Typography component="h2" variant="h2" className={classes.sectionTitle}>
+            <Typography
+              component="h2"
+              variant="h2"
+              className={classes.sectionTitle}>
               حامیان
             </Typography>
           </Grid>
