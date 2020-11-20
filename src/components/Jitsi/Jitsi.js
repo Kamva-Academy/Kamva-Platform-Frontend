@@ -6,6 +6,7 @@ import {
 } from '@material-ui/icons';
 import * as jitsiFuncs from './connection/jitsi';
 import { StatePageContext } from '../../containers/Workshop';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   draggableArea: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function Jitsi({ handleClose, width }) {
+function Jitsi({ handleClose, width, displayName = 'کاربر' }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 
@@ -45,11 +46,11 @@ function Jitsi({ handleClose, width }) {
         parentNode: jitsiElement.current,
         height: width === 'xs' ? '100%' : '300px',
         userInfo: {
-          displayName: 'کاربر',
+          displayName,
         },
       });
     }
-  }, [width, playerUUID]);
+  }, [width, displayName, playerUUID]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -75,4 +76,8 @@ function Jitsi({ handleClose, width }) {
   );
 }
 
-export default withWidth()(Jitsi);
+const mapStatesToProps = (state) => ({
+  displayName: state.account.user.is_mentor ? 'منتور' : state.account.user.name,
+});
+
+export default withWidth()(connect(mapStatesToProps)(Jitsi));
