@@ -40,12 +40,12 @@ const useStyles = makeStyles((theme) => ({
 const UploadFileQuestionWidget = ({
   id,
   text = 'محل آپلود فایل',
-  lastFile,
+  last_submit,
   disabled = true,
   playerId,
   sendFileAnswer,
 }) => {
-  const classes = useStyles({ haveFile: !!lastFile });
+  const classes = useStyles({ haveFile: !!last_submit });
   const onChangeFile = async (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
@@ -68,7 +68,7 @@ const UploadFileQuestionWidget = ({
       <div className={classes.flex}>
         <Typography>{text}</Typography>
         <input
-          accept="image/*"
+          accept="application/pdf,image/*"
           style={{ display: 'none' }}
           id="raised-button-file"
           type="file"
@@ -76,8 +76,8 @@ const UploadFileQuestionWidget = ({
         />
         <Button
           component="label"
-          htmlFor={disabled ? '' : 'raised-button-file'}
-          disabled={disabled}
+          htmlFor={disabled || !playerId ? '' : 'raised-button-file'}
+          disabled={disabled || !playerId}
           variant="contained"
           color="primary"
           size="small"
@@ -86,7 +86,7 @@ const UploadFileQuestionWidget = ({
           بارگذاری فایل
         </Button>
       </div>
-      {lastFile && (
+      {last_submit && (
         <>
           <Divider className={classes.divider} />
           <div className={classes.flex}>
@@ -100,11 +100,11 @@ const UploadFileQuestionWidget = ({
               size="small"
               endIcon={<DescriptionOutlinedIcon />}
               className={classes.lastUploadButton}
-              href={lastFile.src}
+              href={last_submit.answer_file}
               component="a"
               download
               target="_blank">
-              {lastFile.name}
+              {last_submit.file_name}
             </Button>
           </div>
         </>
@@ -114,10 +114,7 @@ const UploadFileQuestionWidget = ({
 };
 
 const mapStateToProps = (state) => ({
-  playerId:
-    state.currentWorkshop &&
-    state.currentWorkshop.player &&
-    state.currentWorkshop.player.id,
+  playerId: state.currentState.player.id,
 });
 
 export default connect(mapStateToProps, { sendFileAnswer })(
