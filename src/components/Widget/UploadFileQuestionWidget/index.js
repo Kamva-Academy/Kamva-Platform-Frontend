@@ -70,13 +70,13 @@ const UploadFileQuestionWidget = ({
         <input
           accept="application/pdf,image/*"
           style={{ display: 'none' }}
-          id="raised-button-file"
+          id={'raised-button-file' + id}
           type="file"
           onChange={onChangeFile}
         />
         <Button
           component="label"
-          htmlFor={disabled || !playerId ? '' : 'raised-button-file'}
+          htmlFor={disabled || !playerId ? '' : 'raised-button-file' + id}
           disabled={disabled || !playerId}
           variant="contained"
           color="primary"

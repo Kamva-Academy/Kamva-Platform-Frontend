@@ -39,7 +39,7 @@ const Widget = ({ widget, mode = MODES.VIEW, stateId, ...props }) => {
           />
         </>
       )}
-      <WidgetComponent {...widget} {...props} disabled={mode === MODES.EDIT} />
+      <WidgetComponent {...props} {...widget} disabled={mode === MODES.EDIT} />
     </div>
   );
 };
