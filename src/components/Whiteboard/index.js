@@ -23,11 +23,7 @@ const useStyles = makeStyles((theme) => ({
   whiteboard: {
     position: 'relative',
     display: 'inline-block',
-    padding: theme.spacing(1),
     background: '#F7F9FC',
-    borderRadius: 10,
-    boxShadow:
-      '0 3px #bbb, 0 6px #aaa, 0 -3px #bbb, 0 -6px #aaa, 3px 0 #bbb, 6px 0 #aaa, -3px 0 #bbb, -6px 0 #aaa',
     touchAction: 'none',
   },
 }));
@@ -54,19 +50,13 @@ function Whiteboard({
   const classes = useStyles();
 
   const [stage, setStage] = useState();
-  const {playerUUID} = useContext(StatePageContext);
+  const { playerUUID } = useContext(StatePageContext);
 
   useEffect(() => {
     initWhiteboard();
     connectToTeam({ playerUUID, userUUID });
     return () => wsDisconnect();
-  }, [
-    initWhiteboard,
-    connectToTeam,
-    wsDisconnect,
-    playerUUID,
-    userUUID,
-  ]);
+  }, [initWhiteboard, connectToTeam, wsDisconnect, playerUUID, userUUID]);
 
   useEffect(() => {
     if (wsConnected) {

@@ -25,7 +25,7 @@ export const saveAndSendWhiteboardNodes = (action) => (dispatch, getState) => {
   dispatch(action);
   dispatch({
     type: actionTypes.INCREASE_WHITEBOARD_VERSION,
-    payload: futureLength,
+    payload: futureLength + 1,
   });
   dispatch(sendWhiteboardNodes(getState));
 };

@@ -88,7 +88,15 @@ function Drawing({
 
   return (
     // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-    <div className="drawing">
+    <div
+      className="drawing"
+      style={{
+        float: 'left',
+        direction: 'ltr',
+        overflowX: 'scroll',
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+      }}>
       <Stage
         width={width}
         height={height}
@@ -107,6 +115,7 @@ function Drawing({
             fill="white"
             width={width}
             height={height}
+            preventDefault={false}
           />
           {nodes.map((node) => (
             <KonvaNode
