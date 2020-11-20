@@ -14,8 +14,6 @@ const getMessage = (actionType, message) => {
       return 'جواب شما با موقفیت ثبت شد!';
     case actionTypes.SEND_ANSWER_FAILURE:
       return 'یک مشکلی هست. جواب شما ثبت نشد.';
-    case actionTypes.CALL_MENTOR:
-      return 'امروز منتور ندارید :))';
     default:
       return message;
   }
@@ -58,7 +56,6 @@ export default function notifications(state = defaultState, action) {
         },
       });
 
-    case actionTypes.CALL_MENTOR:
     case actionTypes.SEND_ANSWER_SUCCESS:
     case actionTypes.LOGIN_SUCCESS:
       return enquequeSnackbar({
