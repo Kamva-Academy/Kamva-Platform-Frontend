@@ -5,6 +5,7 @@ import { getWorkshop } from '../redux/actions/mentor';
 import { connect } from 'react-redux';
 import StatesTabbar from '../components/SpecialComponents/EditWorkshopPage/StatesTabbar';
 import EditState from '../components/SpecialComponents/EditWorkshopPage/EditState';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
@@ -24,9 +25,15 @@ const useStyles = makeStyles((theme) => ({
 const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
   const [tab, setTab] = React.useState(0);
 
+  const history = useHistory();
+
   useEffect(() => {
-    getWorkshop({ id: fsmId });
-  }, [getWorkshop, fsmId]);
+    if (fsmId) {
+      getWorkshop({ id: fsmId });
+    } else {
+      history.push('/');
+    }
+  }, [getWorkshop, fsmId, history]);
 
   const classes = useStyles();
 

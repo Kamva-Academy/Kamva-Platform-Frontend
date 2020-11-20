@@ -7,19 +7,12 @@ import {
   Paper,
   ButtonGroup,
   Hidden,
-  Backdrop,
   Badge,
-  IconButton,
-  Tooltip,
-  Tabs,
-  Tab,
-  LinearProgress,
 } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
 import ClassIcon from '@material-ui/icons/Class';
 import { connect } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {
   getAllWorkshops,
   getUnreadNotifications,
@@ -41,28 +34,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MentorPage = ({
-  isLoading,
-  getAllWorkshops,
-  getUnreadNotifications,
-  workshops,
-}) => {
+const MentorPage = ({ getAllWorkshops, getUnreadNotifications }) => {
   const classes = useStyles();
   const [tabNumber, setTabNumber] = useState(0);
-  const [workshopNumber, setWorkshopNumber] = useState(0);
 
   useEffect(() => {
-    getAllWorkshops();
     const interval = setInterval(() => {
       getUnreadNotifications();
     }, 10000);
-
     return () => clearInterval(interval);
-  }, [getAllWorkshops, getUnreadNotifications]);
+  }, [getUnreadNotifications]);
 
-  const handleChange = (event, newValue) => {
-    setWorkshopNumber(newValue);
-  };
+  useEffect(() => {
+    getAllWorkshops();
+  }, [getAllWorkshops]);
 
   return (
     <>
@@ -116,7 +101,6 @@ const MentorPage = ({
             <Paper elevation={3} classNames={classes.rightBox}>
               {tabNumber === 0 && <MentorWorkshops />}
               {tabNumber === 1 && <Teams />}
-              
             </Paper>
           </Grid>
           <Hidden smUp>
@@ -131,9 +115,6 @@ const MentorPage = ({
             </Grid>
           </Hidden>
         </Grid>
-        <Backdrop className={classes.backdrop} open={isLoading}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
       </Container>
     </>
   );
