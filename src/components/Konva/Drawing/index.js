@@ -115,7 +115,6 @@ function Drawing({
             fill="white"
             width={width}
             height={height}
-            preventDefault={false}
           />
           {nodes.map((node) => (
             <KonvaNode

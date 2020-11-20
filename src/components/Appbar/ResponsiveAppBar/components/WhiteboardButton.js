@@ -26,8 +26,8 @@ function WhiteboardButton() {
       </IconButton>
       <Dialog open={open} onClose={() => setOpen(false)} fullScreen>
         <Whiteboard
-          width={2500}
-          height={2500}
+          width={width}
+          height={height}
           handleClose={() => setOpen(false)}
         />
       </Dialog>
