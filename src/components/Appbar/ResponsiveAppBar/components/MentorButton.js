@@ -20,6 +20,7 @@ function MentorButton({ callMentor, playerId }) {
       variant="contained"
       color="primary"
       className={classes.mentorButton}
+      disabled={!playerId}
       onClick={() => callMentor({ fsmId, playerId })}>
       درخواست منتور
     </Button>
