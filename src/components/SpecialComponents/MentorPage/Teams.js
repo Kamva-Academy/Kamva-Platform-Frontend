@@ -23,7 +23,7 @@ function Teams({
 
   const viewTeams =
     mode === 'notifications'
-      ? currentTeams.filter((team) => notifications.includes(+team.player.id))
+      ? currentTeams.filter((team) => notifications.includes(+team.id))
       : currentTeams;
 
   return (

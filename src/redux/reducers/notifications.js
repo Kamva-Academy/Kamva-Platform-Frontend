@@ -10,6 +10,8 @@ const getMessage = (actionType, message) => {
       return 'خوش آمدید!';
     case actionTypes.LOGIN_FAILURE:
       return 'نام کاربری یا رمزعبور اشتباه است!';
+    case actionTypes.CALL_MENTOR_SUCCESS:
+      return 'درخواست شما برای منتور‌ها ارسال شد.';
     case actionTypes.SEND_ANSWER_SUCCESS:
       return 'جواب شما با موقفیت ثبت شد!';
     case actionTypes.SEND_ANSWER_FAILURE:
@@ -57,6 +59,7 @@ export default function notifications(state = defaultState, action) {
       });
 
     case actionTypes.SEND_ANSWER_SUCCESS:
+    case actionTypes.CALL_MENTOR_SUCCESS:
     case actionTypes.LOGIN_SUCCESS:
       return enquequeSnackbar({
         state,

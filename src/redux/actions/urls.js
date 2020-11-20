@@ -31,7 +31,7 @@ export const PARTICIPANT_GET_CURRENT_STATE = ROOT.concat(
 export const DELETE_STATE = (id) => ROOT.concat(`fsm/state/${id}/`);
 export const WORKSHOP_TEAMS = ROOT.concat('fsm/workshopplayers/');
 export const TEAM_ANSWERS = ROOT.concat('fsm/submittedanswers/');
-export const VISIT_TEAM = ROOT.concat('fsm/visitteam/');
+export const VISIT_PLAYER_WORKSHOP = ROOT.concat('fsm/visitteam/');
 
 export const SEND_ANSWER = ROOT.concat('fsm/sendanswer/');
 export const START_WORKSHOP = ROOT.concat('fsm/startWorkshop/');

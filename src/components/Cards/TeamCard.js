@@ -13,6 +13,8 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { visitPlayerWorkshop } from '../../redux/actions/mentor';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TeamCard = ({ team, fsmId, fsmFirstState }) => {
+const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
   const classes = useStyles();
 
   return (
@@ -50,6 +52,7 @@ const TeamCard = ({ team, fsmId, fsmFirstState }) => {
       <CardActions>
         <ButtonGroup variant="outlined" color="primary" fullWidth>
           <Button
+            onClick={() => visitPlayerWorkshop({ playerWorkshopId: team.id })}
             component={Link}
             to={`/workshop/${team.player.uuid}/${fsmId}/${fsmFirstState}/`}>
             مشاهده
@@ -61,4 +64,4 @@ const TeamCard = ({ team, fsmId, fsmFirstState }) => {
   );
 };
 
-export default TeamCard;
+export default connect(null, { visitPlayerWorkshop })(TeamCard);

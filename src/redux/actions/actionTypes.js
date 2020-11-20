@@ -76,9 +76,9 @@ export const TEAM_ANSWERS_SUCCESS = 'TEAM_ANSWERS_SUCCESS';
 export const TEAM_ANSWERS_FAILURE = 'TEAM_ANSWERS_FAILURE';
 
 ////////////// مشاهده‌ی تیم(که نوتیف رو خاموش کنه)
-export const VISIT_TEAM_REQUEST = 'VISIT_TEAM_REQUEST'; //url: api/fsm/gototeam method: post / body: {fsmId + teamId}
-export const VISIT_TEAM_SUCCESS = 'VISIT_TEAM_SUCCESS';
-export const VISIT_TEAM_FAILURE = 'VISIT_TEAM_FAILURE';
+export const VISIT_PLAYER_WORKSHOP_REQUEST = 'VISIT_PLAYER_WORKSHOP_REQUEST'; //url: api/fsm/gototeam method: post / body: {fsmId + teamId}
+export const VISIT_PLAYER_WORKSHOP_SUCCESS = 'VISIT_PLAYER_WORKSHOP_SUCCESS';
+export const VISIT_PLAYER_WORKSHOP_FAILURE = 'VISIT_PLAYER_WORKSHOP_FAILURE';
 
 // create workshop
 export const CREATE_WORKSHOP_REQUEST = 'CREATE_WORKSHOP_REQUEST';

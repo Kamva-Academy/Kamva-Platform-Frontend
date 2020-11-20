@@ -75,17 +75,17 @@ export const getTeamAnswers = (fsmId, teamId) => ({
   },
 });
 
-export const visitTeam = (fsmId, teamId) => ({
+export const visitPlayerWorkshop = ({ playerWorkshopId }) => ({
   [CALL_API]: {
     types: [
-      actionTypes.VISIT_TEAM_REQUEST,
-      actionTypes.VISIT_TEAM_SUCCESS,
-      actionTypes.VISIT_TEAM_FAILURE,
+      actionTypes.VISIT_PLAYER_WORKSHOP_REQUEST,
+      actionTypes.VISIT_PLAYER_WORKSHOP_SUCCESS,
+      actionTypes.VISIT_PLAYER_WORKSHOP_FAILURE,
     ],
-    url: URLs.VISIT_TEAM,
+    url: URLs.VISIT_PLAYER_WORKSHOP,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ fsm: fsmId, team: teamId }),
+      body: JSON.stringify({ player_workshop: playerWorkshopId }),
     },
   },
 });
