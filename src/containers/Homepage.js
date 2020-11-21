@@ -22,6 +22,7 @@ import CustomizedTimeline from '../components/TimeLine/TimeLine';
 import FAQ from '../components/FAQ/FAQ';
 import { logout } from '../redux/actions/account';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -237,16 +238,28 @@ function Homepage({ isLoggedIn, logout }) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Button
-                  size="large"
-                  variant="contained"
-                  className={classes.survey}
-                  startIcon={<Assignment />}
-                  component="a"
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSfdRqjzxFBTpx9FjYP9UY4VwvaJZ-d8tqupWKOi1v3IG-qxJw/viewform?usp=sf_link"
-                  target="_blank">
-                  <Typography variant="h3">شرکت در نظرسنجی</Typography>
-                </Button>
+                {isLoggedIn ? (
+                  <Button
+                    size="large"
+                    variant="contained"
+                    className={classes.survey}
+                    startIcon={<Assignment />}
+                    component="a"
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfdRqjzxFBTpx9FjYP9UY4VwvaJZ-d8tqupWKOi1v3IG-qxJw/viewform?usp=sf_link"
+                    target="_blank">
+                    <Typography variant="h3">شرکت در نظرسنجی</Typography>
+                  </Button>
+                ) : (
+                  <Button
+                    size="large"
+                    variant="contained"
+                    className={classes.survey}
+                    startIcon={<Assignment />}
+                    component={Link}
+                    to="/survey">
+                    <Typography variant="h3">شرکت در نظرسنجی</Typography>
+                  </Button>
+                )}
               </Grid>
             </Grid>
           </Grid>

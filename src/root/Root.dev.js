@@ -6,6 +6,7 @@ import Workshop from '../containers/Workshop';
 import MentorPage from '../containers/MentorPage';
 import EditWorkshop from '../containers/EditWorkshop';
 import Workshops from '../containers/Workshops';
+import Survey from '../containers/Survey';
 
 const Root = () => {
   return (
@@ -24,6 +25,7 @@ const Root = () => {
           </Switch>
         </Route>
         <Route path="/mentor/" component={MentorPage} /> */}
+        <Route path="/survey" component={Survey} />
         <Route path="/" component={Homepage} />
       </Switch>
       <DevTools />
