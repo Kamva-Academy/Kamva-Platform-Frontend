@@ -178,7 +178,7 @@ function Homepage({ isLoggedIn, logout }) {
         <div className="landing-background" />
 
         <Grid container direction="column" style={{ height: '100%' }}>
-          {/* <Grid container item direction="row" style={{ height: '10%' }}>
+          <Grid container item direction="row" style={{ height: '10%' }}>
             <Grid item>
               <Button
                 variant="contained"
@@ -194,7 +194,7 @@ function Homepage({ isLoggedIn, logout }) {
                 </Button>
               </Grid>
             )}
-          </Grid> */}
+          </Grid>
 
           <Grid container item direction="row" style={{ height: '90%' }}>
             <Grid

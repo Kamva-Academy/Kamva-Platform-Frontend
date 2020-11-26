@@ -56,17 +56,17 @@ function AuthDialog({
   const [password, setPassword] = useState('');
   const classes = useStyles();
   const t = useTranslate();
-  // const history = useHistory();
+  const history = useHistory();
 
-  // useEffect(() => {
-  //   if (open && isLoggedIn) {
-  //     if (user.is_mentor) {
-  //       history.push('/mentor');
-  //     } else {
-  //       history.push('/workshops');
-  //     }
-  //   }
-  // }, [isLoggedIn, user, open]);
+  useEffect(() => {
+    if (open && isLoggedIn) {
+      if (user.is_mentor) {
+        history.push('/mentor');
+      } else {
+        history.push('/workshops');
+      }
+    }
+  }, [isLoggedIn, user, open, history]);
 
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
@@ -122,7 +122,7 @@ function AuthDialog({
                     variant="contained"
                     type="submit"
                     onClick={(e) => {
-                      login({ username, password }).then(handleClose);
+                      login({ username, password });
                       e.preventDefault();
                     }}
                     disabled={isFetching}
