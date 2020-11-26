@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import { Fab, makeStyles, Toolbar } from '@material-ui/core';
 import {
-  getCurrentState,
+  participantGetCurrentState,
+  mentorGetCurrentState,
   initCurrentState,
   startWorkshop,
 } from '../redux/actions/currentState';
@@ -43,7 +44,8 @@ const Workshop = ({
   isMentor,
   startWorkshop,
   initCurrentState,
-  getCurrentState,
+  participantGetCurrentState,
+  mentorGetCurrentState,
 }) => {
   const classes = useStyles();
 
@@ -54,18 +56,29 @@ const Workshop = ({
   }, [initCurrentState, stateId]);
 
   useEffect(() => {
-    if (isMentor && !playerUUID) {
-      history.push('/');
-    } else if (playerUUID) {
-      getCurrentState({ stateId, playerUUID, isMentor });
+    if (isMentor) {
+      if (!playerUUID) {
+        history.push('/mentor');
+      } else {
+        mentorGetCurrentState({ stateId, playerUUID, isMentor });
+      }
+    } else {
+      if (!playerUUID) {
+        startWorkshop({ fsmId });
+      } else {
+        participantGetCurrentState({ fsmId });
+      }
     }
-  }, [stateId, playerUUID, isMentor, getCurrentState, history]);
-
-  useEffect(() => {
-    if (!playerUUID && !isMentor) {
-      startWorkshop({ fsmId });
-    }
-  }, [playerUUID, isMentor, fsmId, startWorkshop]);
+  }, [
+    fsmId,
+    stateId,
+    playerUUID,
+    isMentor,
+    mentorGetCurrentState,
+    participantGetCurrentState,
+    startWorkshop,
+    history,
+  ]);
 
   return (
     <StatePageContext.Provider value={{ fsmId, stateId, playerUUID, isMentor }}>
@@ -94,7 +107,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
-  getCurrentState,
+  participantGetCurrentState,
+  mentorGetCurrentState,
   initCurrentState,
   startWorkshop,
 })(Workshop);

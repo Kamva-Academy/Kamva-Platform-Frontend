@@ -7,16 +7,59 @@ export const initCurrentState = () => ({
   type: actionTypes.INIT_CURRENT_STATE,
 });
 
-export const getCurrentState = ({ stateId, playerUUID, isMentor }) => ({
+export const goForward = ({ edgeId, playerId }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GO_FORWARD_REQUEST,
+      actionTypes.GO_FORWARD_SUCCESS,
+      actionTypes.GO_FORWARD_FAILURE,
+    ],
+    url: URLs.GO_FORWARD,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ edge: edgeId, player: playerId }),
+    },
+  },
+});
+
+export const goBackward = ({ edgeId, playerId }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GO_BACKWARD_REQUEST,
+      actionTypes.GO_BACKWARD_SUCCESS,
+      actionTypes.GO_BACKWARD_FAILURE,
+    ],
+    url: URLs.GO_BACKWARD,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ edge: edgeId, player: playerId }),
+    },
+  },
+});
+
+export const participantGetCurrentState = ({ fsmId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.GET_CURRENT_STATE_REQUEST,
       actionTypes.GET_CURRENT_STATE_SUCCESS,
       actionTypes.GET_CURRENT_STATE_FAILURE,
     ],
-    url: isMentor
-      ? URLs.MENTOR_GET_CURRENT_STATE
-      : URLs.PARTICIPANT_GET_CURRENT_STATE,
+    url: URLs.PARTICIPANT_GET_CURRENT_STATE,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ fsm: fsmId }),
+    },
+  },
+});
+
+export const mentorGetCurrentState = ({ stateId, playerUUID }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GET_CURRENT_STATE_REQUEST,
+      actionTypes.GET_CURRENT_STATE_SUCCESS,
+      actionTypes.GET_CURRENT_STATE_FAILURE,
+    ],
+    url: URLs.MENTOR_GET_CURRENT_STATE,
     fetchOptions: {
       method: 'POST',
       body: JSON.stringify({

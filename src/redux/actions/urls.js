@@ -7,7 +7,6 @@ export const LOGIN = ROOT.concat('auth/token/obtain/');
 export const LOGOUT = ROOT.concat('auth/logout/');
 export const TEAMMATES = ROOT.concat('/'); //todo
 export const STUDENT_WORKSHOPS = ROOT.concat('/'); //todo
-export const CURRENT_STATE = ROOT.concat('fsm/getcurrentState/');
 export const CALL_MENTOR = ROOT.concat('fsm/requestmentor/');
 export const GO_FORWARD = ROOT.concat('fsm/goforward/');
 export const GO_BACKWARD = ROOT.concat('fsm/gobackward/');
@@ -26,7 +25,7 @@ export const MENTOR_GET_CURRENT_STATE = ROOT.concat(
   `fsm/mentorgetplayerstate/`
 );
 export const PARTICIPANT_GET_CURRENT_STATE = ROOT.concat(
-  `fsm/pargetplayerstate/`
+  `fsm/getcurrentstate/`
 );
 export const DELETE_STATE = (id) => ROOT.concat(`fsm/state/${id}/`);
 export const WORKSHOP_TEAMS = ROOT.concat('fsm/workshopplayers/');
