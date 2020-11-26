@@ -1,122 +1,68 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
+import parse from 'html-react-parser';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
 
-import React, { Component } from 'react';
+export default function Frame({
+  content,
+  frameProps,
+  title = '',
+  handleUpdateContent,
+}) {
+  const [contentRef, setContentRef] = useState(null);
+  const doc =
+    contentRef?.contentDocument ?? contentRef?.contentWindow?.document;
 
-export default class Frame extends Component {
-  constructor(props) {
-    super(props);
-
-    this.initIframe(props.frameProps);
-    this.print = this.print.bind(this);
-    this.removeHeaderAndFooter = this.removeHeaderAndFooter.bind(this);
-    this.addStyles = this.addStyles.bind(this);
-    this.onUpdateContent = this.onUpdateContent.bind(this);
-    this.initContent = this.initContent.bind(this);
-  }
-
-  initIframe(frameProps) {
-    this.iframeEl = document.createElement('iframe');
-    for (let key in frameProps) {
-      this.iframeEl[key] = frameProps[key];
+  const fixHeight = useCallback(() => {
+    if (!contentRef) {
+      return;
     }
-    this.iframeEl.style.height = 0;
-  }
+    contentRef.style.height = doc?.documentElement?.scrollHeight * 1.01 + 'px';
+  }, [contentRef, doc?.documentElement?.scrollHeight]);
 
-  onUpdateContent() {
-    if (!!this.props.onUpdateContent) {
-      this.props.onUpdateContent(this, this.state.window);
+  useEffect(() => {
+    if (!contentRef) {
+      return;
     }
-  }
+    handleUpdateContent?.(doc);
+  }, [content, contentRef, doc, handleUpdateContent]);
 
-  setContent(innerBody) {
-    const body = '<body>' + innerBody + '</body>';
-    this.state.window.document.open();
-    this.state.window.document.write(body);
-    this.state.window.document.close();
-    this.onUpdateContent();
-  }
+  useLayoutEffect(() => {
+    window.addEventListener('resize', fixHeight);
+    return () => window.removeEventListener('resize', fixHeight);
+  }, [fixHeight]);
 
-  addStyles(styles) {
-    const doc = this.state.window.document;
-    const styleElement = doc.createElement('style');
-    styleElement.type = 'text/css';
-    if (styleElement.styleSheet) {
-      styleElement.styleSheet.cssText = styles;
-    } else {
-      styleElement.appendChild(doc.createTextNode(styles));
-    }
-    doc.getElementsByTagName('head')[0].appendChild(styleElement);
-  }
+  useEffect(() => {
+    fixHeight();
+  }, [content, contentRef, fixHeight]);
 
-  fixHeight() {
-    try {
-      this.iframeEl.style.height =
-        this.state.window.document.documentElement.scrollHeight * 1.1 + 'px';
-      this.wrapper.style.height =
-        this.state.window.document.documentElement.scrollHeight * 1.1 + 'px';
-    } catch {}
-  }
-
-  addCSS(href) {
-    const doc = this.state.window.document;
-
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.onload = () => {
-      setTimeout(() => {
-        this.fixHeight(); // TODO: fix font load time
-      }, 100);
-      setTimeout(() => {
-        this.fixHeight();
-      }, 500);
-      setTimeout(() => {
-        this.fixHeight();
-      }, 4000);
-    };
-    link.href = href;
-
-    doc.getElementsByTagName('head')[0].appendChild(link);
-  }
-
-  removeHeaderAndFooter() {
-    this.addStyles('@page { size: auto; margin: 0mm }');
-  }
-  print() {
-    this.state.window.print();
-  }
-
-  componentDidMount() {
-    this.wrapper.appendChild(this.iframeEl);
-    const window = this.iframeEl.contentWindow;
-    this.setState({ window }, () => {
-      this.initContent();
-    });
-  }
-
-  fixBaseTag() {
-    const doc = this.state.window.document;
-    var base = doc.createElement('base');
-    base.target = '_blank';
-    doc.getElementsByTagName('head')[0].appendChild(base);
-  }
-
-  initContent() {
-    this.setContent(this.props.content);
-    this.addStyles(
-      'html,body{overflow:hidden;height:100%;direction: rtl; margin: 0; height:min-content; height: fit-content;height: -moz-fit-content;}'
-    );
-    this.addCSS('/fonts/iranyekan/iranyekan.css');
-    this.fixBaseTag();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.content !== this.props.content) {
-      this.initContent();
-    }
-  }
-
-  render() {
-    return <div ref={(wrapper) => (this.wrapper = wrapper)}></div>;
-  }
+  return (
+    <iframe title={title} {...frameProps} ref={setContentRef}>
+      {doc?.body && createPortal(parse(content), doc.body)}
+      {doc?.head &&
+        createPortal(
+          <>
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="/fonts/iranyekan/iranyekan.css"
+              onLoad={fixHeight}
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="/frame.css"
+              onLoad={fixHeight}
+            />
+            <base target="_blank" />
+          </>,
+          doc.head
+        )}
+    </iframe>
+  );
 }

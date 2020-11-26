@@ -1,0 +1,14 @@
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+  direction: rtl;
+  margin: 0;
+  height: min-content;
+  height: fit-content;
+  height: -moz-fit-content;
+}
+@page {
+  size: auto;
+  margin: 0mm;
+}

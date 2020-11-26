@@ -6,9 +6,7 @@ const TinyPreview = ({ hidden = false, content = '', frameProps = {} }) => {
   return (
     <div style={hidden ? { display: 'none' } : {}}>
       <Frame
-        onUpdateContent={(frame, window) =>
-          fixDocumentMathElements(window.document)
-        }
+        handleUpdateContent={(doc) => fixDocumentMathElements(doc)}
         content={content}
         frameProps={frameProps}
       />
