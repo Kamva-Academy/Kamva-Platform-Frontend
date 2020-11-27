@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Frame from '../../Frame/Frame';
 import fixDocumentMathElements from './fixDocumentMathElements';
 

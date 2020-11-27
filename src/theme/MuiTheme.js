@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core';
-import typography from './typography';
+
 import theme from './theme';
+import typography from './typography';
 
 const MuiTheme = createMuiTheme({
   ...theme,

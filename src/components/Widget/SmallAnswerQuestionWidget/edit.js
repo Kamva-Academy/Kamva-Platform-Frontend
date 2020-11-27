@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { createSmallAnswerQuestionWidget } from '../../../redux/actions/mentor';
-import { connect } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -10,6 +7,10 @@ import {
   DialogTitle,
   TextField,
 } from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { createSmallAnswerQuestionWidget } from '../../../redux/actions/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function SmallAnswerQuestionEditWidget({

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { Button, ClickAwayListener, Grow, Popper } from '@material-ui/core';
+import React, { useState } from 'react';
 
 export default function CustomSelect({ ContentComponent, title }) {
   const [btnEl, setBtnEl] = useState(null);

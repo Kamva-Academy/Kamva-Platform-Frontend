@@ -1,4 +1,5 @@
 import undoable from 'redux-undo';
+
 import DrawingModes from '../../components/Konva/Drawing/DrawingModes';
 import * as actionTypes from '../actions/actionTypes';
 

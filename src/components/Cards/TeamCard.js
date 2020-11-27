@@ -1,20 +1,21 @@
-import React from 'react';
 import {
-  Button,
-  makeStyles,
-  Grid,
-  Typography,
-  CardContent,
-  CardActionArea,
-  Card,
-  CardActions,
-  ButtonGroup,
   Avatar,
+  Button,
+  ButtonGroup,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Grid,
+  makeStyles,
   Tooltip,
+  Typography,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { visitPlayerWorkshop } from '../../redux/actions/mentor';
+import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { visitPlayerWorkshop } from '../../redux/actions/mentor';
 
 const useStyles = makeStyles({
   root: {

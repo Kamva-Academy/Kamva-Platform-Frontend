@@ -1,7 +1,7 @@
-import React from 'react';
 import { Avatar, makeStyles } from '@material-ui/core';
-import { AvatarGroup } from '@material-ui/lab';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import { AvatarGroup } from '@material-ui/lab';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   orange: {

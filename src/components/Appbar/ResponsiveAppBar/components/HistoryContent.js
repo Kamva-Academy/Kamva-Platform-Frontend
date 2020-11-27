@@ -1,5 +1,5 @@
-import React from 'react';
 import { MenuItem, MenuList, Paper } from '@material-ui/core';
+import React from 'react';
 
 export default function HistoryContent() {
   return (

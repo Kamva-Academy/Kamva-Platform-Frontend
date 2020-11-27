@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-simple-import-sort": "^6.0.1",
     "prettier": "^2.1.2",
     "redux-devtools": "^3.7.0",
     "redux-devtools-dock-monitor": "^1.2.0",

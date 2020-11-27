@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { createMultiChoicesQuestionWidget } from '../../../redux/actions/mentor';
-import { connect } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -13,11 +10,15 @@ import {
   MenuItem,
   TextField,
 } from '@material-ui/core';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 import {
   AddCircle as AddCircleIcon,
   Remove as RemoveIcon,
 } from '@material-ui/icons';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { createMultiChoicesQuestionWidget } from '../../../redux/actions/mentor';
+import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 const useStyles = makeStyles((theme) => ({
   choice: {

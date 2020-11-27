@@ -1,5 +1,4 @@
 import 'tinymce/icons/default/icons';
-
 import 'tinymce/plugins/advlist';
 import 'tinymce/plugins/wordcount';
 import 'tinymce/plugins/table';
@@ -26,7 +25,6 @@ import 'tinymce/plugins/help';
 import 'tinymce/plugins/wordcount';
 import 'tinymce/plugins/directionality';
 import './additional_plugins/latex';
-
 import 'tinymce/skins/ui/oxide/skin.min.css';
 
 let config = {

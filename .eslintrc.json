@@ -1,10 +1,12 @@
 {
   "extends": ["react-app", "plugin:jsx-a11y/recommended"],
-  "plugins": ["jsx-a11y"],
+  "plugins": ["jsx-a11y", "simple-import-sort"],
   "rules": {
     "jsx-a11y/label-has-associated-control": "off",
     "indent": [2, 2, { "SwitchCase": 1 }],
     "jsx-a11y/anchor-is-valid": "off",
-    "jsx-a11y/no-autofocus": "off"
+    "jsx-a11y/no-autofocus": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   }
 }

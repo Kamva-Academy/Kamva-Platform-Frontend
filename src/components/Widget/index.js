@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import { IconButton } from '@material-ui/core';
-import { Edit as EditIcon, Delete as DeleteIcon } from '@material-ui/icons';
+import { Delete as DeleteIcon,Edit as EditIcon } from '@material-ui/icons';
+import React, { useState } from 'react';
+
 import DeleteWidgetDialog from './components/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 

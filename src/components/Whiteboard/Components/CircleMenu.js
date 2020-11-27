@@ -1,21 +1,22 @@
-import * as React from 'react';
-import Menu from 'material-ui-popup-state/HoverMenu';
+import { IconButton } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
 import {
-  usePopupState,
+  FiberManualRecord as FiberManualRecordIcon,
+  FiberManualRecordOutlined as FiberManualRecordOutlinedIcon,
+} from '@material-ui/icons';
+import {
   bindHover,
   bindMenu,
+  usePopupState,
 } from 'material-ui-popup-state/hooks';
-import { IconButton } from '@material-ui/core';
-import {
-  FiberManualRecordOutlined as FiberManualRecordOutlinedIcon,
-  FiberManualRecord as FiberManualRecordIcon,
-} from '@material-ui/icons';
+import Menu from 'material-ui-popup-state/HoverMenu';
+import * as React from 'react';
+import { connect } from 'react-redux';
+
 import {
   addNewCircleNode,
   changeMode,
 } from '../../../redux/actions/whiteboard';
-import { connect } from 'react-redux';
 import DrawingModes from '../../Konva/Drawing/DrawingModes';
 
 const CircleMenu = ({ changeMode, addNewCircleNode }) => {

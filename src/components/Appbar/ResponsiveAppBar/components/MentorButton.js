@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { callMentor } from '../../../../redux/actions/currentState';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+
 import { StatePageContext } from '../../../../containers/Workshop';
+import { callMentor } from '../../../../redux/actions/currentState';
 
 const useStyles = makeStyles((theme) => ({
   mentorButton: {

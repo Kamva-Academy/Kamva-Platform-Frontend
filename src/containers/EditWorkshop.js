@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import Container from '@material-ui/core/Container';
 import { makeStyles, Paper } from '@material-ui/core';
-import { getWorkshop } from '../redux/actions/mentor';
+import Container from '@material-ui/core/Container';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import StatesTabbar from '../components/SpecialComponents/EditWorkshopPage/StatesTabbar';
-import EditState from '../components/SpecialComponents/EditWorkshopPage/EditState';
 import { useHistory } from 'react-router';
+
+import EditState from '../components/SpecialComponents/EditWorkshopPage/EditState';
+import StatesTabbar from '../components/SpecialComponents/EditWorkshopPage/StatesTabbar';
+import { getWorkshop } from '../redux/actions/mentor';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {

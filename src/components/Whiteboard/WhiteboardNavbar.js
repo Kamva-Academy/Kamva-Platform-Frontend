@@ -11,14 +11,15 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 import { connect } from 'react-redux';
+
 import {
-  addNewTextNode,
   addNewRectangleNode,
+  addNewTextNode,
   changeMode,
-  removeSelectedNodes,
   deselectNodes,
-  undo,
   redo,
+  removeSelectedNodes,
+  undo,
 } from '../../redux/actions/whiteboard';
 import downloadFromURL from '../../utils/downloadFromURL';
 import DrawingModes from '../Konva/Drawing/DrawingModes';

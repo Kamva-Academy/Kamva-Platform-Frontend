@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import { VideoCall as VideoCallIcon } from '@material-ui/icons';
+import React, { useState } from 'react';
+
 import DraggableJitsi from '../../../Jitsi/DraggableJitsi';
 
 export default function JitsiButton() {

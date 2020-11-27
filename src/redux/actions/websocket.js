@@ -1,4 +1,5 @@
 import { connect, send } from '@giantmachines/redux-websocket';
+
 import { compressNodes } from '../../utils/compresstion';
 import * as actionTypes from './actionTypes';
 import * as wsActionTypes from './wsActionTypes';

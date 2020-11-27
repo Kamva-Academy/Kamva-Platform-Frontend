@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { createBigAnswerQuestionWidget } from '../../../redux/actions/mentor';
-import { connect } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -9,6 +6,10 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { createBigAnswerQuestionWidget } from '../../../redux/actions/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function BigAnswerQuestionEditWidget({

@@ -1,7 +1,8 @@
-import * as actionTypes from './actionTypes';
-import makeId from '../../utils/makeId';
-import { saveAndSendWhiteboardNodes } from './websocket';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
+
+import makeId from '../../utils/makeId';
+import * as actionTypes from './actionTypes';
+import { saveAndSendWhiteboardNodes } from './websocket';
 
 export const deselectNode = (node_id) => ({
   type: actionTypes.DESELECT_NODE,

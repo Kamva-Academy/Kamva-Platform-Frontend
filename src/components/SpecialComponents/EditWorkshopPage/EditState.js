@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-import { connect } from 'react-redux';
-import Widget, { MODES } from '../../Widget';
 import { Add as AddIcon, Delete as DeleteIcon } from '@material-ui/icons';
+import clsx from 'clsx';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import Widget, { MODES } from '../../Widget';
 import CreateWidgetDialog from './components/CreateWidgetDialog';
 import DeleteStateDialog from './components/DeleteStateDialog';
 

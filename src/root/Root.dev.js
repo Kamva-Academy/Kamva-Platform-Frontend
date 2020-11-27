@@ -1,12 +1,13 @@
 import React from 'react';
-import DevTools from '../containers/DevTools';
 import { Route, Switch } from 'react-router-dom';
-import Homepage from '../containers/Homepage';
-import Workshop from '../containers/Workshop';
-import MentorPage from '../containers/MentorPage';
+
+import DevTools from '../containers/DevTools';
 import EditWorkshop from '../containers/EditWorkshop';
-import Workshops from '../containers/Workshops';
+import Homepage from '../containers/Homepage';
+import MentorPage from '../containers/MentorPage';
 import Survey from '../containers/Survey';
+import Workshop from '../containers/Workshop';
+import Workshops from '../containers/Workshops';
 import PrivateRoute from './PrivateRoute';
 
 const Root = () => {

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import { Dialog, IconButton } from '@material-ui/core';
 import { Brush as BrushIcon } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react';
+
 import Whiteboard from '../../../Whiteboard';
 
 function WhiteboardButton() {

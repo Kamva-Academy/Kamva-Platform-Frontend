@@ -1,8 +1,8 @@
-import React from 'react';
-import { Editor } from '@tinymce/tinymce-react';
-
 import 'tinymce/tinymce';
 import '../../../assets/styles/tiny.css';
+
+import { Editor } from '@tinymce/tinymce-react';
+import React from 'react';
 
 import config from '../config';
 

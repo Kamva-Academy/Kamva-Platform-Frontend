@@ -1,4 +1,5 @@
 import React from 'react';
+
 import LogoButton from './components/LogoButton';
 
 const LandingAppBarItems = () => ({

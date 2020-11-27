@@ -1,11 +1,12 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { createLogger } from 'redux-logger';
-import api from '../middleware/api/api';
-import rootReducer from '../reducers';
-import DevTools from '../../containers/DevTools';
 import reduxWebsocket from '@giantmachines/redux-websocket';
+import { applyMiddleware, compose,createStore } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+
+import DevTools from '../../containers/DevTools';
+import api from '../middleware/api/api';
 import receiveMessage from '../middleware/socket/receiveMessage';
+import rootReducer from '../reducers';
 
 const configureStore = (preloadedState) => {
   const store = createStore(

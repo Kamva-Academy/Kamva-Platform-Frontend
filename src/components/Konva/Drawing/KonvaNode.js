@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { Circle, Rect, Transformer, Image, Line } from 'react-konva';
+import { Circle, Image, Line,Rect, Transformer } from 'react-konva';
+
 import KonvaTextNode from './Components/KonvaTextNode';
 import DrawingModes from './DrawingModes';
 

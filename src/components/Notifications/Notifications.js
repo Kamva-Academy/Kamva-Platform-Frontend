@@ -1,10 +1,11 @@
+import { Button } from '@material-ui/core';
+import Grow from '@material-ui/core/Grow';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 import { connect } from 'react-redux';
-import { useSnackbar } from 'notistack';
-import { removeSnackbar } from '../../redux/actions/notifications';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import Grow from '@material-ui/core/Grow';
-import { Button } from '@material-ui/core';
+
+import { removeSnackbar } from '../../redux/actions/notifications';
 
 let displayed = [];
 

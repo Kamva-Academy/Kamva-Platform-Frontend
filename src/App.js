@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import translations from './translations';
-import { IntlProvider } from 'react-redux-multilingual';
+import './assets/styles/App.css';
+
+import { CssBaseline } from '@material-ui/core';
+import { StylesProvider } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { SnackbarProvider } from 'notistack';
+import Pushe from 'pushe-webpush';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { IntlProvider } from 'react-redux-multilingual';
+import { useHistory } from 'react-router-dom';
+
+import Notifier from './components/Notifications/Notifications';
+import { initRedirect } from './redux/actions/redirect';
+import Root from './root/Root';
 import MuiTheme from './theme/MuiTheme';
 import RTLMuiTheme from './theme/RTLMuiTheme';
-import Root from './root/Root';
+import translations from './translations';
 import jss from './utils/jssRTL';
-import { StylesProvider } from '@material-ui/core/styles';
-import Notifier from './components/Notifications/Notifications';
-import { SnackbarProvider } from 'notistack';
-import { useHistory } from 'react-router-dom';
-import { initRedirect } from './redux/actions/redirect';
-
-import './assets/styles/App.css';
-import { CssBaseline } from '@material-ui/core';
-import Pushe from 'pushe-webpush';
 Pushe.init('ld838ykvn2n75poe');
 Pushe.subscribe();
 

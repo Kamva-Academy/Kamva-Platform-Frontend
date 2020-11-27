@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { Grid, IconButton, makeStyles, Tooltip } from '@material-ui/core';
 import { AddCircle as AddCircleIcon } from '@material-ui/icons';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
 import WorkShopCard from '../../Cards/WorkshopCard';
 import CreateWorkshopDialog from '../../Dialog/CreateWorkshopDialog/CreateWorkshopDialog';
 

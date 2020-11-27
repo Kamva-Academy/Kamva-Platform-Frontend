@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import clsx from 'clsx';
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-import Widget from '../../Widget';
+import clsx from 'clsx';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { StatePageContext } from '../../../containers/Workshop';
+import Widget from '../../Widget';
 
 const useStyles = makeStyles((theme) => ({
   workshopContent: {

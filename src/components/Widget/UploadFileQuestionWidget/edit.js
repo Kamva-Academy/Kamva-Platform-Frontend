@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { createUploadFileWidget } from '../../../redux/actions/mentor';
-import { connect } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -10,6 +7,10 @@ import {
   DialogTitle,
   TextField,
 } from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { createUploadFileWidget } from '../../../redux/actions/mentor';
 
 function UploadFileQuestionEditWidget({
   open,

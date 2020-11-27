@@ -1,10 +1,12 @@
+import './assets/styles/App.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+import App from './App';
 import configureStore from './redux/store/configureStore';
-import './assets/styles/App.css';
 
 const persistedState = localStorage.getItem('rastaState')
   ? JSON.parse(localStorage.getItem('rastaState'))

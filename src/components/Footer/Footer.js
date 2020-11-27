@@ -1,9 +1,10 @@
-import React from 'react';
-import Institutions from './Institutions';
-import InstitutionCard from './InstitutionCard'
 import {
   Grid,
 } from '@material-ui/core';
+import React from 'react';
+
+import InstitutionCard from './InstitutionCard'
+import Institutions from './Institutions';
 
 const Footer = () => {
   return (

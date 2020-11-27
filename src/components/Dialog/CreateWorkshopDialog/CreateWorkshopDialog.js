@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -8,8 +7,10 @@ import {
   DialogTitle,
   TextField,
 } from '@material-ui/core';
-import { createWorkshop } from '../../../redux/actions/mentor';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+
+import { createWorkshop } from '../../../redux/actions/mentor';
 
 function CreateWorkshopDialog({ open, handleClose, createWorkshop }) {
   const [name, setName] = useState();

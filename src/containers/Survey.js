@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import {
   Button,
   Container,
@@ -7,6 +5,9 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 
 const useStyles = makeStyles((theme) => ({

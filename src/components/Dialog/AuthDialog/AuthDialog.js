@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from 'react';
 import {
   Button,
   CircularProgress,
   Container,
   Dialog,
   Grid,
+  Hidden,
   IconButton,
   makeStyles,
   TextField,
   Typography,
-  Hidden,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
-import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { login } from '../../../redux/actions/account';
-import { connect } from 'react-redux';
 import { green } from '@material-ui/core/colors';
+import { Close as CloseIcon } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router-dom';
+
+import { login } from '../../../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({
   rightImage: {

@@ -1,12 +1,13 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { IconButton, makeStyles, withWidth } from '@material-ui/core';
 import {
   Cancel as CancelIcon,
   Refresh as RefreshIcon,
 } from '@material-ui/icons';
-import * as jitsiFuncs from './connection/jitsi';
-import { StatePageContext } from '../../containers/Workshop';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
+
+import { StatePageContext } from '../../containers/Workshop';
+import * as jitsiFuncs from './connection/jitsi';
 
 const useStyles = makeStyles((theme) => ({
   draggableArea: {

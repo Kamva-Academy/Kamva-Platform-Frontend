@@ -1,6 +1,7 @@
+import { normalize } from 'normalizr';
+
 import fetchApi from '../../../utils/fetchApi';
 import * as actionTypes from '../../actions/actionTypes';
-import { normalize } from 'normalizr';
 
 export const CALL_API = 'Call API';
 

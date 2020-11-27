@@ -1,18 +1,18 @@
-import React from 'react';
 import {
   Button,
-  makeStyles,
-  Grid,
-  Typography,
-  CardContent,
-  CardActionArea,
   Card,
-  CardMedia,
+  CardActionArea,
   CardActions,
+  CardContent,
+  CardMedia,
   Chip,
+  Grid,
+  makeStyles,
+  Typography,
 } from '@material-ui/core';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({

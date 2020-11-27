@@ -1,12 +1,13 @@
-import React from 'react';
 import { Button, Divider, makeStyles, Typography } from '@material-ui/core';
 import {
   CloudUpload as CloudUploadIcon,
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@material-ui/icons';
-import UploadFileQuestionEditWidget from './edit';
-import { sendFileAnswer } from '../../../redux/actions/currentState';
+import React from 'react';
 import { connect } from 'react-redux';
+
+import { sendFileAnswer } from '../../../redux/actions/currentState';
+import UploadFileQuestionEditWidget from './edit';
 
 export { UploadFileQuestionEditWidget };
 

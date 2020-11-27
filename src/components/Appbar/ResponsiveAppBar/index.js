@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
 import {
   AppBar,
+  Container,
+  Drawer,
+  Hidden,
+  IconButton,
+  List,
   makeStyles,
   Toolbar,
-  IconButton,
-  Container,
-  Hidden,
-  Drawer,
-  List,
 } from '@material-ui/core';
-
 import { Menu as MenuIcon } from '@material-ui/icons';
+import React, { useState } from 'react';
+
 import HideOnScroll from './components/HideOnScroll';
 import modes from './modes';
 

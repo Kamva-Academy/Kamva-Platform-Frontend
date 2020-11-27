@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import { createTextWidget } from '../../../redux/actions/mentor';
-import { connect } from 'react-redux';
 import {
   Button,
   Dialog,
@@ -9,6 +6,10 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { createTextWidget } from '../../../redux/actions/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function TextEditWidget({

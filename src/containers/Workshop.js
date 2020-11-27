@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
-import Container from '@material-ui/core/Container';
 import { Fab, makeStyles, Toolbar } from '@material-ui/core';
+import Container from '@material-ui/core/Container';
+import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
+
+import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
+import ScrollTop from '../components/ScrollToTop/ScrollToTop';
+import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import {
-  participantGetCurrentState,
-  mentorGetCurrentState,
   initCurrentState,
+  mentorGetCurrentState,
+  participantGetCurrentState,
   startWorkshop,
 } from '../redux/actions/currentState';
-import { connect } from 'react-redux';
-import ScrollTop from '../components/ScrollToTop/ScrollToTop';
-import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
-import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { getWorkshopTeams } from '../../../redux/actions/mentor';
-import { connect } from 'react-redux';
-import TeamCard from '../../Cards/TeamCard';
 import { Grid, Tab, Tabs } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+
+import { getWorkshopTeams } from '../../../redux/actions/mentor';
+import TeamCard from '../../Cards/TeamCard';
 
 function Teams({
   workshops,

@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
 import {
   Badge,
   Grid,
@@ -15,8 +13,11 @@ import {
   AccountCircle as AccountCircleIcon,
   Notifications as NotificationsIcon,
 } from '@material-ui/icons';
-import dateFormatter from '../../../../utils/dateFormatter';
+import clsx from 'clsx';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+
+import dateFormatter from '../../../../utils/dateFormatter';
 
 const useStyles = makeStyles((theme) => ({
   badge: {

@@ -1,6 +1,7 @@
-import TelegramIcon from '@material-ui/icons/Telegram';
-import InstagramIcon from '@material-ui/icons/Instagram';
 import '../../assets/styles/footer.css';
+
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TelegramIcon from '@material-ui/icons/Telegram';
 
 const media = () => {
   return (

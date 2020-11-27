@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Layer, Stage, Rect, Line } from 'react-konva';
+import { Layer, Line,Rect, Stage } from 'react-konva';
+
 import DrawingModes from './DrawingModes';
 import KonvaNode from './KonvaNode';
 

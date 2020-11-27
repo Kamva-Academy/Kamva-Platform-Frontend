@@ -1,23 +1,23 @@
+import { disconnect as wsDisconnect } from '@giantmachines/redux-websocket';
+import { makeStyles } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  initWhiteboard,
-  deselectNodes,
-  selectNode,
-  updateShapeProps,
-  addNewLineNode,
-  removeNode,
-} from '../../redux/actions/whiteboard';
 import { connect } from 'react-redux';
 
-import Drawing from '../Konva/Drawing';
-import { makeStyles } from '@material-ui/core';
-import WhiteboardNavbar from './WhiteboardNavbar';
-import { disconnect as wsDisconnect } from '@giantmachines/redux-websocket';
+import { StatePageContext } from '../../containers/Workshop';
 import {
   connectToTeam,
   getLastWhiteboard,
 } from '../../redux/actions/websocket';
-import { StatePageContext } from '../../containers/Workshop';
+import {
+  addNewLineNode,
+  deselectNodes,
+  initWhiteboard,
+  removeNode,
+  selectNode,
+  updateShapeProps,
+} from '../../redux/actions/whiteboard';
+import Drawing from '../Konva/Drawing';
+import WhiteboardNavbar from './WhiteboardNavbar';
 
 const useStyles = makeStyles((theme) => ({
   whiteboard: {

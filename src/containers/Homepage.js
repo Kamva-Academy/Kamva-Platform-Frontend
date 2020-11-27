@@ -1,28 +1,29 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useState } from 'react';
-import Container from '@material-ui/core/Container';
 import {
   Button,
+  Divider,
   Fab,
   Grid,
-  makeStyles,
-  Typography,
-  Divider,
-  Paper,
   Hidden,
+  makeStyles,
+  Paper,
+  Typography,
 } from '@material-ui/core';
-import Footer from '../components/Footer/Footer';
-import ScrollTop from '../components/ScrollToTop/ScrollToTop';
+import Container from '@material-ui/core/Container';
 import {
   Assignment,
   KeyboardArrowUp as KeyboardArrowUpIcon,
 } from '@material-ui/icons';
-import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
-import CustomizedTimeline from '../components/TimeLine/TimeLine';
-import FAQ from '../components/FAQ/FAQ';
-import { logout } from '../redux/actions/account';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
+import FAQ from '../components/FAQ/FAQ';
+import Footer from '../components/Footer/Footer';
+import ScrollTop from '../components/ScrollToTop/ScrollToTop';
+import CustomizedTimeline from '../components/TimeLine/TimeLine';
+import { logout } from '../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {

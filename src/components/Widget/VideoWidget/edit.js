@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -9,8 +8,10 @@ import {
   Link,
   TextField,
 } from '@material-ui/core';
-import { createVideoWidget } from '../../../redux/actions/mentor';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+
+import { createVideoWidget } from '../../../redux/actions/mentor';
 
 function VideoEditWidget({
   open,

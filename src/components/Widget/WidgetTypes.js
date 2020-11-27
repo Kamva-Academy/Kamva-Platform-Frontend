@@ -2,17 +2,17 @@ import BigAnswerQuestionWidget, {
   BigAnswerQuestionEditWidget,
 } from './BigAnswerQuestionWidget';
 import ImageWidget, { ImageEditWidget } from './ImageWidget';
-import TextWidget, { TextEditWidget } from './TextWidget';
-import VideoWidget, { VideoEditWidget } from './VideoWidget';
-import UploadFileQuestionWidget, {
-  UploadFileQuestionEditWidget,
-} from './UploadFileQuestionWidget';
 import MultiChoiceQuestionWidget, {
   MultiChoiceQuestionEditWidget,
 } from './MultiChoiceQuestionWidget';
 import SmallAnswerQuestionWidget, {
   SmallAnswerQuestionEditWidget,
 } from './SmallAnswerQuestionWidget';
+import TextWidget, { TextEditWidget } from './TextWidget';
+import UploadFileQuestionWidget, {
+  UploadFileQuestionEditWidget,
+} from './UploadFileQuestionWidget';
+import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 
 

@@ -1,12 +1,13 @@
-import React from 'react';
-import { ExitToApp as ExitToAppIcon } from '@material-ui/icons';
 import { IconButton, makeStyles } from '@material-ui/core';
+import { ExitToApp as ExitToAppIcon } from '@material-ui/icons';
+import React from 'react';
+
 import JitsiButton from './components/JitsiButton';
 import JitsiMicButton from './components/JitsiMicButton';
+import MentorButton from './components/MentorButton';
 import NotificationButton from './components/NotificationButton';
 import UsersAvatar from './components/UsersAvatar';
 import WhiteboardButton from './components/WhiteboardButton';
-import MentorButton from './components/MentorButton';
 
 const useStyles = makeStyles((theme) => ({
   backBtn: {
