@@ -28,14 +28,21 @@ const AppRout = () => (
   </SnackbarProvider>
 );
 
-const App = ({ dir, redirectTo, initRedirect }) => {
+const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
   useEffect(() => {
     if (redirectTo !== null) {
       history.push(redirectTo);
+      if (forceRedirect) {
+        history.push(redirectTo);
+        history.push('/loading/');
+        history.goBack();
+      } else {
+        history.push(redirectTo);
+      }
       initRedirect();
     }
-  }, [redirectTo, initRedirect, history]);
+  }, [redirectTo, forceRedirect, initRedirect, history]);
 
   useEffect(() => {
     document.body.dir = dir;
@@ -61,6 +68,7 @@ const App = ({ dir, redirectTo, initRedirect }) => {
 const mapStateToProps = (state) => ({
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
   redirectTo: state.redirect.redirectTo,
+  forceRedirect: state.redirect.force,
 });
 
 export default connect(mapStateToProps, { initRedirect })(App);
