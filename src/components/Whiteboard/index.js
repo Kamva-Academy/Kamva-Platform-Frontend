@@ -50,13 +50,13 @@ function Whiteboard({
   const classes = useStyles();
 
   const [stage, setStage] = useState();
-  const { playerUUID } = useContext(StatePageContext);
+  const { player } = useContext(StatePageContext);
 
   useEffect(() => {
     initWhiteboard();
-    connectToTeam({ playerUUID, userUUID });
+    connectToTeam({ playerUUID: player.uuid, userUUID });
     return () => wsDisconnect();
-  }, [initWhiteboard, connectToTeam, wsDisconnect, playerUUID, userUUID]);
+  }, [initWhiteboard, connectToTeam, wsDisconnect, player.uuid, userUUID]);
 
   useEffect(() => {
     if (wsConnected) {

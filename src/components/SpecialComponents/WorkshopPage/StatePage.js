@@ -1,10 +1,10 @@
-import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
-import { StatePageContext } from '../../../containers/Workshop';
 import Widget from '../../Widget';
+import BackButton from './components/BackButton';
+import NextButton from './components/NextButton';
 
 const useStyles = makeStyles((theme) => ({
   workshopContent: {
@@ -27,12 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StatePage({ state = {} }) {
+function StatePage({ state }) {
   const classes = useStyles();
 
-  const { playerUUID, fsmId, isMentor } = useContext(StatePageContext);
-
-  const { widgets = [] } = state;
+  const { widgets = [], inward_edges, outward_edges } = state;
 
   widgets.sort((a, b) => a.id - b.id);
 
@@ -74,48 +72,13 @@ function StatePage({ state = {} }) {
               <Widget widget={widget} />
             </Paper>
           ))}
-          {state.outward_edges && state.inward_edges && (
+          {inward_edges && outward_edges && (
             <Grid container spacing={2} style={{ marginTop: 20 }}>
               <Grid item xs={6}>
-                {state.inward_edges.length > 0 && (
-                  <Button
-                    fullWidth
-                    variant="outlined"
-                    color="primary"
-                    component={Link}
-                    to={
-                      isMentor
-                        ? `/workshop/${playerUUID}/${fsmId}/${state.inward_edges[0].tail}`
-                        : `/workshop/${fsmId}/${state.inward_edges[0].tail}`
-                    }>
-                    قبلی
-                  </Button>
-                )}
+                <BackButton inwardEdges={inward_edges} />
               </Grid>
               <Grid item xs={6}>
-                {state.outward_edges.length > 0 ? (
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to={
-                      isMentor
-                        ? `/workshop/${playerUUID}/${fsmId}/${state.outward_edges[0].head}`
-                        : `/workshop/${fsmId}/${state.outward_edges[0].head}`
-                    }>
-                    بعدی
-                  </Button>
-                ) : (
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to="/">
-                    پایان
-                  </Button>
-                )}
+                <NextButton outwardEdges={outward_edges} />
               </Grid>
             </Grid>
           )}

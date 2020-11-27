@@ -37,7 +37,7 @@ export const goBackward = ({ edgeId, playerId }) => ({
   },
 });
 
-export const participantGetCurrentState = ({ fsmId }) => ({
+export const participantGetCurrentState = ({ fsmId, playerId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.GET_CURRENT_STATE_REQUEST,
@@ -47,7 +47,7 @@ export const participantGetCurrentState = ({ fsmId }) => ({
     url: URLs.PARTICIPANT_GET_CURRENT_STATE,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ fsm: fsmId }),
+      body: JSON.stringify({ fsm: fsmId, player: playerId }),
     },
   },
 });

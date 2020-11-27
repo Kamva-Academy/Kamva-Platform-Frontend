@@ -41,7 +41,7 @@ const Workshop = ({
   workshopState,
   fsmId,
   stateId,
-  playerUUID,
+  player,
   isMentor,
   startWorkshop,
   initCurrentState,
@@ -58,31 +58,26 @@ const Workshop = ({
 
   useEffect(() => {
     if (isMentor) {
-      if (!playerUUID) {
+      if (!player.uuid) {
         history.push('/mentor');
       } else {
-        mentorGetCurrentState({ stateId, playerUUID, isMentor });
-      }
-    } else {
-      if (!playerUUID) {
-        startWorkshop({ fsmId });
-      } else {
-        participantGetCurrentState({ fsmId });
+        mentorGetCurrentState({ stateId, playerUUID: player.uuid, isMentor });
       }
     }
-  }, [
-    fsmId,
-    stateId,
-    playerUUID,
-    isMentor,
-    mentorGetCurrentState,
-    participantGetCurrentState,
-    startWorkshop,
-    history,
-  ]);
+  }, [fsmId, stateId, player.uuid, isMentor, mentorGetCurrentState, history]);
+
+  useEffect(() => {
+    if (!isMentor) {
+      if (!player.id) {
+        startWorkshop({ fsmId });
+      } else {
+        participantGetCurrentState({ fsmId, playerId: player.id });
+      }
+    }
+  }, [fsmId, player.id, isMentor, participantGetCurrentState, startWorkshop]);
 
   return (
-    <StatePageContext.Provider value={{ fsmId, stateId, playerUUID, isMentor }}>
+    <StatePageContext.Provider value={{ fsmId, stateId, player, isMentor }}>
       <Container component="main" className={classes.body}>
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
@@ -102,9 +97,12 @@ const mapStateToProps = (state, ownProps) => ({
   isMentor: state.account.user.is_mentor,
   fsmId: ownProps.match.params.fsmId,
   stateId: ownProps.match.params.stateId,
-  playerUUID: state.account.user.is_mentor
-    ? ownProps.match.params.playerUUID
-    : state.currentState.player.uuid,
+  player: {
+    uuid: state.account.user.is_mentor
+      ? ownProps.match.params.playerUUID
+      : state.currentState.player?.uuid,
+    id: state.currentState.player?.id,
+  },
 });
 
 export default connect(mapStateToProps, {

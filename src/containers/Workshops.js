@@ -32,7 +32,7 @@ function Workshops() {
             variant="contained"
             color="primary"
             component={Link}
-            to="/workshop/4/12">
+            to="/workshop/4">
             ورود
           </Button>
         </Paper>

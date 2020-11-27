@@ -37,13 +37,13 @@ function Jitsi({ handleClose, width, displayName = 'کاربر' }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 
-  const { playerUUID } = useContext(StatePageContext);
+  const { player } = useContext(StatePageContext);
 
   const refresh = useCallback(() => {
-    if (playerUUID) {
+    if (player.uuid) {
       jitsiFuncs.destroy();
       jitsiFuncs.initJitsi({
-        roomName: 'ra_' + playerUUID,
+        roomName: 'ra_' + player.uuid,
         parentNode: jitsiElement.current,
         height: width === 'xs' ? '100%' : '300px',
         userInfo: {
@@ -51,7 +51,7 @@ function Jitsi({ handleClose, width, displayName = 'کاربر' }) {
         },
       });
     }
-  }, [width, displayName, playerUUID]);
+  }, [width, displayName, player.uuid]);
 
   useEffect(() => {
     setTimeout(() => {

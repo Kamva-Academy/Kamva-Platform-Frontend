@@ -7,13 +7,15 @@ function currentState(state = initState, action) {
     case actionTypes.INIT_CURRENT_STATE:
       return initState;
 
+    case actionTypes.GO_FORWARD_SUCCESS:
+    case actionTypes.GO_BACKWARD_SUCCESS:
     case actionTypes.GET_CURRENT_STATE_SUCCESS:
       return {
         ...state,
         state: action.response,
       };
 
-    case actionTypes.SEND_ANSWER_SUCCESS:
+    case actionTypes.SEND_ANSWER_SUCCESS: // TODO: fix another answer types
       return {
         ...state,
         state: {
