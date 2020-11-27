@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import parse from 'html-react-parser';
 import React, {
   useCallback,
   useEffect,
   useLayoutEffect,
   useState,
 } from 'react';
-import { createPortal } from 'react-dom';
 
 export default function Frame({
   content,
@@ -26,6 +24,19 @@ export default function Frame({
   }, [contentRef, doc?.documentElement?.scrollHeight]);
 
   useEffect(() => {
+    if (!doc) {
+      return;
+    }
+    doc.open();
+    doc.write(
+      `<head><link rel='stylesheet' href='${process.env.PUBLIC_URL}/frame.css' /><link rel='stylesheet' href='${process.env.PUBLIC_URL}/fonts/iranyekan/iranyekan.css' /></head><body>${content}</body>`
+    );
+    doc.close();
+
+    doc.fonts.ready.then(fixHeight);
+  }, [doc, content, fixHeight]);
+
+  useEffect(() => {
     if (!contentRef) {
       return;
     }
@@ -41,28 +52,5 @@ export default function Frame({
     fixHeight();
   }, [content, contentRef, fixHeight]);
 
-  return (
-    <iframe title={title} {...frameProps} ref={setContentRef}>
-      {doc?.body && createPortal(parse(content), doc.body)}
-      {doc?.head &&
-        createPortal(
-          <>
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href="/fonts/iranyekan/iranyekan.css"
-              onLoad={fixHeight}
-            />
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href="/frame.css"
-              onLoad={fixHeight}
-            />
-            <base target="_blank" />
-          </>,
-          doc.head
-        )}
-    </iframe>
-  );
+  return <iframe title={title} {...frameProps} ref={setContentRef}></iframe>;
 }

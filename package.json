@@ -8,7 +8,6 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@tinymce/tinymce-react": "^3.8.1",
-    "html-react-parser": "^0.14.2",
     "jalali-moment": "^3.3.8",
     "jsonpack": "^1.1.5",
     "jss-rtl": "^0.3.0",
