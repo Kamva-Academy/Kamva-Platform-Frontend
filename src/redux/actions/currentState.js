@@ -112,7 +112,6 @@ export const sendBigAnswer = ({ player, problem, answer }) =>
     problem,
     problem_type: 'ProblemBigAnswer',
     answer: {
-      answer_type: 'BigAnswer',
       text: answer,
     },
   });
@@ -123,7 +122,6 @@ export const sendSmallAnswer = ({ player, problem, answer }) =>
     problem,
     problem_type: 'ProblemSmallAnswer',
     answer: {
-      answer_type: 'SmallAnswer',
       text: answer,
     },
   });
@@ -134,7 +132,6 @@ export const sendMultiChoiceAnswer = ({ player, problem, answer }) =>
     problem,
     problem_type: 'ProblemMultiChoice',
     answer: {
-      answer_type: 'MultiChoiceAnswer',
       text: answer,
     },
   });
@@ -155,6 +152,7 @@ export const startWorkshop = ({ fsmId }) => ({
 });
 
 export const callMentor = ({ fsmId, playerId }) => ({
+  // TODO: stateId
   [CALL_API]: {
     types: [
       actionTypes.CALL_MENTOR_REQUEST,

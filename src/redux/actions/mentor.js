@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes';
 import * as URLs from './urls';
 
 export const getUnreadNotifications = () => ({
+  // TODO: get stateId
   [CALL_API]: {
     types: [
       actionTypes.UNREAD_NOTIFICATIONS_REQUEST,
@@ -16,7 +17,22 @@ export const getUnreadNotifications = () => ({
   },
 });
 
+export const createEvent = ({
+  name,
+  description,
+  image,
+  type,
+  password,
+}) => ({}); // TODO: type:['private', 'public']
+
+export const editEvent = ({ id, name, description, image, password }) => ({}); // TODO:
+
+export const deleteEvent = ({ id }) => ({}); // TODO:
+
+export const getAllEvents = () => ({}); // TODO:
+
 export const getAllWorkshops = () => ({
+  // TODO: get event workshops
   [CALL_API]: {
     types: [
       actionTypes.ALL_WORKSHOPS_REQUEST,
@@ -44,7 +60,12 @@ export const getWorkshop = ({ id }) => ({
   },
 });
 
+export const editWorkshop = () => ({}); // TODO:
+
+export const deleteWorkshop = () => ({}); // TODO:
+
 export const getWorkshopTeams = ({ fsmId }) => ({
+  // teams => players
   [CALL_API]: {
     types: [
       actionTypes.WORKSHOP_TEAMS_REQUEST,
@@ -61,6 +82,7 @@ export const getWorkshopTeams = ({ fsmId }) => ({
 });
 
 export const getTeamAnswers = (fsmId, teamId) => ({
+  //TODO: team => player, answer => history
   [CALL_API]: {
     types: [
       actionTypes.TEAM_ANSWERS_REQUEST,
@@ -76,6 +98,7 @@ export const getTeamAnswers = (fsmId, teamId) => ({
 });
 
 export const visitPlayerWorkshop = ({ playerWorkshopId }) => ({
+  // TODO: fsmId, playerId
   [CALL_API]: {
     types: [
       actionTypes.VISIT_PLAYER_WORKSHOP_REQUEST,
@@ -90,7 +113,12 @@ export const visitPlayerWorkshop = ({ playerWorkshopId }) => ({
   },
 });
 
-export const createWorkshop = ({ name }) => ({
+export const createWorkshop = ({
+  name,
+  playerType = 'team',
+  mentorType = 'withMentor',
+}) => ({
+  // TODO: eventId, description, image, playerType:['team', 'individual', 'hybrid], mentorType=['withMentor', 'noMentor']
   [CALL_API]: {
     types: [
       actionTypes.CREATE_WORKSHOP_REQUEST,
@@ -100,12 +128,16 @@ export const createWorkshop = ({ name }) => ({
     url: URLs.CREATE_WORKSHOP,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({
+        name,
+        fsm_p_type: playerType,
+        fsm_learning_type: mentorType,
+      }),
     },
   },
 });
 
-export const createState = ({ name, fsm }) => ({
+export const createState = ({ name, fsmId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.CREATE_STATE_REQUEST,
@@ -115,13 +147,27 @@ export const createState = ({ name, fsm }) => ({
     url: URLs.CREATE_STATE,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ widgets: [], name, fsm }),
+      body: JSON.stringify({ name, fsm: fsmId }),
     },
     payload: {
-      fsm,
+      fsm: fsmId,
     },
   },
 });
+
+export const editState = ({ stateId, name }) => ({}); // TODO:
+
+export const getOutwardsEdges = ({ stateId }) => ({}); // TODO: [{ from, to }]
+
+export const createEdges = ({ edges }) => ({}); // TODO: [{ from, to }]
+
+export const editEdges = ({ edges }) => ({}); // TODO:
+
+export const createHelp = ({ stateId }) => ({}); // TODO:
+
+export const changePlayerState = ({ edge, player }) => ({}); // TODO:
+
+export const createHelpWidget = ({ helpId }) => ({}); // TODO: inherit from state
 
 export const deleteState = ({ id }) => ({
   [CALL_API]: {
@@ -138,6 +184,7 @@ export const deleteState = ({ id }) => ({
 });
 
 const createWidget = (body) => ({
+  // TODO: dont refresh in submit
   [CALL_API]: {
     types: [
       actionTypes.CREATE_WIDGET_REQUEST,
@@ -218,7 +265,7 @@ export const getWidget = ({ id }) => {
         actionTypes.GET_WIDGET_SUCCESS,
         actionTypes.GET_WIDGET_FAILURE,
       ],
-      url: URLs.DELETE_WIDGET(id),
+      url: URLs.DELETE_WIDGET(id), // TODO: rename
       fetchOptions: {
         method: 'GET',
       },
@@ -239,3 +286,5 @@ export const deleteWidget = ({ id }) => ({
     },
   },
 });
+
+export const editWidget = ({ id }) => ({}); // TODO:

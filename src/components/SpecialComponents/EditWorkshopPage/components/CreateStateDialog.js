@@ -31,7 +31,7 @@ function CreateStateDialog({ open, handleClose, createState, fsmId }) {
         <Button
           color="primary"
           variant="contained"
-          onClick={() => createState({ name, fsm: fsmId }).then(handleClose)}>
+          onClick={() => createState({ name, fsmId }).then(handleClose)}>
           ایجاد
         </Button>
       </DialogActions>
