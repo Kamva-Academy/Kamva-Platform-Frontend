@@ -32,7 +32,6 @@ const onSuccess = ({
 };
 
 const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
-  alert(error.message);
   if (error.message === 'TOKEN_EXPIRED') {
     return next({
       type: actionTypes.LOGOUT_REQUEST,
