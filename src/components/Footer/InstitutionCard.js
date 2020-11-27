@@ -2,7 +2,6 @@ import {
   Grid,
   IconButton,
   makeStyles,
-  Paper,
   Tooltip,
 } from '@material-ui/core';
 import React from 'react';

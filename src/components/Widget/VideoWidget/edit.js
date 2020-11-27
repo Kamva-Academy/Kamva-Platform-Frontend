@@ -5,7 +5,6 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Link,
   TextField,
 } from '@material-ui/core';
 import React, { useState } from 'react';

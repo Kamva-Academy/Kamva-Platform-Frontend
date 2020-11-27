@@ -6,7 +6,6 @@ import {
   Grid,
   Hidden,
   makeStyles,
-  Paper,
   Typography,
 } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
@@ -22,7 +21,6 @@ import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 import FAQ from '../components/FAQ/FAQ';
 import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
-import CustomizedTimeline from '../components/TimeLine/TimeLine';
 import { logout } from '../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({

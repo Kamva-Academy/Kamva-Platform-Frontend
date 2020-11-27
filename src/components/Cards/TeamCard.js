@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   ButtonGroup,
   Card,
@@ -8,7 +7,6 @@ import {
   CardContent,
   Grid,
   makeStyles,
-  Tooltip,
   Typography,
 } from '@material-ui/core';
 import React from 'react';
