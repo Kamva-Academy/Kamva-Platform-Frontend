@@ -115,7 +115,7 @@ const UploadFileQuestionWidget = ({
 };
 
 const mapStateToProps = (state) => ({
-  playerId: state.currentState.player.id,
+  playerId: state.currentState.player?.id,
 });
 
 export default connect(mapStateToProps, { sendFileAnswer })(

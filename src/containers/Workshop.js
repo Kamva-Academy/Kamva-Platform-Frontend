@@ -39,6 +39,7 @@ export const StatePageContext = React.createContext();
 
 const Workshop = ({
   workshopState,
+  needUpdateState,
   fsmId,
   stateId,
   player,
@@ -76,6 +77,14 @@ const Workshop = ({
     }
   }, [fsmId, player.id, isMentor, participantGetCurrentState, startWorkshop]);
 
+  const getCurrentStateIfNeed = () => {
+    if (needUpdateState && !isMentor && player.id) {
+      participantGetCurrentState({ fsmId, playerId: player.id });
+    }
+  };
+
+  useEffect(getCurrentStateIfNeed, [needUpdateState, getCurrentStateIfNeed]);
+
   return (
     <StatePageContext.Provider value={{ fsmId, stateId, player, isMentor }}>
       <Container component="main" className={classes.body}>
@@ -94,6 +103,7 @@ const Workshop = ({
 
 const mapStateToProps = (state, ownProps) => ({
   workshopState: state.currentState.state,
+  needUpdateState: state.currentState.needUpdateState,
   isMentor: state.account.user.is_mentor,
   fsmId: ownProps.match.params.fsmId,
   stateId: ownProps.match.params.stateId,

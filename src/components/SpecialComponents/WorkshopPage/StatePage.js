@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StatePage({ state }) {
+function StatePage({ state = {} }) {
   const classes = useStyles();
 
   const { widgets = [], inward_edges, outward_edges } = state;

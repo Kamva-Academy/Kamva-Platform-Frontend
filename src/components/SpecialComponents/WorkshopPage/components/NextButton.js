@@ -17,7 +17,7 @@ function NextButton({ outwardEdges = [], goForward }) {
     if (isMentor) {
       history.push(`/workshop/${player.uuid}/${fsmId}/${edge.head}`);
     } else {
-      goForward({ fsmId, edgeId: edge.id, playerId: player.id });
+      goForward({ edgeId: edge.id, playerId: player.id });
     }
   };
 

@@ -1,17 +1,25 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initState = { state: { widgets: [] }, player: {} };
+const initState = {};
 
 function currentState(state = initState, action) {
   switch (action.type) {
     case actionTypes.INIT_CURRENT_STATE:
       return initState;
 
+    case actionTypes.GO_FORWARD_FAILURE:
+    case actionTypes.GO_BACKWARD_FAILURE:
+      return {
+        ...state,
+        needUpdateState: true,
+      };
+
     case actionTypes.GO_FORWARD_SUCCESS:
     case actionTypes.GO_BACKWARD_SUCCESS:
     case actionTypes.GET_CURRENT_STATE_SUCCESS:
       return {
         ...state,
+        needUpdateState: false,
         state: action.response,
       };
 

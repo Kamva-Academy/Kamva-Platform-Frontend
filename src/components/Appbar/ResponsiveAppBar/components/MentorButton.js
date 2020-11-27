@@ -29,7 +29,7 @@ function MentorButton({ callMentor, playerId }) {
 }
 
 const mapStatesToProps = (state) => ({
-  playerId: state.currentState.player.id,
+  playerId: state.currentState.player?.id,
 });
 
 export default connect(mapStatesToProps, { callMentor })(MentorButton);
