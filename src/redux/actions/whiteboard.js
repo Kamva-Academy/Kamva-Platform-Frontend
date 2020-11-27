@@ -127,9 +127,7 @@ export const updateShapeProps = (node_id, shapeProps) =>
 
 export const changeMode = (mode) => ({
   type: actionTypes.CHANGE_MODE,
-  payload: {
-    mode,
-  },
+  payload: { mode },
 });
 
 export const removeSelectedNodes = () =>
@@ -140,9 +138,7 @@ export const removeSelectedNodes = () =>
 export const removeNode = (nodeId) =>
   saveAndSendWhiteboardNodes({
     type: actionTypes.REMOVE_NODE,
-    payload: {
-      nodeId,
-    },
+    payload: { nodeId },
   });
 
 export const undo = () => saveAndSendWhiteboardNodes(UndoActionCreators.undo());

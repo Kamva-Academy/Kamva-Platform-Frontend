@@ -7,7 +7,7 @@ export const initCurrentState = () => ({
   type: actionTypes.INIT_CURRENT_STATE,
 });
 
-export const goForward = ({ edgeId, playerId }) => ({
+export const goForward = ({ fsmId, edgeId, playerId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.GO_FORWARD_REQUEST,
@@ -20,9 +20,10 @@ export const goForward = ({ edgeId, playerId }) => ({
       body: JSON.stringify({ edge: edgeId, player: playerId }),
     },
   },
+  payload: { fsmId },
 });
 
-export const goBackward = ({ edgeId, playerId }) => ({
+export const goBackward = ({ fsmId, edgeId, playerId }) => ({
   [CALL_API]: {
     types: [
       actionTypes.GO_BACKWARD_REQUEST,
@@ -35,6 +36,7 @@ export const goBackward = ({ edgeId, playerId }) => ({
       body: JSON.stringify({ edge: edgeId, player: playerId }),
     },
   },
+  payload: { fsmId },
 });
 
 export const participantGetCurrentState = ({ fsmId, playerId }) => ({

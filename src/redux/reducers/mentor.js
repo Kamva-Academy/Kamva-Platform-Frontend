@@ -24,7 +24,7 @@ function mentor(state = initState, action) {
       return {
         ...state,
         workshops: state.workshops.map((workshop) =>
-          workshop.id === action.payload.fsm
+          workshop.id === action.payload.fsmId
             ? { ...workshop, states: [...workshop.states, action.response] }
             : workshop
         ),

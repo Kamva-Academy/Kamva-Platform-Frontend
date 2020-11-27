@@ -17,6 +17,15 @@ const fetchApi = async (url, fetchOptions) => {
   if (!response.ok) {
     if (json_response.error) {
       throw new Error(json_response.error);
+    } else if (json_response.non_field_errors) {
+      throw new Error(json_response.non_field_errors[0]);
+    } else if (json_response.another_field) {
+      throw new Error(json_response.another_field[0]);
+    } else if (json_response.detail) {
+      throw new Error(json_response.detail);
+    } else if (Object.keys(json_response).length > 0) {
+      const firstKey = Object.keys(json_response)[0];
+      throw new Error(firstKey + ': ' + json_response[firstKey]);
     } else {
       throw new Error(response.text);
     }

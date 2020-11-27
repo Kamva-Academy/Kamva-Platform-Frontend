@@ -77,8 +77,8 @@ export const getWorkshopTeams = ({ fsmId }) => ({
       method: 'POST',
       body: JSON.stringify({ fsm: fsmId }),
     },
-    payload: { fsmId },
   },
+  payload: { fsmId },
 });
 
 export const getTeamAnswers = (fsmId, teamId) => ({
@@ -149,10 +149,8 @@ export const createState = ({ name, fsmId }) => ({
       method: 'POST',
       body: JSON.stringify({ name, fsm: fsmId }),
     },
-    payload: {
-      fsm: fsmId,
-    },
   },
+  payload: { fsmId },
 });
 
 export const editState = ({ stateId, name }) => ({}); // TODO:

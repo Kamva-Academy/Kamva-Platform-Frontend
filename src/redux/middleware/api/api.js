@@ -3,67 +3,75 @@ import { normalize } from 'normalizr';
 import fetchApi from '../../../utils/fetchApi';
 import * as actionTypes from '../../actions/actionTypes';
 
-export const CALL_API = 'Call API';
+export const CALL_API = 'callAPI';
+
+const getRequestOptions = ({ fetchOptions, token }) => ({
+  ...fetchOptions,
+  headers: {
+    ...(!fetchOptions.dontContentType && {
+      'Content-Type': 'application/json',
+    }),
+    ...fetchOptions.headers,
+    ...(token && { Authorization: token }),
+  },
+});
+
+const onSuccess = ({
+  response,
+  schema,
+  actionWithoutCallAPI,
+  successType,
+  next,
+}) => {
+  response = schema ? normalize(response, schema) : response;
+  return next({
+    ...actionWithoutCallAPI,
+    response,
+    type: successType,
+  });
+};
+
+const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
+  alert(error.message);
+  if (error.message === 'TOKEN_EXPIRED') {
+    return next({
+      type: actionTypes.LOGOUT_REQUEST,
+    });
+  }
+
+  return next({
+    ...actionWithoutCallAPI,
+    type: failureType,
+    error: error.message || 'خطایی رخ داده است!',
+  });
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({ getState }) => (next) => async (action) => {
-  const callAPI = action[CALL_API];
+export default ({ getState }) => (next) => (action) => {
+  const { callAPI, ...actionWithoutCallAPI } = action;
   if (typeof callAPI === 'undefined') {
     return next(action);
   }
 
-  const actionWith = (data) => {
-    const finalAction = Object.assign({}, action, data);
-    delete finalAction[CALL_API];
-    return finalAction;
-  };
-
-  let { fetchOptions } = callAPI;
-  const { url, types, payload, schema } = callAPI;
+  const { url, types, schema, fetchOptions } = callAPI;
   const [requestType, successType, failureType] = types;
-  next(actionWith({ payload, type: requestType }));
+  next({ ...actionWithoutCallAPI, type: requestType });
+  const requestOptions = getRequestOptions({
+    fetchOptions,
+    token: 'JWT ' + getState().account.token,
+  });
 
-  try {
-    if (!fetchOptions.dontContentType) {
-      fetchOptions.headers = {
-        'Content-Type': 'application/json',
-        ...fetchOptions.headers,
-      };
-    }
-    const account = getState().account;
-    if (!!account && !!account.token) {
-      fetchOptions.headers = {
-        ...fetchOptions.headers,
-        Authorization: 'JWT ' + account.token,
-      };
-    }
-    let response = await fetchApi(url, fetchOptions);
-    if (schema) {
-      response = normalize(response, schema);
-    }
-    return next(
-      actionWith({
-        payload,
+  return fetchApi(url, requestOptions)
+    .then((response) =>
+      onSuccess({
         response,
-        type: successType,
+        schema,
+        actionWithoutCallAPI,
+        successType,
+        next,
       })
+    )
+    .catch((error) =>
+      onFailure({ error, actionWithoutCallAPI, failureType, next })
     );
-  } catch (error) {
-    if (error.message === 'TOKEN_EXPIRED') {
-      return next(
-        actionWith({
-          payload,
-          type: actionTypes.LOGOUT_REQUEST,
-          error: error.message || 'Something bad happened!',
-        })
-      );
-    }
-    return next(
-      actionWith({
-        payload,
-        type: failureType,
-        error: error.message || 'Something bad happened!',
-      })
-    );
-  }
 };

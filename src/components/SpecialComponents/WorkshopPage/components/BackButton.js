@@ -19,7 +19,7 @@ function BackButton({ inwardEdges = [], goBackward }) {
     if (isMentor) {
       history.push(`/workshop/${player.uuid}/${fsmId}/${inwardEdges[0].tail}`);
     } else {
-      goBackward({ edgeId: inwardEdges[0].id, playerId: player.id });
+      goBackward({ fsmId, edgeId: inwardEdges[0].id, playerId: player.id });
     }
   };
 

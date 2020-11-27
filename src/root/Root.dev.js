@@ -14,6 +14,7 @@ const Root = () => {
   return (
     <>
       <Switch>
+        <Route path="/loading/"></Route>
         <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
         <Route path="/workshops/" component={Workshops} />
         <Route path="/workshop/">
