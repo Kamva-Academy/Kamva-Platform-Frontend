@@ -161,7 +161,21 @@ export const createEdges = ({ edges }) => ({}); // TODO: [{ from, to }]
 
 export const editEdges = ({ edges }) => ({}); // TODO:
 
-export const createHelp = ({ stateId }) => ({}); // TODO:
+export const createHelp = ({ stateId }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CREATE_HELP_REQUEST,
+      actionTypes.CREATE_HELP_SUCCESS,
+      actionTypes.CREATE_HELP_FAILURE,
+    ],
+    url: URLs.CREATE_HELP,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({ state: stateId }),
+    },
+  },
+  payload: { stateId },
+});
 
 export const changePlayerState = ({ edge, player }) => ({}); // TODO:
 

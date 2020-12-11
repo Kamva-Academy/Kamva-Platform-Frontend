@@ -1,4 +1,4 @@
-import { makeStyles, Paper } from '@material-ui/core';
+import { Grid, makeStyles, Paper } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -10,16 +10,26 @@ import { getWorkshop } from '../redux/actions/mentor';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
-    margin: theme.spacing(2, 2, 0),
     overflow: 'hidden',
   },
   body: {
     background: '#fff',
+    paddingTop: theme.spacing(1),
+    height: '100vh',
+  },
+  smFullHeight: {
+    [theme.breakpoints.up('sm')]: {
+      height: '100%',
+    },
   },
   mainPaper: {
-    margin: theme.spacing(1, 0),
     padding: theme.spacing(1),
     background: '#F7F9FC',
+  },
+  workshopTabsPaper: {
+    padding: theme.spacing(1),
+    background: '#F7F9FC',
+    height: '100%',
   },
 }));
 
@@ -40,21 +50,28 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
 
   return (
     <Container component="main" className={classes.body}>
-      <Paper className={classes.mainPaper}>
-        {workshop && (
-          <>
-            <Paper className={classes.tabbar}>
-              <StatesTabbar
-                value={tab}
-                setValue={setTab}
-                tabs={workshop.states.map((state) => state.name)}
-                fsmId={workshop.id}
-              />
-            </Paper>
-            <EditState state={workshop.states[tab]} />
-          </>
-        )}
-      </Paper>
+      <Grid container spacing={1} className={classes.smFullHeight}>
+        <Grid item xs={12} sm={2} md={1} className={classes.smFullHeight}>
+          <Paper className={classes.workshopTabsPaper}></Paper>
+        </Grid>
+        <Grid item xs={12} sm={10} md={11}>
+          <Paper className={classes.mainPaper}>
+            {workshop && (
+              <>
+                <Paper className={classes.tabbar}>
+                  <StatesTabbar
+                    value={tab}
+                    setValue={setTab}
+                    tabs={workshop.states.map((state) => state.name)}
+                    fsmId={workshop.id}
+                  />
+                </Paper>
+                <EditState state={workshop.states[tab]} />
+              </>
+            )}
+          </Paper>
+        </Grid>
+      </Grid>
     </Container>
   );
 };
