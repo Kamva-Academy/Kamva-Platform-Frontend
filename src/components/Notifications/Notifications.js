@@ -37,7 +37,9 @@ const Notifications = ({ notifications = [], removeSnackbar }) => {
             vertical: 'top',
             horizontal: 'left',
           },
-          TransitionComponent: (props) => <Grow {...props} />,
+          TransitionComponent: function TransitionComponent(props) {
+            return <Grow {...props} />;
+          },
           ...options,
           onClose: (event, reason, myKey) => {
             if (options.onClose) {

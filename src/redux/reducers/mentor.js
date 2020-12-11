@@ -11,6 +11,7 @@ function mentor(state = initState, action) {
       };
 
     case actionTypes.GET_WORKSHOP_SUCCESS:
+      // eslint-disable-next-line no-case-declarations
       const newWorkshops = state.workshops.filter(
         (workshop) => workshop.id !== action.response.id
       );

@@ -87,6 +87,7 @@ const NotificationButton = ({ notifications }) => {
               .sort((a, b) => b.time - a.time)
               .map((notification) => (
                 <MenuItem
+                  key={notification.id}
                   className={clsx(
                     classes.notification,
                     notification.seen && classes.seen
@@ -127,6 +128,7 @@ const NotificationButton = ({ notifications }) => {
 const mapStateToProps = (state) => ({
   notifications: [
     {
+      id: 1,
       time: Date.now(),
       message: 'خیلی خوش اومدید!',
       seen: true,

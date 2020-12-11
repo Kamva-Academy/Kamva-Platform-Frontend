@@ -39,13 +39,11 @@ function MentorWorkshops({ workshops }) {
         </Grid>
         <Grid item spacing={2} direction="row" className={classes.cardHolder}>
           <Grid container spacing={2} alignItems="center" justify="center">
-            {workshops.map((workshop) => {
-              return (
-                <Grid item xs={12} sm={6} md={4}>
-                  <WorkShopCard {...workshop} />
-                </Grid>
-              );
-            })}
+            {workshops.map((workshop) => (
+              <Grid item xs={12} sm={6} md={4} key={workshop.id}>
+                <WorkShopCard {...workshop} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Grid>

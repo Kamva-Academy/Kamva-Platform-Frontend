@@ -38,7 +38,7 @@ function Teams({
           variant="scrollable"
           scrollButtons="auto">
           {workshops.map((workshop) => (
-            <Tab label={workshop.name} />
+            <Tab label={workshop.name} key={workshop.name} />
           ))}
         </Tabs>
       </Grid>
@@ -46,7 +46,7 @@ function Teams({
         <Grid container spacing={2} alignItems="center" justify="center">
           {viewTeams.map((team) => {
             return (
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={4} key={team.id}>
                 <TeamCard
                   team={team}
                   fsmId={workshops[workshopNumber].id}

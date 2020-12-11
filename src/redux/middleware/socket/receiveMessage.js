@@ -9,7 +9,6 @@ import {
   PASS_DRAWING_STATE,
 } from '../../actions/wsActionTypes';
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default ({ getState, dispatch }) => (next) => async (action) => {
   if (action.type !== REDUX_WEBSOCKET_MESSAGE) {
     return next(action);

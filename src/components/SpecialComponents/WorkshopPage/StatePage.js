@@ -51,7 +51,7 @@ function StatePage({ state = {} }) {
         <Grid item xs={12} md={7} lg={7}>
           <Paper className={classes.paper}>
             {notQuestions.map((widget) => (
-              <div className={classes.mainItem}>
+              <div className={classes.mainItem} key={widget.id}>
                 <Widget widget={widget} />
               </div>
             ))}
@@ -68,7 +68,7 @@ function StatePage({ state = {} }) {
             {state.name}
           </Typography>
           {questions.map((widget) => (
-            <Paper className={classes.item}>
+            <Paper className={classes.item} key={widget.id}>
               <Widget widget={widget} />
             </Paper>
           ))}

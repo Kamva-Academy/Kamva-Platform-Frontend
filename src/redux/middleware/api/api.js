@@ -51,7 +51,6 @@ const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
   });
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default ({ getState }) => (next) => (action) => {
   const { callAPI, ...actionWithoutCallAPI } = action;
   if (typeof callAPI === 'undefined') {

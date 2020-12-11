@@ -118,7 +118,7 @@ export const createWorkshop = ({
   playerType = 'team',
   mentorType = 'withMentor',
 }) => ({
-  // TODO: eventId, description, image, playerType:['team', 'individual', 'hybrid], mentorType=['withMentor', 'noMentor']
+  // TODO: eventId, description, image, playerType:['team', 'individual', 'hybrid'], mentorType=['withMentor', 'noMentor']
   [CALL_API]: {
     types: [
       actionTypes.CREATE_WORKSHOP_REQUEST,

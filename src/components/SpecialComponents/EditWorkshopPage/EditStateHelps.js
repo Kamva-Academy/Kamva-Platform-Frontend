@@ -40,9 +40,12 @@ function EditStateHelps({ helps, stateId }) {
                 fullHeightHover={false}
                 navButtonsAlwaysInvisible={true}>
                 {helps.map((help) => (
-                  <Paper className={clsx(classes.mainItem, classes.paper)}>
+                  <Paper
+                    className={clsx(classes.mainItem, classes.paper)}
+                    key={help.id}>
                     {help.widgets.map((widget) => (
                       <Widget
+                        key={widget.id}
                         stateId={stateId}
                         widget={widget}
                         mode={MODES.EDIT}

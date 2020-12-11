@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@tinymce/tinymce-react": "^3.8.1",
+    "eslint-plugin-react": "^7.21.5",
     "jalali-moment": "^3.3.8",
     "jsonpack": "^1.1.5",
     "jss-rtl": "^0.3.0",
@@ -57,7 +58,6 @@
     ]
   },
   "devDependencies": {
-    "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-simple-import-sort": "^6.0.1",
     "prettier": "^2.2.0",
     "redux-devtools": "^3.7.0",

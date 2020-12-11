@@ -42,7 +42,7 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
               // <Tooltip title={tm} aria-label={tm}>
               //   <Avatar className={classes.orange}>{tm}</Avatar>
               // </Tooltip>
-              <div>{tm}</div>
+              <div key={tm}>{tm}</div>
             ))}
           </Grid>
         </CardContent>
