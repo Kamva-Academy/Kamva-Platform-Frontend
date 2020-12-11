@@ -6,7 +6,7 @@ import { getWorkshopTeams } from '../../../redux/actions/mentor';
 import TeamCard from '../../Cards/TeamCard';
 
 function Teams({
-  workshops,
+  workshops = [],
   teams,
   getWorkshopTeams,
   mode = 'normal',
@@ -20,7 +20,7 @@ function Teams({
     }
   }, [getWorkshopTeams, workshops, teams, workshopNumber]);
 
-  const currentTeams = teams[workshops[workshopNumber].id] || [];
+  const currentTeams = teams[workshops[workshopNumber]?.id] || [];
 
   const viewTeams =
     mode === 'notifications'
