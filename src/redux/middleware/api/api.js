@@ -31,17 +31,23 @@ const onSuccess = ({
   });
 };
 
-const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
-  if (error.message === 'TOKEN_EXPIRED') {
-    return next({
-      type: actionTypes.LOGOUT_REQUEST,
-    });
-  }
+const ERRORS = {
+  SERVER_ERROR: 'ایراد سروری رخ داده‌است! ما رو مطلع کنید.',
+  TOKEN_EXPIRED: 'لطفا به سامانه وارد شوید!',
+  NOT_FOUND: 'اطلاعات یافت نشد!',
+  [actionTypes.LOGIN_FAILURE]: 'نام کاربری یا رمزعبور اشتباه است!',
+  [actionTypes.SEND_ANSWER_FAILURE]: 'یک مشکلی هست. جواب شما ثبت نشد.',
+};
 
+const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
   return next({
     ...actionWithoutCallAPI,
     type: failureType,
-    error: error.message || 'خطایی رخ داده است!',
+    error:
+      ERRORS[error.message] ||
+      ERRORS[failureType] ||
+      error.message ||
+      'خطایی رخ داده است!',
   });
 };
 

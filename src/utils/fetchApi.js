@@ -1,9 +1,9 @@
 const checkErrorsStatusCode = (response) => {
-  if (response.status === 500) {
-    throw new Error('ایراد سروری رخ داده‌است! ما رو مطلع کنید.');
+  if (response.status >= 500) {
+    throw new Error('SERVER_ERROR');
   }
   if (response.status === 404) {
-    throw new Error('صفحه مورد نظر یافت نشد!');
+    throw new Error('NOT_FOUND');
   }
   if (response.status === 401) {
     throw new Error('TOKEN_EXPIRED');

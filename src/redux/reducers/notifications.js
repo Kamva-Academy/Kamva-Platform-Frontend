@@ -8,16 +8,28 @@ const getMessage = (actionType, message) => {
   switch (actionType) {
     case actionTypes.LOGIN_SUCCESS:
       return 'خوش آمدید!';
-    case actionTypes.LOGIN_FAILURE:
-      return 'نام کاربری یا رمزعبور اشتباه است!';
     case actionTypes.CALL_MENTOR_SUCCESS:
       return 'درخواست شما برای منتور‌ها ارسال شد.';
     case actionTypes.SEND_ANSWER_SUCCESS:
       return 'جواب شما با موقفیت ثبت شد!';
-    case actionTypes.SEND_ANSWER_FAILURE:
-      return 'یک مشکلی هست. جواب شما ثبت نشد.';
     default:
       return message;
+  }
+};
+
+const getVariant = (type) => {
+  switch (type) {
+    case actionTypes.LOGIN_FAILURE:
+    case actionTypes.SEND_ANSWER_FAILURE:
+    case actionTypes.SHOW_ERROR_MESSAGE:
+      return 'error';
+    case actionTypes.LOGIN_SUCCESS:
+    case actionTypes.CALL_MENTOR_SUCCESS:
+    case actionTypes.SEND_ANSWER_SUCCESS:
+    case actionTypes.SHOW_SUCCESS_MESSAGE:
+      return 'success';
+    default:
+      return 'info';
   }
 };
 
@@ -46,28 +58,23 @@ export default function notifications(state = defaultState, action) {
 
     case actionTypes.SEND_ANSWER_FAILURE:
     case actionTypes.LOGIN_FAILURE:
-      return enquequeSnackbar({
-        state,
-        notification: {
-          message: getMessage(action.type, action.error),
-          options: {
-            key: new Date().getTime() + Math.random(),
-            variant: 'error',
-            autoHideDuration: 3000,
-          },
-        },
-      });
-
     case actionTypes.SEND_ANSWER_SUCCESS:
     case actionTypes.CALL_MENTOR_SUCCESS:
     case actionTypes.LOGIN_SUCCESS:
+    case actionTypes.SHOW_SUCCESS_MESSAGE:
+    case actionTypes.SHOW_ERROR_MESSAGE:
+      const variant = getVariant(action.type);
+      const message =
+        variant === 'success'
+          ? getMessage(action.type, action.message)
+          : getMessage(action.type, action.error);
       return enquequeSnackbar({
         state,
         notification: {
-          message: getMessage(action.type, action.message),
+          message,
           options: {
             key: new Date().getTime() + Math.random(),
-            variant: 'success',
+            variant,
             autoHideDuration: 3000,
           },
         },

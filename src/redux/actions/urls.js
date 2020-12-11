@@ -1,7 +1,7 @@
 export const ROOT =
   process.env.NODE_ENV === 'production'
-    ? 'https://a-lympiad.rastaiha.ir/api/'
-    : 'https://a-lympiad.rastaiha.ir/api/';
+    ? 'https://rastaiha.ir/api/'
+    : 'https://rastaiha.ir/api/';
 
 export const LOGIN = ROOT.concat('auth/token/obtain/');
 export const LOGOUT = ROOT.concat('auth/logout/');
@@ -37,3 +37,5 @@ export const START_WORKSHOP = ROOT.concat('fsm/startWorkshop/');
 
 export const CREATE_WIDGET = ROOT.concat('fsm/widget/');
 export const DELETE_WIDGET = (id) => ROOT.concat(`fsm/widget/${id}/`);
+
+export const CREATE_HELP = ROOT.concat('fsm/helpstate/');
