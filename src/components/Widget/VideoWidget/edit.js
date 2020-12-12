@@ -26,10 +26,9 @@ function VideoEditWidget({
     if (id) {
       // TODO: edit mode
     } else {
-      createVideoWidget({ state: stateId, link }).then(() =>
-        window.location.reload(false)
-      );
+      createVideoWidget({ state: stateId, link });
     }
+    handleClose();
   };
 
   return (

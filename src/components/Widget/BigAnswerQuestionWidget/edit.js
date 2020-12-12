@@ -32,8 +32,9 @@ function BigAnswerQuestionEditWidget({
         state: stateId,
         text: question,
         answer,
-      }).then(()=>window.location.reload(false));
+      });
     }
+    handleClose();
   };
 
   return (

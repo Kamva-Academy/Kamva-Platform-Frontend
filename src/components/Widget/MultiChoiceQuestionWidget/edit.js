@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import {
   AddCircle as AddCircleIcon,
-  Remove as RemoveIcon,
+  RemoveCircle as RemoveCircleIcon,
 } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -57,8 +57,9 @@ function MultiChoiceQuestionEditWidget({
         text: question,
         answer,
         choices: choices.map((choice) => ({ text: choice })),
-      }).then(()=>window.location.reload(false));
+      });
     }
+    handleClose();
   };
 
   return (
@@ -101,7 +102,7 @@ function MultiChoiceQuestionEditWidget({
             color="primary"
             disabled={choices.length < 3}
             onClick={() => setChoices(choices.slice(0, -1))}>
-            <RemoveIcon />
+            <RemoveCircleIcon />
           </IconButton>
         </div>
         <br />

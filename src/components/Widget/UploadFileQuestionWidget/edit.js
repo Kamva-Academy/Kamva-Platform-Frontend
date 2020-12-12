@@ -26,8 +26,9 @@ function UploadFileQuestionEditWidget({
     if (id) {
       // TODO: edit mode
     } else {
-      createUploadFileWidget({ state: stateId, text: question }).then(()=>window.location.reload(false));
+      createUploadFileWidget({ state: stateId, text: question });
     }
+    handleClose();
   };
 
   return (

@@ -29,10 +29,13 @@ function SmallAnswerQuestionEditWidget({
     if (id) {
       // TODO: edit mode
     } else {
-      createSmallAnswerQuestionWidget({ state: stateId, text: question, answer }).then(
-        ()=>window.location.reload(false)
-      );
+      createSmallAnswerQuestionWidget({
+        state: stateId,
+        text: question,
+        answer,
+      });
     }
+    handleClose();
   };
 
   return (

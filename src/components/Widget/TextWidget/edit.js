@@ -26,8 +26,9 @@ function TextEditWidget({
     if (id) {
       // TODO: edit mode
     } else {
-      createTextWidget({ state: stateId, text }).then(()=>window.location.reload(false));
+      createTextWidget({ state: stateId, text });
     }
+    handleClose();
   };
 
   return (

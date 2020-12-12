@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
+const EditWorkshop = ({ workshop, getWorkshop, fsmId, needUpdate }) => {
   const [tab, setTab] = React.useState(0);
 
   const history = useHistory();
@@ -45,6 +45,12 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId }) => {
       history.push('/');
     }
   }, [getWorkshop, fsmId, history]);
+
+  useEffect(() => {
+    if (fsmId && needUpdate) {
+      getWorkshop({ id: fsmId });
+    }
+  }, [getWorkshop, fsmId, needUpdate, history]);
 
   const classes = useStyles();
 
@@ -80,6 +86,7 @@ const mapStateToProps = (state, ownProps) => ({
   workshop: state.mentor.workshops.find(
     (workshop) => +workshop.id === +ownProps.match.params.fsmId
   ),
+  needUpdate: state.mentor.needUpdateCurrentWorkshop,
   fsmId: ownProps.match.params.fsmId,
 });
 

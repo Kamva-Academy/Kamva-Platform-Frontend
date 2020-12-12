@@ -196,7 +196,6 @@ export const deleteState = ({ id }) => ({
 });
 
 const createWidget = (body) => ({
-  // TODO: dont refresh in submit
   [CALL_API]: {
     types: [
       actionTypes.CREATE_WIDGET_REQUEST,
@@ -206,7 +205,7 @@ const createWidget = (body) => ({
     url: URLs.CREATE_WIDGET,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify(body),
+      body: JSON.stringify({ priority: 0, ...body }),
     },
   },
 });

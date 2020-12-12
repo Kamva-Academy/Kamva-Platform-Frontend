@@ -26,8 +26,9 @@ function ImageEditWidget({
     if (id) {
       // TODO: edit mode
     } else {
-      createImageWidget({ state: stateId, link }).then(()=>window.location.reload(false));
+      createImageWidget({ state: stateId, link });
     }
+    handleClose();
   };
 
   return (

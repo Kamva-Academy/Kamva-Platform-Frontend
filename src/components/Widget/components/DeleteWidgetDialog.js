@@ -21,9 +21,10 @@ function DeleteWidgetDialog({ open, handleClose, deleteWidget, id }) {
           لغو
         </Button>
         <Button
-          onClick={() =>
-            deleteWidget({ id }).then(() => window.location.reload(false))
-          }
+          onClick={() => {
+            deleteWidget({ id });
+            handleClose();
+          }}
           color="primary"
           variant="contained">
           حذف

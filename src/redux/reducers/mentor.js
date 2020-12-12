@@ -1,6 +1,11 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initState = { workshops: [], teams: {}, notifications: [] };
+const initState = {
+  workshops: [],
+  teams: {},
+  notifications: [],
+  needUpdateCurrentWorkshop: false,
+};
 
 function mentor(state = initState, action) {
   switch (action.type) {
@@ -8,6 +13,7 @@ function mentor(state = initState, action) {
       return {
         ...state,
         workshops: action.response,
+        needUpdateCurrentWorkshop: false,
       };
 
     case actionTypes.GET_WORKSHOP_SUCCESS:
@@ -19,6 +25,7 @@ function mentor(state = initState, action) {
       return {
         ...state,
         workshops: newWorkshops,
+        needUpdateCurrentWorkshop: false,
       };
 
     case actionTypes.CREATE_STATE_SUCCESS:
@@ -46,6 +53,13 @@ function mentor(state = initState, action) {
         notifications: action.response.unread_list.map(
           (unread) => +unread.actor_object_id
         ),
+      };
+
+    case actionTypes.CREATE_WIDGET_SUCCESS:
+    case actionTypes.DELETE_WIDGET_SUCCESS:
+      return {
+        ...state,
+        needUpdateCurrentWorkshop: true,
       };
 
     default:
