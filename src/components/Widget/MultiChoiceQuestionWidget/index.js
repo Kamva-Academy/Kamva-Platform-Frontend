@@ -1,7 +1,9 @@
 import { Button, makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import React from 'react';
+import { connect } from 'react-redux';
 
+import { sendMultiChoiceAnswer } from '../../../redux/actions/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import MultiChoiceQuestionEditWidget from './edit';
 
@@ -13,10 +15,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   selected: {
-    color: '#fff',
-    border: '1px solid #337733',
+    color: 'black',
+    border: '2px dashed #EB1748',
     margin: theme.spacing(1, 1, 0, 0),
-    backgroundColor: '#5577aa',
+  },
+  answer: {
+    color: '#fff',
+    borderColor: '#337766',
+    margin: theme.spacing(1, 1, 0, 0),
+    backgroundColor: '#337766',
     '&:hover': {
       color: 'black',
     },
@@ -24,10 +31,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MultiChoiceQuestionWidget = ({
+  id,
   text,
   choices,
-  answer = { text: '' },
+  answer,
+  last_submit,
   disabled = true,
+  playerId,
+  sendMultiChoiceAnswer,
 }) => {
   const classes = useStyles();
   return (
@@ -49,8 +60,12 @@ const MultiChoiceQuestionWidget = ({
             disabled={disabled}
             className={clsx(
               classes.choice,
-              +index === +answer.text && classes.selected
-            )}>
+              +index === +last_submit?.text && classes.selected,
+              +index === +answer?.text && classes.answer
+            )}
+            onClick={() =>
+              sendMultiChoiceAnswer({ playerId, problemId: id, answer: index })
+            }>
             {choice.text}
           </Button>
         ))}
@@ -58,4 +73,10 @@ const MultiChoiceQuestionWidget = ({
   );
 };
 
-export default MultiChoiceQuestionWidget;
+const mapStateToProps = (state) => ({
+  playerId: state.currentState.player?.id,
+});
+
+export default connect(mapStateToProps, { sendMultiChoiceAnswer })(
+  MultiChoiceQuestionWidget
+);

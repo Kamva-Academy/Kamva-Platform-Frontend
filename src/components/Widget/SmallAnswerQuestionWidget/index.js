@@ -1,17 +1,47 @@
-import { Button, Grid, TextField } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  makeStyles,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
+import { sendSmallAnswer } from '../../../redux/actions/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import SmallAnswerQuestionEditWidget from './edit';
 
 export { SmallAnswerQuestionEditWidget };
 
+const useStyles = makeStyles((theme) => ({
+  success: {
+    '& input:valid + fieldset': {
+      borderColor: 'green',
+      borderWidth: 2,
+    },
+    '& input:invalid + fieldset': {
+      borderColor: 'red',
+      borderWidth: 2,
+    },
+    '& input:valid:focus + fieldset': {
+      borderLeftWidth: 6,
+      padding: '4px !important', // override inline-style
+    },
+  },
+}));
+
 const SmallAnswerQuestionWidget = ({
+  id,
   text = '',
-  answer = { text: '' },
+  answer,
+  last_submit,
   disabled = true,
+  playerId,
+  sendSmallAnswer,
 }) => {
-  const [value, setValue] = useState(answer.text);
+  const classes = useStyles();
+  const [value, setValue] = useState(last_submit?.text);
   return (
     <>
       <TinyPreview
@@ -26,10 +56,21 @@ const SmallAnswerQuestionWidget = ({
         <Grid item xs={9} sm={10} md={9}>
           <TextField
             fullWidth
-            variant="outlined"
+            variant={'outlined'}
             value={value}
             onChange={(e) => setValue(e.target.value)}
             size="small"
+            error={
+              answer?.text &&
+              last_submit?.text &&
+              last_submit?.text !== answer?.text
+            }
+            className={
+              answer?.text &&
+              last_submit?.text &&
+              last_submit?.text === answer?.text &&
+              classes.success
+            }
           />
         </Grid>
         <Grid item xs={3} sm={2} md={3}>
@@ -38,13 +79,27 @@ const SmallAnswerQuestionWidget = ({
             variant="contained"
             color="primary"
             size="small"
-            disabled={disabled}>
+            disabled={disabled}
+            onClick={() =>
+              sendSmallAnswer({ playerId, problemId: id, answer: value })
+            }>
             ثبت
           </Button>
         </Grid>
+        {answer?.text && (
+          <Grid item xs={12}>
+            <Typography variant="body2">{'پاسخ: ' + answer.text}</Typography>
+          </Grid>
+        )}
       </Grid>
     </>
   );
 };
 
-export default SmallAnswerQuestionWidget;
+const mapStateToProps = (state) => ({
+  playerId: state.currentState.player?.id,
+});
+
+export default connect(mapStateToProps, { sendSmallAnswer })(
+  SmallAnswerQuestionWidget
+);

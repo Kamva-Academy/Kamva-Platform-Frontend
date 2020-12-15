@@ -1,6 +1,8 @@
 import { Button, makeStyles } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
+import { sendBigAnswer } from '../../../redux/actions/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 import BigAnswerQuestionEditWidget from './edit';
@@ -14,11 +16,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BigAnswerQuestionWidget = ({
+  id,
   text = '',
-  answer = { text: '' },
+  answer,
+  last_submit,
   disabled = true,
+  playerId,
+  sendBigAnswer,
 }) => {
   const classes = useStyles();
+  const [value, setValue] = useState(last_submit?.text);
   return (
     <>
       <TinyPreview
@@ -42,7 +49,8 @@ const BigAnswerQuestionWidget = ({
       ) : (
         <TinyEditorComponent
           id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
-          content={answer.text}
+          content={value}
+          onChange={setValue}
         />
       )}
 
@@ -52,11 +60,20 @@ const BigAnswerQuestionWidget = ({
         color="primary"
         size="small"
         className={classes.submit}
-        disabled={disabled}>
+        disabled={disabled}
+        onClick={() =>
+          sendBigAnswer({ playerId, problemId: id, answer: value })
+        }>
         ثبت پاسخ
       </Button>
     </>
   );
 };
 
-export default BigAnswerQuestionWidget;
+const mapStateToProps = (state) => ({
+  playerId: state.currentState.player?.id,
+});
+
+export default connect(mapStateToProps, { sendBigAnswer })(
+  BigAnswerQuestionWidget
+);

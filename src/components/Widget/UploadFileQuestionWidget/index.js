@@ -53,8 +53,8 @@ const UploadFileQuestionWidget = ({
       if (e.target.files[0].size <= 8e6) {
         sendFileAnswer({
           answer_file: e.target.files[0],
-          player: playerId,
-          problem: id,
+          playerId,
+          problemId: id,
         });
       } else {
         e.target.value = '';
