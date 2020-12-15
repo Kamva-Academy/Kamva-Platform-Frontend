@@ -14,34 +14,53 @@ import {
 import React, { useEffect, useState } from 'react'
 import Graph from 'react-graph-network';
 
+
 const useStyles = makeStyles((theme) => ({
   row1: {
     height: '85vh',
-    backgroundColor: 'green'
   },
 
   row2: {
     height: '15vh',
-    backgroundColor: 'yellow'
   },
 }))
 
 
 const Node = () => {
   return (
-    <circle r={5} />
+    <circle r={7} />
   )
 }
 
+const initial_n = 15;
+const initial_p = 0.3
 
-const GraphPage = ({ }) => {
+const generateNewGraph = (n, p) => {
+  const newData = {
+    nodes: [],
+    links: [],
+  };
+  for (var i = 0; i < n; i++) {
+    newData.nodes.push({ "id": i })
+  }
+  for (var i = 0; i < n; i++) {
+    for (var j = i + 1; j < n; j++) {
+      const probability = Math.random();
+      if (probability < p) {
+        newData.links.push({ "source": i, "target": j });
+      }
+    }
+  }
+  return newData;
+}
+
+const GraphTab = ({ }) => {
   const classes = useStyles();
-  const [data, setData] = useState('');
-  const [n, setN] = useState(10);
-  const [p, setP] = useState(0.2);
+  const [data, setData] = useState(generateNewGraph(initial_n, initial_p));
+  const [n, setN] = useState(initial_n);
+  const [p, setP] = useState(initial_p);
   const [isNValid, setNValidation] = useState(true);
   const [isPValid, setPValidation] = useState(true);
-
 
   const checkAndSetN = (value) => {
     if (value < 1 || value > 30) {
@@ -61,30 +80,8 @@ const GraphPage = ({ }) => {
     setP(value)
   }
 
-
-  const generateNewGraph = () => {
-    const newData = {
-      nodes: [],
-      links: [],
-    };
-    for (var i = 0; i < n; i++) {
-      newData.nodes.push({ "id": i })
-    }
-    for (var i = 0; i < n; i++) {
-      for (var j = i + 1; j < n; j++) {
-        const probability = Math.random();
-        if (probability < p) {
-          newData.links.push({ "source": i, "target": j });
-        }
-      }
-    }
-    setData(newData);
-  }
-
-  console.log(n)
-
   return (
-    <Container>
+    <>
       <Grid container direction='column'>
         <Grid container item direction='row' className={classes.row1}>
           <Graph
@@ -92,7 +89,7 @@ const GraphPage = ({ }) => {
             nodeDistance={1000}
             data={data}
             id="graph"
-            zoomDepth={5}
+            zoomDepth={1}
             enableDrag={true}
           />
         </Grid>
@@ -104,18 +101,15 @@ const GraphPage = ({ }) => {
           className={classes.row2}
           spacing={2}>
           <Grid item>
-            <ButtonGroup
+            <Button
               orientation="vertical"
               color="primary"
               aria-label="vertical contained primary button group"
               variant="contained"
-            >
-              <Button
-                onClick={generateNewGraph}>
-                یه‌دونه جدید بساز
-              </Button>
-              <Button>Two</Button>
-            </ButtonGroup>
+              disabled={!isNValid || !isPValid}
+              onClick={() => setData(generateNewGraph(n, p))}>
+              یه‌دونه جدید بساز
+            </Button>
           </Grid>
           <Grid item>
             <TextField
@@ -141,8 +135,8 @@ const GraphPage = ({ }) => {
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+    </>
   )
 }
 
-export default GraphPage;
+export default GraphTab;

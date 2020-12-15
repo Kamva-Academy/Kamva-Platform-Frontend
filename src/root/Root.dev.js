@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Graph from '../components/MiniGames/Graph/Graph'
+import Graph from '../components/MiniGames/Graph'
 import DevTools from '../containers/DevTools';
 import EditWorkshop from '../containers/EditWorkshop';
 import Homepage from '../containers/Homepage';
