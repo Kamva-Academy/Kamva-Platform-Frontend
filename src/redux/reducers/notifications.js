@@ -12,7 +12,9 @@ const getMessage = (actionType, message) => {
     case actionTypes.CALL_MENTOR_SUCCESS:
       return 'درخواست شما برای منتور‌ها ارسال شد.';
     case actionTypes.SEND_ANSWER_SUCCESS:
-      return 'جواب شما با موقفیت ثبت شد!';
+      return 'جواب شما با موفقیت ثبت شد!';
+    case actionTypes.SEND_ANSWER_FAILURE:
+      return 'یک مشکلی هست. جواب شما ثبت نشد!';
     default:
       return message;
   }

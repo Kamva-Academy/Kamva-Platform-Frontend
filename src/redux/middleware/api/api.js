@@ -36,16 +36,20 @@ const ERRORS = {
   TOKEN_EXPIRED: 'لطفا به سامانه وارد شوید!',
   NOT_FOUND: 'اطلاعات یافت نشد!',
   [actionTypes.LOGIN_FAILURE]: 'نام کاربری یا رمزعبور اشتباه است!',
-  [actionTypes.SEND_ANSWER_FAILURE]: 'یک مشکلی هست. جواب شما ثبت نشد.',
 };
 
 const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
+  if (error.message === 'TOKEN_EXPIRED') {
+    next({
+      type: actionTypes.LOGOUT_REQUEST,
+    });
+  }
   return next({
     ...actionWithoutCallAPI,
     type: failureType,
     error:
-      ERRORS[error.message] ||
       ERRORS[failureType] ||
+      ERRORS[error.message] ||
       error.message ||
       'خطایی رخ داده است!',
   });

@@ -13,7 +13,13 @@ const checkErrorsStatusCode = (response) => {
 const fetchApi = async (url, fetchOptions) => {
   const response = await fetch(url, fetchOptions);
   checkErrorsStatusCode(response);
-  const json_response = await response.json();
+  let json_response;
+  try {
+    json_response = await response.json();
+  } catch (e) {
+    if (response.status < 300) return {};
+    throw new Error();
+  }
   if (!response.ok) {
     if (json_response.error) {
       throw new Error(json_response.error);
