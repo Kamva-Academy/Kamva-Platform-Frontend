@@ -16,7 +16,7 @@ const Root = () => {
       <Switch>
         <Route path="/loading/"></Route>
         <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
-        <Route path="/workshops/" component={Workshops} />
+        <PrivateRoute path="/workshops/" component={Workshops} />
         <Route path="/workshop/">
           <Switch>
             <PrivateRoute
@@ -28,7 +28,7 @@ const Root = () => {
           </Switch>
         </Route>
         <PrivateRoute path="/mentor/" component={MentorPage} />
-        <Route path="/survey" component={Survey} />
+        <PrivateRoute path="/survey" component={Survey} />
         <Route path="/" component={Homepage} />
       </Switch>
       <DevTools />
