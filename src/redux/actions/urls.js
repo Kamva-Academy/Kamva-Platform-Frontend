@@ -19,6 +19,7 @@ export const CREATE_STATE = ROOT.concat('fsm/state/');
 
 export const ALL_WORKSHOPS = ROOT.concat('fsm/fsm/');
 export const GET_WORKSHOP = (id) => ROOT.concat(`fsm/fsm/${id}/`);
+export const GET_STATE = (id) => ROOT.concat(`fsm/state/${id}/`);
 export const MENTOR_GET_WORKSHOP = ROOT.concat(`fsm/mentorgetplayerfsm/`);
 
 export const MENTOR_GET_CURRENT_STATE = ROOT.concat(

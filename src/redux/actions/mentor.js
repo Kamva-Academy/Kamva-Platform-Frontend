@@ -60,6 +60,20 @@ export const getWorkshop = ({ id }) => ({
   },
 });
 
+export const getState = ({ stateId }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GET_CURRENT_STATE_REQUEST,
+      actionTypes.GET_CURRENT_STATE_SUCCESS,
+      actionTypes.GET_CURRENT_STATE_FAILURE,
+    ],
+    url: URLs.GET_STATE(stateId),
+    fetchOptions: {
+      method: 'GET',
+    },
+  },
+});
+
 export const editWorkshop = () => ({}); // TODO:
 
 export const deleteWorkshop = () => ({}); // TODO:
@@ -171,15 +185,13 @@ export const createHelp = ({ stateId }) => ({
     url: URLs.CREATE_HELP,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ state: stateId }),
+      body: JSON.stringify({ state: stateId, name: 'heeeeellllllp' }),
     },
   },
   payload: { stateId },
 });
 
 export const changePlayerState = ({ edge, player }) => ({}); // TODO:
-
-export const createHelpWidget = ({ helpId }) => ({}); // TODO: inherit from state
 
 export const deleteState = ({ id }) => ({
   [CALL_API]: {

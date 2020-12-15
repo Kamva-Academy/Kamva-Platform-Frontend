@@ -7,6 +7,9 @@ function currentState(state = initState, action) {
     case actionTypes.INIT_CURRENT_STATE:
       return initState;
 
+    case actionTypes.CREATE_HELP_SUCCESS:
+    case actionTypes.DELETE_WIDGET_SUCCESS:
+    case actionTypes.CREATE_WIDGET_SUCCESS:
     case actionTypes.GO_FORWARD_FAILURE:
     case actionTypes.GO_BACKWARD_FAILURE:
       return {
@@ -30,7 +33,11 @@ function currentState(state = initState, action) {
           ...state.state,
           widgets: state.state.widgets.map((widget) =>
             +widget.id === +action.response.problem
-              ? { ...widget, last_submit: action.response.xanswer }
+              ? {
+                  ...widget,
+                  last_submit: action.response.xanswer,
+                  answer: action.response.answer,
+                }
               : widget
           ),
         },

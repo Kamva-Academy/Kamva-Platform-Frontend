@@ -13,7 +13,8 @@
       2,
       {
         "SwitchCase": 1,
-        "flatTernaryExpressions": true
+        "flatTernaryExpressions": true,
+        "offsetTernaryExpressions": true
       }
     ],
     "jsx-a11y/anchor-is-valid": "off",

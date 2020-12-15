@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 
 import EditState from '../components/SpecialComponents/EditWorkshopPage/EditState';
 import StatesTabbar from '../components/SpecialComponents/EditWorkshopPage/StatesTabbar';
-import { getWorkshop } from '../redux/actions/mentor';
+import { getState, getWorkshop } from '../redux/actions/mentor';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
@@ -33,7 +33,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EditWorkshop = ({ workshop, getWorkshop, fsmId, needUpdate }) => {
+const EditWorkshop = ({
+  workshop,
+  currentState = {},
+  getState,
+  getWorkshop,
+  fsmId,
+  needUpdateState,
+}) => {
   const [tab, setTab] = React.useState(0);
 
   const history = useHistory();
@@ -47,10 +54,16 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId, needUpdate }) => {
   }, [getWorkshop, fsmId, history]);
 
   useEffect(() => {
-    if (fsmId && needUpdate) {
-      getWorkshop({ id: fsmId });
+    if (workshop?.states[tab]?.id) {
+      getState({ stateId: workshop.states[tab].id });
     }
-  }, [getWorkshop, fsmId, needUpdate, history]);
+  }, [tab, workshop, getState]);
+
+  useEffect(() => {
+    if (workshop?.states[tab]?.id && needUpdateState) {
+      getState({ stateId: workshop.states[tab].id });
+    }
+  }, [needUpdateState]);
 
   const classes = useStyles();
 
@@ -72,7 +85,7 @@ const EditWorkshop = ({ workshop, getWorkshop, fsmId, needUpdate }) => {
                     fsmId={workshop.id}
                   />
                 </Paper>
-                <EditState state={workshop.states[tab]} />
+                <EditState state={currentState} />
               </>
             )}
           </Paper>
@@ -86,8 +99,12 @@ const mapStateToProps = (state, ownProps) => ({
   workshop: state.mentor.workshops.find(
     (workshop) => +workshop.id === +ownProps.match.params.fsmId
   ),
+  currentState: state.currentState.state,
+  needUpdateState: state.currentState.needUpdateState,
   needUpdate: state.mentor.needUpdateCurrentWorkshop,
   fsmId: ownProps.match.params.fsmId,
 });
 
-export default connect(mapStateToProps, { getWorkshop })(EditWorkshop);
+export default connect(mapStateToProps, { getWorkshop, getState })(
+  EditWorkshop
+);

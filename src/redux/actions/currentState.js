@@ -85,7 +85,7 @@ const sendAnswer = (body) => ({
   },
 });
 
-export const sendFileAnswer = ({ player, problem, answer_file }) => ({
+export const sendFileAnswer = ({ playerId, problemId, answer_file }) => ({
   [CALL_API]: {
     types: [
       actionTypes.SEND_ANSWER_REQUEST,
@@ -97,8 +97,8 @@ export const sendFileAnswer = ({ player, problem, answer_file }) => ({
       method: 'POST',
       dontContentType: true,
       body: jsonToFormData({
-        player,
-        problem,
+        player: playerId,
+        problem: problemId,
         problem_type: 'ProblemUploadFileAnswer',
         answer_file,
       }),
@@ -106,33 +106,36 @@ export const sendFileAnswer = ({ player, problem, answer_file }) => ({
   },
 });
 
-export const sendBigAnswer = ({ player, problem, answer }) =>
+export const sendBigAnswer = ({ playerId, problemId, answer }) =>
   sendAnswer({
-    player,
-    problem,
+    player: playerId,
+    problem: problemId,
     problem_type: 'ProblemBigAnswer',
     answer: {
       text: answer,
+      answer_type: 'BigAnswer',
     },
   });
 
-export const sendSmallAnswer = ({ player, problem, answer }) =>
+export const sendSmallAnswer = ({ playerId, problemId, answer }) =>
   sendAnswer({
-    player,
-    problem,
+    player: playerId,
+    problem: problemId,
     problem_type: 'ProblemSmallAnswer',
     answer: {
       text: answer,
+      answer_type: 'SmallAnswer',
     },
   });
 
-export const sendMultiChoiceAnswer = ({ player, problem, answer }) =>
+export const sendMultiChoiceAnswer = ({ playerId, problemId, answer }) =>
   sendAnswer({
-    player,
-    problem,
+    player: playerId,
+    problem: problemId,
     problem_type: 'ProblemMultiChoice',
     answer: {
       text: answer,
+      answer_type: 'MultiChoiceAnswer',
     },
   });
 

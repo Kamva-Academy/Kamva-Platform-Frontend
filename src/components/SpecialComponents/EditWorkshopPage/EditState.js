@@ -7,11 +7,10 @@ import EditStateHelps from './EditStateHelps';
 import EditWidgets from './EditWidgets';
 
 function EditState({ state }) {
-  const { widgets = [] } = state;
+  const { widgets = [], help_states = [] } = state;
 
-  const helps = [{ widgets }, { widgets }];
   widgets.sort((a, b) => a.id - b.id);
-  helps.sort((a, b) => a.id - b.id);
+  help_states.sort((a, b) => a.id - b.id);
 
   return (
     <>
@@ -19,7 +18,7 @@ function EditState({ state }) {
       <Box my={2}>
         <Divider />
       </Box>
-      <EditStateHelps helps={helps} stateId={state.id} />
+      <EditStateHelps helps={help_states} stateId={state.id} />
       <Box my={2}>
         <Divider />
       </Box>

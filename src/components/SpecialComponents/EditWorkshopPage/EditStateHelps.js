@@ -1,11 +1,13 @@
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
 import clsx from 'clsx';
-import React from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { connect } from 'react-redux';
 
+import { createHelp, getState } from '../../../redux/actions/mentor';
 import Widget, { MODES } from '../../Widget';
+import CreateWidgetDialog from './components/CreateWidgetDialog';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,8 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EditStateHelps({ helps, stateId }) {
+function EditStateHelps({ helps, stateId, createHelp, getState }) {
   const classes = useStyles();
+  const [helpId, setHelpId] = useState();
   return (
     <>
       <Typography variant="h3" gutterBottom>
@@ -39,10 +42,11 @@ function EditStateHelps({ helps, stateId }) {
                 autoPlay={false}
                 fullHeightHover={false}
                 navButtonsAlwaysInvisible={true}>
-                {helps.map((help) => (
+                {helps.map((help, index) => (
                   <Paper
                     className={clsx(classes.mainItem, classes.paper)}
                     key={help.id}>
+                    <Typography>راهنمایی شماره {index + 1}</Typography>
                     {help.widgets.map((widget) => (
                       <Widget
                         key={widget.id}
@@ -55,7 +59,8 @@ function EditStateHelps({ helps, stateId }) {
                       className={classes.addHelpWidget}
                       startIcon={<AddIcon />}
                       variant="contained"
-                      color="primary">
+                      color="primary"
+                      onClick={() => setHelpId(help.id)}>
                       ایجاد ویجت جدید
                     </Button>
                   </Paper>
@@ -69,13 +74,19 @@ function EditStateHelps({ helps, stateId }) {
             fullWidth
             startIcon={<AddIcon />}
             variant="contained"
-            color="primary">
+            color="primary"
+            onClick={() => createHelp({ stateId })}>
             راهنمایی جدید
           </Button>
         </Grid>
       </Grid>
+      <CreateWidgetDialog
+        stateId={helpId}
+        open={!!helpId}
+        handleClose={() => setHelpId(null)}
+      />
     </>
   );
 }
 
-export default connect()(EditStateHelps);
+export default connect(null, { createHelp, getState })(EditStateHelps);
