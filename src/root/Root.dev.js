@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import Graph from '../components/MiniGames/Graph'
 import DevTools from '../containers/DevTools';
 import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
@@ -16,6 +17,7 @@ const Root = () => {
     <>
       <Switch>
         <Route path="/loading/"></Route>
+        <Route path="/test/" component={Graph} />
         <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
         <PrivateRoute
           path="/edit_article/:articleId/"
