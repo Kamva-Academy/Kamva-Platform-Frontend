@@ -17,54 +17,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialData = {
-  labels: [50, 100, 200],
-  datasets: [
-    {
-      label: 'طول کوتاه‌ترین مسیر بر حسب تعداد رئوس',
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [Math.log(50), Math.log(100), Math.log(200)],
-    },
-  ],
+const step = 10;
+
+const chartConfig = {
+  label: 'طول کوتاه‌ترین مسیر بر حسب تعداد رئوس',
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: 'rgba(75,192,192,0.4)',
+  borderColor: 'rgba(75,192,192,1)',
+  borderCapStyle: 'butt',
+  borderDash: [],
+  borderDashOffset: 0.0,
+  borderJoinStyle: 'miter',
+  pointBorderColor: 'rgba(75,192,192,1)',
+  pointBackgroundColor: '#fff',
+  pointBorderWidth: 5,
+  pointHoverRadius: 8,
+  pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+  pointHoverBorderColor: 'rgba(220,220,220,1)',
+  pointHoverBorderWidth: 2,
+  pointRadius: 1,
+  pointHitRadius: 10,
 };
 
 const ChartTab = () => {
   const classes = useStyles();
-  const [data, setData] = useState(initialData);
-  const [lastInput, setLastInput] = useState(20);
+  const [labels, setLabels] = useState([step, 2 * step]);
 
   const changeChart = (newInput) => {
-    console.log(newInput);
-    const newData = data;
-    if (newInput > lastInput) {
-      console.log(1);
-      newData.datasets[0].data.push(Math.log(newInput));
-      newData.labels.push(newInput);
-    } else if (newInput < lastInput) {
-      console.log(2);
-      newData.datasets[0].data.pop();
-      newData.labels.pop();
-    }
-    console.log(newData.datasets[0].data);
-    console.log(newData.labels);
-    setData(newData);
-    setLastInput(newInput);
+    setLabels([...Array(newInput / step).keys()].map((x) => x * step + step));
   };
 
   return (
@@ -75,7 +56,15 @@ const ChartTab = () => {
             height={5}
             width={5}
             options={{ maintainAspectRatio: false }}
-            data={data}
+            data={{
+              labels,
+              datasets: [
+                {
+                  ...chartConfig,
+                  data: labels.map((label) => Math.log(label)),
+                },
+              ],
+            }}
           />
         </Grid>
         <Grid
@@ -90,16 +79,13 @@ const ChartTab = () => {
             <ThemeProvider theme={theme}>
               <div dir="ltr">
                 <Slider
-                  defaultValue={100}
-                  aria-labelledby="discrete-slider"
+                  defaultValue={2 * step}
                   valueLabelDisplay="auto"
-                  step={50}
+                  step={step}
                   marks
-                  min={50}
-                  max={400}
-                  onChangeCommitted={(e) =>
-                    changeChart(parseInt(e.target.textContent))
-                  }
+                  min={step}
+                  max={20 * step}
+                  onChangeCommitted={(e, val) => changeChart(val)}
                 />
               </div>
             </ThemeProvider>
