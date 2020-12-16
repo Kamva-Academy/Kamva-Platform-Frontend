@@ -2,10 +2,12 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import MiniGames from '../components/MiniGames';
+import Article from '../containers/Article';
 import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
 import Homepage from '../containers/Homepage';
 import MentorPage from '../containers/MentorPage';
+import PhysicsDay from '../containers/PhysicsDay';
 import Survey from '../containers/Survey';
 import Workshop from '../containers/Workshop';
 import Workshops from '../containers/Workshops';
@@ -29,8 +31,10 @@ const Root = () => {
           <Route path="/workshop/" component={Workshops} />
         </Switch>
       </Route>
+      <Route path="/article/:articleId" component={Article} />
       <PrivateRoute path="/mentor/" component={MentorPage} />
       <PrivateRoute path="/survey" component={Survey} />
+      <Route path="/physics_day" component={PhysicsDay} />
       <Route path="/" component={Homepage} />
     </Switch>
   );

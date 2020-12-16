@@ -1,5 +1,4 @@
 import './assets/styles/App.css';
-import './assets/styles/landing.css';
 
 import { CssBaseline } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';

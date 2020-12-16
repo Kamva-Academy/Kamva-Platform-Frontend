@@ -12,7 +12,7 @@ const getRequestOptions = ({ fetchOptions, token }) => ({
       'Content-Type': 'application/json',
     }),
     ...fetchOptions.headers,
-    ...(token && { Authorization: token }),
+    ...(token && { Authorization: 'JWT ' + token }),
   },
 });
 
@@ -66,7 +66,7 @@ export default ({ getState }) => (next) => (action) => {
   next({ ...actionWithoutCallAPI, type: requestType });
   const requestOptions = getRequestOptions({
     fetchOptions,
-    token: 'JWT ' + getState().account.token,
+    token: getState().account.token,
   });
 
   return fetchApi(url, requestOptions)

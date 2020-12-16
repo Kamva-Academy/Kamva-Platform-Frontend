@@ -1,112 +1,83 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import {
-  Button,
-  Divider,
-  Fab,
-  Grid,
-  Hidden,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Button, Fab, Grid, makeStyles, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import {
-  Assignment,
-  KeyboardArrowUp as KeyboardArrowUpIcon,
-} from '@material-ui/icons';
+import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
-import FAQ from '../components/FAQ/FAQ';
-import Footer from '../components/Footer/Footer';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import { logout } from '../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({
-  centerItems: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+  section1: {
+    height: '100vh',
+    color: 'black',
   },
-
+  landingBackground: {
+    height: '100%',
+    width: '100%',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    background: `linear-gradient(rgba(254,206,171,.2),rgba(254,206,171,.2)),url(${process.env.PUBLIC_URL}/back.jpg) no-repeat 50% fixed`,
+    filter: 'blur(6px)',
+    webkitFilter: 'blur(6px)',
+    opacity: 0.6,
+    backgroundSize: 'cover',
+    zIndex: -1,
+    animation: 'show-back .8s .3s both',
+  },
+  firstPageContent: {
+    height: '100%',
+  },
   title: {
     fontSize: 80,
     lineHeight: '80px',
-    textAlign: 'center',
-    textShadow: '-2px 2px #888',
-    color: 'white',
+    fontWeight: 900,
+    color: '#555',
+    textShadow: '3px 3px #888',
     [theme.breakpoints.down('sm')]: {
       fontSize: 60,
       lineHeight: '60px',
     },
   },
-
-  subtitle: {
-    fontSize: 30,
-    textAlign: 'center',
-    // lineHeight: '40px',
-    color: '#37253f',
-    textShadow: '-2px 2px #888',
+  goToWorkshop: {
+    display: 'inline-block',
+    border: '1px solid #2185d0',
+    background: 'rgba(33,133,208,.6)',
+    borderRadius: '10px',
+    transition: '.3s',
+    fontSize: 50,
+    lineHeight: '60px',
+    fontWeight: 800,
+    color: '#eee',
+    textShadow: '3px 3px #888',
+    padding: theme.spacing(2),
+    margin: theme.spacing(6, 2),
     [theme.breakpoints.down('sm')]: {
-      fontSize: 20,
-      // marginBottom: theme.spacing(3),
+      fontSize: 40,
+      lineHeight: '40px',
     },
   },
-
-  sectionTitle: {
-    fontSize: 26,
+  physicsDay: {
+    display: 'inline-block',
+    border: '1px solid #35be32',
+    background: 'rgba(53,190,50,.6)',
+    borderRadius: '10px',
+    transition: '.3s',
+    fontSize: 50,
+    lineHeight: '60px',
+    fontWeight: 800,
+    color: '#eee',
+    textShadow: '3px 3px #888',
+    padding: theme.spacing(2),
+    margin: theme.spacing(6, 2),
     [theme.breakpoints.down('sm')]: {
-      fontSize: 20,
+      fontSize: 40,
+      lineHeight: '40px',
     },
-  },
-
-  text: {
-    textAlign: 'justify',
-    textJustify: 'inter-word',
-    paddingLeft: '20px',
-  },
-
-  apple: {
-    zIndex: '5',
-    position: 'fixed',
-    top: '25%',
-    left: '50%',
-    width: '60px',
-    height: '70px',
-    marginTop: '-35px',
-    marginLeft: '-30px',
-    filter: 'drop-shadow(3px 3px 5px #33333333)',
-  },
-
-  section1: {
-    height: '100vh',
-    color: 'black',
-    // padding: theme.spacing(4, 3, 4),
-  },
-
-  fullHeight: {
-    height: '100%',
-  },
-
-  section2: {
-    position: 'relative',
-    zIndex: '100',
-    opacity: '1',
-    boxShadow: '1px 1px 10px black',
-    color: '#f7f2f6',
-    background: '#410066',
-    paddingTop: '30px',
-    paddingBottom: '30px',
-  },
-
-  section5: {
-    position: 'relative',
-    zIndex: '100',
-    opacity: '1',
-    background: '#F0DBED',
-    paddingTop: '30px',
-    paddingBottom: '30px',
   },
 }));
 
@@ -118,83 +89,28 @@ function Homepage({ isLoggedIn, logout }) {
     <>
       <Container className={classes.section1}>
         <div id="back-to-top-anchor"></div>
-        <div className="landing-background" />
-        <img
-          src={process.env.PUBLIC_URL + '/apple.png'}
-          className={classes.apple}
-          alt=""
-        />
-
+        <div className={classes.landingBackground} />
         <Grid
           container
-          direction="column"
-          alignContent="center"
           justify="center"
-          style={{ height: '100%' }}>
-          <Grid
-            container
-            item
-            justify="center"
-            direction="row"
-            style={{ height: '90%' }}>
-            <Grid
-              item
-              container
-              xs={12}
-              sm={7}
-              justify="center"
-              alignItems="center"
-              direction="column">
-              <Grid item>
-                <Typography className={classes.title} variant="h2">
-                  رویداد روز فیزیک
-                </Typography>
-                <br />
-                <Typography
-                  component="h2"
-                  variant="h3"
-                  className={classes.subtitle}>
-                  آخرِ آخرین هفته‌ی آذر
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
-
-      <Container className={`${classes.section2} ${classes.centerItems}`}>
-        <Grid
-          container
-          direction="row"
-          spacing={4}
           alignItems="center"
-          justify="center">
-          <Grid container xs={12} sm={4} justify="center"></Grid>
-          <Grid container xs={12} sm={4} justify="center">
-            <Grid item>
-              <img
-                style={{ height: '80vh', zIndex: '1000' }}
-                src={process.env.PUBLIC_URL + '/daneshmandan.png'}
-                alt=""
-              />
-            </Grid>
-          </Grid>
-          <Grid container xs={12} sm={4} justify="center"></Grid>
-        </Grid>
-      </Container>
-
-      <Container className={`${classes.section5} ${classes.centerItems}`}>
-        <Grid container direction="column" spacing={4}>
+          direction="column"
+          className={classes.firstPageContent}>
           <Grid item>
-            <Typography
-              component="h2"
-              variant="h2"
-              className={classes.sectionTitle}>
-              برگزارکنندگان
+            <Typography component="h1" variant="h1" className={classes.title}>
+              مدرسه تابستانه
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Footer />
+          <Grid item>
+            {/* <Button className={classes.goToWorkshop}>
+              ورود به کارگاه بدون منتور
+            </Button> */}
+            <Button
+              component={Link}
+              to="/physics_day"
+              className={classes.physicsDay}>
+              رویداد روز فیزیک
+            </Button>
           </Grid>
         </Grid>
       </Container>
