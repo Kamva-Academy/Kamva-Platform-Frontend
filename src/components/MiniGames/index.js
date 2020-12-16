@@ -1,11 +1,16 @@
 import React from 'react';
 
-import PhysicArticle from './PhysicArticle';
+import Chart from './PhysicArticle/Chart';
+import Graph from './PhysicArticle/Graph';
 
 export const MINI_GAMES = {
-  physic_article: {
-    label: 'بازی مقاله فیزیک',
-    component: PhysicArticle,
+  physic_article_graph: {
+    label: 'گراف مقاله فیزیک',
+    component: Graph,
+  },
+  physic_article_chart: {
+    label: 'نمودار مقاله فیزیک',
+    component: Chart,
   },
 };
 

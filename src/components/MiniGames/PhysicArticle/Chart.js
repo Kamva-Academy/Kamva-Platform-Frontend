@@ -1,6 +1,11 @@
 import { Grid, makeStyles, Slider } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
+
+const theme = createMuiTheme({
+  direction: 'ltr', // Both here and <body dir="rtl">
+});
 
 const useStyles = makeStyles((theme) => ({
   row1: {
@@ -13,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialData = {
-  labels: [50, 100],
+  labels: [50, 100, 200],
   datasets: [
     {
-      label: 'نمودار تعداد خوشگی بر حسب تعداد رئوس',
+      label: 'طول کوتاه‌ترین مسیر بر حسب تعداد رئوس',
       fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -34,7 +39,7 @@ const initialData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [Math.log(50), Math.log(100)],
+      data: [Math.log(50), Math.log(100), Math.log(200)],
     },
   ],
 };
@@ -82,18 +87,22 @@ const ChartTab = () => {
           className={classes.row2}
           spacing={2}>
           <Grid item style={{ width: '80%' }}>
-            <Slider
-              defaultValue={100}
-              aria-labelledby="discrete-slider"
-              valueLabelDisplay="auto"
-              step={50}
-              marks
-              min={50}
-              max={400}
-              onChangeCommitted={(e) =>
-                changeChart(parseInt(e.target.textContent))
-              }
-            />
+            <ThemeProvider theme={theme}>
+              <div dir="ltr">
+                <Slider
+                  defaultValue={100}
+                  aria-labelledby="discrete-slider"
+                  valueLabelDisplay="auto"
+                  step={50}
+                  marks
+                  min={50}
+                  max={400}
+                  onChangeCommitted={(e) =>
+                    changeChart(parseInt(e.target.textContent))
+                  }
+                />
+              </div>
+            </ThemeProvider>
           </Grid>
         </Grid>
       </Grid>

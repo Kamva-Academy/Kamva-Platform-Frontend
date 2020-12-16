@@ -1,4 +1,10 @@
-import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  makeStyles,
+  TextField,
+  withWidth,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import Graph from 'react-graph-network';
 
@@ -6,15 +12,7 @@ const useStyles = makeStyles((theme) => ({
   row1: {
     height: '85vh',
   },
-
-  row2: {
-    height: '15vh',
-  },
 }));
-
-const Node = () => {
-  return <circle r={7} />;
-};
 
 const initial_n = 15;
 const initial_p = 0.3;
@@ -37,7 +35,7 @@ const generateNewGraph = (n, p) => {
   return newData;
 };
 
-const GraphTab = () => {
+const GraphTab = ({ width }) => {
   const classes = useStyles();
   const [data, setData] = useState(generateNewGraph(initial_n, initial_p));
   const [n, setN] = useState(initial_n);
@@ -67,33 +65,21 @@ const GraphTab = () => {
     <Grid container direction="column">
       <Grid item className={classes.row1}>
         <Graph
-          NodeComponent={Node}
-          nodeDistance={1000}
+          NodeComponent={() => <circle r={width === 'xs' ? 3 : 7} />}
+          nodeDistance={width === 'xs' ? 300 : 1000}
           data={data}
-          id="graph"
-          zoomDepth={1}
+          zoomDepth={2}
           enableDrag={true}
         />
       </Grid>
-      <Grid item className={classes.row2}>
+      <Grid item>
         <Grid
           container
-          direction="row"
+          direction="row-reverse"
           justify="center"
           alignItems="center"
           spacing={2}>
-          <Grid item>
-            <Button
-              orientation="vertical"
-              color="primary"
-              aria-label="vertical contained primary button group"
-              variant="contained"
-              disabled={!isNValid || !isPValid}
-              onClick={() => setData(generateNewGraph(n, p))}>
-              یه‌دونه جدید بساز
-            </Button>
-          </Grid>
-          <Grid item>
+          <Grid item xs={4} md={3}>
             <TextField
               error={!isNValid}
               label="تعداد راس‌ها"
@@ -101,12 +87,14 @@ const GraphTab = () => {
               variant="outlined"
               value={n}
               onChange={(e) => checkAndSetN(e.target.value)}
+              fullWidth
+              inputProps={{ className: 'ltr-input' }}
               helperText={
-                isNValid ? '' : 'تعداد راس‌ها باید حداقل یک و حداکثر ۳۰ باشد.'
+                !isNValid && 'تعداد راس‌ها باید حداقل یک و حداکثر ۳۰ باشد.'
               }
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={4} md={3}>
             <TextField
               error={!isPValid}
               label="احتمال"
@@ -114,10 +102,22 @@ const GraphTab = () => {
               variant="outlined"
               value={p}
               onChange={(e) => checkAndSetP(e.target.value)}
-              helperText={
-                isPValid ? '' : 'احتمال داده شده باید بین ۰ تا ۱ باشد.'
-              }
+              fullWidth
+              inputProps={{ className: 'ltr-input' }}
+              helperText={!isPValid && 'احتمال داده شده باید بین ۰ تا ۱ باشد.'}
             />
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Button
+              orientation="vertical"
+              color="primary"
+              aria-label="vertical contained primary button group"
+              variant="contained"
+              disabled={!isNValid || !isPValid}
+              onClick={() => setData(generateNewGraph(n, p))}
+              fullWidth>
+              یه‌دونه جدید بساز
+            </Button>
           </Grid>
         </Grid>
       </Grid>
@@ -125,4 +125,4 @@ const GraphTab = () => {
   );
 };
 
-export default GraphTab;
+export default withWidth()(GraphTab);
