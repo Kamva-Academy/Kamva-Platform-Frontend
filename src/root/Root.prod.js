@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
 import Homepage from '../containers/Homepage';
 import MentorPage from '../containers/MentorPage';
@@ -11,26 +12,25 @@ import PrivateRoute from './PrivateRoute';
 
 const Root = () => {
   return (
-    <>
-      <Switch>
-        <Route path="/loading/"></Route>
-        <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
-        <Route path="/workshops/" component={Workshops} />
-        <Route path="/workshop/">
-          <Switch>
-            <PrivateRoute
-              path="/workshop/:playerUUID/:fsmId/:stateId/"
-              component={Workshop}
-            />
-            <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
-            <Route path="/workshop/" component={Workshops} />
-          </Switch>
-        </Route>
-        <PrivateRoute path="/mentor/" component={MentorPage} />
-        <Route path="/survey" component={Survey} />
-        <Route path="/" component={Homepage} />
-      </Switch>
-    </>
+    <Switch>
+      <Route path="/loading/"></Route>
+      <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
+      <PrivateRoute path="/edit_article/:articleId/" component={EditArticle} />
+      <PrivateRoute path="/workshops/" component={Workshops} />
+      <Route path="/workshop/">
+        <Switch>
+          <PrivateRoute
+            path="/workshop/:playerUUID/:fsmId/:stateId/"
+            component={Workshop}
+          />
+          <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
+          <Route path="/workshop/" component={Workshops} />
+        </Switch>
+      </Route>
+      <PrivateRoute path="/mentor/" component={MentorPage} />
+      <PrivateRoute path="/survey" component={Survey} />
+      <Route path="/" component={Homepage} />
+    </Switch>
   );
 };
 export default Root;

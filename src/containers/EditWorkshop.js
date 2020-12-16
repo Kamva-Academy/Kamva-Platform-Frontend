@@ -101,7 +101,6 @@ const mapStateToProps = (state, ownProps) => ({
   ),
   currentState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
-  needUpdate: state.mentor.needUpdateCurrentWorkshop,
   fsmId: ownProps.match.params.fsmId,
 });
 

@@ -15,10 +15,13 @@ export const UNREAD_NOTIFICATIONS = ROOT.concat(
   'notifications/api/unread_list/'
 );
 export const CREATE_WORKSHOP = ROOT.concat('fsm/fsm/');
+export const CREATE_ARTICLE = ROOT.concat('fsm/article/');
 export const CREATE_STATE = ROOT.concat('fsm/state/');
 
 export const ALL_WORKSHOPS = ROOT.concat('fsm/fsm/');
+export const ALL_ARTICLES = ROOT.concat('fsm/article/');
 export const GET_WORKSHOP = (id) => ROOT.concat(`fsm/fsm/${id}/`);
+export const GET_ARTICLE = (id) => ROOT.concat(`fsm/article/${id}/`);
 export const GET_STATE = (id) => ROOT.concat(`fsm/state/${id}/`);
 export const MENTOR_GET_WORKSHOP = ROOT.concat(`fsm/mentorgetplayerfsm/`);
 

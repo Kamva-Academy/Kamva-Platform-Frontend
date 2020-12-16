@@ -55,15 +55,25 @@ export const UNREAD_NOTIFICATIONS_REQUEST = 'UNREAD_NOTIFICATIONS_REQUEST'; //ut
 export const UNREAD_NOTIFICATIONS_SUCCESS = 'UNREAD_NOTIFICATIONS_SUCCESS';
 export const UNREAD_NOTIFICATIONS_FAILURE = 'UNREAD_NOTIFICATIONS_FAILURE';
 
-////////////// all workShops:
+////////////// all workshops:
 export const ALL_WORKSHOPS_REQUEST = 'ALL_WORKSHOPS_REQUEST'; //utl: api/fsm/fsm method: get /
 export const ALL_WORKSHOPS_SUCCESS = 'ALL_WORKSHOPS_SUCCESS';
 export const ALL_WORKSHOPS_FAILURE = 'ALL_WORKSHOPS_FAILURE';
 
-////////////// get workShop:
+////////////// all articles:
+export const ALL_ARTICLES_REQUEST = 'ALL_ARTICLES_REQUEST'; //utl: api/fsm/article method: get /
+export const ALL_ARTICLES_SUCCESS = 'ALL_ARTICLES_SUCCESS';
+export const ALL_ARTICLES_FAILURE = 'ALL_ARTICLES_FAILURE';
+
+////////////// get workshop:
 export const GET_WORKSHOP_REQUEST = 'GET_WORKSHOP_REQUEST'; //utl: api/fsm/fsm method: get /
 export const GET_WORKSHOP_SUCCESS = 'GET_WORKSHOP_SUCCESS';
 export const GET_WORKSHOP_FAILURE = 'GET_WORKSHOP_FAILURE';
+
+////////////// get article:
+export const GET_ARTICLE_REQUEST = 'GET_ARTICLE_REQUEST'; //utl: api/fsm/article method: get /
+export const GET_ARTICLE_SUCCESS = 'GET_ARTICLE_SUCCESS';
+export const GET_ARTICLE_FAILURE = 'GET_ARTICLE_FAILURE';
 
 ////////////// خود تیم‌ها
 export const WORKSHOP_TEAMS_REQUEST = 'WORKSHOP_TEAMS_REQUEST'; //url: api/fsm/teams method: post / body: {fsmId}
@@ -84,6 +94,11 @@ export const VISIT_PLAYER_WORKSHOP_FAILURE = 'VISIT_PLAYER_WORKSHOP_FAILURE';
 export const CREATE_WORKSHOP_REQUEST = 'CREATE_WORKSHOP_REQUEST';
 export const CREATE_WORKSHOP_SUCCESS = 'CREATE_WORKSHOP_SUCCESS';
 export const CREATE_WORKSHOP_FAILURE = 'CREATE_WORKSHOP_FAILURE';
+
+// create article
+export const CREATE_ARTICLE_REQUEST = 'CREATE_ARTICLE_REQUEST';
+export const CREATE_ARTICLE_SUCCESS = 'CREATE_ARTICLE_SUCCESS';
+export const CREATE_ARTICLE_FAILURE = 'CREATE_ARTICLE_FAILURE';
 
 // create state
 export const CREATE_STATE_REQUEST = 'CREATE_STATE_REQUEST';

@@ -35,10 +35,10 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
             {' تیم'}
           </Typography>
           <Typography gutterBottom variant="h3">
-            {team.player.group_name}
+            {team?.player?.group_name}
           </Typography>
           <Grid container direction="row" justify="center">
-            {team.player.team_members.map((tm) => (
+            {team?.player?.team_members?.map((tm) => (
               // <Tooltip title={tm} aria-label={tm}>
               //   <Avatar className={classes.orange}>{tm}</Avatar>
               // </Tooltip>

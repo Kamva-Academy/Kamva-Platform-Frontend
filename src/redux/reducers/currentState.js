@@ -16,6 +16,12 @@ function currentState(state = initState, action) {
         ...state,
         needUpdateState: true,
       };
+    case actionTypes.ALL_ARTICLES_SUCCESS:
+    case actionTypes.GET_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        needUpdateState: false,
+      };
 
     case actionTypes.GO_FORWARD_SUCCESS:
     case actionTypes.GO_BACKWARD_SUCCESS:

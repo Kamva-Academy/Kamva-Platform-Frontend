@@ -8,6 +8,8 @@ function redirect(state = initState, action) {
   switch (action.type) {
     case actionTypes.CREATE_WORKSHOP_SUCCESS:
       return { redirectTo: `/edit_workshop/${action.response.id}` };
+    case actionTypes.CREATE_ARTICLE_SUCCESS:
+      return { redirectTo: `/edit_article/${action.response.id}` };
     case actionTypes.REDIRECT:
       return { redirectTo: action.payload };
     case actionTypes.INIT_REDIRECT:

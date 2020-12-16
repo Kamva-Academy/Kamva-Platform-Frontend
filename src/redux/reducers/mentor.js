@@ -2,6 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initState = {
   workshops: [],
+  articles: [],
   teams: {},
   notifications: [],
 };
@@ -17,12 +18,29 @@ function mentor(state = initState, action) {
     case actionTypes.GET_WORKSHOP_SUCCESS:
       // eslint-disable-next-line no-case-declarations
       const newWorkshops = state.workshops.filter(
-        (workshop) => workshop.id !== action.response.id
+        (workshop) => +workshop.id !== +action.response.id
       );
       newWorkshops.push(action.response);
       return {
         ...state,
         workshops: newWorkshops,
+      };
+
+    case actionTypes.ALL_ARTICLES_SUCCESS:
+      return {
+        ...state,
+        articles: action.response,
+      };
+
+    case actionTypes.GET_ARTICLE_SUCCESS:
+      // eslint-disable-next-line no-case-declarations
+      const newArticles = state.articles.filter(
+        (article) => +article.id !== +action.response.id
+      );
+      newArticles.push(action.response);
+      return {
+        ...state,
+        articles: newArticles,
       };
 
     case actionTypes.CREATE_STATE_SUCCESS:

@@ -46,6 +46,20 @@ export const getAllWorkshops = () => ({
   },
 });
 
+export const getAllArticles = () => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.ALL_ARTICLES_REQUEST,
+      actionTypes.ALL_ARTICLES_SUCCESS,
+      actionTypes.ALL_ARTICLES_FAILURE,
+    ],
+    url: URLs.ALL_ARTICLES,
+    fetchOptions: {
+      method: 'GET',
+    },
+  },
+});
+
 export const getWorkshop = ({ id }) => ({
   [CALL_API]: {
     types: [
@@ -54,6 +68,20 @@ export const getWorkshop = ({ id }) => ({
       actionTypes.GET_WORKSHOP_FAILURE,
     ],
     url: URLs.GET_WORKSHOP(id),
+    fetchOptions: {
+      method: 'GET',
+    },
+  },
+});
+
+export const getArticle = ({ id }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.GET_ARTICLE_REQUEST,
+      actionTypes.GET_ARTICLE_SUCCESS,
+      actionTypes.GET_ARTICLE_FAILURE,
+    ],
+    url: URLs.GET_ARTICLE(id),
     fetchOptions: {
       method: 'GET',
     },
@@ -146,6 +174,23 @@ export const createWorkshop = ({
         name,
         fsm_p_type: playerType,
         fsm_learning_type: mentorType,
+      }),
+    },
+  },
+});
+
+export const createArticle = ({ name }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CREATE_ARTICLE_REQUEST,
+      actionTypes.CREATE_ARTICLE_SUCCESS,
+      actionTypes.CREATE_ARTICLE_FAILURE,
+    ],
+    url: URLs.CREATE_ARTICLE,
+    fetchOptions: {
+      method: 'POST',
+      body: JSON.stringify({
+        name,
       }),
     },
   },

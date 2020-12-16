@@ -1,5 +1,4 @@
 import {
-  Badge,
   Button,
   ButtonGroup,
   Container,
@@ -11,14 +10,16 @@ import {
 import ClassIcon from '@material-ui/icons/Class';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import Articles from '../components/SpecialComponents/MentorPage/Articles';
 import MentorWorkshops from '../components/SpecialComponents/MentorPage/MentorWorkshops';
 import Teams from '../components/SpecialComponents/MentorPage/Teams';
 import { getWorkshopTeams } from '../redux/actions/mentor';
 import {
+  getAllArticles,
   getAllWorkshops,
   getUnreadNotifications,
 } from '../redux/actions/mentor';
@@ -36,15 +37,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const tabs = [
+  {
+    label: 'کارگاه‌ها',
+    icon: ClassIcon,
+    component: MentorWorkshops,
+  },
+  {
+    label: 'مقالات',
+    icon: ClassIcon,
+    component: Articles,
+  },
+  {
+    label: 'تیم‌ها',
+    icon: GroupIcon,
+    component: Teams,
+  },
+  {
+    label: 'درخواست‌ها',
+    component: Teams,
+    props: {
+      mode: 'notifications',
+    },
+  },
+];
+
 const MentorPage = ({
   workshops,
   teams,
   getAllWorkshops,
+  getAllArticles,
   getUnreadNotifications,
   getWorkshopTeams,
 }) => {
   const classes = useStyles();
-  const [tabNumber, setTabNumber] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,7 +90,10 @@ const MentorPage = ({
 
   useEffect(() => {
     getAllWorkshops();
-  }, [getAllWorkshops]);
+    getAllArticles();
+  }, [getAllWorkshops, getAllArticles]);
+
+  const TabComponent = tabs[tabIndex].component;
 
   return (
     <>
@@ -78,25 +108,15 @@ const MentorPage = ({
             justify="space-between">
             <Grid item>
               <ButtonGroup orientation="vertical" color="primary" fullWidth>
-                <Button
-                  onClick={() => setTabNumber(0)}
-                  variant={tabNumber === 0 && 'contained'}
-                  startIcon={<ClassIcon />}>
-                  کارگاه‌ها
-                </Button>
-                <Button
-                  onClick={() => setTabNumber(1)}
-                  variant={tabNumber === 1 && 'contained'}
-                  startIcon={<GroupIcon />}>
-                  تیم‌ها
-                </Button>
-                <Button
-                  onClick={() => setTabNumber(2)}
-                  variant={tabNumber === 2 && 'contained'}>
-                  <Badge badgeContent={'!'} color="secondary">
-                    درخواست‌ها
-                  </Badge>
-                </Button>
+                {tabs.map((tab, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => setTabIndex(index)}
+                    variant={tabIndex === index && 'contained'}
+                    startIcon={tab.icon && <tab.icon />}>
+                    {tab.label}
+                  </Button>
+                ))}
               </ButtonGroup>
             </Grid>
             <Hidden xsDown>
@@ -114,9 +134,7 @@ const MentorPage = ({
           </Grid>
           <Grid item sm={9} xs={12}>
             <Paper elevation={3} classNames={classes.rightBox}>
-              {tabNumber === 0 && <MentorWorkshops />}
-              {tabNumber === 1 && <Teams />}
-              {tabNumber === 2 && <Teams mode="notifications" />}
+              <TabComponent {...tabs[tabIndex].props} />
             </Paper>
           </Grid>
           <Hidden smUp>
@@ -141,4 +159,5 @@ export default connect(mapStateToProps, {
   getAllWorkshops,
   getUnreadNotifications,
   getWorkshopTeams,
+  getAllArticles,
 })(MentorPage);

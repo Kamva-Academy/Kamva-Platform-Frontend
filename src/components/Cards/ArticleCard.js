@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-const WorkshopCard = ({
+const ArticleCard = ({
   id,
   name = '',
   description = '',
@@ -75,7 +75,7 @@ const WorkshopCard = ({
           fullWidth
           color="primary"
           component={Link}
-          to={`/edit_workshop/${id}`}>
+          to={`/edit_article/${id}`}>
           مشاهده
         </Button>
       </CardActions>
@@ -83,4 +83,4 @@ const WorkshopCard = ({
   );
 };
 
-export default WorkshopCard;
+export default ArticleCard;
