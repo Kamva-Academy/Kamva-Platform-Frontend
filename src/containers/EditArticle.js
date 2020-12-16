@@ -33,12 +33,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EditArticle = ({
-  article = { widgets: [] },
+  article = {},
   articleId,
   needUpdateState,
   getArticle,
 }) => {
   const history = useHistory();
+
+  const { widgets = [] } = article;
+  widgets.sort((a, b) => a.id - b.id);
 
   useEffect(() => {
     if (articleId) {
@@ -61,7 +64,7 @@ const EditArticle = ({
       <Paper className={classes.mainPaper}>
         {article && (
           <EditWidgets
-            widgets={article.widgets}
+            widgets={widgets}
             stateId={articleId}
             stateName={article.name}
           />

@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Paper } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
+import { Telegram as TelegramIcon } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -34,8 +35,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Article = ({ article = { widgets: [] }, articleId, getArticle }) => {
+const Article = ({ article = {}, articleId, getArticle }) => {
   const history = useHistory();
+
+  const { widgets = [] } = article;
+  widgets.sort((a, b) => a.id - b.id);
 
   useEffect(() => {
     if (articleId) {
@@ -51,14 +55,12 @@ const Article = ({ article = { widgets: [] }, articleId, getArticle }) => {
     <Container component="main" className={classes.body}>
       <ResponsiveAppBar mode="ARTICLE" />
       {article && (
-        <Grid container justify="center" spacing={2} style={{ marginTop: 70 }}>
-          <Grid item xs={12} md={8}>
-            <Paper className={classes.mainPaper}>
-              {article.widgets.map((widget) => (
-                <Widget key={widget.id} widget={widget} />
-              ))}
-            </Paper>
-          </Grid>
+        <Grid
+          container
+          justify="center"
+          direction="row-reverse"
+          spacing={2}
+          style={{ marginTop: 70 }}>
           <Grid item xs={12} md={4}>
             <ArticleCard2
               img={process.env.PUBLIC_URL + '/mp.jpg'}
@@ -68,6 +70,21 @@ const Article = ({ article = { widgets: [] }, articleId, getArticle }) => {
                در ادامۀ این نوشته قراره به دو روش که هر دوتا مبتنی بر احتمال هستن این کار رو انجام بدیم. پس بزن بریم!"
               withoutButton
             />
+            {/* <Grid container>
+              <Grid item>
+                <TelegramIcon />
+              </Grid>
+              <Grid item></Grid>
+              <Grid item></Grid>
+              <Grid item></Grid>
+            </Grid> */}
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <Paper className={classes.mainPaper}>
+              {widgets.map((widget) => (
+                <Widget key={widget.id} widget={widget} />
+              ))}
+            </Paper>
           </Grid>
         </Grid>
       )}
