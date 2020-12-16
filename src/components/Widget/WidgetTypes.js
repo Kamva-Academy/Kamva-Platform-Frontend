@@ -2,6 +2,7 @@ import BigAnswerQuestionWidget, {
   BigAnswerQuestionEditWidget,
 } from './BigAnswerQuestionWidget';
 import ImageWidget, { ImageEditWidget } from './ImageWidget';
+import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
 import MultiChoiceQuestionWidget, {
   MultiChoiceQuestionEditWidget,
 } from './MultiChoiceQuestionWidget';
@@ -13,8 +14,6 @@ import UploadFileQuestionWidget, {
   UploadFileQuestionEditWidget,
 } from './UploadFileQuestionWidget';
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
-
-
 
 const WIDGET_TYPES = {
   ProblemSmallAnswer: {
@@ -58,6 +57,12 @@ const WIDGET_TYPES = {
     WidgetEditDialog: VideoEditWidget,
     label: 'فیلم',
     backendType: 'Video',
+  },
+  Game: {
+    WidgetComponent: MiniGameWidget,
+    WidgetEditDialog: MiniGameEditWidget,
+    label: 'بازی',
+    backendType: 'Game',
   },
 };
 export default WIDGET_TYPES;

@@ -67,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '20px',
   },
 
-
   apple: {
     zIndex: '5',
     position: 'fixed',
@@ -101,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '30px',
   },
 
-
   section5: {
     position: 'relative',
     zIndex: '100',
@@ -124,17 +122,21 @@ function Homepage({ isLoggedIn, logout }) {
         <img
           src={process.env.PUBLIC_URL + '/apple.png'}
           className={classes.apple}
-          alt=''
+          alt=""
         />
 
         <Grid
           container
           direction="column"
-          alignContent='center'
-          justify='center'
+          alignContent="center"
+          justify="center"
           style={{ height: '100%' }}>
-
-          <Grid container item justify='center' direction="row" style={{ height: '90%' }}>
+          <Grid
+            container
+            item
+            justify="center"
+            direction="row"
+            style={{ height: '90%' }}>
             <Grid
               item
               container
@@ -144,7 +146,7 @@ function Homepage({ isLoggedIn, logout }) {
               alignItems="center"
               direction="column">
               <Grid item>
-                <Typography className={classes.title} variant="h2" >
+                <Typography className={classes.title} variant="h2">
                   رویداد روز فیزیک
                 </Typography>
                 <br />
@@ -167,20 +169,17 @@ function Homepage({ isLoggedIn, logout }) {
           spacing={4}
           alignItems="center"
           justify="center">
-          <Grid container xs={12} sm={4} justify='center'>
-            رویداد‌ها ۱
-          </Grid>
-          <Grid container xs={12} sm={4} justify='center'>
-            <Grid item >
+          <Grid container xs={12} sm={4} justify="center"></Grid>
+          <Grid container xs={12} sm={4} justify="center">
+            <Grid item>
               <img
                 style={{ height: '80vh', zIndex: '1000' }}
                 src={process.env.PUBLIC_URL + '/daneshmandan.png'}
-                alt='' />
+                alt=""
+              />
             </Grid>
           </Grid>
-          <Grid container xs={12} sm={4} justify='center'>
-            رویدادها ۲
-          </Grid>
+          <Grid container xs={12} sm={4} justify="center"></Grid>
         </Grid>
       </Container>
 

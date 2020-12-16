@@ -274,6 +274,13 @@ export const createVideoWidget = ({ state, link }) =>
     link,
   });
 
+export const createMiniGameWidget = ({ state, link }) =>
+  createWidget({
+    state,
+    widget_type: 'Game',
+    link,
+  });
+
 export const createImageWidget = ({ state, link }) =>
   createWidget({
     state,
