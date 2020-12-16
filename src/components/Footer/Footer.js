@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
 
 import InstitutionCard from './InstitutionCard';
@@ -12,7 +12,7 @@ const Footer = () => {
       justify="center"
       alignItems="center"
       spacing={2}>
-      <Grid container item direction="row" justify="center" sm={6}>
+      <Grid container item direction="row" justify="space-evenly" sm={6}>
         {Institutions.map((institution, index) => {
           return (
             <InstitutionCard
@@ -24,8 +24,11 @@ const Footer = () => {
           );
         })}
       </Grid>
-      <Grid item xs={12} justify="center" alignItems="center">
-        «به راه بادیه رفتن به از نشستن باطل / و گر مراد نیابم به قدر وسع بکوشم»
+      <Grid item xs={12} justify="center">
+        <Typography align="center">
+          «به راه بادیه رفتن به از نشستن باطل / و گر مراد نیابم به قدر وسع
+          بکوشم»
+        </Typography>
       </Grid>
     </Grid>
   );

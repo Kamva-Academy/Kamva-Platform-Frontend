@@ -1,13 +1,13 @@
 const Institutions = [
   {
-    name: 'خانه ریاضیات اصفهان',
-    img_src: process.env.PUBLIC_URL + '/MathHouse-logo.png',
-    site_url: 'http://mathhouse.org/',
+    name: 'انجمن علمی ژرفا',
+    img_src: process.env.PUBLIC_URL + '/zharfa.png',
+    site_url: '',
   },
   {
     name: 'جمع علمی-ترویجی رستا',
     img_src: process.env.PUBLIC_URL + '/Rasta-logo.png',
-    site_url: 'https://rastaiha.ir/',
+    site_url: '',
   },
 ]
 
