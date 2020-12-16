@@ -20,7 +20,13 @@ const useStyles = makeStyles({
   },
 });
 
-const ArticleCard2 = ({ id, name = '', description = '', img }) => {
+const ArticleCard2 = ({
+  id,
+  name = '',
+  description = '',
+  img,
+  withoutButton,
+}) => {
   const classes = useStyles();
 
   return (
@@ -40,15 +46,17 @@ const ArticleCard2 = ({ id, name = '', description = '', img }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          variant="contained"
-          fullWidth
-          color="primary"
-          component={Link}
-          disabled={!id}
-          to={id && `/article/${id}`}>
-          مطالعه مقاله
-        </Button>
+        {!withoutButton && (
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            component={Link}
+            disabled={!id}
+            to={id && `/article/${id}`}>
+            مطالعه مقاله
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 800,
     lineHeight: '30px',
     color: '#E20814',
-    textShadow: '-2px 2px #888',
+    textShadow: '-1px 1px #aaa',
     marginTop: theme.spacing(2),
     [theme.breakpoints.down('sm')]: {
       fontSize: 20,
@@ -175,6 +175,8 @@ function PhysicsDay() {
             <ArticleCard2
               img={process.env.PUBLIC_URL + '/zharfa_rasta.png'}
               name="دنیای کوچک ما"
+              description="چشماتو ببند،خودتو کنار سی‌سه پل تصور کن، یا حتی دورتر وسط یکی از خیابون‌های پاریس، یا حتی وسط یه قبیله‌ توی اتیوپی، آدم‌های مختلفی توی هر کدوم از این جاها مشغول کاری هستن. به نظرت از همین جایی که نشستی با چند تا واسطه میتونی یه نامه رو به دست یکی‌شون برسونی؟ 
+              توی این نوشته قراره ‌ببینیم دنیا اینقدر‌ها هم جای بزرگی نیست!"
             />
           </Grid>
           <Grid item sm={3}>

@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
+import ArticleCard2 from '../components/Cards/ArticleCard2';
 import Widget from '../components/Widget';
 import { getArticle } from '../redux/actions/mentor';
 
@@ -57,9 +58,14 @@ const Article = ({ article = { widgets: [] }, articleId, getArticle }) => {
             </Paper>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Paper className={classes.mainPaper}>
-              
-            </Paper>
+            <ArticleCard2
+              img={process.env.PUBLIC_URL + '/mp.jpg'}
+              name="عدد پی با چند رقم اعشار"
+              description="یکی از اعداد عجیبی که همه‌مون توی مدرسه خیلی زود باهاش آشنا می‌شیم عدد «پی»ئه.
+              به‌نظرت از چه روش‌هایی می‌تونیم مقدار عدد پی رو با تقریب نسبتاً خوبی محاسبه کنیم؟
+               در ادامۀ این نوشته قراره به دو روش که هر دوتا مبتنی بر احتمال هستن این کار رو انجام بدیم. پس بزن بریم!"
+              withoutButton
+            />
           </Grid>
         </Grid>
       )}

@@ -7,6 +7,7 @@ import DevTools from '../containers/DevTools';
 import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
 import Homepage from '../containers/Homepage';
+import LoginPage from '../containers/LoginPage';
 import MentorPage from '../containers/MentorPage';
 import PhysicsDay from '../containers/PhysicsDay';
 import Survey from '../containers/Survey';
@@ -19,6 +20,7 @@ const Root = () => {
     <>
       <Switch>
         <Route path="/loading/"></Route>
+        <Route path="/admin" component={LoginPage}></Route>
         <Route path="/game/:gameId" component={MiniGames} />
         <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
         <PrivateRoute

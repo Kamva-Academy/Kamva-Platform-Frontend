@@ -1687,12 +1687,12 @@
     loader-utils "^2.0.0"
 
 "@tinymce/tinymce-react@^3.8.3":
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-3.8.3.tgz#f08b2f0266f0869c362f39c5fb7df706f04e1dc6"
-  integrity sha512-nDs41NVZsl6EgP5rsWzWzO/aGlyZRbcSiFnRcGSvuE0BqDHKaDE3467WjWJreA+8QgcnCR1XP8o3FCLVrnPWqA==
+  version "3.8.4"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-3.8.4.tgz#c652f23735bf63812ce2077a06682fe335b24fee"
+  integrity sha512-wk9UTyuopeSs2UPxfMY2t4ZK4094aH7bfbHz+kAoHQ/lAQB01qojM9Khsg9dGwlMg8ZmUcvQdoiAOwYNUztKww==
   dependencies:
     prop-types "^15.6.2"
-    tinymce "^5.6.1"
+    tinymce "^5.6.2"
 
 "@types/anymatch@*":
   version "1.3.1"
@@ -3246,9 +3246,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001165:
-  version "1.0.30001166"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001166.tgz#ca73e8747acfd16a4fd6c4b784f1b995f9698cf8"
-  integrity sha512-nCL4LzYK7F4mL0TjEMeYavafOGnBa98vTudH5c8lW9izUjnB99InG6pmC1ElAI1p0GlyZajv4ltUdFXvOHIl1A==
+  version "1.0.30001168"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001168.tgz#6fcd098c139d003b9bd484cbb9ca26cb89907f9a"
+  integrity sha512-P2zmX7swIXKu+GMMR01TWa4csIKELTNnZKc+f1CjebmZJQtTAEXmpQSoKVJVVcvPGAA0TEYTOUp3VehavZSFPQ==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -11910,7 +11910,7 @@ tiny-warning@^1.0.0, tiny-warning@^1.0.2, tiny-warning@^1.0.3:
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.3.tgz#94a30db453df4c643d0fd566060d60a875d84754"
   integrity sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA==
 
-tinymce@^5.6.1, tinymce@^5.6.2:
+tinymce@^5.6.2:
   version "5.6.2"
   resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-5.6.2.tgz#4c20c22e328c5d0baab204928dbc2b0ecbed18b4"
   integrity sha512-z7zvM5seOPiW86/vqf08kStwW5Zs5U9oQfuqh2rTj4jEcT2QzxT0v72i2zw3W6rbTLldkAej6edFZphj5ee5zg==
