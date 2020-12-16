@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   Grid,
   makeStyles,
   TextField,
@@ -60,68 +61,71 @@ const GraphTab = ({ width }) => {
     }
     setP(value);
   };
-
   return (
-    <Grid container direction="column">
-      <Grid item className={classes.row1}>
-        <Graph
-          NodeComponent={() => <circle r={width === 'xs' ? 3 : 7} />}
-          nodeDistance={width === 'xs' ? 300 : 1000}
-          data={data}
-          zoomDepth={2}
-          enableDrag={true}
-        />
-      </Grid>
-      <Grid item>
-        <Grid
-          container
-          direction="row-reverse"
-          justify="center"
-          alignItems="center"
-          spacing={2}>
-          <Grid item xs={4} md={3}>
-            <TextField
-              error={!isNValid}
-              label="تعداد راس‌ها"
-              type="number"
-              variant="outlined"
-              value={n}
-              onChange={(e) => checkAndSetN(e.target.value)}
-              fullWidth
-              inputProps={{ className: 'ltr-input' }}
-              helperText={
-                !isNValid && 'تعداد راس‌ها باید حداقل یک و حداکثر ۳۰ باشد.'
-              }
-            />
-          </Grid>
-          <Grid item xs={4} md={3}>
-            <TextField
-              error={!isPValid}
-              label="احتمال"
-              type="number"
-              variant="outlined"
-              value={p}
-              onChange={(e) => checkAndSetP(e.target.value)}
-              fullWidth
-              inputProps={{ className: 'ltr-input' }}
-              helperText={!isPValid && 'احتمال داده شده باید بین ۰ تا ۱ باشد.'}
-            />
-          </Grid>
-          <Grid item xs={4} md={3}>
-            <Button
-              orientation="vertical"
-              color="primary"
-              aria-label="vertical contained primary button group"
-              variant="contained"
-              disabled={!isNValid || !isPValid}
-              onClick={() => setData(generateNewGraph(n, p))}
-              fullWidth>
-              یه‌دونه جدید بساز
-            </Button>
+    <Container>
+      <Grid container direction="column">
+        <Grid item className={classes.row1}>
+          <Graph
+            NodeComponent={() => <circle r={width === 'xs' ? 3 : 7} />}
+            nodeDistance={width === 'xs' ? 300 : 1000}
+            data={data}
+            zoomDepth={2}
+            enableDrag={true}
+          />
+        </Grid>
+        <Grid item>
+          <Grid
+            container
+            direction="row-reverse"
+            justify="center"
+            alignItems="center"
+            spacing={2}>
+            <Grid item xs={4} md={3}>
+              <TextField
+                error={!isNValid}
+                label="تعداد راس‌ها"
+                type="number"
+                variant="outlined"
+                value={n}
+                onChange={(e) => checkAndSetN(e.target.value)}
+                fullWidth
+                inputProps={{ className: 'ltr-input' }}
+                helperText={
+                  !isNValid && 'تعداد راس‌ها باید حداقل یک و حداکثر ۳۰ باشد.'
+                }
+              />
+            </Grid>
+            <Grid item xs={4} md={3}>
+              <TextField
+                error={!isPValid}
+                label="احتمال"
+                type="number"
+                variant="outlined"
+                value={p}
+                onChange={(e) => checkAndSetP(e.target.value)}
+                fullWidth
+                inputProps={{ className: 'ltr-input' }}
+                helperText={
+                  !isPValid && 'احتمال داده شده باید بین ۰ تا ۱ باشد.'
+                }
+              />
+            </Grid>
+            <Grid item xs={4} md={3}>
+              <Button
+                orientation="vertical"
+                color="primary"
+                aria-label="vertical contained primary button group"
+                variant="contained"
+                disabled={!isNValid || !isPValid}
+                onClick={() => setData(generateNewGraph(n, p))}
+                fullWidth>
+                {width === 'xs' ? 'بساز' : 'یه‌دونه جدید بساز'}
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 
