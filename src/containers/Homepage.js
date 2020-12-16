@@ -38,9 +38,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 900,
     color: '#555',
     textShadow: '3px 3px #888',
+    textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
-      fontSize: 60,
-      lineHeight: '60px',
+      fontSize: 50,
+      lineHeight: '50px',
     },
   },
   goToWorkshop: {
@@ -54,11 +55,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 800,
     color: '#eee',
     textShadow: '3px 3px #888',
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 3),
     margin: theme.spacing(6, 2),
+    textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
-      fontSize: 40,
-      lineHeight: '40px',
+      fontSize: 30,
+      lineHeight: '30px',
+      padding: theme.spacing(1, 2),
     },
   },
   physicsDay: {
@@ -72,11 +75,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 800,
     color: '#eee',
     textShadow: '3px 3px #888',
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 4),
     margin: theme.spacing(6, 2),
+    textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
-      fontSize: 40,
-      lineHeight: '40px',
+      fontSize: 30,
+      lineHeight: '30px',
+      padding: theme.spacing(1, 2),
     },
   },
 }));

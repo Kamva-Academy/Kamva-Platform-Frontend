@@ -102,8 +102,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '1px 1px 10px black',
     color: '#f7f2f6',
     background: '#410066',
-    paddingTop: '30px',
-    paddingBottom: '30px',
+    padding: theme.spacing(4, 1),
   },
 
   section5: {
