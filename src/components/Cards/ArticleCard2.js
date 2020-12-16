@@ -18,6 +18,9 @@ const useStyles = makeStyles({
   media: {
     height: 140,
   },
+  justify: {
+    textAlign: 'justify',
+  }
 });
 
 const ArticleCard2 = ({
@@ -35,8 +38,7 @@ const ArticleCard2 = ({
         {img && (
           <CardMedia className={classes.media} image={img} title={name} />
         )}
-
-        <CardContent>
+        <CardContent className={classes.justify}>
           <Typography gutterBottom variant="h4" component="h2">
             {name}
           </Typography>

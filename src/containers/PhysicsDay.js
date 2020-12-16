@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   landingBackground: {
     height: '100vh',
     width: '100%',
@@ -25,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     left: 0,
     background: `url(${process.env.PUBLIC_URL}/background.jpg) no-repeat 50% fixed`,
-    filter: 'blur(3px)',
-    webkitFilter: 'blur(3px)',
+    filter: 'blur(4px)',
+    webkitFilter: 'blur(4px)',
     opacity: 0.9,
     backgroundSize: 'cover',
     zIndex: -1,
@@ -38,9 +39,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 900,
     color: '#eee',
     textShadow: '3px 3px #888',
+    textAlign: 'center',
     [theme.breakpoints.down('sm')]: {
       fontSize: 60,
-      lineHeight: '60px',
+      lineHeight: '70px',
     },
   },
 
@@ -74,19 +76,19 @@ const useStyles = makeStyles((theme) => ({
   apple: {
     zIndex: '5',
     position: 'fixed',
-    top: '25%',
+    top: '15%',
     left: '50%',
     width: '60px',
     height: '70px',
     marginTop: '-35px',
     marginLeft: '-30px',
-    filter: 'drop-shadow(3px 3px 5px #33333333)',
+    filter: 'drop-shadow(5px 5px 5px #33333333)',
   },
 
   section1: {
     height: '100vh',
     color: 'black',
-    // padding: theme.spacing(4, 3, 4),
+    padding: theme.spacing(4, 3, 4),
   },
 
   fullHeight: {
@@ -110,14 +112,18 @@ const useStyles = makeStyles((theme) => ({
     opacity: '1',
     background: '#F0DBED',
     paddingTop: '30px',
-    paddingBottom: '30px',
+    paddingBottom: '50px',
   },
 
   articleCard: {
     overflow: 'hidden',
   },
 
-  daneshmandanContainer: { margin: 'auto', display: 'table' },
+  daneshmandanContainer: {
+    margin: 'auto',
+    display: 'table'
+  },
+  
 }));
 
 export const articleData = {
@@ -131,7 +137,7 @@ export const articleData = {
     img: process.env.PUBLIC_URL + '/zharfa_rasta.png',
     name: 'دنیای کوچک ما',
     description:
-      'چشماتو ببند،خودتو کنار سی‌وسه‌پل تصور کن، یا حتی دورتر وسط یکی از خیابون‌های پاریس، یا حتی وسط یه قبیله‌ توی اتیوپی، آدم‌های مختلفی توی هر کدوم از این جاها مشغول کاری هستن. به نظرت از همین جایی که نشستی با چند تا واسطه می‌تونی یه نامه رو به دست یکی‌شون برسونی؟ توی این نوشته قراره ‌ببینیم دنیا اینقدر‌ها هم جای بزرگی نیست!',
+      'چشماتو ببند، خودتو کنار سی‌وسه‌پل تصور کن، یا حتی دورتر وسط یکی از خیابون‌های پاریس، یا حتی وسط یه قبیله‌ توی اتیوپی، آدم‌های مختلفی توی هر کدوم از این جاها مشغول کاری هستن. به نظرت از همین جایی که نشستی با چند تا واسطه می‌تونی یه نامه رو به دست یکی‌شون برسونی؟ توی این نوشته قراره ‌ببینیم دنیا اینقدر‌ها هم جای بزرگی نیست!',
   },
 };
 
@@ -152,13 +158,16 @@ function PhysicsDay() {
         <Grid
           container
           xs={12}
-          justify="space-between"
+          justify="space-evenly"
           alignItems="center"
           direction="column"
           className={classes.fullHeight}>
           <Grid item></Grid>
           <Grid item>
-            <Typography className={classes.title} variant="h2">
+            <Typography
+              variant="h2"
+              align='center'
+              className={classes.title}>
               رویداد روز فیزیک
             </Typography>
             <br />
@@ -192,7 +201,7 @@ function PhysicsDay() {
           <Grid item sm={3}>
             <div className={classes.daneshmandanContainer}>
               <img
-                style={{ height: '80vh', zIndex: '1000' }}
+                style={{ height: '80vh' }}
                 src={process.env.PUBLIC_URL + '/daneshmandan.png'}
                 alt="دانشمندان"
               />
