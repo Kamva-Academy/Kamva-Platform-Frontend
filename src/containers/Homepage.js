@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   apple: {
     zIndex: '5',
     position: 'fixed',
-    top: '75%',
+    top: '25%',
     left: '50%',
     width: '60px',
     height: '70px',
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   section1: {
     height: '100vh',
     color: 'black',
-    padding: theme.spacing(4, 3, 4),
+    // padding: theme.spacing(4, 3, 4),
   },
 
   fullHeight: {
@@ -129,7 +129,12 @@ function Homepage({ isLoggedIn, logout }) {
           alt=''
         />
 
-        <Grid container direction="column" style={{ height: '100%' }}>
+        <Grid
+          container
+          direction="column"
+          alignContent='center'
+          justify='center'
+          style={{ height: '100%' }}>
 
           <Grid container item justify='center' direction="row" style={{ height: '90%' }}>
             <Grid
