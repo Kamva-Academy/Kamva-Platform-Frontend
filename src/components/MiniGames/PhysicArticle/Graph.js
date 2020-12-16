@@ -104,7 +104,12 @@ const GraphTab = ({ width }) => {
                 value={p}
                 onChange={(e) => checkAndSetP(e.target.value)}
                 fullWidth
-                inputProps={{ className: 'ltr-input' }}
+                inputProps={{
+                  className: 'ltr-input',
+                  step: 0.1,
+                  min: 0,
+                  max: 1,
+                }}
                 helperText={
                   !isPValid && 'احتمال داده شده باید بین ۰ تا ۱ باشد.'
                 }
