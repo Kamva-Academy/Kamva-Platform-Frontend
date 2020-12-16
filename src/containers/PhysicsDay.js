@@ -121,9 +121,8 @@ const useStyles = makeStyles((theme) => ({
 
   daneshmandanContainer: {
     margin: 'auto',
-    display: 'table'
+    display: 'table',
   },
-  
 }));
 
 export const articleData = {
@@ -134,6 +133,7 @@ export const articleData = {
       'یکی از اعداد عجیبی که همه‌مون توی مدرسه خیلی زود باهاش آشنا می‌شیم عدد «پی»ئه. به‌نظرت از چه روش‌هایی می‌تونیم مقدار عدد پی رو با تقریب نسبتاً خوبی محاسبه کنیم؟ در ادامۀ این نوشته قراره به دو روش که هر دوتا مبتنی بر احتمال هستن این کار رو انجام بدیم. پس بزن بریم!',
   },
   13: {
+    id: 13,
     img: process.env.PUBLIC_URL + '/zharfa_rasta.png',
     name: 'دنیای کوچک ما',
     description:
@@ -164,10 +164,7 @@ function PhysicsDay() {
           className={classes.fullHeight}>
           <Grid item></Grid>
           <Grid item>
-            <Typography
-              variant="h2"
-              align='center'
-              className={classes.title}>
+            <Typography variant="h2" align="center" className={classes.title}>
               رویداد روز فیزیک
             </Typography>
             <br />
@@ -196,7 +193,7 @@ function PhysicsDay() {
           alignItems="center"
           justify="center">
           <Grid container xs={12} sm={4} md={3} justify="center">
-            <ArticleCard2 {...articleData[12]} />
+            <ArticleCard2 {...articleData[13]} />
           </Grid>
           <Grid item sm={3}>
             <div className={classes.daneshmandanContainer}>
@@ -208,7 +205,7 @@ function PhysicsDay() {
             </div>
           </Grid>
           <Grid container xs={12} sm={4} md={3} justify="center">
-            <ArticleCard2 {...articleData[13]} />
+            <ArticleCard2 {...articleData[12]} />
           </Grid>
         </Grid>
       </Container>
