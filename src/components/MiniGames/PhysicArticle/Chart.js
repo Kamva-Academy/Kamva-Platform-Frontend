@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const step = 10;
+const count = 20;
+const labels = [...Array(count).keys()].map((x) => x * step + step);
 
 const chartConfig = {
   label: 'طول کوتاه‌ترین مسیر بر حسب تعداد رئوس',
@@ -40,12 +42,27 @@ const chartConfig = {
   pointHitRadius: 10,
 };
 
+const options = {
+  maintainAspectRatio: false,
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          max: Math.log(count * step) * 1.1,
+          min: Math.log(step) * 0.9,
+          stepSize: 0.5,
+        },
+      },
+    ],
+  },
+};
+
 const ChartTab = () => {
   const classes = useStyles();
-  const [labels, setLabels] = useState([step, 2 * step]);
+  const [lastPoint, setLastPoint] = useState(2);
 
   const changeChart = (newInput) => {
-    setLabels([...Array(newInput / step).keys()].map((x) => x * step + step));
+    setLastPoint(newInput / step);
   };
 
   return (
@@ -55,16 +72,18 @@ const ChartTab = () => {
           <Line
             height={5}
             width={5}
-            options={{ maintainAspectRatio: false }}
             data={{
               labels,
               datasets: [
                 {
                   ...chartConfig,
-                  data: labels.map((label) => Math.log(label)),
+                  data: labels
+                    .slice(0, lastPoint)
+                    .map((label) => Math.log(label)),
                 },
               ],
             }}
+            options={options}
           />
         </Grid>
         <Grid
@@ -84,7 +103,7 @@ const ChartTab = () => {
                   step={step}
                   marks
                   min={step}
-                  max={20 * step}
+                  max={count * step}
                   onChangeCommitted={(e, val) => changeChart(val)}
                 />
               </div>
