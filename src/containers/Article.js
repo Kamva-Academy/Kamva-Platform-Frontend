@@ -2,9 +2,9 @@ import { Grid, IconButton, makeStyles, Paper } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import {
   FilterNone as FilterNoneIcon,
-  Instagram as InstagramIcon,
   Telegram as TelegramIcon,
   Twitter as TwitterIcon,
+  WhatsApp as WhatsAppIcon,
 } from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -79,7 +79,9 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://telegram.me/share/url?url=${window.location.href}&text=${articleData[articleId].name}`}>
+                  href={`https://telegram.me/share/url?url=${
+                    window.location.href
+                  }&text=${encodeURIComponent(articleData[articleId].name)}`}>
                   <TelegramIcon />
                 </IconButton>
               </Grid>
@@ -87,7 +89,9 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://twitter.com/share?url=${window.location.href}&text=${articleData[articleId].name}`}>
+                  href={`https://twitter.com/share?url=${
+                    window.location.href
+                  }&text=${encodeURIComponent(articleData[articleId].name)}`}>
                   <TwitterIcon />
                 </IconButton>
               </Grid>
@@ -95,8 +99,13 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://www.instagram.com/?url=${window.location.href}&text=${articleData[articleId].name}`}>
-                  <InstagramIcon />
+                  href={
+                    'whatsapp://send?text=' +
+                    encodeURIComponent(
+                      articleData[articleId].name + ':\n' + window.location.href
+                    )
+                  }>
+                  <WhatsAppIcon />
                 </IconButton>
               </Grid>
               <Grid item xs={2}>
