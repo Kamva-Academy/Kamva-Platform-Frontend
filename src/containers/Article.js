@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
+import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ArticleCard2 from '../components/Cards/ArticleCard2';
 import Widget from '../components/Widget';
 import { getArticle } from '../redux/actions/mentor';
@@ -48,8 +49,9 @@ const Article = ({ article = { widgets: [] }, articleId, getArticle }) => {
 
   return (
     <Container component="main" className={classes.body}>
+      <ResponsiveAppBar mode="ARTICLE" />
       {article && (
-        <Grid container justify="center" spacing={2}>
+        <Grid container justify="center" spacing={2} style={{ marginTop: 70 }}>
           <Grid item xs={12} md={8}>
             <Paper className={classes.mainPaper}>
               {article.widgets.map((widget) => (

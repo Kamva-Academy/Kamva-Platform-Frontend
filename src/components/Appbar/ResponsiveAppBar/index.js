@@ -62,14 +62,16 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
         <AppBar className={classes.appBar} color="inherit">
           <Container maxWidth="md">
             <Toolbar className={classes.toolbar}>
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                className={classes.menuButton}
-                onClick={() => setDrawerOpen(true)}>
-                <MenuIcon />
-              </IconButton>
+              {mobileMenuListItems.length > 0 && (
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  className={classes.menuButton}
+                  onClick={() => setDrawerOpen(true)}>
+                  <MenuIcon />
+                </IconButton>
+              )}
               <Hidden xsDown>{desktopRightItems}</Hidden>
               <Hidden smUp>{mobileRightItems}</Hidden>
               <div className={classes.grow} />
@@ -79,20 +81,22 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
           </Container>
         </AppBar>
       </HideOnScroll>
-      <Hidden smUp>
-        <Drawer
-          anchor="left"
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}>
-          <div className={classes.list}>
-            <List>
-              {mobileMenuListItems.map((item) => (
-                <>{item}</>
-              ))}
-            </List>
-          </div>
-        </Drawer>
-      </Hidden>
+      {mobileMenuListItems.length > 0 && (
+        <Hidden smUp>
+          <Drawer
+            anchor="left"
+            open={drawerOpen}
+            onClose={() => setDrawerOpen(false)}>
+            <div className={classes.list}>
+              <List>
+                {mobileMenuListItems.map((item) => (
+                  <>{item}</>
+                ))}
+              </List>
+            </div>
+          </Drawer>
+        </Hidden>
+      )}
     </>
   );
 }

@@ -1,17 +1,5 @@
-import {
-  Badge,
-  Button,
-  ButtonGroup,
-  Container,
-  Fab,
-  Grid,
-  Hidden,
-  makeStyles,
-  Paper,
-  TextField,
-  Toolbar,
-} from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import { Button, Grid, makeStyles, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
 import Graph from 'react-graph-network';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,8 +29,7 @@ const generateNewGraph = (n, p) => {
   }
   for (let i = 0; i < n; i++) {
     for (let j = i + 1; j < n; j++) {
-      const probability = Math.random();
-      if (probability < p) {
+      if (Math.random() < p) {
         newData.links.push({ source: i, target: j });
       }
     }
@@ -77,25 +64,23 @@ const GraphTab = () => {
   };
 
   return (
-    <>
-      <Grid container direction="column">
-        <Grid container item direction="row" className={classes.row1}>
-          <Graph
-            NodeComponent={Node}
-            nodeDistance={1000}
-            data={data}
-            id="graph"
-            zoomDepth={1}
-            enableDrag={true}
-          />
-        </Grid>
+    <Grid container direction="column">
+      <Grid item className={classes.row1}>
+        <Graph
+          NodeComponent={Node}
+          nodeDistance={1000}
+          data={data}
+          id="graph"
+          zoomDepth={1}
+          enableDrag={true}
+        />
+      </Grid>
+      <Grid item className={classes.row2}>
         <Grid
           container
-          item
           direction="row"
           justify="center"
           alignItems="center"
-          className={classes.row2}
           spacing={2}>
           <Grid item>
             <Button
@@ -136,7 +121,7 @@ const GraphTab = () => {
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   );
 };
 
