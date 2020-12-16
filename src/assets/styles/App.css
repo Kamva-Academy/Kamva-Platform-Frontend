@@ -28,31 +28,11 @@ input.rtl-placeholder::placeholder,
   overflow-y: hidden;
 }
 
-
-.landing-background {
-  height: 100vh;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: linear-gradient(#feceab33, #feceab33),
-    url('background.jpg') no-repeat center center fixed;
-  filter: blur(4px);
-  -webkit-filter: blur(4px);
-  opacity: 0.8;
-
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  z-index: -1;
-  animation: show-back 0.8s 0.3s both;
-}
-
 .h_iframe-aparat_embed_frame {
   position: relative;
   margin: 0 auto 30px;
 }
+
 .h_iframe-aparat_embed_frame .ratio {
   display: block;
   width: 100%;
