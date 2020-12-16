@@ -120,6 +120,21 @@ const useStyles = makeStyles((theme) => ({
   daneshmandanContainer: { margin: 'auto', display: 'table' },
 }));
 
+export const articleData = {
+  12: {
+    img: process.env.PUBLIC_URL + '/mp.jpg',
+    name: 'عدد پی با چند رقم اعشار',
+    description:
+      'یکی از اعداد عجیبی که همه‌مون توی مدرسه خیلی زود باهاش آشنا می‌شیم عدد «پی»ئه. به‌نظرت از چه روش‌هایی می‌تونیم مقدار عدد پی رو با تقریب نسبتاً خوبی محاسبه کنیم؟ در ادامۀ این نوشته قراره به دو روش که هر دوتا مبتنی بر احتمال هستن این کار رو انجام بدیم. پس بزن بریم!',
+  },
+  13: {
+    img: process.env.PUBLIC_URL + '/zharfa_rasta.png',
+    name: 'دنیای کوچک ما',
+    description:
+      'چشماتو ببند،خودتو کنار سی‌وسه‌پل تصور کن، یا حتی دورتر وسط یکی از خیابون‌های پاریس، یا حتی وسط یه قبیله‌ توی اتیوپی، آدم‌های مختلفی توی هر کدوم از این جاها مشغول کاری هستن. به نظرت از همین جایی که نشستی با چند تا واسطه می‌تونی یه نامه رو به دست یکی‌شون برسونی؟ توی این نوشته قراره ‌ببینیم دنیا اینقدر‌ها هم جای بزرگی نیست!',
+  },
+};
+
 function PhysicsDay() {
   const classes = useStyles();
   const [authDialogOpen, setAuthDialogOpen] = useState();
@@ -172,13 +187,7 @@ function PhysicsDay() {
           alignItems="center"
           justify="center">
           <Grid container xs={12} sm={4} md={3} justify="center">
-            <ArticleCard2
-              img={process.env.PUBLIC_URL + '/mp.jpg'}
-              name="عدد پی با چند رقم اعشار"
-              description="یکی از اعداد عجیبی که همه‌مون توی مدرسه خیلی زود باهاش آشنا می‌شیم عدد «پی»ئه.
-              به‌نظرت از چه روش‌هایی می‌تونیم مقدار عدد پی رو با تقریب نسبتاً خوبی محاسبه کنیم؟
-               در ادامۀ این نوشته قراره به دو روش که هر دوتا مبتنی بر احتمال هستن این کار رو انجام بدیم. پس بزن بریم!"
-            />
+            <ArticleCard2 {...articleData[12]} />
           </Grid>
           <Grid item sm={3}>
             <div className={classes.daneshmandanContainer}>
@@ -190,12 +199,7 @@ function PhysicsDay() {
             </div>
           </Grid>
           <Grid container xs={12} sm={4} md={3} justify="center">
-            <ArticleCard2
-              img={process.env.PUBLIC_URL + '/zharfa_rasta.png'}
-              name="دنیای کوچک ما"
-              description="چشماتو ببند،خودتو کنار سی‌وسه‌پل تصور کن، یا حتی دورتر وسط یکی از خیابون‌های پاریس، یا حتی وسط یه قبیله‌ توی اتیوپی، آدم‌های مختلفی توی هر کدوم از این جاها مشغول کاری هستن. به نظرت از همین جایی که نشستی با چند تا واسطه میتونی یه نامه رو به دست یکی‌شون برسونی؟ 
-              توی این نوشته قراره ‌ببینیم دنیا اینقدر‌ها هم جای بزرگی نیست!"
-            />
+            <ArticleCard2 {...articleData[13]} />
           </Grid>
         </Grid>
       </Container>
