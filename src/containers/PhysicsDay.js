@@ -1,6 +1,6 @@
 import '../assets/styles/physics_day.css';
 
-import { Fab, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Fab, Grid, makeStyles, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import React, { useState } from 'react';

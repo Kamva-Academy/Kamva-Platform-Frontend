@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { connect } from 'react-redux';
 
-import { createHelp, getState } from '../../../redux/actions/mentor';
+import { createHelp } from '../../../redux/actions/mentor';
 import Widget, { MODES } from '../../Widget';
 import CreateWidgetDialog from './components/CreateWidgetDialog';
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EditStateHelps({ helps, stateId, createHelp, getState }) {
+function EditStateHelps({ helps, stateId, createHelp }) {
   const classes = useStyles();
   const [helpId, setHelpId] = useState();
   return (
@@ -89,4 +89,4 @@ function EditStateHelps({ helps, stateId, createHelp, getState }) {
   );
 }
 
-export default connect(null, { createHelp, getState })(EditStateHelps);
+export default connect(null, { createHelp })(EditStateHelps);

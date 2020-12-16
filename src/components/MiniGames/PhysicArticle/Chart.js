@@ -1,25 +1,6 @@
-import {
-  Badge,
-  Button,
-  ButtonGroup,
-  Container,
-  Fab,
-  Grid,
-  Hidden,
-  makeStyles,
-  Paper,
-  Slider,
-  TextField,
-  Toolbar,
-} from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import merge from 'lodash.merge';
-import React, { useEffect, useState } from 'react';
+import { Grid, makeStyles, Slider } from '@material-ui/core';
+import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
-
-const theme = createMuiTheme({
-  direction: 'ltr', // Both here and <body dir="rtl">
-});
 
 const useStyles = makeStyles((theme) => ({
   row1: {
@@ -101,22 +82,18 @@ const ChartTab = () => {
           className={classes.row2}
           spacing={2}>
           <Grid item style={{ width: '80%' }}>
-            <ThemeProvider theme={theme}>
-              <div dir="ltr">
-                <Slider
-                  defaultValue={100}
-                  aria-labelledby="discrete-slider"
-                  valueLabelDisplay="auto"
-                  step={50}
-                  marks
-                  min={50}
-                  max={400}
-                  onChangeCommitted={(e) =>
-                    changeChart(parseInt(e.target.textContent))
-                  }
-                />
-              </div>
-            </ThemeProvider>
+            <Slider
+              defaultValue={100}
+              aria-labelledby="discrete-slider"
+              valueLabelDisplay="auto"
+              step={50}
+              marks
+              min={50}
+              max={400}
+              onChangeCommitted={(e) =>
+                changeChart(parseInt(e.target.textContent))
+              }
+            />
           </Grid>
         </Grid>
       </Grid>

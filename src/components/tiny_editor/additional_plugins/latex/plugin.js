@@ -107,7 +107,7 @@ import mathTextToSvg from '../mathTextToSvg';
         return open(editor);
       },
     });
-    editor.on('DblClick', function (e, t) {
+    editor.on('DblClick', function (e) {
       let mathTarget = e.target;
       if (e.target.className !== 'tiny-math') {
         mathTarget = e.target.closest('span.tiny-math');

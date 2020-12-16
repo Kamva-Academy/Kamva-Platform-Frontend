@@ -13,7 +13,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-  addNewRectangleNode,
   addNewTextNode,
   changeMode,
   deselectNodes,
@@ -45,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 function WhiteboardNavbar({
   drawingMode,
   addNewTextNode,
-  addNewRectangleNode,
   changeMode,
   removeSelectedNodes,
   deselectNodes,
@@ -122,7 +120,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   addNewTextNode,
-  addNewRectangleNode,
   changeMode,
   removeSelectedNodes,
   deselectNodes,
