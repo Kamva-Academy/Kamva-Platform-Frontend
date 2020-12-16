@@ -1,6 +1,11 @@
-import { Grid, makeStyles, Paper } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Paper } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import { Telegram as TelegramIcon } from '@material-ui/icons';
+import {
+  FilterNone as FilterNoneIcon,
+  Instagram as InstagramIcon,
+  Telegram as TelegramIcon,
+  Twitter as TwitterIcon,
+} from '@material-ui/icons';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -64,14 +69,45 @@ const Article = ({ article = {}, articleId, getArticle }) => {
           style={{ marginTop: 70 }}>
           <Grid item xs={12} md={4}>
             <ArticleCard2 {...articleData[articleId]} withoutButton />
-            {/* <Grid container>
-              <Grid item>
-                <TelegramIcon />
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              spacing={1}
+              style={{ marginTop: 20 }}>
+              <Grid item xs={2}>
+                <IconButton
+                  component="a"
+                  target="_blank"
+                  href={`https://telegram.me/share/url?url=${window.location.href}&text=${articleData[articleId].name}`}>
+                  <TelegramIcon />
+                </IconButton>
               </Grid>
-              <Grid item></Grid>
-              <Grid item></Grid>
-              <Grid item></Grid>
-            </Grid> */}
+              <Grid item xs={2}>
+                <IconButton
+                  component="a"
+                  target="_blank"
+                  href={`https://twitter.com/share?url=${window.location.href}&text=${articleData[articleId].name}`}>
+                  <TwitterIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton
+                  component="a"
+                  target="_blank"
+                  href={`https://www.instagram.com/?url=${window.location.href}&text=${articleData[articleId].name}`}>
+                  <InstagramIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton
+                  onClick={() =>
+                    navigator.clipboard.writeText(window.location.href)
+                  }>
+                  <FilterNoneIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12} md={8}>
             <Paper className={classes.mainPaper}>
