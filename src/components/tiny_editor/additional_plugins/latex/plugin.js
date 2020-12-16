@@ -5,6 +5,12 @@ import mathTextToSvg from '../mathTextToSvg';
   const global = tinymce.util.Tools.resolve('tinymce.PluginManager');
 
   const open = function (editor, initData = '') {
+    try {
+      document
+        .querySelectorAll('.MuiDialog-container')
+        .forEach((el) => (el.style.visibility = 'hidden'));
+      // eslint-disable-next-line no-empty
+    } catch (err) {}
     let latexData = initData;
     let svgLatex = mathTextToSvg(latexData);
     editor.windowManager.open({
@@ -47,6 +53,14 @@ import mathTextToSvg from '../mathTextToSvg';
           primary: true,
         },
       ],
+      onClose: function () {
+        try {
+          document
+            .querySelectorAll('.MuiDialog-container')
+            .forEach((el) => (el.style.visibility = ''));
+          // eslint-disable-next-line no-empty
+        } catch (err) {}
+      },
       initialData: {
         latex: latexData,
       },
