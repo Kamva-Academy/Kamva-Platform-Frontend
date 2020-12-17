@@ -37,14 +37,19 @@ function MentorWorkshops({ workshops }) {
             </IconButton>
           </Tooltip>
         </Grid>
-        <Grid item spacing={2} direction="row" className={classes.cardHolder}>
-          <Grid container spacing={2} alignItems="center" justify="center">
-            {workshops.map((workshop) => (
-              <Grid item xs={12} sm={6} md={4} key={workshop.id}>
-                <WorkshopCard {...workshop} />
-              </Grid>
-            ))}
-          </Grid>
+        <Grid
+          container
+          item
+          spacing={2}
+          alignItems="center"
+          justify="center"
+          direction="row"
+          className={classes.cardHolder}>
+          {workshops.map((workshop) => (
+            <Grid item xs={12} sm={6} md={4} key={workshop.id}>
+              <WorkshopCard {...workshop} />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
       <CreateWorkshopDialog

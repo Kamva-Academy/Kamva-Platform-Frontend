@@ -46,7 +46,6 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
             ))}
           </Grid>
         </CardContent>
-        <Grid container></Grid>
       </CardActionArea>
       <CardActions>
         <ButtonGroup variant="outlined" color="primary" fullWidth>

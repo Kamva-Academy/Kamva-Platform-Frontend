@@ -73,60 +73,57 @@ const GraphTab = ({ width }) => {
             enableDrag={true}
           />
         </Grid>
-        <Grid item>
-          <Grid
-            container
-            direction="row-reverse"
-            justify="center"
-            alignItems="center"
-            spacing={2}>
-            <Grid item xs={4} md={3}>
-              <TextField
-                error={!isNValid}
-                label="تعداد راس‌ها"
-                type="number"
-                variant="outlined"
-                value={n}
-                onChange={(e) => checkAndSetN(e.target.value)}
-                fullWidth
-                inputProps={{ className: 'ltr-input' }}
-                helperText={
-                  !isNValid && 'تعداد راس‌ها باید حداقل یک و حداکثر ۳۰ باشد.'
-                }
-              />
-            </Grid>
-            <Grid item xs={4} md={3}>
-              <TextField
-                error={!isPValid}
-                label="احتمال"
-                type="number"
-                variant="outlined"
-                value={p}
-                onChange={(e) => checkAndSetP(e.target.value)}
-                fullWidth
-                inputProps={{
-                  className: 'ltr-input',
-                  step: 0.1,
-                  min: 0,
-                  max: 1,
-                }}
-                helperText={
-                  !isPValid && 'احتمال داده شده باید بین ۰ تا ۱ باشد.'
-                }
-              />
-            </Grid>
-            <Grid item xs={4} md={3}>
-              <Button
-                orientation="vertical"
-                color="primary"
-                aria-label="vertical contained primary button group"
-                variant="contained"
-                disabled={!isNValid || !isPValid}
-                onClick={() => setData(generateNewGraph(n, p))}
-                fullWidth>
-                {width === 'xs' ? 'بساز' : 'یه‌دونه جدید بساز'}
-              </Button>
-            </Grid>
+        <Grid
+          item
+          container
+          direction="row-reverse"
+          justify="center"
+          alignItems="center"
+          spacing={2}>
+          <Grid item xs={4} md={3}>
+            <TextField
+              error={!isNValid}
+              label="تعداد راس‌ها"
+              type="number"
+              variant="outlined"
+              value={n}
+              onChange={(e) => checkAndSetN(e.target.value)}
+              fullWidth
+              inputProps={{ className: 'ltr-input' }}
+              helperText={
+                !isNValid && 'تعداد راس‌ها باید حداقل یک و حداکثر ۳۰ باشد.'
+              }
+            />
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <TextField
+              error={!isPValid}
+              label="احتمال"
+              type="number"
+              variant="outlined"
+              value={p}
+              onChange={(e) => checkAndSetP(e.target.value)}
+              fullWidth
+              inputProps={{
+                className: 'ltr-input',
+                step: 0.1,
+                min: 0,
+                max: 1,
+              }}
+              helperText={!isPValid && 'احتمال داده شده باید بین ۰ تا ۱ باشد.'}
+            />
+          </Grid>
+          <Grid item xs={4} md={3}>
+            <Button
+              orientation="vertical"
+              color="primary"
+              aria-label="vertical contained primary button group"
+              variant="contained"
+              disabled={!isNValid || !isPValid}
+              onClick={() => setData(generateNewGraph(n, p))}
+              fullWidth>
+              {width === 'xs' ? 'بساز' : 'یه‌دونه جدید بساز'}
+            </Button>
           </Grid>
         </Grid>
       </Grid>

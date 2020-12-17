@@ -191,7 +191,7 @@ function PhysicsDay() {
           spacing={3}
           alignItems="center"
           justify="center">
-          <Grid container xs={12} sm={4} md={3} justify="center">
+          <Grid container item xs={12} sm={4} md={3} justify="center">
             <ArticleCard2 {...articleData[13]} />
           </Grid>
           <Grid item sm={3}>
@@ -203,7 +203,7 @@ function PhysicsDay() {
               />
             </div>
           </Grid>
-          <Grid container xs={12} sm={4} md={3} justify="center">
+          <Grid container item xs={12} sm={4} md={3} justify="center">
             <ArticleCard2 {...articleData[12]} />
           </Grid>
         </Grid>

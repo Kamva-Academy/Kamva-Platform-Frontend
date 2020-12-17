@@ -35,14 +35,19 @@ function Articles({ articles }) {
             </IconButton>
           </Tooltip>
         </Grid>
-        <Grid item spacing={2} direction="row" className={classes.cardHolder}>
-          <Grid container spacing={2} alignItems="center" justify="center">
-            {articles.map((article) => (
-              <Grid item xs={12} sm={6} md={4} key={article.id}>
-                <ArticleCard {...article} />
-              </Grid>
-            ))}
-          </Grid>
+        <Grid
+          container
+          item
+          spacing={2}
+          alignItems="center"
+          justify="center"
+          direction="row"
+          className={classes.cardHolder}>
+          {articles.map((article) => (
+            <Grid item xs={12} sm={6} md={4} key={article.id}>
+              <ArticleCard {...article} />
+            </Grid>
+          ))}
         </Grid>
       </Grid>
       <CreateArticleDialog

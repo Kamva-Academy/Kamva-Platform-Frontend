@@ -91,18 +91,16 @@ function EditWidgets({ widgets, stateId, stateName }) {
             </Grid>
           </>
         )}
-        <Grid item xs={12}>
-          <Grid container justify="center">
-            <Grid item xs={12} md={5}>
-              <Button
-                color="primary"
-                variant="contained"
-                fullWidth
-                onClick={() => setOpenCreateWidgetDialog(true)}
-                startIcon={<AddIcon />}>
-                ایجاد ویجت جدید
-              </Button>
-            </Grid>
+        <Grid item xs={12} container justify="center">
+          <Grid item xs={12} md={5}>
+            <Button
+              color="primary"
+              variant="contained"
+              fullWidth
+              onClick={() => setOpenCreateWidgetDialog(true)}
+              startIcon={<AddIcon />}>
+              ایجاد ویجت جدید
+            </Button>
           </Grid>
         </Grid>
       </Grid>
