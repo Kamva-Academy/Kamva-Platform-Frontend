@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import MiniGames from '../components/MiniGames';
+import AboutUs from '../containers/AboutUs';
 import Article from '../containers/Article';
 import DevTools from '../containers/DevTools';
 import EditArticle from '../containers/EditArticle';
@@ -9,6 +10,7 @@ import EditWorkshop from '../containers/EditWorkshop';
 import Homepage from '../containers/Homepage';
 import LoginPage from '../containers/LoginPage';
 import MentorPage from '../containers/MentorPage';
+import OurTeam from '../containers/OurTeam';
 import PhysicsDay from '../containers/PhysicsDay';
 import Survey from '../containers/Survey';
 import Workshop from '../containers/Workshop';
@@ -42,6 +44,8 @@ const Root = () => {
         <PrivateRoute path="/mentor/" component={MentorPage} />
         <PrivateRoute path="/survey" component={Survey} />
         <Route path="/physics_day" component={PhysicsDay} />
+        <Route path="/our_team" component={OurTeam} />
+        <Route path="/about_us" component={AboutUs} />
         <Route path="/" component={Homepage} />
       </Switch>
       <DevTools />

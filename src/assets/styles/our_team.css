@@ -1,0 +1,104 @@
+.our-team-page .tab-wrap {
+  width: 100%;
+  transition: 0.3s box-shadow ease;
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.our-team-page .tab-wrap:hover {
+  box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+}
+
+.our-team-page .tab {
+  display: none;
+}
+
+.our-team-page .tab:checked:nth-of-type(1) ~ .tab__content:nth-of-type(1),
+.our-team-page .tab:checked:nth-of-type(2) ~ .tab__content:nth-of-type(2),
+.our-team-page .tab:checked:nth-of-type(3) ~ .tab__content:nth-of-type(3),
+.our-team-page .tab:checked:nth-of-type(4) ~ .tab__content:nth-of-type(4),
+.our-team-page .tab:checked:nth-of-type(5) ~ .tab__content:nth-of-type(5),
+.our-team-page .tab:checked:nth-of-type(6) ~ .tab__content:nth-of-type(6) {
+  opacity: 1;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  transform: translateY(0px);
+  text-shadow: 0 0 0;
+}
+
+.our-team-page .tab:first-of-type:not(:last-of-type) + label {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.our-team-page .tab:not(:first-of-type):not(:last-of-type) + label {
+  border-radius: 0;
+}
+
+.our-team-page .tab:last-of-type:not(:first-of-type) + label {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.our-team-page .tab:checked + label {
+  background-color: #fff;
+  box-shadow: 0 -1px 0 #fff inset;
+  cursor: default;
+}
+
+.our-team-page .tab:checked + label:hover {
+  box-shadow: 0 -1px 0 #fff inset;
+  background-color: #fff;
+}
+
+.our-team-page .tab + label {
+  box-shadow: 0 -1px 0 #eee inset;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  flex-grow: 3;
+  text-align: center;
+  background-color: #f2f2f2;
+  user-select: none;
+  text-align: center;
+  transition: 0.3s background-color ease, 0.3s box-shadow ease;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.our-team-page .tab + label:hover {
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 0 #f4f4f4 inset;
+}
+
+.our-team-page .tab__content {
+  padding: 10px 25px;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  opacity: 0;
+  left: 0;
+  transform: translateY(-3px);
+  border-radius: 6px;
+  max-height: 75vh;
+  overflow: auto;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.team-wrapper {
+  margin: 10px auto;
+}

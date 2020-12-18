@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 
 import account from './account';
 import currentState from './currentState';
+import landing from './landing';
 import mentor from './mentor';
 import notifications from './notifications';
 import redirect from './redirect';
@@ -17,6 +18,7 @@ const allReducers = combineReducers({
   whiteboard,
   websocket,
   redirect,
+  landing,
   Intl,
 });
 export default allReducers;

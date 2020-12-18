@@ -1,23 +1,13 @@
 import {
   Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   Fab,
   Grid,
-  IconButton,
   makeStyles,
   Paper,
-  SvgIcon,
   Typography,
 } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import {
-  Instagram,
-  KeyboardArrowUp as KeyboardArrowUpIcon,
-  Telegram,
-} from '@material-ui/icons';
+import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -28,6 +18,7 @@ import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import questions from '../components/SpecialComponents/Homepage/constants/FAQs';
 import FAQ from '../components/SpecialComponents/Homepage/FAQ';
 import Footer from '../components/SpecialComponents/Homepage/Footer';
+import LandingOurTeam from '../components/SpecialComponents/Homepage/LandingOurTeam';
 import WorkshopList from '../components/SpecialComponents/Homepage/WorkshopList';
 import { logout } from '../redux/actions/account';
 
@@ -51,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     animation: 'show-back .8s .3s both',
   },
   firstPageContent: {
-    height: '100%',
+    height: '100vh',
   },
   title: {
     fontSize: 80,
@@ -120,7 +111,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   telegramLink: {
-    direction: 'ltr',
     display: 'inline-block',
     marginRight: 10,
     color: 'rgb(85, 85, 255)',
@@ -138,7 +128,8 @@ const useStyles = makeStyles((theme) => ({
   },
   moreButton: {
     margin: theme.spacing(2, 'auto', 0),
-    display: 'block',
+    textAlign: 'center',
+    display: 'table',
   },
 
   section4: {
@@ -150,42 +141,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4, 2),
     backgroundColor: '#ededed',
   },
-  section6: {
-    padding: theme.spacing(4, 2),
-    backgroundColor: '#99b898',
-    color: 'white',
-  },
-  footer: {
-    padding: theme.spacing(2),
-    backgroundColor: '#feceab',
-  },
-  card: {
-    width: 140,
-  },
-  media: {
-    height: 140,
-  },
 }));
-
-function OurTeamCard() {
-  const classes = useStyles();
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  );
-}
 
 function Homepage({ isLoggedIn, logout }) {
   const classes = useStyles();
@@ -196,27 +152,40 @@ function Homepage({ isLoggedIn, logout }) {
       <Container className={classes.section1}>
         <div id="back-to-top-anchor"></div>
         <div className={classes.landingBackground} />
+
         <Grid
           container
-          justify="center"
+          xs={12}
+          justify="space-evenly"
           alignItems="center"
           direction="column"
           className={classes.firstPageContent}>
-          <Grid item>
-            <Typography component="h1" variant="h1" className={classes.title}>
-              مدرسه تابستانه
-            </Typography>
-          </Grid>
-          <Grid item>
-            {/* <Button className={clsx(classes.headButton, classes.goToWorkshop)}>
+          <Grid item></Grid>
+          <Grid item container alignItems="center" direction="column">
+            <Grid item>
+              <Typography component="h1" variant="h1" className={classes.title}>
+                مدرسه تابستانه
+              </Typography>
+            </Grid>
+            <Grid item>
+              {/* <Button className={clsx(classes.headButton, classes.goToWorkshop)}>
               ورود به کارگاه بدون منتور
             </Button> */}
-            <Button
-              component={Link}
-              to="/physics_day"
-              className={clsx(classes.headButton, classes.physicsDay)}>
-              رویداد روز فیزیک
-            </Button>
+              <Button
+                component={Link}
+                to="/physics_day"
+                className={clsx(classes.headButton, classes.physicsDay)}>
+                رویداد روز فیزیک
+              </Button>
+            </Grid>
+          </Grid>
+
+          <Grid item>
+            <img
+              src={process.env.PUBLIC_URL + 'scroll.gif'}
+              alt="scroll"
+              style={{ width: 20 }}
+            />
           </Grid>
         </Grid>
       </Container>
@@ -264,8 +233,9 @@ function Homepage({ isLoggedIn, logout }) {
                   // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
                   href="https://t.me/rastaiha"
-                  className={classes.telegramLink}>
-                  @Rastaiha
+                  className={classes.telegramLink}
+                  style={{ direction: 'ltr' }}>
+                  {' @Rastaiha '}
                 </a>
               </Typography>
             </Grid>
@@ -307,7 +277,10 @@ function Homepage({ isLoggedIn, logout }) {
           </Grid>
           <Grid item xs={12} sm={10} md={8} lg={6}>
             <Paper className={classes.section2Paper}>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} direction="row-reverse">
+                <Grid item xs={12} sm={4}>
+                  <img src={process.env.PUBLIC_URL + '/edu.png'} alt="" />
+                </Grid>
                 <Grid item xs={12} sm={8}>
                   <Typography variant="h3" align="center" gutterBottom>
                     ارتباط با منتور
@@ -318,9 +291,6 @@ function Homepage({ isLoggedIn, logout }) {
                     ازشون داشتید یا خواستید چیزی رو باهاشون مطرح کنید کمکتون
                     کنن.
                   </Typography>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <img src={process.env.PUBLIC_URL + '/edu.png'} alt="" />
                 </Grid>
               </Grid>
             </Paper>
@@ -361,12 +331,14 @@ function Homepage({ isLoggedIn, logout }) {
           و خلاقیتِ بچه‌ها رو تقویت کنه و با نشون دادنِ توانمندی‌های بالقوه‌ی
           بچه‌ها به خودشون، اعتماد به نفسِ اونهارو افزایش بده.
         </Typography>
-        {/* <Button
+        <Button
           variant="contained"
           color="primary"
-          className={classes.moreButton}>
+          className={classes.moreButton}
+          component={Link}
+          to="/about_us">
           اطلاعات بیشتر
-        </Button> */}
+        </Button>
       </Container>
       <Container className={classes.section4}>
         <Typography component="h2" variant="h2" gutterBottom>
@@ -382,7 +354,7 @@ function Homepage({ isLoggedIn, logout }) {
           <FAQ questions={questions} />
         </Container>
       </Container>
-
+      <LandingOurTeam />
       <Footer />
       <ScrollTop>
         <Fab color="secondary" size="small" aria-label="scroll back to top">
