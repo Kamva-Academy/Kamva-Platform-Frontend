@@ -126,6 +126,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const articleData = {
   12: {
+    id: 12,
     img: process.env.PUBLIC_URL + '/mp.jpg',
     name: 'عدد پی با چند رقم اعشار',
     description:
