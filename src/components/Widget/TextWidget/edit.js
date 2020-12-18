@@ -32,7 +32,11 @@ function TextEditWidget({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      disableAutoFocus
+      disableEnforceFocus>
       <DialogTitle>متن</DialogTitle>
       <DialogContent>
         <DialogContentText>متن مورد نظر خود را وارد کنید.</DialogContentText>
