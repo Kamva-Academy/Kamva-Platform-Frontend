@@ -1,0 +1,39 @@
+#grid {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+}
+
+#gridColumn {
+  border: double black;
+}
+
+#container {
+  white-space: nowrap;
+}
+
+#popup {
+  direction: rtl;
+}
+
+#line {
+  font-size: smaller;
+  display: 'inline-flex';
+  vertical-align: 'middle';
+  display: 'table';
+  border: double black;
+}
+
+#blankBox {
+  font-size: medium;
+  font-weight: bold;
+  cursor: 'move';
+  padding: 3px;
+}
+
+#answerBox {
+  font-size: medium;
+  padding: '5px';
+  font-weight: bold;
+  cursor: 'move';
+  margin-bottom: 2px;
+}
