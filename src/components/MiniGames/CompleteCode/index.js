@@ -14,12 +14,9 @@ const useStyles = makeStyles((theme) => ({
   },
   gridContainer: {
     padding: theme.spacing(1),
-    display: 'table',
     maxHeight: '100vh',
   },
-  gridItem: {
-    display: 'table-row',
-  },
+  gridItem: {},
   paper: {
     padding: theme.spacing(0.5, 0.2),
   },
@@ -40,7 +37,7 @@ configs.forEach((config, configIndex) =>
   )
 );
 
-function CompleteCode({ mode = 0, width }) {
+function CompleteCode({ mode = 0 }) {
   const classes = useStyles();
   const [code, setCode] = useState(configs[mode]);
 
@@ -58,7 +55,6 @@ function CompleteCode({ mode = 0, width }) {
         container
         spacing={1}
         className={classes.gridContainer}
-        justify="space-evenly"
         alignItems="center">
         <Grid item xs={12} sm={4} className={classes.gridItem}>
           <Paper className={classes.paper}>
