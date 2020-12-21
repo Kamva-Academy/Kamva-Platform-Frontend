@@ -68,7 +68,9 @@ function MultiChoiceQuestionEditWidget({
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
-      scroll="body">
+      scroll="body"
+      disableAutoFocus
+      disableEnforceFocus>
       <DialogTitle>سوال چند گزینه‌ای</DialogTitle>
       <DialogContent>
         <DialogContentText>

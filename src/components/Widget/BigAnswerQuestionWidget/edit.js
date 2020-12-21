@@ -43,7 +43,9 @@ function BigAnswerQuestionEditWidget({
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
-      scroll="body">
+      scroll="body"
+      disableAutoFocus
+      disableEnforceFocus>
       <DialogTitle>سوال توضیحی</DialogTitle>
       <DialogContent>
         <DialogContentText>صورت سوال و پاسخ آن را وارد کنید.</DialogContentText>

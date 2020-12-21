@@ -39,7 +39,13 @@ function SmallAnswerQuestionEditWidget({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="sm"
+      fullWidth
+      disableAutoFocus
+      disableEnforceFocus>
       <DialogTitle>سوال کوتاه پاسخ</DialogTitle>
       <DialogContent>
         <DialogContentText>صورت سوال و پاسخ آن را وارد کنید.</DialogContentText>
