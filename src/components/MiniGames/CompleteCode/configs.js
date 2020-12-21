@@ -25,7 +25,7 @@ const configs = [
               'Domain = {',
               {
                 type: 'blank',
-                answer: 1,
+                answer: 0,
               },
               '}',
             ],
@@ -225,34 +225,34 @@ const configs = [
                 answer: 7,
               },
               'at  x, y',
+            ],
+          },
+          {
+            tab: 3,
+            items: [
+              'if cell',
               {
-                tab: 3,
-                items: [
-                  'if cell',
-                  {
-                    type: 'blank',
-                    answer: 5,
-                  },
-                  {
-                    type: 'blank',
-                    answer: 6,
-                  },
-                ],
+                type: 'blank',
+                answer: 5,
               },
               {
-                tab: 4,
-                items: [
-                  'delete cell.value from',
-                  {
-                    type: 'blank',
-                    answer: 1,
-                  },
-                  '.',
-                  {
-                    type: 'blank',
-                    answer: 11,
-                  },
-                ],
+                type: 'blank',
+                answer: 6,
+              },
+            ],
+          },
+          {
+            tab: 4,
+            items: [
+              'delete cell.value from',
+              {
+                type: 'blank',
+                answer: 1,
+              },
+              '.',
+              {
+                type: 'blank',
+                answer: 11,
               },
             ],
           },

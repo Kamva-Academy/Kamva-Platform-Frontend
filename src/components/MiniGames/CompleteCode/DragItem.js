@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
   item: {
     padding: theme.spacing(0.2, 1),
     borderRadius: 3,
+    background: '#fafafa',
     border: '2px solid #222',
     transition: '.2s',
     '&:hover': {

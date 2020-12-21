@@ -1,8 +1,38 @@
-import { Grid } from '@material-ui/core';
+import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
+const MODES = {
+  E: {
+    color: 'white',
+  },
+  N: {
+    color: '#aaddee',
+  },
+  T: {
+    color: '#ddeeaa',
+  },
+  F: {
+    color: '#eeddaa',
+  },
+};
+
+const useStyles = makeStyles((theme) => ({
+  dropArea: ({ mode }) => ({
+    border: '1px dotted black',
+    minWidth: 50,
+    height: 30,
+    [theme.breakpoints.down('xs')]: {
+      minWidth: 40,
+      height: 20,
+    },
+    background: MODES[mode].color,
+    padding: '1px 3px',
+  }),
+}));
+
 function DropArea({ item }) {
+  const classes = useStyles({ mode: item.mode });
   const [_, dropRef] = useDrop({
     accept: 'CARD',
     drop: () => ({ item }),
@@ -13,13 +43,7 @@ function DropArea({ item }) {
       alignItems="center"
       justify="center"
       ref={dropRef}
-      style={{
-        border: '1px dotted black',
-        minWidth: 50,
-        height: 20,
-        background: item.option ? '#aaddee' : 'white',
-        padding: '1px 3px',
-      }}>
+      className={classes.dropArea}>
       <Grid item>{item.option}</Grid>
     </Grid>
   );

@@ -19,6 +19,7 @@ function Help({ help }) {
   return (
     <>
       <IconButton
+        size="small"
         aria-describedby={id}
         variant="contained"
         color="primary"

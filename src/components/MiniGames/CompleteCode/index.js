@@ -1,4 +1,12 @@
-import { Grid, makeStyles, Paper, withWidth } from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  Container,
+  Grid,
+  Hidden,
+  makeStyles,
+  Paper,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -8,17 +16,21 @@ import DragItem from './DragItem';
 import Paragraph from './Paragraph';
 
 const useStyles = makeStyles((theme) => ({
-  dragItem: {
-    display: 'inline-block',
-    margin: theme.spacing(0.3, 0.5),
-  },
-  gridContainer: {
+  container: {
     padding: theme.spacing(1),
-    maxHeight: '100vh',
   },
-  gridItem: {},
   paper: {
     padding: theme.spacing(0.5, 0.2),
+  },
+  dragItemsPaper: {
+    padding: theme.spacing(0.5, 0.2),
+    background: 'white',
+    [theme.breakpoints.down('xs')]: {
+      borderRadius: '10px 10px 0 0',
+    },
+  },
+  button: {
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -31,11 +43,30 @@ configs.forEach((config, configIndex) =>
           item.paragraphIndex = paragraphIndex;
           item.lineIndex = lineIndex;
           item.itemIndex = itemIndex;
+          item.mode = 'E';
         }
       })
     )
   )
 );
+
+const DragItems = ({ options, drop }) => {
+  const classes = useStyles();
+  return (
+    <Paper className={classes.dragItemsPaper}>
+      <Grid container spacing={1} alignItems="center" justify="center">
+        {options.map((option) => (
+          <Grid item key={option} style={{ direction: 'ltr' }}>
+            <DragItem
+              text={option}
+              onDrop={(item) => drop({ ...item, option })}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Paper>
+  );
+};
 
 function CompleteCode({ mode = 0 }) {
   const classes = useStyles();
@@ -43,44 +74,72 @@ function CompleteCode({ mode = 0 }) {
 
   const drop = ({ paragraphIndex, lineIndex, itemIndex, option }) => {
     const newCode = { ...code };
-    newCode.paragraphs[paragraphIndex].lines[lineIndex].items[
-      itemIndex
-    ].option = option;
+    const item =
+      newCode.paragraphs[paragraphIndex].lines[lineIndex].items[itemIndex];
+    item.option = option;
+    item.mode = 'N';
+    setCode(newCode);
+  };
+
+  const checkAnswers = () => {
+    const newCode = { ...code };
+    newCode.paragraphs.forEach((paragraph) =>
+      paragraph.lines.forEach((line) =>
+        line.items.forEach((item) => {
+          if (typeof item !== 'string') {
+            if (item.option === -1) {
+              item.mode = 'E';
+            } else if (code.options[item.answer] === item.option) {
+              item.mode = 'T';
+            } else {
+              item.mode = 'F';
+            }
+          }
+        })
+      )
+    );
     setCode(newCode);
   };
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Grid
-        container
-        spacing={1}
-        className={classes.gridContainer}
-        alignItems="center">
-        <Grid item xs={12} sm={4} className={classes.gridItem}>
-          <Paper className={classes.paper}>
-            {code.options.map((option) => (
-              <div
-                key={option}
-                className={classes.dragItem}
-                style={{ direction: 'ltr' }}>
-                <DragItem
-                  text={option}
-                  onDrop={(item) => drop({ ...item, option })}
-                />
+      <Hidden smUp>
+        <AppBar position="sticky" color="transparent">
+          <DragItems options={code.options} drop={drop} />
+        </AppBar>
+      </Hidden>
+      <Container className={classes.container}>
+        <Grid container spacing={1} alignItems="stretch">
+          <Hidden xsDown>
+            <Grid
+              item
+              sm={4}
+              className={classes.gridItem}
+              style={{ height: '100vh' }}>
+              <div style={{ position: 'sticky', top: 50 }}>
+                <DragItems options={code.options} drop={drop} />
               </div>
-            ))}
-          </Paper>
+            </Grid>
+          </Hidden>
+          <Grid item xs={12} sm={8} className={classes.gridItem}>
+            <Paper className={classes.paper} style={{ direction: 'ltr' }}>
+              {code.paragraphs.map((paragraph, index) => (
+                <Paragraph {...paragraph} key={index} />
+              ))}
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={8} className={classes.gridItem}>
-          <Paper className={classes.paper} style={{ direction: 'ltr' }}>
-            {code.paragraphs.map((paragraph, index) => (
-              <Paragraph {...paragraph} key={index} />
-            ))}
-          </Paper>
-        </Grid>
-      </Grid>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={checkAnswers}>
+          بررسی جواب
+        </Button>
+      </Container>
     </DndProvider>
   );
 }
 
-export default withWidth()(CompleteCode);
+export default CompleteCode;
