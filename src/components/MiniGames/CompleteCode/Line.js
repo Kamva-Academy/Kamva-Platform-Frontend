@@ -38,7 +38,7 @@ function Line({ tab = 0, items }) {
 
       {items.map((item, index) => (
         <div item key={index} className={classes.item}>
-          {typeof item === 'string' ? item : <DropArea item={item} />}
+          {typeof item === 'string' ? item : <DropArea dropItem={item} />}
         </div>
       ))}
     </div>

@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
     background: '#fafafa',
     border: '2px solid #222',
     transition: '.2s',
+    color: 'black',
+    fontWeight: 500,
     '&:hover': {
       cursor: 'pointer',
       boxShadow: '-3px 3px 0 #222',

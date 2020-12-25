@@ -8,8 +8,8 @@ import {
   Paper,
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 
 import configs from './configs';
 import DragItem from './DragItem';
@@ -102,7 +102,7 @@ function CompleteCode({ mode = 0 }) {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
+    <DndProvider options={HTML5toTouch}>
       <Hidden smUp>
         <AppBar position="sticky" color="transparent">
           <DragItems options={code.options} drop={drop} />
@@ -115,7 +115,7 @@ function CompleteCode({ mode = 0 }) {
               item
               sm={4}
               className={classes.gridItem}
-              style={{ height: '100vh' }}>
+              style={{ maxHeight: '100vh' }}>
               <div style={{ position: 'sticky', top: 50 }}>
                 <DragItems options={code.options} drop={drop} />
               </div>
