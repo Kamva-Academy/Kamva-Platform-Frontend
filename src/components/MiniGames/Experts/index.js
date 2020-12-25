@@ -98,7 +98,7 @@ function Experts() {
       setConfig(getConfig({ count: 16, end: 8 }));
       setRound(1);
     } else if (round === 1.9) {
-      setConfig(getConfig({ count: 16, end: 25, bestExpertErrors: 1 }));
+      setConfig(getConfig({ count: 16, end: 25, bestErrors: 1 }));
       setRound(2);
     }
   }, [round]);
@@ -111,7 +111,7 @@ function Experts() {
         const newExperts = [...config.experts];
         if (config.bestExpert === i) {
           if (config.bestExpertErrors.includes(config.day)) {
-            newExperts[i].forecast = 2 - answer;
+            newExperts[i].forecast = -answer;
           } else {
             newExperts[i].forecast = answer;
           }

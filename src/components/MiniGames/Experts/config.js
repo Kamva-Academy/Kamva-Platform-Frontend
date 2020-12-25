@@ -9,7 +9,7 @@ export default function getConfig({ count = 16, end = 20, bestErrors = 0 }) {
     });
   }
 
-  const bestExpertErrors = Array.from({ length: bestErrors }, (v, k) => k + 1);
+  const bestExpertErrors = Array.from({ length: end }, (v, k) => k + 1);
 
   shuffle(bestExpertErrors);
 
@@ -19,6 +19,6 @@ export default function getConfig({ count = 16, end = 20, bestErrors = 0 }) {
     day: 0,
     end,
     bestExpert: Math.floor(Math.random() * count),
-    bestExpertErrors,
+    bestExpertErrors: bestExpertErrors.slice(0, bestErrors),
   };
 }
