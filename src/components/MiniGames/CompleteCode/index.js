@@ -115,7 +115,7 @@ function CompleteCode({ mode = 0 }) {
               item
               sm={4}
               className={classes.gridItem}
-              style={{ height: '100vh' }}>
+              style={{ maxHeight: '100vh' }}>
               <div style={{ position: 'sticky', top: 50 }}>
                 <DragItems options={code.options} drop={drop} />
               </div>

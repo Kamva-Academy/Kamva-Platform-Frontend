@@ -98,6 +98,7 @@ const configs = [
                 type: 'blank',
                 answer: 1,
               },
+              '.',
               {
                 type: 'blank',
                 answer: 3,
@@ -147,6 +148,7 @@ const configs = [
                 type: 'blank',
                 answer: 1,
               },
+              '.',
               {
                 type: 'blank',
                 answer: 4,
@@ -214,7 +216,7 @@ const configs = [
       },
       {
         help:
-          'میخوایم محدودیت ناشی از خونه هایی که با خونه مورد نظرمون در یک مربع قرار گرفتن رو اعمال کنیم. پس باید همه خونه‌های پر اون مربع رو بررسی کنیم و دامنه خونه مورد نظر ر و به کمک اونها به روز کنیم. ',
+          'میخوایم محدودیت ناشی از خونه هایی که با خونه مورد نظرمون در یک مربع قرار گرفتن رو اعمال کنیم. پس باید همه خونه‌های پر اون مربع رو بررسی کنیم و دامنه خونه مورد نظر ر و به کمک اون‌ها به روز کنیم. ',
         lines: [
           {
             tab: 2,
@@ -222,7 +224,7 @@ const configs = [
               'for each cell in',
               {
                 type: 'blank',
-                answer: 7,
+                answer: 11,
               },
               'at  x, y',
             ],
@@ -252,7 +254,7 @@ const configs = [
               '.',
               {
                 type: 'blank',
-                answer: 11,
+                answer: 10,
               },
             ],
           },
@@ -336,7 +338,7 @@ const configs = [
               '.',
               {
                 type: 'blank',
-                answer: 2,
+                answer: 5,
               },
 
               'is',
@@ -356,7 +358,7 @@ const configs = [
               '.',
               {
                 type: 'blank',
-                answer: 2,
+                answer: 5,
               },
             ],
           },
