@@ -1,6 +1,8 @@
 import React from 'react';
 
+import BoxSimulator from './BoxSimulator';
 import CompleteCode from './CompleteCode';
+import Experts from './Experts';
 import Chart from './PhysicArticle/Chart';
 import Graph from './PhysicArticle/Graph';
 
@@ -27,6 +29,20 @@ export const MINI_GAMES = {
     label: 'بازی کامل کردن کد سوم',
     component: CompleteCode,
     props: { mode: 2 },
+  },
+  first_box_simulator: {
+    label: 'بازی جعبه‌ها اول',
+    component: BoxSimulator,
+    props: { mode: 0 },
+  },
+  second_box_simulator: {
+    label: 'بازی جعبه‌ها دوم',
+    component: BoxSimulator,
+    props: { mode: 1 },
+  },
+  experts: {
+    label: 'بازی خبرگان',
+    component: Experts,
   },
 };
 
