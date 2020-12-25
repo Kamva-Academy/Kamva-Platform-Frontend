@@ -1,6 +1,7 @@
 import React from 'react';
 
 import CompleteCode from './CompleteCode';
+import Experts from './Experts';
 import Chart from './PhysicArticle/Chart';
 import Graph from './PhysicArticle/Graph';
 
@@ -27,6 +28,10 @@ export const MINI_GAMES = {
     label: 'بازی کامل کردن کد سوم',
     component: CompleteCode,
     props: { mode: 2 },
+  },
+  experts: {
+    label: 'بازی خبرگان',
+    component: Experts,
   },
 };
 

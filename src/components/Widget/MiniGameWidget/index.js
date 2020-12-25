@@ -9,12 +9,10 @@ const useStyles = makeStyles((theme) => ({
   gameWidget: {
     width: '100%',
     borderRadius: 10,
-    minHeight: 500,
+    minHeight: 300,
     border: 'none',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.25)',
     maxHeight: '100vh',
-    overflowX: 'hidden',
-    overflowY: 'auto',
   },
 }));
 
