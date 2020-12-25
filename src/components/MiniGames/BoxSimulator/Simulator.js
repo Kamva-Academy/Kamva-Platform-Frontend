@@ -1,5 +1,5 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { DndProvider } from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 
@@ -17,28 +17,33 @@ const useStyles = makeStyles((theme) => ({
 function Simulator({ config, isOnline }) {
   const classes = useStyles();
 
-  const { initItems, answer } = config[isOnline ? isOnline - 1 : 0];
+  const [onlineMode, setOnlineMode] = useState(isOnline ? 1 : 0);
+
+  const getConfig = useCallback(() => {
+    return config[onlineMode ? onlineMode - 1 : 0];
+  }, [config, onlineMode]);
 
   const [boxes, setBoxes] = useState([[], [], []]);
-  const [items, setItems] = useState([...initItems]);
+  const [items, setItems] = useState([]);
   const [errorCount, setErrorCount] = useState(0);
-  const [onlineMode, setOnlineMode] = useState(isOnline ? 1 : 0);
 
   const total = Math.max(...boxes.map((box) => box.reduce((a, b) => a + b, 0)));
 
-  const isCorrect = total <= answer.optimum;
+  const isCorrect = total <= getConfig().answer.optimum;
 
   const reset = () => {
     setBoxes([[], [], []]);
-    setItems([...initItems]);
+    setItems([...getConfig().initItems]);
     setErrorCount(1);
   };
 
   const next = () => {
     setBoxes([[], [], []]);
-    setItems([...initItems]);
     setOnlineMode(onlineMode + 1);
   };
+  useEffect(() => {
+    setItems([...getConfig().initItems]);
+  }, [onlineMode]);
 
   const onDrop = (boxIndex) => {
     const newItems = items.splice(1);
@@ -62,7 +67,7 @@ function Simulator({ config, isOnline }) {
         <Grid container spacing={2} justify="center">
           {items.length === 0 && (
             <Answer
-              answer={answer}
+              answer={getConfig().answer}
               showAnswer={errorCount === 1}
               isCorrect={isCorrect}
               total={total}
@@ -81,7 +86,7 @@ function Simulator({ config, isOnline }) {
         <br />
         <br />
         <Grid container>
-          <HorizontalBox items={items} onDrop={onDrop} hidden={isOnline} />
+          <HorizontalBox items={items} onDrop={onDrop} hidden={onlineMode} />
         </Grid>
       </DndProvider>
     </Container>

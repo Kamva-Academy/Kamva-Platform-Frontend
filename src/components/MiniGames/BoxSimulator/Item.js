@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     width: 25,
     height: 25,
     lineHeight: '25px',
+    fontSize: 15,
     transition: '.2s',
     '&:hover': {
       cursor: draggable && 'pointer',
