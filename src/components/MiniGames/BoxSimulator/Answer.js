@@ -58,7 +58,7 @@ const Answer = ({
               <Divider />
               <ListItem>
                 <Typography className={classes.leftItem}>
-                  {Math.floor((total / answer.optimum) * 10) / 10}
+                  {Math.floor((total / answer.optimum) * 100) / 100}
                 </Typography>
                 <Typography align="right">Total Time / Optimum</Typography>
               </ListItem>
