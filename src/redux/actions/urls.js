@@ -1,7 +1,7 @@
 export const ROOT =
   process.env.NODE_ENV === 'production'
-    ? 'https://rastaiha.ir/api/'
-    : 'https://rastaiha.ir/api/';
+    ? 'https://workshop.rastaiha.ir/api/'
+    : 'https://workshop.rastaiha.ir/api/';
 
 export const LOGIN = ROOT.concat('auth/token/obtain/');
 export const LOGOUT = ROOT.concat('auth/logout/');

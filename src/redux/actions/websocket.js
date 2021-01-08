@@ -5,7 +5,7 @@ import * as actionTypes from './actionTypes';
 import * as wsActionTypes from './wsActionTypes';
 
 export const connectToTeam = ({ playerUUID, userUUID }) =>
-  connect(`wss://rastaiha.ir/ws/${playerUUID}/${userUUID}/`);
+  connect(`wss://workshop.rastaiha.ir/ws/${playerUUID}/${userUUID}/`);
 
 export const getLastWhiteboard = () =>
   send({ type: wsActionTypes.JOIN_TO_GROUP_ROOM });

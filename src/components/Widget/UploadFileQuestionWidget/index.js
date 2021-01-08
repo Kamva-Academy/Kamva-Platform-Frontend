@@ -101,7 +101,7 @@ const UploadFileQuestionWidget = ({
               size="small"
               endIcon={<DescriptionOutlinedIcon />}
               className={classes.lastUploadButton}
-              href={'http://rastaiha.ir' + last_submit.answer_file} // TODO: fix in back
+              href={'http://workshop.rastaiha.ir' + last_submit.answer_file} // TODO: fix in back
               component="a"
               download
               target="_blank">
