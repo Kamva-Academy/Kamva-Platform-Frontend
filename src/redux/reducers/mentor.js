@@ -9,10 +9,21 @@ const initState = {
 
 function mentor(state = initState, action) {
   switch (action.type) {
+    case actionTypes.ALL_WORKSHOPS_REQUEST:
+      return {
+        ...state,
+        getWorkshopsLoading: true,
+      };
     case actionTypes.ALL_WORKSHOPS_SUCCESS:
       return {
         ...state,
         workshops: action.response,
+        getWorkshopsLoading: false,
+      };
+    case actionTypes.ALL_WORKSHOPS_FAILURE:
+      return {
+        ...state,
+        getWorkshopsLoading: false,
       };
 
     case actionTypes.GET_WORKSHOP_SUCCESS:
