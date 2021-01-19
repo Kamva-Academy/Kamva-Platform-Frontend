@@ -17,7 +17,13 @@ function ChangeStateDialog({ open, handleClose, edges, changeState }) {
       </DialogTitle>
       <List>
         {edges.map((edge) => (
-          <ListItem button onClick={() => changeState(edge)} key={edge.id}>
+          <ListItem
+            button
+            onClick={() => {
+              changeState(edge);
+              handleClose();
+            }}
+            key={edge.id}>
             {edge.text}
           </ListItem>
         ))}

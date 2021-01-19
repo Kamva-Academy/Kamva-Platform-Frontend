@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function MentorButton({ callMentor, playerId }) {
+function MentorButton({ callMentor, playerId, disabled = true }) {
   const classes = useStyles();
 
   const t = useTranslate();
@@ -24,7 +24,7 @@ function MentorButton({ callMentor, playerId }) {
       variant="contained"
       color="primary"
       className={classes.mentorButton}
-      disabled={!playerId}
+      disabled={!playerId || disabled}
       onClick={() => callMentor({ fsmId, playerId })}>
       {t('callMentor')}
     </Button>

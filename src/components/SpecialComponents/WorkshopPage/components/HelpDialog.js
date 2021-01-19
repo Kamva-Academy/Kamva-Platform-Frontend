@@ -47,10 +47,10 @@ function HelpDialog({ open, handleClose, helps }) {
           <Grid item>
             {index < helps.length - 1 && (
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 onClick={() => setIndex(index + 1)}>
-                بعدی
+                بازم کمک لازم دارم
               </Button>
             )}
           </Grid>

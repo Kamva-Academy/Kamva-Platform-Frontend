@@ -3,7 +3,8 @@ const dictionary = {
     locale: 'en',
     messages: {
       hello: 'hello',
-      login: 'login',
+      login: 'Login',
+      logout: 'Logout',
       backToEvent: 'Back To Event',
       callMentor: 'Mentor',
       mentor: 'Mentor',
@@ -79,6 +80,7 @@ const dictionary = {
     messages: {
       hello: 'سلام',
       login: 'ورود',
+      logout: 'خروج',
       backToEvent: 'بازگشت به رویداد',
       callMentor: 'درخواست منتور',
       mentor: 'منتور',

@@ -1,6 +1,6 @@
 const variables = {
   colors: {
-    primary: '#6930C3',
+    primary: '#2185d0',
     primaryLight: '#5E60CE',
     primaryDark: '#7400B8',
     secondary: '#1361A4',

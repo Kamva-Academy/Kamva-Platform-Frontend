@@ -68,6 +68,11 @@ function AuthDialog({
     }
   }, [isLoggedIn, user, open, history]);
 
+  const submit = (e) => {
+    login({ username, password });
+    e.preventDefault();
+  };
+
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <form>
@@ -122,10 +127,7 @@ function AuthDialog({
                 fullWidth
                 variant="contained"
                 type="submit"
-                onClick={(e) => {
-                  login({ username, password });
-                  e.preventDefault();
-                }}
+                onClick={submit}
                 disabled={isFetching}
                 color="primary">
                 {isFetching ? (

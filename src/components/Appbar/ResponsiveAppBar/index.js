@@ -7,8 +7,10 @@ import {
   List,
   makeStyles,
   Toolbar,
+  useScrollTrigger,
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
+import clsx from 'clsx';
 import React, { useState } from 'react';
 
 import HideOnScroll from './components/HideOnScroll';
@@ -27,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    transition: '0.2s',
   },
   menuButton: {
     marginRight: 5,
@@ -42,11 +45,21 @@ const useStyles = makeStyles((theme) => ({
   list: {
     width: 250,
   },
+  hideBack: {
+    background: 'transparent',
+    boxShadow: 'none',
+    paddingTop: theme.spacing(4),
+  },
 }));
 
-function ResponsiveAppBar({ mode = 'LANDING' }) {
+function ResponsiveAppBar({
+  mode = 'LANDING',
+  showBackOnScroll = false,
+  hideOnScroll = true,
+}) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
 
   const {
     desktopLeftItems,
@@ -58,8 +71,13 @@ function ResponsiveAppBar({ mode = 'LANDING' }) {
 
   return (
     <>
-      <HideOnScroll>
-        <AppBar className={classes.appBar} color="inherit">
+      <HideOnScroll disable={!hideOnScroll}>
+        <AppBar
+          className={clsx(
+            classes.appBar,
+            showBackOnScroll && !trigger && classes.hideBack
+          )}
+          color="inherit">
           <Container maxWidth="md">
             <Toolbar className={classes.toolbar}>
               {mobileMenuListItems.length > 0 && (

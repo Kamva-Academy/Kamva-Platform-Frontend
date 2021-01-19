@@ -15,18 +15,18 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import { getAllWorkshops } from '../redux/actions/mentor';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: 40,
+    paddingTop: 120,
   },
   grid: {
     marginTop: 40,
   },
   card: {
-    width: '100%',
-    minWidth: 230,
+    width: 230,
   },
   media: {
     height: 140,
@@ -111,19 +111,22 @@ function Workshops({ workshops, isLoading, getAllWorkshops }) {
   }, []);
 
   return (
-    <Container maxWidth="md" className={classes.root}>
-      <Typography variant="h1" component="h2">
-        کارگاه‌ها
-      </Typography>
-      <Grid
-        container
-        justify="center"
-        alignItems="center"
-        className={classes.grid}
-        spacing={3}>
-        <WorkshopGridItems workshops={workshops} isLoading={isLoading} />
-      </Grid>
-    </Container>
+    <>
+      <ResponsiveAppBar mode="LANDING" />
+      <Container maxWidth="md" className={classes.root}>
+        <Typography variant="h1" component="h2">
+          کارگاه‌ها
+        </Typography>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          className={classes.grid}
+          spacing={3}>
+          <WorkshopGridItems workshops={workshops} isLoading={isLoading} />
+        </Grid>
+      </Container>
+    </>
   );
 }
 

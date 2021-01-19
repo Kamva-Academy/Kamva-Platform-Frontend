@@ -1,14 +1,17 @@
 import React from 'react';
 
+import AuthButton from './components/AuthButton';
 import LogoButton from './components/LogoButton';
 
 const LandingAppBarItems = () => {
-  const logoButton = <LogoButton />;
+  const logoButton = <LogoButton size="large" />;
+  const authButton = <AuthButton />;
+
   return {
-    desktopLeftItems: [],
+    desktopLeftItems: [authButton],
     desktopRightItems: [logoButton],
     mobileLeftItems: [logoButton],
-    mobileRightItems: [],
+    mobileRightItems: [authButton],
     mobileMenuListItems: [],
   };
 };

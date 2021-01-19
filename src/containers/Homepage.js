@@ -10,9 +10,9 @@ import Container from '@material-ui/core/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import questions from '../components/SpecialComponents/Homepage/constants/FAQs';
@@ -20,12 +20,12 @@ import FAQ from '../components/SpecialComponents/Homepage/FAQ';
 import Footer from '../components/SpecialComponents/Homepage/Footer';
 import LandingOurTeam from '../components/SpecialComponents/Homepage/LandingOurTeam';
 import WorkshopList from '../components/SpecialComponents/Homepage/WorkshopList';
-import { logout } from '../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({
   section1: {
     height: '100vh',
     color: 'black',
+    position: 'relative',
   },
   landingBackground: {
     height: '100%',
@@ -62,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
     background: 'rgba(33,133,208,.6)',
     borderRadius: '10px',
     transition: '.3s',
-    fontSize: 50,
-    lineHeight: '60px',
+    fontSize: 45,
+    lineHeight: '45px',
     fontWeight: 800,
     color: '#eee',
     textShadow: '3px 3px #888',
@@ -82,11 +82,35 @@ const useStyles = makeStyles((theme) => ({
     color: '#eee',
     textShadow: '3px 3px #888',
   },
+  physicsDayContainer: {
+    position: 'absolute',
+    left: 20,
+    bottom: 20,
+  },
   physicsDay: {
+    display: 'inline-block',
+    borderRadius: '10px',
+    transition: '.3s',
+    fontSize: 30,
+    lineHeight: '30px',
+    fontWeight: 700,
+    padding: theme.spacing(1, 2),
+    textAlign: 'center',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 25,
+      lineHeight: '25px',
+      padding: theme.spacing(1, 2),
+    },
     border: '1px solid #35be32',
     background: 'rgba(53,190,50,.6)',
     color: '#eee',
     textShadow: '3px 3px #888',
+  },
+  newton: {
+    height: 100,
+    [theme.breakpoints.down('sm')]: {
+      height: 80,
+    },
   },
   section2: {
     padding: theme.spacing(4, 2),
@@ -143,12 +167,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Homepage({ isLoggedIn, logout }) {
+function Homepage() {
   const classes = useStyles();
   const [authDialogOpen, setAuthDialogOpen] = useState(false);
 
   return (
     <>
+      <ResponsiveAppBar mode="LANDING" showBackOnScroll hideOnScroll={false} />
       <section className={classes.section1}>
         <div id="back-to-top-anchor"></div>
         <div className={classes.landingBackground} />
@@ -167,14 +192,10 @@ function Homepage({ isLoggedIn, logout }) {
               </Typography>
             </Grid>
             <Grid item>
-              {/* <Button className={clsx(classes.headButton, classes.goToWorkshop)}>
-              ورود به کارگاه بدون منتور
-            </Button> */}
               <Button
-                component={Link}
-                to="/physics_day"
-                className={clsx(classes.headButton, classes.physicsDay)}>
-                رویداد روز فیزیک
+                className={clsx(classes.headButton, classes.goToWorkshop)}
+                onClick={() => setAuthDialogOpen(true)}>
+                کارگاه بدون منتور
               </Button>
             </Grid>
           </Grid>
@@ -187,6 +208,25 @@ function Homepage({ isLoggedIn, logout }) {
             />
           </Grid>
         </Grid>
+        <div className={classes.physicsDayContainer}>
+          <Grid container alignItems="center">
+            <Grid item>
+              <img
+                src={process.env.PUBLIC_URL + 'newton.png'}
+                alt="newton"
+                className={classes.newton}
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                component={Link}
+                to="/physics_day"
+                className={classes.physicsDay}>
+                رویداد روز فیزیک
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
       </section>
       <section className={classes.section2}>
         <Grid
@@ -368,8 +408,4 @@ function Homepage({ isLoggedIn, logout }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: !!state.account.token,
-});
-
-export default connect(mapStateToProps, { logout })(Homepage);
+export default Homepage;

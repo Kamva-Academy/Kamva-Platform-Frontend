@@ -3,12 +3,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
-  logo: { height: 45 },
-  logoButton: { padding: 0 },
+  logo: ({ size }) => ({
+    height: size === 'large' ? 70 : 45,
+  }),
+  logoButton: ({ size }) => ({
+    padding: size === 'large' ? 5 : 0,
+  }),
 }));
 
-export default function LogoButton() {
-  const classes = useStyles();
+export default function LogoButton({ size = 'normal' }) {
+  const classes = useStyles({ size });
   return (
     <Button className={classes.logoButton} component={Link} to="/">
       <img

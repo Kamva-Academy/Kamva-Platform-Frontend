@@ -2,10 +2,15 @@ import { Container, makeStyles, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
+import Footer from '../components/SpecialComponents/Homepage/Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
+  },
+  container: {
+    marginTop: 80,
+    marginBottom: 10,
   },
 }));
 
@@ -15,7 +20,7 @@ function AboutUs() {
   return (
     <>
       <ResponsiveAppBar mode="LANDING" />
-      <Container maxWidth="sm" style={{ marginTop: 80 }}>
+      <Container maxWidth="sm" className={classes.container}>
         <Paper className={classes.paper}>
           <Typography component="h2" variant="h2" gutterBottom>
             درباره‌ی ما
@@ -133,6 +138,7 @@ function AboutUs() {
           </ul>
         </Paper>
       </Container>
+      <Footer />
     </>
   );
 }
