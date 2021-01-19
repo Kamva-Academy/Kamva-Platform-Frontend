@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router-dom';
 
 import { StatePageContext } from '../../../../containers/Workshop';
@@ -8,6 +9,7 @@ import { goForward } from '../../../../redux/actions/currentState';
 import ChangeStateDialog from './ChangeStateDialog';
 
 function NextButton({ outwardEdges = [], goForward }) {
+  const t = useTranslate();
   const [openChangeStateDialog, setOpenChangeStateDialog] = useState(false);
   const { player, fsmId, isMentor } = useContext(StatePageContext);
 
