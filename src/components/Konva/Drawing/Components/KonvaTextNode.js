@@ -90,7 +90,7 @@ const KonvaTextNode = (
       }
       textarea.style.width = newWidth + 'px';
     };
-    textarea.addEventListener('keydown', (e) => {
+    textarea.addEventListener('keydown', () => {
       if (textarea.value.length > 0) {
         const english = /^[A-Za-z0-9]*$/;
         if (english.test(textarea.value[0])) {

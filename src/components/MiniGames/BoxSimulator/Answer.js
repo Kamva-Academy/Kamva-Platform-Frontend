@@ -11,7 +11,7 @@ import {
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   leftItem: {
     marginRight: 'auto',
   },

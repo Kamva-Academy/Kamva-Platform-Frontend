@@ -2,7 +2,7 @@ import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   logo: { height: 45 },
   logoButton: { padding: 0 },
 }));

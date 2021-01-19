@@ -7,7 +7,7 @@ const theme = createMuiTheme({
   direction: 'ltr', // Both here and <body dir="rtl">
 });
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   row1: {
     height: '85vh',
   },

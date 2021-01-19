@@ -5,7 +5,7 @@ import VideoEditWidget from './edit';
 
 export { VideoEditWidget };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   videoWidget: {
     width: '100%',
     borderRadius: 10,

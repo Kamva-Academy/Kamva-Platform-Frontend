@@ -9,7 +9,7 @@ import {
 import React, { useState } from 'react';
 import Graph from 'react-graph-network';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   row1: {
     height: '85vh',
   },

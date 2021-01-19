@@ -6,7 +6,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { StatePageContext } from '../../../../containers/Workshop';
 import { callMentor } from '../../../../redux/actions/currentState';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   mentorButton: {
     marginLeft: 5,
   },

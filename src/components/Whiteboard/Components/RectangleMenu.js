@@ -52,8 +52,6 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-export default connect(mapStateToProps, { changeMode, addNewRectangleNode })(
+export default connect(null, { changeMode, addNewRectangleNode })(
   RectangleMenu
 );

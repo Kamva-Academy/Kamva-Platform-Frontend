@@ -15,7 +15,7 @@ import SmallAnswerQuestionEditWidget from './edit';
 
 export { SmallAnswerQuestionEditWidget };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   success: {
     '& input:valid + fieldset': {
       borderColor: 'green',

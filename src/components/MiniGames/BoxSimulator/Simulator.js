@@ -54,13 +54,6 @@ function Simulator({ config, isOnline }) {
     setBoxes(newBoxes);
   };
 
-  const onItemChangeBox = (itemIndex, fromBoxIndex, toBoxIndex) => {
-    const newBoxes = [...boxes];
-    newBoxes[toBoxIndex].push(boxes[fromBoxIndex][itemIndex]);
-    newBoxes[fromBoxIndex].splice(itemIndex, 1);
-    setBoxes(newBoxes);
-  };
-
   return (
     <Container className={classes.root} maxWidth="xs">
       <DndProvider options={HTML5toTouch}>

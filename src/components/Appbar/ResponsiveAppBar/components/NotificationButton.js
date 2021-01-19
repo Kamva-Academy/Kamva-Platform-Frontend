@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NotificationButton = ({ notifications }) => {
+const NotificationButton = ({ notifications = [] }) => {
   const classes = useStyles();
   const t = useTranslate();
 
@@ -127,8 +127,4 @@ const NotificationButton = ({ notifications }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  notifications: [],
-});
-
-export default connect(mapStateToProps)(NotificationButton);
+export default connect()(NotificationButton);

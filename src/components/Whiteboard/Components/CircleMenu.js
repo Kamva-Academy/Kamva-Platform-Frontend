@@ -52,8 +52,4 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-export default connect(mapStateToProps, { changeMode, addNewCircleNode })(
-  CircleMenu
-);
+export default connect(null, { changeMode, addNewCircleNode })(CircleMenu);

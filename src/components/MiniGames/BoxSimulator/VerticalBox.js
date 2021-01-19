@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd';
 
 import Item from './Item';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   box: {
     border: '3px solid #333',
     borderRadius: 4,

@@ -7,7 +7,7 @@ import {
 import React from 'react';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   img: {
     maxWidth: '100%',
     height: 'auto',

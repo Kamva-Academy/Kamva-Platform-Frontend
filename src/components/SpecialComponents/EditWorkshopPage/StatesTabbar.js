@@ -8,7 +8,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import CreateStateDialog from './components/CreateStateDialog';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     width: '100%',

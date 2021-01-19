@@ -1,7 +1,6 @@
 import {
   Button,
   Container,
-  Dialog,
   Grid,
   makeStyles,
   Paper,

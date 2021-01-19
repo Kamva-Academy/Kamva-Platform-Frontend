@@ -6,7 +6,7 @@ import MiniGameEditWidget from './edit';
 
 export { MiniGameEditWidget };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   gameWidget: {
     width: '100%',
     borderRadius: 10,

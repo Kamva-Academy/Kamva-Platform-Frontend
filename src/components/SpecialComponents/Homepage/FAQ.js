@@ -5,7 +5,7 @@ import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   text: {
     textAlign: 'justify',
     textJustify: 'inter-word',
