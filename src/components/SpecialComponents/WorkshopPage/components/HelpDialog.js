@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget from '../../../Widget';
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function HelpDialog({ open, handleClose, helps }) {
+  const t = useTranslate();
   const classes = useStyles();
   const [index, setIndex] = useState(0);
 
@@ -28,7 +30,7 @@ function HelpDialog({ open, handleClose, helps }) {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
       <Paper className={classes.paper} key={help.id}>
-        <Typography>راهنمایی شماره {index + 1}</Typography>
+        <Typography>{t('helpNumber') + (index + 1)}</Typography>
         <div className={classes.widgets}>
           {help.widgets.map((widget) => (
             <Widget key={widget.id} widget={widget} />

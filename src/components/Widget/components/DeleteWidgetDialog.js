@@ -6,15 +6,17 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { deleteWidget } from '../../../redux/actions/mentor';
 
 function DeleteWidgetDialog({ open, handleClose, deleteWidget, id }) {
+  const t = useTranslate();
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>حذف ویجت</DialogTitle>
+      <DialogTitle>{t('removeWidget')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>آیا مایل به حذف این ویجت هستید؟</DialogContentText>
+        <DialogContentText>{t('wantRemoveWidget')}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" variant="outlined">

@@ -1,10 +1,25 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import InstitutionCard from './InstitutionCard';
-import Institutions from './Institutions';
+
+const Institutions = [
+  {
+    name: 'zharfaStudentSociety',
+    img_src: process.env.PUBLIC_URL + '/zharfa.png',
+    site_url: '',
+  },
+  {
+    name: 'rastaScientificExtensiveSociety',
+    img_src: process.env.PUBLIC_URL + '/Rasta-logo.png',
+    site_url: '',
+  },
+];
 
 const Footer = () => {
+  const t = useTranslate();
+
   return (
     <Grid
       container
@@ -18,7 +33,7 @@ const Footer = () => {
             <InstitutionCard
               key={index}
               img_src={institution.img_src}
-              name={institution.name}
+              name={t(institution.name)}
               site_url={institution.site_url}
             />
           );

@@ -1,6 +1,7 @@
 import { Button, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { sendBigAnswer } from '../../../redux/actions/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
@@ -24,6 +25,7 @@ const BigAnswerQuestionWidget = ({
   playerId,
   sendBigAnswer,
 }) => {
+  const t = useTranslate();
   const classes = useStyles();
   const [value, setValue] = useState(last_submit?.text);
   return (
@@ -36,7 +38,7 @@ const BigAnswerQuestionWidget = ({
         }}
         content={text}
       />
-      <label>پاسخ</label>
+      <label>{t('answer')}</label>
       {disabled ? (
         <TinyPreview
           frameProps={{
@@ -64,7 +66,7 @@ const BigAnswerQuestionWidget = ({
         onClick={() =>
           sendBigAnswer({ playerId, problemId: id, answer: value })
         }>
-        ثبت پاسخ
+        {t('submitAnswer')}
       </Button>
     </>
   );

@@ -2,6 +2,7 @@ import { Grid, IconButton, makeStyles, Tooltip } from '@material-ui/core';
 import { AddCircle as AddCircleIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import WorkshopCard from '../../Cards/WorkshopCard';
 import CreateWorkshopDialog from '../../Dialog/CreateWorkshopDialog/CreateWorkshopDialog';
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function MentorWorkshops({ workshops }) {
   const classes = useStyles();
+  const t = useTranslate();
 
   const [openCreateWorkshopDialog, setOpenCreateWorkshopDialog] = useState(
     false
@@ -30,7 +32,7 @@ function MentorWorkshops({ workshops }) {
         <Grid item xs={12}>
           <Tooltip
             arrow
-            title={'اضافه کردن کارگاه جدید'}
+            title={t('createWorkshop')}
             className={classes.absolute}>
             <IconButton onClick={() => setOpenCreateWorkshopDialog(true)}>
               <AddCircleIcon fontSize="large" />

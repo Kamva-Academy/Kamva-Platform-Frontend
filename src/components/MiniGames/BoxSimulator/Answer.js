@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 const useStyles = makeStyles((theme) => ({
   leftItem: {
@@ -30,6 +31,7 @@ const Answer = ({
   finishNext,
 }) => {
   const classes = useStyles();
+  const t = useTranslate();
 
   return (
     <Grid
@@ -70,7 +72,7 @@ const Answer = ({
         <Grid item>
           {finishNext ? (
             <Typography variant="h3" align="center">
-              پایان
+              {t('end')}
             </Typography>
           ) : (
             <Button
@@ -78,21 +80,21 @@ const Answer = ({
               color="primary"
               fullWidth
               onClick={goNext}>
-              برو به دست بعدی
+              {t('goNext')}
             </Button>
           )}
         </Grid>
       ) : isCorrect ? (
         <Grid item>
           <Typography variant="h3" align="center">
-            درست گذاشتی :)
+            {t('pickedCorrect')} :)
           </Typography>
         </Grid>
       ) : (
         <>
           <Grid item>
             <Typography variant="h3" align="center">
-              درست نچیدی :(
+              {t('pickedIncorrect')} :(
             </Typography>
           </Grid>
           <Grid item>
@@ -102,7 +104,7 @@ const Answer = ({
               color="primary"
               fullWidth
               onClick={reset}>
-              تلاش مجدد
+              {t('retry')}
             </Button>
           </Grid>
         </>

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-function Jitsi({ handleClose, width, displayName = 'کاربر' }) {
+function Jitsi({ handleClose, width, displayName = 'User' }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 

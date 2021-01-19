@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import React, { useState } from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import CreateStateDialog from './components/CreateStateDialog';
 
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
   const classes = useStyles();
+  const t = useTranslate();
 
   const [openCreateStateDialog, setOpenCreateStateDialog] = useState(false);
 
@@ -52,7 +54,7 @@ export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
                 color="primary"
                 onClick={() => setOpenCreateStateDialog(true)}
                 variant="contained">
-                ایجاد گام
+                {t('createState')}
               </Button>
             </Grid>
           </Grid>

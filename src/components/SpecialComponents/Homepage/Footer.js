@@ -1,10 +1,4 @@
-import {
-  Container,
-  Grid,
-  IconButton,
-  makeStyles,
-  SvgIcon,
-} from '@material-ui/core';
+import { Grid, IconButton, makeStyles, SvgIcon } from '@material-ui/core';
 import {
   Instagram as InstagramIcon,
   Telegram as TelegramIcon,
@@ -21,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 function Footer() {
   const classes = useStyles();
   return (
-    <Container className={classes.footer}>
+    <section className={classes.footer}>
       <Grid container justify="center" alignItems="center" spacing={2}>
         <Grid item>
           <IconButton
@@ -51,7 +45,7 @@ function Footer() {
           </IconButton>
         </Grid>
       </Grid>
-    </Container>
+    </section>
   );
 }
 

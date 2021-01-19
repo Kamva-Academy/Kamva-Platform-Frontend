@@ -6,12 +6,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 function ChangeStateDialog({ open, handleClose, edges, changeState }) {
+  const t = useTranslate();
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
-        <Typography variant="h3">کجا بریم؟</Typography>
+        <Typography variant="h3">{t('chooseNextState')}</Typography>
       </DialogTitle>
       <List>
         {edges.map((edge) => (

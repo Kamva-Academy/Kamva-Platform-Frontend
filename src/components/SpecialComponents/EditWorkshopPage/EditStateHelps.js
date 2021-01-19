@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createHelp } from '../../../redux/actions/mentor';
 import Widget, { MODES } from '../../Widget';
@@ -28,11 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 function EditStateHelps({ helps, stateId, createHelp }) {
   const classes = useStyles();
+  const t = useTranslate();
   const [helpId, setHelpId] = useState();
   return (
     <>
       <Typography variant="h3" gutterBottom>
-        راهنمایی
+        {t('help')}
       </Typography>
       <Grid container justify="center">
         <Grid item xs={12} md={5}>
@@ -46,7 +48,7 @@ function EditStateHelps({ helps, stateId, createHelp }) {
                   <Paper
                     className={clsx(classes.mainItem, classes.paper)}
                     key={help.id}>
-                    <Typography>راهنمایی شماره {index + 1}</Typography>
+                    <Typography>{t('helpNumber') + (index + 1)}</Typography>
                     {help.widgets.map((widget) => (
                       <Widget
                         key={widget.id}
@@ -61,13 +63,13 @@ function EditStateHelps({ helps, stateId, createHelp }) {
                       variant="contained"
                       color="primary"
                       onClick={() => setHelpId(help.id)}>
-                      ایجاد ویجت جدید
+                      {t('createWidget')}
                     </Button>
                   </Paper>
                 ))}
               </Carousel>
             ) : (
-              <Typography align="center">موردی موجود نیست!</Typography>
+              <Typography align="center">{t('thereIsNoItem')}</Typography>
             )}
           </div>
           <Button
@@ -76,7 +78,7 @@ function EditStateHelps({ helps, stateId, createHelp }) {
             variant="contained"
             color="primary"
             onClick={() => createHelp({ stateId })}>
-            راهنمایی جدید
+            {t('createHelp')}
           </Button>
         </Grid>
       </Grid>

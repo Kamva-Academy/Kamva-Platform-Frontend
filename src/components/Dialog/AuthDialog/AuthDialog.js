@@ -1,7 +1,6 @@
 import {
   Button,
   CircularProgress,
-  Container,
   Dialog,
   Grid,
   Hidden,
@@ -83,7 +82,7 @@ function AuthDialog({
             alignItems="stretch"
             className={classes.leftContainer}>
             <Grid container item direction="row">
-              <Grid item justify="left" xs={3}>
+              <Grid item xs={3}>
                 <IconButton
                   aria-label="close"
                   onClick={handleClose}
@@ -93,14 +92,14 @@ function AuthDialog({
               </Grid>
               <Grid item xs={6}>
                 <Typography component="h3" variant="h2" align="center">
-                  ورود
+                  {t('login')}
                 </Typography>
               </Grid>
               <Grid item xs={3} />
             </Grid>
             <Grid item>
               <TextField
-                label="نام کاربری"
+                label={t('username')}
                 type="username"
                 fullWidth
                 onChange={(e) => setUsername(e.target.value)}
@@ -110,7 +109,7 @@ function AuthDialog({
             </Grid>
             <Grid item>
               <TextField
-                label="رمز عبور"
+                label={t('password')}
                 fullWidth
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
@@ -140,7 +139,7 @@ function AuthDialog({
               </Button>
             </Grid>
           </Grid>
-          <Hidden xsDown="true">
+          <Hidden xsDown>
             <Grid item sm={5} className={classes.rightImage}></Grid>
           </Hidden>
         </Grid>

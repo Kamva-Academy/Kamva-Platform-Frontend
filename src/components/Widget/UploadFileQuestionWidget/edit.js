@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createUploadFileWidget } from '../../../redux/actions/mentor';
 
@@ -20,6 +21,7 @@ function UploadFileQuestionEditWidget({
   id,
   createUploadFileWidget,
 }) {
+  const t = useTranslate();
   const [question, setQuestion] = useState(initQuestion);
 
   const handleClick = () => {
@@ -33,7 +35,7 @@ function UploadFileQuestionEditWidget({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>فایل</DialogTitle>
+      <DialogTitle>{t('file')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           متن درخواستی که برای ارسال فایل دارید در قسمت پایین وارد کنید.
@@ -49,7 +51,7 @@ function UploadFileQuestionEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+        {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

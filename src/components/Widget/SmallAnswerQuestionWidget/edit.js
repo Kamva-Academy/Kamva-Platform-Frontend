@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createSmallAnswerQuestionWidget } from '../../../redux/actions/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
@@ -22,6 +23,7 @@ function SmallAnswerQuestionEditWidget({
   id,
   createSmallAnswerQuestionWidget,
 }) {
+  const t = useTranslate();
   const [question, setQuestion] = useState(initQuestion);
   const [answer, setAnswer] = useState(initAnswer);
 
@@ -46,10 +48,10 @@ function SmallAnswerQuestionEditWidget({
       fullWidth
       disableAutoFocus
       disableEnforceFocus>
-      <DialogTitle>سوال کوتاه پاسخ</DialogTitle>
+      <DialogTitle>{t('shortAnswerQuestion')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>صورت سوال و پاسخ آن را وارد کنید.</DialogContentText>
-        <label>سوال</label>
+        <DialogContentText>{t('writeQuestionAndAnswer')}</DialogContentText>
+        <label>{t('question')}</label>
         <TinyEditorComponent
           id={`edit-text-${Math.floor(Math.random() * 1000)}`}
           content={question}
@@ -57,14 +59,14 @@ function SmallAnswerQuestionEditWidget({
         />
         <TextField
           fullWidth
-          label="پاسخ"
+          label={t('answer')}
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

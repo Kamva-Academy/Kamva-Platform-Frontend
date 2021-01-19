@@ -145,17 +145,16 @@ const useStyles = makeStyles((theme) => ({
 
 function Homepage({ isLoggedIn, logout }) {
   const classes = useStyles();
-  const [authDialogOpen, setAuthDialogOpen] = useState();
+  const [authDialogOpen, setAuthDialogOpen] = useState(false);
 
   return (
     <>
-      <Container className={classes.section1}>
+      <section className={classes.section1}>
         <div id="back-to-top-anchor"></div>
         <div className={classes.landingBackground} />
 
         <Grid
           container
-          xs={12}
           justify="space-evenly"
           alignItems="center"
           direction="column"
@@ -188,8 +187,8 @@ function Homepage({ isLoggedIn, logout }) {
             />
           </Grid>
         </Grid>
-      </Container>
-      <Container className={classes.section2}>
+      </section>
+      <section className={classes.section2}>
         <Grid
           container
           justify="center"
@@ -316,8 +315,8 @@ function Homepage({ isLoggedIn, logout }) {
             </Paper>
           </Grid>
         </Grid>
-      </Container>
-      <Container className={classes.section3}>
+      </section>
+      <section className={classes.section3}>
         <Typography component="h2" variant="h2" gutterBottom>
           رستا چیه؟
         </Typography>
@@ -339,21 +338,21 @@ function Homepage({ isLoggedIn, logout }) {
           to="/about_us">
           اطلاعات بیشتر
         </Button>
-      </Container>
-      <Container className={classes.section4}>
+      </section>
+      <section className={classes.section4}>
         <Typography component="h2" variant="h2" gutterBottom>
           کارگاه‌ها
         </Typography>
         <WorkshopList />
-      </Container>
-      <Container className={classes.section5}>
+      </section>
+      <section className={classes.section5}>
         <Typography component="h2" variant="h2" gutterBottom align="center">
           پرسش‌های متداول
         </Typography>
         <Container maxWidth="sm">
           <FAQ questions={questions} />
         </Container>
-      </Container>
+      </section>
       <LandingOurTeam />
       <Footer />
       <ScrollTop>

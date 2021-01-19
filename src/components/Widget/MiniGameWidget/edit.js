@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createMiniGameWidget } from '../../../redux/actions/mentor';
 import { MINI_GAMES } from '../../MiniGames';
@@ -23,6 +24,7 @@ function MiniGameEditWidget({
   createMiniGameWidget,
 }) {
   const [link, setLink] = useState(initLink);
+  const t = useTranslate();
 
   const handleClick = () => {
     if (id) {
@@ -35,14 +37,14 @@ function MiniGameEditWidget({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>بازی</DialogTitle>
+      <DialogTitle>{t('game')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>بازی مورد نظرتان را انتخاب کنید.</DialogContentText>
+        <DialogContentText>{t('chooseTheGame')}</DialogContentText>
         <TextField
           autoFocus
           fullWidth
           select
-          label="بازی"
+          label={t('game')}
           value={link}
           inputProps={{ className: 'ltr-input' }}
           onChange={(e) => setLink(e.target.value)}>
@@ -55,7 +57,7 @@ function MiniGameEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

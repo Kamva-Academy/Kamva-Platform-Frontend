@@ -2,6 +2,7 @@ import { Grid, IconButton, makeStyles, Tooltip } from '@material-ui/core';
 import { AddCircle as AddCircleIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import ArticleCard from '../../Cards/ArticleCard';
 import CreateArticleDialog from '../../Dialog/CreateArticleDialog/CreateArticleDialog';
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Articles({ articles }) {
   const classes = useStyles();
+  const t = useTranslate();
 
   const [openCreateArticleDialog, setOpenCreateArticleDialog] = useState(false);
 
@@ -28,7 +30,7 @@ function Articles({ articles }) {
         <Grid item xs={12}>
           <Tooltip
             arrow
-            title={'اضافه کردن مقاله جدید'}
+            title={t('createArticle')}
             className={classes.absolute}>
             <IconButton onClick={() => setOpenCreateArticleDialog(true)}>
               <AddCircleIcon fontSize="large" />

@@ -5,14 +5,11 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Chip,
-  Grid,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -27,13 +24,8 @@ const useStyles = makeStyles({
   },
 });
 
-const ArticleCard = ({
-  id,
-  name = '',
-  description = '',
-  teamsNumber = 0,
-  mentorsNumber = 0,
-}) => {
+const ArticleCard = ({ id, name = '', description = '' }) => {
+  const t = useTranslate();
   const classes = useStyles();
 
   return (
@@ -52,22 +44,6 @@ const ArticleCard = ({
             {description}
           </Typography>
         </CardContent>
-        <Grid container direction="row" justify="center">
-          <Grid container item xs={6} justify="center">
-            <Chip
-              variant="outlined"
-              icon={<EmojiPeopleIcon />}
-              label={`${mentorsNumber} منتور`}
-            />
-          </Grid>
-          <Grid container item xs={6} justify="center">
-            <Chip
-              variant="outlined"
-              icon={<PeopleAltIcon />}
-              label={`${teamsNumber} تیم`}
-            />
-          </Grid>
-        </Grid>
       </CardActionArea>
       <CardActions>
         <Button
@@ -76,7 +52,7 @@ const ArticleCard = ({
           color="primary"
           component={Link}
           to={`/edit_article/${id}`}>
-          مشاهده
+          {t('edit')}
         </Button>
       </CardActions>
     </Card>

@@ -3,6 +3,7 @@ import { Add as AddIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget, { MODES } from '../../Widget';
 import CreateWidgetDialog from './components/CreateWidgetDialog';
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function EditWidgets({ widgets, stateId, stateName }) {
   const classes = useStyles();
+  const t = useTranslate();
   const questions = widgets.filter((widget) =>
     widget.widget_type.includes('Problem')
   );
@@ -46,7 +48,7 @@ function EditWidgets({ widgets, stateId, stateName }) {
         justify="center">
         {notQuestions.length + questions.length === 0 ? (
           <Grid item xs={12} md={5}>
-            <Typography align="center">ویجتی وجود ندارد</Typography>
+            <Typography align="center">{t('thereIsNoItem')}</Typography>
           </Grid>
         ) : (
           <>
@@ -99,7 +101,7 @@ function EditWidgets({ widgets, stateId, stateName }) {
               fullWidth
               onClick={() => setOpenCreateWidgetDialog(true)}
               startIcon={<AddIcon />}>
-              ایجاد ویجت جدید
+              {t('createWidget')}
             </Button>
           </Grid>
         </Grid>

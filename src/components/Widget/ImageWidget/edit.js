@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createImageWidget } from '../../../redux/actions/mentor';
 
@@ -21,6 +22,7 @@ function ImageEditWidget({
   createImageWidget,
 }) {
   const [link, setLink] = useState(initLink);
+  const t = useTranslate();
 
   const handleClick = () => {
     if (id) {
@@ -33,11 +35,9 @@ function ImageEditWidget({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>عکس</DialogTitle>
+      <DialogTitle>{t('image')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          عکس را در مکانی بارگذاری کرده و آدرس آن را در ورودی پایین قرار دهید.
-        </DialogContentText>
+        <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
         <TextField
           autoFocus
           fullWidth
@@ -50,7 +50,7 @@ function ImageEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

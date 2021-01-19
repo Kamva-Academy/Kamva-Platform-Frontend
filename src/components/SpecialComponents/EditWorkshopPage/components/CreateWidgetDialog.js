@@ -3,14 +3,15 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React, { useState } from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import WIDGET_TYPES from '../../../Widget/WidgetTypes';
 
 export default function CreateWidgetDialog({ open, handleClose, stateId }) {
   const [type, setType] = useState('');
+  const t = useTranslate();
 
   if (type) {
     const { WidgetEditDialog } = WIDGET_TYPES[type];
@@ -28,16 +29,13 @@ export default function CreateWidgetDialog({ open, handleClose, stateId }) {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>ایجاد گام جدید</DialogTitle>
+      <DialogTitle>{t('createWidget')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          برای ایجاد ویجت ابتدا نوع آن را مشخص کنید.
-        </DialogContentText>
         <TextField
           fullWidth
           autoFocus
           select
-          label="نوع ویجت"
+          label={t('widgetType')}
           onChange={(e) => setType(e.target.value)}>
           {Object.keys(WIDGET_TYPES).map((option, index) => (
             <MenuItem key={index} value={option}>

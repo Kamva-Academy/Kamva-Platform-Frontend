@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 import { visitPlayerWorkshop } from '../../redux/actions/mentor';
@@ -26,13 +27,14 @@ const useStyles = makeStyles({
 
 const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
   const classes = useStyles();
+  const t = useTranslate();
 
   return (
     <Card className={classes.root}>
       <CardActionArea disabled>
         <CardContent>
           <Typography gutterBottom variant="h5">
-            {' تیم'}
+            {t('team')}
           </Typography>
           <Typography gutterBottom variant="h3">
             {team?.player?.group_name}
@@ -53,9 +55,9 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
             onClick={() => visitPlayerWorkshop({ playerWorkshopId: team.id })}
             component={Link}
             to={`/workshop/${team.player.uuid}/${fsmId}/${fsmFirstState}/`}>
-            مشاهده
+            {t('watch')}
           </Button>
-          <Button>سابقه</Button>
+          <Button>{t('history')}</Button>
         </ButtonGroup>
       </CardActions>
     </Card>

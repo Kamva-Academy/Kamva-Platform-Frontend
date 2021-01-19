@@ -6,15 +6,18 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { deleteState } from '../../../../redux/actions/mentor';
 
 function DeleteStateDialog({ open, handleClose, deleteState, stateId }) {
+  const t = useTranslate();
+
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>حذف گام</DialogTitle>
+      <DialogTitle>{t('removeState')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>آیا مایل به حذف این گام هستید؟</DialogContentText>
+        <DialogContentText>{t('wantDeleteState')}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" variant="outlined">

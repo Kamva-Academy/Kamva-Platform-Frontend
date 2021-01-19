@@ -10,6 +10,7 @@ import {
 import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import configs from './configs';
 import DragItem from './DragItem';
@@ -71,6 +72,7 @@ const DragItems = ({ options, drop }) => {
 function CompleteCode({ mode = 0 }) {
   const classes = useStyles();
   const [code, setCode] = useState(configs[mode]);
+  const t = useTranslate();
 
   const drop = ({ paragraphIndex, lineIndex, itemIndex, option }) => {
     const newCode = { ...code };
@@ -135,7 +137,7 @@ function CompleteCode({ mode = 0 }) {
           color="primary"
           className={classes.button}
           onClick={checkAnswers}>
-          بررسی جواب
+          {t('checkAnswer')}
         </Button>
       </Container>
     </DndProvider>

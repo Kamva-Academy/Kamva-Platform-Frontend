@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createVideoWidget } from '../../../redux/actions/mentor';
 
@@ -20,6 +21,7 @@ function VideoEditWidget({
   id,
   createVideoWidget,
 }) {
+  const t = useTranslate();
   const [link, setLink] = useState(initLink);
 
   const handleClick = () => {
@@ -35,9 +37,7 @@ function VideoEditWidget({
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>فیلم</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          فیلم را در مکانی بارگذاری کرده و آدرس آن را در ورودی پایین قرار دهید.
-        </DialogContentText>
+        <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
         <TextField
           autoFocus
           fullWidth
@@ -50,7 +50,7 @@ function VideoEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

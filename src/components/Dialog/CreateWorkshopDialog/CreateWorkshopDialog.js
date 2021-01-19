@@ -9,23 +9,25 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createWorkshop } from '../../../redux/actions/mentor';
 
 function CreateWorkshopDialog({ open, handleClose, createWorkshop }) {
   const [name, setName] = useState();
+  const t = useTranslate();
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm">
-      <DialogTitle>{'ساخت کارگاه جدید'}</DialogTitle>
+      <DialogTitle>{t('createWorkshop')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          برای ساخت کارگاه ابتدا نام و نوع آن را تعیین کنید.
+          {t('specifyNameAndTypeOfWorkshop')}
         </DialogContentText>
         <TextField
           fullWidth
           autoFocus
-          label="نام کارگاه"
+          label={t('workshopName')}
           onChange={(e) => setName(e.target.value)}
         />
       </DialogContent>
@@ -34,7 +36,7 @@ function CreateWorkshopDialog({ open, handleClose, createWorkshop }) {
           variant="contained"
           color="primary"
           onClick={() => createWorkshop({ name })}>
-          ایجاد
+          {t('create')}
         </Button>
       </DialogActions>
     </Dialog>

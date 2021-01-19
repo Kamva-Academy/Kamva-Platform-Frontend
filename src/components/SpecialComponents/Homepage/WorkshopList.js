@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -35,6 +36,8 @@ function WorkshopCard({ img, name }) {
 }
 
 function WorkshopList() {
+  const t = useTranslate();
+
   return (
     <Grid container spacing={1} alignItems="center" justify="center">
       <Grid
@@ -48,7 +51,7 @@ function WorkshopList() {
         lg={2}>
         <WorkshopCard
           img={process.env.PUBLIC_URL + '/game_theory.jpg'}
-          name="نظریه بازی‌ها"
+          name={t('gameTheory')}
         />
       </Grid>
       <Grid
@@ -62,7 +65,7 @@ function WorkshopList() {
         lg={2}>
         <WorkshopCard
           img={process.env.PUBLIC_URL + '/blockchain.jpg'}
-          name="بلاکچین"
+          name={t('blockchain')}
         />
       </Grid>
       <Grid
@@ -76,7 +79,7 @@ function WorkshopList() {
         lg={2}>
         <WorkshopCard
           img={process.env.PUBLIC_URL + '/granesh.jpg'}
-          name="گرانش"
+          name={t('gravity')}
         />
       </Grid>
       <Grid
@@ -90,7 +93,7 @@ function WorkshopList() {
         lg={2}>
         <WorkshopCard
           img={process.env.PUBLIC_URL + '/ai_pic.jpg'}
-          name="هوش مصنوعی"
+          name={t('AI')}
         />
       </Grid>
       <Grid
@@ -104,7 +107,7 @@ function WorkshopList() {
         lg={2}>
         <WorkshopCard
           img={process.env.PUBLIC_URL + '/algo.jpg'}
-          name="الگوریتم"
+          name={t('algorithm')}
         />
       </Grid>
       <Grid
@@ -118,7 +121,7 @@ function WorkshopList() {
         lg={2}>
         <WorkshopCard
           img={process.env.PUBLIC_URL + '/coding.jpg'}
-          name="نظریه کدگذاری"
+          name={t('codingTheory')}
         />
       </Grid>
     </Grid>

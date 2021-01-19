@@ -1,6 +1,7 @@
 import { Button, makeStyles } from '@material-ui/core';
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { StatePageContext } from '../../../../containers/Workshop';
 import { callMentor } from '../../../../redux/actions/currentState';
@@ -14,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
 function MentorButton({ callMentor, playerId }) {
   const classes = useStyles();
 
+  const t = useTranslate();
+
   const { fsmId } = useContext(StatePageContext);
 
   return (
@@ -23,7 +26,7 @@ function MentorButton({ callMentor, playerId }) {
       className={classes.mentorButton}
       disabled={!playerId}
       onClick={() => callMentor({ fsmId, playerId })}>
-      درخواست منتور
+      {t('callMentor')}
     </Button>
   );
 }

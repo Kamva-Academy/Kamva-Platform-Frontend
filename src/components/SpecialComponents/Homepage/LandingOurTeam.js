@@ -1,12 +1,7 @@
-import {
-  Button,
-  Container,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 import { getLandingData } from '../../../redux/actions/landing';
@@ -28,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 function LandingOurTeam({ members = [], count = 4, getLandingData }) {
   const classes = useStyles();
+  const t = useTranslate();
 
   useEffect(() => {
     getLandingData();
@@ -36,9 +32,9 @@ function LandingOurTeam({ members = [], count = 4, getLandingData }) {
   if (members.length === 0) return <></>;
 
   return (
-    <Container className={classes.section6}>
+    <section className={classes.section6}>
       <Typography component="h2" variant="h2" gutterBottom align="center">
-        تیم رویداد
+        {t('eventTeam')}
       </Typography>
       <Grid container spacing={4} justify="center">
         {getRandomSubarray(members, count).map((member, index) => (
@@ -60,9 +56,9 @@ function LandingOurTeam({ members = [], count = 4, getLandingData }) {
         className={classes.moreButton}
         component={Link}
         to="/our_team">
-        مشاهده تیم رویداد
+        {t('seeMore')}
       </Button>
-    </Container>
+    </section>
   );
 }
 

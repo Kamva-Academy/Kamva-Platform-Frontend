@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import MiniGameEditWidget from './edit';
 
@@ -17,13 +18,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GameWidget = ({ link = '' }) => {
+  const t = useTranslate();
   const classes = useStyles();
 
   const [iFrameHeight, setIFrameHeight] = useState(500);
 
   return (
     <iframe
-      title="بازی"
+      title={t('game')}
       src={link}
       className={classes.gameWidget}
       style={{ height: iFrameHeight }}

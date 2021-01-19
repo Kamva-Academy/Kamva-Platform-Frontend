@@ -12,6 +12,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 import Articles from '../components/SpecialComponents/MentorPage/Articles';
@@ -70,6 +71,7 @@ const MentorPage = ({
   getUnreadNotifications,
   getWorkshopTeams,
 }) => {
+  const t = useTranslate();
   const classes = useStyles();
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -127,7 +129,7 @@ const MentorPage = ({
                   component={Link}
                   to="/"
                   startIcon={<ExitToAppIcon />}>
-                  بازگشت
+                  {t('back')}
                 </Button>
               </Grid>
             </Hidden>
@@ -140,7 +142,7 @@ const MentorPage = ({
           <Hidden smUp>
             <Grid item fullWidth>
               <Button fullWidth color="primary" startIcon={<ExitToAppIcon />}>
-                بازگشت
+                {t('back')}
               </Button>
             </Grid>
           </Hidden>

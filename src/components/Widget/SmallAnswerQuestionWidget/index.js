@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { sendSmallAnswer } from '../../../redux/actions/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
@@ -40,6 +41,7 @@ const SmallAnswerQuestionWidget = ({
   playerId,
   sendSmallAnswer,
 }) => {
+  const t = useTranslate();
   const classes = useStyles();
   const [value, setValue] = useState(last_submit?.text);
   return (
@@ -83,12 +85,14 @@ const SmallAnswerQuestionWidget = ({
             onClick={() =>
               sendSmallAnswer({ playerId, problemId: id, answer: value })
             }>
-            ثبت
+            {t('submit')}
           </Button>
         </Grid>
         {answer?.text && (
           <Grid item xs={12}>
-            <Typography variant="body2">{'پاسخ: ' + answer.text}</Typography>
+            <Typography variant="body2">
+              {t('answer') + ': ' + answer.text}
+            </Typography>
           </Grid>
         )}
       </Grid>

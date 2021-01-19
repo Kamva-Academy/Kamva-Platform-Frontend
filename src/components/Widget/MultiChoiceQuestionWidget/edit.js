@@ -16,6 +16,7 @@ import {
 } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createMultiChoicesQuestionWidget } from '../../../redux/actions/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
@@ -37,6 +38,7 @@ function MultiChoiceQuestionEditWidget({
   createMultiChoicesQuestionWidget,
 }) {
   const classes = useStyles();
+  const t = useTranslate();
 
   const [question, setQuestion] = useState(initQuestion);
   const [answer, setAnswer] = useState(initAnswer);
@@ -71,19 +73,19 @@ function MultiChoiceQuestionEditWidget({
       scroll="body"
       disableAutoFocus
       disableEnforceFocus>
-      <DialogTitle>سوال چند گزینه‌ای</DialogTitle>
+      <DialogTitle>{t('multipleChoiceQuestions')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
           صورت سوال و گزینه‌های آن را وارد کنید.
         </DialogContentText>
-        <label>سوال</label>
+        <label>{t('question')}</label>
         <TinyEditorComponent
           id={`edit-text-${Math.floor(Math.random() * 1000)}`}
           content={question}
           onChange={(val) => setQuestion(val)}
         />
         <br />
-        <label>گزینه‌ها</label>
+        <label>{t('options')}</label>
         {choices.map((choice, index) => (
           <TextField
             key={index}
@@ -112,7 +114,7 @@ function MultiChoiceQuestionEditWidget({
         <TextField
           fullWidth
           select
-          label="پاسخ"
+          label={t('answer')}
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}>
           {choices.map((choice, index) => (
@@ -124,7 +126,7 @@ function MultiChoiceQuestionEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

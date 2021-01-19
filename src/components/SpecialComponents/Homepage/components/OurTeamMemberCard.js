@@ -39,7 +39,7 @@ function OurTeamMemberCard({ member }) {
           <Typography variant="h4" component="h4">
             {member.name}
           </Typography>
-          <Typography gutterBottom variant="subtitle" component="div">
+          <Typography gutterBottom variant="subtitle1" component="div">
             {'تیم ' + member.team}
           </Typography>
           <Typography variant="h6">{member.desc}</Typography>

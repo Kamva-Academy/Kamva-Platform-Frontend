@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   },
   justify: {
     textAlign: 'justify',
-  }
+  },
 });
 
 const ArticleCard2 = ({
@@ -31,6 +32,7 @@ const ArticleCard2 = ({
   withoutButton,
 }) => {
   const classes = useStyles();
+  const t = useTranslate();
 
   return (
     <Card className={classes.root}>
@@ -56,7 +58,7 @@ const ArticleCard2 = ({
             component={Link}
             disabled={!id}
             to={id && `/article/${id}`}>
-            مطالعه مقاله
+            {t('readArticle')}
           </Button>
         )}
       </CardActions>

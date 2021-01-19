@@ -1,10 +1,12 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 import LogoButton from './components/LogoButton';
 
 const ArticleAppBarItems = () => {
+  const t = useTranslate();
   const logoButton = <LogoButton />;
   const BackButton = (
     <Button
@@ -12,7 +14,7 @@ const ArticleAppBarItems = () => {
       to="/physics_day"
       variant="outlined"
       color="primary">
-      بازگشت به رویداد
+      {t('backToEvent')}
     </Button>
   );
   return {

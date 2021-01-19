@@ -2,6 +2,7 @@ import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import DeleteStateDialog from './components/DeleteStateDialog';
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function AdvanceSection({ stateId }) {
   const classes = useStyles();
+  const t = useTranslate();
   const [openDeleteStateDialog, setOpenDeleteStateDialog] = useState();
   return (
     <>
@@ -31,7 +33,7 @@ function AdvanceSection({ stateId }) {
         <Grid item xs={12} md={5}>
           <Paper className={classes.advance}>
             <Typography variant="h4" gutterBottom>
-              حذف گام
+              {t('removeState')}
             </Typography>
             <Button
               color="primary"
@@ -40,7 +42,7 @@ function AdvanceSection({ stateId }) {
               disabled={true}
               onClick={() => setOpenDeleteStateDialog(true)}
               startIcon={<DeleteIcon />}>
-              حذف گام
+              {t('removeState')}
             </Button>
           </Paper>
         </Grid>

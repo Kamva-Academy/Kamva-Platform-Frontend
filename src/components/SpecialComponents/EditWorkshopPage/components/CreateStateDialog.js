@@ -3,27 +3,25 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createState } from '../../../../redux/actions/mentor';
 
 function CreateStateDialog({ open, handleClose, createState, fsmId }) {
   const [name, setName] = useState();
+  const t = useTranslate();
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>ایجاد گام جدید</DialogTitle>
+      <DialogTitle>{t('createState')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          برای ایجاد گام جدید ابتدا نام این گام را مشخص کنید.
-        </DialogContentText>
         <TextField
           fullWidth
           autoFocus
-          label="نام گام"
+          label={t('stateName')}
           onChange={(e) => setName(e.target.value)}
         />
       </DialogContent>
@@ -32,7 +30,7 @@ function CreateStateDialog({ open, handleClose, createState, fsmId }) {
           color="primary"
           variant="contained"
           onClick={() => createState({ name, fsmId }).then(handleClose)}>
-          ایجاد
+          {t('create')}
         </Button>
       </DialogActions>
     </Dialog>

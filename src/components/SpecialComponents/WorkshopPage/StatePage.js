@@ -2,6 +2,7 @@ import { Fab, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Help as HelpIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget from '../../Widget';
 import BackButton from './components/BackButton';
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 function StatePage({ state = {} }) {
   const classes = useStyles();
+  const t = useTranslate();
   const [openHelpDialog, setOpenHelpDialog] = useState();
 
   const { widgets = [], inward_edges, outward_edges, help_states = [] } = state;
@@ -107,7 +109,7 @@ function StatePage({ state = {} }) {
             className={classes.helpFab}
             onClick={() => setOpenHelpDialog(true)}>
             <HelpIcon className={classes.extendedIcon} />
-            <Typography>راهنمایی</Typography>
+            <Typography>{t('help')}</Typography>
           </Fab>
           <HelpDialog
             open={openHelpDialog}

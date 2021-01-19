@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createTextWidget } from '../../../redux/actions/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
@@ -20,6 +21,7 @@ function TextEditWidget({
   id,
   createTextWidget,
 }) {
+  const t = useTranslate();
   const [text, setText] = useState(initText);
 
   const handleClick = () => {
@@ -37,7 +39,7 @@ function TextEditWidget({
       onClose={handleClose}
       disableAutoFocus
       disableEnforceFocus>
-      <DialogTitle>متن</DialogTitle>
+      <DialogTitle>{t('text')}</DialogTitle>
       <DialogContent>
         <DialogContentText>متن مورد نظر خود را وارد کنید.</DialogContentText>
 
@@ -49,7 +51,7 @@ function TextEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-          ثبت
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>

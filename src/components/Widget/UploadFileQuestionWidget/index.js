@@ -5,6 +5,7 @@ import {
 } from '@material-ui/icons';
 import React from 'react';
 import { connect } from 'react-redux';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { sendFileAnswer } from '../../../redux/actions/currentState';
 import UploadFileQuestionEditWidget from './edit';
@@ -46,6 +47,7 @@ const UploadFileQuestionWidget = ({
   playerId,
   sendFileAnswer,
 }) => {
+  const t = useTranslate();
   const classes = useStyles({ haveFile: !!last_submit });
   const onChangeFile = async (e) => {
     e.preventDefault();
@@ -84,7 +86,7 @@ const UploadFileQuestionWidget = ({
           size="small"
           startIcon={<CloudUploadIcon />}
           className={classes.uploadButton}>
-          بارگذاری فایل
+          {t('uploadFile')}
         </Button>
       </div>
       {last_submit && (

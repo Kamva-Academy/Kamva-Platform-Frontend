@@ -13,6 +13,7 @@ import {
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import React from 'react';
+import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -35,6 +36,7 @@ const WorkshopCard = ({
   mentorsNumber = 0,
 }) => {
   const classes = useStyles();
+  const t = useTranslate();
 
   return (
     <Card className={classes.root}>
@@ -57,14 +59,14 @@ const WorkshopCard = ({
             <Chip
               variant="outlined"
               icon={<EmojiPeopleIcon />}
-              label={`${mentorsNumber} منتور`}
+              label={`${mentorsNumber} ${t('mentor')}`}
             />
           </Grid>
           <Grid container item xs={6} justify="center">
             <Chip
               variant="outlined"
               icon={<PeopleAltIcon />}
-              label={`${teamsNumber} تیم`}
+              label={`${teamsNumber} ${t('team')}`}
             />
           </Grid>
         </Grid>
@@ -76,7 +78,7 @@ const WorkshopCard = ({
           color="primary"
           component={Link}
           to={`/edit_workshop/${id}`}>
-          مشاهده
+          {t('watch')}
         </Button>
       </CardActions>
     </Card>

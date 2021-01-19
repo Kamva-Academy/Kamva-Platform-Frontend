@@ -39,7 +39,7 @@ function NextButton({ outwardEdges = [], goForward }) {
         variant="contained"
         color="primary"
         onClick={handleClick}>
-        {outwardEdges.length === 0 ? 'پایان' : 'بعدی'}
+        {outwardEdges.length === 0 ? t('end') : t('next')}
       </Button>
       <ChangeStateDialog
         open={openChangeStateDialog}

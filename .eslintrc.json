@@ -8,18 +8,9 @@
   "parser": "babel-eslint",
   "rules": {
     "jsx-a11y/label-has-associated-control": "off",
-    "indent": [
-      2,
-      2,
-      {
-        "SwitchCase": 1,
-        "flatTernaryExpressions": true,
-        "offsetTernaryExpressions": true
-      }
-    ],
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/no-autofocus": "off",
-    "simple-import-sort/imports": "error",
+    "simple-import-sort/imports": "warn",
     "react/prop-types": "off",
     "no-unused-vars": "warn"
   },
