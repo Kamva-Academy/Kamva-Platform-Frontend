@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   }),
 }));
 
-function DropArea({ dropItem }) {
+function DropArea({ dropItem, onSelectDropArea }) {
   const classes = useStyles({ mode: dropItem.mode });
   const [_, dropRef] = useDrop({
     accept: 'CARD',
@@ -43,7 +43,8 @@ function DropArea({ dropItem }) {
       alignItems="center"
       justify="center"
       ref={dropRef}
-      className={classes.dropArea}>
+      className={classes.dropArea}
+      onClick={() => onSelectDropArea(dropItem)}>
       <Grid item>{dropItem.option}</Grid>
     </Grid>
   );

@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Paragraph({ help, lines }) {
+function Paragraph({ help, lines, onSelectDropArea }) {
   const classes = useStyles();
   return (
     <div className={classes.paper}>
@@ -33,7 +33,7 @@ function Paragraph({ help, lines }) {
         <Help help={help} />
       </div>
       {lines.map((line, index) => (
-        <Line {...line} key={index} />
+        <Line {...line} key={index} onSelectDropArea={onSelectDropArea} />
       ))}
     </div>
   );

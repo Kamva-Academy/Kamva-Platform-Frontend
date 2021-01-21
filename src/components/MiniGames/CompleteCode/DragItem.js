@@ -15,10 +15,11 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
       boxShadow: '-3px 3px 0 #222',
     },
+    userSelect: 'none',
   },
 }));
 
-function DragItem({ text, onDrop }) {
+function DragItem({ text, onDrop, onSelect }) {
   const classes = useStyles();
   const [{ isDragging }, dragRef] = useDrag({
     item: { text, type: 'CARD' },
@@ -34,7 +35,12 @@ function DragItem({ text, onDrop }) {
   });
   const opacity = isDragging ? 0.4 : 1;
   return (
-    <div ref={dragRef} style={{ opacity }} className={classes.item}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div
+      ref={dragRef}
+      style={{ opacity }}
+      className={classes.item}
+      onClick={onSelect}>
       {text}
     </div>
   );

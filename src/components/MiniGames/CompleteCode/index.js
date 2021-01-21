@@ -51,7 +51,7 @@ configs.forEach((config, configIndex) =>
   )
 );
 
-const DragItems = ({ options, drop }) => {
+const DragItems = ({ options, drop, setSelectedDragItemOption }) => {
   const classes = useStyles();
   return (
     <Paper className={classes.dragItemsPaper}>
@@ -61,6 +61,7 @@ const DragItems = ({ options, drop }) => {
             <DragItem
               text={option}
               onDrop={(item) => drop({ ...item, option })}
+              onSelect={() => setSelectedDragItemOption(option)}
             />
           </Grid>
         ))}
@@ -72,15 +73,29 @@ const DragItems = ({ options, drop }) => {
 function CompleteCode({ mode = 0 }) {
   const classes = useStyles();
   const [code, setCode] = useState(configs[mode]);
+
+  const [selectedDragItemOption, setSelectedDragItemOption] = useState();
   const t = useTranslate();
 
-  const drop = ({ paragraphIndex, lineIndex, itemIndex, option }) => {
+  const setDroppedItem = ({ paragraphIndex, lineIndex, itemIndex, option }) => {
     const newCode = { ...code };
     const item =
       newCode.paragraphs[paragraphIndex].lines[lineIndex].items[itemIndex];
     item.option = option;
     item.mode = 'N';
     setCode(newCode);
+  };
+
+  const handleSelectDropItem = ({ paragraphIndex, lineIndex, itemIndex }) => {
+    if (selectedDragItemOption) {
+      setDroppedItem({
+        paragraphIndex,
+        lineIndex,
+        itemIndex,
+        option: selectedDragItemOption,
+      });
+      setSelectedDragItemOption(null);
+    }
   };
 
   const checkAnswers = () => {
@@ -107,7 +122,11 @@ function CompleteCode({ mode = 0 }) {
     <DndProvider options={HTML5toTouch}>
       <Hidden smUp>
         <AppBar position="sticky" color="transparent">
-          <DragItems options={code.options} drop={drop} />
+          <DragItems
+            options={code.options}
+            drop={setDroppedItem}
+            setSelectedDragItemOption={setSelectedDragItemOption}
+          />
         </AppBar>
       </Hidden>
       <Container className={classes.container}>
@@ -119,14 +138,22 @@ function CompleteCode({ mode = 0 }) {
               className={classes.gridItem}
               style={{ maxHeight: '100vh' }}>
               <div style={{ position: 'sticky', top: 50 }}>
-                <DragItems options={code.options} drop={drop} />
+                <DragItems
+                  options={code.options}
+                  drop={setDroppedItem}
+                  setSelectedDragItemOption={setSelectedDragItemOption}
+                />
               </div>
             </Grid>
           </Hidden>
           <Grid item xs={12} sm={8} className={classes.gridItem}>
             <Paper className={classes.paper} style={{ direction: 'ltr' }}>
               {code.paragraphs.map((paragraph, index) => (
-                <Paragraph {...paragraph} key={index} />
+                <Paragraph
+                  {...paragraph}
+                  key={index}
+                  onSelectDropArea={handleSelectDropItem}
+                />
               ))}
             </Paper>
           </Grid>

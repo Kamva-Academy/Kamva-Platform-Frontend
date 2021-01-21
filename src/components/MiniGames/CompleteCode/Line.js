@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Line({ tab = 0, items }) {
+function Line({ tab = 0, items, onSelectDropArea }) {
   const classes = useStyles();
 
   return (
@@ -38,7 +38,11 @@ function Line({ tab = 0, items }) {
 
       {items.map((item, index) => (
         <div item key={index} className={classes.item}>
-          {typeof item === 'string' ? item : <DropArea dropItem={item} />}
+          {typeof item === 'string' ? (
+            item
+          ) : (
+            <DropArea dropItem={item} onSelectDropArea={onSelectDropArea} />
+          )}
         </div>
       ))}
     </div>
