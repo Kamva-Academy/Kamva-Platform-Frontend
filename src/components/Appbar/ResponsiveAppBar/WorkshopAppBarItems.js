@@ -33,17 +33,15 @@ const ExitButton = () => {
 const WorkshopAppBarItems = () => {
   const jitsiButton = <JitsiButton />;
   const jitsiMicButton = <JitsiMicButton />;
-  const notificationButton = <NotificationButton />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const usersAvatar = <UsersAvatar />;
-  const exitButton = <ExitButton />;
   return {
-    desktopLeftItems: [notificationButton, whiteboardButton, mentorButton],
+    desktopLeftItems: [whiteboardButton, mentorButton],
     desktopRightItems: [usersAvatar, jitsiMicButton, jitsiButton],
     mobileLeftItems: [jitsiMicButton, jitsiButton, mentorButton],
-    mobileRightItems: [notificationButton, whiteboardButton],
-    mobileMenuListItems: [exitButton],
+    mobileRightItems: [whiteboardButton],
+    mobileMenuListItems: [],
   };
 };
 
