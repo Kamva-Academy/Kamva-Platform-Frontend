@@ -8,6 +8,7 @@ import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
 import Homepage from '../containers/Homepage';
 import LoginPage from '../containers/LoginPage';
+import MathHouseProblemDayLanding from '../containers/MathHouseProblemDayLanding';
 import MentorPage from '../containers/MentorPage';
 import OurTeam from '../containers/OurTeam';
 import PhysicsDay from '../containers/PhysicsDay';
@@ -41,6 +42,7 @@ const Root = () => {
       <Route path="/physics_day" component={PhysicsDay} />
       <Route path="/our_team" component={OurTeam} />
       <Route path="/about_us" component={AboutUs} />
+      <Route path="/prob-day" component={MathHouseProblemDayLanding} />
       <Route path="/" component={Homepage} />
     </Switch>
   );
