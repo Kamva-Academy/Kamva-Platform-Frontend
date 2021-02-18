@@ -7,7 +7,7 @@ const AppbarModes = {
   LANDING: LandingAppBarItems,
   WORKSHOP: WorkshopAppBarItems,
   ARTICLE: ArticleAppBarItems,
-  PROBLEMDAY: MathHouseProblemDayItems,
+  PROBLEM_DAY: MathHouseProblemDayItems,
 };
 
 export default AppbarModes;
