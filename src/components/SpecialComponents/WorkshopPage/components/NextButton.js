@@ -25,7 +25,7 @@ function NextButton({ outwardEdges = [], goForward }) {
 
   const handleClick = () => {
     if (outwardEdges.length === 0) {
-      history.push('/');
+      history.push('/workshops');
     }
     if (outwardEdges.length === 1) {
       changeState(outwardEdges[0]);

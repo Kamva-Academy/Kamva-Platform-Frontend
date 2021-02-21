@@ -173,7 +173,7 @@ function Homepage() {
 
   return (
     <>
-      <ResponsiveAppBar mode="PROBLEMDAY" showBackOnScroll hideOnScroll={false} />
+      <ResponsiveAppBar mode="PROBLEM_DAY" showBackOnScroll hideOnScroll={false} />
       <section className={classes.section1}>
         <div id="back-to-top-anchor"></div>
         <div className={classes.landingBackground} />
