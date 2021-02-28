@@ -14,7 +14,7 @@ import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ArticleCard2 from '../components/Cards/ArticleCard2';
 import Widget from '../components/Widget';
 import { getArticle } from '../redux/actions/mentor';
-import { articleData } from './PhysicsDay';
+import { articleData } from './Landings/PhysicsDay';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
@@ -79,9 +79,8 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://telegram.me/share/url?url=${
-                    window.location.href
-                  }&text=${encodeURIComponent(articleData[articleId].name)}`}>
+                  href={`https://telegram.me/share/url?url=${window.location.href
+                    }&text=${encodeURIComponent(articleData[articleId].name)}`}>
                   <TelegramIcon />
                 </IconButton>
               </Grid>
@@ -89,9 +88,8 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://twitter.com/share?url=${
-                    window.location.href
-                  }&text=${encodeURIComponent(articleData[articleId].name)}`}>
+                  href={`https://twitter.com/share?url=${window.location.href
+                    }&text=${encodeURIComponent(articleData[articleId].name)}`}>
                   <TwitterIcon />
                 </IconButton>
               </Grid>

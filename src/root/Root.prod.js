@@ -6,12 +6,13 @@ import AboutUs from '../containers/AboutUs';
 import Article from '../containers/Article';
 import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
-import Homepage from '../containers/Homepage';
+import MathHouseProblemDayLanding from '../containers/Landing/MathHouseProblemDayLanding';
+import BombEvent from '../containers/Landings/BombEvent';
+import PhysicsDayLanding from '../containers/Landings/PhysicsDay';
+import WorkshopLanding from '../containers/Landings/Workshop';
 import LoginPage from '../containers/LoginPage';
-import MathHouseProblemDayLanding from '../containers/MathHouseProblemDayLanding';
 import MentorPage from '../containers/MentorPage';
 import OurTeam from '../containers/OurTeam';
-import PhysicsDay from '../containers/PhysicsDay';
 import Survey from '../containers/Survey';
 import Workshop from '../containers/Workshop';
 import Workshops from '../containers/Workshops';
@@ -39,10 +40,11 @@ const Root = () => {
       <Route path="/article/:articleId" component={Article} />
       <PrivateRoute path="/mentor/" component={MentorPage} />
       <PrivateRoute path="/survey" component={Survey} />
-      <Route path="/physics_day" component={PhysicsDay} />
       <Route path="/our_team" component={OurTeam} />
       <Route path="/about_us" component={AboutUs} />
-      <Route exact path="/" component={Homepage} />
+      <Route path="/physics_day" component={PhysicsDayLanding} />
+      <Route path="/bomb" component={BombEvent} />
+      <Route exact path="/" component={WorkshopLanding} />
       <Route exact path="/prob-day" component={MathHouseProblemDayLanding} />
       <Route
         path="*"

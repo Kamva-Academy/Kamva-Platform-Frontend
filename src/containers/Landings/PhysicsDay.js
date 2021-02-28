@@ -1,4 +1,4 @@
-import '../assets/styles/physics_day.css';
+import '../../assets/styles/physics_day.css';
 
 import { Fab, Grid, makeStyles, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
@@ -6,11 +6,11 @@ import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import ArticleCard2 from '../components/Cards/ArticleCard2';
-import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
-import Footer from '../components/Footer/Footer';
-import ScrollTop from '../components/ScrollToTop/ScrollToTop';
-import { logout } from '../redux/actions/account';
+import ArticleCard2 from '../../components/Cards/ArticleCard2';
+import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
+import Footer from '../../components/Footer/Footer';
+import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
+import { logout } from '../../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
