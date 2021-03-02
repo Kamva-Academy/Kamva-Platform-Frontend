@@ -41,8 +41,6 @@ const BombEvent = () => {
       <video ref={videoRef} id="v0" preload className={classes.backgroundVideo} playsInline muted loop >
         <source src="https://uupload.ir/filelink/aEha19Gn0X8W/00ls_finalclip_trim.mp4" type="video/mp4" />
       </video>
-
-
     </div>
   )
 }

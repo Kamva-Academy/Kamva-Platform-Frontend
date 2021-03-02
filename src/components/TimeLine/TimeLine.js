@@ -1,10 +1,10 @@
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import HotelIcon from '@material-ui/icons/Hotel';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import RepeatIcon from '@material-ui/icons/Repeat';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import ComputerIcon from '@material-ui/icons/Computer';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import CreateIcon from '@material-ui/icons/Create';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
@@ -12,6 +12,11 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import SlideshowIcon from '@material-ui/icons/Slideshow';
+import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import StarHalfIcon from '@material-ui/icons/StarHalf';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedTimeline() {
+export default function TimeLine() {
   const classes = useStyles();
 
   return (
@@ -28,86 +33,150 @@ export default function CustomizedTimeline() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            ۸ صبح
-          </Typography>
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot color="secondary">
-            <FastfoodIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              شروع روز اول مسابقه
-            </Typography>
-            {/* <Typography>Because you need strength</Typography> */}
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            ۱۰ صبح
-          </Typography>
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot color="secondary">
-            <LaptopMacIcon />
-          </TimelineDot>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
-            <Typography variant="h6" component="h1">
-              میان‌وعده!
-            </Typography>
-            {/* <Typography>Because it&apos;s awesome!</Typography> */}
-          </Paper>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant="body2" color="textSecondary">
-            ۱۲ ظهر
+
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="secondary" >
-            <HotelIcon />
+            <SlideshowIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              پایان روز اول
+              دو فروند ارائه‌ی غیرعلمی
             </Typography>
-            {/* <Typography>Because you need rest</Typography> */}
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant="body2" color="textSecondary">
-            فردا
+            ۲۵ بهمن الی ۵ اسفند
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot dis color="secondary">
+            <LibraryBooksIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              ثبت‌نام مرحله‌ی اول
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            ۸ الی ۱۰ اسفند
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot color="secondary">
-            <RepeatIcon />
+            <CreateIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              آزمون مرحله اول
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            ۵ الی ۷ اردیبهشت
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot color="secondary">
+            <CreateIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              آزمون مرحله دوم
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            خرداد و مرداد ۱۴۰۰
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot color="secondary">
+            <SupervisorAccountIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              جلسات درون سیاره‌ای بین کارسوقمندانِ سابق و تازه‌واردینِ کهکشان
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            ۱۳ الی ۱۵ مرداد ۱۴۰۰
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot color="secondary">
+            <StarHalfIcon />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper elevation={3} className={classes.paper}>
+            <Typography variant="h6" component="h1">
+              مرحله‌ی نهایی، جنگ ستارگان!
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+
+      <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant="body2" color="textSecondary">
+            تا سال بعد...
+          </Typography>
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot color="secondary">
+            <SentimentVeryDissatisfiedIcon />
           </TimelineDot>
         </TimelineSeparator>
         <TimelineContent>
           <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="h1">
-              روز دوم
+              دل‌تنگی و دوری :(
             </Typography>
-            {/* <Typography>Because this is the life you love!</Typography> */}
           </Paper>
         </TimelineContent>
       </TimelineItem>
+
     </Timeline>
   );
 }
