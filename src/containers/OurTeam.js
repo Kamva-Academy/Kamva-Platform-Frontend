@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unknown-property */
-import '../assets/styles/our_team.css';
+import '../Theme/Styles/OurTeam.scss';
 
 import { Container, Grid } from '@material-ui/core';
 import React, { useEffect } from 'react';
@@ -31,7 +30,7 @@ function OurTeam({ members = [], getLandingData }) {
                   name="tabGroup1"
                   className="tab"
                 />
-                <label for={'tab' + index}>{team}</label>
+                <label htmlFor={'tab' + index}>{team}</label>
               </>
             ))}
             {teams.map((team) => (

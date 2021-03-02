@@ -1,6 +1,4 @@
-import variables from '../assets/core/MuiVariables';
-
-const theme = {
+const theme = (variables) => ({
   palette: {
     primary: {
       main: variables.colors.primary,
@@ -57,6 +55,6 @@ const theme = {
       },
     },
   },
-};
+});
 
 export default theme;

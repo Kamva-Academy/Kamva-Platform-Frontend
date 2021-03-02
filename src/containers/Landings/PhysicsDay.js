@@ -1,4 +1,4 @@
-import '../../assets/styles/physics_day.css';
+import '../../Theme/Styles/PhysicsDay.scss'
 
 import { Fab, Grid, makeStyles, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';

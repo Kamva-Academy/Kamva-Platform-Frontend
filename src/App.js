@@ -1,4 +1,4 @@
-import './assets/styles/App.css';
+import './Theme/Styles/Style.scss';
 
 import { CssBaseline } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';
@@ -14,8 +14,8 @@ import Notifier from './components/Notifications/Notifications';
 import { initRedirect } from './redux/actions/redirect';
 import WorkshopRoot from './root/Workshop';
 import ZeroDayRoot from './root/ZeroDay';
-import MuiTheme from './theme/MuiTheme';
-import RTLMuiTheme from './theme/RTLMuiTheme';
+import MuiTheme from './Theme/MuiThemes/MuiTheme';
+import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
