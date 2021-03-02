@@ -12,7 +12,8 @@ import { useHistory } from 'react-router-dom';
 
 import Notifier from './components/Notifications/Notifications';
 import { initRedirect } from './redux/actions/redirect';
-import Root from './root/Root';
+import WorkshopRoot from './root/Workshop';
+import ZeroDayRoot from './root/ZeroDay';
 import MuiTheme from './theme/MuiTheme';
 import RTLMuiTheme from './theme/RTLMuiTheme';
 import translations from './translations';
@@ -20,13 +21,21 @@ import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
 // Pushe.subscribe();
 
-const AppRout = () => (
+const Workshop = () => (
   <SnackbarProvider>
     <Notifier />
     <CssBaseline />
-    <Root />
+    <WorkshopRoot />
   </SnackbarProvider>
 );
+
+const ZeroDay = () => {
+  <SnackbarProvider>
+    <Notifier />
+    <CssBaseline />
+    <ZeroDayRoot />
+  </SnackbarProvider>
+}
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
@@ -51,16 +60,27 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   return (
     <IntlProvider translations={translations}>
       {dir === 'rtl' ? (
-        <ThemeProvider theme={RTLMuiTheme}>
-          <StylesProvider jss={jss}>
-            <AppRout />
-          </StylesProvider>
-        </ThemeProvider>
+        <>
+          <ThemeProvider theme={RTLMuiTheme}>
+            <StylesProvider jss={jss}>
+              <Workshop />
+            </StylesProvider>
+          </ThemeProvider>
+          <ThemeProvider theme={RTLMuiTheme}>
+            <StylesProvider jss={jss}>
+            </StylesProvider>
+          </ThemeProvider>
+        </>
       ) : (
-        <ThemeProvider theme={MuiTheme}>
-          <AppRout />
-        </ThemeProvider>
-      )}
+          <>
+            <ThemeProvider theme={MuiTheme}>
+              <Workshop />
+            </ThemeProvider>
+            <ThemeProvider theme={MuiTheme}>
+              <ZeroDay />
+            </ThemeProvider>
+          </>
+        )}
     </IntlProvider>
   );
 };
