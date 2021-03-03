@@ -19,7 +19,7 @@ export const Workshop = {
   },
 };
 
-export const ZeroDay = {
+export const ZeroJourney = {
   colors: {
     primary: '#966c2d',
     primaryLight: '#5E60CE',

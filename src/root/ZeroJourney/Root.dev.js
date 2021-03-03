@@ -1,14 +1,16 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import BombEvent from '../../containers/Landings/ZeroDay/BombEvent';
+import DevTools from '../../containers/DevTools';
+import ZeroJourney from '../../containers/Landings/ZeroJourney';
 
 const Root = () => {
   return (
     <>
       <Switch>
-        <Route path="/bomb" component={BombEvent} />
+        <Route path="/bomb" component={ZeroJourney} />
       </Switch>
+      <DevTools />
     </>
   );
 };

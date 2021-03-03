@@ -1,13 +1,13 @@
 import { createMuiTheme } from '@material-ui/core';
 
-import { ZeroDay } from '../MuiVariables';
+import { ZeroJourney } from '../MuiVariables';
 import theme from '../theme';
 import typography from '../typography';
 
-const ZeroDayMuiTheme = createMuiTheme({
+const ZeroJourneyMuiTheme = createMuiTheme({
   direction: 'rtl',
-  ...theme(ZeroDay),
+  ...theme(ZeroJourney),
   typography
 });
 
-export default ZeroDayMuiTheme;
+export default ZeroJourneyMuiTheme;
