@@ -1,3 +1,5 @@
+import './Style.scss';
+
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
@@ -44,9 +46,9 @@ const BombEvent = () => {
       <Button variant='contained' color='primary'>
         سلام
       </Button>
-      <video ref={videoRef} id="v0" preload className={classes.backgroundVideo} playsInline muted loop >
-        <source src="https://uupload.ir/filelink/aEha19Gn0X8W/00ls_finalclip_trim.mp4" type="video/mp4" />
-      </video>
+      <p id='digital'>
+        123346789
+      </p>
     </div>
   )
 }
