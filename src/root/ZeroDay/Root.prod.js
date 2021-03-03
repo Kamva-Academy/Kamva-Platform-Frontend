@@ -1,56 +1,15 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import MiniGames from '../components/MiniGames';
-import AboutUs from '../containers/AboutUs';
-import Article from '../containers/Article';
-import EditArticle from '../containers/EditArticle';
-import EditWorkshop from '../containers/EditWorkshop';
-import MathHouseProblemDayLanding from '../containers/Landing/MathHouseProblemDayLanding';
-import BombEvent from '../containers/Landings/BombEvent';
-import PhysicsDayLanding from '../containers/Landings/PhysicsDay';
-import WorkshopLanding from '../containers/Landings/Workshop';
-import LoginPage from '../containers/LoginPage';
-import MentorPage from '../containers/MentorPage';
-import OurTeam from '../containers/OurTeam';
-import Survey from '../containers/Survey';
-import Workshop from '../containers/Workshop';
-import Workshops from '../containers/Workshops';
-import PrivateRoute from './PrivateRoute';
+import BombEvent from '../../containers/Landings/BombEvent';
 
 const Root = () => {
   return (
-    <Switch>
-      <Route path="/loading/"></Route>
-      <Route path="/admin" component={LoginPage}></Route>
-      <Route path="/game/:gameId" component={MiniGames} />
-      <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
-      <PrivateRoute path="/edit_article/:articleId/" component={EditArticle} />
-      <PrivateRoute path="/workshops/" component={Workshops} />
-      <Route path="/workshop/">
-        <Switch>
-          <PrivateRoute
-            path="/workshop/:playerUUID/:fsmId/:stateId/"
-            component={Workshop}
-          />
-          <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
-          <Route path="/workshop/" component={Workshops} />
-        </Switch>
-      </Route>
-      <Route path="/article/:articleId" component={Article} />
-      <PrivateRoute path="/mentor/" component={MentorPage} />
-      <PrivateRoute path="/survey" component={Survey} />
-      <Route path="/our_team" component={OurTeam} />
-      <Route path="/about_us" component={AboutUs} />
-      <Route path="/physics_day" component={PhysicsDayLanding} />
-      <Route path="/bomb" component={BombEvent} />
-      <Route exact path="/" component={WorkshopLanding} />
-      <Route exact path="/prob-day" component={MathHouseProblemDayLanding} />
-      <Route
-        path="*"
-        render={() => <Redirect to={{ pathname: '/prob-day' }} />}
-      />
-    </Switch>
+    <>
+      <Switch>
+        <Route path="/bomb" component={BombEvent} />
+      </Switch>
+    </>
   );
 };
 export default Root;

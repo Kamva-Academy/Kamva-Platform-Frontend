@@ -7,7 +7,6 @@ import Article from '../containers/Article';
 import EditArticle from '../containers/EditArticle';
 import EditWorkshop from '../containers/EditWorkshop';
 import MathHouseProblemDayLanding from '../containers/Landing/MathHouseProblemDayLanding';
-import BombEvent from '../containers/Landings/BombEvent';
 import PhysicsDayLanding from '../containers/Landings/PhysicsDay';
 import WorkshopLanding from '../containers/Landings/Workshop';
 import LoginPage from '../containers/LoginPage';
@@ -43,13 +42,8 @@ const Root = () => {
       <Route path="/our_team" component={OurTeam} />
       <Route path="/about_us" component={AboutUs} />
       <Route path="/physics_day" component={PhysicsDayLanding} />
-      <Route path="/bomb" component={BombEvent} />
-      <Route exact path="/" component={WorkshopLanding} />
       <Route exact path="/prob-day" component={MathHouseProblemDayLanding} />
-      <Route
-        path="*"
-        render={() => <Redirect to={{ pathname: '/prob-day' }} />}
-      />
+      <Route exact path="/" component={WorkshopLanding} />
     </Switch>
   );
 };

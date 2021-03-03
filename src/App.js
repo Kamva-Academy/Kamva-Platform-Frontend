@@ -16,6 +16,7 @@ import WorkshopRoot from './root/Workshop';
 import ZeroDayRoot from './root/ZeroDay';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
+import ZeroDayMuiTheme from './Theme/MuiThemes/ZeroDayMuiTheme'
 import translations from './translations';
 import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
@@ -29,13 +30,13 @@ const Workshop = () => (
   </SnackbarProvider>
 );
 
-const ZeroDay = () => {
+const ZeroDay = () => (
   <SnackbarProvider>
     <Notifier />
     <CssBaseline />
     <ZeroDayRoot />
   </SnackbarProvider>
-}
+)
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
@@ -61,13 +62,14 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
     <IntlProvider translations={translations}>
       {dir === 'rtl' ? (
         <>
-          <ThemeProvider theme={RTLMuiTheme}>
+          <ThemeProvider theme={ZeroDayMuiTheme}>
             <StylesProvider jss={jss}>
-              <Workshop />
+              <ZeroDay />
             </StylesProvider>
           </ThemeProvider>
           <ThemeProvider theme={RTLMuiTheme}>
             <StylesProvider jss={jss}>
+              <Workshop />
             </StylesProvider>
           </ThemeProvider>
         </>
@@ -75,9 +77,6 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
           <>
             <ThemeProvider theme={MuiTheme}>
               <Workshop />
-            </ThemeProvider>
-            <ThemeProvider theme={MuiTheme}>
-              <ZeroDay />
             </ThemeProvider>
           </>
         )}

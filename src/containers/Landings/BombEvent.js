@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { DriveEtaOutlined } from '@material-ui/icons';
+import {
+  Button,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   backgroundVideo: {
@@ -28,7 +31,7 @@ const BombEvent = () => {
 
   setInterval(() => {
     console.log(window.pageYOffset)
-    videoRef.current.currentTime = window.pageYOffset / 100;
+    // videoRef.current.currentTime = window.pageYOffset / 100;
   }, 100)
 
   useEffect(() => {
@@ -38,6 +41,9 @@ const BombEvent = () => {
 
   return (
     <div style={{ height: '1500vh' }}>
+      <Button variant='contained' color='primary'>
+        سلام
+      </Button>
       <video ref={videoRef} id="v0" preload className={classes.backgroundVideo} playsInline muted loop >
         <source src="https://uupload.ir/filelink/aEha19Gn0X8W/00ls_finalclip_trim.mp4" type="video/mp4" />
       </video>

@@ -21,7 +21,7 @@ export const Workshop = {
 
 export const ZeroDay = {
   colors: {
-    primary: '#2185d0',
+    primary: '#966c2d',
     primaryLight: '#5E60CE',
     primaryDark: '#7400B8',
     secondary: '#1361A4',
