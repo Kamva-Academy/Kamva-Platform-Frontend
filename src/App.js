@@ -13,10 +13,10 @@ import { useHistory } from 'react-router-dom';
 import Notifier from './components/Notifications/Notifications';
 import { initRedirect } from './redux/actions/redirect';
 import WorkshopRoot from './root/Workshop';
-import ZeroJourneyRoot from './root/ZeroJourney';
+import ZeroJourneyerRoot from './root/ZeroJourneyer';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
-import ZeroJourneyMuiTheme from './Theme/MuiThemes/ZeroJourneyMuiTheme'
+import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme'
 import translations from './translations';
 import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
@@ -30,11 +30,11 @@ const Workshop = () => (
   </SnackbarProvider>
 );
 
-const ZeroJourney = () => (
+const ZeroJourneyer = () => (
   <SnackbarProvider>
     <Notifier />
     <CssBaseline />
-    <ZeroJourneyRoot />
+    <ZeroJourneyerRoot />
   </SnackbarProvider>
 )
 
@@ -62,9 +62,9 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
     <IntlProvider translations={translations}>
       {dir === 'rtl' ? (
         <>
-          <ThemeProvider theme={ZeroJourneyMuiTheme}>
+          <ThemeProvider theme={ZeroJourneyerMuiTheme}>
             <StylesProvider jss={jss}>
-              <ZeroJourney />
+              <ZeroJourneyer />
             </StylesProvider>
           </ThemeProvider>
           <ThemeProvider theme={RTLMuiTheme}>

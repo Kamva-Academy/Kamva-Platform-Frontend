@@ -24,13 +24,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: 0,
   },
-  countDownDigits: {
-    direction: 'ltr !important',
-    fontFamily: 'digital !important',
-    fontSize: 30,
-    color: 'red',
-    transformOrigin: 'center center',
-  },
   emptySection: {
     height: `${BOMB_HEIGHT + 200}vh`,
   },
@@ -57,44 +50,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const BombEvent = () => {
+const ZeroJourneyer = () => {
   const classes = useStyles();
-  const [countDown, setCountDown] = useState(10);
-  const [scale, setScale] = useState(10);
-
-  useEffect(() => {
-    const initialCountDown = 9;
-    const initialScale = Math.min(window.innerWidth / document.getElementById('countDownDigits').offsetWidth, 9);
-
-    function scrollPlay() {
-      setCountDown(Math.max(initialCountDown - Math.ceil(window.pageYOffset / window.innerHeight / (BOMB_HEIGHT / 100) * initialCountDown), 1));
-      if (window.pageYOffset / window.innerHeight > 8) {
-        setCountDown(0);
-      }
-      setScale(Math.max(initialScale - (window.pageYOffset / window.innerHeight / (BOMB_HEIGHT / 100) * initialScale), 1.2));
-      window.requestAnimationFrame(scrollPlay);
-    }
-
-    window.requestAnimationFrame(scrollPlay);
-  }, [])
-
 
   return (
     <div className={classes.container}>
       <Container className={classes.countDownSection}>
         <BombImage />
-        <Grid
-          container
-          justify='center'
-          alignItems="center"
-          direction="column"
-          className={classes.fullHeight}>
-          <Grid item>
-            <Typography id='countDownDigits' style={{ transform: `scale(${scale})` }} align="center" className={classes.countDownDigits}>
-              {`00:00:0${countDown}`}
-            </Typography>
-          </Grid>
-        </Grid>
       </Container>
 
       <Container className={classes.emptySection} />
@@ -126,4 +88,4 @@ export default connect(
   {
 
   }
-)(BombEvent);
+)(ZeroJourneyer);

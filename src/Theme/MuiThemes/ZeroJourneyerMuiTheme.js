@@ -1,12 +1,12 @@
 import { createMuiTheme } from '@material-ui/core';
 
-import { ZeroJourney } from '../MuiVariables';
+import { ZeroJourneyer } from '../MuiVariables';
 import theme from '../theme';
 import typography from '../typography';
 
 const ZeroJourneyMuiTheme = createMuiTheme({
   direction: 'rtl',
-  ...theme(ZeroJourney),
+  ...theme(ZeroJourneyer),
   typography
 });
 
