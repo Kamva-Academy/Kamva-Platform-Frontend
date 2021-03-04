@@ -12,8 +12,6 @@ jobs:
       - name: Extract branch name
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: ls
-        run: ls -a
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@f30895310c20ef3d2569a5f690a80e56faf36c19
