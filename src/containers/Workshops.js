@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import { getAllWorkshops } from '../redux/actions/mentor';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     paddingTop: 120,
   },
