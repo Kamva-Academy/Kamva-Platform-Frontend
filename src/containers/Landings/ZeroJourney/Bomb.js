@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import {
-  makeStyles,
   Grid,
+  makeStyles,
 } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+
+import { BOMB_HEIGHT } from './index';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     height: '100vh',
     position: 'fixed',
     top: 0,
-    zIndex: 0,
+    zIndex: -1,
   },
   bomb: {
     width: '100%',
@@ -17,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const VerticalBomb = () => {
+const Bomb = () => {
   const classes = useStyles();
   const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     function scrollPlay() {
-      setOpacity(window.pageYOffset / 10000);
+      setOpacity(window.pageYOffset / window.innerHeight / (BOMB_HEIGHT / 100));
       window.requestAnimationFrame(scrollPlay);
     }
     window.requestAnimationFrame(scrollPlay);
@@ -38,4 +40,4 @@ const VerticalBomb = () => {
   )
 }
 
-export default VerticalBomb;
+export default Bomb;
