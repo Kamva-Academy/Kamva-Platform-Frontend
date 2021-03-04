@@ -9,6 +9,9 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
+      - name: Extract branch name
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@cp_instead_of_deleting
@@ -20,4 +23,4 @@ jobs:
           destination-repository-name: 'rasta_workshop_frontend'
           user-email: a.re.morteza@gmail.com
           commit-message: sync
-          target-branch: ${GITHUB_REF##*/} 
+          target-branch: ${{ steps.extract_branch.outputs.branch }}
