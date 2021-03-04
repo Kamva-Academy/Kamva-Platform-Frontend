@@ -13,7 +13,7 @@ jobs:
         id: extract_branch
       - name: Pushes to another repository
         id: push_directory
-        uses: abreza/github-action-push-to-another-repository@v1.3.2
+        uses: cpina/github-action-push-to-another-repository@cp_instead_of_deleting
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
