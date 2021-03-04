@@ -9,10 +9,6 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
       - name: Pushes to another repository
         id: push_directory
         uses: cpina/github-action-push-to-another-repository@cp_instead_of_deleting
