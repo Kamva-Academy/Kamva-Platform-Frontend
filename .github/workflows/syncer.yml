@@ -9,28 +9,6 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
-      - name: Pushes to another repository
-        id: push_directory
-        uses: cpina/github-action-push-to-another-repository@cp_instead_of_deleting
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source-directory: '.'
-          destination-github-username: 'abreza'
-          destination-repository-name: 'rasta_workshop_frontend'
-          user-email: a.re.morteza@gmail.com
-          commit-message: sync
-          target-branch: name: CI
-
-on:
-  push:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container: pandoc/latex
-    steps:
-      - uses: actions/checkout@v2
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
