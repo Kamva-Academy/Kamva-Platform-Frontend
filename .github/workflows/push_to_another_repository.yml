@@ -14,7 +14,7 @@ jobs:
         id: extract_branch
       - name: Pushes to another repository
         id: push_directory
-        uses: cpina/github-action-push-to-another-repository@f30895310c20ef3d2569a5f690a80e56faf36c19
+        uses: abreza/github-action-push-to-another-repository@728744f3e1b06b2b7fdca4561e17fe756eec36e4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
