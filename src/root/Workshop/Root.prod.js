@@ -15,7 +15,7 @@ import OurTeam from '../containers/OurTeam';
 import Survey from '../containers/Survey';
 import Workshop from '../containers/Workshop';
 import Workshops from '../containers/Workshops';
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from '../PrivateRoute';
 
 const Root = () => {
   return (
