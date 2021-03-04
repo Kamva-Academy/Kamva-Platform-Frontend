@@ -1,7 +1,11 @@
-name: CI
+name: push_to_another_repository
 
 on:
   push:
+    branches:    
+      - '*'
+      - '*/*'
+      - '**'
 
 jobs:
   build:
