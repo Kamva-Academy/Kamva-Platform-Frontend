@@ -12,11 +12,12 @@ import { connect } from 'react-redux';
 
 import BombImage from './Bomb';
 
-export const BOMB_HEIGHT = 800;
+export const BOMB_HEIGHT = 500;
 
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: 'black',
+    height: '1500vh',
   },
   countDownSection: {
     height: `${BOMB_HEIGHT}vh`,
@@ -24,10 +25,11 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
   },
   countDownDigits: {
+    direction: 'ltr !important',
     fontFamily: 'digital !important',
-    paddingRight: theme.spacing(8),
     fontSize: 30,
     color: 'red',
+    transformOrigin: 'center center',
   },
   emptySection: {
     height: `${BOMB_HEIGHT + 200}vh`,
@@ -57,20 +59,28 @@ const useStyles = makeStyles((theme) => ({
 
 const BombEvent = () => {
   const classes = useStyles();
-  const videoRef = useRef();
-  const [countDown, setCountDown] = useState('00:00:19');
+  const [countDown, setCountDown] = useState(10);
+  const [scale, setScale] = useState(10);
 
   useEffect(() => {
+    const initialCountDown = 9;
+    const initialScale = Math.min(window.innerWidth / document.getElementById('countDownDigits').offsetWidth, 9);
+
     function scrollPlay() {
-      setCountDown(Math.max(10 - Math.ceil(window.pageYOffset / window.innerHeight), 1));
+      setCountDown(Math.max(initialCountDown - Math.ceil(window.pageYOffset / window.innerHeight / (BOMB_HEIGHT / 100) * initialCountDown), 1));
+      if (window.pageYOffset / window.innerHeight > 8) {
+        setCountDown(0);
+      }
+      setScale(Math.max(initialScale - (window.pageYOffset / window.innerHeight / (BOMB_HEIGHT / 100) * initialScale), 1.2));
       window.requestAnimationFrame(scrollPlay);
     }
+
     window.requestAnimationFrame(scrollPlay);
   }, [])
 
 
   return (
-    <div style={{ height: '1500vh' }} className={classes.container}>
+    <div className={classes.container}>
       <Container className={classes.countDownSection}>
         <BombImage />
         <Grid
@@ -80,8 +90,8 @@ const BombEvent = () => {
           direction="column"
           className={classes.fullHeight}>
           <Grid item>
-            <Typography variant="h2" align="center" className={classes.countDownDigits}>
-              {countDown}
+            <Typography id='countDownDigits' style={{ transform: `scale(${scale})` }} align="center" className={classes.countDownDigits}>
+              {`00:00:0${countDown}`}
             </Typography>
           </Grid>
         </Grid>
