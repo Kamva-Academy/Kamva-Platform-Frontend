@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
+      - uses: actions/checkout@v2.3.4
       - name: Extract branch name
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
