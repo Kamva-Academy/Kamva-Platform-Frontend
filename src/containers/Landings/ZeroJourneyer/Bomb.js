@@ -67,9 +67,9 @@ const Bomb = () => {
     window.requestAnimationFrame(scrollPlay);
 
     if (window.innerWidth < window.innerHeight) {
-      setImage(process.env.PUBLIC_URL + '/ZeroJourney/Vertical.png')
+      setImage(process.env.PUBLIC_URL + '/ZeroJourneyer/Vertical.png')
     } else {
-      setImage(process.env.PUBLIC_URL + '/ZeroJourney/Horizontal.png');
+      setImage(process.env.PUBLIC_URL + '/ZeroJourneyer/Horizontal.png');
     }
   }, [])
 

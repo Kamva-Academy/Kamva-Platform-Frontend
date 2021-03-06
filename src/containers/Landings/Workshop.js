@@ -228,6 +228,7 @@ function Homepage() {
           </Grid>
         </div>
       </section>
+
       <section className={classes.section2}>
         <Grid
           container
@@ -394,6 +395,7 @@ function Homepage() {
           <FAQ questions={questions} />
         </Container>
       </section>
+
       <LandingOurTeam />
       <Footer />
       <ScrollTop>
