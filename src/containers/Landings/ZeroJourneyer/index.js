@@ -1,7 +1,6 @@
-import './Style.scss';
+import './Style.css';
 
 import {
-  Button,
   Container,
   Grid,
   makeStyles,

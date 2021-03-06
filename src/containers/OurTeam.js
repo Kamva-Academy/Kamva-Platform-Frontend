@@ -1,4 +1,4 @@
-import '../Theme/Styles/OurTeam.scss';
+import '../Theme/Styles/OurTeam.css';
 
 import { Container, Grid } from '@material-ui/core';
 import React, { useEffect } from 'react';

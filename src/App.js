@@ -1,4 +1,4 @@
-import './Theme/Styles/Style.scss';
+import './Theme/Styles/App.css';
 
 import { CssBaseline } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';
