@@ -18,7 +18,7 @@ function OurTeam({ members = [], getLandingData }) {
 
   return (
     <>
-      <ResponsiveAppBar mode="LANDING" />
+      {/* <ResponsiveAppBar mode="LANDING" /> */}
       <Container maxWidth="md" style={{ marginTop: 80 }}>
         <div className="our-team-page">
           <div className="tab-wrap">

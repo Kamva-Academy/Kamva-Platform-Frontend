@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
   },
   title: {
-    maxHeight: '95vh',
+    maxHeight: '25vh',
     maxWidth: '100%',
     [theme.breakpoints.down('sm')]: {
-      marginTop: -theme.spacing(15),
+      marginTop: -theme.spacing(12),
       maxHeight: '20vh',
     },
   },
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
   secondSectionBackground: {
     position: 'absolute',
     top: `${BOMB_HEIGHT + 100}vh`,
-    height: '100%',
+    height: '100vh',
     width: '100%',
     backgroundImage: `url(${process.env.PUBLIC_URL}/ZeroJourneyer/background.jpg)`,
     backgroundPosition: 'center center',
@@ -132,23 +132,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4, 2),
     backgroundColor: '#7DC1D3',
   },
-  h_iframe_aparat_embed_frame: {
-    position: 'relative',
-    '& iframe': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      border: 'none',
-      boxShadow: '0 2px 4px rgb(0 0 0 / 15%), 0 1px 3px rgb(0 0 0 / 25%)',
-      borderRadius: 8,
-    },
-    '& span': {
-      display: 'block',
-      paddingTop: '57%',
-    },
-  },
   telegramLink: {
     display: 'inline-block',
     marginRight: 10,
@@ -200,7 +183,7 @@ const ZeroJourneyer = () => {
           <Grid item container justify='center' alignItems='center' xs={12} md={6}>
             <img className={classes.logo} src={process.env.PUBLIC_URL + '/ZeroJourneyer/logo.png'} alt='' />
           </Grid>
-          <Grid direction='column' item container alignItems='center' justify='space-around' className={classes.titleHolder} xs={12} md={6} >
+          <Grid direction='column' item container spacing={2} alignItems='center' justify='space-around' className={classes.titleHolder} xs={12} md={6} >
             <Grid item>
               <img src={process.env.PUBLIC_URL + '/ZeroJourneyer/titre.png'} className={classes.title} alt='' />
             </Grid>
@@ -208,6 +191,11 @@ const ZeroJourneyer = () => {
               <Typography variant="h4" className={classes.subtitle}>
                 زمان از نو، صفر می‌شود...
               </Typography>
+            </Grid>
+            <Grid item >
+              <Button variant='contained' href='' color='primary'>
+                دریافت سوالات
+              </Button>
             </Grid>
           </Grid>
         </Grid>

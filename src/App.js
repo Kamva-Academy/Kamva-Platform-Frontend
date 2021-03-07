@@ -67,17 +67,9 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
               <ZeroJourneyer />
             </StylesProvider>
           </ThemeProvider>
-          <ThemeProvider theme={RTLMuiTheme}>
-            <StylesProvider jss={jss}>
-              <Workshop />
-            </StylesProvider>
-          </ThemeProvider>
         </>
       ) : (
           <>
-            <ThemeProvider theme={MuiTheme}>
-              <Workshop />
-            </ThemeProvider>
           </>
         )}
     </IntlProvider>

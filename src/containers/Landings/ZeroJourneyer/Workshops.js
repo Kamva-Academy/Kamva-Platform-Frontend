@@ -33,7 +33,7 @@ const workshops = [
   {
     name: 'ترکیبیات',
     image: '/ZeroJourneyer/workshops/tarkibiat.png',
-    description: [],
+    description: [''],
   },
   {
     name: 'نظریه‌بازی‌ها',

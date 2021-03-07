@@ -56,6 +56,8 @@ function LandingOurTeam({ members = [], count = 4, getLandingData }) {
         color="primary"
         className={classes.moreButton}
         component={Link}
+        target="_blank"
+        rel="noopener"
         to="/our_team">
         {t('seeMore')}
       </Button>
