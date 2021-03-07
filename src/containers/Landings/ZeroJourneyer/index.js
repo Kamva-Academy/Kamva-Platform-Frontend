@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: '95vh',
     maxWidth: '100%',
     [theme.breakpoints.down('sm')]: {
-      maxHeight: '50vh',
+      marginTop: -theme.spacing(15),
+      maxHeight: '20vh',
     },
   },
   subtitle: {
@@ -220,27 +221,35 @@ const ZeroJourneyer = () => {
           <Grid item container xs={12} sm={4} justify='center'>
             <img className={classes.oldman} src={process.env.PUBLIC_URL + '/ZeroJourneyer/oldman.png'} alt='' />
           </Grid>
-          <Grid item container justify='center' spacing={1} xs={12} sm={8}>
-            <Typography variant="subtitle1">
-              این رویداد داستانی رو براتون میگه که قراره توش با هم کارهای خارق‌العاده‌ای کنیم، در زمان سفر می‌کنیم و تلاش می‌کنیم شهرمون رو نجات بدیم.
+          <Grid item container justify='center' spacing={2} xs={12} sm={8}>
+            <Grid item>
+              <Typography variant="subtitle1">
+                این رویداد داستانی رو براتون میگه که قراره توش با هم کارهای خارق‌العاده‌ای کنیم، در زمان سفر می‌کنیم و تلاش می‌کنیم شهرمون رو نجات بدیم.
               </Typography>
-            <Typography variant="subtitle1">
-              از ۲۸ اسفند تا ۶ فروردین یه پیش‌رویداد داریم که شما رو با محیط رویداد و سایت و همچنین فضای داستان آشنا می‌کنه و بعدش در ۷، ۸ و ۱۰ فروردین، داستان ما رو به کارگاه‌های علمی می‌بره که مشکلات سفرمون رو حل کنیم.
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1">
+                از ۲۸ اسفند تا ۶ فروردین یه پیش‌رویداد داریم که شما رو با محیط رویداد و سایت و همچنین فضای داستان آشنا می‌کنه و بعدش در ۷، ۸ و ۱۰ فروردین، داستان ما رو به کارگاه‌های علمی می‌بره که مشکلات سفرمون رو حل کنیم.
               </Typography>
-            <Typography variant="subtitle1">
-              البته در ۹ فروردین هم قراره یه کم استراحت کنیم و برنامه‌های مفرح داشته باشیم. روز آخر هم که وقت مسابقه و اختتامیه است.
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1">
+                البته در ۹ فروردین هم قراره یه کم استراحت کنیم و برنامه‌های مفرح داشته باشیم. روز آخر هم که وقت مسابقه و اختتامیه است.
               </Typography>
-            <Typography variant="subtitle1">
-              {'با ما باشید، دوستاتون رو خبر کنید و اگه سوالی داشتید، یکم پایین‌تر بخش «سوال‌های متداول» رو یه نگاهی بندازید یا به کانال رویداد در تلگرام سر بزنید: '}
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="https://t.me/rastaihaOnline"
-                className={classes.telegramLink}
-                style={{ direction: 'ltr', color: 'white' }}>
-                {'@RastaihaOnline'}
-              </a>
-            </Typography>
+            </Grid >
+            <Grid item>
+              <Typography variant="subtitle1">
+                {'با ما باشید، دوستاتون رو خبر کنید و اگه سوالی داشتید، یکم پایین‌تر بخش «سوال‌های متداول» رو یه نگاهی بندازید یا به کانال رویداد در تلگرام سر بزنید: '}
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://t.me/rastaihaOnline"
+                  className={classes.telegramLink}
+                  style={{ direction: 'ltr', color: 'white' }}>
+                  {'@RastaihaOnline'}
+                </a>
+              </Typography>
+            </Grid >
           </Grid>
         </Grid>
       </Container>
@@ -250,17 +259,18 @@ const ZeroJourneyer = () => {
           رستا چیه؟
         </Typography>
         <Grid container justify='center' alignItems='center' spacing={2}>
-          <Grid item container justify='center' xs={12} sm={8}>
-            <Typography variant="subtitle1">
-              رستا جمعی علمی-ترویجی متشکل از دانشجوهای دانشگاه‌های صنعتی اصفهان،
-              تهران، شریف، اصفهان، بهشتی و ... هست؛
+          <Grid item container justify='center' xs={12} sm={8} spacing={2}>
+            <Grid item>
+              <Typography variant="subtitle1">
+                رستا جمعی علمی-ترویجی متشکل از دانشجوهای دانشگاه‌های صنعتی اصفهان،
+                تهران، شریف، اصفهان، بهشتی و ... هست؛
+
+                جمعی که در تلاشه تا آموزش تعاملی رو جایگزین آموزش کنکوری و حفظی کنه و
+                با اینکار، علاوه بر یاد دادن محتوای علمی به نحوه‌ای موثرتر، تفکر منطقی
+                و خلاقیتِ بچه‌ها رو تقویت کنه و با نشون دادنِ توانمندی‌های بالقوه‌ی
+                بچه‌ها به خودشون، اعتماد به نفسِ اونهارو افزایش بده.
             </Typography>
-            <Typography variant="subtitle1">
-              جمعی که در تلاشه تا آموزش تعاملی رو جایگزین آموزش کنکوری و حفظی کنه و
-              با اینکار، علاوه بر یاد دادن محتوای علمی به نحوه‌ای موثرتر، تفکر منطقی
-              و خلاقیتِ بچه‌ها رو تقویت کنه و با نشون دادنِ توانمندی‌های بالقوه‌ی
-              بچه‌ها به خودشون، اعتماد به نفسِ اونهارو افزایش بده.
-            </Typography>
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={4} container justify='center'>
             <img className={classes.kaftar} src={process.env.PUBLIC_URL + '/originalLogo.png'} alt='' />
