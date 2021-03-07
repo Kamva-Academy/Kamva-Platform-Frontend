@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 
 import ArticleCard2 from '../../components/Cards/ArticleCard2';
 import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
-import Footer from '../../components/Footer/Footer';
+import Footer from '../../components/SpecialComponents/Homepage/Footer';
 import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
 import { logout } from '../../redux/actions/account';
 
@@ -210,7 +210,7 @@ function PhysicsDay() {
         </Grid>
       </Container>
 
-      <Container className={`${classes.section5} ${classes.centerItems}`}>
+      {/* <Container className={`${classes.section5} ${classes.centerItems}`}>
         <Grid container direction="column" spacing={4}>
           <Grid item>
             <Typography
@@ -224,17 +224,10 @@ function PhysicsDay() {
             <Footer />
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
 
-      <ScrollTop>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
-      <AuthDialog
-        open={authDialogOpen}
-        handleClose={() => setAuthDialogOpen(false)}
-      />
+      <Footer />
+
     </>
   );
 }

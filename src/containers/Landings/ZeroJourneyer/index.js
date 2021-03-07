@@ -18,20 +18,20 @@ import { Link } from 'react-router-dom';
 import ResponsiveAppBar from '../../../components/Appbar/ResponsiveAppBar';
 import AuthDialog from '../../../components/Dialog/AuthDialog/AuthDialog';
 import ScrollTop from '../../../components/ScrollToTop/ScrollToTop';
-import questions from '../../../components/SpecialComponents/Homepage/constants/FAQs';
 import FAQ from '../../../components/SpecialComponents/Homepage/FAQ';
 import Footer from '../../../components/SpecialComponents/Homepage/Footer';
 import LandingOurTeam from '../../../components/SpecialComponents/Homepage/LandingOurTeam';
 import WorkshopList from '../../../components/SpecialComponents/Homepage/WorkshopList';
 import BombImage from './Bomb';
+import questions from './FAQs';
+import workshops from './Workshops';
 
 
 export const BOMB_HEIGHT = 500;
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: 'black',
-    height: '1500vh',
+    background: 'linear-gradient(90deg, rgba(6,11,13,1) 0%, rgba(0,16,22,1) 100%)',
   },
   countDownSection: {
     height: `${BOMB_HEIGHT}vh`,
@@ -46,11 +46,26 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '80px',
     fontWeight: 900,
     color: '#eee',
-    textShadow: '3px 3px #888',
-    textAlign: 'center',
+    textShadow: '2px 2px #888',
     [theme.breakpoints.down('sm')]: {
-      fontSize: 60,
-      lineHeight: '70px',
+      fontSize: 50,
+      lineHeight: '50px',
+    },
+  },
+  subtitle: {
+    fontSize: 40,
+    lineHeight: '40px',
+    fontWeight: 600,
+    color: '#dbd9d9',
+    textShadow: '1px 1px #888',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 20,
+      lineHeight: '20px',
+    },
+  },
+  titleHolder: {
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '-100px',
     },
   },
   emptySection: {
@@ -59,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
   secondSection: {
     position: 'relative',
     height: '100vh',
+    zIndex: 10,
   },
   secondSectionBackground: {
     position: 'absolute',
@@ -69,8 +85,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    filter: 'blur(6px)',
-    webkitFilter: 'blur(6px)',
+    filter: 'blur(3px)',
+    webkitFilter: 'blur(3px)',
+    zIndex: 10,
+  },
+  scrollIcon: {
+    position: 'absolute',
+    height: '30vh',
   },
   logo: {
     maxHeight: '95vh',
@@ -78,70 +99,41 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       height: '50vh',
     },
+    zIndex: 10,
   },
-
-
-
-  headButton: {
-    display: 'inline-block',
-    border: '1px solid #2185d0',
-    background: 'rgba(33,133,208,.6)',
-    borderRadius: '10px',
-    transition: '.3s',
-    fontSize: 45,
-    lineHeight: '45px',
-    fontWeight: 800,
-    color: '#eee',
-    textShadow: '3px 3px #888',
-    padding: theme.spacing(2, 3),
-    margin: theme.spacing(6, 2),
-    textAlign: 'center',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 30,
-      lineHeight: '30px',
-      padding: theme.spacing(1, 2),
-    },
-  },
-  goToWorkshop: {
-    border: '1px solid #2185d0',
-    background: 'rgba(33,133,208,.6)',
-    color: '#eee',
-    textShadow: '3px 3px #888',
-  },
-  physicsDayContainer: {
-    position: 'absolute',
-    left: 20,
-    bottom: 20,
-  },
-  physicsDay: {
-    display: 'inline-block',
-    borderRadius: '10px',
-    transition: '.3s',
-    fontSize: 30,
-    lineHeight: '30px',
-    fontWeight: 700,
-    padding: theme.spacing(1, 2),
-    textAlign: 'center',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 25,
-      lineHeight: '25px',
-      padding: theme.spacing(1, 2),
-    },
-    border: '1px solid #35be32',
-    background: 'rgba(53,190,50,.6)',
-    color: '#eee',
-    textShadow: '3px 3px #888',
-  },
-  newton: {
-    height: 100,
-    [theme.breakpoints.down('sm')]: {
-      height: 80,
-    },
-  },
-  section2: {
+  eventDescriptionSection: {
+    marginTop: theme.spacing(-1),
+    position: 'relative',
     padding: theme.spacing(4, 2),
-    backgroundColor: '#99b898',
+    backgroundColor: '#00869e',
     color: 'white',
+    zIndex: 5,
+  },
+  RastaDescriptionSection: {
+    position: 'relative',
+    padding: theme.spacing(4, 2),
+    backgroundColor: '#feceab',
+    color: '#',
+  },
+  kaftar: {
+    maxHeight: '40vh',
+    maxWidth: '100%',
+  },
+  moreButton: {
+    margin: theme.spacing(2, 'auto', 0),
+    textAlign: 'center',
+    display: 'table',
+  },
+  workshopsSection: {
+    position: 'relative',
+    padding: theme.spacing(4, 2),
+    backgroundColor: '#3f3f56',
+    color: 'white',
+  },
+  FAQSection: {
+    position: 'relative',
+    padding: theme.spacing(4, 2),
+    backgroundColor: '#7DC1D3',
   },
   h_iframe_aparat_embed_frame: {
     position: 'relative',
@@ -171,25 +163,8 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
-  section3: {
-    padding: theme.spacing(4, 2),
-    backgroundColor: '#e84a5f',
-    color: 'white',
-  },
-  moreButton: {
-    margin: theme.spacing(2, 'auto', 0),
-    textAlign: 'center',
-    display: 'table',
-  },
-
-  section4: {
-    padding: theme.spacing(4, 2),
-    backgroundColor: '#feceab',
-  },
-
-  section5: {
-    padding: theme.spacing(4, 2),
-    backgroundColor: '#ededed',
+  lastEmptySection: {
+    height: '100vh',
   },
 }));
 
@@ -197,14 +172,26 @@ const useStyles = makeStyles((theme) => ({
 const ZeroJourneyer = () => {
   const classes = useStyles();
 
+
+  console.log(workshops);
+
   return (
     <div className={classes.container}>
+      <Grid container justify='center' alignItems='flex-end' className={classes.scrollIcon}>
+        <Grid item>
+          <img
+            src={process.env.PUBLIC_URL + 'scroll.gif'}
+            alt="scroll"
+            style={{ width: 20 }}
+          />
+        </Grid>
+      </Grid>
+
       <Container className={classes.countDownSection}>
         <BombImage />
       </Container>
 
       <Container className={classes.emptySection} />
-
 
       <div className={classes.secondSectionBackground} />
       <Container className={classes.secondSection}>
@@ -216,62 +203,51 @@ const ZeroJourneyer = () => {
           <Grid item container justify='center' alignItems='center' xs={12} md={6}>
             <img className={classes.logo} src={process.env.PUBLIC_URL + '/ZeroJourneyer/logo.png'} alt='' />
           </Grid>
-          <Grid item container justify='center' xs={12} md={6} style={{ height: '30vh' }} >
-            <Typography variant="h2" align="center" className={classes.title}>
-              مسافر صفر
-            </Typography>
+          <Grid direction='column' item container alignItems='center' justify='space-around' className={classes.titleHolder} xs={12} md={6} spacing={2}>
+            <Grid item>
+              <Typography variant="h2" className={classes.title}>
+                مسافر صفر
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h4" className={classes.subtitle}>
+                زمان از نو، صفر می‌شود...
+              </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Container>
 
-      <section className={classes.section2}>
+      <Container className={classes.eventDescriptionSection}>
         <Grid
           container
           justify="center"
           alignItems="center"
           direction="column"
           spacing={3}>
-          <Grid item container xs={12} spacing={3}>
-            <Grid item xs={12} sm={6}>
+          <Grid item container alignItems='center' xs={12} spacing={3}>
+            <Grid item container spacing={1} xs={12} sm={6}>
               <Typography component="h2" variant="h2" gutterBottom>
-                قضیه چیه؟
+                چه خبره؟
               </Typography>
               <Typography variant="subtitle1">
-                تابستون هم که داره تموم میشه و حتی اینبار مدرسه‌ها دو هفته زودتر
-                قراره باز بشن. با این وضع کرونا هم که نه تفریح درست و حسابی
-                کردیم، نه دوستامونو دیدیم، نه فعالیت گروهی نه هیچی.
+                این رویداد داستانی رو براتون میگه که قراره توش با هم کارهای خارق‌العاده‌ای کنیم، در زمان سفر می‌کنیم و تلاش می‌کنیم شهرمون رو نجات بدیم.
               </Typography>
               <Typography variant="subtitle1">
-                اگر که موارد بالا در مورد شما هم صدق می‌کنه ما یه راه‌حل خوب
-                براتون داریم :)
+                از ۲۸ اسفند تا ۶ فروردین یه پیش‌رویداد داریم که شما رو با محیط رویداد و سایت و همچنین فضای داستان آشنا می‌کنه و بعدش در ۷، ۸ و ۱۰ فروردین، داستان ما رو به کارگاه‌های علمی می‌بره که مشکلات سفرمون رو حل کنیم.
               </Typography>
               <Typography variant="subtitle1">
-                به رسم هر ساله، جمع رستا امسال هم رویداد تابستانه خودش رو برگزار
-                می‌کنه؛ فقط امسال باتوجه به وضعیت اپیدمی موجود، رویدادمون به
-                صورت آنلاین خواهد بود.
+                البته در ۹ فروردین هم قراره یه کم استراحت کنیم و برنامه‌های مفرح داشته باشیم. روز آخر هم که وقت مسابقه و اختتامیه است.
               </Typography>
               <Typography variant="subtitle1">
-                تیم رستا در چند ماه گذشته تلاش بسیاری کرده تا در بستر آنلاین
-                بتونه همون تعامل بین شرکت‌کننده‌ها و منتورها رو ایجاد کنه، البته
-                اینبار از قابلیت‌های فضای آنلاین هم برای آموزش هرچه موثرتر
-                استفاده می‌کنیم.
-              </Typography>
-              <Typography variant="subtitle1">
-                خلاصه اگه دوست دارید با دوستاتون یه رویداد جذاب و باحال رو این
-                آخرای تابستون شرکت کنید و کلی هم مطالب خفن و خوب یاد بگیرین،
-                رویداد تابستانه رستا رو از دست ندید.
-              </Typography>
-              <Typography variant="subtitle1">
-                با ما باشید، دوستاتون رو خبر کنید و اگه سوالی هم داشتید همین جا
-                بپرسید یا به کانالمون در تلگرام سر بزنید:
+                {'با ما باشید، دوستاتون رو خبر کنید و اگه سوالی داشتید، یکم پایین‌تر بخش «سوال‌های متداول» رو یه نگاهی بندازید یا به کانال رویداد در تلگرام سر بزنید: '}
                 <a
-                  // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
                   rel="noreferrer"
-                  href="https://t.me/rastaiha"
+                  href="https://t.me/rastaihaOnline"
                   className={classes.telegramLink}
-                  style={{ direction: 'ltr' }}>
-                  {' @Rastaiha '}
+                  style={{ direction: 'ltr', color: 'white' }}>
+                  {'@RastaihaOnline'}
                 </a>
               </Typography>
             </Grid>
@@ -287,118 +263,63 @@ const ZeroJourneyer = () => {
               </div>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={10} md={8} lg={6}>
-            <Paper className={classes.section2Paper}>
-              <Grid container spacing={2} alignItems="center" justify="center">
-                <Grid item xs={12} sm={4}>
-                  <img
-                    src={process.env.PUBLIC_URL + '/edu_student.png'}
-                    alt=""
-                  />
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                  <Typography variant="h3" align="center" gutterBottom>
-                    کارگاه مجازی
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    امسال باتوجه به آنلاین بودن رویداد دو دسته کارگاه طراحی
-                    کردیم. در دسته اول منتورها کنارتون حضور دارن و بهتون کمک
-                    میکنن و در دسته دوم سعی کردیم یه سری کارگاه طراحی کنیم که
-                    بدون حضور منتور و به صورت خودآموز و قدم‌به‌قدم، مطالب رو به
-                    شما آموزش بدن.
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={10} md={8} lg={6}>
-            <Paper className={classes.section2Paper}>
-              <Grid container spacing={2} direction="row-reverse">
-                <Grid item xs={12} sm={4}>
-                  <img src={process.env.PUBLIC_URL + '/edu.png'} alt="" />
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                  <Typography variant="h3" align="center" gutterBottom>
-                    ارتباط با منتور
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    بروبچه‌های تیم طراحی و منتورهای کارگاه، برای آموزش‌ هرچه
-                    بهتر و کمک به شما در این روند، اینجا منتظرن تا هروقت سوالی
-                    ازشون داشتید یا خواستید چیزی رو باهاشون مطرح کنید کمکتون
-                    کنن.
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={10} md={8} lg={6}>
-            <Paper className={classes.section2Paper}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
-                  <img src={process.env.PUBLIC_URL + '/team-work.png'} alt="" />
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                  <Typography variant="h3" align="center" gutterBottom>
-                    کار گروهی
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    در رستا، آموزش بر اساس تعامل در کار گروهی و کار بر مسئله‌های
-                    چالش‌برانگیز، واقعی و نزدیک به دنیای فکری مخاطبین است. هدف
-                    رستا از انتخاب آموزش مسئله و تعامل‌محور، ایجاد خلاقیت و
-                    یادگیری عمیق دانش‌آموزان است.
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
         </Grid>
-      </section>
-      <section className={classes.section3}>
+      </Container>
+
+      <Container className={classes.RastaDescriptionSection}>
         <Typography component="h2" variant="h2" gutterBottom>
           رستا چیه؟
         </Typography>
-        <Typography variant="subtitle1">
-          رستا جمعی علمی-ترویجی متشکل از دانشجوهای دانشگاه‌های صنعتی اصفهان،
-          تهران، شریف، اصفهان، بهشتی و ... هست؛
-        </Typography>
-        <Typography variant="subtitle1">
-          جمعی که در تلاشه تا آموزش تعاملی رو جایگزین آموزش کنکوری و حفظی کنه و
-          با اینکار، علاوه بر یاد دادن محتوای علمی به نحوه‌ای موثرتر، تفکر منطقی
-          و خلاقیتِ بچه‌ها رو تقویت کنه و با نشون دادنِ توانمندی‌های بالقوه‌ی
-          بچه‌ها به خودشون، اعتماد به نفسِ اونهارو افزایش بده.
-        </Typography>
+        <Grid container justify='center' alignItems='center' spacing={2}>
+          <Grid item xs={12} sm={8}>
+            <Typography variant="subtitle1">
+              رستا جمعی علمی-ترویجی متشکل از دانشجوهای دانشگاه‌های صنعتی اصفهان،
+              تهران، شریف، اصفهان، بهشتی و ... هست؛
+            </Typography>
+            <Typography variant="subtitle1">
+              جمعی که در تلاشه تا آموزش تعاملی رو جایگزین آموزش کنکوری و حفظی کنه و
+              با اینکار، علاوه بر یاد دادن محتوای علمی به نحوه‌ای موثرتر، تفکر منطقی
+              و خلاقیتِ بچه‌ها رو تقویت کنه و با نشون دادنِ توانمندی‌های بالقوه‌ی
+              بچه‌ها به خودشون، اعتماد به نفسِ اونهارو افزایش بده.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={4} container justify='center'>
+            <img className={classes.kaftar} src={process.env.PUBLIC_URL + '/originalLogo.png'} alt='' />
+          </Grid>
+        </Grid>
         <Button
+          target="_blank"
           variant="contained"
           color="primary"
           className={classes.moreButton}
-          component={Link}
-          to="/about_us">
+          href="https://rastaiha.ir">
           اطلاعات بیشتر
         </Button>
-      </section>
-      <section className={classes.section4}>
+      </Container>
+
+      <Container className={classes.workshopsSection}>
         <Typography component="h2" variant="h2" gutterBottom>
           کارگاه‌ها
         </Typography>
-        <WorkshopList />
-      </section>
-      <section className={classes.section5}>
+        <WorkshopList workshops={workshops} />
+      </Container>
+
+
+      <Container className={classes.FAQSection}>
         <Typography component="h2" variant="h2" gutterBottom align="center">
           پرسش‌های متداول
         </Typography>
         <Container maxWidth="sm">
           <FAQ questions={questions} />
         </Container>
-      </section>
+      </Container>
 
       <LandingOurTeam />
+
+      <Container className={classes.lastEmptySection} />
+
       <Footer />
-      <ScrollTop>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
-    </div>
+    </div >
   )
 }
 

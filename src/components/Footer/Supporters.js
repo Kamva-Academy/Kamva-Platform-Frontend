@@ -6,9 +6,8 @@ import React from 'react';
 
 import InstitutionCard from './InstitutionCard'
 import Institutions from './Institutions';
-import Media from './socialMedias';
 
-const Supporters = () => {
+const Supporters = ({ Institutions }) => {
   return (
     <Grid
       container
@@ -26,9 +25,10 @@ const Supporters = () => {
           </Typography>
       </Grid>
       <Grid container item direction='row' justify='center' xs={10} md={8}>
-        {Institutions.map((institution) => {
+        {Institutions.map((institution, index) => {
           return (
             <InstitutionCard
+              key={index}
               img_src={institution.img_src}
               name={institution.name}
               site_url={institution.site_url}

@@ -35,95 +35,30 @@ function WorkshopCard({ img, name }) {
   );
 }
 
-function WorkshopList() {
+function WorkshopList({ workshops }) {
   const t = useTranslate();
 
   return (
-    <Grid container spacing={1} alignItems="center" justify="center">
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        item
-        xs={6}
-        sm={4}
-        md={3}
-        lg={2}>
-        <WorkshopCard
-          img={process.env.PUBLIC_URL + '/game_theory.jpg'}
-          name={t('gameTheory')}
-        />
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        item
-        xs={6}
-        sm={4}
-        md={3}
-        lg={2}>
-        <WorkshopCard
-          img={process.env.PUBLIC_URL + '/blockchain.jpg'}
-          name={t('blockchain')}
-        />
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        item
-        xs={6}
-        sm={4}
-        md={3}
-        lg={2}>
-        <WorkshopCard
-          img={process.env.PUBLIC_URL + '/granesh.jpg'}
-          name={t('gravity')}
-        />
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        item
-        xs={6}
-        sm={4}
-        md={3}
-        lg={2}>
-        <WorkshopCard
-          img={process.env.PUBLIC_URL + '/ai_pic.jpg'}
-          name={t('AI')}
-        />
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        item
-        xs={6}
-        sm={4}
-        md={3}
-        lg={2}>
-        <WorkshopCard
-          img={process.env.PUBLIC_URL + '/algo.jpg'}
-          name={t('algorithm')}
-        />
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        item
-        xs={6}
-        sm={4}
-        md={3}
-        lg={2}>
-        <WorkshopCard
-          img={process.env.PUBLIC_URL + '/coding.jpg'}
-          name={t('codingTheory')}
-        />
-      </Grid>
+    <Grid container spacing={2} alignItems="center" justify="center">
+      {
+        workshops.map((workshop, index) => (
+          <Grid
+            key={index}
+            container
+            alignItems="center"
+            justify="center"
+            item
+            xs={6}
+            sm={4}
+            md={3}
+            lg={2}>
+            <WorkshopCard
+              img={process.env.PUBLIC_URL + workshop.image}
+              name={workshop.name}
+            />
+          </Grid>
+        ))
+      }
     </Grid>
   );
 }

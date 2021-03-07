@@ -1,4 +1,4 @@
-import { Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Button, Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -9,9 +9,10 @@ import getRandomSubarray from '../../../utils/getRandomSubarray';
 import OurTeamMemberCard from './components/OurTeamMemberCard';
 
 const useStyles = makeStyles((theme) => ({
-  section6: {
+  container: {
+    position: 'relative',
     padding: theme.spacing(4, 2),
-    backgroundColor: '#99b898',
+    backgroundColor: '#BD8A69',
     color: 'white',
   },
   moreButton: {
@@ -32,7 +33,7 @@ function LandingOurTeam({ members = [], count = 4, getLandingData }) {
   if (members.length === 0) return <></>;
 
   return (
-    <section className={classes.section6}>
+    <Container className={classes.container}>
       <Typography component="h2" variant="h2" gutterBottom align="center">
         {t('eventTeam')}
       </Typography>
@@ -58,7 +59,7 @@ function LandingOurTeam({ members = [], count = 4, getLandingData }) {
         to="/our_team">
         {t('seeMore')}
       </Button>
-    </section>
+    </Container>
   );
 }
 

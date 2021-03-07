@@ -1,16 +1,21 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  Grid,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import { withStyles } from '@material-ui/core/styles';
 import React from 'react';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   text: {
     textAlign: 'justify',
     textJustify: 'inter-word',
   },
 }));
+
 
 const Accordion = withStyles({
   root: {
@@ -47,12 +52,16 @@ const AccordionSummary = withStyles({
   expanded: {},
 })(MuiAccordionSummary);
 
+
+
 const AccordionDetails = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
     display: 'block',
   },
 }))(MuiAccordionDetails);
+
+
 
 const FAQ = ({ questions }) => {
   const classes = useStyles();
@@ -62,36 +71,43 @@ const FAQ = ({ questions }) => {
     setExpanded(newExpanded ? panel : false);
   };
 
-  return questions.map((question, index) => (
-    <Accordion
-      key={index}
-      square
-      expanded={expanded === 'panel' + index}
-      onChange={handleChange('panel' + index)}>
-      <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-        <Typography variant="h6">{question.text}</Typography>
-      </AccordionSummary>
+  return (
+    questions.map((question, index) =>
+      <Accordion key={index} square expanded={expanded === 'panel' + index} onChange={handleChange('panel' + index)}>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography variant='h6'>{question.text}</Typography>
+        </AccordionSummary>
 
-      <AccordionDetails>
-        <Grid container direction="column" spacing={2}>
-          {question.answerParagraphs &&
-            question.answerParagraphs.map((answer, index) => (
-              <Grid item key={index}>
-                <Typography className={classes.text}>{answer}</Typography>
-              </Grid>
-            ))}
-          {question.answerItems &&
-            question.answerItems.map((item, index) => (
-              <Grid item key={index}>
-                <Typography className={classes.text}>
-                  <li>{item}</li>
-                </Typography>
-              </Grid>
-            ))}
-        </Grid>
-      </AccordionDetails>
-    </Accordion>
-  ));
-};
+        <AccordionDetails>
+          <Grid container direction='column' spacing={2}>
+            {question.answerParagraphs &&
+              question.answerParagraphs.map((answer, index) => {
+                return (
+                  <Grid key={index} item>
+                    <Typography className={classes.text}>
+                      {answer}
+                    </Typography>
+                  </Grid>
+                )
+              })
+            }
+            {
+              question.answerItems &&
+              question.answerItems.map((item, index) => {
+                return (
+                  <Grid key={index} item>
+                    <Typography className={classes.text}>
+                      <li>{item}</li>
+                    </Typography>
+                  </Grid>
+                )
+              })
+            }
+          </Grid>
+        </AccordionDetails>
+      </Accordion >
+    )
+  );
+}
 
 export default FAQ;

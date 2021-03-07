@@ -7,7 +7,7 @@ const Root = () => {
   return (
     <>
       <Switch>
-        <Route path="/bomb" component={ZeroJourneyer} />
+        <Route path="/zero-journeyer" component={ZeroJourneyer} />
       </Switch>
     </>
   );
