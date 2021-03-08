@@ -194,7 +194,8 @@ const ZeroJourneyer = () => {
             </Grid>
             <Grid item >
               {/* Erfan Farhadi */}
-              <Button variant='contained' href='' color='primary'>
+              <Button variant='contained' color='primary'
+              href='https://res.cloudinary.com/dflcxtpro/image/upload/v1615190772/rasta/%D9%85%D8%B9%D9%85%D8%A7_1_qmgzdp.pdf'>
                 دریافت سوالات
               </Button>
             </Grid>
