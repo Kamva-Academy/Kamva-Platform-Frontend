@@ -195,7 +195,7 @@ const ZeroJourneyer = () => {
             <Grid item >
               {/* Erfan Farhadi */}
               <Button variant='contained' color='primary'
-              href='https://s17.picofile.com/d/8427320976/5edab0a2-6db1-417a-b4f1-dbee8fd7b767/selection_quiz.pdf'>
+              href='https://drive.google.com/uc?export=download&id=1om9U-RWVTqwzOIHBFb6hQ_kXEibJiyQz'>
                 دریافت سوالات
               </Button>
             </Grid>
