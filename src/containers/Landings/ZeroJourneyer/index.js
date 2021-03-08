@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
   },
   oldman: {
-    maxHeight: '40vh',
+    maxHeight: '50vh',
     maxWidth: '100%',
   },
   moreButton: {
@@ -310,8 +310,15 @@ const ZeroJourneyer = () => {
         <Typography component="h2" variant="h2" gutterBottom align="center">
           پرسش‌های متداول
         </Typography>
-        <Container maxWidth="sm">
-          <FAQ questions={questions} />
+        <Container >
+          <Grid container justify='center' alignItems='center' spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <FAQ questions={questions} />
+            </Grid>
+            <Grid item container xs={12} sm={4} justify='center' alignItems='center'>
+              <img className={classes.oldman} src={process.env.PUBLIC_URL + '/ZeroJourneyer/oldman.png'} alt='' />
+            </Grid>
+          </Grid>
         </Container>
       </Container>
 
