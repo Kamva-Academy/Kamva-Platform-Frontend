@@ -146,6 +146,25 @@ const useStyles = makeStyles((theme) => ({
   lastEmptySection: {
     height: '100vh',
   },
+  h_iframe_aparat_embed_frame: {
+    position: 'relative',
+    '& iframe': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+      width: '100%',
+      height: '100%',
+      border: 'none',
+      boxShadow: '0 2px 4px rgb(0 0 0 / 15%), 0 1px 3px rgb(0 0 0 / 25%)',
+      borderRadius: 8,
+    },
+    '& span': {
+      display: 'block',
+      paddingTop: '57%',
+    },
+  },
 }));
 
 
@@ -203,10 +222,7 @@ const ZeroJourneyer = () => {
           چه خبره؟
         </Typography>
         <Grid container justify='center' alignItems='center' spacing={2}>
-          <Grid item container xs={12} sm={4} justify='center'>
-            <img className={classes.oldman} src={process.env.PUBLIC_URL + '/ZeroJourneyer/oldman.png'} alt='' />
-          </Grid>
-          <Grid item container justify='center' spacing={2} xs={12} sm={8}>
+          <Grid item container justify='center' spacing={2} xs={12} md={7}>
             <Grid item>
               <Typography variant="subtitle1">
                 این رویداد داستانی رو براتون میگه که قراره توش با هم کارهای خارق‌العاده‌ای کنیم، در زمان سفر می‌کنیم و تلاش می‌کنیم شهرمون رو نجات بدیم.
@@ -235,6 +251,17 @@ const ZeroJourneyer = () => {
                 </a>
               </Typography>
             </Grid >
+          </Grid>
+          <Grid item xs={12} sm={7} md={5}>
+            <div className={classes.h_iframe_aparat_embed_frame}>
+              <span></span>
+              <iframe
+                title="رستاخیز: مسافر صفر"
+                src="https://www.aparat.com/video/video/embed/videohash/5M9Sp/vt/frame"
+                allowFullScreen
+                webkitallowfullscreen="true"
+                mozallowfullscreen="true"></iframe>
+            </div>
           </Grid>
         </Grid>
       </Container>
