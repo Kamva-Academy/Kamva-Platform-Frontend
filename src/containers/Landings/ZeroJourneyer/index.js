@@ -221,8 +221,8 @@ const ZeroJourneyer = () => {
         <Typography component="h2" variant="h2" gutterBottom>
           چه خبره؟
         </Typography>
-        <Grid container justify='center' alignItems='center' spacing={2}>
-          <Grid item container justify='center' spacing={2} xs={12} md={7}>
+        <Grid container justify='space-evenly' alignItems='center' spacing={4}>
+          <Grid item container justify='center' spacing={2} xs={12} md={6}>
             <Grid item>
               <Typography variant="subtitle1">
                 این رویداد داستانی رو براتون میگه که قراره توش با هم کارهای خارق‌العاده‌ای کنیم، در زمان سفر می‌کنیم و تلاش می‌کنیم شهرمون رو نجات بدیم.
@@ -271,7 +271,7 @@ const ZeroJourneyer = () => {
           رستا چیه؟
         </Typography>
         <Grid container justify='center' alignItems='center' spacing={2}>
-          <Grid item container justify='center' xs={12} sm={8} spacing={2}>
+          <Grid item container justify='center' xs={12} sm={9} spacing={2}>
             <Grid item>
               <Typography variant="subtitle1">
                 رستا جمعی علمی-ترویجی متشکل از دانشجوهای دانشگاه‌های صنعتی اصفهان،
@@ -284,7 +284,7 @@ const ZeroJourneyer = () => {
             </Typography>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={4} container justify='center'>
+          <Grid item xs={12} sm={3} container justify='center'>
             <img className={classes.kaftar} src={process.env.PUBLIC_URL + '/originalLogo.png'} alt='' />
           </Grid>
         </Grid>
