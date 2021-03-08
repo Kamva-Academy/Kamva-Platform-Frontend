@@ -152,9 +152,6 @@ const useStyles = makeStyles((theme) => ({
 const ZeroJourneyer = () => {
   const classes = useStyles();
 
-
-  console.log(workshops);
-
   return (
     <div className={classes.container}>
       <Grid container justify='center' alignItems='flex-end' className={classes.scrollIcon}>
@@ -193,9 +190,7 @@ const ZeroJourneyer = () => {
               </Typography>
             </Grid>
             <Grid item >
-              {/* Erfan Farhadi */}
-              <Button variant='contained' color='primary'
-              href='https://drive.google.com/uc?export=download&id=1om9U-RWVTqwzOIHBFb6hQ_kXEibJiyQz'>
+              <Button variant='contained' rel="noreferrer" target="_blank" href='https://s17.picofile.com/d/8427320976/178b1986-1417-4e13-8fa7-2c2f4fef6751/selection_quiz.pdf' color='primary'>
                 دریافت سوالات
               </Button>
             </Grid>

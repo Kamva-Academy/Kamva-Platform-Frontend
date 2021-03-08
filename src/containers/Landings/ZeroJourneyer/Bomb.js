@@ -22,14 +22,13 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'contain',
   },
   countDownDigits: {
-    direction: 'ltr !important',
+    position: 'relative',
     fontFamily: 'digital !important',
     fontSize: 40,
     [theme.breakpoints.down('sm')]: {
       fontSize: 30,
     },
     color: 'red',
-    transformOrigin: 'center center',
   },
   fullHeight: {
     minHeight: '100vh',

@@ -45,7 +45,6 @@ function CardDialogue({
   image,
   description,
 }) {
-  console.log(image)
 
   const classes = useStyles({ image });
 
