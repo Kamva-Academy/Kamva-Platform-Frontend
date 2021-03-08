@@ -190,7 +190,7 @@ const ZeroJourneyer = () => {
               </Typography>
             </Grid>
             <Grid item >
-              <Button variant='contained' rel="noreferrer" target="_blank" href='https://dl.dropboxusercontent.com/s/t4kix6g3z7kk2lf/selection_quiz.pdf?dl=0' color='primary'>
+              <Button variant='contained' rel="noreferrer" target="_blank" href={process.env.PUBLIC_URL + '/ZeroJourneyer/Question.pdf'} color='primary'>
                 دریافت سوالات
               </Button>
             </Grid>
