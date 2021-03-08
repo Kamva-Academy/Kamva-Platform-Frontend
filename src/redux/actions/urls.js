@@ -44,7 +44,7 @@ export const DELETE_WIDGET = (id) => ROOT.concat(`fsm/widget/${id}/`);
 
 export const CREATE_HELP = ROOT.concat('fsm/helpstate/');
 
-// ERFAN FARHADI 
-export const GET_LANDING = `https://res.cloudinary.com/derp8mdew/raw/upload/v${Math.floor(
+
+export const GET_LANDING = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
   Math.random() * 10000000
-)}/files/landpage.json`;
+)}/rasta/staff_zero_endxfc.json`;

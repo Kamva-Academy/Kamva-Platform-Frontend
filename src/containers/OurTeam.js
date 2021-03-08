@@ -8,7 +8,7 @@ import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import OurTeamMemberCard from '../components/SpecialComponents/Homepage/components/OurTeamMemberCard';
 import { getLandingData } from '../redux/actions/landing';
 
-const teams = ['کمیته برگزاری', 'فنی', 'علمی', 'رسانه', 'بازی', 'تست'];
+const teams = ['کمیته برگزاری', 'فنی', 'برندینگ', 'علمی', 'رسانه', 'مسابقه'];
 
 function OurTeam({ members = [], getLandingData }) {
   useEffect(() => {
