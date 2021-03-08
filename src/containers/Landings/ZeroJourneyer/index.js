@@ -190,7 +190,7 @@ const ZeroJourneyer = () => {
               </Typography>
             </Grid>
             <Grid item >
-              <Button variant='contained' rel="noreferrer" target="_blank" href='https://s17.picofile.com/d/8427320976/178b1986-1417-4e13-8fa7-2c2f4fef6751/selection_quiz.pdf' color='primary'>
+              <Button variant='contained' rel="noreferrer" target="_blank" href='https://dl.dropboxusercontent.com/s/t4kix6g3z7kk2lf/selection_quiz.pdf?dl=0' color='primary'>
                 دریافت سوالات
               </Button>
             </Grid>
