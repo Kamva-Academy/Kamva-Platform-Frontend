@@ -30,9 +30,6 @@ const useStyles = makeStyles((theme) => ({
     },
     color: 'red',
   },
-  fullHeight: {
-    minHeight: '100vh',
-  },
 }))
 
 const Bomb = () => {
@@ -84,7 +81,7 @@ const Bomb = () => {
         justify='center'
         alignItems="center"
         direction="column"
-        className={classes.fullHeight}>
+        className={classes.container}>
         <Grid item>
           <Typography id='countDownDigits' style={{ transform: `scale(${scale})` }} align="center" className={classes.countDownDigits}>
             {`00:00:0${countDown}`}
