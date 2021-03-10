@@ -230,14 +230,14 @@ const InputFields = ({
             <Grid item >
               <RadioGroup name='gender' row value={data.gender} onChange={putData}>
                 <FormControlLabel
-                  value="male"
+                  value="Man"
                   control={<Radio color="primary" />}
                   label="آقایِ"
                   labelPlacement="end"
                 />
 
                 <FormControlLabel
-                  value="female"
+                  value="Woman"
                   control={<Radio color="primary" />}
                   label="خانمِ"
                   labelPlacement="end"
@@ -328,9 +328,9 @@ const InputFields = ({
             name='grade'
             onChange={putData}
           >
-            <MenuItem value={10}>دهم</MenuItem>
-            <MenuItem value={11}>یازدهم</MenuItem>
-            <MenuItem value={12}>دوازدهم</MenuItem>
+            <MenuItem value={"Ten"}>دهم</MenuItem>
+            <MenuItem value={"Eleven"}>یازدهم</MenuItem>
+            <MenuItem value={"Twelve"}>دوازدهم</MenuItem>
           </Select>
         </FormControl >
       </Grid>

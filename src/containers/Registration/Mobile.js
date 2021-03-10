@@ -63,7 +63,6 @@ const MobileCreateAccount = () => {
             </Typography>
           </Grid>
           <Grid item className={classes.readyImage} />
-
           <InputFields />
         </Grid>
       </Container>
