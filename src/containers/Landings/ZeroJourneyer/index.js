@@ -214,7 +214,7 @@ const ZeroJourneyer = () => {
                 <Button rel="noreferrer" target="_blank" href={process.env.PUBLIC_URL + '/ZeroJourneyer/Question.pdf'} >
                   دریافت سوالات
               </Button>
-                <Button rel="noreferrer" target="_blank" href='/registration' color='primary'>
+                <Button href='/registration'>
                   ثبت‌نام
               </Button>
               </ButtonGroup>

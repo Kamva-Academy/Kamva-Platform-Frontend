@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: '5px',
     padding: theme.spacing(1),
-    paddingBottom: theme.spacing(1) / 2,
   }
 }))
 
@@ -121,7 +120,7 @@ const InputFields = ({
 
   const doGetVerifyCode = () => {
     if (!data.phone) {
-      addNotification({ message: 'یه شماره تلفن وارد کن!', type: 'error' })
+      addNotification({ message: 'یه شماره تلفن‌همراه وارد کن!', type: 'error' })
       return;
     }
     if (!isPhoneNumberValid(data.phone)) {
@@ -276,7 +275,7 @@ const InputFields = ({
             }
             value={data.verify_code}
             name='verify_code'
-            label='کد تایید'
+            label='کد ۵ رقمی پیامک‌شده رو وارد کنید'
             type='text' />
         </Grid>
         <Grid item xs={4} sm={3} container >
@@ -315,6 +314,7 @@ const InputFields = ({
                 onChange={putFile}
                 type='file' />
             </Grid>
+            <FormLabel>توجه کنید که فقط می‌تونید عکس یا pdf بفرستید</FormLabel>
           </Grid>
         </FormControl >
       </Grid >
@@ -356,6 +356,7 @@ const InputFields = ({
                 onChange={putFile}
                 type='file' />
             </Grid>
+            <FormLabel>توجه کنید که فقط می‌تونید عکس یا pdf بفرستید</FormLabel>
           </Grid>
         </FormControl >
       </Grid >
