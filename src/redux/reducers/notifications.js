@@ -70,7 +70,7 @@ export default function notifications(state = defaultState, action) {
       const message =
         variant === 'success'
           ? getMessage(action.type, action.message)
-          : getMessage(action.type, action.error);
+          : getMessage(action.type, action.error || action.message);
       return enquequeSnackbar({
         state,
         notification: {

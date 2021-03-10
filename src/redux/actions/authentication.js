@@ -1,50 +1,57 @@
+import jsonToFormData from '../../utils/jsonToFromDate';
 import { CALL_API } from '../middleware/api/api';
 import * as actionTypes from './actionTypes';
 import * as URLs from './urls';
 
-export const studentRegistration = ({ name, phone, password }) => ({
+export const register = (data) => ({
   [CALL_API]: {
     types: [
-      actionTypes.LOGIN_REQUEST,
-      actionTypes.LOGIN_SUCCESS,
-      actionTypes.LOGIN_FAILURE,
+      actionTypes.REGISTRATION_REQUEST,
+      actionTypes.REGISTRATION_SUCCESS,
+      actionTypes.REGISTRATION_FAILURE,
     ],
-    url: URLs.LOGIN,
+    url: URLs.REGISTRATION,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ name, phone, password }),
+      dontContentType: true,
+      body: jsonToFormData(data),
     },
   },
 });
 
 
-
-export const login = ({ username, password }) => ({
-  //TODO: login by email, phone
+export const getVerifyCode = ({ phone }) => ({
   [CALL_API]: {
     types: [
-      actionTypes.LOGIN_REQUEST,
-      actionTypes.LOGIN_SUCCESS,
-      actionTypes.LOGIN_FAILURE,
+      actionTypes.VERIFY_CODE_REQUEST,
+      actionTypes.VERIFY_CODE_SUCCESS,
+      actionTypes.VERIFY_CODE_FAILURE,
     ],
-    url: URLs.LOGIN,
+    url: URLs.VERIFY_CODE,
     fetchOptions: {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      dontContentType: true,
+      body: jsonToFormData({
+        phone,
+      }),
     },
   },
 });
 
-export const logout = () => ({
+export const getTeamData = ({ teamCode }) => ({
   [CALL_API]: {
     types: [
-      actionTypes.LOGOUT_REQUEST,
-      actionTypes.LOGOUT_SUCCESS,
-      actionTypes.LOGOUT_FAILURE,
+      actionTypes.TEAM_DATA_REQUEST,
+      actionTypes.TEAM_DATA_SUCCESS,
+      actionTypes.TEAM_DATA_FAILURE,
     ],
-    url: URLs.LOGOUT,
+    url: URLs.TEAM_DATA,
     fetchOptions: {
       method: 'POST',
+      dontContentType: true,
+      body: jsonToFormData({
+        team_code: teamCode,
+      }),
     },
   },
 });

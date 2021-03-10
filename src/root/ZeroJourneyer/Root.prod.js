@@ -10,8 +10,8 @@ const Root = () => {
     <>
       <Switch>
         <Route path="/our_team" component={OurTeam} />
-        <Route path="/" component={ZeroJourneyer} />
         <Route path="/registration" component={Registration} />
+        <Route path="/" component={ZeroJourneyer} />
       </Switch>
     </>
   );

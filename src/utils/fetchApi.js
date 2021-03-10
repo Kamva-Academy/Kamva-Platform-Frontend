@@ -11,6 +11,11 @@ const checkErrorsStatusCode = (response) => {
 };
 
 const fetchApi = async (url, fetchOptions) => {
+
+  console.log(url)
+  console.log(fetchOptions);
+
+
   const response = await fetch(url, fetchOptions);
   checkErrorsStatusCode(response);
   let json_response;

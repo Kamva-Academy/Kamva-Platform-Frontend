@@ -1,7 +1,11 @@
 export const ROOT =
   process.env.NODE_ENV === 'production'
-    ? 'https://workshop.rastaiha.ir/api/'
-    : 'https://workshop.rastaiha.ir/api/';
+    ? 'https://zero.rastaiha.ir/api/'
+    : 'https://dev.rastaiha.ir/api/';
+
+export const REGISTRATION = ROOT.concat('auth/signup/');
+export const VERIFY_CODE = ROOT.concat('auth/sendVerify/');
+export const TEAM_DATA = ROOT.concat('auth/teamData/');
 
 export const LOGIN = ROOT.concat('auth/token/obtain/');
 export const LOGOUT = ROOT.concat('auth/logout/');
