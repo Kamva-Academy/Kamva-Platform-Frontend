@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     background: `url(${process.env.PUBLIC_URL}'/ZeroJourneyer/Dr.Rastaranj.png')`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'center bottom',
   },
 }))
 
@@ -55,12 +55,13 @@ const DesktopCreateAccount = () => {
         <Grid
           container
           justify='space-evenly'
+          spacing={2}
           alignItems='flex-end'>
           <Grid
             container item
             justify='center'
             alignItems='center'
-            xs={6}>
+            xs={7} md={6}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Grid item container>

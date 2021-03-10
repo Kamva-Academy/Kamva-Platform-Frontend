@@ -1,13 +1,14 @@
-import React from 'react'
 import {
   Hidden
 } from '@material-ui/core';
-import MobileLogin from './Mobile';
-import DesktopLogin from './Desktop';
+import React from 'react'
 import { connect } from 'react-redux';
 import {
   Redirect,
 } from "react-router-dom";
+
+import DesktopLogin from './Desktop';
+import MobileLogin from './Mobile';
 
 const CreateAccount = () => {
 

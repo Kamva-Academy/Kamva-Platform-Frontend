@@ -2,6 +2,7 @@ import './Style.css';
 
 import {
   Button,
+  ButtonGroup,
   Container,
   Fab,
   Grid,
@@ -209,9 +210,14 @@ const ZeroJourneyer = () => {
               </Typography>
             </Grid>
             <Grid item >
-              <Button variant='contained' rel="noreferrer" target="_blank" href={process.env.PUBLIC_URL + '/ZeroJourneyer/Question.pdf'} color='primary'>
-                دریافت سوالات
+              <ButtonGroup variant='contained' color='primary'>
+                <Button rel="noreferrer" target="_blank" href={process.env.PUBLIC_URL + '/ZeroJourneyer/Question.pdf'} >
+                  دریافت سوالات
               </Button>
+                <Button rel="noreferrer" target="_blank" href='/registration' color='primary'>
+                  ثبت‌نام
+              </Button>
+              </ButtonGroup>
             </Grid>
           </Grid>
         </Grid>

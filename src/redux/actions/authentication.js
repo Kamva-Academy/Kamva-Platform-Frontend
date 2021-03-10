@@ -10,6 +10,9 @@ export const register = (data) => ({
       actionTypes.REGISTRATION_SUCCESS,
       actionTypes.REGISTRATION_FAILURE,
     ],
+    payload: {
+      message: 'ایول! ثبت‌نامت با موفقیت انجام شد. یه پیامک برات میاد که جزئیات ثبت‌نامت توشه.'
+    },
     url: URLs.REGISTRATION,
     fetchOptions: {
       method: 'POST',

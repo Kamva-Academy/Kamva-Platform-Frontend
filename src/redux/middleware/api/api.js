@@ -22,12 +22,14 @@ const onSuccess = ({
   actionWithoutCallAPI,
   successType,
   next,
+  payload,
 }) => {
   response = schema ? normalize(response, schema) : response;
   return next({
     ...actionWithoutCallAPI,
     response,
     type: successType,
+    payload,
   });
 };
 
@@ -38,7 +40,7 @@ const ERRORS = {
   [actionTypes.LOGIN_FAILURE]: 'نام کاربری یا رمزعبور اشتباه است!',
 };
 
-const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
+const onFailure = ({ error, actionWithoutCallAPI, failureType, next, payload }) => {
   if (error.message === 'TOKEN_EXPIRED') {
     next({
       type: actionTypes.LOGOUT_REQUEST,
@@ -47,6 +49,7 @@ const onFailure = ({ error, actionWithoutCallAPI, failureType, next }) => {
   return next({
     ...actionWithoutCallAPI,
     type: failureType,
+    payload,
     error:
       ERRORS[failureType] ||
       ERRORS[error.message] ||
@@ -61,7 +64,7 @@ export default ({ getState }) => (next) => (action) => {
     return next(action);
   }
 
-  const { url, types, schema, fetchOptions } = callAPI;
+  const { url, types, schema, fetchOptions, payload } = callAPI;
   const [requestType, successType, failureType] = types;
   next({ ...actionWithoutCallAPI, type: requestType });
   const requestOptions = getRequestOptions({
@@ -77,9 +80,10 @@ export default ({ getState }) => (next) => (action) => {
         actionWithoutCallAPI,
         successType,
         next,
+        payload,
       })
     )
     .catch((error) =>
-      onFailure({ error, actionWithoutCallAPI, failureType, next })
+      onFailure({ error, actionWithoutCallAPI, failureType, next, payload })
     );
 };

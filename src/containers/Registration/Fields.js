@@ -45,10 +45,10 @@ const MyTextField = ({ ...rest }) => (
 )
 
 const InputFields = ({
+  isFetching,
   register,
   getVerifyCode,
   getTeamData,
-  isFetching,
   addNotification,
 }) => {
   const classes = useStyles();
@@ -367,7 +367,7 @@ const InputFields = ({
           color='primary'
           disabled={isFetching}
           fullWidth>
-          ثبت
+          بزن بریم...
         </Button>
       </Grid>
     </>
@@ -375,7 +375,7 @@ const InputFields = ({
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  isFetching: state.account.isFetching,
+  isFetching: state.authentication.isFetching,
 })
 
 export default connect(

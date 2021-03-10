@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     background: `url(${process.env.PUBLIC_URL}'/ZeroJourneyer/Dr.Rastaranj.png')`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'center bottom',
   },
 }))
 
@@ -57,13 +57,13 @@ const MobileCreateAccount = () => {
           justify='space-evenly'
           alignItems='stretch'
           spacing={2}>
-          <Grid item className={classes.readyImage}>
-          </Grid>
           <Grid item>
             <Typography gutterBottom variant='h3' align='center' style={{ color: 'white' }}>
               ثبت‌نام
             </Typography>
           </Grid>
+          <Grid item className={classes.readyImage} />
+
           <InputFields />
         </Grid>
       </Container>
