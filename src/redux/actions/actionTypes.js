@@ -8,7 +8,11 @@ import {
   WEBSOCKET_SEND,
 } from '@giantmachines/redux-websocket';
 
-// account
+// authentication
+export const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST';
+export const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
+export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE';
+
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -17,16 +21,22 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-// student
+export const CHANGE_PASSWORD_REQUEST = 'CHANGE_PASSWORD_REQUEST';
+export const CHANGE_PASSWORD_SUCCESS = 'CHANGE_PASSWORD_SUCCESS';
+export const CHANGE_PASSWORD_FAILURE = 'CHANGE_PASSWORD_FAILURE';
 
-//// گرفتن هم گروهی های یه آدم (در واقعیت چون ممکنه یه نفر توی چندتا گروه باشه، سرش بحثه، ولی چون الان تو ای‌لیمپیاد هرکی فقط تو یه گروهه، اوکیه )
-export const TEAMMATES_REQUEST = 'TEAMMATES_REQUEST';
-export const TEAMMATES_SUCCESS = 'TEAMMATES_SUCCESS';
-export const TEAMMATES_FAILURE = 'TEAMMATES_FAILURE';
+export const UPLOAD_ANSWER_REQUEST = 'UPLOAD_ANSWER_REQUEST';
+export const UPLOAD_ANSWER_SUCCESS = 'UPLOAD_ANSWER_SUCCESS';
+export const UPLOAD_ANSWER_FAILURE = 'UPLOAD_ANSWER_FAILURE';
 
-export const STUDENT_WORKSHOPS_REQUEST = 'STUDENT_WORKSHOPS_REQUEST';
-export const STUDENT_WORKSHOPS_SUCCESS = 'STUDENT_WORKSHOPS_SUCCESS';
-export const STUDENT_WORKSHOPS_FAILURE = 'STUDENT_WORKSHOPS_FAILURE';
+export const VERIFY_CODE_REQUEST = 'VERIFY_CODE_REQUEST';
+export const VERIFY_CODE_SUCCESS = 'VERIFY_CODE_SUCCESS';
+export const VERIFY_CODE_FAILURE = 'VERIFY_CODE_FAILURE';
+
+export const TEAM_DATA_REQUEST = 'TEAM_DATA_REQUEST';
+export const TEAM_DATA_SUCCESS = 'TEAM_DATA_SUCCESS';
+export const TEAM_DATA_FAILURE = 'TEAM_DATA_FAILURE';
+
 
 // export const STATE_REQUEST = 'STATE_REQUEST'; //url: fsm/state method: post / playerId
 // export const STATE_SUCCESS = 'STATE_SUCCESS';
