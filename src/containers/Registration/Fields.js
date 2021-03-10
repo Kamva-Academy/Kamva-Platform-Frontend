@@ -305,7 +305,7 @@ const InputFields = ({
         <FormControl variant="filled" fullWidth className={classes.input}>
           <Grid item container direction='column' spacing={1}>
             <Grid item>
-              <FormLabel>مدرک احراز هویت</FormLabel>
+              <FormLabel>مدرک شناسایی</FormLabel>
             </Grid>
             <Grid item >
               <input
