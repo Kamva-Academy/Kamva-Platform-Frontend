@@ -1,7 +1,9 @@
-import { Grid, IconButton, makeStyles } from '@material-ui/core';
+import { Grid, Hidden, IconButton, makeStyles } from '@material-ui/core';
 import {
   Clear,
   Delete as DeleteIcon,
+  Fullscreen,
+  FullscreenExit,
   Gesture as GestureIcon,
   PanTool as PanToolIcon,
   Redo as RedoIcon,
@@ -33,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     padding: theme.spacing(1),
     zIndex: 3,
-    pointerEvents: 'none',
     '& .MuiIconButton-root': {
       position: 'relative',
       pointerEvents: 'auto',
@@ -51,6 +52,8 @@ function WhiteboardNavbar({
   redo,
   getDataURL,
   handleClose,
+  isFullScreen,
+  setIsFullScreen,
 }) {
   const classes = useStyles();
 
@@ -63,6 +66,11 @@ function WhiteboardNavbar({
         <IconButton onClick={handleClose}>
           <Clear />
         </IconButton>
+        <Hidden xsDown>
+          <IconButton onClick={() => setIsFullScreen(!isFullScreen)}>
+            {isFullScreen ? <FullscreenExit /> : <Fullscreen />}
+          </IconButton>
+        </Hidden>
         <IconButton
           onClick={() => {
             downloadFromURL(getDataURL(), 'stage.png');
