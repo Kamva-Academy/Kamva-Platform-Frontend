@@ -2,6 +2,7 @@ import { Grid, Hidden, IconButton, makeStyles } from '@material-ui/core';
 import {
   Clear,
   Delete as DeleteIcon,
+  DeleteForever,
   Fullscreen,
   FullscreenExit,
   Gesture as GestureIcon,
@@ -11,7 +12,7 @@ import {
   TextFields as TextFieldsIcon,
   Undo as UndoIcon,
 } from '@material-ui/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -19,6 +20,7 @@ import {
   changeMode,
   deselectNodes,
   redo,
+  removeAllNodes,
   removeSelectedNodes,
   undo,
 } from '../../redux/actions/whiteboard';
@@ -26,6 +28,7 @@ import downloadFromURL from '../../utils/downloadFromURL';
 import DrawingModes from '../Konva/Drawing/DrawingModes';
 import CircleMenu from './Components/CircleMenu';
 import RectangleMenu from './Components/RectangleMenu';
+import RemoveAllNodesDialog from './Components/RemoveAllNodesDialog';
 
 const useStyles = makeStyles((theme) => ({
   whiteboardNavbar: {
@@ -48,6 +51,7 @@ function WhiteboardNavbar({
   changeMode,
   removeSelectedNodes,
   deselectNodes,
+  removeAllNodes,
   undo,
   redo,
   getDataURL,
@@ -56,6 +60,7 @@ function WhiteboardNavbar({
   setIsFullScreen,
 }) {
   const classes = useStyles();
+  const [openRemoveNodes, setOpenRemoveNodes] = useState(false);
 
   return (
     <Grid
@@ -66,7 +71,7 @@ function WhiteboardNavbar({
         <IconButton onClick={handleClose}>
           <Clear />
         </IconButton>
-        <Hidden xsDown>
+        <Hidden smDown>
           <IconButton onClick={() => setIsFullScreen(!isFullScreen)}>
             {isFullScreen ? <FullscreenExit /> : <Fullscreen />}
           </IconButton>
@@ -77,6 +82,14 @@ function WhiteboardNavbar({
           }}>
           <SaveIcon />
         </IconButton>
+        <IconButton onClick={() => setOpenRemoveNodes(true)}>
+          <DeleteForever style={{ color: 'red' }} />
+        </IconButton>
+        <RemoveAllNodesDialog
+          open={openRemoveNodes}
+          handleClose={() => setOpenRemoveNodes(false)}
+          removeAllNodes={removeAllNodes}
+        />
       </Grid>
       <Grid item>
         <IconButton
@@ -131,6 +144,7 @@ export default connect(mapStateToProps, {
   changeMode,
   removeSelectedNodes,
   deselectNodes,
+  removeAllNodes,
   undo,
   redo,
 })(WhiteboardNavbar);

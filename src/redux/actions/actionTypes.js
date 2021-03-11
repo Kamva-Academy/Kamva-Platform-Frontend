@@ -163,6 +163,7 @@ export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
 // whiteBoard:
 export const DESELECT_NODE = 'DESELECT_NODE';
 export const DESELECT_NODES = 'DESELECT_NODES';
+export const REMOVE_ALL_NODES = 'REMOVE_ALL_NODES';
 export const SELECT_NODE = 'SELECT_NODE';
 export const ADD_NODE = 'ADD_NODE';
 export const UPDATE_SHAPE_PROPS = 'UPDATE_SHAPE_PROPS';
