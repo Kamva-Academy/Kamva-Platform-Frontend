@@ -18,7 +18,7 @@ function WhiteboardButton() {
   const [open, setOpen] = useState();
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(true);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const classes = useStyle();
 
