@@ -1,0 +1,26 @@
+name: push_to_another_repository
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - name: Extract branch name
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Pushes to another repository
+        id: push_directory
+        uses: abreza/github-action-push-to-another-repository@728744f3e1b06b2b7fdca4561e17fe756eec36e4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: '.'
+          destination-github-username: 'abreza'
+          destination-repository-name: 'rasta_workshop_frontend'
+          user-email: a.re.morteza@gmail.com
+          commit-message: sync
+          target-branch: ${{ steps.extract_branch.outputs.branch }}
