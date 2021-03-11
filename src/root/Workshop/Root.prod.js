@@ -1,21 +1,21 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import MiniGames from '../components/MiniGames';
-import AboutUs from '../containers/AboutUs';
-import Article from '../containers/Article';
-import EditArticle from '../containers/EditArticle';
-import EditWorkshop from '../containers/EditWorkshop';
-import MathHouseProblemDayLanding from '../containers/Landing/MathHouseProblemDayLanding';
-import PhysicsDayLanding from '../containers/Landings/PhysicsDay';
-import WorkshopLanding from '../containers/Landings/Workshop';
-import LoginPage from '../containers/LoginPage';
-import MentorPage from '../containers/MentorPage';
-import OurTeam from '../containers/OurTeam';
-import Survey from '../containers/Survey';
-import Workshop from '../containers/Workshop';
-import Workshops from '../containers/Workshops';
-import PrivateRoute from './PrivateRoute';
+import MiniGames from '../../components/MiniGames';
+import AboutUs from '../../containers/AboutUs';
+import Article from '../../containers/Article';
+import EditArticle from '../../containers/EditArticle';
+import EditWorkshop from '../../containers/EditWorkshop';
+import MathHouseProblemDayLanding from '../../containers/Landings/MathHouseProblemDay';
+import PhysicsDayLanding from '../../containers/Landings/PhysicsDay';
+import WorkshopLanding from '../../containers/Landings/Workshop';
+import LoginPage from '../../containers/LoginPage';
+import MentorPage from '../../containers/MentorPage';
+import OurTeam from '../../containers/OurTeam';
+import Survey from '../../containers/Survey';
+import Workshop from '../../containers/Workshop';
+import Workshops from '../../containers/Workshops';
+import PrivateRoute from '../PrivateRoute';
 
 const Root = () => {
   return (
