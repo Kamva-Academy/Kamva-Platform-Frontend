@@ -4,7 +4,7 @@ import { CssBaseline } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
-// import Pushe from 'pushe-webpush';
+import Pushe from 'pushe-webpush';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
@@ -16,11 +16,11 @@ import WorkshopRoot from './root/Workshop';
 import ZeroJourneyerRoot from './root/ZeroJourneyer';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
-import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme'
+import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
-// Pushe.init('ld838ykvn2n75poe');
-// Pushe.subscribe();
+Pushe.init('ld838ykvn2n75poe');
+Pushe.subscribe();
 
 const Workshop = () => (
   <SnackbarProvider>
@@ -36,7 +36,7 @@ const ZeroJourneyer = () => (
     <CssBaseline />
     <ZeroJourneyerRoot />
   </SnackbarProvider>
-)
+);
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
@@ -74,12 +74,12 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
           </ThemeProvider>
         </>
       ) : (
-          <>
-            <ThemeProvider theme={MuiTheme}>
-              <Workshop />
-            </ThemeProvider>
-          </>
-        )}
+        <>
+          <ThemeProvider theme={MuiTheme}>
+            <Workshop />
+          </ThemeProvider>
+        </>
+      )}
     </IntlProvider>
   );
 };
