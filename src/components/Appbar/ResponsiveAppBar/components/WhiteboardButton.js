@@ -33,7 +33,7 @@ function WhiteboardButton() {
     setHeight(window.innerHeight);
   };
 
-  const isDraggable = width > 1000 && !isFullScreen;
+  const isDraggable = width > 1100 && !isFullScreen;
 
   return (
     <>
@@ -41,6 +41,7 @@ function WhiteboardButton() {
         <BrushIcon />
       </IconButton>
       <Dialog
+        maxWidth="lg"
         open={open}
         onClose={() => setOpen(false)}
         fullScreen={!isDraggable}
@@ -53,7 +54,7 @@ function WhiteboardButton() {
         <div className="not-draggable">
           <Whiteboard
             width={isDraggable ? 1000 : width}
-            height={isDraggable ? 400 : height}
+            height={isDraggable ? 500 : height}
             handleClose={() => setOpen(false)}
             isFullScreen={isFullScreen}
             setIsFullScreen={setIsFullScreen}
