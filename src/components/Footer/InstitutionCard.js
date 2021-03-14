@@ -3,11 +3,12 @@ import {
   IconButton,
   makeStyles,
   Tooltip,
+  Typography,
 } from '@material-ui/core';
 import React from 'react';
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   img: {
     maxWidth: '100%',
     height: 'auto',
@@ -17,11 +18,8 @@ const useStyles = makeStyles(() => ({
 const InstitutionCard = ({ img_src, name, site_url }) => {
   const classes = useStyles();
   return (
-    <Grid item xs={5} sm={3}>
-      <Tooltip
-        title={name}
-        placement="bottom"
-      >
+    <>
+      <Grid item xs={6} sm={3}>
         <IconButton as='a' href={site_url}>
           <img
             className={classes.img}
@@ -29,8 +27,11 @@ const InstitutionCard = ({ img_src, name, site_url }) => {
             alt={name}
           />
         </IconButton>
-      </Tooltip>
-    </Grid>
+        <Typography align='center'>
+          {name}
+        </Typography>
+      </Grid>
+    </>
   )
 }
 

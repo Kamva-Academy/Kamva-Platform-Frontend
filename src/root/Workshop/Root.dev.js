@@ -1,22 +1,22 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import MiniGames from '../components/MiniGames';
-import AboutUs from '../containers/AboutUs';
-import Article from '../containers/Article';
-import DevTools from '../containers/DevTools';
-import EditArticle from '../containers/EditArticle';
-import EditWorkshop from '../containers/EditWorkshop';
-import Homepage from '../containers/Homepage';
-import LoginPage from '../containers/LoginPage';
-import MathHouseProblemDayLanding from '../containers/MathHouseProblemDayLanding';
-import MentorPage from '../containers/MentorPage';
-import OurTeam from '../containers/OurTeam';
-import PhysicsDay from '../containers/PhysicsDay';
-import Survey from '../containers/Survey';
-import Workshop from '../containers/Workshop';
-import Workshops from '../containers/Workshops';
-import PrivateRoute from './PrivateRoute';
+import MiniGames from '../../components/MiniGames';
+import AboutUs from '../../containers/AboutUs';
+import Article from '../../containers/Article';
+import DevTools from '../../containers/DevTools';
+import EditArticle from '../../containers/EditArticle';
+import EditWorkshop from '../../containers/EditWorkshop';
+import MathHouseProblemDayLanding from '../../containers/Landings/MathHouseProblemDay';
+import PhysicsDayLanding from '../../containers/Landings/PhysicsDay';
+import WorkshopLanding from '../../containers/Landings/Workshop';
+import LoginPage from '../../containers/LoginPage';
+import MentorPage from '../../containers/MentorPage';
+import OurTeam from '../../containers/OurTeam';
+import Survey from '../../containers/Survey';
+import Workshop from '../../containers/Workshop';
+import Workshops from '../../containers/Workshops';
+import PrivateRoute from '../PrivateRoute';
 
 const Root = () => {
   return (
@@ -44,10 +44,10 @@ const Root = () => {
         <Route path="/article/:articleId" component={Article} />
         <PrivateRoute path="/mentor/" component={MentorPage} />
         <PrivateRoute path="/survey" component={Survey} />
-        <Route path="/physics_day" component={PhysicsDay} />
         <Route path="/our_team" component={OurTeam} />
         <Route path="/about_us" component={AboutUs} />
-        <Route exact path="/" component={Homepage} />
+        <Route path="/physics_day" component={PhysicsDayLanding} />
+        <Route exact path="/" component={WorkshopLanding} />
         <Route exact path="/tournament" component={MathHouseProblemDayLanding} />
         <Route
           path="*"

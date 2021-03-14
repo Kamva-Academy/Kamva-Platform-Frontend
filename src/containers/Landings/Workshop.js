@@ -12,14 +12,14 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
-import ScrollTop from '../components/ScrollToTop/ScrollToTop';
-import questions from '../components/SpecialComponents/Homepage/constants/FAQs';
-import FAQ from '../components/SpecialComponents/Homepage/FAQ';
-import Footer from '../components/SpecialComponents/Homepage/Footer';
-import LandingOurTeam from '../components/SpecialComponents/Homepage/LandingOurTeam';
-import WorkshopList from '../components/SpecialComponents/Homepage/WorkshopList';
+import ResponsiveAppBar from '../../components/Appbar/ResponsiveAppBar';
+import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
+import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
+import questions from '../../components/SpecialComponents/Homepage/constants/FAQs';
+import FAQ from '../../components/SpecialComponents/Homepage/FAQ';
+import Footer from '../../components/SpecialComponents/Homepage/Footer';
+import LandingOurTeam from '../../components/SpecialComponents/Homepage/LandingOurTeam';
+import WorkshopList from '../../components/SpecialComponents/Homepage/WorkshopList';
 
 const useStyles = makeStyles((theme) => ({
   section1: {
