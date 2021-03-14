@@ -43,10 +43,10 @@ const Root = () => {
       <Route path="/our_team" component={OurTeam} />
       <Route path="/about_us" component={AboutUs} />
       <Route exact path="/" component={Homepage} />
-      <Route exact path="/prob-day" component={MathHouseProblemDayLanding} />
+      <Route exact path="/tournament" component={MathHouseProblemDayLanding} />
       <Route
         path="*"
-        render={() => <Redirect to={{ pathname: '/prob-day' }} />}
+        render={() => <Redirect to={{ pathname: '/tournament' }} />}
       />
     </Switch>
   );

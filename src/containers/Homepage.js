@@ -271,6 +271,7 @@ function Homepage() {
                 <a
                   // eslint-disable-next-line react/jsx-no-target-blank
                   target="_blank"
+                  rel="noreferrer"
                   href="https://t.me/rastaiha"
                   className={classes.telegramLink}
                   style={{ direction: 'ltr' }}>
