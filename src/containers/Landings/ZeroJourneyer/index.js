@@ -4,21 +4,13 @@ import {
   Button,
   ButtonGroup,
   Container,
-  Fab,
   Grid,
   makeStyles,
-  Paper,
   Typography,
 } from '@material-ui/core';
-import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import clsx from 'clsx';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import ResponsiveAppBar from '../../../components/Appbar/ResponsiveAppBar';
-import AuthDialog from '../../../components/Dialog/AuthDialog/AuthDialog';
-import ScrollTop from '../../../components/ScrollToTop/ScrollToTop';
 import FAQ from '../../../components/SpecialComponents/Homepage/FAQ';
 import Footer from '../../../components/SpecialComponents/Homepage/Footer';
 import LandingOurTeam from '../../../components/SpecialComponents/Homepage/LandingOurTeam';
