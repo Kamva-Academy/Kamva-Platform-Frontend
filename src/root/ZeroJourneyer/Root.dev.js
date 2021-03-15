@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import Dashboard from '../../containers/Dashboard';
 import DevTools from '../../containers/DevTools';
 import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import OurTeam from '../../containers/OurTeam';
@@ -12,6 +13,7 @@ const Root = () => {
       <Switch>
         <Route path="/our_team" component={OurTeam} />
         <Route path="/registration" component={Registration} />
+        <Route path='/dashboard' component={Dashboard} />
         <Route path="/" component={ZeroJourneyer} />
       </Switch>
       <DevTools />

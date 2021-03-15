@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 function ResponsiveAppBar({
   mode = 'LANDING',
   showBackOnScroll = false,
-  hideOnScroll = true,
+  hideOnScroll = false,
 }) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -73,13 +73,14 @@ function ResponsiveAppBar({
     <>
       <HideOnScroll disable={!hideOnScroll}>
         <AppBar
+          id='appBar'
           className={clsx(
             classes.appBar,
             showBackOnScroll && !trigger && classes.hideBack
           )}
           color="inherit">
-          <Container maxWidth="md">
-            <Toolbar className={classes.toolbar}>
+          <Container >
+            <Toolbar className={classes.toolbar} disableGutters>
               {mobileMenuListItems.length > 0 && (
                 <IconButton
                   edge="start"
