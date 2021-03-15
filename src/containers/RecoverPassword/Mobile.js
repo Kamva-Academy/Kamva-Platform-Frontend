@@ -3,11 +3,12 @@ import {
   Container,
   Grid,
   makeStyles,
+  TextField,
+  Button,
   Typography,
-  Paper,
 } from '@material-ui/core';
-import InputFields from './Fields'
-
+import { connect } from 'react-redux'
+import InputFields from './Fields';
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   image: {
-    height: '80vh',
+    height: '40vh',
     background: `url(${process.env.PUBLIC_URL}'/ZeroJourneyer/Dr.Rastaranj.png')`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
@@ -44,49 +45,34 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-
-const DesktopCreateAccount = () => {
+const MobileCreateAccount = () => {
   const classes = useStyles();
-
   return (
     <>
       <div className={classes.background} />
       <Container className={classes.container}>
         <Grid
           container
+          direction='column'
           justify='space-evenly'
-          spacing={2}
-          alignItems='flex-end'>
-          <Grid
-            container item
-            justify='center'
-            alignItems='center'
-            xs={7} md={6}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Grid item container>
-                  <Grid
-                    container
-                    item
-                    direction='column'
-                    justify='center'
-                    spacing={2}>
-                    <Grid item>
-                      <Typography gutterBottom variant='h2' align='center'>
-                        ثبت‌نام
-                      </Typography>
-                    </Grid>
-                    <InputFields />
-                  </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
+          alignItems='stretch'
+          spacing={2}>
+          <Grid item>
+            <Typography gutterBottom variant='h3' align='center' style={{ color: 'white' }}>
+              بازیابی رمز عبور
+            </Typography>
           </Grid>
-          <Grid item xs={5} className={classes.image} />
+          <Grid item className={classes.image} />
+          <InputFields />
         </Grid>
       </Container>
     </>
   )
 }
 
-export default (DesktopCreateAccount);
+export default connect(
+  undefined,
+  {
+
+  }
+)(MobileCreateAccount);

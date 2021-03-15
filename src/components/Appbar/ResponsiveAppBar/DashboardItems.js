@@ -10,7 +10,6 @@ const DashboardItems = () => {
   const workshopsButton = <DashboardButton name={'کارگاه‌ها'} href={'/'} disabled />;
   const infoButton = <DashboardButton name={'مشخصات'} href={'/information'} />;
 
-
   return {
     desktopLeftItems: [infoButton],
     desktopRightItems: [logoButton, eventsButton, workshopsButton],

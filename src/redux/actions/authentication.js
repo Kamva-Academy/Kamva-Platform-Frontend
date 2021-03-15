@@ -3,6 +3,26 @@ import { CALL_API } from '../middleware/api/api';
 import * as actionTypes from './actionTypes';
 import * as URLs from './urls';
 
+export const login = (data) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.LOGIN_REQUEST,
+      actionTypes.LOGIN_SUCCESS,
+      actionTypes.LOGIN_FAILURE,
+    ],
+    payload: {
+      message: 'دوباره سلام!'
+    },
+    url: URLs.LOGIN,
+    fetchOptions: {
+      method: 'POST',
+      dontContentType: true,
+      body: jsonToFormData(data),
+    },
+  },
+});
+
+
 export const register = (data) => ({
   [CALL_API]: {
     types: [

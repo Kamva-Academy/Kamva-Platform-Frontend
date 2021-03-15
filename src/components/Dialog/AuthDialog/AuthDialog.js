@@ -95,7 +95,7 @@ function AuthDialog({
                   <CloseIcon />
                 </IconButton>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item container xs={6} justify='center' alignItems='center'>
                 <Typography component="h3" variant="h2" align="center">
                   {t('login')}
                 </Typography>
@@ -123,6 +123,15 @@ function AuthDialog({
               />
             </Grid>
             <Grid item>
+              <Typography align='center'>
+                {'اگر رمزتون رو فراموش کردین، به '}
+                <a href='/recover-password'>
+                  {'این‌جا'}
+                </a>
+                {' مراجعه کنید.'}
+              </Typography>
+            </Grid>
+            <Grid item>
               <Button
                 fullWidth
                 variant="contained"
@@ -136,8 +145,8 @@ function AuthDialog({
                     className={classes.buttonProgress}
                   />
                 ) : (
-                  t('login')
-                )}
+                    t('login')
+                  )}
               </Button>
             </Grid>
           </Grid>

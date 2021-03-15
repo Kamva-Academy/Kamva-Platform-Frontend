@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
+    height: '100%',
+    width: '100%',
   },
   image: {
     height: '80vh',
@@ -55,34 +57,32 @@ const DesktopCreateAccount = () => {
         <Grid
           container
           justify='space-evenly'
-          spacing={2}
-          alignItems='flex-end'>
+          alignItems='center'
+          spacing={2}>
           <Grid
             container item
             justify='center'
             alignItems='center'
-            xs={7} md={6}>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Grid item container>
-                  <Grid
-                    container
-                    item
-                    direction='column'
-                    justify='center'
-                    spacing={2}>
-                    <Grid item>
-                      <Typography gutterBottom variant='h2' align='center'>
-                        ثبت‌نام
+            sm={7} md={6}>
+            <Paper className={classes.paper}>
+              <Grid item container>
+                <Grid
+                  container
+                  item
+                  direction='column'
+                  justify='center'
+                  spacing={2}>
+                  <Grid item>
+                    <Typography gutterBottom variant='h2' align='center'>
+                      بازیابی رمز عبور
                       </Typography>
-                    </Grid>
-                    <InputFields />
                   </Grid>
+                  <InputFields />
                 </Grid>
-              </Paper>
-            </Grid>
+              </Grid>
+            </Paper>
           </Grid>
-          <Grid item xs={5} className={classes.image} />
+          <Grid item sm={4} md={6} className={classes.image} />
         </Grid>
       </Container>
     </>

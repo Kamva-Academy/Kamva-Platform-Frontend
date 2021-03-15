@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
   },
-  readyImage: {
+  image: {
     height: '40vh',
     background: `url(${process.env.PUBLIC_URL}'/ZeroJourneyer/Dr.Rastaranj.png')`,
     backgroundSize: 'contain',
@@ -62,7 +62,7 @@ const MobileCreateAccount = () => {
               ثبت‌نام
             </Typography>
           </Grid>
-          <Grid item className={classes.readyImage} />
+          <Grid item className={classes.image} />
           <InputFields />
         </Grid>
       </Container>

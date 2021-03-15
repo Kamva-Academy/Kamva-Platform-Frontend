@@ -12,7 +12,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import AppBar from '../components/Appbar/ResponsiveAppBar';
+import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
   container: ({ marginTop }) => ({
@@ -54,7 +54,6 @@ function Dashboard({
         <Grid container justify='space-evenly' alignItems='center' style={{ height: '100%' }} >
           <Grid container item direction='column' sm={5}>
             <Paper className={classes.paper}>
-
               <Grid item>
                 salam
               </Grid>
