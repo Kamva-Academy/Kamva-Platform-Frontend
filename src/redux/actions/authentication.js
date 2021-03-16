@@ -3,7 +3,7 @@ import { CALL_API } from '../middleware/api/api';
 import * as actionTypes from './actionTypes';
 import * as URLs from './urls';
 
-export const login = (data) => ({
+export const login = ({ username, email, phone, password }) => ({
   [CALL_API]: {
     types: [
       actionTypes.LOGIN_REQUEST,
@@ -11,13 +11,18 @@ export const login = (data) => ({
       actionTypes.LOGIN_FAILURE,
     ],
     payload: {
-      message: 'دوباره سلام!'
+      successMessage: 'دوباره سلام!',
     },
     url: URLs.LOGIN,
     fetchOptions: {
       method: 'POST',
       dontContentType: true,
-      body: jsonToFormData(data),
+      body: jsonToFormData({
+        username,
+        email,
+        phone,
+        password
+      }),
     },
   },
 });
@@ -43,7 +48,6 @@ export const register = (data) => ({
   },
 });
 
-
 export const getVerifyCode = ({ phone, code_type }) => ({
   [CALL_API]: {
     types: [
@@ -62,6 +66,28 @@ export const getVerifyCode = ({ phone, code_type }) => ({
       body: jsonToFormData({
         phone,
         code_type,
+      }),
+    },
+  },
+});
+
+export const changePassword = ({ phone, password }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.CHANGE_PASSWORD_REQUEST,
+      actionTypes.CHANGE_PASSWORD_SUCCESS,
+      actionTypes.CHANGE_PASSWORD_FAILURE,
+    ],
+    payload: {
+      successMessage: 'حله! رمزت با موفقیت عوض شد.',
+    },
+    url: URLs.CHANGE_PASSWORD,
+    fetchOptions: {
+      method: 'POST',
+      dontContentType: true,
+      body: jsonToFormData({
+        phone,
+        password,
       }),
     },
   },

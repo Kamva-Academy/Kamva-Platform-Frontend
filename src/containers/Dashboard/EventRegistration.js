@@ -2,6 +2,7 @@ import {
   Button,
   Container,
   Grid,
+  Icon,
   makeStyles,
   Paper,
 } from '@material-ui/core'
@@ -12,6 +13,9 @@ import {
 } from "react-router-dom";
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import {
+  getEventRegistrationInfo,
+} from '../../redux/actions/dashboard';
 
 const useStyles = makeStyles((theme) => ({
   container: ({ marginTop }) => ({
@@ -19,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
     height: `calc(100vh - ${marginTop}px)`,
   }),
   logo: {
-    height: 100,
+    maxHeight: '80vh',
+    maxWidth: '100%',
   },
   paper: {
     width: '100%',
@@ -29,19 +34,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = ({
-  getUserInfo,
-  getCityDetails,
-  checkPaymentStatus,
-  payments,
-  info,
+  getEventRegistrationInfo,
 }) => {
-  const { examID, questionID } = useParams();
+  const { eventId } = useParams();
 
   const [marginTop, setMarginTop] = useState('');
   const classes = useStyles({ marginTop });
 
   useEffect(() => {
     setMarginTop(document.getElementById("appBar").offsetHeight);
+    getEventRegistrationInfo({ eventId });
   }, [])
 
   return (
@@ -74,7 +76,7 @@ const Profile = ({
 
           <Grid container item sm={5} justify='center' alignItems='center'>
             <img
-              src={process.env.PUBLIC_URL + '/logo.png'}
+              src={process.env.PUBLIC_URL + '/ZeroJourneyer/Dr.Rastaranj.png'}
               alt="logo"
               className={classes.logo}
             />
@@ -86,13 +88,11 @@ const Profile = ({
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  info: state.account.info,
-  isFetching: state.account.isFetching,
-  payments: state.account.payments,
 })
 
 export default connect(
   mapStateToProps,
   {
+    getEventRegistrationInfo,
   }
 )(Profile);

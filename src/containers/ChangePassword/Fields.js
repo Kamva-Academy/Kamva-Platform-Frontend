@@ -16,9 +16,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux'
 
 import {
-  getTeamData,
+  changePassword,
   getVerifyCode,
-  register,
 } from '../../redux/actions/authentication'
 import { addNotification, } from '../../redux/actions/notifications'
 import { redirect } from '../../redux/actions/redirect'
@@ -45,9 +44,8 @@ const MyTextField = ({ ...rest }) => (
 
 const InputFields = ({
   isFetching,
-  register,
   getVerifyCode,
-  getTeamData,
+  changePassword,
   addNotification,
 }) => {
 
@@ -106,7 +104,7 @@ const InputFields = ({
 
   console.log(data)
 
-  const doRecoverPassword = () => {
+  const doChangePassword = () => {
     const { phone, password, confirmationPassword } = data;
     if (!phone || !password) {
       addNotification({ message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!', type: 'error' });
@@ -118,7 +116,7 @@ const InputFields = ({
       return;
     }
 
-    // register(data);
+    changePassword(data);
   }
 
   return (
@@ -128,6 +126,7 @@ const InputFields = ({
           onBlur={putData}
           label='رمز عبور جدید'
           name='password'
+          inputProps={{ className: 'ltr-input' }}
           type='password' />
       </Grid>
 
@@ -136,6 +135,7 @@ const InputFields = ({
           onBlur={putData}
           label='تکرار رمز عبور جدید'
           type='password'
+          inputProps={{ className: 'ltr-input' }}
           name='confirmationPassword' />
       </Grid>
 
@@ -150,6 +150,7 @@ const InputFields = ({
           }
           value={data.phone}
           name='phone'
+          inputProps={{ className: 'ltr-input' }}
           label='شماره تلفن‌همراه'
           type='tel' />
       </Grid>
@@ -166,6 +167,7 @@ const InputFields = ({
             }
             value={data.verify_code}
             name='verify_code'
+            inputProps={{ className: 'ltr-input' }}
             label='کد پیامک‌شده رو وارد کنید'
             type='text' />
         </Grid>
@@ -178,7 +180,7 @@ const InputFields = ({
 
       <Grid container item direction='row' justify='center'>
         <Button
-          onClick={doRecoverPassword}
+          onClick={doChangePassword}
           variant='contained'
           color='primary'
           disabled={isFetching}
@@ -197,9 +199,8 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   {
-    register,
     getVerifyCode,
-    getTeamData,
+    changePassword,
     addNotification,
     redirect,
   }

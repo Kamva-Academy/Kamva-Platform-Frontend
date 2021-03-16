@@ -16,8 +16,7 @@ store.subscribe(() => {
     'rastaState',
     JSON.stringify({
       account: {
-        user: state.account.user,
-        token: state.account.token,
+        token: state.authentication.token,
       },
       Intl: state.Intl,
     })

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-const MobileCreateAccount = () => {
+const Mobile = () => {
   const classes = useStyles();
   return (
     <>
@@ -75,4 +75,4 @@ export default connect(
   {
 
   }
-)(MobileCreateAccount);
+)(Mobile);

@@ -3,17 +3,28 @@ export const ROOT =
     ? 'https://zero.rastaiha.ir/api/'
     : 'https://dev.rastaiha.ir/api/';
 
+// authentication
+
 export const REGISTRATION = ROOT.concat('auth/signup/');
 export const VERIFY_CODE = ROOT.concat('auth/sendVerify/');
 export const TEAM_DATA = ROOT.concat('auth/teamData/');
-
-export const LOGIN = ROOT.concat('auth/token/obtain/');
+export const CHANGE_PASSWORD = ROOT.concat('auth/changepass/');
+export const LOGIN = ROOT.concat('auth/login/');
 export const LOGOUT = ROOT.concat('auth/logout/');
-export const TEAMMATES = ROOT.concat('/'); //todo
-export const STUDENT_WORKSHOPS = ROOT.concat('/'); //todo
+export const CHECK_PAYMENT = ROOT.concat('auth/pay/');
+
+// dashboard
+
+export const EVENT_REGISTRATION_INFO = ROOT.concat('auth/changepass/');
+
+
+
+
+
 export const CALL_MENTOR = ROOT.concat('fsm/requestmentor/');
 export const GO_FORWARD = ROOT.concat('fsm/goforward/');
 export const GO_BACKWARD = ROOT.concat('fsm/gobackward/');
+
 
 export const UNREAD_NOTIFICATIONS = ROOT.concat(
   'notifications/api/unread_list/'

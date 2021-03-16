@@ -22,18 +22,20 @@ const getMessage = (actionType, message) => {
 
 const getVariant = (type) => {
   switch (type) {
-    case actionTypes.LOGIN_FAILURE:
     case actionTypes.SEND_ANSWER_FAILURE:
     case actionTypes.SHOW_ERROR_MESSAGE:
+    case actionTypes.LOGIN_FAILURE:
     case actionTypes.REGISTRATION_FAILURE:
     case actionTypes.VERIFY_CODE_FAILURE:
+    case actionTypes.CHANGE_PASSWORD_FAILURE:
       return 'error';
-    case actionTypes.LOGIN_SUCCESS:
     case actionTypes.CALL_MENTOR_SUCCESS:
     case actionTypes.SEND_ANSWER_SUCCESS:
     case actionTypes.SHOW_SUCCESS_MESSAGE:
+    case actionTypes.LOGIN_SUCCESS:
     case actionTypes.REGISTRATION_SUCCESS:
     case actionTypes.VERIFY_CODE_SUCCESS:
+    case actionTypes.CHANGE_PASSWORD_SUCCESS:
       return 'success';
     default:
       return 'info';
@@ -64,22 +66,23 @@ export default function notifications(state = defaultState, action) {
       };
 
     case actionTypes.SEND_ANSWER_FAILURE:
-    case actionTypes.LOGIN_FAILURE:
     case actionTypes.SEND_ANSWER_SUCCESS:
     case actionTypes.CALL_MENTOR_SUCCESS:
     case actionTypes.LOGIN_SUCCESS:
+    case actionTypes.LOGIN_FAILURE:
     case actionTypes.SHOW_SUCCESS_MESSAGE:
     case actionTypes.SHOW_ERROR_MESSAGE:
     case actionTypes.REGISTRATION_SUCCESS:
     case actionTypes.REGISTRATION_FAILURE:
     case actionTypes.VERIFY_CODE_SUCCESS:
     case actionTypes.VERIFY_CODE_FAILURE:
-
+    case actionTypes.CHANGE_PASSWORD_SUCCESS:
+    case actionTypes.CHANGE_PASSWORD_FAILURE:
       const variant = getVariant(action.type);
       const message =
         variant === 'success'
-          ? getMessage(action.type, action.message || action.payload.successMessage)
-          : getMessage(action.type, action.error || action.message || action.payload.errorMessage);
+          ? getMessage(action.type, action.message || action.payload.successMessage || action.payload.message)
+          : getMessage(action.type, action.error || action.message || action.payload.errorMessage || action.payload.message);
       return enquequeSnackbar({
         state,
         notification: {
