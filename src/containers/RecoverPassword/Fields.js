@@ -50,6 +50,7 @@ const InputFields = ({
   getTeamData,
   addNotification,
 }) => {
+
   const classes = useStyles();
   const [buttonText, setButtonText] = useState('دریافت کد');
   const [data, setData] = useState({
@@ -66,18 +67,9 @@ const InputFields = ({
   }
 
   const isEnglishDigits = (number) => {
-    var regex = new RegExp(`\\d*`);
+    var regex = new RegExp(`\\d{${number.length}}`);
     if (regex.test(number)) {
       return number;
-    } else {
-      return 'error'
-    }
-  }
-
-  const isEnglish = (string) => {
-    var regex = new RegExp(`[a-zA-Z0-9-_.]{${string.length}}`);
-    if (regex.test(string)) {
-      return string;
     } else {
       return 'error'
     }
@@ -97,19 +89,19 @@ const InputFields = ({
       addNotification({ message: 'یه شماره تلفن‌همراه وارد کن!', type: 'error' })
       return;
     }
+
     if (!isPhoneNumberValid(data.phone)) {
       addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' })
       return;
     }
+
     setButtonText('۱ دقیقه صبر کن');
-    getVerifyCode({ phone: data.phone }).then(
+    getVerifyCode({ phone: data.phone, code_type: 'changePass' }).then(
       () => {
-        addNotification({ message: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.', type: 'success' })
         setTimeout(() => {
           setButtonText('دریافت کد');
-        }, 60000)
-      }
-    )
+        }, 6000)
+      })
   }
 
   console.log(data)
@@ -126,7 +118,7 @@ const InputFields = ({
       return;
     }
 
-    register(data);
+    // register(data);
   }
 
   return (
@@ -162,7 +154,7 @@ const InputFields = ({
           type='tel' />
       </Grid>
 
-      <Grid item container justify='center' alignItems='stretch' spacing={1}>
+      <Grid item container justify='space-between' alignItems='stretch' spacing={1}>
         <Grid item xs={8} sm={9}>
           <MyTextField
             onChange={
@@ -174,7 +166,7 @@ const InputFields = ({
             }
             value={data.verify_code}
             name='verify_code'
-            label='کد ۵ رقمی پیامک‌شده رو وارد کنید'
+            label='کد پیامک‌شده رو وارد کنید'
             type='text' />
         </Grid>
         <Grid item xs={4} sm={3} container >
@@ -191,7 +183,7 @@ const InputFields = ({
           color='primary'
           disabled={isFetching}
           fullWidth>
-          تغییر کن
+          تغییر بده
         </Button>
       </Grid>
     </>

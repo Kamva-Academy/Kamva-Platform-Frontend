@@ -31,7 +31,8 @@ export const register = (data) => ({
       actionTypes.REGISTRATION_FAILURE,
     ],
     payload: {
-      message: 'ایول! ثبت‌نامت با موفقیت انجام شد. یه پیامک برات میاد که جزئیات ثبت‌نامت توشه.'
+      successMessage: 'ایول! ثبت‌نامت با موفقیت انجام شد. یه پیامک برات میاد که جزئیات ثبت‌نامت توشه.',
+      errorMessage: 'ثبت‌نامت با مشکل روبه‌رو شده. یه چند لحظه دیگه دوباره تلاش کن!',
     },
     url: URLs.REGISTRATION,
     fetchOptions: {
@@ -43,19 +44,24 @@ export const register = (data) => ({
 });
 
 
-export const getVerifyCode = ({ phone }) => ({
+export const getVerifyCode = ({ phone, code_type }) => ({
   [CALL_API]: {
     types: [
       actionTypes.VERIFY_CODE_REQUEST,
       actionTypes.VERIFY_CODE_SUCCESS,
       actionTypes.VERIFY_CODE_FAILURE,
     ],
+    payload: {
+      successMessage: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
+      errorMessage: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',
+    },
     url: URLs.VERIFY_CODE,
     fetchOptions: {
       method: 'POST',
       dontContentType: true,
       body: jsonToFormData({
         phone,
+        code_type,
       }),
     },
   },

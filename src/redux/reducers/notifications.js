@@ -26,12 +26,14 @@ const getVariant = (type) => {
     case actionTypes.SEND_ANSWER_FAILURE:
     case actionTypes.SHOW_ERROR_MESSAGE:
     case actionTypes.REGISTRATION_FAILURE:
+    case actionTypes.VERIFY_CODE_FAILURE:
       return 'error';
     case actionTypes.LOGIN_SUCCESS:
     case actionTypes.CALL_MENTOR_SUCCESS:
     case actionTypes.SEND_ANSWER_SUCCESS:
     case actionTypes.SHOW_SUCCESS_MESSAGE:
     case actionTypes.REGISTRATION_SUCCESS:
+    case actionTypes.VERIFY_CODE_SUCCESS:
       return 'success';
     default:
       return 'info';
@@ -70,11 +72,14 @@ export default function notifications(state = defaultState, action) {
     case actionTypes.SHOW_ERROR_MESSAGE:
     case actionTypes.REGISTRATION_SUCCESS:
     case actionTypes.REGISTRATION_FAILURE:
+    case actionTypes.VERIFY_CODE_SUCCESS:
+    case actionTypes.VERIFY_CODE_FAILURE:
+
       const variant = getVariant(action.type);
       const message =
         variant === 'success'
-          ? getMessage(action.type, action.message || action.payload.message)
-          : getMessage(action.type, action.error || action.message);
+          ? getMessage(action.type, action.message || action.payload.successMessage)
+          : getMessage(action.type, action.error || action.message || action.payload.errorMessage);
       return enquequeSnackbar({
         state,
         notification: {

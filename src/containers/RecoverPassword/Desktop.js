@@ -1,11 +1,12 @@
-import React from 'react'
 import {
   Container,
   Grid,
   makeStyles,
-  Typography,
   Paper,
+  Typography,
 } from '@material-ui/core';
+import React from 'react'
+
 import InputFields from './Fields'
 
 
@@ -37,11 +38,12 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   image: {
-    height: '80vh',
+    height: '70vh',
+    width: '100%',
     background: `url(${process.env.PUBLIC_URL}'/ZeroJourneyer/Dr.Rastaranj.png')`,
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center bottom',
+    backgroundPosition: 'center center',
   },
 }))
 
@@ -63,7 +65,7 @@ const DesktopCreateAccount = () => {
             container item
             justify='center'
             alignItems='center'
-            sm={7} md={6}>
+            sm={6} md={5}>
             <Paper className={classes.paper}>
               <Grid item container>
                 <Grid
@@ -82,7 +84,7 @@ const DesktopCreateAccount = () => {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item sm={4} md={6} className={classes.image} />
+          <Grid item sm={5} md={4} className={classes.image} />
         </Grid>
       </Container>
     </>

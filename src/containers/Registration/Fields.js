@@ -128,9 +128,8 @@ const InputFields = ({
       return;
     }
     setButtonText('۱ دقیقه صبر کن');
-    getVerifyCode({ phone: data.phone }).then(
+    getVerifyCode({ phone: data.phone, code_type: 'verify' }).then(
       () => {
-        addNotification({ message: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.', type: 'success' })
         setTimeout(() => {
           setButtonText('دریافت کد');
         }, 60000)

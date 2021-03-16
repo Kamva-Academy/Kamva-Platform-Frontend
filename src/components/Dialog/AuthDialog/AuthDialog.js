@@ -16,10 +16,10 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router-dom';
 
-import { login } from '../../../redux/actions/account';
+import { login } from '../../../redux/actions/authentication';
 
 const useStyles = makeStyles((theme) => ({
-  rightImage: {
+  image: {
     background: `url(${process.env.PUBLIC_URL + '/Auth.jpg'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
@@ -151,7 +151,7 @@ function AuthDialog({
             </Grid>
           </Grid>
           <Hidden xsDown>
-            <Grid item sm={5} className={classes.rightImage}></Grid>
+            <Grid item sm={5} className={classes.image}></Grid>
           </Hidden>
         </Grid>
       </form>
