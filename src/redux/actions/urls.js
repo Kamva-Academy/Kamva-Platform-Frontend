@@ -9,13 +9,15 @@ export const REGISTRATION = ROOT.concat('auth/signup/');
 export const VERIFY_CODE = ROOT.concat('auth/sendVerify/');
 export const TEAM_DATA = ROOT.concat('auth/teamData/');
 export const CHANGE_PASSWORD = ROOT.concat('auth/changepass/');
-export const LOGIN = ROOT.concat('auth/login/');
+export const LOGIN = ROOT.concat('auth/token/obtain/');
 export const LOGOUT = ROOT.concat('auth/logout/');
 export const CHECK_PAYMENT = ROOT.concat('auth/pay/');
 
 // dashboard
 
-export const EVENT_REGISTRATION_INFO = ROOT.concat('auth/changepass/');
+export const EVENT_REGISTRATION_INFO = ROOT.concat('auth/registration-info/');
+export const SUBMIT_DISCOUNT = ROOT.concat('auth/verify-discount/');
+
 
 
 

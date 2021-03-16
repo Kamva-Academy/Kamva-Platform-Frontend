@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import account from './account';
 import authentication from './authentication';
 import currentState from './currentState';
+import event from './event';
 import landing from './landing';
 import mentor from './mentor';
 import notifications from './notifications';
@@ -12,7 +13,7 @@ import websocket from './websocket';
 import whiteboard from './whiteboard';
 
 const allReducers = combineReducers({
-  account,
+  // account,
   currentState,
   notifications,
   mentor,
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
   redirect,
   landing,
   authentication,
+  event,
   Intl,
 });
 export default allReducers;

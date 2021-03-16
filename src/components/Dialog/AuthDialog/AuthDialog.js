@@ -21,11 +21,10 @@ import { addNotification, } from '../../../redux/actions/notifications'
 
 const useStyles = makeStyles((theme) => ({
   image: {
-    background: `url(${process.env.PUBLIC_URL + '/Auth.jpg'})`,
+    background: `url(${process.env.PUBLIC_URL + '/ZeroJourneyer/login.png'})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
-    boxShadow: '3px 3px 3px 3px black',
   },
   leftContainer: {
     height: 300,
@@ -47,25 +46,12 @@ function AuthDialog({
   handleClose,
   login,
   isFetching,
-  isLoggedIn,
-  user,
   addNotification,
 }) {
   const [userIdentity, setUserIdentity] = useState('');
   const [password, setPassword] = useState('');
   const classes = useStyles();
   const t = useTranslate();
-  const history = useHistory();
-
-  useEffect(() => {
-    if (open && isLoggedIn) {
-      if (user.is_mentor) {
-        history.push('/mentor');
-      } else {
-        history.push('/workshops');
-      }
-    }
-  }, [isLoggedIn, user, open, history]);
 
   const isEnglish = (string) => {
     var regex = new RegExp(`[a-zA-Z0-9-_.]{${string.length}}`);
@@ -103,30 +89,29 @@ function AuthDialog({
     }
 
     let phone, username, email;
-    if (userIdentity.startsWith('9') || userIdentity.startsWith('09')) {
-      if (isPhoneNumberValid(userIdentity) === 'error') {
-        addNotification({ message: 'شماره‌تلفنت معتبر نیست!', type: 'error' });
-        return;
-      } else {
-        phone = userIdentity;
-      }
-    } else if (userIdentity.includes('@')) {
-      if (isValidEmail(userIdentity) === 'error') {
-        addNotification({ message: 'ایمیلت معتبر نیست!', type: 'error' });
-        return;
-      } else {
-        email = userIdentity;
-      }
-    } else if (isEnglish(userIdentity) === 'error') {
+    // if (userIdentity.startsWith('9') || userIdentity.startsWith('09')) {
+    //   if (isPhoneNumberValid(userIdentity) === 'error') {
+    //     addNotification({ message: 'شماره‌تلفنت معتبر نیست!', type: 'error' });
+    //     return;
+    //   } else {
+    //     phone = userIdentity;
+    //   }
+    // } else if (userIdentity.includes('@')) {
+    //   if (isValidEmail(userIdentity) === 'error') {
+    //     addNotification({ message: 'ایمیلت معتبر نیست!', type: 'error' });
+    //     return;
+    //   } else {
+    //     email = userIdentity;
+    //   }
+    // } else 
+    if (isEnglish(userIdentity) === 'error') {
       addNotification({ message: 'نام‌کاربریت معتبر نیست!', type: 'error' });
       return;
     } else {
       username = userIdentity;
     }
 
-    console.log(username, phone, email, password)
-
-    login({ username, phone, email, password });
+    login({ username, password });
   };
 
   return (
@@ -160,7 +145,7 @@ function AuthDialog({
           <Grid item>
             <TextField
               value={userIdentity}
-              label='نام‌کاربری یا شماره‌تلفن'
+              label='نام‌کاربری'
               type="text"
               fullWidth
               onChange={(e) => setUserIdentity(e.target.value)}
@@ -182,7 +167,7 @@ function AuthDialog({
           <Grid item>
             <Typography align='center'>
               {'اگر رمزتون رو فراموش کردین، به '}
-              <a href='/recover-password'>
+              <a href='/change-password'>
                 {'این‌جا'}
               </a>
               {' مراجعه کنید.'}
@@ -215,9 +200,7 @@ function AuthDialog({
 }
 
 const mapStateToProps = (state) => ({
-  isFetching: state.account.isFetching,
-  isLoggedIn: !!state.account.token,
-  user: state.account.user,
+  isFetching: state.authentication.isFetching,
 });
 
 export default connect(

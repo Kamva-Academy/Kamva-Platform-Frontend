@@ -137,8 +137,6 @@ const InputFields = ({
     )
   }
 
-  console.log(data)
-
   const isValidEmail = (email) => {
     var regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     if (regex.test(email)) {
@@ -388,3 +386,5 @@ export default connect(
     redirect,
   }
 )(InputFields)
+
+// todo: add 'inputProps={{ className: 'ltr-input' }}' to lrt fields

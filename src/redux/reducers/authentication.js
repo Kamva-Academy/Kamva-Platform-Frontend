@@ -27,7 +27,8 @@ function authentication(state = initState, action) {
       return {
         ...state,
         isFetching: false,
-        memberId: action.memberId,
+        ...action.response,
+        token: action.response.access,
       };
 
     default:

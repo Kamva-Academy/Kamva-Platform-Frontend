@@ -2,6 +2,7 @@ import {
   AppBar,
   Container,
   Drawer,
+  Grid,
   Hidden,
   IconButton,
   List,
@@ -9,7 +10,6 @@ import {
   makeStyles,
   Toolbar,
   useScrollTrigger,
-  Grid,
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import clsx from 'clsx';
@@ -63,6 +63,9 @@ function ResponsiveAppBar({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
 
+
+  console.log(modes)
+
   const {
     desktopLeftItems,
     desktopRightItems,
@@ -83,7 +86,8 @@ function ResponsiveAppBar({
           color="inherit">
           <Container >
             <Toolbar className={classes.toolbar} disableGutters>
-              {mobileMenuListItems.length > 0 && (
+
+              {mobileMenuListItems.length > 0 &&
                 <IconButton
                   edge="start"
                   color="inherit"
@@ -92,7 +96,8 @@ function ResponsiveAppBar({
                   onClick={() => setDrawerOpen(true)}>
                   <MenuIcon />
                 </IconButton>
-              )}
+              }
+
               <Hidden xsDown>
                 <Grid spacing={1} container justify='flex-start' alignItems='center'>
                   {desktopRightItems.map((item, index) => {

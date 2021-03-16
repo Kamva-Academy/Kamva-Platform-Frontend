@@ -1,7 +1,9 @@
 import { Avatar, Button, IconButton, makeStyles } from '@material-ui/core';
-import { stringToColor } from '../../../../utils/stringToColor';
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { stringToColor } from '../../../../utils/stringToColor';
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -9,7 +11,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function AvatarComponent({ name = "علی" }) {
+function AvatarComponent({ name = "علی" }) {
   const classes = useStyles();
   return (
     <Avatar
@@ -22,3 +24,12 @@ export default function AvatarComponent({ name = "علی" }) {
     </Avatar>
   );
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  name: state.authentication.user_info.name,
+})
+
+export default connect(
+  mapStateToProps,
+  {}
+)(AvatarComponent);

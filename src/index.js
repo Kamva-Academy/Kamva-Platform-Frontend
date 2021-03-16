@@ -15,9 +15,8 @@ store.subscribe(() => {
   localStorage.setItem(
     'rastaState',
     JSON.stringify({
-      account: {
-        token: state.authentication.token,
-      },
+      authentication: state.authentication,
+      event: state.event,
       Intl: state.Intl,
     })
   );

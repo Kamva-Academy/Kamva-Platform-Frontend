@@ -17,7 +17,7 @@ const Root = () => {
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/registration" component={Registration} />
         <Route path="/event/">
-          <PrivateRoute path="/event/registration/:eventId" component={EventRegistrationId} />
+          <PrivateRoute path="/event/registration/:eventId?" component={EventRegistrationId} />
         </Route>
         <Route path='/profile' component={Profile} />
         <Route path="/" component={ZeroJourneyer} />

@@ -1,11 +1,9 @@
-import { Button, makeStyles, Icon, Typography } from '@material-ui/core';
+import { Button, Icon, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 
 const useStyles = makeStyles(() => ({
   iconImage: {
-    maxHeight: '30px',
+    maxHeight: '20px',
     width: '100%',
   }
 }));
@@ -21,7 +19,7 @@ export default function DashboardButton({ name, iconImage, ...rest }) {
           className={classes.iconImage}
         />
       </Icon>) : ''}  {...rest}>
-      <Typography>
+      <Typography variant='caption' >
         {name}
       </Typography>
     </Button>
