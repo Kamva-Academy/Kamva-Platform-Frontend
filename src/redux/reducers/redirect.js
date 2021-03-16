@@ -9,6 +9,9 @@ function redirect(state = initState, action) {
     case actionTypes.LOGIN_SUCCESS:
       return { redirectTo: '/event/registration/' };
 
+    case actionTypes.PAYMENT_SUCCESS:
+      return { redirectTo: action.response }; // todo
+
     case actionTypes.CREATE_WORKSHOP_SUCCESS:
       return { redirectTo: `/edit_workshop/${action.response.id}` };
 

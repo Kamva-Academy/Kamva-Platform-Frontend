@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const DesktopCreateAccount = () => {
+const Desktop = () => {
   const classes = useStyles();
 
   return (
@@ -91,4 +91,4 @@ const DesktopCreateAccount = () => {
   )
 }
 
-export default (DesktopCreateAccount);
+export default (Desktop);

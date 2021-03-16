@@ -35,7 +35,7 @@ const Profile = ({
   payments,
   info,
 }) => {
-  const { examID, questionID } = useParams();
+  const { eventId } = useParams();
 
   const [marginTop, setMarginTop] = useState('');
   const classes = useStyles({ marginTop });

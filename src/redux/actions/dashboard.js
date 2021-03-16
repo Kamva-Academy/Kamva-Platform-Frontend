@@ -10,6 +10,9 @@ export const getEventRegistrationInfo = ({ event_id, member_uuid }) => ({
       actionTypes.EVENT_REGISTRATION_INFO_SUCCESS,
       actionTypes.EVENT_REGISTRATION_INFO_FAILURE,
     ],
+    payload: {
+      event_id,
+    },
     url: URLs.EVENT_REGISTRATION_INFO,
     fetchOptions: {
       method: 'POST',
@@ -22,19 +25,45 @@ export const getEventRegistrationInfo = ({ event_id, member_uuid }) => ({
   },
 });
 
-export const submitDiscount = ({ discountCode, participant_id }) => ({
+export const applyDiscount = ({ discountCode, participant_id, event_id }) => ({
   [CALL_API]: {
     types: [
-      actionTypes.SUBMIT_DISCOUNT_REQUEST,
-      actionTypes.SUBMIT_DISCOUNT_SUCCESS,
-      actionTypes.SUBMIT_DISCOUNT_FAILURE,
+      actionTypes.PAYMENT_REQUEST,
+      actionTypes.PAYMENT_SUCCESS,
+      actionTypes.PAYMENT_FAILURE,
     ],
     url: URLs.SUBMIT_DISCOUNT,
+    payload: {
+      successMessage: 'در حال انتقال به صفحه‌ی پرداخت...',
+      failureMessage: 'یه مشکلی وجود داره. چند لحظه دیگه دوباره تلاش کن!',
+    },
     fetchOptions: {
       method: 'POST',
       dontContentType: true,
       body: jsonToFormData({
         discountCode,
+        participant_id,
+      }),
+    },
+  },
+});
+
+
+export const goForPayment = ({ participant_id, event_id }) => ({
+  [CALL_API]: {
+    types: [
+      actionTypes.APPLY_DISCOUNT_REQUEST,
+      actionTypes.APPLY_DISCOUNT_SUCCESS,
+      actionTypes.APPLY_DISCOUNT_FAILURE,
+    ],
+    url: URLs.SUBMIT_DISCOUNT,
+    payload: {
+      event_id,
+    },
+    fetchOptions: {
+      method: 'POST',
+      dontContentType: true,
+      body: jsonToFormData({
         participant_id,
       }),
     },

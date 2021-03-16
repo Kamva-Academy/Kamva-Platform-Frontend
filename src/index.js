@@ -16,7 +16,7 @@ store.subscribe(() => {
     'rastaState',
     JSON.stringify({
       authentication: state.authentication,
-      event: state.event,
+      events: state.events,
       Intl: state.Intl,
     })
   );

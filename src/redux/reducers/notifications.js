@@ -28,6 +28,8 @@ const getVariant = (type) => {
     case actionTypes.REGISTRATION_FAILURE:
     case actionTypes.VERIFY_CODE_FAILURE:
     case actionTypes.CHANGE_PASSWORD_FAILURE:
+    case actionTypes.APPLY_DISCOUNT_FAILURE:
+    case actionTypes.PAYMENT_FAILURE:
       return 'error';
     case actionTypes.CALL_MENTOR_SUCCESS:
     case actionTypes.SEND_ANSWER_SUCCESS:
@@ -36,6 +38,8 @@ const getVariant = (type) => {
     case actionTypes.REGISTRATION_SUCCESS:
     case actionTypes.VERIFY_CODE_SUCCESS:
     case actionTypes.CHANGE_PASSWORD_SUCCESS:
+    case actionTypes.APPLY_DISCOUNT_SUCCESS:
+    case actionTypes.PAYMENT_SUCCESS:
       return 'success';
     default:
       return 'info';
@@ -78,6 +82,10 @@ export default function notifications(state = defaultState, action) {
     case actionTypes.VERIFY_CODE_FAILURE:
     case actionTypes.CHANGE_PASSWORD_SUCCESS:
     case actionTypes.CHANGE_PASSWORD_FAILURE:
+    case actionTypes.APPLY_DISCOUNT_FAILURE:
+    case actionTypes.APPLY_DISCOUNT_SUCCESS:
+    case actionTypes.PAYMENT_SUCCESS:
+    case actionTypes.PAYMENT_FAILURE:
       const variant = getVariant(action.type);
       const message =
         variant === 'success'

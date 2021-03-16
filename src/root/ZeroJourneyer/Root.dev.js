@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import ChangePassword from '../../containers/ChangePassword';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
+import FailedPayment from '../../containers/Dashboard/FailedPayment';
+import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
 import DevTools from '../../containers/DevTools';
 import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import OurTeam from '../../containers/OurTeam';
@@ -14,6 +16,8 @@ const Root = () => {
     <>
       <Switch>
         <Route path="/our_team" component={OurTeam} />
+        <Route path='/payment/successful/' component={SuccessfulPayment} />
+        <Route path='/payment/failed/' component={FailedPayment} />
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/registration" component={Registration} />
         <Route path="/event/">

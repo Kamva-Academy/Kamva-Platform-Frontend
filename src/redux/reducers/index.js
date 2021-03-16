@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import account from './account';
 import authentication from './authentication';
 import currentState from './currentState';
-import event from './event';
+import events from './events';
 import landing from './landing';
 import mentor from './mentor';
 import notifications from './notifications';
@@ -22,7 +22,7 @@ const allReducers = combineReducers({
   redirect,
   landing,
   authentication,
-  event,
+  events,
   Intl,
 });
 export default allReducers;

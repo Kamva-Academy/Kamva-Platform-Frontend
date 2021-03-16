@@ -55,10 +55,10 @@ function Dashboard({
           <Grid container item direction='column' sm={5}>
             <Paper className={classes.paper}>
               <Grid item>
-                salam
+                شماره تیم
               </Grid>
               <Grid item>
-                salam
+                اسم تیم
 </Grid>
               <Grid item>
                 salam

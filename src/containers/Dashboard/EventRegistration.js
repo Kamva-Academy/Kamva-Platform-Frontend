@@ -16,8 +16,8 @@ import {
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import {
+  applyDiscount,
   getEventRegistrationInfo,
-  submitDiscount,
 } from '../../redux/actions/dashboard';
 import { addNotification, } from '../../redux/actions/notifications'
 import { toPersianNumber } from '../../utils/translateNumber';
@@ -59,37 +59,49 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = ({
   getEventRegistrationInfo,
-  submitDiscount,
+  applyDiscount,
   addNotification,
+  isFetching,
   event_id,
   member_uuid,
   participant_id,
   team,
-  event,
+  thisEvent,
 }) => {
-  const is_team = true;
-  const total_price = 70000;
-
+  const [registrationPrice, setRegistrationPrice] = useState(70000);
   const [discountCode, setDiscountCode] = useState('');
   const [marginTop, setMarginTop] = useState('');
   const classes = useStyles({ marginTop });
+  // after ZeroJourneyer it would be uncommented:
+  // const { event_id } = useParams('event_id'); 
 
-  const doSubmitDiscount = () => {
-    submitDiscount({ discount_code: discountCode, participant_id });
+  // to apply discount and get new price:
+  const doApplyDiscount = () => {
+    if (!discountCode) {
+      addNotification({ message: 'یه کد تخفیف وارد کن!', type: 'error' });
+      return;
+    }
+    applyDiscount({ discount_code: discountCode, participant_id, event_id });
   }
 
+  // to apply newPrice on screen:
+  useEffect(() => {
+    if (thisEvent.newPrice) {
+      setRegistrationPrice(thisEvent.newPrice);
+    }
+  }, [thisEvent])
+
+  // to make top margin for main body of page, as long as appbar height, just for appbar
   useEffect(() => {
     setMarginTop(document.getElementById("appBar").offsetHeight);
   }, []);
 
+  // to get registration information of event
   useEffect(() => {
     if (event_id && member_uuid) {
       getEventRegistrationInfo({ event_id, member_uuid });
     }
   }, [event_id, member_uuid]);
-
-  console.log(event_id)
-  console.log(member_uuid)
 
   return (
     <>
@@ -99,40 +111,38 @@ const Profile = ({
           <Grid item direction='column' sm={4}>
             <Paper className={classes.paper}>
               <Grid container direction='column' spacing={4}>
-                {is_team &&
-                  <>
-                    <Grid item>
-                      <Typography className={classes.title} align='center'>
-                        {`«تیم ${'عقاب'}»`}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography className={classes.subtitle}>
-                        {'اعضا:'}
-                      </Typography>
-                      <ol>
-                        <li>
+                <Grid item>
+                  <Typography className={classes.title} align='center'>
+                    {`«تیم ${'عقاب'}»`}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography className={classes.subtitle}>
+                    {'اعضا:'}
+                  </Typography>
+                  <ol>
+                    {
+                      team.filter((member) => member.me == true).map((me, index) =>
+                        <li key={index} >
                           <Typography className={classes.listItem}>
-                            {'سید علیرضا خاتمی'}
+                            {me.name}
                           </Typography>
                         </li>
-                        <li>
-                          <Typography className={classes.listItem}>
-                            {'محمد هاشمی'}
-                          </Typography>
-                        </li>
-                        <li>
-                          <Typography className={classes.listItem}>
-                            {'داریوش فرضیایی'}
-                          </Typography>
-                        </li>
-                      </ol>
-                    </Grid>
-                  </>
-                }
+                      )
+                    }
+                    {team.filter((member) => member.me != true).map((teammate, index) =>
+                      <li key={index} >
+                        <Typography className={classes.listItem}>
+                          {teammate.name}
+                        </Typography>
+                      </li>
+                    )}
+                  </ol>
+                </Grid>
+
                 <Grid item>
                   <Typography className={classes.subtitle} align='center'>
-                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(total_price)} تومان`}
+                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(registrationPrice)} تومان`}
                   </Typography>
                 </Grid>
 
@@ -141,18 +151,20 @@ const Profile = ({
                     <TextField
                       onChange={setDiscountCode}
                       value={discountCode}
+                      variant='outline'
+                      fullWidth
                       label='کد تخفیف خود را وارد کنید'
                       type='text' />
                   </Grid>
                   <Grid item xs={4} sm={3} container >
-                    <Button fullWidth variant='contained' color='primary' onClick={doSubmitDiscount} >
+                    <Button fullWidth variant='contained' color='primary' onClick={doApplyDiscount} >
                       {'اعمال تخفیف'}
                     </Button>
                   </Grid>
                 </Grid>
 
                 <Grid item>
-                  <Button variant='contained' color='primary' fullWidth>
+                  <Button variant='contained' color='primary' fullWidth disabled={isFetching}>
                     به سوی پرداخت...
                 </Button>
                 </Grid>
@@ -173,19 +185,24 @@ const Profile = ({
   );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  member_uuid: state.authentication.user_info ? state.authentication.user_info.uuid : '',
-  event_id: state.authentication.events ? state.authentication.events[0] : '',
-  participant_id: state.event.participant_id,
-  team: state.event.team,
-  event: state.event.event,
-})
+const mapStateToProps = (state, ownProps) => {
+  const event_id = state.authentication.events ? state.authentication.events[0] : '';
+  const event = state.events ? state.events[event_id] : [];
+  return ({
+    isFetching: state.events.isFetching,
+    member_uuid: state.authentication.user_info ? state.authentication.user_info.uuid : '',
+    event_id,
+    participant_id: event ? event.participant_id : '',
+    team: event ? event.team : [],
+    thisEvent: event,
+  })
+}
 
 export default connect(
   mapStateToProps,
   {
     getEventRegistrationInfo,
     addNotification,
-    submitDiscount,
+    applyDiscount,
   }
 )(Profile);
