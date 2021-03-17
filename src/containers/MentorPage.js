@@ -73,7 +73,7 @@ const MentorPage = ({
 }) => {
   const t = useTranslate();
   const classes = useStyles();
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(3);
 
   useEffect(() => {
     const interval = setInterval(() => {
