@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import ChangePassword from '../../containers/ChangePassword';
-import EventRegistrationId from '../../containers/Dashboard/EventRegistrationId';
+import EventRegistration from '../../containers/Dashboard/EventRegistration';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
 import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
@@ -20,7 +20,7 @@ const Root = () => {
         <Route path='/payment/failed/' component={FailedPayment} />
         <Route path="/registration" component={Registration} />
         <Route path="/event/">
-          <PrivateRoute path="/event/registration/:eventId?" component={EventRegistrationId} />
+          <PrivateRoute path="/event/registration/:eventId?" component={EventRegistration} />
         </Route>
         <Route path="/" component={ZeroJourneyer} />
       </Switch>
