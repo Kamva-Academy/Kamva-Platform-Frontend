@@ -10,9 +10,6 @@ import {
 } from '@material-ui/core'
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  useParams,
-} from "react-router-dom";
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import EventCard from '../../components/Cards/Event';
@@ -77,7 +74,7 @@ const Events = ({
         <Grid container justify='space-evenly' alignItems='center' >
           {events.map((event, index) => (
             <Grid key={index} item container direction='column' alignItems='center' justify='center' sm={5}>
-              <EventCard name={event.name} description={event.description} image={event.image} />
+              <EventCard name={event.name} description={event.description} image={event.cover_page} is_active={event.is_active} />
             </Grid>
           ))}
           <Grid container item sm={6} justify='center' alignItems='center'>
@@ -98,7 +95,6 @@ const mapStateToProps = (state, ownProps) => ({
   isFetching: state.events.isFetching,
   events: state.events.events ? state.events.events : [],
 })
-
 
 export default connect(
   mapStateToProps,

@@ -11,6 +11,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
+  Redirect,
   useParams,
 } from "react-router-dom";
 
@@ -55,8 +56,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     textShadow: '1px 1px #dbd9d9',
   },
-}));
-
+}))
 
 const Profile = ({
   getEventRegistrationInfo,
@@ -68,6 +68,7 @@ const Profile = ({
   team,
   event,
 }) => {
+
   const [price, setPrice] = useState(70000);
   const [discountCode, setDiscountCode] = useState('');
   const [marginTop, setMarginTop] = useState('');

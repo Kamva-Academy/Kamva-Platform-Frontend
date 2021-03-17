@@ -64,4 +64,4 @@ export const CREATE_HELP = ROOT.concat('fsm/helpstate/');
 
 export const GET_LANDING = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
   Math.random() * 10000000
-)}/rasta/landing-zero_t2r5xa.json`;
+)}/rasta/landing-zero-v3_d5lbgq.json`;

@@ -53,12 +53,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Event = ({ name, description, image, eventId }) => {
+const Event = ({ name, description, image, eventId, is_active }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.paper}>
-      <CardActionArea href={`${process.env.PUBLIC_URL}/event/registration/${eventId}`}>
+      <CardActionArea href={`${process.env.PUBLIC_URL}/event/registration/${eventId}`} disabled={!is_active}>
         <Grid container textAlign="center" spacing={1} className={classes.mainContainer}>
           <Grid item container justify='center' alignItems='center' xs={12} sm={5} >
             <img src={process.env.PUBLIC_URL + image} alt='' style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
