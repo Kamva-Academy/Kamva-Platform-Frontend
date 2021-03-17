@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import ChangePassword from '../../containers/ChangePassword';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
+import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
 import DevTools from '../../containers/DevTools';
@@ -20,6 +21,7 @@ const Root = () => {
         <Route path='/payment/failed/' component={FailedPayment} />
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/registration" component={Registration} />
+        <Route path="/events/" component={Events} />
         <Route path="/event/">
           <Route path="/event/registration/:eventId?" component={EventRegistrationId} />
         </Route>

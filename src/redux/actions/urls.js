@@ -3,7 +3,7 @@ export const ROOT =
     ? 'https://zero.rastaiha.ir/api/'
     : 'https://dev.rastaiha.ir/api/';
 
-// authentication
+// account
 
 export const REGISTRATION = ROOT.concat('auth/signup/');
 export const VERIFY_CODE = ROOT.concat('auth/sendVerify/');

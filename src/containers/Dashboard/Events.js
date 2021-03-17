@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import EventCard from '../../components/Cards/Event';
 import {
   applyDiscount,
   getEventRegistrationInfo,
@@ -109,67 +110,7 @@ const Profile = ({
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' >
           <Grid item direction='column' sm={4}>
-            <Paper className={classes.paper}>
-              <Grid container direction='column' spacing={4}>
-                <Grid item>
-                  <Typography className={classes.title} align='center'>
-                    {`«تیم ${'عقاب'}»`}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography className={classes.subtitle}>
-                    {'اعضا:'}
-                  </Typography>
-                  <ol>
-                    {
-                      team.filter((member) => member.me == true).map((me, index) =>
-                        <li key={index} >
-                          <Typography className={classes.listItem}>
-                            {me.name}
-                          </Typography>
-                        </li>
-                      )
-                    }
-                    {team.filter((member) => member.me != true).map((teammate, index) =>
-                      <li key={index} >
-                        <Typography className={classes.listItem}>
-                          {teammate.name}
-                        </Typography>
-                      </li>
-                    )}
-                  </ol>
-                </Grid>
-
-                <Grid item>
-                  <Typography className={classes.subtitle} align='center'>
-                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(registrationPrice)} تومان`}
-                  </Typography>
-                </Grid>
-
-                <Grid item container justify='center' alignItems='stretch' spacing={1}>
-                  <Grid item xs={8} sm={9}>
-                    <TextField
-                      onChange={setDiscountCode}
-                      value={discountCode}
-                      variant='outline'
-                      fullWidth
-                      label='کد تخفیف خود را وارد کنید'
-                      type='text' />
-                  </Grid>
-                  <Grid item xs={4} sm={3} container >
-                    <Button fullWidth variant='contained' color='primary' onClick={doApplyDiscount} >
-                      {'اعمال تخفیف'}
-                    </Button>
-                  </Grid>
-                </Grid>
-
-                <Grid item>
-                  <Button variant='contained' color='primary' fullWidth disabled={isFetching}>
-                    به سوی پرداخت...
-                </Button>
-                </Grid>
-              </Grid>
-            </Paper>
+            <EventCard image={'stat.png'} />
           </Grid>
 
           <Grid container item sm={5} justify='center' alignItems='center'>
@@ -181,6 +122,7 @@ const Profile = ({
           </Grid>
         </Grid>
       </Container>
+
     </>
   );
 }
