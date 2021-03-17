@@ -6,10 +6,17 @@ const initState = {
 
 function event(state = initState, action) {
   switch (action.type) {
+    case actionTypes.LOGIN_SUCCESS:
+      return {
+        ...state,
+        events: action.response.events,
+      };
+
     case actionTypes.EVENT_REGISTRATION_INFO_SUCCESS:
       return {
         ...state,
         [action.payload.event_id]: {
+          ...state.events[action.payload.event_id],
           participant_id: action.response.me,
           event: action.response.event,
           team: action.response.team,
@@ -28,7 +35,8 @@ function event(state = initState, action) {
         isFetching: false,
         [action.payload.event_id]: {
           ...state.events[action.payload.event_id],
-          newPrice: action.response.new_price,
+          is_valid: action.response.is_valid,
+          value: action.response.value,
         }
       }
 

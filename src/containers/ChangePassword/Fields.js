@@ -102,8 +102,6 @@ const InputFields = ({
       })
   }
 
-  console.log(data)
-
   const doChangePassword = () => {
     const { phone, password, confirmationPassword } = data;
     if (!phone || !password) {

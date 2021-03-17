@@ -63,9 +63,6 @@ function ResponsiveAppBar({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
 
-
-  console.log(modes)
-
   const {
     desktopLeftItems,
     desktopRightItems,
@@ -101,7 +98,6 @@ function ResponsiveAppBar({
               <Hidden xsDown>
                 <Grid spacing={1} container justify='flex-start' alignItems='center'>
                   {desktopRightItems.map((item, index) => {
-                    console.log(index);
                     return (
                       <Grid key={index} item>
                         {item}
@@ -114,7 +110,6 @@ function ResponsiveAppBar({
               <Hidden smUp>
                 <Grid spacing={1} container justify='flex-start' alignItems='center'>
                   {mobileRightItems.map((item, index) => {
-                    console.log(index);
                     return (
                       <Grid key={index} item>
                         {item}
@@ -129,7 +124,6 @@ function ResponsiveAppBar({
               <Hidden xsDown>
                 <Grid spacing={1} container justify='flex-end' alignItems='center'>
                   {desktopLeftItems.map((item, index) => {
-                    console.log(index);
                     return (
                       <Grid key={index} item>
                         {item}
@@ -142,7 +136,6 @@ function ResponsiveAppBar({
               <Hidden smUp>
                 <Grid spacing={1} container justify='flex-end' alignItems='center'>
                   {mobileLeftItems.map((item, index) => {
-                    console.log(index);
                     return (
                       <Grid key={index} item>
                         {item}

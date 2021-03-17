@@ -30,8 +30,11 @@ const useStyles = makeStyles((theme) => ({
     color: '#4d4a70',
   },
   paper: {
+    minWidth: 400,
+    [theme.breakpoints.down('xs')]: {
+      minWidth: 300,
+    },
     backgroundColor: 'rgb(255, 255, 255, 0.94)',
-    maxWidth: '20rem',
     fontSize: '1rem',
     textDecoration: 'none',
     overflow: 'hidden',
@@ -42,23 +45,29 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: '0 0.5em 1rem -1rem rgba(0, 0, 0, 0.5)',
     }
   },
+  mainContainer: {
+    minHeight: 200,
+  },
+  content: {
+    padding: `${theme.spacing(2)}px !important`,
+  }
 }));
 
 const Event = ({ name, description, image, eventId }) => {
   const classes = useStyles();
 
   return (
-    <Card onClick={console.log("SSSSs")} className={classes.paper}>
-      <CardActionArea >
-        <Grid container textAlign="center" spacing={1} >
-          <Grid item container justify='center' alignItems='center' xs={12} sm={4} >
-            <img src={process.env.PUBLIC_URL + image} alt='' style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    <Card className={classes.paper}>
+      <CardActionArea href={`${process.env.PUBLIC_URL}/event/registration/${eventId}`}>
+        <Grid container textAlign="center" spacing={1} className={classes.mainContainer}>
+          <Grid item container justify='center' alignItems='center' xs={12} sm={5} >
+            <img src={process.env.PUBLIC_URL + image} alt='' style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </Grid>
-          <Grid item xs={12} sm={8} container direction='column' justify='space-evenly' spacing={1}>
+          <Grid item container xs={12} sm={7} direction='column' justify='space-evenly' spacing={1} className={classes.content}>
             <Grid item container alignItems='flex-end' spacing={1}>
               <Grid item>
                 <Typography variant="h3" className={classes.notificationTitle}>
-                  {'name'}
+                  {name}
                 </Typography>
               </Grid>
             </Grid>
@@ -66,7 +75,7 @@ const Event = ({ name, description, image, eventId }) => {
               <Typography
                 variant="body2"
                 color="textSecondary">
-                {'description'}
+                {description}
               </Typography>
             </Grid>
           </Grid>

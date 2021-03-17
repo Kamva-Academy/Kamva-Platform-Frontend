@@ -4,8 +4,6 @@ const initState = { token: null, user: {} };
 
 function account(state = initState, action) {
   switch (action.type) {
-
-
     case actionTypes.REGISTRATION_REQUEST:
     case actionTypes.LOGIN_REQUEST:
       return {

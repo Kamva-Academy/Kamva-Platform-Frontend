@@ -82,8 +82,6 @@ function AuthDialog({
 
   const doLogin = () => {
     if (!userIdentity || !password) {
-      console.log(userIdentity)
-
       addNotification({ message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!', type: 'error' });
       return;
     }
