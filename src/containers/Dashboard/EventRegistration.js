@@ -186,11 +186,11 @@ const Profile = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const event_id = state.authentication.events ? state.authentication.events[0] : '';
+  const event_id = state.account.events ? state.account.events[0] : '';
   const event = state.events ? state.events[event_id] : [];
   return ({
     isFetching: state.events.isFetching,
-    member_uuid: state.authentication.user_info ? state.authentication.user_info.uuid : '',
+    member_uuid: state.account.user ? state.account.user.uuid : '',
     event_id,
     participant_id: event ? event.participant_id : '',
     team: event ? event.team : [],

@@ -69,7 +69,7 @@ export default ({ getState }) => (next) => (action) => {
   next({ ...actionWithoutCallAPI, type: requestType });
   const requestOptions = getRequestOptions({
     fetchOptions,
-    token: getState().authentication.token,
+    token: getState().account.token,
   });
 
   return fetchApi(url, requestOptions)

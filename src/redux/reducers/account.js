@@ -4,6 +4,9 @@ const initState = { token: null, user: {} };
 
 function account(state = initState, action) {
   switch (action.type) {
+
+
+    case actionTypes.REGISTRATION_REQUEST:
     case actionTypes.LOGIN_REQUEST:
       return {
         ...state,
@@ -18,6 +21,8 @@ function account(state = initState, action) {
         user: action.response.user_info,
       };
 
+    case actionTypes.REGISTRATION_SUCCESS:
+    case actionTypes.REGISTRATION_FAILURE:
     case actionTypes.LOGIN_FAILURE:
       return {
         ...state,
