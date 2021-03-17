@@ -64,12 +64,13 @@ const Profile = ({
   addNotification,
   isFetching,
   uuid,
-  participant_id,
-  team,
-  event,
+  events,
 }) => {
 
-  const [price, setPrice] = useState(70000);
+  const [event, setEvent] = useState({
+    price: '70000',
+    team: [],
+  });
   const [discountCode, setDiscountCode] = useState('');
   const [marginTop, setMarginTop] = useState('');
   const { event_id } = useParams('event_id');
@@ -80,23 +81,23 @@ const Profile = ({
   }, []);
 
   useEffect(() => {
+    if (events && events[event_id]) {
+      setEvent(events[event_id]);
+    }
+  }, [events])
+
+  useEffect(() => {
     if (event_id && uuid) {
       getEventRegistrationInfo({ event_id, uuid });
     }
   }, [event_id, uuid]);
-
-  useEffect(() => {
-    if (event && event.price) {
-      setPrice(event.price);
-    }
-  }, [event]);
 
   const doApplyDiscount = () => {
     if (!discountCode) {
       addNotification({ message: 'یه کد تخفیف وارد کن!', type: 'error' });
       return;
     }
-    applyDiscount({ discount_code: discountCode, participant_id, event_id });
+    applyDiscount({ discount_code: discountCode, participant_id: event.participant_id, event_id });
   }
 
   return (
@@ -109,7 +110,7 @@ const Profile = ({
               <Grid container direction='column' spacing={4}>
                 <Grid item>
                   <Typography className={classes.title} align='center'>
-                    {`«تیم ${''}»`}
+                    {`«تیم ${'جای خالی'}»`}
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -118,7 +119,7 @@ const Profile = ({
                   </Typography>
                   <ol>
                     {
-                      team.filter((member) => member.me == true).map((me, index) =>
+                      event.team.filter((member) => member.me == true).map((me, index) =>
                         <li key={index} >
                           <Typography className={classes.listItem}>
                             {me.name}
@@ -126,7 +127,7 @@ const Profile = ({
                         </li>
                       )
                     }
-                    {team.filter((member) => member.me != true).map((teammate, index) =>
+                    {event.team.filter((member) => member.me != true).map((teammate, index) =>
                       <li key={index} >
                         <Typography className={classes.listItem}>
                           {teammate.name}
@@ -138,7 +139,7 @@ const Profile = ({
 
                 <Grid item>
                   <Typography className={classes.subtitle} align='center'>
-                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(price)} تومان`}
+                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(event.price)} تومان`}
                   </Typography>
                 </Grid>
 
@@ -182,14 +183,11 @@ const Profile = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { event_id } = useParams('event_id');
-  const event = state.events ? state.events[event_id] : [];
+  const events = state.events ? state.events : [];
   return ({
     uuid: state.account.user ? state.account.user.uuid : '',
     isFetching: state.events.isFetching,
-    participant_id: event ? event.participant_id : '',
-    team: event ? event.team : [],
-    event,
+    events,
   })
 }
 

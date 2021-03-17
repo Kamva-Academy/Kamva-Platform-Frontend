@@ -36,7 +36,7 @@ function event(state = initState, action) {
         [action.payload.event_id]: {
           ...state.events[action.payload.event_id],
           is_valid: action.response.is_valid,
-          value: action.response.value,
+          discountValue: action.response.value,
         }
       }
 
