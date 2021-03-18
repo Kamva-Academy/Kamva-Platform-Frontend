@@ -11,6 +11,19 @@ import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import OurTeam from '../../containers/OurTeam';
 import Registration from '../../containers/Registration';
 import PrivateRoute from '../PrivateRoute';
+import MiniGames from '../../components/MiniGames';
+import AboutUs from '../../containers/AboutUs';
+import Article from '../../containers/Article';
+import EditArticle from '../../containers/EditArticle';
+import EditWorkshop from '../../containers/EditWorkshop';
+import MathHouseProblemDayLanding from '../../containers/Landings/MathHouseProblemDay';
+import PhysicsDayLanding from '../../containers/Landings/PhysicsDay';
+import WorkshopLanding from '../../containers/Landings/Workshop';
+import LoginPage from '../../containers/LoginPage';
+import MentorPage from '../../containers/MentorPage';
+import Survey from '../../containers/Survey';
+import Workshop from '../../containers/Workshop';
+import Workshops from '../../containers/Workshops';
 
 const Root = () => {
   return (
@@ -25,6 +38,27 @@ const Root = () => {
         <Route path="/event/">
           <PrivateRoute path="/event/registration/:event_id?" component={EventRegistrationId} />
         </Route>
+        <Route path="/loading/"></Route>
+        <Route path="/admin" component={LoginPage}></Route>
+        <Route path="/game/:gameId" component={MiniGames} />
+        <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
+        <PrivateRoute
+          path="/edit_article/:articleId/"
+          component={EditArticle}
+        />
+        <PrivateRoute path="/workshops/" component={Workshops} />
+        <Route path="/workshop/">
+          <Switch>
+            <PrivateRoute
+              path="/workshop/:playerUUID/:fsmId/:stateId/"
+              component={Workshop}
+            />
+            <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
+            <Route path="/workshop/" component={Workshops} />
+          </Switch>
+        </Route>
+        <Route path="/article/:articleId" component={Article} />
+        <PrivateRoute path="/mentor/" component={MentorPage} />
         <Route path="/" component={ZeroJourneyer} />
       </Switch>
       <DevTools />

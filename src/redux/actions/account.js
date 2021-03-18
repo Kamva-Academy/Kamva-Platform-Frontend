@@ -102,7 +102,7 @@ export const logout = () => ({
     ],
     url: URLs.LOGOUT,
     fetchOptions: {
-      method: 'POST',
+      method: 'GET',
     },
   },
 });

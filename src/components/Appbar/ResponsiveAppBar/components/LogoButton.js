@@ -1,4 +1,4 @@
-import { Button, IconButton, makeStyles } from '@material-ui/core';
+import { Button, IconButton, makeStyles, Tooltip } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -14,12 +14,14 @@ const useStyles = makeStyles(() => ({
 export default function LogoButton({ size }) {
   const classes = useStyles({ size });
   return (
-    <IconButton className={classes.logoButton} href={'/dashboard'}>
-      <img
-        src={process.env.PUBLIC_URL + '/logo.png'}
-        alt="logo"
-        className={classes.logo}
-      />
-    </IconButton>
+    <Tooltip title='رستا' arrow>
+      <IconButton className={classes.logoButton} href={'/dashboard'}>
+        <img
+          src={process.env.PUBLIC_URL + '/logo.png'}
+          alt="logo"
+          className={classes.logo}
+        />
+      </IconButton>
+    </Tooltip>
   );
 }
