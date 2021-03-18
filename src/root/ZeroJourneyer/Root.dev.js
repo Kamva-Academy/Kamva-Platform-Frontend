@@ -17,13 +17,13 @@ const Root = () => {
     <>
       <Switch>
         <Route path="/our_team" component={OurTeam} />
-        <Route path='/payment/successful/' component={SuccessfulPayment} />
-        <Route path='/payment/failed/' component={FailedPayment} />
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/registration" component={Registration} />
-        <Route path="/events/" component={Events} />
+        <PrivateRoute path='/payment/successful/' component={SuccessfulPayment} />
+        <PrivateRoute path='/payment/failed/' component={FailedPayment} />
+        <PrivateRoute path="/events/" component={Events} />
         <Route path="/event/">
-          <Route path="/event/registration/:eventId?" component={EventRegistrationId} />
+          <PrivateRoute path="/event/registration/:eventId?" component={EventRegistrationId} />
         </Route>
         <Route path="/" component={ZeroJourneyer} />
       </Switch>

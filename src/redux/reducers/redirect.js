@@ -7,7 +7,7 @@ const initState = {
 function redirect(state = initState, action) {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
-      return { redirectTo: '/event/registration/' };
+      return { redirectTo: '/events' };
 
     case actionTypes.PAYMENT_SUCCESS:
       return { redirectTo: action.response }; // todo

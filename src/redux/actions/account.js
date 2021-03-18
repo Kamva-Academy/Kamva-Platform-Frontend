@@ -70,7 +70,7 @@ export const getVerifyCode = ({ phone, code_type }) => ({
   },
 });
 
-export const changePassword = ({ phone, password }) => ({
+export const changePassword = ({ phone, password, verify_code }) => ({
   [CALL_API]: {
     types: [
       actionTypes.CHANGE_PASSWORD_REQUEST,
@@ -87,6 +87,7 @@ export const changePassword = ({ phone, password }) => ({
       body: jsonToFormData({
         phone,
         password,
+        verify_code,
       }),
     },
   },

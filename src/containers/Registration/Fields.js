@@ -132,7 +132,7 @@ const InputFields = ({
       () => {
         setTimeout(() => {
           setButtonText('دریافت کد');
-        }, 60000)
+        }, process.env.NODE_ENV === 'production' ? 60000 : 1000)
       }
     )
   }
@@ -183,6 +183,7 @@ const InputFields = ({
           onBlur={putData}
           label='نام کاربری'
           type='text'
+          inputProps={{ className: 'ltr-input' }}
           name='username' />
       </Grid>
 
@@ -191,6 +192,7 @@ const InputFields = ({
           onBlur={putData}
           label='رمز عبور'
           name='password'
+          inputProps={{ className: 'ltr-input' }}
           type='password' />
       </Grid>
 
@@ -199,6 +201,7 @@ const InputFields = ({
           onBlur={putData}
           label='تکرار رمز عبور'
           type='password'
+          inputProps={{ className: 'ltr-input' }}
           name='confirmationPassword' />
       </Grid>
 
@@ -207,6 +210,7 @@ const InputFields = ({
           onBlur={putData}
           name='email'
           label='ایمیل'
+          inputProps={{ className: 'ltr-input' }}
           type='text' />
       </Grid>
 
@@ -257,6 +261,7 @@ const InputFields = ({
           value={data.phone}
           name='phone'
           label='شماره تلفن‌همراه'
+          inputProps={{ className: 'ltr-input' }}
           type='tel' />
       </Grid>
 
@@ -272,7 +277,8 @@ const InputFields = ({
             }
             value={data.verify_code}
             name='verify_code'
-            label='کد ۵ رقمی پیامک‌شده رو وارد کنید'
+            label='کد پیامک‌شده رو وارد کنید'
+            inputProps={{ className: 'ltr-input' }}
             type='text' />
         </Grid>
         <Grid item xs={4} sm={3} container >
@@ -337,6 +343,7 @@ const InputFields = ({
           onBlur={putData}
           label='کد تیم (اختیاری)'
           type='text'
+          inputProps={{ className: 'ltr-input' }}
           name='team_code' />
       </Grid>
 

@@ -76,6 +76,8 @@ const Profile = ({
   const { event_id } = useParams('event_id');
   const classes = useStyles({ marginTop });
 
+  console.log(event_id);
+
   useEffect(() => {
     setMarginTop(document.getElementById("appBar").offsetHeight);
   }, []);

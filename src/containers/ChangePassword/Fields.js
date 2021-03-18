@@ -55,6 +55,7 @@ const InputFields = ({
     password: '',
     confirmationPassword: '',
     phone: '',
+    verify_code: '',
   });
 
   const putData = (event) => {
@@ -98,7 +99,7 @@ const InputFields = ({
       () => {
         setTimeout(() => {
           setButtonText('دریافت کد');
-        }, 6000)
+        }, process.env.NODE_ENV === 'production' ? 60000 : 1000)
       })
   }
 
@@ -113,7 +114,7 @@ const InputFields = ({
       addNotification({ message: 'رمزهایی که وارد کردی مشابه هم نیستند!', type: 'error' });
       return;
     }
-
+    console.log(data);
     changePassword(data);
   }
 

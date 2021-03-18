@@ -7,6 +7,7 @@ import {
   Card,
   CardActionArea,
 } from '@material-ui/core';
+import { ROOT } from '../../redux/actions/urls';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -53,15 +54,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Event = ({ name, description, image, eventId, is_active }) => {
+const Event = ({ name = 'مسافر صفر', description = 'مرگ بر آمریکا و آروان با هم جفتشون!', image, id, is_active = 'true' }) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.paper}>
-      <CardActionArea href={`${process.env.PUBLIC_URL}/event/registration/${eventId}`} disabled={!is_active}>
+      <CardActionArea href={`${process.env.PUBLIC_URL}/event/registration/${id}`} disabled={!is_active}>
         <Grid container textAlign="center" spacing={1} className={classes.mainContainer}>
           <Grid item container justify='center' alignItems='center' xs={12} sm={5} >
-            <img src={process.env.PUBLIC_URL + image} alt='' style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={ROOT + image} alt='' style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </Grid>
           <Grid item container xs={12} sm={7} direction='column' justify='space-evenly' spacing={1} className={classes.content}>
             <Grid item container alignItems='flex-end' spacing={1}>
