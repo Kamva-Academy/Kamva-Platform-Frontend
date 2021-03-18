@@ -204,10 +204,10 @@ const ZeroJourneyer = () => {
               </Typography>
             </Grid>
             <Grid item >
-              <ButtonGroup variant='contained' color='primary'>
-                <Button rel="noreferrer" target="_blank" href={process.env.PUBLIC_URL + '/ZeroJourneyer/Question.pdf'} >
+              <ButtonGroup size='large' variant='contained' color='primary'>
+                {/* <Button rel="noreferrer" target="_blank" href={process.env.PUBLIC_URL + '/ZeroJourneyer/Question.pdf'} >
                   دریافت سوالات
-              </Button>
+                </Button> */}
                 <Button onClick={() => setAuthDialogOpen(true)}>
                   ورود
               </Button>
