@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import {
   Redirect,
   useParams,
+  useHistory,
 } from "react-router-dom";
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
@@ -45,14 +46,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   title: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: 600,
     textShadow: '1px 1px #dbd9d9',
   },
   subtitle: {
     fontSize: 25,
     fontWeight: 400,
-    textShadow: '1px 1px #dbd9d9',
   },
   listItem: {
     fontSize: 20,
@@ -78,6 +78,7 @@ const Profile = ({
     team_discount: '0',
   });
   const [team, setTeam] = useState([]);
+  const [initialDiscount, setInitialDiscount] = useState(false);
   const [price, setPrice] = useState(70000);
   const [isButtonDisabled, setButtonStatus] = useState(false);
   const [discount_code, setDiscountCode] = useState('');
@@ -85,6 +86,7 @@ const Profile = ({
   const [marginTop, setMarginTop] = useState('');
   const { event_id } = useParams('event_id');
   const classes = useStyles({ marginTop });
+  const history = useHistory();
 
   useEffect(() => {
     setMarginTop(document.getElementById("appBar").offsetHeight);
@@ -100,9 +102,22 @@ const Profile = ({
   }, [events])
 
   useEffect(() => {
+    if (team
+      && team.filter((member) => member.is_me === true)[0]
+      && team.filter((member) => member.is_me === true)[0].is_paid) {
+      history.push('/workshops');
+    }
+  }, [team]);
+
+  useEffect(() => {
+    if (event && event.team_discount && team && team.length >= 1 && !initialDiscount) {
+      setPrice(price * event.team_discount);
+      setInitialDiscount(true);
+    }
+  }, [event, team])
+
+  useEffect(() => {
     if (event_id && member_uuid) {
-      console.log(event_id);
-      console.log(member_uuid);
       getEventRegistrationInfo({ event_id, member_uuid });
     }
   }, [event_id, member_uuid]);
@@ -150,7 +165,7 @@ const Profile = ({
               <Grid container direction='column' spacing={4}>
                 <Grid item>
                   <Typography className={classes.title} align='center'>
-                    {`«تیم ${'جای خالی'}»`}
+                    {`ثبت‌نام رویداد ${event.name}`}
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -176,7 +191,6 @@ const Profile = ({
                     )}
                   </ol>
                 </Grid>
-
                 <Grid item>
                   <Typography className={classes.subtitle} align='center'>
                     {`هزینه‌ی ثبت‌نام: ${toPersianNumber(price)} تومان`}
@@ -202,8 +216,8 @@ const Profile = ({
 
                 <Grid item>
                   <Button variant='contained' onClick={goForPayment} color='primary' fullWidth disabled={isFetching && !isButtonDisabled}>
-                    به سوی پرداخت...
-                </Button>
+                    {'به سوی پرداخت...'}
+                  </Button>
                 </Grid>
               </Grid>
             </Paper>

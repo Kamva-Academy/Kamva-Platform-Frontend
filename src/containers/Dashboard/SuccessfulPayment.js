@@ -71,16 +71,23 @@ const SuccessfulPayment = () => {
       <AppBar mode='DASHBOARD' />
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' >
-          <Grid item direction='column' sm={4}>
-            <Paper className={classes.paper}>
-              <Grid container direction='column' spacing={4}>
-                <Grid item>
-                  <Typography className={classes.title} align='center'>
-                    {'ایول! ثبت‌نامت با موفقیت انجام شد.'}
-                  </Typography>
+          <Grid item container alignItems='center' direction='column' sm={4} spacing={2}>
+            <Grid item>
+              <Paper className={classes.paper}>
+                <Grid container direction='column' spacing={4}>
+                  <Grid item>
+                    <Typography className={classes.title} align='center'>
+                      {'ایول! ثبت‌نامت با موفقیت انجام شد.'}
+                    </Typography>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Paper>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Button variant='contained' color='primary' href='/events' >
+                {'حله. بزن بریم...'}
+              </Button>
+            </Grid>
           </Grid>
 
           <Grid container item sm={5} justify='center' alignItems='center'>

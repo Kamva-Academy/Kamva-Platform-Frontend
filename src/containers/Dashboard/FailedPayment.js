@@ -71,21 +71,23 @@ const FailedPayment = () => {
       <AppBar mode='DASHBOARD' />
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' >
-          <Grid item direction='column' sm={4}>
-            <Paper className={classes.paper}>
-              <Grid container direction='column' spacing={4}>
-                <Grid item>
-                  <Typography className={classes.title} align='center'>
-                    {'ای بابا! ثبت‌نامت موفق نبوده. اگه پولی از حسابت کم شده و هنوز برنگشته، به رستااینفو خبر بده.'}
-                  </Typography>
+          <Grid item alignItems='center' container direction='column' sm={4} spacing={2}>
+            <Grid item>
+              <Paper className={classes.paper}>
+                <Grid container direction='column' spacing={4}>
+                  <Grid item>
+                    <Typography className={classes.title} align='center'>
+                      {'ای بابا! ثبت‌نامت موفق نبوده. اگه پولی از حسابت کم شده و هنوز برنگشته، به رستااینفو پیام بده.'}
+                    </Typography>
+                  </Grid>
                 </Grid>
-                <Grid item>
-                  <Button href='/events' >
-                    {'متوجه شدم'}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
+              </Paper>
+            </Grid>
+            <Grid item>
+              <Button variant='contained' color='primary' href='/events' >
+                {'باشه. متوجه شدم.'}
+              </Button>
+            </Grid>
           </Grid>
 
           <Grid container item sm={5} justify='center' alignItems='center'>
