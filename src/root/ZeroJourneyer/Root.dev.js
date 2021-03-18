@@ -31,7 +31,9 @@ const Root = () => {
         <PrivateRoute path='/payment/failure/' component={FailedPayment} />
         <PrivateRoute path="/events/" component={Events} />
         <Route path="/event/">
-          <PrivateRoute path="/event/registration/:event_id?" component={EventRegistrationId} />
+          <Switch>
+            <PrivateRoute path="/event/registration/:event_id?" component={EventRegistrationId} />
+          </Switch>
         </Route>
         <Route path="/loading/"></Route>
         <Route path="/admin" component={LoginPage}></Route>
@@ -49,9 +51,9 @@ const Root = () => {
               component={Workshop}
             />
             <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
-            <Route path="/workshop/" component={Workshops} />
           </Switch>
         </Route>
+        <PrivateRoute path="/workshops/" component={Workshops} />
         <Route path="/article/:articleId" component={Article} />
         <PrivateRoute path="/mentor/" component={MentorPage} />
         <Route path="/" component={ZeroJourneyer} />
