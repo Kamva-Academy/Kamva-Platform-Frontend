@@ -25,23 +25,22 @@ export const getEventRegistrationInfo = ({ event_id, member_uuid }) => ({
   },
 });
 
-export const applyDiscount = ({ discountCode, participant_id, event_id }) => ({
+export const applyDiscount = ({ discount_code, participant_id, event_id }) => ({
   [CALL_API]: {
     types: [
-      actionTypes.PAYMENT_REQUEST,
-      actionTypes.PAYMENT_SUCCESS,
-      actionTypes.PAYMENT_FAILURE,
+      actionTypes.APPLY_DISCOUNT_REQUEST,
+      actionTypes.APPLY_DISCOUNT_SUCCESS,
+      actionTypes.APPLY_DISCOUNT_FAILURE,
     ],
     url: URLs.SUBMIT_DISCOUNT,
     payload: {
-      successMessage: 'در حال انتقال به صفحه‌ی پرداخت...',
-      failureMessage: 'یه مشکلی وجود داره. چند لحظه دیگه دوباره تلاش کن!',
+      event_id,
     },
     fetchOptions: {
       method: 'POST',
       dontContentType: true,
       body: jsonToFormData({
-        discountCode,
+        code: discount_code,
         participant_id,
       }),
     },
@@ -52,13 +51,15 @@ export const applyDiscount = ({ discountCode, participant_id, event_id }) => ({
 export const goForPayment = ({ participant_id, event_id }) => ({
   [CALL_API]: {
     types: [
-      actionTypes.APPLY_DISCOUNT_REQUEST,
-      actionTypes.APPLY_DISCOUNT_SUCCESS,
-      actionTypes.APPLY_DISCOUNT_FAILURE,
+      actionTypes.PAYMENT_REQUEST,
+      actionTypes.PAYMENT_SUCCESS,
+      actionTypes.PAYMENT_FAILURE,
     ],
-    url: URLs.SUBMIT_DISCOUNT,
+    url: URLs.PAYMENT,
     payload: {
       event_id,
+      successMessage: 'در حال انتقال به صفحه‌ی پرداخت...',
+      failureMessage: 'یه مشکلی وجود داره. چند لحظه دیگه دوباره تلاش کن!',
     },
     fetchOptions: {
       method: 'POST',

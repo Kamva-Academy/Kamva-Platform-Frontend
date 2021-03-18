@@ -73,11 +73,11 @@ const Events = ({
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' >
           {events.map((event, index) => (
-            <Grid key={index} item container direction='column' alignItems='center' justify='center' sm={5}>
+            <Grid key={index} item container direction='column' alignItems='center' justify='center' sm={6}>
               <EventCard name={event.name} id={event.id} description={event.description} image={event.cover_page} is_active={event.is_active} />
             </Grid>
           ))}
-          <Grid container item sm={6} justify='center' alignItems='center'>
+          <Grid container item sm={5} justify='center' alignItems='center'>
             <img
               src={process.env.PUBLIC_URL + '/ZeroJourneyer/Dr.Rastaranj.png'}
               alt="logo"

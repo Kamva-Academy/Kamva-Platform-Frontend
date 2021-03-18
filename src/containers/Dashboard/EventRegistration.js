@@ -17,6 +17,9 @@ import {
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import {
+  paymentRequest
+} from '../../redux/actions/payment';
+import {
   applyDiscount,
   getEventRegistrationInfo,
 } from '../../redux/actions/dashboard';
@@ -54,29 +57,34 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     fontSize: 20,
     fontWeight: 300,
-    textShadow: '1px 1px #dbd9d9',
   },
 }))
 
 const Profile = ({
   getEventRegistrationInfo,
+  paymentRequest,
   applyDiscount,
   addNotification,
   isFetching,
-  uuid,
+  member_uuid,
   events,
+  paymentGateUrl,
 }) => {
 
   const [event, setEvent] = useState({
+    is_team_based: 'true',
+    name: 'مسافر صفر',
     price: '70000',
-    team: [],
+    team_discount: '0',
   });
-  const [discountCode, setDiscountCode] = useState('');
+  const [team, setTeam] = useState([]);
+  const [price, setPrice] = useState(70000);
+  const [isButtonDisabled, setButtonStatus] = useState(false);
+  const [discount_code, setDiscountCode] = useState('');
+  const [participant_id, setParticipantId] = useState('');
   const [marginTop, setMarginTop] = useState('');
   const { event_id } = useParams('event_id');
   const classes = useStyles({ marginTop });
-
-  console.log(event_id);
 
   useEffect(() => {
     setMarginTop(document.getElementById("appBar").offsetHeight);
@@ -84,30 +92,60 @@ const Profile = ({
 
   useEffect(() => {
     if (events && events[event_id]) {
-      setEvent(events[event_id]);
+      console.log(events[event_id]);
+      setEvent(events[event_id].event);
+      setTeam(events[event_id] ? events[event_id].team : []);
+      setParticipantId(events[event_id].participant_id);
     }
   }, [events])
 
   useEffect(() => {
-    if (event_id && uuid) {
-      getEventRegistrationInfo({ event_id, uuid });
+    if (event_id && member_uuid) {
+      console.log(event_id);
+      console.log(member_uuid);
+      getEventRegistrationInfo({ event_id, member_uuid });
     }
-  }, [event_id, uuid]);
+  }, [event_id, member_uuid]);
 
   const doApplyDiscount = () => {
-    if (!discountCode) {
+    if (!discount_code) {
       addNotification({ message: 'یه کد تخفیف وارد کن!', type: 'error' });
       return;
     }
-    applyDiscount({ discount_code: discountCode, participant_id: event.participant_id, event_id });
+    setButtonStatus(true);
+    applyDiscount({ discount_code, participant_id, event_id }).then(
+      (action) => {
+        if (action.response && action.response.success) {
+          setPrice(price * (1 - action.response.value));
+          addNotification({ message: 'حله. کد تخفیفت اعمال شد!', type: 'success' })
+        }
+        setButtonStatus(false);
+      },
+    );
+  }
+
+  const goForPayment = () => {
+    paymentRequest({ amount: price, participant_id })
+  }
+
+  const getParticipantStatus = (participant) => {
+    if (!participant.is_accepted) {
+      return `${participant.name} | وضعیت: قبول‌نشده ❌`
+    } else {
+      if (participant.is_paid) {
+        return `${participant.name} | وضعیت: قبول‌شده، پرداخت‌کرده ✅ `
+      } else {
+        return `${participant.name} | وضعیت: قبول‌شده، پرداخت‌نکرده ❌ `
+      }
+    }
   }
 
   return (
     <>
       <AppBar mode='DASHBOARD' />
       <Container className={classes.container}>
-        <Grid container justify='space-evenly' alignItems='center' >
-          <Grid item direction='column' sm={4}>
+        <Grid container justify='space-evenly' alignItems='center' spacing={2} >
+          <Grid item direction='column' xs={12} sm={6} md={5}>
             <Paper className={classes.paper}>
               <Grid container direction='column' spacing={4}>
                 <Grid item>
@@ -121,18 +159,18 @@ const Profile = ({
                   </Typography>
                   <ol>
                     {
-                      event.team.filter((member) => member.me == true).map((me, index) =>
+                      team.filter((member) => member.is_me == true).map((me, index) =>
                         <li key={index} >
                           <Typography className={classes.listItem}>
-                            {me.name}
+                            {getParticipantStatus(me)}
                           </Typography>
                         </li>
                       )
                     }
-                    {event.team.filter((member) => member.me != true).map((teammate, index) =>
+                    {team.filter((member) => member.is_me != true).map((teammate, index) =>
                       <li key={index} >
                         <Typography className={classes.listItem}>
-                          {teammate.name}
+                          {getParticipantStatus(teammate)}
                         </Typography>
                       </li>
                     )}
@@ -141,29 +179,29 @@ const Profile = ({
 
                 <Grid item>
                   <Typography className={classes.subtitle} align='center'>
-                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(event.price)} تومان`}
+                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(price)} تومان`}
                   </Typography>
                 </Grid>
 
                 <Grid item container justify='center' alignItems='stretch' spacing={1}>
                   <Grid item xs={8} sm={9}>
                     <TextField
-                      onChange={setDiscountCode}
-                      value={discountCode}
+                      onChange={(event) => setDiscountCode(event.target.value)}
+                      value={discount_code}
                       variant='outlined'
                       fullWidth
                       label='کد تخفیف خود را وارد کنید'
                       type='text' />
                   </Grid>
                   <Grid item xs={4} sm={3} container >
-                    <Button fullWidth variant='contained' color='primary' onClick={doApplyDiscount} >
+                    <Button fullWidth variant='contained' color='primary' onClick={doApplyDiscount} disabled={isButtonDisabled}  >
                       {'اعمال تخفیف'}
                     </Button>
                   </Grid>
                 </Grid>
 
                 <Grid item>
-                  <Button variant='contained' color='primary' fullWidth disabled={isFetching}>
+                  <Button variant='contained' onClick={goForPayment} color='primary' fullWidth disabled={isFetching && !isButtonDisabled}>
                     به سوی پرداخت...
                 </Button>
                 </Grid>
@@ -171,7 +209,7 @@ const Profile = ({
             </Paper>
           </Grid>
 
-          <Grid container item sm={5} justify='center' alignItems='center'>
+          <Grid container item xs={12} sm={5} justify='center' alignItems='center'>
             <img
               src={process.env.PUBLIC_URL + '/ZeroJourneyer/Dr.Rastaranj.png'}
               alt="logo"
@@ -187,8 +225,9 @@ const Profile = ({
 const mapStateToProps = (state, ownProps) => {
   const events = state.events ? state.events : [];
   return ({
-    uuid: state.account.user ? state.account.user.uuid : '',
+    member_uuid: state.account.user ? state.account.user.uuid : '',
     isFetching: state.events.isFetching,
+    paymentGateUrl: state.events.paymentGateUrl,
     events,
   })
 }
@@ -197,6 +236,7 @@ export default connect(
   mapStateToProps,
   {
     getEventRegistrationInfo,
+    paymentRequest,
     addNotification,
     applyDiscount,
   }

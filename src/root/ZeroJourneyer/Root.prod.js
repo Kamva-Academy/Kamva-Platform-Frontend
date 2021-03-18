@@ -18,11 +18,11 @@ const Root = () => {
         <Route path="/our_team" component={OurTeam} />
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/registration" component={Registration} />
-        <PrivateRoute path='/payment/successful/' component={SuccessfulPayment} />
-        <PrivateRoute path='/payment/failed/' component={FailedPayment} />
+        <PrivateRoute path='/payment/success/' component={SuccessfulPayment} />
+        <PrivateRoute path='/payment/failure/' component={FailedPayment} />
         <PrivateRoute path="/events/" component={Events} />
         <Route path="/event/">
-          <PrivateRoute path="/event/registration/:eventId?" component={EventRegistration} />
+          <PrivateRoute path="/event/registration/:event_id?" component={EventRegistration} />
         </Route>
         <Route path="/" component={ZeroJourneyer} />
       </Switch>

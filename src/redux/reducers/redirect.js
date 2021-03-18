@@ -10,7 +10,8 @@ function redirect(state = initState, action) {
       return { redirectTo: '/events' };
 
     case actionTypes.PAYMENT_SUCCESS:
-      return { redirectTo: action.response }; // todo
+      window.location.replace(action.response.message);
+      return initState;
 
     case actionTypes.CREATE_WORKSHOP_SUCCESS:
       return { redirectTo: `/edit_workshop/${action.response.id}` };

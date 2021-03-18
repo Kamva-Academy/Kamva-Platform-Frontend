@@ -39,7 +39,6 @@ const getVariant = (type) => {
     case actionTypes.VERIFY_CODE_SUCCESS:
     case actionTypes.CHANGE_PASSWORD_SUCCESS:
     case actionTypes.APPLY_DISCOUNT_SUCCESS:
-    case actionTypes.PAYMENT_SUCCESS:
       return 'success';
     default:
       return 'info';
@@ -83,12 +82,11 @@ export default function notifications(state = defaultState, action) {
     case actionTypes.CHANGE_PASSWORD_SUCCESS:
     case actionTypes.CHANGE_PASSWORD_FAILURE:
     case actionTypes.APPLY_DISCOUNT_FAILURE:
-    case actionTypes.APPLY_DISCOUNT_SUCCESS:
     case actionTypes.PAYMENT_SUCCESS:
     case actionTypes.PAYMENT_FAILURE:
       const variant = getVariant(action.type);
       const message =
-        variant === 'success'
+        variant === 'success' || variant === 'info'
           ? getMessage(action.type, action.message || action.payload.successMessage || action.payload.message)
           : getMessage(action.type, action.error || action.message || action.payload.errorMessage || action.payload.message);
       return enquequeSnackbar({

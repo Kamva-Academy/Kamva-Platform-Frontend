@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     minWidth: 400,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       minWidth: 300,
     },
     backgroundColor: 'rgb(255, 255, 255, 0.94)',

@@ -11,16 +11,17 @@ export const paymentRequest = ({ amount = 70000, participant_id }) => ({
       actionTypes.PAYMENT_FAILURE,
     ],
     url: urls.PAYMENT,
+    payload: {
+      successMessage: 'در حال انتقال به صفحه‌ی پرداخت...',
+      errorMessage: 'مشکلی وجود داره! یه چند لحظه دیگه دوباره تلاش کنید.',
+    },
     fetchOptions: {
       method: 'POST',
+      dontContentType: true,
       body: jsonToFormData({
         amount,
         participant_id,
       }),
     },
   },
-});
-
-export const removePaymentData = () => ({
-  type: actionTypes.REMOVE_PAYMENT_DATA,
 });

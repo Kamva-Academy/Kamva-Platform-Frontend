@@ -79,6 +79,11 @@ const FailedPayment = () => {
                     {'ای بابا! ثبت‌نامت موفق نبوده. اگه پولی از حسابت کم شده و هنوز برنگشته، به رستااینفو خبر بده.'}
                   </Typography>
                 </Grid>
+                <Grid item>
+                  <Button href='/events' >
+                    {'متوجه شدم'}
+                  </Button>
+                </Grid>
               </Grid>
             </Paper>
           </Grid>
