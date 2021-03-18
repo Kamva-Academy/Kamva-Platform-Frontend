@@ -8,13 +8,13 @@ const defaultState = {
 const getMessage = (actionType, message) => {
   switch (actionType) {
     case actionTypes.LOGIN_SUCCESS:
-      return 'خوش آمدید!';
+      return 'خوش اومدید!';
     case actionTypes.CALL_MENTOR_SUCCESS:
       return 'درخواست شما برای منتور‌ها ارسال شد.';
     case actionTypes.SEND_ANSWER_SUCCESS:
       return 'جواب شما با موفقیت ثبت شد!';
     case actionTypes.SEND_ANSWER_FAILURE:
-      return 'یک مشکلی هست. جواب شما ثبت نشد!';
+      return 'یه مشکلی هست. جواب شما ثبت نشد!';
     default:
       return message;
   }
@@ -84,11 +84,17 @@ export default function notifications(state = defaultState, action) {
     case actionTypes.APPLY_DISCOUNT_FAILURE:
     case actionTypes.PAYMENT_SUCCESS:
     case actionTypes.PAYMENT_FAILURE:
+    case actionTypes.LOGOUT_REQUEST:
+      const a = action.payload;
+      console.log(action.payload)
+      // console.log(action.payload.successMessage)
       const variant = getVariant(action.type);
       const message =
         variant === 'success' || variant === 'info'
-          ? getMessage(action.type, action.message || action.payload.successMessage || action.payload.message)
+          ? getMessage(action.type, action.message || a.successMessage || action.payload.message)
           : getMessage(action.type, action.error || action.message || action.payload.errorMessage || action.payload.message);
+
+      console.log(message)
       return enquequeSnackbar({
         state,
         notification: {

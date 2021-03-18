@@ -4,6 +4,8 @@ const initState = { token: null, user: {} };
 
 function account(state = initState, action) {
   switch (action.type) {
+
+    case actionTypes.CHANGE_PASSWORD_REQUEST:
     case actionTypes.REGISTRATION_REQUEST:
     case actionTypes.LOGIN_REQUEST:
       return {
@@ -19,6 +21,8 @@ function account(state = initState, action) {
         user: action.response.user_info,
       };
 
+    case actionTypes.CHANGE_PASSWORD_SUCCESS:
+    case actionTypes.CHANGE_PASSWORD_FAILURE:
     case actionTypes.REGISTRATION_SUCCESS:
     case actionTypes.REGISTRATION_FAILURE:
     case actionTypes.LOGIN_FAILURE:

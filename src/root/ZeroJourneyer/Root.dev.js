@@ -1,29 +1,24 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import MiniGames from '../../components/MiniGames';
+import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
 import DevTools from '../../containers/DevTools';
-import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
-import OurTeam from '../../containers/OurTeam';
-import Registration from '../../containers/Registration';
-import PrivateRoute from '../PrivateRoute';
-import MiniGames from '../../components/MiniGames';
-import AboutUs from '../../containers/AboutUs';
-import Article from '../../containers/Article';
 import EditArticle from '../../containers/EditArticle';
 import EditWorkshop from '../../containers/EditWorkshop';
-import MathHouseProblemDayLanding from '../../containers/Landings/MathHouseProblemDay';
-import PhysicsDayLanding from '../../containers/Landings/PhysicsDay';
-import WorkshopLanding from '../../containers/Landings/Workshop';
+import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import LoginPage from '../../containers/LoginPage';
 import MentorPage from '../../containers/MentorPage';
-import Survey from '../../containers/Survey';
+import OurTeam from '../../containers/OurTeam';
+import Registration from '../../containers/Registration';
 import Workshop from '../../containers/Workshop';
 import Workshops from '../../containers/Workshops';
+import PrivateRoute from '../PrivateRoute';
 
 const Root = () => {
   return (
