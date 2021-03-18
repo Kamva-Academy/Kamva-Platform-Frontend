@@ -82,6 +82,11 @@ function whiteboard(state = initState, action) {
         ...state,
         nodes: state.nodes.filter((node) => node.id !== action.payload.nodeId),
       };
+    case actionTypes.REMOVE_ALL_NODES:
+      return {
+        ...state,
+        nodes: [],
+      };
     case actionTypes.INCREASE_WHITEBOARD_VERSION:
       return {
         ...state,

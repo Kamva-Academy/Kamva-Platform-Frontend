@@ -187,7 +187,7 @@ function Homepage() {
           <Grid item container alignItems="center" direction="column">
             <Grid item>
               <Typography component="h1" variant="h1" className={classes.title}>
-                روز حل مسئله
+                تورنمنت شهرها
               </Typography>
             </Grid>
             <Grid item>

@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function MentorButton({ callMentor, playerId, disabled = true }) {
+function MentorButton({ callMentor, playerId, disabled = false }) {
   const classes = useStyles();
 
   const t = useTranslate();
