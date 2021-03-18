@@ -18,11 +18,11 @@ import {
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import {
-  applyDiscount,
   getEventRegistrationInfo,
 } from '../../redux/actions/dashboard';
 import { addNotification, } from '../../redux/actions/notifications'
 import {
+  applyDiscount,
   paymentRequest
 } from '../../redux/actions/payment';
 import { toPersianNumber } from '../../utils/translateNumber';
@@ -68,18 +68,13 @@ const Profile = ({
   isFetching,
   member_uuid,
   events,
-  paymentGateUrl,
 }) => {
 
   const [event, setEvent] = useState({
-    is_team_based: 'true',
     name: 'مسافر صفر',
-    price: '70000',
-    team_discount: '0',
+    price: 70000,
   });
   const [team, setTeam] = useState([]);
-  const [initialDiscount, setInitialDiscount] = useState(false);
-  const [price, setPrice] = useState(70000);
   const [isButtonDisabled, setButtonStatus] = useState(false);
   const [discount_code, setDiscountCode] = useState('');
   const [participant_id, setParticipantId] = useState('');
@@ -109,13 +104,6 @@ const Profile = ({
   }, [team]);
 
   useEffect(() => {
-    if (event && event.team_discount && team && team.length >= 3 && !initialDiscount) {
-      setPrice(price * event.team_discount);
-      setInitialDiscount(true);
-    }
-  }, [event, team])
-
-  useEffect(() => {
     if (event_id && member_uuid) {
       getEventRegistrationInfo({ event_id, member_uuid });
     }
@@ -130,16 +118,20 @@ const Profile = ({
     applyDiscount({ discount_code, participant_id, event_id }).then(
       (action) => {
         if (action.response && action.response.success) {
-          setPrice(price * (1 - action.response.value));
+          setEvent({
+            ...event,
+            price: Math.floor(event.price * (1 - action.response.value))
+          });
           addNotification({ message: 'حله. کد تخفیفت اعمال شد!', type: 'success' })
+        } else {
+          setButtonStatus(false);
         }
-        setButtonStatus(false);
       },
     );
   }
 
   const goForPayment = () => {
-    paymentRequest({ amount: price, participant_id })
+    paymentRequest({ discount_code, participant_id })
   }
 
   const getParticipantStatus = (participant) => {
@@ -156,7 +148,7 @@ const Profile = ({
 
   return (
     <>
-      <AppBar mode='DASHBOARD' />
+      <AppBar mode='STUDENT_DASHBOARD' />
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' spacing={2} >
           <Grid item direction='column' xs={12} sm={6} md={5}>
@@ -176,7 +168,7 @@ const Profile = ({
                       team.filter((member) => member.is_me == true).map((me, index) =>
                         <li key={index} >
                           <Typography className={classes.listItem}>
-                            {getParticipantStatus(me)}
+                            <b>{getParticipantStatus(me)}</b>
                           </Typography>
                         </li>
                       )
@@ -192,7 +184,7 @@ const Profile = ({
                 </Grid>
                 <Grid item>
                   <Typography className={classes.subtitle} align='center'>
-                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(price)} تومان`}
+                    {`هزینه‌ی ثبت‌نام: ${toPersianNumber(event.price)} تومان`}
                   </Typography>
                 </Grid>
 
@@ -203,6 +195,7 @@ const Profile = ({
                       value={discount_code}
                       variant='outlined'
                       fullWidth
+                      disabled={isButtonDisabled}
                       label='کد تخفیف خود را وارد کنید'
                       type='text' />
                   </Grid>
@@ -240,7 +233,6 @@ const mapStateToProps = (state, ownProps) => {
   return ({
     member_uuid: state.account.user ? state.account.user.uuid : '',
     isFetching: state.events.isFetching,
-    paymentGateUrl: state.events.paymentGateUrl,
     events,
   })
 }

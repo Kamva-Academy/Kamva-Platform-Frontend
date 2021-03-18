@@ -68,7 +68,7 @@ const FailedPayment = () => {
 
   return (
     <>
-      <AppBar mode='DASHBOARD' />
+      <AppBar mode='STUDENT_DASHBOARD' />
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' >
           <Grid item alignItems='center' container direction='column' sm={4} spacing={2}>

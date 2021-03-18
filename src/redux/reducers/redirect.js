@@ -7,7 +7,11 @@ const initState = {
 function redirect(state = initState, action) {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
-      return { redirectTo: '/events' };
+      if (action.response.user_info.is_mentor) {
+        return { redirectTo: '/mentor' };
+      } else {
+        return { redirectTo: '/events' };
+      }
 
     case actionTypes.PAYMENT_SUCCESS:
       window.location.replace(action.response.message);

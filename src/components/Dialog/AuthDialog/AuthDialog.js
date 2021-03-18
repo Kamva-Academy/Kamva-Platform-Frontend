@@ -102,14 +102,14 @@ function AuthDialog({
     //     email = userIdentity;
     //   }
     // } else 
-    if (isEnglish(userIdentity) === 'error') {
-      addNotification({ message: 'نام‌کاربریت معتبر نیست!', type: 'error' });
-      return;
-    } else {
-      username = userIdentity;
-    }
+    // if (isEnglish(userIdentity) === 'error') {
+    //   addNotification({ message: 'نام‌کاربریت معتبر نیست!', type: 'error' });
+    //   return;
+    // } else {
+    //   username = userIdentity;
+    // }
 
-    login({ username, password });
+    login({ username: userIdentity, password });
   };
 
   return (

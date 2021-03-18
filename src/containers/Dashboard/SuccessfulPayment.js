@@ -68,7 +68,7 @@ const SuccessfulPayment = () => {
 
   return (
     <>
-      <AppBar mode='DASHBOARD' />
+      <AppBar mode='STUDENT_DASHBOARD' />
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' >
           <Grid item container alignItems='center' direction='column' sm={4} spacing={2}>

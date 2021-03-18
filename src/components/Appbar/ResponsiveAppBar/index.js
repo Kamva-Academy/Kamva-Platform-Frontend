@@ -63,6 +63,8 @@ function ResponsiveAppBar({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
 
+  console.log(mode);
+
   const {
     desktopLeftItems,
     desktopRightItems,

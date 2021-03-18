@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
+import AppBar from '../components/Appbar/ResponsiveAppBar';
 import Articles from '../components/SpecialComponents/MentorPage/Articles';
 import MentorWorkshops from '../components/SpecialComponents/MentorPage/MentorWorkshops';
 import Teams from '../components/SpecialComponents/MentorPage/Teams';
@@ -26,9 +27,14 @@ import {
 } from '../redux/actions/mentor';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    padding: theme.spacing(2),
-  },
+  container: ({ marginTop }) => ({
+    marginTop: marginTop,
+    height: `calc(100vh - ${marginTop}px)`,
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  }),
   rightBox: {
     padding: theme.spacing(2),
   },
@@ -72,8 +78,13 @@ const MentorPage = ({
   getWorkshopTeams,
 }) => {
   const t = useTranslate();
-  const classes = useStyles();
   const [tabIndex, setTabIndex] = useState(0);
+  const [marginTop, setMarginTop] = useState('');
+  const classes = useStyles({ marginTop });
+
+  useEffect(() => {
+    setMarginTop(document.getElementById("appBar").offsetHeight);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,6 +110,7 @@ const MentorPage = ({
 
   return (
     <>
+      <AppBar mode='MENTOR_DASHBOARD' />
       <Container className={classes.container}>
         <Grid container spacing={2} direction="row" justify="center">
           <Grid

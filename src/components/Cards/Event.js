@@ -31,9 +31,11 @@ const useStyles = makeStyles((theme) => ({
     color: '#4d4a70',
   },
   paper: {
-    minWidth: 400,
+    minWidth: 350,
+    maxWidth: 400,
     [theme.breakpoints.down('sm')]: {
-      minWidth: 300,
+      minWidth: 280,
+      maxWidth: 300,
     },
     backgroundColor: 'rgb(255, 255, 255, 0.94)',
     fontSize: '1rem',

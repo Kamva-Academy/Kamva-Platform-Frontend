@@ -112,7 +112,7 @@ function Workshops({ workshops, isLoading, getAllWorkshops }) {
 
   return (
     <>
-      <ResponsiveAppBar mode="DASHBOARD" />
+      <ResponsiveAppBar mode="STUDENT_DASHBOARD" />
       <Container maxWidth="md" className={classes.root}>
         <Typography variant="h1" component="h2">
           کارگاه‌ها

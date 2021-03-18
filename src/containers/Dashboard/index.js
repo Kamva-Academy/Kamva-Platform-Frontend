@@ -49,7 +49,7 @@ function Dashboard({
 
   return (
     <>
-      <AppBar mode='DASHBOARD' />
+      <AppBar mode='STUDENT_DASHBOARD' />
       <Container className={classes.container}>
         <Grid container justify='space-evenly' alignItems='center' style={{ height: '100%' }} >
           <Grid container item direction='column' sm={5}>

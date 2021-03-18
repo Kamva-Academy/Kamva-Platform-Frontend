@@ -13,11 +13,10 @@ import { connect } from 'react-redux';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import EventCard from '../../components/Cards/Event';
+import { addNotification, } from '../../redux/actions/notifications'
 import {
   applyDiscount,
-  getEventRegistrationInfo,
-} from '../../redux/actions/dashboard';
-import { addNotification, } from '../../redux/actions/notifications'
+} from '../../redux/actions/payment';
 import { toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,15 +68,29 @@ const Events = ({
 
   return (
     <>
-      <AppBar mode='DASHBOARD' />
+      <AppBar mode='STUDENT_DASHBOARD' />
       <Container className={classes.container}>
-        <Grid container justify='space-evenly' alignItems='center' >
-          {events.map((event, index) => (
-            <Grid key={index} item container direction='column' alignItems='center' justify='center' sm={6}>
-              <EventCard name={event.name} id={event.id} description={event.description} image={event.cover_page} is_active={event.is_active} />
+        <Grid container justify='space-evenly' alignItems='flex-start' spacing={2} >
+          <Grid item container sm={6} direction='column' justify='space-evenly' alignItems='center' style={{ minHeight: '100%' }} spacing={2}>
+            <Grid item >
+              <Typography className={classes.title}>
+                {'رویدادها'}
+              </Typography>
             </Grid>
-          ))}
-          <Grid container item sm={5} justify='center' alignItems='center'>
+            <Grid item container direction='column' justify='center' alignItems='center' spacing={2}>
+              {events.map((event, index) => (
+                <Grid key={index} item alignItems='center' justify='center'>
+                  <EventCard
+                    name={event.name}
+                    id={event.id}
+                    description={event.description}
+                    image={event.cover_page}
+                    is_active={event.is_active} />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+          <Grid container item sm={5} justify='center' alignItems='center' >
             <img
               src={process.env.PUBLIC_URL + '/ZeroJourneyer/Dr.Rastaranj.png'}
               alt="logo"
@@ -99,7 +112,6 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
   mapStateToProps,
   {
-    getEventRegistrationInfo,
     addNotification,
     applyDiscount,
   }
