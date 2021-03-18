@@ -2,9 +2,8 @@ import React from 'react';
 
 import AvatarComponent from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
-import LogoutButton from './components/LogoutButton';
-
 import LogoButton from './components/LogoButton';
+import LogoutButton from './components/LogoutButton';
 
 const DashboardItems = () => {
   const logoButton = <LogoButton />;

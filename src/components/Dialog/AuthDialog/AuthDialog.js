@@ -208,3 +208,7 @@ export default connect(
     addNotification,
   }
 )(AuthDialog);
+
+
+// todo:
+// به نظر میاد وقتی توی دیالوگ درخواست می‌زنیم، دو تا اکشن درمی‌کنه!

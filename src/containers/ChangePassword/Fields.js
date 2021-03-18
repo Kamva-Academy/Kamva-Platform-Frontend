@@ -114,7 +114,6 @@ const InputFields = ({
       addNotification({ message: 'رمزهایی که وارد کردی مشابه هم نیستند!', type: 'error' });
       return;
     }
-    console.log(data);
     changePassword(data);
   }
 

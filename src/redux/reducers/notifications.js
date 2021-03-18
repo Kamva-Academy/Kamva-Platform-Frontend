@@ -85,16 +85,16 @@ export default function notifications(state = defaultState, action) {
     case actionTypes.PAYMENT_SUCCESS:
     case actionTypes.PAYMENT_FAILURE:
     case actionTypes.LOGOUT_REQUEST:
-      const a = action.payload;
-      console.log(action.payload)
-      // console.log(action.payload.successMessage)
+      // todo: clean up
       const variant = getVariant(action.type);
       const message =
         variant === 'success' || variant === 'info'
-          ? getMessage(action.type, action.message || a.successMessage || action.payload.message)
-          : getMessage(action.type, action.error || action.message || action.payload.errorMessage || action.payload.message);
+          ? getMessage(action.type, action.message || (action.payload && action.payload.successMessage) || (action.payload && action.payload.message))
+          : getMessage(action.type, action.error || action.message || (action.payload && action.payload.errorMessage) || (action.payload && action.payload.message));
 
-      console.log(message)
+      if (!message) {
+        return state;
+      }
       return enquequeSnackbar({
         state,
         notification: {

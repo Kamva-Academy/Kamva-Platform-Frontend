@@ -12,19 +12,19 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Redirect,
-  useParams,
   useHistory,
+  useParams,
 } from "react-router-dom";
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
-import {
-  paymentRequest
-} from '../../redux/actions/payment';
 import {
   applyDiscount,
   getEventRegistrationInfo,
 } from '../../redux/actions/dashboard';
 import { addNotification, } from '../../redux/actions/notifications'
+import {
+  paymentRequest
+} from '../../redux/actions/payment';
 import { toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +94,6 @@ const Profile = ({
 
   useEffect(() => {
     if (events && events[event_id]) {
-      console.log(events[event_id]);
       setEvent(events[event_id].event);
       setTeam(events[event_id] ? events[event_id].team : []);
       setParticipantId(events[event_id].participant_id);
@@ -110,7 +109,7 @@ const Profile = ({
   }, [team]);
 
   useEffect(() => {
-    if (event && event.team_discount && team && team.length >= 1 && !initialDiscount) {
+    if (event && event.team_discount && team && team.length >= 3 && !initialDiscount) {
       setPrice(price * event.team_discount);
       setInitialDiscount(true);
     }

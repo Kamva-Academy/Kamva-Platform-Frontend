@@ -15,7 +15,7 @@ export default function LogoButton({ size }) {
   const classes = useStyles({ size });
   return (
     <Tooltip title='رستا' arrow>
-      <IconButton className={classes.logoButton} href={'/dashboard'}>
+      <IconButton className={classes.logoButton} >
         <img
           src={process.env.PUBLIC_URL + '/logo.png'}
           alt="logo"

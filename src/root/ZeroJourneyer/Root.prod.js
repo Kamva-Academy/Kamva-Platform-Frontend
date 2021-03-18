@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import MiniGames from '../../components/MiniGames';
 import Article from '../../containers/Article';
@@ -54,6 +54,10 @@ const Root = () => {
         <PrivateRoute path="/mentor/" component={MentorPage} />
         <PrivateRoute path="/survey" component={Survey} />
         <Route path="/" component={ZeroJourneyer} />
+        <Route
+          path="*"
+          render={() => <Redirect to={{ pathname: '/' }} />}
+        />
       </Switch>
     </>
   );
