@@ -53,7 +53,6 @@ const Root = () => {
             <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
           </Switch>
         </Route>
-        <PrivateRoute path="/workshops/" component={Workshops} />
         <Route path="/article/:articleId" component={Article} />
         <PrivateRoute path="/mentor/" component={MentorPage} />
         <Route path="/" component={ZeroJourneyer} />
