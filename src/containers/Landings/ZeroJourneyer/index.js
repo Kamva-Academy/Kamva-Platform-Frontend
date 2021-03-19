@@ -65,15 +65,15 @@ const useStyles = makeStyles((theme) => ({
   },
   secondSectionBackground: {
     position: 'absolute',
-    top: `${BOMB_HEIGHT + 100}vh`,
+    // top: `${BOMB_HEIGHT + 100}vh`,
     height: '100vh',
     width: '100%',
     backgroundImage: `url(${process.env.PUBLIC_URL}/ZeroJourneyer/background.jpg)`,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    filter: 'blur(3px)',
-    webkitFilter: 'blur(3px)',
+    filter: 'blur(1px)',
+    webkitFilter: 'blur(1px)',
     zIndex: 10,
   },
   scrollIcon: {
@@ -168,7 +168,8 @@ const ZeroJourneyer = () => {
 
   return (
     <div className={classes.container}>
-      <Grid container justify='center' alignItems='flex-end' className={classes.scrollIcon}>
+
+      {/* <Grid container justify='center' alignItems='flex-end' className={classes.scrollIcon}>
         <Grid item>
           <img
             src={process.env.PUBLIC_URL + 'scroll.gif'}
@@ -176,13 +177,13 @@ const ZeroJourneyer = () => {
             style={{ width: 20 }}
           />
         </Grid>
-      </Grid>
+      </Grid> */}
 
-      <Container className={classes.countDownSection}>
+      {/* <Container className={classes.countDownSection}>
         <BombImage />
-      </Container>
+      </Container> */}
 
-      <Container className={classes.emptySection} />
+      {/* <Container className={classes.emptySection} /> */}
 
       <div className={classes.secondSectionBackground} />
       <Container className={classes.secondSection}>
@@ -324,7 +325,7 @@ const ZeroJourneyer = () => {
 
       <LandingOurTeam />
 
-      <Container className={classes.lastEmptySection} />
+      {/* <Container className={classes.lastEmptySection} /> */}
 
       <Footer />
 
