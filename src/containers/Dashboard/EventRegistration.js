@@ -70,30 +70,19 @@ const Profile = ({
   events,
 }) => {
 
-  const [event, setEvent] = useState({
-    name: 'مسافر صفر',
-    price: 70000,
-  });
-  const [team, setTeam] = useState([]);
   const [isButtonDisabled, setButtonStatus] = useState(false);
   const [discount_code, setDiscountCode] = useState('');
-  const [participant_id, setParticipantId] = useState('');
   const [marginTop, setMarginTop] = useState('');
-  const { event_id } = useParams('event_id');
   const classes = useStyles({ marginTop });
+  const { event_id } = useParams('event_id');
+  const [team, setTeam] = useState(events[event_id].team);
+  const [participant_id, setParticipantId] = useState(events[event_id].participant_id);
+  const [event, setEvent] = useState(events[event_id].event);
   const history = useHistory();
 
   useEffect(() => {
     setMarginTop(document.getElementById("appBar").offsetHeight);
   }, []);
-
-  useEffect(() => {
-    if (events && events[event_id]) {
-      setEvent(events[event_id].event);
-      setTeam(events[event_id] ? events[event_id].team : []);
-      setParticipantId(events[event_id].participant_id);
-    }
-  }, [events])
 
   useEffect(() => {
     if (team
@@ -120,9 +109,9 @@ const Profile = ({
         if (action.response && action.response.success) {
           setEvent({
             ...event,
-            price: Math.floor(event.price * (1 - action.response.value))
+            price: Math.round(event.price * (1 - action.response.value))
           });
-          addNotification({ message: 'حله. کد تخفیفت اعمال شد!', type: 'success' })
+          addNotification({ message: 'حله! کد تخفیفت اعمال شد.', type: 'success' })
         } else {
           setButtonStatus(false);
         }
@@ -201,13 +190,13 @@ const Profile = ({
                   </Grid>
                   <Grid item xs={4} sm={3} container >
                     <Button fullWidth variant='contained' color='primary' onClick={doApplyDiscount} disabled={isButtonDisabled}  >
-                      {'اعمال تخفیف'}
+                      {'بررسی کد'}
                     </Button>
                   </Grid>
                 </Grid>
 
                 <Grid item>
-                  <Button variant='contained' onClick={goForPayment} color='primary' fullWidth disabled={isFetching && !isButtonDisabled}>
+                  <Button variant='contained' onClick={goForPayment} color='primary' fullWidth disabled={isFetching}>
                     {'به سوی پرداخت...'}
                   </Button>
                 </Grid>

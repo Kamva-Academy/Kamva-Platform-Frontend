@@ -24,25 +24,11 @@ function event(state = initState, action) {
       };
 
     case actionTypes.PAYMENT_REQUEST:
-    case actionTypes.APPLY_DISCOUNT_REQUEST:
       return {
         ...state,
         isFetching: true,
       }
 
-    // case actionTypes.APPLY_DISCOUNT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     isFetching: false,
-    //     [action.payload.event_id]: {
-    //       ...state[action.payload.event_id],
-    //       is_valid: action.response.is_valid,
-    //       discount_value: action.response.value,
-    //     }
-    //   }
-
-    case actionTypes.APPLY_DISCOUNT_FAILURE:
-    case actionTypes.APPLY_DISCOUNT_SUCCESS:
     case actionTypes.PAYMENT_FAILURE:
       return {
         ...state,
