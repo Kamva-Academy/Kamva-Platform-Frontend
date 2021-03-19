@@ -70,27 +70,16 @@ const Profile = ({
   events,
 }) => {
 
+  const { event_id } = useParams('event_id');
   const [isButtonDisabled, setButtonStatus] = useState(false);
+  const [isDataReady, setDataStatus] = useState(false);
   const [discount_code, setDiscountCode] = useState('');
   const [marginTop, setMarginTop] = useState('');
   const classes = useStyles({ marginTop });
-  const { event_id } = useParams('event_id');
-  const [team, setTeam] = useState(events[event_id].team);
-  const [participant_id, setParticipantId] = useState(events[event_id].participant_id);
-  const [event, setEvent] = useState(events[event_id].event);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [participant_id, setParticipantId] = useState('');
+  const [event, setEvent] = useState({ price: '' });
   const history = useHistory();
-
-  useEffect(() => {
-    setMarginTop(document.getElementById("appBar").offsetHeight);
-  }, []);
-
-  useEffect(() => {
-    if (team
-      && team.filter((member) => member.is_me === true)[0]
-      && team.filter((member) => member.is_me === true)[0].is_paid) {
-      history.push('/workshops');
-    }
-  }, [team]);
 
   useEffect(() => {
     if (event_id && member_uuid) {
@@ -98,9 +87,30 @@ const Profile = ({
     }
   }, [event_id, member_uuid]);
 
+  useEffect(() => {
+    setMarginTop(document.getElementById("appBar").offsetHeight);
+  }, []);
+
+  useEffect(() => {
+    if (events && events[event_id] && !isDataReady) {
+      setEvent(events[event_id].event);
+      setTeamMembers(events[event_id].team);
+      setParticipantId(events[event_id].participant_id);
+      setDataStatus(true);
+    }
+  }, [events]);
+
+  useEffect(() => {
+    if (teamMembers
+      && teamMembers.filter((member) => member.is_me === true)[0]
+      && teamMembers.filter((member) => member.is_me === true)[0].is_paid) {
+      history.push('/workshops');
+    }
+  }, [teamMembers]);
+
   const doApplyDiscount = () => {
     if (!discount_code) {
-      addNotification({ message: 'یه کد تخفیف وارد کن!', type: 'error' });
+      addNotification({ message: 'کد تخفیفت رو وارد کن!', type: 'error' });
       return;
     }
     setButtonStatus(true);
@@ -154,7 +164,7 @@ const Profile = ({
                   </Typography>
                   <ol>
                     {
-                      team.filter((member) => member.is_me == true).map((me, index) =>
+                      teamMembers.filter((member) => member.is_me == true).map((me, index) =>
                         <li key={index} >
                           <Typography className={classes.listItem}>
                             <b>{getParticipantStatus(me)}</b>
@@ -162,7 +172,7 @@ const Profile = ({
                         </li>
                       )
                     }
-                    {team.filter((member) => member.is_me != true).map((teammate, index) =>
+                    {teamMembers.filter((member) => member.is_me != true).map((teammate, index) =>
                       <li key={index} >
                         <Typography className={classes.listItem}>
                           {getParticipantStatus(teammate)}
@@ -218,6 +228,7 @@ const Profile = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
+
   const events = state.events ? state.events : [];
   return ({
     member_uuid: state.account.user ? state.account.user.uuid : '',
