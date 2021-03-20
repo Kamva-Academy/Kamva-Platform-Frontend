@@ -81,6 +81,14 @@ function mentor(state = initState, action) {
         ),
       };
 
+    case actionTypes.VISIT_PLAYER_WORKSHOP_SUCCESS:
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          (notification) => notification !== action.payload.playerWorkshopId
+        ),
+      };
+
     default:
       return state;
   }

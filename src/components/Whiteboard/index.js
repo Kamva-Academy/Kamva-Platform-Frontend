@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     background: '#F7F9FC',
     touchAction: 'none',
+    width: '100%',
   },
 }));
 
@@ -46,6 +47,8 @@ function Whiteboard({
   getLastWhiteboard,
   userUUID,
   handleClose,
+  isFullScreen,
+  setIsFullScreen,
 }) {
   const classes = useStyles();
 
@@ -69,7 +72,10 @@ function Whiteboard({
       <WhiteboardNavbar
         getDataURL={() => stage.toDataURL()}
         handleClose={handleClose}
+        isFullScreen={isFullScreen}
+        setIsFullScreen={setIsFullScreen}
       />
+
       <Drawing
         onSetStage={(stage) => setStage(stage)}
         width={width}

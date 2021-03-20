@@ -22,17 +22,13 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'contain',
   },
   countDownDigits: {
-    direction: 'ltr !important',
+    position: 'relative',
     fontFamily: 'digital !important',
     fontSize: 40,
     [theme.breakpoints.down('sm')]: {
       fontSize: 30,
     },
     color: 'red',
-    transformOrigin: 'center center',
-  },
-  fullHeight: {
-    minHeight: '100vh',
   },
 }))
 
@@ -67,9 +63,9 @@ const Bomb = () => {
     window.requestAnimationFrame(scrollPlay);
 
     if (window.innerWidth < window.innerHeight) {
-      setImage(process.env.PUBLIC_URL + '/ZeroJourney/Vertical.png')
+      setImage(process.env.PUBLIC_URL + '/ZeroJourneyer/Vertical.png')
     } else {
-      setImage(process.env.PUBLIC_URL + '/ZeroJourney/Horizontal.png');
+      setImage(process.env.PUBLIC_URL + '/ZeroJourneyer/Horizontal.png');
     }
   }, [])
 
@@ -85,7 +81,7 @@ const Bomb = () => {
         justify='center'
         alignItems="center"
         direction="column"
-        className={classes.fullHeight}>
+        className={classes.container}>
         <Grid item>
           <Typography id='countDownDigits' style={{ transform: `scale(${scale})` }} align="center" className={classes.countDownDigits}>
             {`00:00:0${countDown}`}

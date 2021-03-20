@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import MiniGames from '../../components/MiniGames';
 import AboutUs from '../../containers/AboutUs';
@@ -42,8 +42,12 @@ const Root = () => {
       <Route path="/our_team" component={OurTeam} />
       <Route path="/about_us" component={AboutUs} />
       <Route path="/physics_day" component={PhysicsDayLanding} />
-      <Route exact path="/prob-day" component={MathHouseProblemDayLanding} />
+      <Route exact path="/tournament" component={MathHouseProblemDayLanding} />
       <Route exact path="/" component={WorkshopLanding} />
+      <Route
+        path="*"
+        render={() => <Redirect to={{ pathname: '/tournament' }} />}
+      />
     </Switch>
   );
 };

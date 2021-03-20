@@ -2,6 +2,7 @@ import { IntlReducer as Intl } from 'react-redux-multilingual';
 import { combineReducers } from 'redux';
 
 import currentState from './currentState';
+import events from './events';
 import landing from './landing';
 import mentor from './mentor';
 import notifications from './notifications';
@@ -15,6 +16,7 @@ const allReducers = combineReducers({
   websocket,
   redirect,
   landing,
+  events,
   Intl,
 });
 export default allReducers;

@@ -153,6 +153,9 @@ export const visitPlayerWorkshop = ({ playerWorkshopId }) => ({
       body: JSON.stringify({ player_workshop: playerWorkshopId }),
     },
   },
+  payload: {
+    playerWorkshopId,
+  },
 });
 
 export const createWorkshop = ({

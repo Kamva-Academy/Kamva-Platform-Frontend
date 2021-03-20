@@ -21,10 +21,10 @@ export const Workshop = {
 
 export const ZeroJourneyer = {
   colors: {
-    primary: '#966c2d',
-    primaryLight: '#5E60CE',
-    primaryDark: '#7400B8',
-    secondary: '#1361A4',
+    primary: '#603f49',
+    primaryLight: '#966f7b',
+    primaryDark: '#542a36',
+    secondary: '#0D5A6B',
     inheritDefault1: '#fefefe',
     inheritDefault2: '#f8f9ff',
     second: '#070919',

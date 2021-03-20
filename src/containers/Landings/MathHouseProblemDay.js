@@ -15,7 +15,6 @@ import { Link } from 'react-router-dom';
 import ResponsiveAppBar from '../../components/Appbar/ResponsiveAppBar';
 import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
 import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
-import questions from '../../components/SpecialComponents/Homepage/constants/FAQs';
 import FAQ from '../../components/SpecialComponents/Homepage/FAQ';
 import Footer from '../../components/SpecialComponents/Homepage/Footer';
 import LandingOurTeam from '../../components/SpecialComponents/Homepage/LandingOurTeam';
@@ -188,7 +187,7 @@ function Homepage() {
           <Grid item container alignItems="center" direction="column">
             <Grid item>
               <Typography component="h1" variant="h1" className={classes.title}>
-                روز حل مسئله
+                تورنمنت شهرها
               </Typography>
             </Grid>
             <Grid item>

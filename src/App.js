@@ -16,7 +16,7 @@ import WorkshopRoot from './root/Workshop';
 import ZeroJourneyerRoot from './root/ZeroJourneyer';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
-import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme'
+import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
@@ -36,7 +36,7 @@ const ZeroJourneyer = () => (
     <CssBaseline />
     <ZeroJourneyerRoot />
   </SnackbarProvider>
-)
+);
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
@@ -65,11 +65,6 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
           <ThemeProvider theme={ZeroJourneyerMuiTheme}>
             <StylesProvider jss={jss}>
               <ZeroJourneyer />
-            </StylesProvider>
-          </ThemeProvider>
-          <ThemeProvider theme={RTLMuiTheme}>
-            <StylesProvider jss={jss}>
-              <Workshop />
             </StylesProvider>
           </ThemeProvider>
         </>

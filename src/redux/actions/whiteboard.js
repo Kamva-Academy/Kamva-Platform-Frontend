@@ -141,5 +141,10 @@ export const removeNode = (nodeId) =>
     payload: { nodeId },
   });
 
+export const removeAllNodes = () =>
+  saveAndSendWhiteboardNodes({
+    type: actionTypes.REMOVE_ALL_NODES,
+  });
+
 export const undo = () => saveAndSendWhiteboardNodes(UndoActionCreators.undo());
 export const redo = () => saveAndSendWhiteboardNodes(UndoActionCreators.redo());

@@ -41,14 +41,14 @@ const WorkshopCard = ({ workshop, isLoading }) => {
         {isLoading ? (
           <Skeleton animation="wave" variant="rect" className={classes.media} />
         ) : (
-          workshop.cover_page && (
-            <CardMedia
-              className={classes.media}
-              image={workshop.cover_page}
-              title={workshop.name}
-            />
-          )
-        )}
+            workshop.cover_page && (
+              <CardMedia
+                className={classes.media}
+                image={workshop.cover_page}
+                title={workshop.name}
+              />
+            )
+          )}
         <CardContent className={classes.justify}>
           {isLoading ? (
             <>
@@ -60,15 +60,15 @@ const WorkshopCard = ({ workshop, isLoading }) => {
               <Skeleton animation="wave" height={10} width="80%" />
             </>
           ) : (
-            <>
-              <Typography gutterBottom variant="h4" component="h2">
-                {workshop.name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {workshop.description}
-              </Typography>
-            </>
-          )}
+              <>
+                <Typography gutterBottom variant="h4" component="h2">
+                  {workshop.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {workshop.description}
+                </Typography>
+              </>
+            )}
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -112,7 +112,7 @@ function Workshops({ workshops, isLoading, getAllWorkshops }) {
 
   return (
     <>
-      <ResponsiveAppBar mode="LANDING" />
+      <ResponsiveAppBar mode="STUDENT_DASHBOARD" />
       <Container maxWidth="md" className={classes.root}>
         <Typography variant="h1" component="h2">
           کارگاه‌ها

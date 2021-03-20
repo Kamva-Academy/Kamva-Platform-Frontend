@@ -4,11 +4,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 
-import InstitutionCard from './InstitutionCard'
-import Institutions from './Institutions';
-import Media from './socialMedias';
-
-const Footer = () => {
+const Footer = ({ Media }) => {
   return (
     <Grid
       container
