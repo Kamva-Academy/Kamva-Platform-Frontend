@@ -73,7 +73,6 @@ const mapStateToProps = (state) => ({
   nodes: state.whiteboard.present.nodes,
   drawingMode: state.whiteboard.present.mode,
   paintingConfig: state.whiteboard.present.paintingConfig,
-  wsConnected: state.websocket.connected,
 });
 
 export default connect(mapStateToProps, {
