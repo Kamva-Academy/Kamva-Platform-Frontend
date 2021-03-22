@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditWorkshop = ({
   workshop,
-  currentState = {},
+  currentState,
   getState,
   getWorkshop,
   fsmId,

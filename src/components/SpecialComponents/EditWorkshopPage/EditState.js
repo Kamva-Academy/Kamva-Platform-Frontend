@@ -7,7 +7,8 @@ import EditStateHelps from './EditStateHelps';
 import EditWidgets from './EditWidgets';
 
 function EditState({ state }) {
-  const { widgets = [], help_states = [] } = state;
+  const widgets = [...state.widgets];
+  const help_states = [...state.help_states];
 
   widgets.sort((a, b) => a.id - b.id);
   help_states.sort((a, b) => a.id - b.id);

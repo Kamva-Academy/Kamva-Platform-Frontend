@@ -40,7 +40,8 @@ const EditArticle = ({
 }) => {
   const history = useHistory();
 
-  const { widgets = [] } = article;
+  const widgets = [...article.widgets];
+
   widgets.sort((a, b) => a.id - b.id);
 
   useEffect(() => {

@@ -19,7 +19,12 @@ import {
   getStateAction,
 } from './mentor';
 
-const initialState = {};
+const initialState = {
+  state: {
+    widgets: [],
+    help_states: [],
+  },
+};
 
 export const goForwardAction = createAsyncThunk(
   'currentState/goForward',
