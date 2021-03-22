@@ -115,14 +115,14 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
 export const startWorkshopAction = createAsyncThunk(
   'currentState/startWorkshop',
   async ({ fsmId }) => ({
-    response: await postApi(startWorkshopUrl, { fsmId }),
+    response: await postApi(startWorkshopUrl, { fsm: fsmId }),
   })
 );
 
 export const requestMentorAction = createAsyncThunk(
   'currentState/requestMentor',
   async ({ fsmId, playerId }) => ({
-    response: await postApi(requestMentorUrl, { fsmId, playerId }),
+    response: await postApi(requestMentorUrl, { fsm: fsmId, player: playerId }),
     message: 'درخواست شما برای منتور‌ها ارسال شد.',
   })
 );
