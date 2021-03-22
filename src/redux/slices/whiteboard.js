@@ -3,6 +3,7 @@ import undoable, { includeAction } from 'redux-undo';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 import DrawingModes from '../../components/Konva/Drawing/DrawingModes';
+import makeId from '../../utils/makeId';
 
 const initialState = {
   mode: DrawingModes.MOVE,
@@ -30,7 +31,7 @@ const whiteboardSlice = createSlice({
     init: () => initialState,
     deselectNode: (state, { payload }) => {
       state.nodes = state.nodes.map((node) =>
-        node.id === payload.node_id ? { ...node, isSelected: false } : node
+        node.id === payload ? { ...node, isSelected: false } : node
       );
     },
     deselectNodes: (state) => {
@@ -41,15 +42,15 @@ const whiteboardSlice = createSlice({
     },
     selectNode: (state, { payload }) => {
       state.nodes = state.nodes.map((node) =>
-        node.id === payload.node_id ? { ...node, isSelected: true } : node
+        node.id === payload ? { ...node, isSelected: true } : node
       );
     },
-    addNode: (state, { payload }) => {
-      state.nodes = [...state.nodes, payload.node];
+    addNode: (state, { payload: { type, shapeProps, transformerProps } }) => {
+      state.nodes.push({ type, id: makeId(), shapeProps, transformerProps });
     },
     updateNode: (state, { payload }) => {
       state.nodes = state.nodes.map((node) =>
-        node.id === payload.node_id
+        node.id === payload.nodeId
           ? { ...node, shapeProps: payload.shapeProps }
           : node
       );
@@ -94,15 +95,18 @@ export const whiteboardReducer = undoable(whiteboardSlice.reducer, {
 });
 
 export const addNewLineNodeAction = (line) =>
-  addWhiteboardNodeAction('LINE', {
-    ...line.shapeProps,
-    points: line.points,
+  addWhiteboardNodeAction({
+    type: 'LINE',
+    shapeProps: {
+      ...line.shapeProps,
+      points: line.points,
+    },
   });
 
 export const addNewTextNodeAction = () =>
-  addWhiteboardNodeAction(
-    'TEXT',
-    {
+  addWhiteboardNodeAction({
+    type: 'TEXT',
+    shapeProps: {
       text: 'اینجا بنویسید',
       x: 50,
       y: 80,
@@ -112,23 +116,23 @@ export const addNewTextNodeAction = () =>
       align: 'right',
       fontFamily: 'iranyekan',
     },
-    {
+    transformerProps: {
       enabledAnchors: ['middle-left', 'middle-right'],
       boundBoxFunc: function (oldBox, newBox) {
         newBox.width = Math.max(30, newBox.width);
         return newBox;
       },
-    }
-  );
+    },
+  });
 
 export const addNewCircleNodeAction = ({ type }) => {
-  let options = {
+  let shapeProps = {
     x: 100,
     shadowBlur: 3,
   };
   if (type === 'outlined') {
-    options = {
-      ...options,
+    shapeProps = {
+      ...shapeProps,
       y: 180,
       width: 96,
       height: 96,
@@ -136,25 +140,28 @@ export const addNewCircleNodeAction = ({ type }) => {
       strokeColor: 'black',
     };
   } else {
-    options = {
-      ...options,
+    shapeProps = {
+      ...shapeProps,
       y: 100,
       width: 100,
       height: 100,
       fill: 'black',
     };
   }
-  return addWhiteboardNodeAction('CIRCLE', options);
+  return addWhiteboardNodeAction({
+    type: 'CIRCLE',
+    shapeProps,
+  });
 };
 
 export const addNewRectangleNodeAction = ({ type }) => {
-  let options = {
+  let shapeProps = {
     x: 100,
     shadowBlur: 3,
   };
   if (type === 'outlined') {
-    options = {
-      ...options,
+    shapeProps = {
+      ...shapeProps,
       y: 180,
       width: 96,
       height: 96,
@@ -162,15 +169,18 @@ export const addNewRectangleNodeAction = ({ type }) => {
       strokeColor: 'black',
     };
   } else {
-    options = {
-      ...options,
+    shapeProps = {
+      ...shapeProps,
       y: 100,
       width: 100,
       height: 100,
       fill: 'black',
     };
   }
-  return addWhiteboardNodeAction('RECT', options);
+  return addWhiteboardNodeAction({
+    type: 'RECT',
+    shapeProps,
+  });
 };
 
 export const undo = () => UndoActionCreators.undo();
