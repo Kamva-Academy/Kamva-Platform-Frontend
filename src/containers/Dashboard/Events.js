@@ -77,7 +77,7 @@ const Events = ({ events }) => {
               alignItems="center"
               spacing={2}>
               {events.map((event, index) => (
-                <Grid key={index} item alignItems="center" justify="center">
+                <Grid key={index} item>
                   <EventCard
                     name={event.name}
                     id={event.id}

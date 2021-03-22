@@ -14,7 +14,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { createWorkshopAction } from '../../../redux/slices/mentor';
 
 function CreateWorkshopDialog({ open, handleClose, createWorkshop }) {
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
   const t = useTranslate();
 
   return (

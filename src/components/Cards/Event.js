@@ -64,11 +64,7 @@ const Event = ({
       <CardActionArea
         href={`${process.env.PUBLIC_URL}/event/registration/${id}`}
         disabled={!is_active}>
-        <Grid
-          container
-          textAlign="center"
-          spacing={1}
-          className={classes.mainContainer}>
+        <Grid container spacing={1} className={classes.mainContainer}>
           <Grid
             item
             container

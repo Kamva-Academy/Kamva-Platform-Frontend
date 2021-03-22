@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Layer, Line,Rect, Stage } from 'react-konva';
+import { Layer, Line, Rect, Stage } from 'react-konva';
 
 import DrawingModes from './DrawingModes';
 import KonvaNode from './KonvaNode';
@@ -29,7 +29,7 @@ function Drawing({
   );
 
   const backgroundEl = useRef();
-  const [isRemoving, setIsRemoving] = useState();
+  const [isRemoving, setIsRemoving] = useState(false);
   const [activeLine, setActiveLine] = useState();
 
   const onTouchStageStart = (e) => {

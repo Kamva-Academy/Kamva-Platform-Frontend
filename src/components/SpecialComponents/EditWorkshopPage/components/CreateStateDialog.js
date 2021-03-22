@@ -11,7 +11,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { createStateAction } from '../../../../redux/slices/mentor';
 
 function CreateStateDialog({ open, handleClose, createState, fsmId }) {
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
   const t = useTranslate();
 
   return (

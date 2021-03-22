@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 function AdvanceSection({ stateId }) {
   const classes = useStyles();
   const t = useTranslate();
-  const [openDeleteStateDialog, setOpenDeleteStateDialog] = useState();
+  const [openDeleteStateDialog, setOpenDeleteStateDialog] = useState(false);
   return (
     <>
       <Typography variant="h3" gutterBottom>

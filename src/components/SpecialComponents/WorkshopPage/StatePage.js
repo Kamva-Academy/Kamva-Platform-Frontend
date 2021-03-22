@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 function StatePage({ state = {} }) {
   const classes = useStyles();
   const t = useTranslate();
-  const [openHelpDialog, setOpenHelpDialog] = useState();
+  const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
   const widgets = [...state.widgets];
   const help_states = [...state.help_states];

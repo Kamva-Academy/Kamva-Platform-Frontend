@@ -69,4 +69,4 @@ const mapStateToProps = (state) => ({
   payments: state.account.payments,
 });
 
-export default connect(mapStateToProps, {})(Profile);
+export default connect(mapStateToProps)(Profile);

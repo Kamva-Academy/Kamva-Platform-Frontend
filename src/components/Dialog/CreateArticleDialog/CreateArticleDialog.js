@@ -14,7 +14,7 @@ import { createArticleAction } from '../../../redux/slices/mentor';
 
 function CreateArticleDialog({ open, handleClose, createArticle }) {
   const t = useTranslate();
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm">

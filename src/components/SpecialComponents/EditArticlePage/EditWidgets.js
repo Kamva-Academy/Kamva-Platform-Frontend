@@ -27,7 +27,7 @@ function EditWidgets({ widgets, stateId, stateName }) {
   const classes = useStyles();
   const t = useTranslate();
 
-  const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState();
+  const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState(false);
   return (
     <>
       <Grid

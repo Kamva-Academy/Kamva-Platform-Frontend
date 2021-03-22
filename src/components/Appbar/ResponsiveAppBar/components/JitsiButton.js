@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import DraggableJitsi from '../../../Jitsi/DraggableJitsi';
 
 export default function JitsiButton() {
-  const [open, setOpen] = useState();
+  const [open, setOpen] = useState(false);
   return (
     <>
       <IconButton onClick={() => setOpen(true)}>

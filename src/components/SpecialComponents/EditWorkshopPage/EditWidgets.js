@@ -37,7 +37,7 @@ function EditWidgets({ widgets, stateId, stateName }) {
   const notQuestions = widgets.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
-  const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState();
+  const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState(false);
   return (
     <>
       <Grid
