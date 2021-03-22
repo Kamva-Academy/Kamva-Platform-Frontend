@@ -16,9 +16,9 @@ export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
 export const teamAnswersUrl = 'fsm/submittedanswers/';
 
-export const getLandingDataUrl = `https://res.cloudinary.com/derp8mdew/raw/upload/v${Math.floor(
+export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
   Math.random() * 10000000
-)}/files/landpage.json`;
+)}/rasta/landing-zero-v3_d5lbgq.json`;
 
 export const goBackwardUrl = 'fsm/goBackward/';
 
