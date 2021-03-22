@@ -122,7 +122,9 @@ function Drawing({
               key={node.id}
               drawingMode={drawingMode}
               {...node}
-              onChange={(newAttrs) => updateShapeProps(node.id, newAttrs)}
+              onChange={(newAttrs) =>
+                updateShapeProps({ nodeId: node.id, shapeProps: newAttrs })
+              }
               onSelect={() => {
                 onDeselectNodes();
                 if (drawingMode === DrawingModes.DELETE) {
