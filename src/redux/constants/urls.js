@@ -20,9 +20,9 @@ export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/uploa
   Math.random() * 10000000
 )}/rasta/landing-zero-v3_d5lbgq.json`;
 
-export const goBackwardUrl = 'fsm/goBackward/';
+export const goBackwardUrl = 'fsm/gobackward/';
 
-export const goForwardUrl = 'fsm/goForward/';
+export const goForwardUrl = 'fsm/goforward/';
 
 export const participantGetCurrentStateUrl = 'fsm/getcurrentstate/';
 
