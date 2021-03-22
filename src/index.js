@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
+import { axiosConfig } from './axios/axiosConfig';
 import configureStore from './redux/store/createStore';
 
 const persistedState = localStorage.getItem('rastaState')
@@ -24,6 +25,8 @@ store.subscribe(() => {
     })
   );
 });
+
+axiosConfig(persistedState?.account?.token);
 
 ReactDOM.render(
   <Router>
