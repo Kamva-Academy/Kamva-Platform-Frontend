@@ -7,7 +7,7 @@ export const baseURL =
 
 const axios = Axios.create({
   baseURL,
-  timeout: 1000,
+  timeout: 10000,
   maxRedirects: 5,
 });
 
