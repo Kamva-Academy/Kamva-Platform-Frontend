@@ -19,12 +19,12 @@ import AppBar from '../components/Appbar/ResponsiveAppBar';
 import Articles from '../components/SpecialComponents/MentorPage/Articles';
 import MentorWorkshops from '../components/SpecialComponents/MentorPage/MentorWorkshops';
 import Teams from '../components/SpecialComponents/MentorPage/Teams';
-import { getWorkshopTeams } from '../redux/actions/mentor';
 import {
-  getAllArticles,
-  getAllWorkshops,
-  getUnreadNotifications,
-} from '../redux/actions/mentor';
+  getArticlesAction,
+  getUnreadNotificationsAction,
+  getWorkshopsAction,
+  getWorkshopTeamsAction,
+} from '../redux/slices/mentor';
 
 const useStyles = makeStyles((theme) => ({
   container: ({ marginTop }) => ({
@@ -83,7 +83,7 @@ const MentorPage = ({
   const classes = useStyles({ marginTop });
 
   useEffect(() => {
-    setMarginTop(document.getElementById("appBar").offsetHeight);
+    setMarginTop(document.getElementById('appBar').offsetHeight);
   }, []);
 
   useEffect(() => {
@@ -110,7 +110,7 @@ const MentorPage = ({
 
   return (
     <>
-      <AppBar mode='MENTOR_DASHBOARD' />
+      <AppBar mode="MENTOR_DASHBOARD" />
       <Container className={classes.container}>
         <Grid container spacing={2} direction="row" justify="center">
           <Grid
@@ -170,8 +170,8 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  getAllWorkshops,
-  getUnreadNotifications,
-  getWorkshopTeams,
-  getAllArticles,
+  getAllWorkshops: getWorkshopsAction,
+  getUnreadNotifications: getUnreadNotificationsAction,
+  getWorkshopTeams: getWorkshopTeamsAction,
+  getAllArticles: getArticlesAction,
 })(MentorPage);

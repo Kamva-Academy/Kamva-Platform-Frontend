@@ -21,14 +21,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
-  addNewTextNode,
-  changeMode,
-  deselectNodes,
+  addNewTextNodeAction,
+  changeWhiteboardModeAction,
+  deselectWhiteboardNodesAction,
   redo,
-  removeAllNodes,
-  removeSelectedNodes,
+  removeWhiteboardAllNodeAction,
+  removeWhiteboardSelectedNodeAction,
   undo,
-} from '../../redux/actions/whiteboard';
+} from '../../redux/slices/whiteboard';
 import downloadFromURL from '../../utils/downloadFromURL';
 import DrawingModes from '../Konva/Drawing/DrawingModes';
 import CircleMenu from './Components/CircleMenu';
@@ -148,11 +148,11 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  addNewTextNode,
-  changeMode,
-  removeSelectedNodes,
-  deselectNodes,
-  removeAllNodes,
+  addNewTextNode: addNewTextNodeAction,
+  changeMode: changeWhiteboardModeAction,
+  removeSelectedNodes: removeWhiteboardSelectedNodeAction,
+  deselectNodes: deselectWhiteboardNodesAction,
+  removeAllNodes: removeWhiteboardAllNodeAction,
   undo,
   redo,
 })(WhiteboardNavbar);

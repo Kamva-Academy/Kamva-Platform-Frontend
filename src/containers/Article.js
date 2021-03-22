@@ -13,7 +13,7 @@ import { useHistory } from 'react-router';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ArticleCard2 from '../components/Cards/ArticleCard2';
 import Widget from '../components/Widget';
-import { getArticle } from '../redux/actions/mentor';
+import { getArticleAction } from '../redux/slices/mentor';
 import { articleData } from './Landings/PhysicsDay';
 
 const useStyles = makeStyles((theme) => ({
@@ -79,8 +79,9 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://telegram.me/share/url?url=${window.location.href
-                    }&text=${encodeURIComponent(articleData[articleId].name)}`}>
+                  href={`https://telegram.me/share/url?url=${
+                    window.location.href
+                  }&text=${encodeURIComponent(articleData[articleId].name)}`}>
                   <TelegramIcon />
                 </IconButton>
               </Grid>
@@ -88,8 +89,9 @@ const Article = ({ article = {}, articleId, getArticle }) => {
                 <IconButton
                   component="a"
                   target="_blank"
-                  href={`https://twitter.com/share?url=${window.location.href
-                    }&text=${encodeURIComponent(articleData[articleId].name)}`}>
+                  href={`https://twitter.com/share?url=${
+                    window.location.href
+                  }&text=${encodeURIComponent(articleData[articleId].name)}`}>
                   <TwitterIcon />
                 </IconButton>
               </Grid>
@@ -136,4 +138,6 @@ const mapStateToProps = (state, ownProps) => ({
   articleId: ownProps.match.params.articleId,
 });
 
-export default connect(mapStateToProps, { getArticle })(Article);
+export default connect(mapStateToProps, { getArticle: getArticleAction })(
+  Article
+);

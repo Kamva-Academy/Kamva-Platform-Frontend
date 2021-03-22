@@ -2,7 +2,7 @@ import { Grid, Tab, Tabs } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { getWorkshopTeams } from '../../../redux/actions/mentor';
+import { getWorkshopTeamsAction } from '../../../redux/slices/mentor';
 import TeamCard from '../../Cards/TeamCard';
 
 function Teams({
@@ -70,4 +70,6 @@ const mapStateToProps = (state) => ({
   teams: state.mentor.teams,
   notifications: state.mentor.notifications,
 });
-export default connect(mapStateToProps, { getWorkshopTeams })(Teams);
+export default connect(mapStateToProps, {
+  getWorkshopTeams: getWorkshopTeamsAction,
+})(Teams);

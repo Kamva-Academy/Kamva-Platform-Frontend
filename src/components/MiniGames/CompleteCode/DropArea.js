@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DropArea({ dropItem, onSelectDropArea }) {
   const classes = useStyles({ mode: dropItem.mode });
+  // eslint-disable-next-line no-unused-vars
   const [_, dropRef] = useDrop({
     accept: 'CARD',
     drop: () => ({ item: dropItem }),

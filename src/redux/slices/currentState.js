@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import jsonToFormData from '../../utils/jsonToFromDate';
-import axios from '../axios/axiosConfig';
+import { postApi, postFormDataApi } from '../apis';
 import {
   goBackwardUrl,
   goForwardUrl,
@@ -17,66 +16,62 @@ import {
   deleteWidgetAction,
   getArticleAction,
   getArticlesAction,
+  getStateAction,
 } from './mentor';
 
 const initialState = {};
 
 export const goForwardAction = createAsyncThunk(
   'currentState/goForward',
-  async ({ edgeId, playerId }) =>
-    (await axios.post(goForwardUrl, { edge: edgeId, player: playerId })).data
+  async ({ edgeId, playerId }) => ({
+    response: await postApi(goForwardUrl, { edge: edgeId, player: playerId }),
+  })
 );
 
 export const goBackwardAction = createAsyncThunk(
   'currentState/goBackward',
-  async ({ edgeId, playerId }) =>
-    (await axios.post(goBackwardUrl, { edge: edgeId, player: playerId })).data
+  async ({ edgeId, playerId }) => ({
+    response: await postApi(goBackwardUrl, { edge: edgeId, player: playerId }),
+  })
 );
 
 export const participantGetCurrentStateAction = createAsyncThunk(
   'currentState/participantGetCurrentState',
-  async ({ fsmId, playerId }) =>
-    (
-      await axios.post(participantGetCurrentStateUrl, {
-        fsm: fsmId,
-        player: playerId,
-      })
-    ).data
+  async ({ fsmId, playerId }) => ({
+    response: await postApi(participantGetCurrentStateUrl, {
+      fsm: fsmId,
+      player: playerId,
+    }),
+  })
 );
 
 export const mentorGetCurrentStateAction = createAsyncThunk(
   'currentState/mentorGetCurrentState',
-  async ({ edgeId, playerId }) =>
-    (
-      await axios.post(mentorGetCurrentStateUrl, {
-        edge: edgeId,
-        player: playerId,
-      })
-    ).data
+  async ({ edgeId, playerUUID }) => ({
+    response: await postApi(mentorGetCurrentStateUrl, {
+      edge: edgeId,
+      player_uuid: playerUUID,
+    }),
+  })
 );
 
 const sendAnswerAction = createAsyncThunk(
   'currentState/sendAnswer',
-  async (answer) => (await axios.post(sendAnswerUrl, answer)).data
+  async (answer) => ({
+    response: await postApi(sendAnswerUrl, { answer }),
+  })
 );
 
 export const sendFileAnswerAction = createAsyncThunk(
   'currentState/sendFileAnswer',
-  async ({ playerId, problemId, answerFile }) =>
-    axios.post(
-      sendAnswerUrl,
-      jsonToFormData({
-        player: playerId,
-        problem: problemId,
-        problem_type: 'ProblemUploadFileAnswer',
-        answer_file: answerFile,
-      }),
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    ).data
+  async ({ playerId, problemId, answerFile }) => ({
+    response: await postFormDataApi(sendAnswerUrl, {
+      player: playerId,
+      problem: problemId,
+      problem_type: 'ProblemUploadFileAnswer',
+      answer_file: answerFile,
+    }),
+  })
 );
 
 export const sendBigAnswerAction = ({ playerId, problemId, answer }) =>
@@ -114,13 +109,17 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
 
 export const startWorkshopAction = createAsyncThunk(
   'currentState/startWorkshop',
-  async ({ fsmId }) => (await axios.post(startWorkshopUrl, { fsmId })).data
+  async ({ fsmId }) => ({
+    response: await postApi(startWorkshopUrl, { fsmId }),
+  })
 );
 
 export const requestMentorAction = createAsyncThunk(
   'currentState/requestMentor',
-  async ({ fsmId, playerId }) =>
-    (await axios.post(requestMentorUrl, { fsmId, playerId })).data
+  async ({ fsmId, playerId }) => ({
+    response: await postApi(requestMentorUrl, { fsmId, playerId }),
+    message: 'درخواست شما برای منتور‌ها ارسال شد.',
+  })
 );
 
 const stateNeedUpdate = (state) => {
@@ -131,18 +130,18 @@ const stateDontNeedUpdate = (state) => {
   state.needUpdateState = false;
 };
 
-const getNewState = (state, { payload }) => {
+const getNewState = (state, { payload: { response } }) => {
   state.needUpdateState = false;
-  state.state = payload;
+  state.state = response;
 };
 
-const sentAnswer = (state, { payload }) => {
+const sentAnswer = (state, { payload: { response } }) => {
   state.widgets = state.state.widgets.map((widget) =>
-    +widget.id === +payload.response.problem
+    +widget.id === +response.problem
       ? {
           ...widget,
-          last_submit: payload.response.xanswer,
-          answer: payload.response.answer,
+          last_submit: response.xanswer,
+          answer: response.answer,
         }
       : widget
   );
@@ -168,14 +167,25 @@ const currentStateSlice = createSlice({
     [goBackwardAction.fulfilled.toString()]: getNewState,
     [participantGetCurrentStateAction.fulfilled.toString()]: getNewState,
     [mentorGetCurrentStateAction.fulfilled.toString()]: getNewState,
+    [getStateAction.fulfilled.toString()]: getNewState,
 
     [sendAnswerAction.fulfilled.toString()]: sentAnswer,
     [sendFileAnswerAction.fulfilled.toString()]: sentAnswer,
 
-    [startWorkshopAction.fulfilled.toString()]: (state, { payload }) => {
-      state.player = payload.response.player;
+    [startWorkshopAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      if (response.error) {
+        return state;
+      }
+      state.player = response.player;
     },
   },
 });
 
-export const { reducer: accountReducer } = currentStateSlice;
+export const {
+  initCurrentState: initCurrentStateAction,
+} = currentStateSlice.actions;
+
+export const { reducer: currentStateReducer } = currentStateSlice;

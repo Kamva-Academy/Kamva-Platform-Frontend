@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import undoable, { includeAction } from 'redux-undo';
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 import DrawingModes from '../../components/Konva/Drawing/DrawingModes';
 
@@ -59,6 +60,9 @@ const whiteboardSlice = createSlice({
     removeSelected: (state) => {
       state.nodes = state.nodes.filter((node) => !node.isSelected);
     },
+    removeAllNodes: (state) => {
+      state.nodes = [];
+    },
     remove: (state, { payload }) => {
       state.nodes = state.nodes.filter((node) => node.id !== payload.nodeId);
     },
@@ -75,6 +79,7 @@ export const {
   updateNode: updateWhiteboardNodeAction,
   changeMode: changeWhiteboardModeAction,
   removeSelected: removeWhiteboardSelectedNodeAction,
+  removeAllNodes: removeWhiteboardAllNodeAction,
   remove: removeWhiteboardNodeAction,
 } = whiteboardSlice.actions;
 
@@ -88,13 +93,13 @@ export const whiteboardReducer = undoable(whiteboardSlice.reducer, {
   ]),
 });
 
-export const addNewLineNode = (line) =>
+export const addNewLineNodeAction = (line) =>
   addWhiteboardNodeAction('LINE', {
     ...line.shapeProps,
     points: line.points,
   });
 
-export const addNewTextNode = () =>
+export const addNewTextNodeAction = () =>
   addWhiteboardNodeAction(
     'TEXT',
     {
@@ -116,7 +121,7 @@ export const addNewTextNode = () =>
     }
   );
 
-export const addNewCircleNode = ({ type }) => {
+export const addNewCircleNodeAction = ({ type }) => {
   let options = {
     x: 100,
     shadowBlur: 3,
@@ -142,7 +147,7 @@ export const addNewCircleNode = ({ type }) => {
   return addWhiteboardNodeAction('CIRCLE', options);
 };
 
-export const addNewRectangleNode = ({ type }) => {
+export const addNewRectangleNodeAction = ({ type }) => {
   let options = {
     x: 100,
     shadowBlur: 3,
@@ -167,3 +172,6 @@ export const addNewRectangleNode = ({ type }) => {
   }
   return addWhiteboardNodeAction('RECT', options);
 };
+
+export const undo = () => UndoActionCreators.undo();
+export const redo = () => UndoActionCreators.redo();

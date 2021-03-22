@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const translatorSlice = createSlice({
   name: 'translator',
-  initialState: 'fa',
+  initialState: { locale: 'fa' },
   reducers: {
     setLocal: (state, { payload }) => payload,
   },

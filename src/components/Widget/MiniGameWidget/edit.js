@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createMiniGameWidget } from '../../../redux/actions/mentor';
+import { createMiniGameWidgetAction } from '../../../redux/slices/mentor';
 import { MINI_GAMES } from '../../MiniGames';
 
 function MiniGameEditWidget({
@@ -64,4 +64,6 @@ function MiniGameEditWidget({
   );
 }
 
-export default connect(null, { createMiniGameWidget })(MiniGameEditWidget);
+export default connect(null, {
+  createMiniGameWidget: createMiniGameWidgetAction,
+})(MiniGameEditWidget);

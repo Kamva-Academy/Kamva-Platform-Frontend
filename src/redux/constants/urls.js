@@ -1,8 +1,8 @@
-export const loginUrl = 'auth/login/';
+export const loginUrl = 'auth/token/obtain/';
 
 export const workshopsUrl = 'fsm/fsm/';
 
-export const unreadNotifications = 'notifications/api/unread_list/';
+export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
 
 export const articlesUrl = 'fsm/article/';
 
@@ -16,7 +16,7 @@ export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
 export const teamAnswersUrl = 'fsm/submittedanswers/';
 
-export const landingUrl = `https://res.cloudinary.com/derp8mdew/raw/upload/v${Math.floor(
+export const getLandingDataUrl = `https://res.cloudinary.com/derp8mdew/raw/upload/v${Math.floor(
   Math.random() * 10000000
 )}/files/landpage.json`;
 
@@ -24,7 +24,7 @@ export const goBackwardUrl = 'fsm/goBackward/';
 
 export const goForwardUrl = 'fsm/goForward/';
 
-export const participantGetUrl = 'fsm/getcurrentstate/';
+export const participantGetCurrentStateUrl = 'fsm/getcurrentstate/';
 
 export const mentorGetCurrentStateUrl = 'fsm/mentorgetplayerstate/';
 
@@ -32,4 +32,16 @@ export const sendAnswerUrl = 'fsm/sendanswer/';
 
 export const startWorkshopUrl = 'fsm/startWorkshop/';
 
-export const requestMentorUrl = 'fsm/requestMentor/';
+export const requestMentorUrl = 'fsm/requestmentor/';
+
+export const changePasswordUrl = 'auth/changepass/';
+
+export const getVerificationCodeUrl = 'auth/sendVerify/';
+
+export const registerUrl = 'auth/signup/';
+
+export const getEventRegistrationInfoUrl = 'auth/registration-info/';
+
+export const paymentRequestUrl = 'auth/pay/';
+
+export const applyDiscountUrl = 'auth/verify-discount/';

@@ -14,9 +14,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import {
-  addNewCircleNode,
-  changeMode,
-} from '../../../redux/actions/whiteboard';
+  addNewCircleNodeAction,
+  changeWhiteboardModeAction,
+} from '../../../redux/slices/whiteboard';
 import DrawingModes from '../../Konva/Drawing/DrawingModes';
 
 const CircleMenu = ({ changeMode, addNewCircleNode }) => {
@@ -52,4 +52,7 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
   );
 };
 
-export default connect(null, { changeMode, addNewCircleNode })(CircleMenu);
+export default connect(null, {
+  changeMode: changeWhiteboardModeAction,
+  addNewCircleNode: addNewCircleNodeAction,
+})(CircleMenu);

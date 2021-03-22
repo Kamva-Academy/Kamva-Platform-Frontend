@@ -5,7 +5,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router-dom';
 
 import { StatePageContext } from '../../../../containers/Workshop';
-import { goForward } from '../../../../redux/actions/currentState';
+import { goForwardAction } from '../../../../redux/slices/currentState';
 import ChangeStateDialog from './ChangeStateDialog';
 
 function NextButton({ outwardEdges = [], goForward }) {
@@ -53,4 +53,4 @@ function NextButton({ outwardEdges = [], goForward }) {
   );
 }
 
-export default connect(null, { goForward })(NextButton);
+export default connect(null, { goForward: goForwardAction })(NextButton);

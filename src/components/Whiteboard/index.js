@@ -1,25 +1,19 @@
-import { disconnect as wsDisconnect } from '@giantmachines/redux-websocket';
 import { makeStyles } from '@material-ui/core';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from '../../containers/Workshop';
 import {
-  connectToTeam,
-  getLastWhiteboard,
-} from '../../redux/actions/websocket';
-import {
-  addNewLineNode,
-  deselectNodes,
-  initWhiteboard,
-  removeNode,
-  selectNode,
-  updateShapeProps,
-} from '../../redux/actions/whiteboard';
+  addNewLineNodeAction,
+  deselectWhiteboardNodesAction,
+  initWhiteboardAction,
+  removeWhiteboardNodeAction,
+  selectWhiteboardNodeAction,
+  updateWhiteboardNodeAction,
+} from '../../redux/slices/whiteboard';
 import Drawing from '../Konva/Drawing';
 import WhiteboardNavbar from './WhiteboardNavbar';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   whiteboard: {
     position: 'relative',
     display: 'inline-block',
@@ -35,17 +29,11 @@ function Whiteboard({
   nodes,
   drawingMode,
   paintingConfig,
-  wsConnected,
   deselectNodes,
   selectNode,
   removeNode,
   updateShapeProps,
   addNewLineNode,
-  initWhiteboard,
-  connectToTeam,
-  wsDisconnect,
-  getLastWhiteboard,
-  userUUID,
   handleClose,
   isFullScreen,
   setIsFullScreen,
@@ -53,19 +41,6 @@ function Whiteboard({
   const classes = useStyles();
 
   const [stage, setStage] = useState();
-  const { player } = useContext(StatePageContext);
-
-  useEffect(() => {
-    initWhiteboard();
-    connectToTeam({ playerUUID: player.uuid, userUUID });
-    return () => wsDisconnect();
-  }, [initWhiteboard, connectToTeam, wsDisconnect, player.uuid, userUUID]);
-
-  useEffect(() => {
-    if (wsConnected) {
-      getLastWhiteboard();
-    }
-  }, [wsConnected, getLastWhiteboard]);
 
   return (
     <div className={classes.whiteboard}>
@@ -102,13 +77,10 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  deselectNodes,
-  selectNode,
-  updateShapeProps,
-  addNewLineNode,
-  removeNode,
-  initWhiteboard,
-  connectToTeam,
-  wsDisconnect,
-  getLastWhiteboard,
+  deselectNodes: deselectWhiteboardNodesAction,
+  selectNode: selectWhiteboardNodeAction,
+  updateShapeProps: updateWhiteboardNodeAction,
+  addNewLineNode: addNewLineNodeAction,
+  removeNode: removeWhiteboardNodeAction,
+  initWhiteboard: initWhiteboardAction,
 })(Whiteboard);

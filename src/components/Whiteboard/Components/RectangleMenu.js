@@ -14,9 +14,9 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import {
-  addNewRectangleNode,
-  changeMode,
-} from '../../../redux/actions/whiteboard';
+  addNewRectangleNodeAction,
+  changeWhiteboardModeAction,
+} from '../../../redux/slices/whiteboard';
 import DrawingModes from '../../Konva/Drawing/DrawingModes';
 
 const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
@@ -52,6 +52,7 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
   );
 };
 
-export default connect(null, { changeMode, addNewRectangleNode })(
-  RectangleMenu
-);
+export default connect(null, {
+  changeMode: changeWhiteboardModeAction,
+  addNewRectangleNode: addNewRectangleNodeAction,
+})(RectangleMenu);

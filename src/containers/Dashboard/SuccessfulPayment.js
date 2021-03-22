@@ -2,25 +2,13 @@ import {
   Button,
   Container,
   Grid,
-  Icon,
   makeStyles,
   Paper,
-  TextField,
   Typography,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import {
-  useParams,
-} from "react-router-dom";
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
-import {
-  applyDiscount,
-  getEventRegistrationInfo,
-} from '../../redux/actions/dashboard';
-import { addNotification, } from '../../redux/actions/notifications'
-import { toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
   container: ({ marginTop }) => ({
@@ -63,20 +51,26 @@ const SuccessfulPayment = () => {
 
   // to make top margin for main body of page, as long as appbar height, just for appbar
   useEffect(() => {
-    setMarginTop(document.getElementById("appBar").offsetHeight);
+    setMarginTop(document.getElementById('appBar').offsetHeight);
   }, []);
 
   return (
     <>
-      <AppBar mode='STUDENT_DASHBOARD' />
+      <AppBar mode="STUDENT_DASHBOARD" />
       <Container className={classes.container}>
-        <Grid container justify='space-evenly' alignItems='center' >
-          <Grid item container alignItems='center' direction='column' sm={4} spacing={2}>
+        <Grid container justify="space-evenly" alignItems="center">
+          <Grid
+            item
+            container
+            alignItems="center"
+            direction="column"
+            sm={4}
+            spacing={2}>
             <Grid item>
               <Paper className={classes.paper}>
-                <Grid container direction='column' spacing={4}>
+                <Grid container direction="column" spacing={4}>
                   <Grid item>
-                    <Typography className={classes.title} align='center'>
+                    <Typography className={classes.title} align="center">
                       {'ایول! ثبت‌نامت با موفقیت انجام شد.'}
                     </Typography>
                   </Grid>
@@ -84,13 +78,13 @@ const SuccessfulPayment = () => {
               </Paper>
             </Grid>
             <Grid item>
-              <Button variant='contained' color='primary' href='/events' >
+              <Button variant="contained" color="primary" href="/events">
                 {'حله. بزن بریم...'}
               </Button>
             </Grid>
           </Grid>
 
-          <Grid container item sm={5} justify='center' alignItems='center'>
+          <Grid container item sm={5} justify="center" alignItems="center">
             <img
               src={process.env.PUBLIC_URL + '/ZeroJourneyer/Dr.Rastaranj.png'}
               alt="logo"
@@ -101,6 +95,6 @@ const SuccessfulPayment = () => {
       </Container>
     </>
   );
-}
+};
 
 export default SuccessfulPayment;

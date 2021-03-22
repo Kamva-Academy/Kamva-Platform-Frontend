@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createSmallAnswerQuestionWidget } from '../../../redux/actions/mentor';
+import { createSmallAnswerQuestionWidgetAction } from '../../../redux/slices/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function SmallAnswerQuestionEditWidget({
@@ -73,6 +73,6 @@ function SmallAnswerQuestionEditWidget({
   );
 }
 
-export default connect(null, { createSmallAnswerQuestionWidget })(
-  SmallAnswerQuestionEditWidget
-);
+export default connect(null, {
+  createSmallAnswerQuestionWidget: createSmallAnswerQuestionWidgetAction,
+})(SmallAnswerQuestionEditWidget);

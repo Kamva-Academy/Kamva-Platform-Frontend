@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { removeSnackbar } from '../../redux/actions/notifications';
+import { removeNotificationAction } from '../../redux/slices/notifications';
 
 let displayed = [];
 
@@ -71,7 +71,9 @@ const Notifications = ({ notifications = [], removeSnackbar }) => {
 };
 
 const mapStateToProps = (state) => ({
-  notifications: state.notifications.notifications,
+  notifications: state.notifications,
 });
 
-export default connect(mapStateToProps, { removeSnackbar })(Notifications);
+export default connect(mapStateToProps, {
+  removeSnackbar: removeNotificationAction,
+})(Notifications);

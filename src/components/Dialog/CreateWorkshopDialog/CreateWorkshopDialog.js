@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createWorkshop } from '../../../redux/actions/mentor';
+import { createWorkshopAction } from '../../../redux/slices/mentor';
 
 function CreateWorkshopDialog({ open, handleClose, createWorkshop }) {
   const [name, setName] = useState();
@@ -43,4 +43,6 @@ function CreateWorkshopDialog({ open, handleClose, createWorkshop }) {
   );
 }
 
-export default connect(null, { createWorkshop })(CreateWorkshopDialog);
+export default connect(null, { createWorkshop: createWorkshopAction })(
+  CreateWorkshopDialog
+);

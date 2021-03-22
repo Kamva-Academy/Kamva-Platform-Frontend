@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createState } from '../../../../redux/actions/mentor';
+import { createStateAction } from '../../../../redux/slices/mentor';
 
 function CreateStateDialog({ open, handleClose, createState, fsmId }) {
   const [name, setName] = useState();
@@ -37,4 +37,6 @@ function CreateStateDialog({ open, handleClose, createState, fsmId }) {
   );
 }
 
-export default connect(null, { createState })(CreateStateDialog);
+export default connect(null, { createState: createStateAction })(
+  CreateStateDialog
+);

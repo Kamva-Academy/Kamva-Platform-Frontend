@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createMultiChoicesQuestionWidget } from '../../../redux/actions/mentor';
+import { createMultiChoicesQuestionWidgetAction } from '../../../redux/slices/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 const useStyles = makeStyles((theme) => ({
@@ -133,6 +133,6 @@ function MultiChoiceQuestionEditWidget({
   );
 }
 
-export default connect(null, { createMultiChoicesQuestionWidget })(
-  MultiChoiceQuestionEditWidget
-);
+export default connect(null, {
+  createMultiChoicesQuestionWidget: createMultiChoicesQuestionWidgetAction,
+})(MultiChoiceQuestionEditWidget);

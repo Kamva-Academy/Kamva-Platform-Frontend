@@ -1,28 +1,27 @@
-import React from 'react'
-import {
-  Container,
-  Grid,
-  makeStyles,
-  TextField,
-  Button,
-  Typography,
-} from '@material-ui/core';
-import { connect } from 'react-redux'
+import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import React from 'react';
+import { connect } from 'react-redux';
+
 import InputFields from './Fields';
 
 const useStyles = makeStyles((theme) => ({
   background: {
     position: 'fixed',
-    top: 0, right: 0, left: 0, bottom: 0,
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
     height: '100vh',
     backgroundImage: `url(${process.env.PUBLIC_URL}/ZeroJourneyer/background.jpg)`,
     backgroundPosition: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    filter: 'blur(3px)', webkitFilter: 'blur(3px)',
+    filter: 'blur(3px)',
+    webkitFilter: 'blur(3px)',
     zIndex: -10,
-    paddingTop: theme.spacing(2), paddingBottom: theme.spacing(2),
-    transform: 'scale(1.1)'
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    transform: 'scale(1.1)',
   },
   container: {
     minHeight: '100vh',
@@ -42,8 +41,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center bottom',
   },
-}))
-
+}));
 
 const Mobile = () => {
   const classes = useStyles();
@@ -53,12 +51,16 @@ const Mobile = () => {
       <Container className={classes.container}>
         <Grid
           container
-          direction='column'
-          justify='space-evenly'
-          alignItems='stretch'
+          direction="column"
+          justify="space-evenly"
+          alignItems="stretch"
           spacing={2}>
           <Grid item>
-            <Typography gutterBottom variant='h3' align='center' style={{ color: 'white' }}>
+            <Typography
+              gutterBottom
+              variant="h3"
+              align="center"
+              style={{ color: 'white' }}>
               بازیابی رمز عبور
             </Typography>
           </Grid>
@@ -67,12 +69,7 @@ const Mobile = () => {
         </Grid>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default connect(
-  undefined,
-  {
-
-  }
-)(Mobile);
+export default connect(undefined, {})(Mobile);

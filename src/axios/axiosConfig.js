@@ -1,7 +1,12 @@
 import Axios from 'axios';
 
+export const baseURL =
+  process.env.NODE_ENV === 'production'
+    ? 'https://zero.rastaiha.ir/'
+    : 'https://zero.rastaiha.ir/';
+
 const axios = Axios.create({
-  baseURL: 'http://localhost:3030/',
+  baseURL,
   timeout: 1000,
   maxRedirects: 5,
 });

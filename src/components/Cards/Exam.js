@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +18,6 @@ const useStyles = makeStyles({
   root: {
     height: '100%',
     width: '100%',
-    maxWidth: '20rem',
     fontSize: '1rem',
     textDecoration: 'none',
     overflow: 'hidden',
@@ -29,7 +27,7 @@ const useStyles = makeStyles({
     '&:hover': {
       transform: 'translateY(-0.5rem) scale(1.0125)',
       boxShadow: '0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5)',
-    }
+    },
   },
   media: {
     height: '200px',
@@ -39,13 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ExamCard = ({
-  id,
-  name = '',
-  description = '',
-  teamsNumber = 0,
-  mentorsNumber = 0,
-}) => {
+const ExamCard = ({ id, name = '', description = '', mentorsNumber = 0 }) => {
   const classes = useStyles();
 
   return (
@@ -69,7 +61,9 @@ const ExamCard = ({
             <Chip
               variant="outlined"
               icon={<EmojiPeopleIcon />}
-              label={`تا حالا ${(mentorsNumber = 6)} در این آزمون ثبت‌نام کرده‌اند!`}
+              label={`تا حالا ${
+                mentorsNumber || 6
+              } در این آزمون ثبت‌نام کرده‌اند!`}
             />
           </Grid>
           {/* <Grid container item xs={6} justify="center">

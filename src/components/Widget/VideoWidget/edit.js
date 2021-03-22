@@ -11,7 +11,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createVideoWidget } from '../../../redux/actions/mentor';
+import { createVideoWidgetAction } from '../../../redux/slices/mentor';
+
 
 function VideoEditWidget({
   open,
@@ -57,4 +58,4 @@ function VideoEditWidget({
   );
 }
 
-export default connect(null, { createVideoWidget })(VideoEditWidget);
+export default connect(null, { createVideoWidget: createVideoWidgetAction })(VideoEditWidget);

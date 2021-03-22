@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import CustomDraggable from '../../../CustomDraggable';
 import Whiteboard from '../../../Whiteboard';
 
-const useStyle = makeStyles((theme) => ({
+const useStyle = makeStyles(() => ({
   dragArea: {
     width: '100%',
     height: 20,

@@ -13,41 +13,38 @@ import {
   TextField,
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import {
-  getTeamData,
-  getVerifyCode,
-  register,
-} from '../../redux/actions/account'
-import { addNotification, } from '../../redux/actions/notifications'
-import { redirect } from '../../redux/actions/redirect'
+  getVerificationCodeAction,
+  registerAction,
+} from '../../redux/slices/account';
+import { addNotificationAction } from '../../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    width: '100%'
+    width: '100%',
   },
   input: {
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderRadius: '5px',
     padding: theme.spacing(1),
-  }
-}))
+  },
+}));
 
 const MyTextField = ({ ...rest }) => (
   <TextField
     style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '5px' }}
-    variant='filled'
+    variant="filled"
     fullWidth
     {...rest}
   />
-)
+);
 
 const InputFields = ({
   isFetching,
   register,
-  getVerifyCode,
-  getTeamData,
+  getVerificationCode,
   addNotification,
 }) => {
   const classes = useStyles();
@@ -72,8 +69,8 @@ const InputFields = ({
     setData({
       ...data,
       [event.target.name]: event.target.value,
-    })
-  }
+    });
+  };
 
   const putFile = async (e) => {
     e.preventDefault();
@@ -81,11 +78,13 @@ const InputFields = ({
       if (e.target.files[0].size <= 8e6) {
         setData({
           ...data,
-          [e.target.name]: e.target.files[0]
+          [e.target.name]: e.target.files[0],
         });
       } else {
         e.target.value = '';
-        e.target.setCustomValidity('حجم فایلت بیشتر از ۶ مگابایته! کمترش کن اگه می‌تونی.');
+        e.target.setCustomValidity(
+          'حجم فایلت بیشتر از ۶ مگابایته! کمترش کن اگه می‌تونی.'
+        );
         e.target.reportValidity();
       }
     }
@@ -96,18 +95,18 @@ const InputFields = ({
     if (regex.test(number)) {
       return number;
     } else {
-      return 'error'
+      return 'error';
     }
-  }
+  };
 
   const isEnglish = (string) => {
     var regex = new RegExp(`[a-zA-Z0-9-_.]{${string.length}}`);
     if (regex.test(string)) {
       return string;
     } else {
-      return 'error'
+      return 'error';
     }
-  }
+  };
 
   const isPhoneNumberValid = (phoneNumber) => {
     var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
@@ -118,48 +117,92 @@ const InputFields = ({
     }
   };
 
-  const doGetVerifyCode = () => {
+  const doGetVerificationCode = () => {
     if (!data.phone) {
-      addNotification({ message: 'یه شماره تلفن‌همراه وارد کن!', type: 'error' })
+      addNotification({
+        message: 'یه شماره تلفن‌همراه وارد کن!',
+        type: 'error',
+      });
       return;
     }
     if (!isPhoneNumberValid(data.phone)) {
-      addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' })
+      addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' });
       return;
     }
     setButtonText('۱ دقیقه صبر کن');
-    getVerifyCode({ phone: data.phone, code_type: 'verify' }).then(
-      () => {
-        setTimeout(() => {
+    getVerificationCode({ phone: data.phone, codeType: 'verify' }).then(() => {
+      setTimeout(
+        () => {
           setButtonText('دریافت کد');
-        }, process.env.NODE_ENV === 'production' ? 60000 : 1000)
-      }
-    )
-  }
+        },
+        process.env.NODE_ENV === 'production' ? 60000 : 1000
+      );
+    });
+  };
 
   const isValidEmail = (email) => {
-    var regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    var regex = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
     if (regex.test(email)) {
       return email;
     } else {
-      return 'error'
+      return 'error';
     }
-  }
+  };
 
   const doRegistration = () => {
-    const { name, email, document, grade, phone, school, city, gender, password, confirmationPassword, verify_code, username, selection_doc, team_code } = data;
-    if (!name || !email || !document || !grade || !phone || !school || !city || !gender || !password || !verify_code || !username || !selection_doc) {
-      addNotification({ message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!', type: 'error' });
+    const {
+      name,
+      email,
+      document,
+      grade,
+      phone,
+      school,
+      city,
+      gender,
+      password,
+      confirmationPassword,
+      verify_code,
+      username,
+      selection_doc,
+      team_code,
+    } = data;
+    if (
+      !name ||
+      !email ||
+      !document ||
+      !grade ||
+      !phone ||
+      !school ||
+      !city ||
+      !gender ||
+      !password ||
+      !verify_code ||
+      !username ||
+      !selection_doc
+    ) {
+      addNotification({
+        message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
+        type: 'error',
+      });
       return;
     }
 
     if (password !== confirmationPassword) {
-      addNotification({ message: 'رمزهایی که وارد کردی مشابه هم نیستند!', type: 'error' });
+      addNotification({
+        message: 'رمزهایی که وارد کردی مشابه هم نیستند!',
+        type: 'error',
+      });
       return;
     }
 
     if (isEnglish(username) === 'error') {
-      addNotification({ message: 'نام کاربری فقط می‌تونه شامل ارقام و حروف انگلیسی و کارکترهای . و - و ـ باشه!', type: 'error' });
+      addNotification({
+        message:
+          'نام کاربری فقط می‌تونه شامل ارقام و حروف انگلیسی و کارکترهای . و - و ـ باشه!',
+        type: 'error',
+      });
       return;
     }
 
@@ -174,62 +217,71 @@ const InputFields = ({
     }
 
     register(data);
-  }
+  };
 
   return (
     <>
       <Grid item>
         <MyTextField
           onBlur={putData}
-          label='نام کاربری'
-          type='text'
+          label="نام کاربری"
+          type="text"
           inputProps={{ className: 'ltr-input' }}
-          name='username' />
+          name="username"
+        />
       </Grid>
 
       <Grid item>
         <MyTextField
           onBlur={putData}
-          label='رمز عبور'
-          name='password'
+          label="رمز عبور"
+          name="password"
           inputProps={{ className: 'ltr-input' }}
-          type='password' />
+          type="password"
+        />
       </Grid>
 
       <Grid item>
         <MyTextField
           onBlur={putData}
-          label='تکرار رمز عبور'
-          type='password'
+          label="تکرار رمز عبور"
+          type="password"
           inputProps={{ className: 'ltr-input' }}
-          name='confirmationPassword' />
+          name="confirmationPassword"
+        />
       </Grid>
 
       <Grid item>
         <MyTextField
           onBlur={putData}
-          name='email'
-          label='ایمیل'
+          name="email"
+          label="ایمیل"
           inputProps={{ className: 'ltr-input' }}
-          type='text' />
+          type="text"
+        />
       </Grid>
 
       <Grid item>
         <MyTextField
           onBlur={putData}
-          label='نام و نام‌خانوادگی'
-          type='text'
-          name='name' />
+          label="نام و نام‌خانوادگی"
+          type="text"
+          name="name"
+        />
       </Grid>
 
       <Grid item>
-        <FormControl variant="filled" fullWidth className={classes.input} >
-          <Grid item container direction='column' >
+        <FormControl variant="filled" fullWidth className={classes.input}>
+          <Grid item container direction="column">
             <Grid item>
-              <FormLabel >پیش از اسمتون چی باید بیارم؟</FormLabel>
+              <FormLabel>پیش از اسمتون چی باید بیارم؟</FormLabel>
             </Grid>
-            <Grid item >
-              <RadioGroup name='gender' row value={data.gender} onChange={putData}>
+            <Grid item>
+              <RadioGroup
+                name="gender"
+                row
+                value={data.gender}
+                onChange={putData}>
                 <FormControlLabel
                   value="Man"
                   control={<Radio color="primary" />}
@@ -251,147 +303,141 @@ const InputFields = ({
 
       <Grid item>
         <MyTextField
-          onChange={
-            (e) => {
+          onChange={(e) => {
+            if (isEnglishDigits(e.target.value) !== 'error') {
+              putData(e);
+            }
+          }}
+          value={data.phone}
+          name="phone"
+          label="شماره تلفن‌همراه"
+          inputProps={{ className: 'ltr-input' }}
+          type="tel"
+        />
+      </Grid>
+
+      <Grid item container justify="center" alignItems="stretch" spacing={1}>
+        <Grid item xs={8} sm={9}>
+          <MyTextField
+            onChange={(e) => {
               if (isEnglishDigits(e.target.value) !== 'error') {
                 putData(e);
               }
-            }
-          }
-          value={data.phone}
-          name='phone'
-          label='شماره تلفن‌همراه'
-          inputProps={{ className: 'ltr-input' }}
-          type='tel' />
-      </Grid>
-
-      <Grid item container justify='center' alignItems='stretch' spacing={1}>
-        <Grid item xs={8} sm={9}>
-          <MyTextField
-            onChange={
-              (e) => {
-                if (isEnglishDigits(e.target.value) !== 'error') {
-                  putData(e);
-                }
-              }
-            }
+            }}
             value={data.verify_code}
-            name='verify_code'
-            label='کد پیامک‌شده رو وارد کنید'
+            name="verify_code"
+            label="کد پیامک‌شده رو وارد کنید"
             inputProps={{ className: 'ltr-input' }}
-            type='text' />
+            type="text"
+          />
         </Grid>
-        <Grid item xs={4} sm={3} container >
-          <Button fullWidth variant='contained' color='primary' onClick={doGetVerifyCode} disabled={buttonText !== 'دریافت کد'}>
+        <Grid item xs={4} sm={3} container>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={doGetVerificationCode}
+            disabled={buttonText !== 'دریافت کد'}>
             {buttonText}
           </Button>
         </Grid>
       </Grid>
 
       <Grid item>
-        <MyTextField
-          onBlur={putData}
-          name='school'
-          label='مدرسه'
-          type='text' />
+        <MyTextField onBlur={putData} name="school" label="مدرسه" type="text" />
       </Grid>
 
       <Grid item>
-        <MyTextField
-          onBlur={putData}
-          name='city'
-          label='شهر'
-          type='text' />
+        <MyTextField onBlur={putData} name="city" label="شهر" type="text" />
       </Grid>
 
       <Grid item>
         <FormControl variant="filled" fullWidth className={classes.input}>
-          <Grid item container direction='column' spacing={1}>
+          <Grid item container direction="column" spacing={1}>
             <Grid item>
               <FormLabel>مدرک شناسایی</FormLabel>
             </Grid>
-            <Grid item >
+            <Grid item>
               <input
-                name='document'
+                name="document"
                 accept="application/pdf,image/*"
                 onChange={putFile}
-                type='file' />
+                type="file"
+              />
             </Grid>
             <FormLabel>توجه کنید که فقط می‌تونید عکس یا pdf بفرستید</FormLabel>
           </Grid>
-        </FormControl >
-      </Grid >
+        </FormControl>
+      </Grid>
 
       <Grid item>
-        <FormControl variant="filled" fullWidth style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '5px' }}>
+        <FormControl
+          variant="filled"
+          fullWidth
+          style={{
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            borderRadius: '5px',
+          }}>
           <InputLabel>پایه تحصیلی</InputLabel>
-          <Select
-
-            value={data.grade}
-            name='grade'
-            onChange={putData}
-          >
-            <MenuItem value={"Ten"}>دهم</MenuItem>
-            <MenuItem value={"Eleven"}>یازدهم</MenuItem>
-            <MenuItem value={"Twelve"}>دوازدهم</MenuItem>
+          <Select value={data.grade} name="grade" onChange={putData}>
+            <MenuItem value={'Ten'}>دهم</MenuItem>
+            <MenuItem value={'Eleven'}>یازدهم</MenuItem>
+            <MenuItem value={'Twelve'}>دوازدهم</MenuItem>
           </Select>
-        </FormControl >
+        </FormControl>
       </Grid>
 
       <Grid item>
         <MyTextField
           onBlur={putData}
-          label='کد تیم (اختیاری)'
-          type='text'
+          label="کد تیم (اختیاری)"
+          type="text"
           inputProps={{ className: 'ltr-input' }}
-          name='team_code' />
+          name="team_code"
+        />
       </Grid>
 
       <Grid item>
         <FormControl variant="filled" fullWidth className={classes.input}>
-          <Grid item container direction='column' spacing={1}>
+          <Grid item container direction="column" spacing={1}>
             <Grid item>
               <FormLabel>پاسخ سوالات</FormLabel>
             </Grid>
-            <Grid item >
+            <Grid item>
               <input
-                name='selection_doc'
+                name="selection_doc"
                 accept="application/pdf,image/*"
                 onChange={putFile}
-                type='file' />
+                type="file"
+              />
             </Grid>
             <FormLabel>توجه کنید که فقط می‌تونید عکس یا pdf بفرستید</FormLabel>
           </Grid>
-        </FormControl >
-      </Grid >
+        </FormControl>
+      </Grid>
 
-      <Grid container item direction='row' justify='center'>
+      <Grid container item direction="row" justify="center">
         <Button
           onClick={doRegistration}
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           disabled={isFetching}
           fullWidth>
           بزن بریم...
         </Button>
       </Grid>
     </>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   isFetching: state.account.isFetching,
-})
+});
 
-export default connect(
-  mapStateToProps,
-  {
-    register,
-    getVerifyCode,
-    getTeamData,
-    addNotification,
-    redirect,
-  }
-)(InputFields)
+export default connect(mapStateToProps, {
+  register: registerAction,
+  getVerificationCode: getVerificationCodeAction,
+  addNotification: addNotificationAction,
+})(InputFields);
 
 // todo: add 'inputProps={{ className: 'ltr-input' }}' to lrt fields

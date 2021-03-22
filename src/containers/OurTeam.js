@@ -4,9 +4,8 @@ import { Container, Grid } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import OurTeamMemberCard from '../components/SpecialComponents/Homepage/components/OurTeamMemberCard';
-import { getLandingData } from '../redux/actions/landing';
+import { getLandingDataAction } from '../redux/slices/landing';
 
 const teams = ['کمیته برگزاری', 'فنی', 'برندینگ', 'علمی', 'رسانه', 'مسابقه'];
 
@@ -65,4 +64,6 @@ const mapStatesToProps = (state) => ({
   members: state.landing.members,
 });
 
-export default connect(mapStatesToProps, { getLandingData })(OurTeam);
+export default connect(mapStatesToProps, {
+  getLandingData: getLandingDataAction,
+})(OurTeam);

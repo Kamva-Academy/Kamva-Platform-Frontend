@@ -1,53 +1,59 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 
-import { loginAction } from './account';
+export const closeNotificationAction = createAction('closeNotificationAction');
+export const removeNotificationAction = createAction(
+  'removeNotificationAction'
+);
+export const addNotificationAction = createAction('addNotificationAction');
 
-const actions = [
-  {
-    name: loginAction.fulfilled.toString(),
-    variant: 'success',
-    message: 'خوش آمدید!',
-  },
-  {
-    name: loginAction.rejected.toString(),
-    variant: 'error',
-    message: 'ورود ناموفق! دوباره تلاش کنید.',
-  },
-];
-
-const extraReducers = {};
-actions.forEach(
-  (action) =>
-    (extraReducers[action.name] = (state) => [
-      ...state,
-      {
+export const notificationReducer = createReducer([], (builder) => {
+  builder
+    .addCase(closeNotificationAction, (state, action) => {
+      state.map((notification) =>
+        action.dismissAll || notification.key === action.key
+          ? { ...notification, dismissed: true }
+          : { ...notification }
+      );
+    })
+    .addCase(removeNotificationAction, (state, action) => {
+      state.filter((notification) => notification.key !== action.key);
+    })
+    .addCase(addNotificationAction, (state, action) => {
+      state.push({
         message: action.message,
         options: {
           key: new Date().getTime() + Math.random(),
           variant: action.variant,
           autoHideDuration: 3000,
         },
-      },
-    ])
-);
-
-const notificationSlice = createSlice({
-  name: 'notification',
-  initialState: [],
-  reducers: {
-    close: (state, { payload }) => {
-      state.map((notification) =>
-        payload.dismissAll || notification.key === payload.key
-          ? { ...notification, dismissed: true }
-          : { ...notification }
-      );
-    },
-    remove: (state, { payload }) =>
-      state.filter((notification) => notification.key !== payload.key),
-  },
-  extraReducers,
+      });
+    })
+    .addMatcher(
+      (action) => action.type.endsWith('/rejected'),
+      (state, action) => {
+        if (!action?.payload?.message) return;
+        state.push({
+          message: action.payload.message,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'error',
+            autoHideDuration: 3000,
+          },
+        });
+      }
+    )
+    .addMatcher(
+      (action) => action.type.endsWith('/fulfilled'),
+      (state, action) => {
+        if (!action?.payload?.message) return;
+        state.push({
+          message: action.payload.message,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'success',
+            autoHideDuration: 3000,
+          },
+        });
+      }
+    );
 });
-
-export const { setLocal: setLocalAction } = notificationSlice.actions;
-
-export const { reducer: translatorReducer } = notificationSlice;

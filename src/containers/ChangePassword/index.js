@@ -1,20 +1,13 @@
-import {
-  Hidden
-} from '@material-ui/core';
-import React from 'react'
-import { connect } from 'react-redux';
-import {
-  Redirect,
-} from "react-router-dom";
+import { Hidden } from '@material-ui/core';
+import React from 'react';
 
 import DesktopLogin from './Desktop';
 import MobileLogin from './Mobile';
 
 const CreateAccount = () => {
-
   return (
     <>
-      <div className='login-background' />
+      <div className="login-background" />
       <Hidden smUp>
         <MobileLogin />
       </Hidden>
@@ -22,15 +15,7 @@ const CreateAccount = () => {
         <DesktopLogin />
       </Hidden>
     </>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state) => ({
-})
-
-export default connect(
-  mapStateToProps,
-  {
-
-  }
-)(CreateAccount);
+export default CreateAccount;

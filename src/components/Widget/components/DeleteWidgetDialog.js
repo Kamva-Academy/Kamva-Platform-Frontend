@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { deleteWidget } from '../../../redux/actions/mentor';
+import { deleteWidgetAction } from '../../../redux/slices/mentor';
 
 function DeleteWidgetDialog({ open, handleClose, deleteWidget, id }) {
   const t = useTranslate();
@@ -36,4 +36,6 @@ function DeleteWidgetDialog({ open, handleClose, deleteWidget, id }) {
   );
 }
 
-export default connect(null, { deleteWidget })(DeleteWidgetDialog);
+export default connect(null, { deleteWidget: deleteWidgetAction })(
+  DeleteWidgetDialog
+);

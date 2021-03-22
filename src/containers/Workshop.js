@@ -9,11 +9,11 @@ import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import {
-  initCurrentState,
-  mentorGetCurrentState,
-  participantGetCurrentState,
-  startWorkshop,
-} from '../redux/actions/currentState';
+  initCurrentStateAction,
+  mentorGetCurrentStateAction,
+  participantGetCurrentStateAction,
+  startWorkshopAction,
+} from '../redux/slices/currentState';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -62,7 +62,7 @@ const Workshop = ({
       if (!player.uuid) {
         history.push('/mentor');
       } else {
-        mentorGetCurrentState({ stateId, playerUUID: player.uuid, isMentor });
+        mentorGetCurrentState({ stateId, playerUUID: player.uuid });
       }
     }
   }, [fsmId, stateId, player.uuid, isMentor, mentorGetCurrentState, history]);
@@ -116,8 +116,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
-  participantGetCurrentState,
-  mentorGetCurrentState,
-  initCurrentState,
-  startWorkshop,
+  participantGetCurrentState: participantGetCurrentStateAction,
+  mentorGetCurrentState: mentorGetCurrentStateAction,
+  initCurrentState: initCurrentStateAction,
+  startWorkshop: startWorkshopAction,
 })(Workshop);

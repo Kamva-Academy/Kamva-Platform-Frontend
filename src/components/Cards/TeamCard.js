@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
-import { visitPlayerWorkshop } from '../../redux/actions/mentor';
+import { visitWorkshopPlayerAction } from '../../redux/slices/mentor';
 
 const useStyles = makeStyles({
   root: {
@@ -52,7 +52,7 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
       <CardActions>
         <ButtonGroup variant="outlined" color="primary" fullWidth>
           <Button
-            onClick={() => visitPlayerWorkshop({ playerWorkshopId: team.id })}
+            onClick={() => visitPlayerWorkshop({ workshopPlayerId: team.id })}
             component={Link}
             to={`/workshop/${team.player.uuid}/${fsmId}/${fsmFirstState}/`}>
             {t('watch')}
@@ -64,4 +64,6 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
   );
 };
 
-export default connect(null, { visitPlayerWorkshop })(TeamCard);
+export default connect(null, {
+  visitPlayerWorkshop: visitWorkshopPlayerAction,
+})(TeamCard);

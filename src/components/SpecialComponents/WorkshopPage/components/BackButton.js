@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { StatePageContext } from '../../../../containers/Workshop';
-import { goBackward } from '../../../../redux/actions/currentState';
+import { goBackwardAction } from '../../../../redux/slices/currentState';
 
 function BackButton({ inwardEdges = [], goBackward }) {
   const { player, fsmId, isMentor } = useContext(StatePageContext);
@@ -30,4 +30,4 @@ function BackButton({ inwardEdges = [], goBackward }) {
   );
 }
 
-export default connect(null, { goBackward })(BackButton);
+export default connect(null, { goBackward: goBackwardAction })(BackButton);

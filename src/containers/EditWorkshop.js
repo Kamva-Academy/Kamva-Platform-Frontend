@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 
 import EditState from '../components/SpecialComponents/EditWorkshopPage/EditState';
 import StatesTabbar from '../components/SpecialComponents/EditWorkshopPage/StatesTabbar';
-import { getState, getWorkshop } from '../redux/actions/mentor';
+import { getStateAction, getWorkshopAction } from '../redux/slices/mentor';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
@@ -47,7 +47,7 @@ const EditWorkshop = ({
 
   useEffect(() => {
     if (fsmId) {
-      getWorkshop({ id: fsmId });
+      getWorkshop({ fsmId });
     } else {
       history.push('/');
     }
@@ -104,6 +104,7 @@ const mapStateToProps = (state, ownProps) => ({
   fsmId: ownProps.match.params.fsmId,
 });
 
-export default connect(mapStateToProps, { getWorkshop, getState })(
-  EditWorkshop
-);
+export default connect(mapStateToProps, {
+  getWorkshop: getWorkshopAction,
+  getState: getStateAction,
+})(EditWorkshop);

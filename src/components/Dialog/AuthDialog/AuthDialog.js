@@ -14,10 +14,10 @@ import { Close as CloseIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
-import { login } from '../../../redux/actions/account';
-import { addNotification, } from '../../../redux/actions/notifications'
+import { loginAction } from '../../../redux/slices/account';
+import { addNotificationAction } from '../../../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -44,72 +44,39 @@ const useStyles = makeStyles((theme) => ({
 function AuthDialog({
   open,
   handleClose,
-  login,
   isFetching,
+  isLoggedIn,
+  user,
+  login,
   addNotification,
 }) {
-  const [userIdentity, setUserIdentity] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const classes = useStyles();
   const t = useTranslate();
 
-  const isEnglish = (string) => {
-    var regex = new RegExp(`[a-zA-Z0-9-_.]{${string.length}}`);
-    if (regex.test(string)) {
-      return string;
-    } else {
-      return 'error'
-    }
-  }
+  const history = useHistory();
 
-  const isPhoneNumberValid = (phoneNumber) => {
-    var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
-    if (regex.test(phoneNumber)) {
-      return phoneNumber;
-    } else {
-      return;
+  useEffect(() => {
+    if (open && isLoggedIn) {
+      if (user.is_mentor) {
+        history.push('/mentor');
+      } else {
+        history.push('/events');
+      }
     }
-  };
-
-  const isValidEmail = (email) => {
-    var regex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    if (regex.test(email)) {
-      return email;
-    } else {
-      return 'error'
-    }
-  }
+  }, [isLoggedIn, user, open, history]);
 
   const doLogin = () => {
-    if (!userIdentity || !password) {
-      addNotification({ message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!', type: 'error' });
+    if (!username || !password) {
+      addNotification({
+        message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
+        type: 'error',
+      });
       return;
     }
 
-    let phone, username, email;
-    // if (userIdentity.startsWith('9') || userIdentity.startsWith('09')) {
-    //   if (isPhoneNumberValid(userIdentity) === 'error') {
-    //     addNotification({ message: 'شماره‌تلفنت معتبر نیست!', type: 'error' });
-    //     return;
-    //   } else {
-    //     phone = userIdentity;
-    //   }
-    // } else if (userIdentity.includes('@')) {
-    //   if (isValidEmail(userIdentity) === 'error') {
-    //     addNotification({ message: 'ایمیلت معتبر نیست!', type: 'error' });
-    //     return;
-    //   } else {
-    //     email = userIdentity;
-    //   }
-    // } else 
-    // if (isEnglish(userIdentity) === 'error') {
-    //   addNotification({ message: 'نام‌کاربریت معتبر نیست!', type: 'error' });
-    //   return;
-    // } else {
-    //   username = userIdentity;
-    // }
-
-    login({ username: userIdentity, password });
+    login({ username, password });
   };
 
   return (
@@ -133,7 +100,7 @@ function AuthDialog({
                 <CloseIcon />
               </IconButton>
             </Grid>
-            <Grid item container xs={6} justify='center' alignItems='center'>
+            <Grid item container xs={6} justify="center" alignItems="center">
               <Typography component="h3" variant="h2" align="center">
                 {t('login')}
               </Typography>
@@ -142,11 +109,11 @@ function AuthDialog({
           </Grid>
           <Grid item>
             <TextField
-              value={userIdentity}
-              label='نام‌کاربری'
+              value={username}
+              label="نام‌کاربری"
               type="text"
               fullWidth
-              onChange={(e) => setUserIdentity(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               inputProps={{ className: 'ltr-input' }}
               variant="outlined"
             />
@@ -163,11 +130,9 @@ function AuthDialog({
             />
           </Grid>
           <Grid item>
-            <Typography align='center'>
+            <Typography align="center">
               {'اگر رمزتون رو فراموش کردین، به '}
-              <a href='/change-password'>
-                {'این‌جا'}
-              </a>
+              <a href="/change-password">{'این‌جا'}</a>
               {' مراجعه کنید.'}
             </Typography>
           </Grid>
@@ -184,8 +149,8 @@ function AuthDialog({
                   className={classes.buttonProgress}
                 />
               ) : (
-                  t('login')
-                )}
+                t('login')
+              )}
             </Button>
           </Grid>
         </Grid>
@@ -199,16 +164,14 @@ function AuthDialog({
 
 const mapStateToProps = (state) => ({
   isFetching: state.account.isFetching,
+  isLoggedIn: !!state.account.token,
+  user: state.account.user,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    login,
-    addNotification,
-  }
-)(AuthDialog);
-
+export default connect(mapStateToProps, {
+  login: loginAction,
+  addNotification: addNotificationAction,
+})(AuthDialog);
 
 // todo:
 // به نظر میاد وقتی توی دیالوگ درخواست می‌زنیم، دو تا اکشن درمی‌کنه!

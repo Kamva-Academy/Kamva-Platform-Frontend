@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createUploadFileWidget } from '../../../redux/actions/mentor';
+import { createUploadFileWidgetAction } from '../../../redux/slices/mentor';
 
 function UploadFileQuestionEditWidget({
   open,
@@ -51,13 +51,13 @@ function UploadFileQuestionEditWidget({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClick} color="primary" variant="contained">
-        {t('submit')}
+          {t('submit')}
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default connect(null, { createUploadFileWidget })(
-  UploadFileQuestionEditWidget
-);
+export default connect(null, {
+  createUploadFileWidget: createUploadFileWidgetAction,
+})(UploadFileQuestionEditWidget);
