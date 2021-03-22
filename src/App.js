@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
 import { useHistory } from 'react-router';
 
+import { axiosConfig } from './axios/axiosConfig';
 import Notifier from './components/Notifications/Notifications';
 import { initRedirectAction } from './redux/slices/redirect';
 import WorkshopRoot from './root/Workshop';
@@ -18,7 +19,6 @@ import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
-import { axiosConfig } from './axios/axiosConfig';
 // Pushe.init('ld838ykvn2n75poe');
 // Pushe.subscribe();
 
