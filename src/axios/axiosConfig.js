@@ -2,11 +2,11 @@ import Axios from 'axios';
 
 export const baseURL =
   process.env.NODE_ENV === 'production'
-    ? 'https://zero.rastaiha.ir/api/'
-    : 'https://zero.rastaiha.ir/api/';
+    ? 'https://zero.rastaiha.ir'
+    : 'https://zero.rastaiha.ir';
 
 const axios = Axios.create({
-  baseURL,
+  baseURL: baseURL + '/api/',
   timeout: 10000,
   maxRedirects: 5,
 });
