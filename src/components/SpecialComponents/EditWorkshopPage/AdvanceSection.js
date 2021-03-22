@@ -1,7 +1,6 @@
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import DeleteStateDialog from './components/DeleteStateDialog';
@@ -56,4 +55,4 @@ function AdvanceSection({ stateId }) {
   );
 }
 
-export default connect()(AdvanceSection);
+export default AdvanceSection;
