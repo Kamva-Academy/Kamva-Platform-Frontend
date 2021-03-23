@@ -100,7 +100,7 @@ function WhiteboardNavbar({
         <IconButton
           color={drawingMode === DrawingModes.DELETE ? 'primary' : 'default'}
           onClick={() => {
-            changeMode(DrawingModes.DELETE);
+            changeMode({ mode: DrawingModes.DELETE });
             removeSelectedNodes();
           }}>
           <SvgIcon>
@@ -118,7 +118,7 @@ function WhiteboardNavbar({
           color={drawingMode === DrawingModes.PAINTING ? 'primary' : 'default'}
           onClick={() => {
             deselectNodes();
-            changeMode(DrawingModes.PAINTING);
+            changeMode({ mode: DrawingModes.PAINTING });
           }}>
           <GestureIcon />
         </IconButton>
@@ -126,14 +126,14 @@ function WhiteboardNavbar({
         <RectangleMenu />
         <IconButton
           onClick={() => {
-            changeMode(DrawingModes.MOVE);
+            changeMode({ mode: DrawingModes.MOVE });
             addNewTextNode();
           }}>
           <TextFieldsIcon />
         </IconButton>
         <IconButton
           color={drawingMode === DrawingModes.MOVE ? 'primary' : 'default'}
-          onClick={() => changeMode(DrawingModes.MOVE)}>
+          onClick={() => changeMode({ mode: DrawingModes.MOVE })}>
           <PanToolIcon />
         </IconButton>
       </Grid>

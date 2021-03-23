@@ -26,7 +26,7 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
   });
 
   const onClick = (type) => {
-    changeMode(DrawingModes.MOVE);
+    changeMode({ mode: DrawingModes.MOVE });
     addNewCircleNode({ type });
     popupState.close();
   };

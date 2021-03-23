@@ -128,14 +128,14 @@ function Drawing({
               onSelect={() => {
                 onDeselectNodes();
                 if (drawingMode === DrawingModes.DELETE) {
-                  removeNode(node.id);
+                  removeNode({ nodeId: node.id });
                 } else {
-                  onSelectNode(node.id);
+                  onSelectNode({ nodeId: node.id });
                 }
               }}
               onTouchMove={() => {
                 if (drawingMode === DrawingModes.DELETE && isRemoving) {
-                  removeNode(node.id);
+                  removeNode({ nodeId: node.id });
                 }
               }}
             />

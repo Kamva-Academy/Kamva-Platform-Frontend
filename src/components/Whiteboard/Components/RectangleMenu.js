@@ -26,7 +26,7 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
   });
 
   const onClick = (type) => {
-    changeMode(DrawingModes.MOVE);
+    changeMode({ mode: DrawingModes.MOVE });
     addNewRectangleNode({ type });
     popupState.close();
   };

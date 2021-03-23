@@ -29,9 +29,9 @@ const whiteboardSlice = createSlice({
       }
     },
     init: () => initialState,
-    deselectNode: (state, { payload }) => {
+    deselectNode: (state, { payload: { nodeId } }) => {
       state.nodes = state.nodes.map((node) =>
-        node.id === payload ? { ...node, isSelected: false } : node
+        node.id === nodeId ? { ...node, isSelected: false } : node
       );
     },
     deselectNodes: (state) => {
@@ -40,9 +40,9 @@ const whiteboardSlice = createSlice({
         isSelected: false,
       }));
     },
-    selectNode: (state, { payload }) => {
+    selectNode: (state, { payload: { nodeId } }) => {
       state.nodes = state.nodes.map((node) =>
-        node.id === payload ? { ...node, isSelected: true } : node
+        node.id === nodeId ? { ...node, isSelected: true } : node
       );
     },
     addNode: (state, { payload: { type, shapeProps, transformerProps } }) => {
@@ -55,8 +55,8 @@ const whiteboardSlice = createSlice({
           : node
       );
     },
-    changeMode: (state, { payload }) => {
-      state.mode = payload.mode;
+    changeMode: (state, { payload: { mode } }) => {
+      state.mode = mode;
     },
     removeSelected: (state) => {
       state.nodes = state.nodes.filter((node) => !node.isSelected);
@@ -64,8 +64,8 @@ const whiteboardSlice = createSlice({
     removeAllNodes: (state) => {
       state.nodes = [];
     },
-    remove: (state, { payload }) => {
-      state.nodes = state.nodes.filter((node) => node.id !== payload.nodeId);
+    remove: (state, { payload: { nodeId } }) => {
+      state.nodes = state.nodes.filter((node) => node.id !== nodeId);
     },
   },
 });
