@@ -9,8 +9,7 @@ import {
   deselectWhiteboardNodesAction,
   getWhiteboardNodesAction,
   initWhiteboardAction,
-  offlineAddNodeAction,
-  offlineUpdateNodeAction,
+  offlineUpdateWhiteboardAction,
   removeWhiteboardNodeAction,
   selectWhiteboardNodeAction,
   updateWhiteboardNodeAction,
@@ -36,8 +35,7 @@ function Whiteboard({
   paintingConfig,
   deselectNodes,
   selectNode,
-  addNode,
-  updateNode,
+  offlineUpdateWhiteboard,
   removeNode,
   updateShapeProps,
   addNewLineNode,
@@ -60,24 +58,14 @@ function Whiteboard({
       const subscription = await getWhiteboardActionSubscription({
         uuid,
       });
-      subscription.on('create', updateWhiteboard);
+      subscription.on('create', (whiteboardAction) =>
+        offlineUpdateWhiteboard(whiteboardAction.get('action'))
+      );
       return () => {
         subscription.unsubscribe();
       };
     }
   }, [uuid]);
-
-  const updateWhiteboard = (whiteboardAction) => {
-    const action = whiteboardAction.get('action');
-    switch (action.type) {
-      case 'ADD_NODE':
-        addNode({ node: action.node });
-        break;
-      case 'UPDATE_NODE':
-        updateNode({ nodeId: action.nodeId, shape: action.shape });
-        break;
-    }
-  };
 
   return (
     <div className={classes.whiteboard}>
@@ -117,9 +105,8 @@ export default connect(mapStateToProps, {
   selectNode: selectWhiteboardNodeAction,
   updateShapeProps: updateWhiteboardNodeAction,
   addNewLineNode: addNewLineNodeAction,
-  addNode: offlineAddNodeAction,
-  updateNode: offlineUpdateNodeAction,
-  removeNode: removeWhiteboardNodeAction,
   initWhiteboard: initWhiteboardAction,
   getWhiteboardNodes: getWhiteboardNodesAction,
+  offlineUpdateWhiteboard: offlineUpdateWhiteboardAction,
+  removeNode: removeWhiteboardNodeAction,
 })(Whiteboard);

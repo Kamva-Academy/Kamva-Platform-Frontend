@@ -6,6 +6,8 @@ import DrawingModes from '../../components/Konva/Drawing/DrawingModes';
 import {
   addWhiteboardNode,
   getWhiteboard,
+  removeWhiteboardNode,
+  removeWhiteboardNodes,
   updateWhiteboardNode,
 } from '../../parse/whiteboard';
 import makeId from '../../utils/makeId';
@@ -69,6 +71,49 @@ export const updateWhiteboardNodeAction = createAsyncThunk(
   }
 );
 
+export const removeSelectedWhiteboardNodeAction = createAsyncThunk(
+  'whiteboard/removeSelectedNode',
+  async ({ uuid }, { rejectWithValue, getState }) => {
+    const { nodes } = getState().whiteboard.present;
+    try {
+      const selectedNode = nodes.find((node) => node.isSelected);
+      if (selectedNode) {
+        await removeWhiteboardNode({ uuid, nodeId: selectedNode.id });
+      }
+    } catch (err) {
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
+  }
+);
+
+export const removeWhiteboardNodeAction = createAsyncThunk(
+  'whiteboard/removeNode',
+  async ({ uuid, nodeId }, { rejectWithValue }) => {
+    try {
+      await removeWhiteboardNode({ uuid, nodeId });
+    } catch {
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
+  }
+);
+
+export const removeAllWhiteboardNodesAction = createAsyncThunk(
+  'whiteboard/removeAllNodes',
+  async ({ uuid }, { rejectWithValue }) => {
+    try {
+      await removeWhiteboardNodes({ uuid });
+    } catch {
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
+  }
+);
+
 const whiteboardSlice = createSlice({
   name: 'whiteboard',
   initialState,
@@ -101,9 +146,6 @@ const whiteboardSlice = createSlice({
     changeMode: (state, { payload: { mode } }) => {
       state.mode = mode;
     },
-    removeSelected: (state) => {
-      state.nodes = state.nodes.filter((node) => !node.isSelected);
-    },
     removeAllNodes: (state) => {
       state.nodes = [];
     },
@@ -130,18 +172,36 @@ export const {
   addNode: offlineAddNodeAction,
   updateNode: offlineUpdateNodeAction,
   changeMode: changeWhiteboardModeAction,
-  removeSelected: removeWhiteboardSelectedNodeAction,
-  removeAllNodes: removeWhiteboardAllNodeAction,
-  remove: removeWhiteboardNodeAction,
+  removeAllNodes: offlineRemoveAllWhiteboardNodesAction,
+  remove: offlineRemoveWhiteboardNodeAction,
 } = whiteboardSlice.actions;
+
+export const offlineUpdateWhiteboardAction = (action) => {
+  switch (action.type) {
+    case 'ADD_NODE':
+      return offlineAddNodeAction({ node: action.node });
+    case 'UPDATE_NODE':
+      return offlineUpdateNodeAction({
+        nodeId: action.nodeId,
+        shape: action.shape,
+      });
+    case 'REMOVE_NODE':
+      return offlineRemoveWhiteboardNodeAction({
+        nodeId: action.nodeId,
+      });
+    case 'REMOVE_ALL_NODES':
+      return offlineRemoveAllWhiteboardNodesAction();
+  }
+};
 
 export const whiteboardReducer = undoable(whiteboardSlice.reducer, {
   limit: 20,
   filter: includeAction([
     addWhiteboardNodeAction.toString(),
     updateWhiteboardNodeAction.toString(),
-    removeWhiteboardSelectedNodeAction.toString(),
+    removeSelectedWhiteboardNodeAction.toString(),
     removeWhiteboardNodeAction.toString(),
+    removeAllWhiteboardNodesAction.toString(),
   ]),
 });
 

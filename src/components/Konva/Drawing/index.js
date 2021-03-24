@@ -133,14 +133,14 @@ function Drawing({
               onSelect={() => {
                 onDeselectNodes();
                 if (drawingMode === DrawingModes.DELETE) {
-                  removeNode({ nodeId: node.id });
+                  removeNode({ uuid, nodeId: node.id });
                 } else {
                   onSelectNode({ nodeId: node.id });
                 }
               }}
               onTouchMove={() => {
                 if (drawingMode === DrawingModes.DELETE && isRemoving) {
-                  removeNode({ nodeId: node.id });
+                  removeNode({ uuid, nodeId: node.id });
                 }
               }}
             />

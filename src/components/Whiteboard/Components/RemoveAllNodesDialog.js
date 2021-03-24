@@ -5,13 +5,19 @@ import {
   DialogContent,
   DialogContentText,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { StatePageContext } from '../../../containers/Workshop';
 
 export default function RemoveAllNodesDialog({
   open,
   handleClose,
   removeAllNodes,
 }) {
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
@@ -25,7 +31,7 @@ export default function RemoveAllNodesDialog({
         </Button>
         <Button
           onClick={() => {
-            removeAllNodes();
+            removeAllNodes({ uuid });
             handleClose();
           }}
           color="primary"
