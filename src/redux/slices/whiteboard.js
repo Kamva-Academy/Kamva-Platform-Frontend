@@ -29,7 +29,6 @@ export const getWhiteboardNodesAction = createAsyncThunk(
     try {
       return { nodes: (await getWhiteboard({ uuid })).get('nodes') };
     } catch (err) {
-      alert(err);
       return rejectWithValue({
         message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
       });
@@ -46,7 +45,6 @@ export const addWhiteboardNodeAction = createAsyncThunk(
         node: { ...node, id: makeId() },
       });
     } catch (err) {
-      alert(JSON.stringify(err));
       return rejectWithValue({
         message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
       });
