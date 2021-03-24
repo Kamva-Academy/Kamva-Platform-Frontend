@@ -123,7 +123,7 @@ export const requestMentorAction = createAsyncThunk(
   'currentState/requestMentor',
   async ({ fsmId, playerId }) => ({
     response: await postApi(requestMentorUrl, { fsm: fsmId, player: playerId }),
-    message: 'درخواست شما برای منتور‌ها ارسال شد.',
+    message: 'درخواست شما ارسال شد.',
   })
 );
 
