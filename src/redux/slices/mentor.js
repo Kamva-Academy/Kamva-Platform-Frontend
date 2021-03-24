@@ -6,7 +6,7 @@ import {
   getUnreadNotificationsUrl,
   helpUrl,
   statesUrl,
-  teamAnswersUrl,
+  visitWorkshopPlayerUrl,
   widgetUrl,
   workshopsUrl,
   workshopTeamsUrl,
@@ -199,17 +199,10 @@ export const getWorkshopTeamsAction = createAsyncThunk(
   })
 );
 
-export const getTeamAnswersAction = createAsyncThunk(
-  'workshops/teams/getAllAnswers',
-  async ({ fsmId, teamId }) => ({
-    response: await postApi(teamAnswersUrl, { fsmId, teamId }),
-  })
-);
-
 export const visitWorkshopPlayerAction = createAsyncThunk(
   'workshops/teams/visitWorkshopPlayer',
   async ({ workshopPlayerId }) => ({
-    response: await postApi(teamAnswersUrl, {
+    response: await postApi(visitWorkshopPlayerUrl, {
       player_workshop: workshopPlayerId,
     }),
     additional: {

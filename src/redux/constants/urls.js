@@ -14,8 +14,6 @@ export const widgetUrl = 'fsm/widget/';
 
 export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
-export const teamAnswersUrl = 'fsm/submittedanswers/';
-
 export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
   Math.random() * 10000000
 )}/rasta/landing-zero-v3_d5lbgq.json`;
@@ -27,6 +25,8 @@ export const goForwardUrl = 'fsm/goforward/';
 export const participantGetCurrentStateUrl = 'fsm/getcurrentstate/';
 
 export const mentorGetCurrentStateUrl = 'fsm/mentorgetplayerstate/';
+
+export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 
 export const sendAnswerUrl = 'fsm/sendanswer/';
 
