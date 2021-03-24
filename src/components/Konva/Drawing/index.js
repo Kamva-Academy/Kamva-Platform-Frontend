@@ -1,6 +1,7 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Layer, Line, Rect, Stage } from 'react-konva';
 
+import { StatePageContext } from '../../../containers/Workshop';
 import DrawingModes from './DrawingModes';
 import KonvaNode from './KonvaNode';
 
@@ -51,7 +52,7 @@ function Drawing({
     setActiveLine({
       lastUpdate: Date.now(),
       points: [x, y],
-      shapeProps: {
+      shape: {
         ...paintingConfig,
         globalCompositeOperation:
           drawingMode === DrawingModes.ERASING
@@ -79,9 +80,13 @@ function Drawing({
     }
   };
 
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   const onTouchStageEnd = () => {
     if (activeLine) {
-      addNewLineNode(activeLine);
+      addNewLineNode({ uuid, line: activeLine });
     }
     setIsRemoving(false);
     setActiveLine(null);
@@ -123,7 +128,7 @@ function Drawing({
               drawingMode={drawingMode}
               {...node}
               onChange={(newAttrs) =>
-                updateShapeProps({ nodeId: node.id, shapeProps: newAttrs })
+                updateShapeProps({ uuid, nodeId: node.id, shape: newAttrs })
               }
               onSelect={() => {
                 onDeselectNodes();
@@ -141,7 +146,7 @@ function Drawing({
             />
           ))}
           {activeLine && (
-            <Line {...activeLine.shapeProps} points={activeLine.points} />
+            <Line {...activeLine.shape} points={activeLine.points} />
           )}
         </Layer>
       </Stage>

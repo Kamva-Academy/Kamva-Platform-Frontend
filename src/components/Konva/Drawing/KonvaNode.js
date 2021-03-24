@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { Circle, Image, Line,Rect, Transformer } from 'react-konva';
+import { Circle, Image, Line, Rect, Transformer } from 'react-konva';
 
 import KonvaTextNode from './Components/KonvaTextNode';
 import DrawingModes from './DrawingModes';
@@ -16,13 +16,23 @@ export default function KonvaNode({
   isSelected,
   drawingMode,
   type,
-  shapeProps,
+  shape,
   onSelect,
   onChange,
   onTouchMove,
-  transformerProps,
 }) {
   const nodeEl = useRef();
+
+  const transformerProps =
+    type === 'TEXT'
+      ? {
+          enabledAnchors: ['middle-left', 'middle-right'],
+          boundBoxFunc: function (oldBox, newBox) {
+            newBox.width = Math.max(30, newBox.width);
+            return newBox;
+          },
+        }
+      : {};
 
   const setNode = useCallback(
     (node) => {
@@ -55,21 +65,21 @@ export default function KonvaNode({
     <>
       <Node
         ref={setNode}
-        {...shapeProps}
+        {...shape}
         onClick={onSelect}
         onTouchEnd={onSelect}
         onMouseMove={onTouchMove}
         onTouchMove={onTouchMove}
         onDragEnd={(e) =>
           onChange({
-            ...shapeProps,
+            ...shape,
             x: e.target.x(),
             y: e.target.y(),
           })
         }
         onTransformEnd={() =>
           onChange({
-            ...shapeProps,
+            ...shape,
             x: nodeEl.current.x(),
             y: nodeEl.current.y(),
             width: nodeEl.current.width(),
@@ -80,7 +90,7 @@ export default function KonvaNode({
         }
         onTextChange={(text) =>
           onChange({
-            ...shapeProps,
+            ...shape,
             text,
           })
         }

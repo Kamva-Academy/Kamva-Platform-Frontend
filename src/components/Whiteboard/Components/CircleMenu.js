@@ -10,9 +10,10 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import Menu from 'material-ui-popup-state/HoverMenu';
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
+import { StatePageContext } from '../../../containers/Workshop';
 import {
   addNewCircleNodeAction,
   changeWhiteboardModeAction,
@@ -25,9 +26,13 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
     popupId: 'circleMenu',
   });
 
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   const onClick = (type) => {
     changeMode({ mode: DrawingModes.MOVE });
-    addNewCircleNode({ type });
+    addNewCircleNode({ uuid, type });
     popupState.close();
   };
 

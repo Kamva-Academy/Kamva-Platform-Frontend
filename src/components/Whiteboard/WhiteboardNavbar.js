@@ -17,9 +17,10 @@ import {
   TextFields as TextFieldsIcon,
   Undo as UndoIcon,
 } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 
+import { StatePageContext } from '../../containers/Workshop';
 import {
   addNewTextNodeAction,
   changeWhiteboardModeAction,
@@ -66,6 +67,10 @@ function WhiteboardNavbar({
 }) {
   const classes = useStyles();
   const [openRemoveNodes, setOpenRemoveNodes] = useState(false);
+
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
 
   return (
     <Grid
@@ -127,7 +132,7 @@ function WhiteboardNavbar({
         <IconButton
           onClick={() => {
             changeMode({ mode: DrawingModes.MOVE });
-            addNewTextNode();
+            addNewTextNode({ uuid });
           }}>
           <TextFieldsIcon />
         </IconButton>

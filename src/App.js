@@ -12,6 +12,7 @@ import { useHistory } from 'react-router';
 
 import { axiosConfig } from './axios/axiosConfig';
 import Notifier from './components/Notifications/Notifications';
+import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
 import WorkshopRoot from './root/Workshop';
 import ZeroJourneyerRoot from './root/ZeroJourneyer';
@@ -57,6 +58,10 @@ const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
   useEffect(() => {
     axiosConfig(token);
   }, [token]);
+
+  useEffect(() => {
+    initParseServer();
+  }, []);
 
   useEffect(() => {
     document.body.dir = dir;

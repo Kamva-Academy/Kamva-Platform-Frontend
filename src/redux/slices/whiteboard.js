@@ -1,8 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import undoable, { includeAction } from 'redux-undo';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 import DrawingModes from '../../components/Konva/Drawing/DrawingModes';
+import {
+  addWhiteboardNode,
+  getWhiteboard,
+  updateWhiteboardNode,
+} from '../../parse/whiteboard';
 import makeId from '../../utils/makeId';
 
 const initialState = {
@@ -18,16 +23,58 @@ const initialState = {
   version: 0,
 };
 
+export const getWhiteboardNodesAction = createAsyncThunk(
+  'whiteboard/getOne',
+  async ({ uuid }, { rejectWithValue }) => {
+    try {
+      return { nodes: (await getWhiteboard({ uuid })).get('nodes') };
+    } catch (err) {
+      alert(err);
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
+  }
+);
+
+export const addWhiteboardNodeAction = createAsyncThunk(
+  'whiteboard/addNode',
+  async ({ uuid, node }, { rejectWithValue }) => {
+    try {
+      await addWhiteboardNode({
+        uuid,
+        node: { ...node, id: makeId() },
+      });
+    } catch (err) {
+      alert(JSON.stringify(err));
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
+  }
+);
+
+export const updateWhiteboardNodeAction = createAsyncThunk(
+  'whiteboard/update',
+  async ({ uuid, nodeId, shape }, { rejectWithValue }) => {
+    try {
+      await updateWhiteboardNode({
+        uuid,
+        nodeId,
+        shape,
+      });
+    } catch {
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
+  }
+);
+
 const whiteboardSlice = createSlice({
   name: 'whiteboard',
   initialState,
   reducers: {
-    update: (state, { payload }) => {
-      if (payload.version > state.version) {
-        state.nodes = payload.nodes;
-        state.version = payload.version;
-      }
-    },
     init: () => initialState,
     deselectNode: (state, { payload: { nodeId } }) => {
       state.nodes = state.nodes.map((node) =>
@@ -45,14 +92,12 @@ const whiteboardSlice = createSlice({
         node.id === nodeId ? { ...node, isSelected: true } : node
       );
     },
-    addNode: (state, { payload: { type, shapeProps, transformerProps } }) => {
-      state.nodes.push({ type, id: makeId(), shapeProps, transformerProps });
+    addNode: (state, { payload: { node } }) => {
+      state.nodes.push(node);
     },
-    updateNode: (state, { payload }) => {
+    updateNode: (state, { payload: { nodeId, shape } }) => {
       state.nodes = state.nodes.map((node) =>
-        node.id === payload.nodeId
-          ? { ...node, shapeProps: payload.shapeProps }
-          : node
+        node.id === nodeId ? { ...node, shape } : node
       );
     },
     changeMode: (state, { payload: { mode } }) => {
@@ -68,16 +113,24 @@ const whiteboardSlice = createSlice({
       state.nodes = state.nodes.filter((node) => node.id !== nodeId);
     },
   },
+
+  extraReducers: {
+    [getWhiteboardNodesAction.fulfilled.toString()]: (
+      state,
+      { payload: { nodes } }
+    ) => {
+      state.nodes = nodes;
+    },
+  },
 });
 
 export const {
-  update: updateWhiteboardAction,
   init: initWhiteboardAction,
   deselectNodes: deselectWhiteboardNodesAction,
   deselectNode: deselectWhiteboardNodeAction,
   selectNode: selectWhiteboardNodeAction,
-  addNode: addWhiteboardNodeAction,
-  updateNode: updateWhiteboardNodeAction,
+  addNode: offlineAddNodeAction,
+  updateNode: offlineUpdateNodeAction,
   changeMode: changeWhiteboardModeAction,
   removeSelected: removeWhiteboardSelectedNodeAction,
   removeAllNodes: removeWhiteboardAllNodeAction,
@@ -88,51 +141,50 @@ export const whiteboardReducer = undoable(whiteboardSlice.reducer, {
   limit: 20,
   filter: includeAction([
     addWhiteboardNodeAction.toString(),
-    updateWhiteboardAction.toString(),
+    updateWhiteboardNodeAction.toString(),
     removeWhiteboardSelectedNodeAction.toString(),
     removeWhiteboardNodeAction.toString(),
   ]),
 });
 
-export const addNewLineNodeAction = (line) =>
+export const addNewLineNodeAction = ({ uuid, line }) =>
   addWhiteboardNodeAction({
-    type: 'LINE',
-    shapeProps: {
-      ...line.shapeProps,
-      points: line.points,
-    },
-  });
-
-export const addNewTextNodeAction = () =>
-  addWhiteboardNodeAction({
-    type: 'TEXT',
-    shapeProps: {
-      text: 'اینجا بنویسید',
-      x: 50,
-      y: 80,
-      fontSize: 20,
-      draggable: true,
-      width: 200,
-      align: 'right',
-      fontFamily: 'iranyekan',
-    },
-    transformerProps: {
-      enabledAnchors: ['middle-left', 'middle-right'],
-      boundBoxFunc: function (oldBox, newBox) {
-        newBox.width = Math.max(30, newBox.width);
-        return newBox;
+    uuid,
+    node: {
+      type: 'LINE',
+      shape: {
+        ...line.shape,
+        points: line.points,
       },
     },
   });
 
-export const addNewCircleNodeAction = ({ type }) => {
-  let shapeProps = {
+export const addNewTextNodeAction = ({ uuid }) =>
+  addWhiteboardNodeAction({
+    uuid,
+    node: {
+      type: 'TEXT',
+      shape: {
+        text: 'اینجا بنویسید',
+        x: 50,
+        y: 80,
+        fontSize: 20,
+        draggable: true,
+        width: 200,
+        align: 'right',
+        fontFamily: 'iranyekan',
+      },
+    },
+  });
+
+export const addNewCircleNodeAction = ({ uuid, type }) => {
+  let shape = {
     x: 100,
     shadowBlur: 3,
   };
   if (type === 'outlined') {
-    shapeProps = {
-      ...shapeProps,
+    shape = {
+      ...shape,
       y: 180,
       width: 96,
       height: 96,
@@ -140,8 +192,8 @@ export const addNewCircleNodeAction = ({ type }) => {
       strokeColor: 'black',
     };
   } else {
-    shapeProps = {
-      ...shapeProps,
+    shape = {
+      ...shape,
       y: 100,
       width: 100,
       height: 100,
@@ -149,19 +201,22 @@ export const addNewCircleNodeAction = ({ type }) => {
     };
   }
   return addWhiteboardNodeAction({
-    type: 'CIRCLE',
-    shapeProps,
+    uuid,
+    node: {
+      type: 'CIRCLE',
+      shape,
+    },
   });
 };
 
-export const addNewRectangleNodeAction = ({ type }) => {
-  let shapeProps = {
+export const addNewRectangleNodeAction = ({ uuid, type }) => {
+  let shape = {
     x: 100,
     shadowBlur: 3,
   };
   if (type === 'outlined') {
-    shapeProps = {
-      ...shapeProps,
+    shape = {
+      ...shape,
       y: 180,
       width: 96,
       height: 96,
@@ -169,8 +224,8 @@ export const addNewRectangleNodeAction = ({ type }) => {
       strokeColor: 'black',
     };
   } else {
-    shapeProps = {
-      ...shapeProps,
+    shape = {
+      ...shape,
       y: 100,
       width: 100,
       height: 100,
@@ -178,8 +233,11 @@ export const addNewRectangleNodeAction = ({ type }) => {
     };
   }
   return addWhiteboardNodeAction({
-    type: 'RECT',
-    shapeProps,
+    uuid,
+    node: {
+      type: 'RECT',
+      shape,
+    },
   });
 };
 
