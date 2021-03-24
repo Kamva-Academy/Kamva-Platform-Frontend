@@ -52,9 +52,9 @@ export const participantGetCurrentStateAction = createAsyncThunk(
 
 export const mentorGetCurrentStateAction = createAsyncThunk(
   'currentState/mentorGetCurrentState',
-  async ({ edgeId, playerUUID }) => ({
+  async ({ stateId, playerUUID }) => ({
     response: await postApi(mentorGetCurrentStateUrl, {
-      edge: edgeId,
+      state: stateId,
       player_uuid: playerUUID,
     }),
   })
