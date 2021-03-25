@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
 import { useHistory } from 'react-router';
 
-import { axiosConfig } from './axios/axiosConfig';
 import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
@@ -54,10 +53,6 @@ const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
       initRedirect();
     }
   }, [redirectTo, forceRedirect, initRedirect, history]);
-
-  useEffect(() => {
-    axiosConfig(token);
-  }, [token]);
 
   useEffect(() => {
     initParseServer();

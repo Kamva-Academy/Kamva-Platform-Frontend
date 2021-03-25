@@ -4,33 +4,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
-import { axiosConfig } from './axios/axiosConfig';
-import configureStore from './redux/store/createStore';
-
-const persistedState = localStorage.getItem('rastaState')
-  ? JSON.parse(localStorage.getItem('rastaState'))
-  : {};
-const store = configureStore(persistedState);
-store.subscribe(() => {
-  const state = store.getState();
-  localStorage.setItem(
-    'rastaState',
-    JSON.stringify({
-      account: {
-        user: state.account.user,
-        token: state.account.token,
-      },
-      events: state.events,
-      Intl: state.Intl,
-    })
-  );
-});
-
-axiosConfig(persistedState?.account?.token);
+import reduxStore from './redux/store';
 
 ReactDOM.render(
   <Router>
-    <Provider store={store}>
+    <Provider store={reduxStore}>
       <App />
     </Provider>
   </Router>,
