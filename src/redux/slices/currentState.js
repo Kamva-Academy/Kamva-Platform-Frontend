@@ -63,7 +63,7 @@ export const mentorGetCurrentStateAction = createAsyncThunk(
 const sendAnswerAction = createAsyncThunk(
   'currentState/sendAnswer',
   async (answer) => ({
-    response: await postApi(sendAnswerUrl, { answer }),
+    response: await postApi(sendAnswerUrl, answer),
   })
 );
 
@@ -144,10 +144,10 @@ const sentAnswer = (state, { payload: { response } }) => {
   state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
-          ...widget,
-          last_submit: response.xanswer,
-          answer: response.answer,
-        }
+        ...widget,
+        last_submit: response.xanswer,
+        answer: response.answer,
+      }
       : widget
   );
 };
