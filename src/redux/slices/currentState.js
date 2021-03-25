@@ -63,7 +63,7 @@ export const mentorGetCurrentStateAction = createAsyncThunk(
 const sendAnswerAction = createAsyncThunk(
   'currentState/sendAnswer',
   async (answer) => ({
-    response: await postApi(sendAnswerUrl, { answer }),
+    response: await postApi(sendAnswerUrl, answer),
   })
 );
 
