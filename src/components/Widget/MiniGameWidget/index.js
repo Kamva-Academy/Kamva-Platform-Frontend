@@ -21,25 +21,33 @@ const GameWidget = ({ link = '' }) => {
   const t = useTranslate();
   const classes = useStyles();
 
+  const [scale, setScale] = useState(0.7);
   const [iFrameHeight, setIFrameHeight] = useState(500);
+
+  console.log(scale);
 
   return (
     <iframe
       title={t('game')}
       src={link}
       className={classes.gameWidget}
-      style={{ height: iFrameHeight }}
-      onLoad={(e) => {
-        const body =
-          e.target?.contentDocument?.body ??
-          e.target?.contentWindow?.document?.body;
-        setTimeout(() => {
-          setIFrameHeight(body.scrollHeight);
-          body.style.maxHeight = '100vh';
-          body.style.overflowY = 'auto';
-          body.style.overflowX = 'hidden';
-        }, 10);
+      style={{
+        height: iFrameHeight,
+        transform: `scale(${scale})`,
+        width: `${(1 / scale) * 100}%`,
+        marginRight: `-${((1 / scale) * 100 - 100) / 2}%`
       }}
+    // onLoad={(e) => {
+    //   const body =
+    //     e.target?.contentDocument?.body ??
+    //     e.target?.contentWindow?.document?.body;
+    //   setTimeout(() => {
+    //     setIFrameHeight(body.scrollHeight);
+    //     body.style.maxHeight = '100vh';
+    //     body.style.overflowY = 'auto';
+    //     body.style.overflowX = 'hidden';
+    //   }, 10);
+    // }}
     />
   );
 };

@@ -48,9 +48,9 @@ function MiniGameEditWidget({
           value={link}
           inputProps={{ className: 'ltr-input' }}
           onChange={(e) => setLink(e.target.value)}>
-          {Object.keys(MINI_GAMES).map((url, index) => (
-            <MenuItem key={index} value={`/game/${url}`}>
-              {MINI_GAMES[url].label}
+          {MINI_GAMES.map((miniGame, index) => (
+            <MenuItem key={index} value={miniGame.url}>
+              {miniGame.label}
             </MenuItem>
           ))}
         </TextField>
