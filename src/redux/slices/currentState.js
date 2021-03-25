@@ -144,10 +144,10 @@ const sentAnswer = (state, { payload: { response } }) => {
   state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
-          ...widget,
-          last_submit: response.xanswer,
-          answer: response.answer,
-        }
+        ...widget,
+        last_submit: response.xanswer,
+        answer: response.answer,
+      }
       : widget
   );
 };
