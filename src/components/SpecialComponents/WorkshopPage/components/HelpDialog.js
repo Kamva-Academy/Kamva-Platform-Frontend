@@ -7,7 +7,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget from '../../../Widget';
@@ -60,4 +59,4 @@ function HelpDialog({ open, handleClose, helps }) {
   );
 }
 
-export default connect()(HelpDialog);
+export default HelpDialog;

@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createBigAnswerQuestionWidget } from '../../../redux/actions/mentor';
+import { createBigAnswerQuestionWidgetAction } from '../../../redux/slices/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function BigAnswerQuestionEditWidget({
@@ -74,6 +74,6 @@ function BigAnswerQuestionEditWidget({
   );
 }
 
-export default connect(null, { createBigAnswerQuestionWidget })(
-  BigAnswerQuestionEditWidget
-);
+export default connect(null, {
+  createBigAnswerQuestionWidget: createBigAnswerQuestionWidgetAction,
+})(BigAnswerQuestionEditWidget);

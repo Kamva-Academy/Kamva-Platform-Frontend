@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { logout } from '../../../../redux/actions/account';
+import { logoutAction } from '../../../../redux/slices/account';
 import AuthDialog from '../../../Dialog/AuthDialog/AuthDialog';
 
 function AuthButton({ isLoggedIn, logout }) {
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => ({
   isLoggedIn: !!state.account.token,
 });
 
-export default connect(mapStateToProps, { logout })(AuthButton);
+export default connect(mapStateToProps, { logout: logoutAction })(AuthButton);

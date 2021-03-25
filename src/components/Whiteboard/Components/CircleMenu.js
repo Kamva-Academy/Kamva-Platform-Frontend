@@ -10,13 +10,14 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import Menu from 'material-ui-popup-state/HoverMenu';
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
+import { StatePageContext } from '../../../containers/Workshop';
 import {
-  addNewCircleNode,
-  changeMode,
-} from '../../../redux/actions/whiteboard';
+  addNewCircleNodeAction,
+  changeWhiteboardModeAction,
+} from '../../../redux/slices/whiteboard';
 import DrawingModes from '../../Konva/Drawing/DrawingModes';
 
 const CircleMenu = ({ changeMode, addNewCircleNode }) => {
@@ -25,9 +26,13 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
     popupId: 'circleMenu',
   });
 
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   const onClick = (type) => {
-    changeMode(DrawingModes.MOVE);
-    addNewCircleNode({ type });
+    changeMode({ mode: DrawingModes.MOVE });
+    addNewCircleNode({ uuid, type });
     popupState.close();
   };
 
@@ -52,4 +57,7 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
   );
 };
 
-export default connect(null, { changeMode, addNewCircleNode })(CircleMenu);
+export default connect(null, {
+  changeMode: changeWhiteboardModeAction,
+  addNewCircleNode: addNewCircleNodeAction,
+})(CircleMenu);

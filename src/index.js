@@ -4,7 +4,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
-import configureStore from './redux/store/configureStore';
+import { axiosConfig } from './axios/axiosConfig';
+import configureStore from './redux/store/createStore';
 
 const persistedState = localStorage.getItem('rastaState')
   ? JSON.parse(localStorage.getItem('rastaState'))
@@ -15,12 +16,17 @@ store.subscribe(() => {
   localStorage.setItem(
     'rastaState',
     JSON.stringify({
-      account: state.account,
+      account: {
+        user: state.account.user,
+        token: state.account.token,
+      },
       events: state.events,
       Intl: state.Intl,
     })
   );
 });
+
+axiosConfig(persistedState?.account?.token);
 
 ReactDOM.render(
   <Router>

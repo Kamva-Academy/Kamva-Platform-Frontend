@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import EditWidgets from '../components/SpecialComponents/EditArticlePage/EditWidgets';
-import { getArticle, getState } from '../redux/actions/mentor';
+import { getArticleAction } from '../redux/slices/mentor';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
@@ -40,12 +40,13 @@ const EditArticle = ({
 }) => {
   const history = useHistory();
 
-  const { widgets = [] } = article;
+  const widgets = [...article.widgets];
+
   widgets.sort((a, b) => a.id - b.id);
 
   useEffect(() => {
     if (articleId) {
-      getArticle({ id: articleId });
+      getArticle({ articleId });
     } else {
       history.push('/');
     }
@@ -53,7 +54,7 @@ const EditArticle = ({
 
   useEffect(() => {
     if (articleId && needUpdateState) {
-      getArticle({ id: articleId });
+      getArticle({ articleId });
     }
   }, [needUpdateState]);
 
@@ -82,4 +83,6 @@ const mapStateToProps = (state, ownProps) => ({
   needUpdateState: state.currentState.needUpdateState,
 });
 
-export default connect(mapStateToProps, { getArticle, getState })(EditArticle);
+export default connect(mapStateToProps, {
+  getArticle: getArticleAction,
+})(EditArticle);

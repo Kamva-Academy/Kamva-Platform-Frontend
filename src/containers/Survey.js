@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Survey({ isLoggedIn }) {
   const classes = useStyles();
-  const [authDialogOpen, setAuthDialogOpen] = useState();
+  const [authDialogOpen, setAuthDialogOpen] = useState(false);
   return (
     <>
       <Container className={classes.centerItems} maxWidth="sm">

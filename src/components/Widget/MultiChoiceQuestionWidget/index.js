@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { sendMultiChoiceAnswer } from '../../../redux/actions/currentState';
+import { sendMultiChoiceAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import MultiChoiceQuestionEditWidget from './edit';
 
@@ -77,6 +77,6 @@ const mapStateToProps = (state) => ({
   playerId: state.currentState.player?.id,
 });
 
-export default connect(mapStateToProps, { sendMultiChoiceAnswer })(
-  MultiChoiceQuestionWidget
-);
+export default connect(mapStateToProps, {
+  sendMultiChoiceAnswer: sendMultiChoiceAnswerAction,
+})(MultiChoiceQuestionWidget);

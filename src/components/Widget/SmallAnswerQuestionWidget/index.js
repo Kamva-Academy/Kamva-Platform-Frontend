@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { sendSmallAnswer } from '../../../redux/actions/currentState';
+import { sendSmallAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import SmallAnswerQuestionEditWidget from './edit';
 
@@ -104,6 +104,6 @@ const mapStateToProps = (state) => ({
   playerId: state.currentState.player?.id,
 });
 
-export default connect(mapStateToProps, { sendSmallAnswer })(
-  SmallAnswerQuestionWidget
-);
+export default connect(mapStateToProps, {
+  sendSmallAnswer: sendSmallAnswerAction,
+})(SmallAnswerQuestionWidget);

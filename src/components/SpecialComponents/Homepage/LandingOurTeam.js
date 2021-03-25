@@ -1,10 +1,16 @@
-import { Button, Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  Button,
+  Container,
+  Grid,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
-import { getLandingData } from '../../../redux/actions/landing';
+import { getLandingDataAction } from '../../../redux/slices/landing';
 import getRandomSubarray from '../../../utils/getRandomSubarray';
 import OurTeamMemberCard from './components/OurTeamMemberCard';
 
@@ -69,4 +75,6 @@ const mapStatesToProps = (state) => ({
   members: state.landing.members,
 });
 
-export default connect(mapStatesToProps, { getLandingData })(LandingOurTeam);
+export default connect(mapStatesToProps, {
+  getLandingData: getLandingDataAction,
+})(LandingOurTeam);

@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createTextWidget } from '../../../redux/actions/mentor';
+import { createTextWidgetAction } from '../../../redux/slices/mentor';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function TextEditWidget({
@@ -58,4 +58,6 @@ function TextEditWidget({
   );
 }
 
-export default connect(null, { createTextWidget })(TextEditWidget);
+export default connect(null, { createTextWidget: createTextWidgetAction })(
+  TextEditWidget
+);

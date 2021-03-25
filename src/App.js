@@ -8,14 +8,15 @@ import { SnackbarProvider } from 'notistack';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
+import { axiosConfig } from './axios/axiosConfig';
 import Notifier from './components/Notifications/Notifications';
-import { initRedirect } from './redux/actions/redirect';
+import { initParseServer } from './parse/init';
+import { initRedirectAction } from './redux/slices/redirect';
 import WorkshopRoot from './root/Workshop';
 import ZeroJourneyerRoot from './root/ZeroJourneyer';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
-import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
 import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
@@ -38,7 +39,7 @@ const ZeroJourneyer = () => (
   </SnackbarProvider>
 );
 
-const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
+const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
   useEffect(() => {
     if (redirectTo !== null) {
@@ -55,6 +56,14 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   }, [redirectTo, forceRedirect, initRedirect, history]);
 
   useEffect(() => {
+    axiosConfig(token);
+  }, [token]);
+
+  useEffect(() => {
+    initParseServer();
+  }, []);
+
+  useEffect(() => {
     document.body.dir = dir;
   }, [dir]);
 
@@ -69,20 +78,23 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
           </ThemeProvider>
         </>
       ) : (
-          <>
-            <ThemeProvider theme={MuiTheme}>
-              <Workshop />
-            </ThemeProvider>
-          </>
-        )}
+        <>
+          <ThemeProvider theme={MuiTheme}>
+            <Workshop />
+          </ThemeProvider>
+        </>
+      )}
     </IntlProvider>
   );
 };
 
 const mapStateToProps = (state) => ({
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
+  token: state.account.token,
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
 });
 
-export default connect(mapStateToProps, { initRedirect })(App);
+export default connect(mapStateToProps, { initRedirect: initRedirectAction })(
+  App
+);

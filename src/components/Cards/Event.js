@@ -1,16 +1,10 @@
-import React from 'react';
+import { Card, CardActionArea, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  Paper,
-  Typography,
-  Grid,
-  Card,
-  CardActionArea,
-} from '@material-ui/core';
-import { ROOT } from '../../redux/actions/urls';
+import React from 'react';
+
+import { baseURL } from '../../axios/axiosConfig';
 
 const useStyles = makeStyles((theme) => ({
-
   statImage: {
     height: '40vh',
     background: `url(${process.env.PUBLIC_URL + '/logo.png'})`,
@@ -46,28 +40,54 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       transform: 'translateY(-0.1rem) scale(1.01)',
       boxShadow: '0 0.5em 1rem -1rem rgba(0, 0, 0, 0.5)',
-    }
+    },
   },
   mainContainer: {
     minHeight: 200,
   },
   content: {
     padding: `${theme.spacing(2)}px !important`,
-  }
+  },
 }));
 
-const Event = ({ name = 'مسافر صفر', description = 'مرگ بر آمریکا و آروان با هم جفتشون!', image, id, is_active = 'true' }) => {
+const Event = ({
+  name = 'مسافر صفر',
+  description = 'مرگ بر آمریکا و آروان با هم جفتشون!',
+  image,
+  id,
+  is_active = 'true',
+}) => {
   const classes = useStyles();
 
   return (
     <Card className={classes.paper}>
-      <CardActionArea href={`${process.env.PUBLIC_URL}/event/registration/${id}`} disabled={!is_active}>
-        <Grid container textAlign="center" spacing={1} className={classes.mainContainer}>
-          <Grid item container justify='center' alignItems='center' xs={12} sm={5} >
-            <img src={ROOT + image} alt='' style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+      <CardActionArea
+        href={`${process.env.PUBLIC_URL}/event/registration/${id}`}
+        disabled={!is_active}>
+        <Grid container spacing={1} className={classes.mainContainer}>
+          <Grid
+            item
+            container
+            justify="center"
+            alignItems="center"
+            xs={12}
+            sm={5}>
+            <img
+              src={baseURL + image}
+              alt=""
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
           </Grid>
-          <Grid item container xs={12} sm={7} direction='column' justify='space-evenly' spacing={1} className={classes.content}>
-            <Grid item container alignItems='flex-end' spacing={1}>
+          <Grid
+            item
+            container
+            xs={12}
+            sm={7}
+            direction="column"
+            justify="space-evenly"
+            spacing={1}
+            className={classes.content}>
+            <Grid item container alignItems="flex-end" spacing={1}>
               <Grid item>
                 <Typography variant="h3" className={classes.notificationTitle}>
                   {name}
@@ -75,9 +95,7 @@ const Event = ({ name = 'مسافر صفر', description = 'مرگ بر آمری
               </Grid>
             </Grid>
             <Grid item>
-              <Typography
-                variant="body2"
-                color="textSecondary">
+              <Typography variant="body2" color="textSecondary">
                 {description}
               </Typography>
             </Grid>
@@ -86,7 +104,6 @@ const Event = ({ name = 'مسافر صفر', description = 'مرگ بر آمری
       </CardActionArea>
     </Card>
   );
-}
-
+};
 
 export default Event;

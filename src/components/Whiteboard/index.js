@@ -1,25 +1,23 @@
-import { disconnect as wsDisconnect } from '@giantmachines/redux-websocket';
 import { makeStyles } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { StatePageContext } from '../../containers/Workshop';
+import { getWhiteboardActionSubscription } from '../../parse/whiteboard';
 import {
-  connectToTeam,
-  getLastWhiteboard,
-} from '../../redux/actions/websocket';
-import {
-  addNewLineNode,
-  deselectNodes,
-  initWhiteboard,
-  removeNode,
-  selectNode,
-  updateShapeProps,
-} from '../../redux/actions/whiteboard';
+  addNewLineNodeAction,
+  deselectWhiteboardNodesAction,
+  getWhiteboardNodesAction,
+  initWhiteboardAction,
+  offlineUpdateWhiteboardAction,
+  removeWhiteboardNodeAction,
+  selectWhiteboardNodeAction,
+  updateWhiteboardNodeAction,
+} from '../../redux/slices/whiteboard';
 import Drawing from '../Konva/Drawing';
 import WhiteboardNavbar from './WhiteboardNavbar';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   whiteboard: {
     position: 'relative',
     display: 'inline-block',
@@ -35,37 +33,39 @@ function Whiteboard({
   nodes,
   drawingMode,
   paintingConfig,
-  wsConnected,
   deselectNodes,
   selectNode,
+  offlineUpdateWhiteboard,
   removeNode,
   updateShapeProps,
   addNewLineNode,
-  initWhiteboard,
-  connectToTeam,
-  wsDisconnect,
-  getLastWhiteboard,
-  userUUID,
   handleClose,
   isFullScreen,
   setIsFullScreen,
+  getWhiteboardNodes,
 }) {
   const classes = useStyles();
 
   const [stage, setStage] = useState();
-  const { player } = useContext(StatePageContext);
 
-  useEffect(() => {
-    initWhiteboard();
-    connectToTeam({ playerUUID: player.uuid, userUUID });
-    return () => wsDisconnect();
-  }, [initWhiteboard, connectToTeam, wsDisconnect, player.uuid, userUUID]);
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
 
-  useEffect(() => {
-    if (wsConnected) {
-      getLastWhiteboard();
+  useEffect(async () => {
+    if (uuid) {
+      getWhiteboardNodes({ uuid });
+      const subscription = await getWhiteboardActionSubscription({
+        uuid,
+      });
+      subscription.on('create', (whiteboardAction) =>
+        offlineUpdateWhiteboard(whiteboardAction.get('action'))
+      );
+      return () => {
+        subscription.unsubscribe();
+      };
     }
-  }, [wsConnected, getLastWhiteboard]);
+  }, [uuid]);
 
   return (
     <div className={classes.whiteboard}>
@@ -98,17 +98,15 @@ const mapStateToProps = (state) => ({
   nodes: state.whiteboard.present.nodes,
   drawingMode: state.whiteboard.present.mode,
   paintingConfig: state.whiteboard.present.paintingConfig,
-  wsConnected: state.websocket.connected,
 });
 
 export default connect(mapStateToProps, {
-  deselectNodes,
-  selectNode,
-  updateShapeProps,
-  addNewLineNode,
-  removeNode,
-  initWhiteboard,
-  connectToTeam,
-  wsDisconnect,
-  getLastWhiteboard,
+  deselectNodes: deselectWhiteboardNodesAction,
+  selectNode: selectWhiteboardNodeAction,
+  updateShapeProps: updateWhiteboardNodeAction,
+  addNewLineNode: addNewLineNodeAction,
+  initWhiteboard: initWhiteboardAction,
+  getWhiteboardNodes: getWhiteboardNodesAction,
+  offlineUpdateWhiteboard: offlineUpdateWhiteboardAction,
+  removeNode: removeWhiteboardNodeAction,
 })(Whiteboard);

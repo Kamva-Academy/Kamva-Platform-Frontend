@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { sendFileAnswer } from '../../../redux/actions/currentState';
+import { sendFileAnswerAction } from '../../../redux/slices/currentState';
 import UploadFileQuestionEditWidget from './edit';
 
 export { UploadFileQuestionEditWidget };
@@ -120,6 +120,6 @@ const mapStateToProps = (state) => ({
   playerId: state.currentState.player?.id,
 });
 
-export default connect(mapStateToProps, { sendFileAnswer })(
+export default connect(mapStateToProps, { sendFileAnswer: sendFileAnswerAction })(
   UploadFileQuestionWidget
 );

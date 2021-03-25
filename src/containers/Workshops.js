@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import { getAllWorkshops } from '../redux/actions/mentor';
+import { getWorkshopsAction } from '../redux/slices/mentor';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -41,14 +41,14 @@ const WorkshopCard = ({ workshop, isLoading }) => {
         {isLoading ? (
           <Skeleton animation="wave" variant="rect" className={classes.media} />
         ) : (
-            workshop.cover_page && (
-              <CardMedia
-                className={classes.media}
-                image={workshop.cover_page}
-                title={workshop.name}
-              />
-            )
-          )}
+          workshop.cover_page && (
+            <CardMedia
+              className={classes.media}
+              image={workshop.cover_page}
+              title={workshop.name}
+            />
+          )
+        )}
         <CardContent className={classes.justify}>
           {isLoading ? (
             <>
@@ -60,15 +60,15 @@ const WorkshopCard = ({ workshop, isLoading }) => {
               <Skeleton animation="wave" height={10} width="80%" />
             </>
           ) : (
-              <>
-                <Typography gutterBottom variant="h4" component="h2">
-                  {workshop.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {workshop.description}
-                </Typography>
-              </>
-            )}
+            <>
+              <Typography gutterBottom variant="h4" component="h2">
+                {workshop.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {workshop.description}
+              </Typography>
+            </>
+          )}
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -135,4 +135,6 @@ const mapStateToProps = (state) => ({
   isLoading: state.mentor.getWorkshopsLoading,
 });
 
-export default connect(mapStateToProps, { getAllWorkshops })(Workshops);
+export default connect(mapStateToProps, {
+  getAllWorkshops: getWorkshopsAction,
+})(Workshops);

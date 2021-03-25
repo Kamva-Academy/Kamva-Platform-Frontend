@@ -1,24 +1,11 @@
-import {
-  Button,
-  Fab,
-  Grid,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
-import Container from '@material-ui/core/Container';
+import { Button, Fab, Grid, makeStyles, Typography } from '@material-ui/core';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import ResponsiveAppBar from '../../components/Appbar/ResponsiveAppBar';
 import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
 import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
-import FAQ from '../../components/SpecialComponents/Homepage/FAQ';
-import Footer from '../../components/SpecialComponents/Homepage/Footer';
-import LandingOurTeam from '../../components/SpecialComponents/Homepage/LandingOurTeam';
-import WorkshopList from '../../components/SpecialComponents/Homepage/WorkshopList';
 
 const useStyles = makeStyles((theme) => ({
   section1: {
@@ -172,7 +159,11 @@ function Homepage() {
 
   return (
     <>
-      <ResponsiveAppBar mode="PROBLEM_DAY" showBackOnScroll hideOnScroll={false} />
+      <ResponsiveAppBar
+        mode="PROBLEM_DAY"
+        showBackOnScroll
+        hideOnScroll={false}
+      />
       <section className={classes.section1}>
         <div id="back-to-top-anchor"></div>
         <div className={classes.landingBackground} />

@@ -15,7 +15,6 @@ import {
 } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import dateFormatter from '../../../../utils/dateFormatter';
@@ -127,4 +126,4 @@ const NotificationButton = ({ notifications = [] }) => {
   );
 };
 
-export default connect()(NotificationButton);
+export default NotificationButton;

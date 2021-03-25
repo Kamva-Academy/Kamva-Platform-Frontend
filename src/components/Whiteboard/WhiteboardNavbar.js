@@ -17,18 +17,19 @@ import {
   TextFields as TextFieldsIcon,
   Undo as UndoIcon,
 } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 
+import { StatePageContext } from '../../containers/Workshop';
 import {
-  addNewTextNode,
-  changeMode,
-  deselectNodes,
+  addNewTextNodeAction,
+  changeWhiteboardModeAction,
+  deselectWhiteboardNodesAction,
   redo,
-  removeAllNodes,
-  removeSelectedNodes,
+  removeAllWhiteboardNodesAction,
+  removeSelectedWhiteboardNodeAction,
   undo,
-} from '../../redux/actions/whiteboard';
+} from '../../redux/slices/whiteboard';
 import downloadFromURL from '../../utils/downloadFromURL';
 import DrawingModes from '../Konva/Drawing/DrawingModes';
 import CircleMenu from './Components/CircleMenu';
@@ -67,6 +68,10 @@ function WhiteboardNavbar({
   const classes = useStyles();
   const [openRemoveNodes, setOpenRemoveNodes] = useState(false);
 
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   return (
     <Grid
       container
@@ -100,8 +105,8 @@ function WhiteboardNavbar({
         <IconButton
           color={drawingMode === DrawingModes.DELETE ? 'primary' : 'default'}
           onClick={() => {
-            changeMode(DrawingModes.DELETE);
-            removeSelectedNodes();
+            changeMode({ mode: DrawingModes.DELETE });
+            removeSelectedNodes({ uuid });
           }}>
           <SvgIcon>
             <path d="M 23.425781 6.695312 L 18.863281 2.132812 C 18.113281 1.40625 16.921875 1.40625 16.171875 2.132812 L 6.648438 11.652344 L 13.90625 18.90625 L 23.425781 9.386719 C 23.789062 9.027344 23.996094 8.535156 24 8.023438 C 23.996094 7.523438 23.789062 7.042969 23.425781 6.695312 Z M 23.425781 6.695312 " />
@@ -118,7 +123,7 @@ function WhiteboardNavbar({
           color={drawingMode === DrawingModes.PAINTING ? 'primary' : 'default'}
           onClick={() => {
             deselectNodes();
-            changeMode(DrawingModes.PAINTING);
+            changeMode({ mode: DrawingModes.PAINTING });
           }}>
           <GestureIcon />
         </IconButton>
@@ -126,14 +131,14 @@ function WhiteboardNavbar({
         <RectangleMenu />
         <IconButton
           onClick={() => {
-            changeMode(DrawingModes.MOVE);
-            addNewTextNode();
+            changeMode({ mode: DrawingModes.MOVE });
+            addNewTextNode({ uuid });
           }}>
           <TextFieldsIcon />
         </IconButton>
         <IconButton
           color={drawingMode === DrawingModes.MOVE ? 'primary' : 'default'}
-          onClick={() => changeMode(DrawingModes.MOVE)}>
+          onClick={() => changeMode({ mode: DrawingModes.MOVE })}>
           <PanToolIcon />
         </IconButton>
       </Grid>
@@ -148,11 +153,11 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  addNewTextNode,
-  changeMode,
-  removeSelectedNodes,
-  deselectNodes,
-  removeAllNodes,
+  addNewTextNode: addNewTextNodeAction,
+  changeMode: changeWhiteboardModeAction,
+  removeSelectedNodes: removeSelectedWhiteboardNodeAction,
+  deselectNodes: deselectWhiteboardNodesAction,
+  removeAllNodes: removeAllWhiteboardNodesAction,
   undo,
   redo,
 })(WhiteboardNavbar);

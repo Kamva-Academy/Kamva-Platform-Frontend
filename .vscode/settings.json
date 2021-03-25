@@ -5,8 +5,10 @@
     "Tabbar",
     "clsx",
     "jitsi",
+    "notistack",
     "scrollable",
     "tinymce",
     "undoable"
-  ]
+  ],
+  "cSpell.ignoreRegExpList": ["/[\\u0621-\\u064A]+/"]
 }

@@ -41,9 +41,12 @@ const useStyles = makeStyles((theme) => ({
 function StatePage({ state = {} }) {
   const classes = useStyles();
   const t = useTranslate();
-  const [openHelpDialog, setOpenHelpDialog] = useState();
+  const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
-  const { widgets = [], inward_edges, outward_edges, help_states = [] } = state;
+  const widgets = [...state.widgets];
+  const help_states = [...state.help_states];
+
+  const { inward_edges, outward_edges } = state;
 
   help_states.sort((a, b) => a.id - b.id);
   widgets.sort((a, b) => a.id - b.id);

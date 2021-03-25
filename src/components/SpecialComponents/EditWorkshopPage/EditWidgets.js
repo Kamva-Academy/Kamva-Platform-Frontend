@@ -2,7 +2,6 @@ import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget, { MODES } from '../../Widget';
@@ -38,7 +37,7 @@ function EditWidgets({ widgets, stateId, stateName }) {
   const notQuestions = widgets.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
-  const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState();
+  const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState(false);
   return (
     <>
       <Grid
@@ -116,4 +115,4 @@ function EditWidgets({ widgets, stateId, stateName }) {
   );
 }
 
-export default connect()(EditWidgets);
+export default EditWidgets;

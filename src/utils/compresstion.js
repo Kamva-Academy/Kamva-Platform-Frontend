@@ -30,12 +30,8 @@ const translate = [
     to: '"sb"',
   },
   {
-    from: '"transformerProps"',
-    to: '"tp"',
-  },
-  {
-    from: '"shapeProps"',
-    to: '"sp"',
+    from: '"shape"',
+    to: '"sh"',
   },
   {
     from: '"stroke"',

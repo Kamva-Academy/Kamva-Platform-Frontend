@@ -1,10 +1,12 @@
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import ComputerIcon from '@material-ui/icons/Computer';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import CreateIcon from '@material-ui/icons/Create';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import SlideshowIcon from '@material-ui/icons/Slideshow';
+import StarHalfIcon from '@material-ui/icons/StarHalf';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
@@ -12,14 +14,9 @@ import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import SlideshowIcon from '@material-ui/icons/Slideshow';
-import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import React from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   paper: {
     padding: '6px 16px',
   },

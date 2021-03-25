@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
 import {
+  Button,
   Card,
   CardActionArea,
+  CardActions,
   CardContent,
   CardMedia,
   makeStyles,
   Typography,
-  Button,
-  CardActions,
 } from '@material-ui/core';
-import MentorIntroduction from '../Dialog/MentorIntroduction'
+import React, { useState } from 'react';
+
+import MentorIntroduction from '../Dialog/MentorIntroduction';
 
 const useStyles = makeStyles({
   root: {
-    // height: '100%',
     width: '100%',
-    maxWidth: '20rem',
     fontSize: '1rem',
     textDecoration: 'none',
     overflow: 'hidden',
@@ -25,7 +24,7 @@ const useStyles = makeStyles({
     '&:hover': {
       transform: 'translateY(-0.2rem) scale(1.02)',
       boxShadow: '0 0.5em 3rem -1rem rgba(0, 0, 0, 0.5)',
-    }
+    },
   },
   media: {
     height: '300px',
@@ -35,12 +34,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PersonCard = ({
-  name,
-  position,
-  image,
-  description,
-}) => {
+const PersonCard = ({ name, position, image, description }) => {
   const classes = useStyles();
   const [isDialogueOpen, setDialogueOpen] = useState(false);
 
@@ -62,7 +56,11 @@ const PersonCard = ({
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button fullWidth variant='contained' color='secondary' onClick={() => setDialogueOpen(!isDialogueOpen)}>
+          <Button
+            fullWidth
+            variant="contained"
+            color="secondary"
+            onClick={() => setDialogueOpen(!isDialogueOpen)}>
             او کیست؟!
           </Button>
         </CardActions>
@@ -72,7 +70,9 @@ const PersonCard = ({
         image={image}
         description={description}
         open={isDialogueOpen}
-        handleClose={() => { setDialogueOpen(!isDialogueOpen) }}
+        handleClose={() => {
+          setDialogueOpen(!isDialogueOpen);
+        }}
       />
     </>
   );

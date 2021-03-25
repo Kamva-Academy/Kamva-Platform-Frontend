@@ -5,7 +5,7 @@ import ImageEditWidget from './edit';
 
 export { ImageEditWidget };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   imageWidget: {
     width: '100%',
     borderRadius: 10,

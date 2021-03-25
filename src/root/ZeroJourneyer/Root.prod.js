@@ -20,7 +20,6 @@ import Workshop from '../../containers/Workshop';
 import Workshops from '../../containers/Workshops';
 import PrivateRoute from '../PrivateRoute';
 
-
 const Root = () => {
   return (
     <>
@@ -28,19 +27,25 @@ const Root = () => {
         <Route path="/our_team" component={OurTeam} />
         <Route path="/change-password" component={ChangePassword} />
         <Route path="/registration" component={Registration} />
-        <PrivateRoute path='/payment/success/' component={SuccessfulPayment} />
-        <PrivateRoute path='/payment/failure/' component={FailedPayment} />
+        <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
+        <PrivateRoute path="/payment/failure/" component={FailedPayment} />
         <PrivateRoute path="/events/" component={Events} />
         <Route path="/event/">
           <Switch>
-            <PrivateRoute path="/event/registration/:event_id?" component={EventRegistration} />
+            <PrivateRoute
+              path="/event/registration/:eventId?"
+              component={EventRegistration}
+            />
           </Switch>
         </Route>
         <Route path="/loading/"></Route>
         <Route path="/admin" component={LoginPage}></Route>
         <Route path="/game/:gameId" component={MiniGames} />
         <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
-        <PrivateRoute path="/edit_article/:articleId/" component={EditArticle} />
+        <PrivateRoute
+          path="/edit_article/:articleId/"
+          component={EditArticle}
+        />
         <PrivateRoute path="/workshops/" component={Workshops} />
         <Route path="/workshop/">
           <Switch>
@@ -56,10 +61,7 @@ const Root = () => {
         <PrivateRoute path="/mentor/" component={MentorPage} />
         <PrivateRoute path="/survey" component={Survey} />
         <Route path="/" component={ZeroJourneyer} />
-        <Route
-          path="*"
-          render={() => <Redirect to={{ pathname: '/' }} />}
-        />
+        <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
       </Switch>
     </>
   );

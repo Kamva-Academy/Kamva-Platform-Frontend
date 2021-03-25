@@ -10,11 +10,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createArticle } from '../../../redux/actions/mentor';
+import { createArticleAction } from '../../../redux/slices/mentor';
 
 function CreateArticleDialog({ open, handleClose, createArticle }) {
   const t = useTranslate();
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm">
@@ -39,4 +39,6 @@ function CreateArticleDialog({ open, handleClose, createArticle }) {
   );
 }
 
-export default connect(null, { createArticle })(CreateArticleDialog);
+export default connect(null, { createArticle: createArticleAction })(
+  CreateArticleDialog
+);

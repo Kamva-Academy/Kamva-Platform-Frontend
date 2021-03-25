@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { StatePageContext } from '../../../../containers/Workshop';
-import { callMentor } from '../../../../redux/actions/currentState';
+import { requestMentorAction } from '../../../../redux/slices/currentState';
 
 const useStyles = makeStyles(() => ({
   mentorButton: {
@@ -35,4 +35,6 @@ const mapStatesToProps = (state) => ({
   playerId: state.currentState.player?.id,
 });
 
-export default connect(mapStatesToProps, { callMentor })(MentorButton);
+export default connect(mapStatesToProps, { callMentor: requestMentorAction })(
+  MentorButton
+);

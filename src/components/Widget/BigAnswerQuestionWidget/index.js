@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { sendBigAnswer } from '../../../redux/actions/currentState';
+import { sendBigAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 import BigAnswerQuestionEditWidget from './edit';
@@ -76,6 +76,6 @@ const mapStateToProps = (state) => ({
   playerId: state.currentState.player?.id,
 });
 
-export default connect(mapStateToProps, { sendBigAnswer })(
+export default connect(mapStateToProps, { sendBigAnswer: sendBigAnswerAction })(
   BigAnswerQuestionWidget
 );

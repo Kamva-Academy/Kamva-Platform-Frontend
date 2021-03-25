@@ -10,13 +10,14 @@ import {
   usePopupState,
 } from 'material-ui-popup-state/hooks';
 import Menu from 'material-ui-popup-state/HoverMenu';
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
+import { StatePageContext } from '../../../containers/Workshop';
 import {
-  addNewRectangleNode,
-  changeMode,
-} from '../../../redux/actions/whiteboard';
+  addNewRectangleNodeAction,
+  changeWhiteboardModeAction,
+} from '../../../redux/slices/whiteboard';
 import DrawingModes from '../../Konva/Drawing/DrawingModes';
 
 const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
@@ -25,9 +26,13 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
     popupId: 'RectangleMenu',
   });
 
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   const onClick = (type) => {
-    changeMode(DrawingModes.MOVE);
-    addNewRectangleNode({ type });
+    changeMode({ mode: DrawingModes.MOVE });
+    addNewRectangleNode({ uuid, type });
     popupState.close();
   };
 
@@ -52,6 +57,7 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
   );
 };
 
-export default connect(null, { changeMode, addNewRectangleNode })(
-  RectangleMenu
-);
+export default connect(null, {
+  changeMode: changeWhiteboardModeAction,
+  addNewRectangleNode: addNewRectangleNodeAction,
+})(RectangleMenu);

@@ -1,6 +1,7 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { Layer, Line,Rect, Stage } from 'react-konva';
+import React, { useCallback, useContext, useRef, useState } from 'react';
+import { Layer, Line, Rect, Stage } from 'react-konva';
 
+import { StatePageContext } from '../../../containers/Workshop';
 import DrawingModes from './DrawingModes';
 import KonvaNode from './KonvaNode';
 
@@ -29,7 +30,7 @@ function Drawing({
   );
 
   const backgroundEl = useRef();
-  const [isRemoving, setIsRemoving] = useState();
+  const [isRemoving, setIsRemoving] = useState(false);
   const [activeLine, setActiveLine] = useState();
 
   const onTouchStageStart = (e) => {
@@ -51,7 +52,7 @@ function Drawing({
     setActiveLine({
       lastUpdate: Date.now(),
       points: [x, y],
-      shapeProps: {
+      shape: {
         ...paintingConfig,
         globalCompositeOperation:
           drawingMode === DrawingModes.ERASING
@@ -79,9 +80,13 @@ function Drawing({
     }
   };
 
+  const {
+    player: { uuid },
+  } = useContext(StatePageContext);
+
   const onTouchStageEnd = () => {
     if (activeLine) {
-      addNewLineNode(activeLine);
+      addNewLineNode({ uuid, line: activeLine });
     }
     setIsRemoving(false);
     setActiveLine(null);
@@ -122,24 +127,26 @@ function Drawing({
               key={node.id}
               drawingMode={drawingMode}
               {...node}
-              onChange={(newAttrs) => updateShapeProps(node.id, newAttrs)}
+              onChange={(newAttrs) =>
+                updateShapeProps({ uuid, nodeId: node.id, shape: newAttrs })
+              }
               onSelect={() => {
                 onDeselectNodes();
                 if (drawingMode === DrawingModes.DELETE) {
-                  removeNode(node.id);
+                  removeNode({ uuid, nodeId: node.id });
                 } else {
-                  onSelectNode(node.id);
+                  onSelectNode({ nodeId: node.id });
                 }
               }}
               onTouchMove={() => {
                 if (drawingMode === DrawingModes.DELETE && isRemoving) {
-                  removeNode(node.id);
+                  removeNode({ uuid, nodeId: node.id });
                 }
               }}
             />
           ))}
           {activeLine && (
-            <Line {...activeLine.shapeProps} points={activeLine.points} />
+            <Line {...activeLine.shape} points={activeLine.points} />
           )}
         </Layer>
       </Stage>

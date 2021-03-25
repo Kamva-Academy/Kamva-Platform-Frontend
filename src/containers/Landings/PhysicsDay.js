@@ -1,16 +1,12 @@
-import '../../Theme/Styles/PhysicsDay.css'
+import '../../Theme/Styles/PhysicsDay.css';
 
-import { Fab, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
-import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import ArticleCard2 from '../../components/Cards/ArticleCard2';
-import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
 import Footer from '../../components/SpecialComponents/Homepage/Footer';
-import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
-import { logout } from '../../redux/actions/account';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -143,7 +139,6 @@ export const articleData = {
 
 function PhysicsDay() {
   const classes = useStyles();
-  const [authDialogOpen, setAuthDialogOpen] = useState();
 
   return (
     <>
@@ -227,7 +222,6 @@ function PhysicsDay() {
       </Container> */}
 
       <Footer />
-
     </>
   );
 }
@@ -236,4 +230,4 @@ const mapStateToProps = (state) => ({
   isLoggedIn: !!state.account.token,
 });
 
-export default connect(mapStateToProps, { logout })(PhysicsDay);
+export default connect(mapStateToProps)(PhysicsDay);

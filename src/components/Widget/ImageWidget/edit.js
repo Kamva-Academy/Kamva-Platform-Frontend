@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createImageWidget } from '../../../redux/actions/mentor';
+import { createImageWidgetAction } from '../../../redux/slices/mentor';
 
 function ImageEditWidget({
   open,
@@ -57,4 +57,6 @@ function ImageEditWidget({
   );
 }
 
-export default connect(null, { createImageWidget })(ImageEditWidget);
+export default connect(null, { createImageWidget: createImageWidgetAction })(
+  ImageEditWidget
+);

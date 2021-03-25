@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { deleteState } from '../../../../redux/actions/mentor';
+import { deleteStateAction } from '../../../../redux/slices/mentor';
 
 function DeleteStateDialog({ open, handleClose, deleteState, stateId }) {
   const t = useTranslate();
@@ -37,4 +37,6 @@ function DeleteStateDialog({ open, handleClose, deleteState, stateId }) {
   );
 }
 
-export default connect(null, { deleteState })(DeleteStateDialog);
+export default connect(null, { deleteState: deleteStateAction })(
+  DeleteStateDialog
+);

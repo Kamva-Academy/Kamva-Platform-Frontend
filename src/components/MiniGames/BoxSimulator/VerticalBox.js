@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
 const VerticalBox = ({ items, dropItem, draggable, onDrop }) => {
   const classes = useStyles();
 
+  // eslint-disable-next-line no-unused-vars
   const [_, dropRef] = useDrop({
     accept: 'CARD',
     drop: () => ({ item: dropItem }),

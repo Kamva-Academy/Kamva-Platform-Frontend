@@ -6,7 +6,7 @@ import Carousel from 'react-material-ui-carousel';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createHelp } from '../../../redux/actions/mentor';
+import { createHelpAction } from '../../../redux/slices/mentor';
 import Widget, { MODES } from '../../Widget';
 import CreateWidgetDialog from './components/CreateWidgetDialog';
 
@@ -91,4 +91,4 @@ function EditStateHelps({ helps, stateId, createHelp }) {
   );
 }
 
-export default connect(null, { createHelp })(EditStateHelps);
+export default connect(null, { createHelp: createHelpAction })(EditStateHelps);
