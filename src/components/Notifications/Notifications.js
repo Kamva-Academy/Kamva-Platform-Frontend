@@ -47,14 +47,14 @@ const Notifications = ({ notifications = [], removeSnackbar }) => {
             }
           },
           onExited: (event, myKey) => {
-            removeSnackbar(myKey);
+            removeSnackbar({ key: myKey });
             removeDisplayed(myKey);
           },
           action: (
             <Button
               onClick={() => {
                 closeSnackbar(key);
-                removeSnackbar(key);
+                removeSnackbar({ key });
                 removeDisplayed(key);
               }}>
               {t('dismiss')}

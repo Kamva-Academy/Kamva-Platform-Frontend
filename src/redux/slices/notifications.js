@@ -8,22 +8,26 @@ export const addNotificationAction = createAction('addNotificationAction');
 
 export const notificationReducer = createReducer([], (builder) => {
   builder
-    .addCase(closeNotificationAction, (state, action) => {
-      state.map((notification) =>
-        action.dismissAll || notification.key === action.key
-          ? { ...notification, dismissed: true }
-          : { ...notification }
-      );
-    })
-    .addCase(removeNotificationAction, (state, action) => {
-      state.filter((notification) => notification.key !== action.key);
+    .addCase(
+      closeNotificationAction,
+      (state, { payload: { key, dismissAll } }) => {
+        state.map((notification) =>
+          dismissAll || notification.key === key
+            ? { ...notification, dismissed: true }
+            : { ...notification }
+        );
+      }
+    )
+    .addCase(removeNotificationAction, (state, { payload: { key } }) => {
+      return state.filter((notification) => notification.key !== key);
     })
     .addCase(addNotificationAction, (state, action) => {
+      if (!action?.payload?.message || !action?.payload?.variant) return;
       state.push({
-        message: action.message,
+        key: new Date().getTime() + Math.random(),
+        message: action.payload.message,
         options: {
-          key: new Date().getTime() + Math.random(),
-          variant: action.variant,
+          variant: action.payload.variant,
           autoHideDuration: 3000,
         },
       });
@@ -33,9 +37,9 @@ export const notificationReducer = createReducer([], (builder) => {
       (state, action) => {
         if (!action?.payload?.message) return;
         state.push({
+          key: new Date().getTime() + Math.random(),
           message: action.payload.message,
           options: {
-            key: new Date().getTime() + Math.random(),
             variant: 'error',
             autoHideDuration: 3000,
           },
@@ -47,9 +51,9 @@ export const notificationReducer = createReducer([], (builder) => {
       (state, action) => {
         if (!action?.payload?.message) return;
         state.push({
+          key: new Date().getTime() + Math.random(),
           message: action.payload.message,
           options: {
-            key: new Date().getTime() + Math.random(),
             variant: 'success',
             autoHideDuration: 3000,
           },

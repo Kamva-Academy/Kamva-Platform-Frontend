@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { postApi } from '../apis';
+import { Apis } from '../apis';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   applyDiscountUrl,
   getEventRegistrationInfoUrl,
@@ -8,49 +9,43 @@ import {
 } from '../constants/urls';
 import { loginAction } from './account';
 
-export const getEventRegistrationInfoAction = createAsyncThunk(
+export const getEventRegistrationInfoAction = createAsyncThunkApi(
   'events/getEventRegistrationInfo',
-  async ({ eventId, memberUuid }) => ({
-    response: await postApi(getEventRegistrationInfoUrl, {
+  Apis.POST,
+  getEventRegistrationInfoUrl,
+  {
+    bodyCreator: ({ eventId, memberUuid }) => ({
       event_id: eventId,
       member_uuid: memberUuid,
     }),
-    additional: {
-      eventId,
-    },
-  })
-);
-
-export const paymentRequestAction = createAsyncThunk(
-  'events/paymentRequest',
-  async ({ participantId, discountCode }, { rejectWithValue }) => {
-    try {
-      return {
-        response: await postApi(paymentRequestUrl, {
-          code: discountCode,
-          participant_id: participantId,
-        }),
-        message: 'در حال انتقال به صفحه‌ی پرداخت...',
-      };
-    } catch {
-      return rejectWithValue({
-        message: 'مشکلی وجود داره! یه چند لحظه دیگه دوباره تلاش کنید.',
-      });
-    }
   }
 );
 
-export const applyDiscountAction = createAsyncThunk(
-  'events/applyDiscount',
-  async ({ discountCode, participantId, eventId }) => ({
-    response: await postApi(applyDiscountUrl, {
+export const paymentRequestAction = createAsyncThunkApi(
+  'events/paymentRequest',
+  Apis.POST,
+  paymentRequestUrl,
+  {
+    bodyCreator: ({ discountCode, participantId }) => ({
       code: discountCode,
       participant_id: participantId,
     }),
-    additional: {
-      event_id: eventId,
+    defaultNotification: {
+      success: 'در حال انتقال به صفحه‌ی پرداخت...',
     },
-  })
+  }
+);
+
+export const applyDiscountAction = createAsyncThunkApi(
+  'events/applyDiscount',
+  Apis.POST,
+  applyDiscountUrl,
+  {
+    bodyCreator: ({ discountCode, participantId }) => ({
+      code: discountCode,
+      participant_id: participantId,
+    }),
+  }
 );
 
 const initialState = {
@@ -75,11 +70,11 @@ const eventSlice = createSlice({
     },
     [getEventRegistrationInfoAction.fulfilled.toString()]: (
       state,
-      { payload: { response, additional } }
+      { payload: { response }, meta: { arg } }
     ) => {
-      state[additional.eventId] = {
-        ...state[additional.eventId],
-        participant_id: response.me,
+      state[arg.eventId] = {
+        ...state[arg.eventId],
+        participantId: response.me,
         event: response.event,
         team: response.team,
       };

@@ -1,5 +1,4 @@
-import { configureAxios, updateToken } from '../../axios';
-import { logoutAction } from '../slices/account';
+import { updateToken } from '../../axios';
 import createStore from './createStore';
 
 const persistedState = localStorage.getItem('rastaState')
@@ -21,10 +20,6 @@ reduxStore.subscribe(() => {
     })
   );
   updateToken({ token: state.account.token });
-});
-
-configureAxios({
-  logoutDispatcher: () => reduxStore.dispatch(logoutAction()),
 });
 
 export default reduxStore;

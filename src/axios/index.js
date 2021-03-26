@@ -11,18 +11,6 @@ const baseAxios = Axios.create({
   maxRedirects: 5,
 });
 
-export const configureAxios = ({ logoutDispatcher }) => {
-  baseAxios.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      if (error.response.status === 401) {
-        logoutDispatcher();
-      }
-      return error;
-    }
-  );
-};
-
 export const updateToken = ({ token }) => {
   if (token) {
     baseAxios.defaults.headers.common['Authorization'] = 'JWT ' + token;

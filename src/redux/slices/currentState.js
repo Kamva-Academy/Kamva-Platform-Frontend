@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { postApi, postFormDataApi } from '../apis';
+import { Apis } from '../apis';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   goBackwardUrl,
   goForwardUrl,
@@ -26,57 +27,66 @@ const initialState = {
   },
 };
 
-export const goForwardAction = createAsyncThunk(
+export const goForwardAction = createAsyncThunkApi(
   'currentState/goForward',
-  async ({ edgeId, playerId }) => ({
-    response: await postApi(goForwardUrl, { edge: edgeId, player: playerId }),
-  })
+  Apis.POST,
+  goForwardUrl,
+  {
+    bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+  }
 );
 
-export const goBackwardAction = createAsyncThunk(
+export const goBackwardAction = createAsyncThunkApi(
   'currentState/goBackward',
-  async ({ edgeId, playerId }) => ({
-    response: await postApi(goBackwardUrl, { edge: edgeId, player: playerId }),
-  })
+  Apis.POST,
+  goBackwardUrl,
+  {
+    bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+  }
 );
 
-export const participantGetCurrentStateAction = createAsyncThunk(
+export const participantGetCurrentStateAction = createAsyncThunkApi(
   'currentState/participantGetCurrentState',
-  async ({ fsmId, playerId }) => ({
-    response: await postApi(participantGetCurrentStateUrl, {
+  Apis.POST,
+  participantGetCurrentStateUrl,
+  {
+    bodyCreator: ({ fsmId, playerId }) => ({
       fsm: fsmId,
       player: playerId,
     }),
-  })
+  }
 );
 
-export const mentorGetCurrentStateAction = createAsyncThunk(
+export const mentorGetCurrentStateAction = createAsyncThunkApi(
   'currentState/mentorGetCurrentState',
-  async ({ stateId, playerUUID }) => ({
-    response: await postApi(mentorGetCurrentStateUrl, {
+  Apis.POST,
+  mentorGetCurrentStateUrl,
+  {
+    bodyCreator: ({ stateId, playerUUID }) => ({
       state: stateId,
       player_uuid: playerUUID,
     }),
-  })
+  }
 );
 
-const sendAnswerAction = createAsyncThunk(
+export const sendAnswerAction = createAsyncThunkApi(
   'currentState/sendAnswer',
-  async (answer) => ({
-    response: await postApi(sendAnswerUrl, answer),
-  })
+  Apis.POST,
+  sendAnswerUrl
 );
 
-export const sendFileAnswerAction = createAsyncThunk(
+export const sendFileAnswerAction = createAsyncThunkApi(
   'currentState/sendFileAnswer',
-  async ({ playerId, problemId, answerFile }) => ({
-    response: await postFormDataApi(sendAnswerUrl, {
+  Apis.POST,
+  sendAnswerUrl,
+  {
+    bodyCreator: ({ playerId, problemId, answerFile }) => ({
       player: playerId,
       problem: problemId,
       problem_type: 'ProblemUploadFileAnswer',
       answer_file: answerFile,
     }),
-  })
+  }
 );
 
 export const sendBigAnswerAction = ({ playerId, problemId, answer }) =>
@@ -112,19 +122,25 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
     },
   });
 
-export const startWorkshopAction = createAsyncThunk(
+export const startWorkshopAction = createAsyncThunkApi(
   'currentState/startWorkshop',
-  async ({ fsmId }) => ({
-    response: await postApi(startWorkshopUrl, { fsm: fsmId }),
-  })
+  Apis.POST,
+  startWorkshopUrl,
+  {
+    bodyCreator: ({ fsmId }) => ({ fsm: fsmId }),
+  }
 );
 
-export const requestMentorAction = createAsyncThunk(
+export const requestMentorAction = createAsyncThunkApi(
   'currentState/requestMentor',
-  async ({ fsmId, playerId }) => ({
-    response: await postApi(requestMentorUrl, { fsm: fsmId, player: playerId }),
-    message: 'درخواست شما ارسال شد.',
-  })
+  Apis.POST,
+  requestMentorUrl,
+  {
+    bodyCreator: ({ fsmId, playerId }) => ({ fsm: fsmId, player: playerId }),
+    defaultNotification: {
+      success: 'درخواست شما ارسال شد.',
+    },
+  }
 );
 
 const stateNeedUpdate = (state) => {

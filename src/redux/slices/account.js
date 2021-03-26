@@ -1,75 +1,68 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { postApi, postFormDataApi } from '../apis';
-import { loginUrl, registerUrl } from '../constants/urls';
+import { Apis } from '../apis';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
+import {
+  changePasswordUrl,
+  getVerificationCodeUrl,
+  loginUrl,
+  registerUrl,
+} from '../constants/urls';
 
 const initialState = { token: null, user: {} };
 
-export const loginAction = createAsyncThunk(
+export const loginAction = createAsyncThunkApi(
   'users/login',
-  async ({ username, password }, { rejectWithValue }) => {
-    try {
-      return {
-        response: await postApi(loginUrl, { username, password }),
-        message: 'دوباره سلام!',
-      };
-    } catch {
-      return rejectWithValue({ message: 'نام کاربری یا رمز عبورت اشتباهه!' });
-    }
+  Apis.POST,
+  loginUrl,
+  {
+    defaultNotification: {
+      success: 'دوباره سلام!',
+      error: 'نام کاربری یا رمز عبورت اشتباهه!',
+    },
   }
 );
 
-export const registerAction = createAsyncThunk(
+export const registerAction = createAsyncThunkApi(
   'users/register',
-  async (registrationData, { rejectWithValue }) => {
-    try {
-      return {
-        response: await postFormDataApi(registerUrl, registrationData),
-        message:
-          'ایول! ثبت‌نامت با موفقیت انجام شد. یه پیامک برات میاد که جزئیات ثبت‌نامت توشه.',
-      };
-    } catch {
-      return rejectWithValue({
-        message:
-          'ثبت‌نامت با مشکل روبه‌رو شده. یه چند لحظه دیگه دوباره تلاش کن!',
-      });
-    }
+  Apis.POST_FORM_DATA,
+  registerUrl,
+  {
+    defaultNotification: {
+      success:
+        'ایول! ثبت‌نامت با موفقیت انجام شد. یه پیامک برات میاد که جزئیات ثبت‌نامت توشه.',
+      error: 'ثبت‌نامت با مشکل روبه‌رو شده. یه چند لحظه دیگه دوباره تلاش کن!',
+    },
   }
 );
 
-export const getVerificationCodeAction = createAsyncThunk(
+export const getVerificationCodeAction = createAsyncThunkApi(
   'users/getVerificationCode',
-  async ({ phone, codeType }, { rejectWithValue }) => {
-    try {
-      return {
-        response: await postApi({ phone, code_type: codeType }),
-        message: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
-      };
-    } catch {
-      return rejectWithValue({
-        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',
-      });
-    }
+  Apis.POST,
+  getVerificationCodeUrl,
+  {
+    bodyCreator: ({ phone, codeType }) => ({ phone, code_type: codeType }),
+    defaultNotification: {
+      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
+      error: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',
+    },
   }
 );
 
-export const changePasswordAction = createAsyncThunk(
+export const changePasswordAction = createAsyncThunkApi(
   'users/changePassword',
-  async ({ phone, password, verificationCode }, { rejectWithValue }) => {
-    try {
-      return {
-        response: await postApi({
-          phone,
-          password,
-          verify_code: verificationCode,
-        }),
-        message: 'حله! رمزت با موفقیت عوض شد.',
-      };
-    } catch {
-      return rejectWithValue({
-        message: 'یه مشکلی وجود داره، رمزت تغییر نکرد!',
-      });
-    }
+  Apis.POST,
+  changePasswordUrl,
+  {
+    bodyCreator: ({ phone, password, verificationCode }) => ({
+      phone,
+      password,
+      verify_code: verificationCode,
+    }),
+    defaultNotification: {
+      success: 'حله! رمزت با موفقیت عوض شد.',
+      error: 'یه مشکلی وجود داره، رمزت تغییر نکرد!',
+    },
   }
 );
 
