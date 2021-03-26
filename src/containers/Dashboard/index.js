@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
-  container: () => ({
+  container: {
     marginTop: 80,
     height: `calc(100vh - ${80}px)`,
-  }),
+  },
   logo: {
     height: 100,
   },

@@ -6,14 +6,14 @@ import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import EventCard from '../../components/Cards/Event';
 
 const useStyles = makeStyles((theme) => ({
-  container: () => ({
+  container: {
     marginTop: 80,
     height: `calc(100vh - ${80}px)`,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-  }),
+  },
   logo: {
     maxHeight: '80vh',
     maxWidth: '100%',

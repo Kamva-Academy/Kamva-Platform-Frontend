@@ -27,14 +27,14 @@ import {
 } from '../redux/slices/mentor';
 
 const useStyles = makeStyles((theme) => ({
-  container: () => ({
+  container: {
     marginTop: 80,
     height: `calc(100vh - ${80}px)`,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-  }),
+  },
   rightBox: {
     padding: theme.spacing(2),
   },
