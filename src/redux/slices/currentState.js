@@ -75,7 +75,12 @@ export const mentorGetCurrentStateAction = createAsyncThunkApi(
 export const sendAnswerAction = createAsyncThunkApi(
   'currentState/sendAnswer',
   Apis.POST,
-  sendAnswerUrl
+  sendAnswerUrl,
+  {
+    defaultNotification: {
+      success: 'جوابت با موفقیت ثبت شد!',
+    },
+  }
 );
 
 export const sendFileAnswerAction = createAsyncThunkApi(
@@ -89,6 +94,9 @@ export const sendFileAnswerAction = createAsyncThunkApi(
       problem_type: 'ProblemUploadFileAnswer',
       answer_file: answerFile,
     }),
+    defaultNotification: {
+      success: 'جوابت با موفقیت ثبت شد!',
+    },
   }
 );
 
