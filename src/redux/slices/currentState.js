@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
+  getScoresUrl,
   goBackwardUrl,
   goForwardUrl,
   mentorGetCurrentStateUrl,
@@ -25,6 +26,8 @@ const initialState = {
     widgets: [],
     help_states: [],
   },
+  scores: [],
+  totalScore: 0,
 };
 
 export const goForwardAction = createAsyncThunkApi(
@@ -143,6 +146,15 @@ export const requestMentorAction = createAsyncThunkApi(
   }
 );
 
+export const getScoresAction = createAsyncThunkApi(
+  'player/getScore',
+  Apis.POST,
+  getScoresUrl,
+  {
+    bodyCreator: ({ fsmId, playerId }) => ({ fsm: fsmId, player: playerId }),
+  }
+);
+
 const stateNeedUpdate = (state) => {
   state.needUpdateState = true;
 };
@@ -199,8 +211,16 @@ const currentStateSlice = createSlice({
     ) => {
       if (response.error) {
         return state;
-      }
+      } // TODO: check backend
       state.player = response.player;
+    },
+
+    [getScoresAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      state.scores = response.score_transactions;
+      state.totalScore = response.scores_sum;
     },
   },
 });

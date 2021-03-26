@@ -45,3 +45,5 @@ export const getEventRegistrationInfoUrl = 'auth/registration-info/';
 export const paymentRequestUrl = 'auth/pay/';
 
 export const applyDiscountUrl = 'auth/verify-discount/';
+
+export const getScoresUrl = 'fsm/getscores/';
