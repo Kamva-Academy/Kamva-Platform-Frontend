@@ -1,5 +1,5 @@
 import { IconButton } from '@material-ui/core';
-import { Delete as DeleteIcon,Edit as EditIcon } from '@material-ui/icons';
+import { Delete as DeleteIcon, Edit as EditIcon } from '@material-ui/icons';
 import React, { useState } from 'react';
 
 import DeleteWidgetDialog from './components/DeleteWidgetDialog';
@@ -8,6 +8,7 @@ import WIDGET_TYPES from './WidgetTypes';
 export const MODES = {
   VIEW: 'VIEW',
   EDIT: 'EDIT',
+  CORRECTION: 'CORRECTION',
 };
 
 const Widget = ({ widget, mode = MODES.VIEW, stateId, ...props }) => {
@@ -40,7 +41,7 @@ const Widget = ({ widget, mode = MODES.VIEW, stateId, ...props }) => {
           />
         </>
       )}
-      <WidgetComponent {...props} {...widget} disabled={mode === MODES.EDIT} />
+      <WidgetComponent {...props} {...widget} mode={mode} />
     </div>
   );
 };

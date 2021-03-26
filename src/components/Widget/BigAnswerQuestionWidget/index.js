@@ -1,4 +1,4 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, Paper } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -6,6 +6,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { sendBigAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
+import { MODES } from '..';
 import BigAnswerQuestionEditWidget from './edit';
 
 export { BigAnswerQuestionEditWidget };
@@ -14,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     marginTop: theme.spacing(1),
   },
+  showAnswer: {
+    background: '#eee',
+  },
 }));
 
 const BigAnswerQuestionWidget = ({
@@ -21,7 +25,7 @@ const BigAnswerQuestionWidget = ({
   text = '',
   answer,
   last_submit,
-  disabled = true,
+  mode,
   playerId,
   sendBigAnswer,
 }) => {
@@ -39,35 +43,38 @@ const BigAnswerQuestionWidget = ({
         content={text}
       />
       <label>{t('answer')}</label>
-      {disabled ? (
-        <TinyPreview
-          frameProps={{
-            frameBorder: '1',
-            scrolling: 'no',
-            width: '100%',
-          }}
-          content={answer.text}
-        />
-      ) : (
+      {mode === MODES.VIEW ? (
         <TinyEditorComponent
           id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
           content={value}
           onChange={setValue}
         />
+      ) : (
+        <Paper className={classes.showAnswer}>
+          <TinyPreview
+            frameProps={{
+              frameBorder: '0',
+              width: '100%',
+            }}
+            content={mode === MODES.EDIT ? answer.text : value}
+          />
+        </Paper>
       )}
 
-      <Button
-        fullWidth
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.submit}
-        disabled={disabled}
-        onClick={() =>
-          sendBigAnswer({ playerId, problemId: id, answer: value })
-        }>
-        {t('submitAnswer')}
-      </Button>
+      {mode !== MODES.CORRECTION && (
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          size="small"
+          className={classes.submit}
+          disabled={mode === MODES.EDIT}
+          onClick={() =>
+            sendBigAnswer({ playerId, problemId: id, answer: value })
+          }>
+          {t('submitAnswer')}
+        </Button>
+      )}
     </>
   );
 };
