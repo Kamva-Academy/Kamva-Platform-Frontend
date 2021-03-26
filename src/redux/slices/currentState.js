@@ -36,6 +36,9 @@ export const goForwardAction = createAsyncThunkApi(
   goForwardUrl,
   {
     bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+    defaultNotification: {
+      showHttpError: true,
+    },
   }
 );
 
@@ -45,6 +48,9 @@ export const goBackwardAction = createAsyncThunkApi(
   goBackwardUrl,
   {
     bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+    defaultNotification: {
+      showHttpError: true,
+    },
   }
 );
 

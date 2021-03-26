@@ -2,7 +2,8 @@ export const errorHandler = (
   error,
   dispatch,
   rejectWithValue,
-  errorMessage
+  errorMessage,
+  showHttpError
 ) => {
   if (!error.response) {
     return rejectWithValue({
@@ -28,8 +29,14 @@ export const errorHandler = (
         message: 'ایرادی پیش اومده! لطفا ما را در جریان بذار!',
       });
   }
+
   if (errorMessage) {
     return rejectWithValue({ message: errorMessage });
   }
+
+  if (showHttpError && error.response.data?.error) {
+    return rejectWithValue({ message: error.response.data.error });
+  }
+
   return rejectWithValue();
 };

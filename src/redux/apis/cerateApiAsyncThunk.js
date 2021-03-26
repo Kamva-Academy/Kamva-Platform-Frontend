@@ -19,7 +19,8 @@ export const createAsyncThunkApi = (typePrefix, api, url, options) =>
         error,
         dispatch,
         rejectWithValue,
-        options?.defaultNotification?.error
+        options?.defaultNotification?.error,
+        options?.defaultNotification?.showHttpError || false
       );
     }
   });
