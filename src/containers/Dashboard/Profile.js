@@ -31,12 +31,10 @@ const Profile = () => {
           justify="space-evenly"
           alignItems="center"
           style={{ height: '100%' }}>
-          <Grid container item direction="column" sm={5}>
+          <Grid container direction="column" sm={5}>
             <Paper className={classes.paper}>
               <Grid item>شماره تیم</Grid>
               <Grid item>اسم تیم</Grid>
-              <Grid item>salam</Grid>
-              <Grid item>salam</Grid>
               <Grid item>
                 <Button variant="contained" color="primary" fullWidth>
                   پرداخت
