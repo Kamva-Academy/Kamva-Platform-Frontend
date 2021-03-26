@@ -1,13 +1,13 @@
 import { Button, Container, Grid, makeStyles, Paper } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
-  container: ({ marginTop }) => ({
-    marginTop: marginTop,
-    height: `calc(100vh - ${marginTop}px)`,
+  container: () => ({
+    marginTop: 80,
+    height: `calc(100vh - ${80}px)`,
   }),
   logo: {
     height: 100,
@@ -20,12 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard() {
-  const [marginTop, setMarginTop] = useState('');
-  const classes = useStyles({ marginTop });
-
-  useEffect(() => {
-    setMarginTop(document.getElementById('appBar').offsetHeight);
-  }, []);
+  const classes = useStyles();
 
   return (
     <>
