@@ -177,7 +177,7 @@ const getNewState = (state, { payload: { response } }) => {
 };
 
 const sentAnswer = (state, { payload: { response } }) => {
-  state.widgets = state.state.widgets.map((widget) =>
+  state.state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
           ...widget,
