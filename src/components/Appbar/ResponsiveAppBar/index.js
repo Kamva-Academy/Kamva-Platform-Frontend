@@ -63,8 +63,6 @@ function ResponsiveAppBar({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
 
-  console.log(mode);
-
   const {
     desktopLeftItems,
     desktopRightItems,
@@ -77,16 +75,15 @@ function ResponsiveAppBar({
     <>
       <HideOnScroll disable={!hideOnScroll}>
         <AppBar
-          id='appBar'
+          id="appBar"
           className={clsx(
             classes.appBar,
             showBackOnScroll && !trigger && classes.hideBack
           )}
           color="inherit">
-          <Container >
+          <Container>
             <Toolbar className={classes.toolbar} disableGutters>
-
-              {mobileMenuListItems.length > 0 &&
+              {mobileMenuListItems.length > 0 && (
                 <IconButton
                   edge="start"
                   color="inherit"
@@ -95,28 +92,36 @@ function ResponsiveAppBar({
                   onClick={() => setDrawerOpen(true)}>
                   <MenuIcon />
                 </IconButton>
-              }
+              )}
 
               <Hidden xsDown>
-                <Grid spacing={1} container justify='flex-start' alignItems='center'>
+                <Grid
+                  spacing={1}
+                  container
+                  justify="flex-start"
+                  alignItems="center">
                   {desktopRightItems.map((item, index) => {
                     return (
                       <Grid key={index} item>
                         {item}
                       </Grid>
-                    )
+                    );
                   })}
                 </Grid>
               </Hidden>
 
               <Hidden smUp>
-                <Grid spacing={1} container justify='flex-start' alignItems='center'>
+                <Grid
+                  spacing={1}
+                  container
+                  justify="flex-start"
+                  alignItems="center">
                   {mobileRightItems.map((item, index) => {
                     return (
                       <Grid key={index} item>
                         {item}
                       </Grid>
-                    )
+                    );
                   })}
                 </Grid>
               </Hidden>
@@ -124,25 +129,33 @@ function ResponsiveAppBar({
               <div className={classes.grow} />
 
               <Hidden xsDown>
-                <Grid spacing={1} container justify='flex-end' alignItems='center'>
+                <Grid
+                  spacing={1}
+                  container
+                  justify="flex-end"
+                  alignItems="center">
                   {desktopLeftItems.map((item, index) => {
                     return (
                       <Grid key={index} item>
                         {item}
                       </Grid>
-                    )
+                    );
                   })}
                 </Grid>
               </Hidden>
 
               <Hidden smUp>
-                <Grid spacing={1} container justify='flex-end' alignItems='center'>
+                <Grid
+                  spacing={1}
+                  container
+                  justify="flex-end"
+                  alignItems="center">
                   {mobileLeftItems.map((item, index) => {
                     return (
                       <Grid key={index} item>
                         {item}
                       </Grid>
-                    )
+                    );
                   })}
                 </Grid>
               </Hidden>
@@ -159,9 +172,7 @@ function ResponsiveAppBar({
             <div className={classes.list}>
               <List>
                 {mobileMenuListItems.map((item, index) => (
-                  <ListItem key={index}>
-                    {item}
-                  </ListItem>
+                  <ListItem key={index}>{item}</ListItem>
                 ))}
               </List>
             </div>
