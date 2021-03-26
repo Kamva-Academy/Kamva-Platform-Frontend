@@ -38,16 +38,15 @@ function ScoreHistoryDialog({
   handleClose,
   scores,
   totalScore,
-  playerId,
   getScores,
 }) {
   const classes = useStyles();
 
-  const { fsmId } = useContext(StatePageContext);
+  const { fsmId, player } = useContext(StatePageContext);
 
   useEffect(() => {
     if (open) {
-      getScores({ fsmId, playerId });
+      getScores({ fsmId, playerId: player.id });
     }
   }, [open]);
 
@@ -99,7 +98,6 @@ function ScoreHistoryDialog({
 const mapStateToProps = (state) => ({
   scores: state.currentState.scores,
   totalScore: state.currentState.totalScore,
-  playerId: state.currentState.player?.id,
 });
 
 export default connect(mapStateToProps, { getScores: getScoresAction })(

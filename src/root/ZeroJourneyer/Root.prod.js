@@ -54,7 +54,7 @@ const Root = () => {
       <Route path="/workshop/">
         <Switch>
           <PrivateRoute
-            path="/workshop/:playerUUID/:fsmId/:stateId/"
+            path="/workshop/:playerUUID/:playerId/:fsmId/:stateId/"
             component={Workshop}
             onlyMentor
           />

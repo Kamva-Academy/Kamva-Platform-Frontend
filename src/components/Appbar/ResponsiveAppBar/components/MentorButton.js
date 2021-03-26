@@ -12,27 +12,27 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function MentorButton({ callMentor, playerId, disabled = false }) {
+function MentorButton({ callMentor, isMentor, disabled = false }) {
   const classes = useStyles();
 
   const t = useTranslate();
 
-  const { fsmId } = useContext(StatePageContext);
+  const { fsmId, player } = useContext(StatePageContext);
 
   return (
     <Button
       variant="contained"
       color="primary"
       className={classes.mentorButton}
-      disabled={!playerId || disabled}
-      onClick={() => callMentor({ fsmId, playerId })}>
+      disabled={isMentor || disabled}
+      onClick={() => callMentor({ fsmId, playerId: player.id })}>
       {t('callMentor')}
     </Button>
   );
 }
 
 const mapStatesToProps = (state) => ({
-  playerId: state.currentState.player?.id,
+  isMentor: state.account.user?.is_mentor,
 });
 
 export default connect(mapStatesToProps, { callMentor: requestMentorAction })(
