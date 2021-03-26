@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
@@ -74,7 +75,11 @@ const FailedPayment = () => {
               </Paper>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="primary" href="/events">
+              <Button
+                variant="contained"
+                component={Link}
+                color="primary"
+                to="/events">
                 {'باشه. متوجه شدم.'}
               </Button>
             </Grid>

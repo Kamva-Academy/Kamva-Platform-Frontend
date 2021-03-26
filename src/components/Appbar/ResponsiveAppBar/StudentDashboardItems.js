@@ -7,7 +7,7 @@ import LogoutButton from './components/LogoutButton';
 
 const DashboardItems = () => {
   const logoButton = <LogoButton />;
-  const eventsButton = <DashboardButton name={'رویدادها'} href={'/events'} />;
+  const eventsButton = <DashboardButton name={'رویدادها'} to={'/events'} />;
   const logoutButton = <LogoutButton />;
   const Avatar = <AvatarComponent />;
 

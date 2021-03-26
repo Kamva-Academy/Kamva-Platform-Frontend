@@ -15,6 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { loginAction } from '../../../redux/slices/account';
 import { addNotificationAction } from '../../../redux/slices/notifications';
@@ -132,7 +133,7 @@ function AuthDialog({
           <Grid item>
             <Typography align="center">
               {'اگر رمزتون رو فراموش کردین، به '}
-              <a href="/change-password">{'این‌جا'}</a>
+              <Link to="/change-password">{'این‌جا'}</Link>
               {' مراجعه کنید.'}
             </Typography>
           </Grid>

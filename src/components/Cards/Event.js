@@ -1,6 +1,7 @@
 import { Card, CardActionArea, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { baseURL } from '../../axios';
 
@@ -62,7 +63,8 @@ const Event = ({
   return (
     <Card className={classes.paper}>
       <CardActionArea
-        href={`${process.env.PUBLIC_URL}/event/registration/${id}`}
+        component={Link}
+        to={`${process.env.PUBLIC_URL}/event/registration/${id}`}
         disabled={!is_active}>
         <Grid container spacing={1} className={classes.mainContainer}>
           <Grid
