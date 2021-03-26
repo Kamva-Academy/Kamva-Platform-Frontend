@@ -129,7 +129,7 @@ const MentorPage = ({
               </ButtonGroup>
             </Grid>
             <Hidden xsDown>
-              <Grid item fullWidth>
+              <Grid item>
                 <Button
                   fullWidth
                   color="primary"
@@ -142,12 +142,12 @@ const MentorPage = ({
             </Hidden>
           </Grid>
           <Grid item sm={9} xs={12}>
-            <Paper elevation={3} classNames={classes.rightBox}>
+            <Paper elevation={3} className={classes.rightBox}>
               <TabComponent {...tabs[tabIndex].props} />
             </Paper>
           </Grid>
           <Hidden smUp>
-            <Grid item fullWidth>
+            <Grid item>
               <Button fullWidth color="primary" startIcon={<ExitToAppIcon />}>
                 {t('back')}
               </Button>
