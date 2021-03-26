@@ -9,8 +9,12 @@ export const errorHandler = (
       message: 'ارتباطت با مشکل مواجه شده. یه چند لحظه دیگه دوباره تلاش کن!',
     });
   }
+
   switch (error.response.status) {
     case 401:
+      if (error.config.url === 'auth/token/obtain/') {
+        break;
+      }
       dispatch({ type: 'account/logout' });
       return rejectWithValue({
         message: 'لطفا دوباره وارد سامانه شو!',
@@ -23,10 +27,9 @@ export const errorHandler = (
       return rejectWithValue({
         message: 'ایرادی پیش اومده! لطفا ما را در جریان بذار!',
       });
-    default:
-      if (errorMessage) {
-        return rejectWithValue({ message: errorMessage });
-      }
-      return rejectWithValue();
   }
+  if (errorMessage) {
+    return rejectWithValue({ message: errorMessage });
+  }
+  return rejectWithValue();
 };
