@@ -10,6 +10,7 @@ import {
   makeStyles,
   Toolbar,
   useScrollTrigger,
+  withWidth,
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import clsx from 'clsx';
@@ -41,9 +42,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
     },
   },
-  grow: {
-    flexGrow: 1,
-  },
   list: {
     width: 250,
   },
@@ -58,6 +56,7 @@ function ResponsiveAppBar({
   mode = 'LANDING',
   showBackOnScroll = false,
   hideOnScroll = false,
+  width,
 }) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -70,6 +69,9 @@ function ResponsiveAppBar({
     mobileRightItems,
     mobileMenuListItems,
   } = modes[mode]();
+
+  const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
+  const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
 
   return (
     <>
@@ -93,72 +95,34 @@ function ResponsiveAppBar({
                   <MenuIcon />
                 </IconButton>
               )}
-
-              <Hidden xsDown>
-                <Grid
-                  spacing={1}
-                  container
-                  justify="flex-start"
-                  alignItems="center">
-                  {desktopRightItems.map((item, index) => {
-                    return (
+              <Grid container justify="space-between">
+                <Grid item>
+                  <Grid
+                    spacing={1}
+                    container
+                    justify="flex-start"
+                    alignItems="center">
+                    {rightItems.map((item, index) => (
                       <Grid key={index} item>
                         {item}
                       </Grid>
-                    );
-                  })}
+                    ))}
+                  </Grid>
                 </Grid>
-              </Hidden>
-
-              <Hidden smUp>
-                <Grid
-                  spacing={1}
-                  container
-                  justify="flex-start"
-                  alignItems="center">
-                  {mobileRightItems.map((item, index) => {
-                    return (
+                <Grid item>
+                  <Grid
+                    spacing={1}
+                    container
+                    justify="flex-end"
+                    alignItems="center">
+                    {leftItems.map((item, index) => (
                       <Grid key={index} item>
                         {item}
                       </Grid>
-                    );
-                  })}
+                    ))}
+                  </Grid>
                 </Grid>
-              </Hidden>
-
-              <div className={classes.grow} />
-
-              <Hidden xsDown>
-                <Grid
-                  spacing={1}
-                  container
-                  justify="flex-end"
-                  alignItems="center">
-                  {desktopLeftItems.map((item, index) => {
-                    return (
-                      <Grid key={index} item>
-                        {item}
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </Hidden>
-
-              <Hidden smUp>
-                <Grid
-                  spacing={1}
-                  container
-                  justify="flex-end"
-                  alignItems="center">
-                  {mobileLeftItems.map((item, index) => {
-                    return (
-                      <Grid key={index} item>
-                        {item}
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-              </Hidden>
+              </Grid>
             </Toolbar>
           </Container>
         </AppBar>
@@ -183,4 +147,4 @@ function ResponsiveAppBar({
   );
 }
 
-export default ResponsiveAppBar;
+export default withWidth()(ResponsiveAppBar);
