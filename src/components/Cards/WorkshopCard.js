@@ -73,6 +73,14 @@ const WorkshopCard = ({
       </CardActionArea>
       <CardActions>
         <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          component={Link}
+          to={`/correction/${id}`}>
+          تصحیح
+        </Button>
+        <Button
           variant="outlined"
           fullWidth
           color="primary"
