@@ -38,7 +38,7 @@ const ZeroJourneyer = () => (
   </SnackbarProvider>
 );
 
-const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
+const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
   useEffect(() => {
     if (redirectTo !== null) {
@@ -85,7 +85,6 @@ const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
 
 const mapStateToProps = (state) => ({
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
-  token: state.account.token,
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
 });
