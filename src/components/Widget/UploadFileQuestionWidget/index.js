@@ -7,6 +7,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
+import { baseURL } from '../../../axios';
 import { sendFileAnswerAction } from '../../../redux/slices/currentState';
 import UploadFileQuestionEditWidget from './edit';
 
@@ -103,7 +104,7 @@ const UploadFileQuestionWidget = ({
               size="small"
               endIcon={<DescriptionOutlinedIcon />}
               className={classes.lastUploadButton}
-              href={'http://workshop.rastaiha.ir' + last_submit.answer_file} // TODO: fix in back
+              href={baseURL + last_submit.answer_file} // TODO: fix in back
               component="a"
               download
               target="_blank">
@@ -120,6 +121,6 @@ const mapStateToProps = (state) => ({
   playerId: state.currentState.player?.id,
 });
 
-export default connect(mapStateToProps, { sendFileAnswer: sendFileAnswerAction })(
-  UploadFileQuestionWidget
-);
+export default connect(mapStateToProps, {
+  sendFileAnswer: sendFileAnswerAction,
+})(UploadFileQuestionWidget);

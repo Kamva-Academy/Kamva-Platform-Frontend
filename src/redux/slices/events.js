@@ -5,6 +5,7 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   applyDiscountUrl,
   getEventRegistrationInfoUrl,
+  getWorkshopsDescriptionUrl,
   paymentRequestUrl,
 } from '../constants/urls';
 import { loginAction } from './account';
@@ -48,8 +49,18 @@ export const applyDiscountAction = createAsyncThunkApi(
   }
 );
 
+export const getWorkshopsDescriptionAction = createAsyncThunkApi(
+  'events/getWorkshops',
+  Apis.GET,
+  getWorkshopsDescriptionUrl
+);
+
 const initialState = {
   isFetching: false,
+  getWorkshopsLoading: false,
+  workshops: [],
+  events: [],
+  registeredEvents: {},
 };
 
 const isFetching = (state) => {
@@ -63,7 +74,6 @@ const isNotFetching = (state) => {
 const eventSlice = createSlice({
   name: 'events',
   initialState,
-  reducers: {},
   extraReducers: {
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.events = response.events;
@@ -72,8 +82,11 @@ const eventSlice = createSlice({
       state,
       { payload: { response }, meta: { arg } }
     ) => {
-      state[arg.eventId] = {
-        ...state[arg.eventId],
+      if (!state.registeredEvents) {
+        state.registeredEvents = {};
+      }
+      state.registeredEvents[arg.eventId] = {
+        ...state.registeredEvents[arg.eventId],
         participantId: response.me,
         event: response.event,
         team: response.team,
@@ -82,6 +95,19 @@ const eventSlice = createSlice({
     [paymentRequestAction.pending.toString()]: isFetching,
     [paymentRequestAction.fulfilled.toString()]: isNotFetching,
     [paymentRequestAction.rejected.toString()]: isNotFetching,
+    [getWorkshopsDescriptionAction.pending.toString()]: (state) => {
+      state.getWorkshopsLoading = true;
+    },
+    [getWorkshopsDescriptionAction.rejected.toString()]: (state) => {
+      state.getWorkshopsLoading = false;
+    },
+    [getWorkshopsDescriptionAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      state.workshops = response;
+      state.getWorkshopsLoading = false;
+    },
   },
 });
 

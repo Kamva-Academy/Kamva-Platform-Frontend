@@ -4,8 +4,11 @@ import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   articlesUrl,
+  getProblemsUrl,
+  getSubmissionsUrl,
   getUnreadNotificationsUrl,
   helpUrl,
+  markSubmissionUrl,
   statesUrl,
   visitWorkshopPlayerUrl,
   widgetUrl,
@@ -18,6 +21,9 @@ const initialState = {
   articles: [],
   teams: {},
   notifications: [],
+  problems: [],
+  submissions: [],
+  submissionsIsLoading: false,
 };
 
 export const getUnreadNotificationsAction = createAsyncThunkApi(
@@ -52,6 +58,41 @@ export const createWorkshopAction = createAsyncThunkApi(
       fsm_p_type: playerType,
       fsm_learning_type: mentorType,
     }),
+  }
+);
+
+export const getProblemsAction = createAsyncThunkApi(
+  'workshops/getProblems',
+  Apis.GET,
+  getProblemsUrl
+);
+
+export const getSubmissionsAction = createAsyncThunkApi(
+  'workshops/getSubmissions',
+  Apis.POST,
+  getSubmissionsUrl,
+  {
+    bodyCreator: ({ fsmId, stateId, problemId }) => ({
+      fsm_id: fsmId,
+      state_id: stateId,
+      problem_id: problemId,
+    }),
+  }
+);
+
+export const markSubmissionAction = createAsyncThunkApi(
+  'workshops/markSubmission',
+  Apis.POST,
+  markSubmissionUrl,
+  {
+    bodyCreator: ({ submissionId, score, description }) => ({
+      submission_id: submissionId,
+      score,
+      description,
+    }),
+    defaultNotification: {
+      success: 'نمره با موفقیت ثبت شد!',
+    },
   }
 );
 
@@ -289,6 +330,27 @@ const mentorSlice = createSlice({
       state.notifications = state.notifications.filter(
         (notification) => notification !== arg.workshopPlayerId
       );
+    },
+
+    [getProblemsAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      state.problems = response;
+    },
+
+    [getSubmissionsAction.pending.toString()]: (state) => {
+      state.submissionsIsLoading = true;
+    },
+    [getSubmissionsAction.rejected.toString()]: (state) => {
+      state.submissionsIsLoading = false;
+    },
+    [getSubmissionsAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      state.submissions = response;
+      state.submissionsIsLoading = false;
     },
   },
 });

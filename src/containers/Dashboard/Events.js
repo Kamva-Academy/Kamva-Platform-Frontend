@@ -98,7 +98,7 @@ const Events = ({ events }) => {
 };
 
 const mapStateToProps = (state) => ({
-  events: state.events.events ? state.events.events : [],
+  events: state.events.events || [],
 });
 
 export default connect(mapStateToProps)(Events);
