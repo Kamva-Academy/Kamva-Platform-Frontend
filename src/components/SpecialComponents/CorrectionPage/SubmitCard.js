@@ -63,7 +63,7 @@ function SubmitCard({ submission, markSubmission }) {
           step: '1',
           maxLength: '3',
         }}
-        onChange={(e) => e.target.value < 100 && setScore(e.target.value)}
+        onChange={(e) => e.target.value <= 100 && setScore(e.target.value)}
       />
 
       <TextField
