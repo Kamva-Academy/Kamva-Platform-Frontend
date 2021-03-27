@@ -53,3 +53,5 @@ export const getProblemsUrl = 'fsm/getproblems/';
 export const getSubmissionsUrl = 'fsm/getsubmissions/';
 
 export const markSubmissionUrl = 'fsm/marksubmission/';
+
+export const getWorkshopsDescriptionUrl = 'fsm/getworkshopsdescription/';
