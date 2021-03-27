@@ -96,7 +96,7 @@ function ScoreHistoryDialog({
 }
 
 const mapStateToProps = (state) => ({
-  scores: state.currentState.scores,
+  scores: state.currentState.scores.filter((score) => score.is_valid),
   totalScore: state.currentState.totalScore,
 });
 
