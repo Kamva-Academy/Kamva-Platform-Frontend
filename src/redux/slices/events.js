@@ -50,6 +50,8 @@ export const applyDiscountAction = createAsyncThunkApi(
 
 const initialState = {
   isFetching: false,
+  events: [],
+  registeredEvents: {},
 };
 
 const isFetching = (state) => {
@@ -72,8 +74,11 @@ const eventSlice = createSlice({
       state,
       { payload: { response }, meta: { arg } }
     ) => {
-      state[arg.eventId] = {
-        ...state[arg.eventId],
+      if (!state.registeredEvents) {
+        state.registeredEvents = {};
+      }
+      state.registeredEvents[arg.eventId] = {
+        ...state.registeredEvents[arg.eventId],
         participantId: response.me,
         event: response.event,
         team: response.team,

@@ -242,11 +242,10 @@ const Profile = ({
 };
 
 const mapStateToProps = (state) => {
-  const events = state.events ? state.events : [];
   return {
     memberUuid: state.account.user ? state.account.user.uuid : '',
     isFetching: state.events.isFetching,
-    events,
+    events: state.events.registeredEvents || {},
   };
 };
 
