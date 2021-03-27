@@ -32,6 +32,8 @@ const BigAnswerQuestionWidget = ({
   const t = useTranslate();
   const classes = useStyles();
   const [value, setValue] = useState(last_submit?.text);
+  const [isButtonDisabled, setButtonDisable] = useState(false);
+
   return (
     <>
       <TinyPreview
@@ -50,16 +52,16 @@ const BigAnswerQuestionWidget = ({
           onChange={setValue}
         />
       ) : (
-        <Paper className={classes.showAnswer}>
-          <TinyPreview
-            frameProps={{
-              frameBorder: '0',
-              width: '100%',
-            }}
-            content={mode === MODES.EDIT ? answer.text : value}
-          />
-        </Paper>
-      )}
+          <Paper className={classes.showAnswer}>
+            <TinyPreview
+              frameProps={{
+                frameBorder: '0',
+                width: '100%',
+              }}
+              content={mode === MODES.EDIT ? answer.text : value}
+            />
+          </Paper>
+        )}
 
       {mode !== MODES.CORRECTION && (
         <Button
@@ -68,9 +70,14 @@ const BigAnswerQuestionWidget = ({
           color="primary"
           size="small"
           className={classes.submit}
-          disabled={mode === MODES.EDIT}
-          onClick={() =>
+          disabled={mode === MODES.EDIT || isButtonDisabled}
+          onClick={() => {
+            setButtonDisable(true);
+            setTimeout(() => {
+              setButtonDisable(false);
+            }, 20000)
             sendBigAnswer({ playerId, problemId: id, answer: value })
+          }
           }>
           {t('submitAnswer')}
         </Button>

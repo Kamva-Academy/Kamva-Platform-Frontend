@@ -50,6 +50,8 @@ const SmallAnswerQuestionWidget = ({
   const t = useTranslate();
   const classes = useStyles();
   const [value, setValue] = useState(last_submit?.text);
+  const [isButtonDisabled, setButtonDisable] = useState(false);
+
   return (
     <>
       <TinyPreview
@@ -66,43 +68,48 @@ const SmallAnswerQuestionWidget = ({
             <Paper className={classes.showAnswer}>{value}</Paper>
           </Grid>
         ) : (
-          <>
-            <Grid item xs>
-              <TextField
-                fullWidth
-                variant={'outlined'}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                size="small"
-                error={
-                  answer?.text &&
-                  last_submit?.text &&
-                  last_submit?.text !== answer?.text
-                }
-                className={
-                  answer?.text &&
-                  last_submit?.text &&
-                  last_submit?.text === answer?.text &&
-                  classes.success
-                }
-              />
-            </Grid>
+            <>
+              <Grid item xs>
+                <TextField
+                  fullWidth
+                  variant={'outlined'}
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  size="small"
+                  error={
+                    answer?.text &&
+                    last_submit?.text &&
+                    last_submit?.text !== answer?.text
+                  }
+                  className={
+                    answer?.text &&
+                    last_submit?.text &&
+                    last_submit?.text === answer?.text &&
+                    classes.success
+                  }
+                />
+              </Grid>
 
-            <Grid item xs={3} sm={2} md={3}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                size="small"
-                disabled={mode === MODES.EDIT}
-                onClick={() =>
-                  sendSmallAnswer({ playerId, problemId: id, answer: value })
-                }>
-                {t('submit')}
-              </Button>
-            </Grid>
-          </>
-        )}
+              <Grid item xs={3} sm={2} md={3}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  disabled={mode === MODES.EDIT || isButtonDisabled}
+                  onClick={() => {
+                    setButtonDisable(true);
+                    setTimeout(() => {
+                      setButtonDisable(false);
+                    }, 20000);
+                    sendSmallAnswer({ playerId, problemId: id, answer: value })
+                  }
+                  }>
+                  {t('submit')}
+                </Button>
+              </Grid>
+            </>
+          )}
 
         {answer?.text && (
           <Grid item xs={12}>
