@@ -1,4 +1,5 @@
 import {
+  Button,
   CircularProgress,
   Container,
   Grid,
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     marginTop: theme.spacing(2),
+    minHeight: 100,
   },
 }));
 
@@ -60,13 +62,17 @@ function Correction({
     }
   }, [states]);
 
-  useEffect(() => {
+  const updateCurrentState = () => {
     if (states[stateNum]?.state_id) {
       getSubmissions({
         fsmId,
         stateId: states[stateNum].state_id,
       });
     }
+  };
+
+  useEffect(() => {
+    updateCurrentState();
   }, [stateNum]);
 
   let flatSubmissions = [];
@@ -94,6 +100,12 @@ function Correction({
           />
         </Paper>
         <Paper className={classes.paper}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => updateCurrentState()}>
+            بروز کردن لیست
+          </Button>
           <Grid container justify="center" spacing={2}>
             {submissionsIsLoading ? (
               <CircularProgress size={24} />
