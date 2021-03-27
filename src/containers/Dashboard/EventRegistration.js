@@ -21,14 +21,14 @@ import { addNotificationAction } from '../../redux/slices/notifications';
 import { toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
-  container: ({ marginTop }) => ({
-    marginTop: marginTop,
-    height: `calc(100vh - ${marginTop}px)`,
+  container: {
+    marginTop: 80,
+    height: `calc(100vh - ${80}px)`,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-  }),
+  },
   logo: {
     maxHeight: '80vh',
     maxWidth: '100%',
@@ -66,8 +66,7 @@ const Profile = ({
   const [isButtonDisabled, setButtonStatus] = useState(false);
   const [isDataReady, setDataStatus] = useState(false);
   const [discountCode, setDiscountCode] = useState('');
-  const [marginTop, setMarginTop] = useState('');
-  const classes = useStyles({ marginTop });
+  const classes = useStyles();
   const [teamMembers, setTeamMembers] = useState([]);
   const [participantId, setParticipantId] = useState('');
   const [event, setEvent] = useState({ price: '' });
@@ -78,10 +77,6 @@ const Profile = ({
       getEventRegistrationInfo({ eventId, memberUuid });
     }
   }, [eventId, memberUuid]);
-
-  useEffect(() => {
-    setMarginTop(document.getElementById('appBar').offsetHeight);
-  }, []);
 
   useEffect(() => {
     if (events && events[eventId] && !isDataReady) {

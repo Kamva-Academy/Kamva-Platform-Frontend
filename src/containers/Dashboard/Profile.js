@@ -1,14 +1,14 @@
 import { Button, Container, Grid, makeStyles, Paper } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
-  container: ({ marginTop }) => ({
-    marginTop: marginTop,
-    height: `calc(100vh - ${marginTop}px)`,
-  }),
+  container: {
+    marginTop: 80,
+    height: `calc(100vh - ${80}px)`,
+  },
   logo: {
     height: 100,
   },
@@ -20,12 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Profile = () => {
-  const [marginTop, setMarginTop] = useState('');
-  const classes = useStyles({ marginTop });
-
-  useEffect(() => {
-    setMarginTop(document.getElementById('appBar').offsetHeight);
-  }, []);
+  const classes = useStyles();
 
   return (
     <>
@@ -36,12 +31,10 @@ const Profile = () => {
           justify="space-evenly"
           alignItems="center"
           style={{ height: '100%' }}>
-          <Grid container item direction="column" sm={5}>
+          <Grid container direction="column" sm={5}>
             <Paper className={classes.paper}>
               <Grid item>شماره تیم</Grid>
               <Grid item>اسم تیم</Grid>
-              <Grid item>salam</Grid>
-              <Grid item>salam</Grid>
               <Grid item>
                 <Button variant="contained" color="primary" fullWidth>
                   پرداخت

@@ -6,19 +6,20 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
-  container: ({ marginTop }) => ({
-    marginTop: marginTop,
-    height: `calc(100vh - ${marginTop}px)`,
+  container: {
+    marginTop: 80,
+    height: `calc(100vh - ${80}px)`,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-  }),
+  },
   logo: {
     maxHeight: '80vh',
     maxWidth: '100%',
@@ -46,13 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FailedPayment = () => {
-  const [marginTop, setMarginTop] = useState('');
-  const classes = useStyles({ marginTop });
-
-  // to make top margin for main body of page, as long as appbar height, just for appbar
-  useEffect(() => {
-    setMarginTop(document.getElementById('appBar').offsetHeight);
-  }, []);
+  const classes = useStyles();
 
   return (
     <>
@@ -80,7 +75,11 @@ const FailedPayment = () => {
               </Paper>
             </Grid>
             <Grid item>
-              <Button variant="contained" color="primary" href="/events">
+              <Button
+                variant="contained"
+                component={Link}
+                color="primary"
+                to="/events">
                 {'باشه. متوجه شدم.'}
               </Button>
             </Grid>

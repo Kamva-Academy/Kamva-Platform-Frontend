@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import MiniGames from '../../components/MiniGames';
 import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
+import Correction from '../../containers/Correction';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
@@ -39,20 +40,34 @@ const Root = () => {
       <Route path="/loading/"></Route>
       <Route path="/admin" component={LoginPage}></Route>
       <Route path="/game/:gameId" component={MiniGames} />
-      <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
-      <PrivateRoute path="/edit_article/:articleId/" component={EditArticle} />
+      <PrivateRoute
+        path="/edit_workshop/:fsmId/"
+        component={EditWorkshop}
+        onlyMentor
+      />
+      <PrivateRoute
+        path="/edit_article/:articleId/"
+        component={EditArticle}
+        onlyMentor
+      />
       <PrivateRoute path="/workshops/" component={Workshops} />
       <Route path="/workshop/">
         <Switch>
           <PrivateRoute
-            path="/workshop/:playerUUID/:fsmId/:stateId/"
+            path="/workshop/:playerUUID/:playerId/:fsmId/:stateId/"
             component={Workshop}
+            onlyMentor
           />
           <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
         </Switch>
       </Route>
       <Route path="/article/:articleId" component={Article} />
-      <PrivateRoute path="/mentor/" component={MentorPage} />
+      <PrivateRoute path="/mentor/" component={MentorPage} onlyMentor />
+      <PrivateRoute
+        path="/correction/:fsmId/"
+        component={Correction}
+        onlyMentor
+      />
       <Route path="/" component={ZeroJourneyer} />
       <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
     </Switch>

@@ -2,6 +2,7 @@ import {
   Button,
   Grid,
   makeStyles,
+  Paper,
   TextField,
   Typography,
 } from '@material-ui/core';
@@ -11,11 +12,12 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { sendSmallAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import { MODES } from '..';
 import SmallAnswerQuestionEditWidget from './edit';
 
 export { SmallAnswerQuestionEditWidget };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   success: {
     '& input:valid + fieldset': {
       borderColor: 'green',
@@ -30,6 +32,10 @@ const useStyles = makeStyles(() => ({
       padding: '4px !important', // override inline-style
     },
   },
+  showAnswer: {
+    padding: theme.spacing(1),
+    background: '#eee',
+  },
 }));
 
 const SmallAnswerQuestionWidget = ({
@@ -37,7 +43,7 @@ const SmallAnswerQuestionWidget = ({
   text = '',
   answer,
   last_submit,
-  disabled = true,
+  mode,
   playerId,
   sendSmallAnswer,
 }) => {
@@ -55,39 +61,49 @@ const SmallAnswerQuestionWidget = ({
         content={text}
       />
       <Grid container alignItems="center" spacing={1}>
-        <Grid item xs={9} sm={10} md={9}>
-          <TextField
-            fullWidth
-            variant={'outlined'}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            size="small"
-            error={
-              answer?.text &&
-              last_submit?.text &&
-              last_submit?.text !== answer?.text
-            }
-            className={
-              answer?.text &&
-              last_submit?.text &&
-              last_submit?.text === answer?.text &&
-              classes.success
-            }
-          />
-        </Grid>
-        <Grid item xs={3} sm={2} md={3}>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            size="small"
-            disabled={disabled}
-            onClick={() =>
-              sendSmallAnswer({ playerId, problemId: id, answer: value })
-            }>
-            {t('submit')}
-          </Button>
-        </Grid>
+        {mode === MODES.CORRECTION ? (
+          <Grid item xs>
+            <Paper className={classes.showAnswer}>{value}</Paper>
+          </Grid>
+        ) : (
+          <>
+            <Grid item xs>
+              <TextField
+                fullWidth
+                variant={'outlined'}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                size="small"
+                error={
+                  answer?.text &&
+                  last_submit?.text &&
+                  last_submit?.text !== answer?.text
+                }
+                className={
+                  answer?.text &&
+                  last_submit?.text &&
+                  last_submit?.text === answer?.text &&
+                  classes.success
+                }
+              />
+            </Grid>
+
+            <Grid item xs={3} sm={2} md={3}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                size="small"
+                disabled={mode === MODES.EDIT}
+                onClick={() =>
+                  sendSmallAnswer({ playerId, problemId: id, answer: value })
+                }>
+                {t('submit')}
+              </Button>
+            </Grid>
+          </>
+        )}
+
         {answer?.text && (
           <Grid item xs={12}>
             <Typography variant="body2">

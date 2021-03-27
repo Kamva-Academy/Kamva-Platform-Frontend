@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { deleteApi, getApi, postApi } from '../apis';
+import { Apis } from '../apis';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   articlesUrl,
   getUnreadNotificationsUrl,
@@ -19,93 +20,96 @@ const initialState = {
   notifications: [],
 };
 
-export const getUnreadNotificationsAction = createAsyncThunk(
+export const getUnreadNotificationsAction = createAsyncThunkApi(
   'workshops/getNotifications',
-  async () => ({
-    response: await getApi(getUnreadNotificationsUrl),
-  })
+  Apis.GET,
+  getUnreadNotificationsUrl
 );
 
-export const getWorkshopsAction = createAsyncThunk(
+export const getWorkshopsAction = createAsyncThunkApi(
   'workshops/getAll',
-  async () => ({
-    response: await getApi(workshopsUrl),
-  })
+  Apis.GET,
+  workshopsUrl
 );
 
-export const getWorkshopAction = createAsyncThunk(
+export const getWorkshopAction = createAsyncThunkApi(
   'workshops/getOne',
-  async ({ fsmId }) => ({
-    response: await getApi(workshopsUrl + fsmId + '/'),
-  })
+  Apis.GET,
+  ({ fsmId }) => workshopsUrl + fsmId + '/'
 );
 
-export const createWorkshopAction = createAsyncThunk(
+export const createWorkshopAction = createAsyncThunkApi(
   'workshops/create',
-  async ({ name, playerType = 'team', mentorType = 'withMentor' }) => ({
-    response: await postApi(workshopsUrl, {
+  Apis.POST,
+  workshopsUrl,
+  {
+    bodyCreator: ({
+      name,
+      playerType = 'team',
+      mentorType = 'withMentor',
+    }) => ({
       name,
       fsm_p_type: playerType,
       fsm_learning_type: mentorType,
     }),
-  })
+  }
 );
 
-export const getArticlesAction = createAsyncThunk(
+export const getArticlesAction = createAsyncThunkApi(
   'articles/getAll',
-  async () => ({
-    response: await getApi(articlesUrl),
-  })
+  Apis.GET,
+  articlesUrl
 );
 
-export const getArticleAction = createAsyncThunk(
+export const getArticleAction = createAsyncThunkApi(
   'articles/getOne',
-  async ({ articleId }) => ({
-    response: await getApi(articlesUrl + articleId + '/'),
-  })
+  Apis.GET,
+  ({ articleId }) => articlesUrl + articleId + '/'
 );
 
-export const createArticleAction = createAsyncThunk(
+export const createArticleAction = createAsyncThunkApi(
   'articles/create',
-  async ({ name }) => ({
-    response: await postApi(articlesUrl, { name }),
-  })
+  Apis.POST,
+  articlesUrl
 );
 
-export const getStateAction = createAsyncThunk(
+export const getStateAction = createAsyncThunkApi(
   'states/getOne',
-  async ({ stateId }) => ({
-    response: await getApi(statesUrl + stateId + '/'),
-  })
+  Apis.GET,
+  ({ stateId }) => statesUrl + stateId + '/'
 );
 
-export const createStateAction = createAsyncThunk(
+export const createStateAction = createAsyncThunkApi(
   'states/create',
-  async ({ name, fsmId }) => ({
-    response: await postApi(statesUrl, { name, fsm: fsmId }),
-    additional: { fsmId },
-  })
+  Apis.POST,
+  statesUrl,
+  {
+    bodyCreator: ({ name, fsmId }) => ({ name, fsm: fsmId }),
+  }
 );
 
-export const deleteStateAction = createAsyncThunk(
+export const deleteStateAction = createAsyncThunkApi(
   'states/delete',
-  async ({ stateId }) => ({
-    response: await deleteApi(statesUrl + stateId + '/'),
-  })
+  Apis.DELETE,
+  ({ stateId }) => statesUrl + stateId + '/'
 );
 
-export const createHelpAction = createAsyncThunk(
+export const createHelpAction = createAsyncThunkApi(
   'states/helps/create',
-  async ({ stateId }) => ({
-    response: await postApi(helpUrl, { state: stateId, name: 'help' }),
-  })
+  Apis.POST,
+  helpUrl,
+  {
+    bodyCreator: ({ stateId }) => ({ state: stateId, name: 'help' }),
+  }
 );
 
-export const createWidgetAction = createAsyncThunk(
+export const createWidgetAction = createAsyncThunkApi(
   'states/widget/create',
-  async (body) => ({
-    response: await postApi(widgetUrl, { priority: 0, ...body }),
-  })
+  Apis.POST,
+  widgetUrl,
+  {
+    bodyCreator: (widget) => ({ priority: 0, ...widget }),
+  }
 );
 
 export const createVideoWidgetAction = ({ state, link }) =>
@@ -177,38 +181,36 @@ export const createUploadFileWidgetAction = ({ state, text }) =>
     text,
   });
 
-export const deleteWidgetAction = createAsyncThunk(
+export const deleteWidgetAction = createAsyncThunkApi(
   'states/widgets/delete',
-  async ({ widgetId }) => ({
-    response: await deleteApi(widgetUrl + widgetId + '/'),
-  })
+  Apis.DELETE,
+  ({ widgetId }) => widgetUrl + widgetId + '/'
 );
 
-export const getWidgetAction = createAsyncThunk(
+export const getWidgetAction = createAsyncThunkApi(
   'states/widgets/getOne',
-  async ({ widgetId }) => ({
-    response: await getApi(widgetUrl + widgetId + '/'),
-  })
+  Apis.GET,
+  ({ widgetId }) => widgetUrl + widgetId + '/'
 );
 
-export const getWorkshopTeamsAction = createAsyncThunk(
+export const getWorkshopTeamsAction = createAsyncThunkApi(
   'workshops/teams/getAll',
-  async ({ fsmId }) => ({
-    response: await postApi(workshopTeamsUrl, { fsm: fsmId }),
-    additional: { fsmId },
-  })
+  Apis.POST,
+  workshopTeamsUrl,
+  {
+    bodyCreator: ({ fsmId }) => ({ fsm: fsmId }),
+  }
 );
 
-export const visitWorkshopPlayerAction = createAsyncThunk(
+export const visitWorkshopPlayerAction = createAsyncThunkApi(
   'workshops/teams/visitWorkshopPlayer',
-  async ({ workshopPlayerId }) => ({
-    response: await postApi(visitWorkshopPlayerUrl, {
+  Apis.POST,
+  visitWorkshopPlayerUrl,
+  {
+    bodyCreator: ({ workshopPlayerId }) => ({
       player_workshop: workshopPlayerId,
     }),
-    additional: {
-      workshopPlayerId,
-    },
-  })
+  }
 );
 
 const mentorSlice = createSlice({
@@ -255,21 +257,21 @@ const mentorSlice = createSlice({
     },
     [createStateAction.fulfilled.toString()]: (
       state,
-      { payload: { response, additional } }
+      { payload: { response }, meta: { arg } }
     ) => {
       state.workshops = state.workshops.map((workshop) =>
-        +workshop.id === +additional.fsmId
+        +workshop.id === +arg.fsmId
           ? { ...workshop, states: [...workshop.states, response] }
           : workshop
       );
     },
     [getWorkshopTeamsAction.fulfilled.toString()]: (
       state,
-      { payload: { response, additional } }
+      { payload: { response }, meta: { arg } }
     ) => {
       state.teams = {
         ...state.teams,
-        [additional.fsmId]: response,
+        [arg.fsmId]: response,
       };
     },
     [getUnreadNotificationsAction.fulfilled.toString()]: (
@@ -282,10 +284,10 @@ const mentorSlice = createSlice({
     },
     [visitWorkshopPlayerAction.fulfilled.toString()]: (
       state,
-      { payload: { additional } }
+      { meta: { arg } }
     ) => {
       state.notifications = state.notifications.filter(
-        (notification) => notification !== additional.workshopPlayerId
+        (notification) => notification !== arg.workshopPlayerId
       );
     },
   },

@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
 import { useHistory } from 'react-router';
 
-import { axiosConfig } from './axios/axiosConfig';
 import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
@@ -39,7 +38,7 @@ const ZeroJourneyer = () => (
   </SnackbarProvider>
 );
 
-const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
+const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
   useEffect(() => {
     if (redirectTo !== null) {
@@ -54,10 +53,6 @@ const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
       initRedirect();
     }
   }, [redirectTo, forceRedirect, initRedirect, history]);
-
-  useEffect(() => {
-    axiosConfig(token);
-  }, [token]);
 
   useEffect(() => {
     initParseServer();
@@ -90,7 +85,6 @@ const App = ({ dir, token, redirectTo, forceRedirect, initRedirect }) => {
 
 const mapStateToProps = (state) => ({
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
-  token: state.account.token,
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
 });

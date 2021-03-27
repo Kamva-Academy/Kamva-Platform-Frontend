@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { sendMultiChoiceAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import { MODES } from '..';
 import MultiChoiceQuestionEditWidget from './edit';
 
 export { MultiChoiceQuestionEditWidget };
@@ -36,7 +37,7 @@ const MultiChoiceQuestionWidget = ({
   choices,
   answer,
   last_submit,
-  disabled = true,
+  mode,
   playerId,
   sendMultiChoiceAnswer,
 }) => {
@@ -57,7 +58,7 @@ const MultiChoiceQuestionWidget = ({
             key={index}
             fullWidth
             variant="contained"
-            disabled={disabled}
+            disabled={mode !== MODES.VIEW}
             className={clsx(
               classes.choice,
               +index === +last_submit?.text && classes.selected,

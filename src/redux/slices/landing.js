@@ -1,6 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { getApi } from '../apis';
+import { Apis } from '../apis';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import { getLandingDataUrl } from '../constants/urls';
 
 const initialState = {
@@ -10,9 +11,10 @@ const initialState = {
   FAQs: [],
 };
 
-export const getLandingDataAction = createAsyncThunk(
+export const getLandingDataAction = createAsyncThunkApi(
   'landing/getData',
-  async () => ({ response: await getApi(getLandingDataUrl) })
+  Apis.GET,
+  getLandingDataUrl
 );
 
 const landingSlice = createSlice({

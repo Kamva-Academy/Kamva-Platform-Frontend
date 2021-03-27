@@ -1,19 +1,19 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import EventCard from '../../components/Cards/Event';
 
 const useStyles = makeStyles((theme) => ({
-  container: ({ marginTop }) => ({
-    marginTop: marginTop,
-    height: `calc(100vh - ${marginTop}px)`,
+  container: {
+    marginTop: 80,
+    height: `calc(100vh - ${80}px)`,
     display: 'flex',
     justifyContent: 'center',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-  }),
+  },
   logo: {
     maxHeight: '80vh',
     maxWidth: '100%',
@@ -41,12 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Events = ({ events }) => {
-  const [marginTop, setMarginTop] = useState('');
-  const classes = useStyles({ marginTop });
-
-  useEffect(() => {
-    setMarginTop(document.getElementById('appBar').offsetHeight);
-  }, []);
+  const classes = useStyles();
 
   return (
     <>

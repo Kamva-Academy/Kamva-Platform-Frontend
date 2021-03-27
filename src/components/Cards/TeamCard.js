@@ -54,7 +54,8 @@ const TeamCard = ({ team, fsmId, fsmFirstState, visitPlayerWorkshop }) => {
           <Button
             onClick={() => visitPlayerWorkshop({ workshopPlayerId: team.id })}
             component={Link}
-            to={`/workshop/${team.player.uuid}/${fsmId}/${fsmFirstState}/`}>
+            to={`/workshop/${team.player.uuid}/${team.player.id}/${fsmId}/${fsmFirstState}/`}>
+            {/* TODO: fix playerId and playerUuid */}
             {t('watch')}
           </Button>
           <Button>{t('history')}</Button>

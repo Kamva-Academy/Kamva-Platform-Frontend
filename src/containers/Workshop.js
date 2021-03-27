@@ -111,7 +111,9 @@ const mapStateToProps = (state, ownProps) => ({
     uuid: state.account.user.is_mentor
       ? ownProps.match.params.playerUUID
       : state.currentState.player?.uuid,
-    id: state.currentState.player?.id,
+    id: state.account.user.is_mentor
+      ? ownProps.match.params.playerId
+      : state.currentState.player?.id,
   },
 });
 

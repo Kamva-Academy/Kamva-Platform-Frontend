@@ -1,7 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { postApi, postFormDataApi } from '../apis';
+import { Apis } from '../apis';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
+  getScoresUrl,
   goBackwardUrl,
   goForwardUrl,
   mentorGetCurrentStateUrl,
@@ -24,59 +26,84 @@ const initialState = {
     widgets: [],
     help_states: [],
   },
+  scores: [],
+  totalScore: 0,
 };
 
-export const goForwardAction = createAsyncThunk(
+export const goForwardAction = createAsyncThunkApi(
   'currentState/goForward',
-  async ({ edgeId, playerId }) => ({
-    response: await postApi(goForwardUrl, { edge: edgeId, player: playerId }),
-  })
+  Apis.POST,
+  goForwardUrl,
+  {
+    bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+    defaultNotification: {
+      showHttpError: true,
+    },
+  }
 );
 
-export const goBackwardAction = createAsyncThunk(
+export const goBackwardAction = createAsyncThunkApi(
   'currentState/goBackward',
-  async ({ edgeId, playerId }) => ({
-    response: await postApi(goBackwardUrl, { edge: edgeId, player: playerId }),
-  })
+  Apis.POST,
+  goBackwardUrl,
+  {
+    bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+    defaultNotification: {
+      showHttpError: true,
+    },
+  }
 );
 
-export const participantGetCurrentStateAction = createAsyncThunk(
+export const participantGetCurrentStateAction = createAsyncThunkApi(
   'currentState/participantGetCurrentState',
-  async ({ fsmId, playerId }) => ({
-    response: await postApi(participantGetCurrentStateUrl, {
+  Apis.POST,
+  participantGetCurrentStateUrl,
+  {
+    bodyCreator: ({ fsmId, playerId }) => ({
       fsm: fsmId,
       player: playerId,
     }),
-  })
+  }
 );
 
-export const mentorGetCurrentStateAction = createAsyncThunk(
+export const mentorGetCurrentStateAction = createAsyncThunkApi(
   'currentState/mentorGetCurrentState',
-  async ({ stateId, playerUUID }) => ({
-    response: await postApi(mentorGetCurrentStateUrl, {
+  Apis.POST,
+  mentorGetCurrentStateUrl,
+  {
+    bodyCreator: ({ stateId, playerUUID }) => ({
       state: stateId,
       player_uuid: playerUUID,
     }),
-  })
+  }
 );
 
-const sendAnswerAction = createAsyncThunk(
+export const sendAnswerAction = createAsyncThunkApi(
   'currentState/sendAnswer',
-  async (answer) => ({
-    response: await postApi(sendAnswerUrl, answer),
-  })
+  Apis.POST,
+  sendAnswerUrl,
+  {
+    defaultNotification: {
+      success: 'جوابت با موفقیت ثبت شد!',
+    },
+  }
 );
 
-export const sendFileAnswerAction = createAsyncThunk(
+export const sendFileAnswerAction = createAsyncThunkApi(
   'currentState/sendFileAnswer',
-  async ({ playerId, problemId, answerFile }) => ({
-    response: await postFormDataApi(sendAnswerUrl, {
+  Apis.POST,
+  sendAnswerUrl,
+  {
+    bodyCreator: ({ playerId, problemId, answerFile }) => ({
       player: playerId,
       problem: problemId,
       problem_type: 'ProblemUploadFileAnswer',
       answer_file: answerFile,
     }),
-  })
+    defaultNotification: {
+      success: 'جوابت با موفقیت ثبت شد!',
+    },
+  }
 );
 
 export const sendBigAnswerAction = ({ playerId, problemId, answer }) =>
@@ -112,19 +139,34 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
     },
   });
 
-export const startWorkshopAction = createAsyncThunk(
+export const startWorkshopAction = createAsyncThunkApi(
   'currentState/startWorkshop',
-  async ({ fsmId }) => ({
-    response: await postApi(startWorkshopUrl, { fsm: fsmId }),
-  })
+  Apis.POST,
+  startWorkshopUrl,
+  {
+    bodyCreator: ({ fsmId }) => ({ fsm: fsmId }),
+  }
 );
 
-export const requestMentorAction = createAsyncThunk(
+export const requestMentorAction = createAsyncThunkApi(
   'currentState/requestMentor',
-  async ({ fsmId, playerId }) => ({
-    response: await postApi(requestMentorUrl, { fsm: fsmId, player: playerId }),
-    message: 'درخواست شما ارسال شد.',
-  })
+  Apis.POST,
+  requestMentorUrl,
+  {
+    bodyCreator: ({ fsmId, playerId }) => ({ fsm: fsmId, player: playerId }),
+    defaultNotification: {
+      success: 'درخواست شما ارسال شد.',
+    },
+  }
+);
+
+export const getScoresAction = createAsyncThunkApi(
+  'player/getScore',
+  Apis.POST,
+  getScoresUrl,
+  {
+    bodyCreator: ({ fsmId, playerId }) => ({ fsm: fsmId, player: playerId }),
+  }
 );
 
 const stateNeedUpdate = (state) => {
@@ -141,13 +183,13 @@ const getNewState = (state, { payload: { response } }) => {
 };
 
 const sentAnswer = (state, { payload: { response } }) => {
-  state.widgets = state.state.widgets.map((widget) =>
+  state.state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
-        ...widget,
-        last_submit: response.xanswer,
-        answer: response.answer,
-      }
+          ...widget,
+          last_submit: response.xanswer,
+          answer: response.answer,
+        }
       : widget
   );
 };
@@ -183,8 +225,16 @@ const currentStateSlice = createSlice({
     ) => {
       if (response.error) {
         return state;
-      }
+      } // TODO: check backend
       state.player = response.player;
+    },
+
+    [getScoresAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      state.scores = response.score_transactions;
+      state.totalScore = response.scores_sum;
     },
   },
 });
