@@ -80,6 +80,8 @@ function Correction({
     });
   });
 
+  flatSubmissions = flatSubmissions.reverse();
+
   return (
     <>
       <ResponsiveAppBar mode="MENTOR_DASHBOARD" />
