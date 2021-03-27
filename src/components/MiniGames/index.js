@@ -19,6 +19,10 @@ export const MINI_GAMES = [
     label: 'بهینه‌سازی مورچه‌ها',
     url: 'http://www.netlogoweb.org/web?http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo'
   },
+  {
+    label: 'حساب به نقطه‌ها',
+    url: 'https://mini-games-sigma.vercel.app/Account2Points'
+  },
 
 ]
 
