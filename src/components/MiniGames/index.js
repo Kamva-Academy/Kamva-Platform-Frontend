@@ -23,7 +23,18 @@ export const MINI_GAMES = [
     label: 'حساب به نقطه‌ها',
     url: 'https://mini-games-sigma.vercel.app/Account2Points'
   },
-
+  {
+    label: 'ترکیبیات ۱',
+    url: 'https://mini-games-sigma.vercel.app/tarkibiat/1'
+  },
+  {
+    label: 'ترکیبیات ۲',
+    url: 'https://mini-games-sigma.vercel.app/tarkibiat/2'
+  },
+  {
+    label: 'ترکیبیات ۳',
+    url: 'https://mini-games-sigma.vercel.app/tarkibiat/3'
+  },
 ]
 
 // physic_article_graph: {
