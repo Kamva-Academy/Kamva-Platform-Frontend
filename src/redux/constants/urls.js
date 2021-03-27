@@ -47,3 +47,9 @@ export const paymentRequestUrl = 'auth/pay/';
 export const applyDiscountUrl = 'auth/verify-discount/';
 
 export const getScoresUrl = 'fsm/getscores/';
+
+export const getProblemsUrl = 'fsm/getproblems/';
+
+export const getSubmissionsUrl = 'fsm/getsubmissions/';
+
+export const markSubmissionUrl = 'fsm/marksubmission/';

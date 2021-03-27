@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
+export default function CorrectionStatesTabbar({ value, setValue, tabs = [] }) {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
           variant="scrollable"
           scrollButtons="auto">
           {tabs.map((tab) => (
-            <Tab label={tab} key={tab} />
+            <Tab label={tab.state_name} key={tab.state_id} />
           ))}
         </Tabs>
       </AppBar>
