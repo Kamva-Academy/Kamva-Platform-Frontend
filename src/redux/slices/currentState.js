@@ -85,6 +85,7 @@ export const sendAnswerAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'جوابت با موفقیت ثبت شد!',
+      showHttpError: true,
     },
   }
 );
@@ -102,6 +103,7 @@ export const sendFileAnswerAction = createAsyncThunkApi(
     }),
     defaultNotification: {
       success: 'جوابت با موفقیت ثبت شد!',
+      showHttpError: true,
     },
   }
 );
