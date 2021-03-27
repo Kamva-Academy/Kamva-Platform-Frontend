@@ -10,6 +10,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { markSubmissionAction } from '../../../redux/slices/mentor';
+import dateFormatter from '../../../utils/dateFormatter';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +51,12 @@ function SubmitCard({ submission, markSubmission }) {
         }}
         content={submission.answer_text}
       />
-      <Typography>{submission.submission_date}</Typography>
+      <Typography>
+        {dateFormatter({
+          date: submission.submission_date,
+          format: 'DD ام ساعت:hh:mm:ss',
+        })}
+      </Typography>
       <Divider className={classes.divider} />
       <TextField
         className={classes.input}
