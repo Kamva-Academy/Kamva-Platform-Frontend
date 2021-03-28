@@ -35,6 +35,26 @@ export const MINI_GAMES = [
     label: 'ترکیبیات ۳',
     url: 'https://mini-games-sigma.vercel.app/tarkibiat/3'
   },
+  {
+    label: 'نظریه بازی ۱',
+    url: 'https://mini-games-sigma.vercel.app/Donor_Patient/1'
+  },
+  {
+    label: 'نظریه بازی۲',
+    url: 'https://mini-games-sigma.vercel.app/Donor_Patient/2'
+  },
+  {
+    label: 'نظریه بازی ۳',
+    url: 'https://mini-games-sigma.vercel.app/Donor_Patient/3'
+  },
+  {
+    label: 'نظریه بازی ۴',
+    url: 'https://mini-games-sigma.vercel.app/Donor_Patient/4'
+  },
+  {
+    label: 'اتوماتا',
+    url: 'https://mini-games-sigma.vercel.app/Defusing_Bomb'
+  },
 ]
 
 // physic_article_graph: {
