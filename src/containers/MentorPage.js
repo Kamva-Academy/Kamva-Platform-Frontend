@@ -84,7 +84,7 @@ const MentorPage = ({
   useEffect(() => {
     const interval = setInterval(() => {
       getUnreadNotifications();
-    }, 10000);
+    }, 60000);
     return () => clearInterval(interval);
   }, [getUnreadNotifications]);
 
