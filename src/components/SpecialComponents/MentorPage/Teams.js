@@ -20,7 +20,7 @@ function Teams({
     }
   }, [getWorkshopTeams, workshops, teams, workshopNumber]);
 
-  const currentTeams = teams[workshops[workshopNumber]?.id] || [];
+  const currentTeams = teams[workshops[workshopNumber]?.id]?.teams || [];
 
   const viewTeams =
     mode === 'notifications'

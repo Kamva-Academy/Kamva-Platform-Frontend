@@ -26,6 +26,8 @@ const initialState = {
   submissionsIsLoading: false,
 };
 
+export { initialState as mentorInitialState };
+
 export const getUnreadNotificationsAction = createAsyncThunkApi(
   'workshops/getNotifications',
   Apis.GET,
@@ -312,7 +314,7 @@ const mentorSlice = createSlice({
     ) => {
       state.teams = {
         ...state.teams,
-        [arg.fsmId]: response,
+        [arg.fsmId]: { teams: response, lastUpdate: Date.now() },
       };
     },
     [getUnreadNotificationsAction.fulfilled.toString()]: (
