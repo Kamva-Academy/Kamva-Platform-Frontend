@@ -106,7 +106,7 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
               variant="contained"
               color="primary"
               onClick={
-                !workshop.has_lock
+                workshop.has_lock
                   ? () => setOpenPassword(true)
                   : () => startWorkshop({ fsmId: workshop.id })
               }>
