@@ -75,19 +75,6 @@ function Correction({
     updateCurrentState();
   }, [stateNum]);
 
-  let flatSubmissions = [];
-  submissions.forEach((submission) => {
-    submission.states.forEach((state) => {
-      state.problems.forEach((problem) => {
-        flatSubmissions = flatSubmissions.concat(
-          problem.submissions.map((submission) => ({ problem, ...submission }))
-        );
-      });
-    });
-  });
-
-  flatSubmissions = flatSubmissions.reverse();
-
   return (
     <>
       <ResponsiveAppBar mode="MENTOR_DASHBOARD" />
@@ -110,13 +97,16 @@ function Correction({
             {submissionsIsLoading ? (
               <CircularProgress size={24} />
             ) : (
-              flatSubmissions.map((submission) => (
-                <Grid item key={submission.id} xs={12} sm={4} md={3}>
-                  <LazyLoad height={200} once>
-                    <SubmitCard submission={submission} />
-                  </LazyLoad>
-                </Grid>
-              ))
+              submissions
+                .slice()
+                .reverse()
+                .map((submission) => (
+                  <Grid item key={submission.id} xs={12} sm={4} md={3}>
+                    <LazyLoad height={200} once>
+                      <SubmitCard submission={submission} />
+                    </LazyLoad>
+                  </Grid>
+                ))
             )}
           </Grid>
         </Paper>
