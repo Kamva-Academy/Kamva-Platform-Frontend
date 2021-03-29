@@ -22,15 +22,6 @@ import {
   getStateAction,
 } from './mentor';
 
-const initialState = {
-  state: {
-    widgets: [],
-    help_states: [],
-  },
-  scores: [],
-  totalScore: 0,
-};
-
 const changeTeamStateBroadcastAction = createAsyncThunk(
   'currentState/changeTeamStateBroadcast',
   async ({ id }, { getState }) => {
@@ -208,19 +199,23 @@ const sentAnswer = (state, { payload: { response } }) => {
   state.state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
-        ...widget,
-        last_submit: response.xanswer,
-        answer: response.answer,
-      }
+          ...widget,
+          last_submit: response.xanswer,
+          answer: response.answer,
+        }
       : widget
   );
 };
 
 const currentStateSlice = createSlice({
   name: 'currentState',
-  initialState,
-  reducers: {
-    initCurrentState: () => initialState,
+  initialState: {
+    state: {
+      widgets: [],
+      help_states: [],
+    },
+    scores: [],
+    totalScore: 0,
   },
   extraReducers: {
     [createHelpAction.fulfilled.toString()]: stateNeedUpdate,
