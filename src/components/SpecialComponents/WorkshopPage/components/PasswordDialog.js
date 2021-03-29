@@ -15,7 +15,10 @@ function StatePasswordDialog({ open, handleClose, onSubmit }) {
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm">
-      <DialogTitle>برای ورود به این گام باید رمز آن را وارد کنید!</DialogTitle>
+      <DialogTitle>
+        برای ورود به این گام باید رمز آن را وارد کنید! )اگر قبلا به این گام
+        رفته‌اید نیازی به رمز نیست(
+      </DialogTitle>
       <DialogContent>
         <TextField
           type="text"
