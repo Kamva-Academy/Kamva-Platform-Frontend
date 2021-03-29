@@ -76,7 +76,9 @@ function ScoreHistoryDialog({
           </TableHead>
           <TableBody>
             {scores.map((result) => (
-              <TableRow key={result.id}>
+              <TableRow
+                key={result.id}
+                style={{ background: result.is_valid ? '#fff' : '#ddd' }}>
                 <TableCell component="th" scope="row" align="center">
                   {result.state_name}
                 </TableCell>
