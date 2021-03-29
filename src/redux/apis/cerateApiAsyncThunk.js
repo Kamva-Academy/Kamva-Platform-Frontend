@@ -8,8 +8,12 @@ export const createAsyncThunkApi = (typePrefix, api, url, options) =>
       const body = options?.bodyCreator?.(input) || input;
       const stringUrl = typeof url === 'function' ? url(input) : url;
 
+      const response = await api(stringUrl, body);
+      if (options.onSuccessAction) {
+        dispatch(options.onSuccessAction(response));
+      }
       return {
-        response: await api(stringUrl, body),
+        response,
         ...(options?.defaultNotification?.success
           ? { message: options.defaultNotification.success }
           : {}),

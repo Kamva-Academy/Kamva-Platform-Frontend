@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { changeTeamState } from '../../parse/team';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
@@ -30,6 +31,16 @@ const initialState = {
   totalScore: 0,
 };
 
+const changeTeamStateBroadcastAction = createAsyncThunk(
+  'currentState/changeTeamStateBroadcast',
+  async ({ id }, { getState }) => {
+    const {
+      account: { token },
+    } = getState();
+    await changeTeamState({ stateId: id.toString(), token });
+  }
+);
+
 export const goForwardAction = createAsyncThunkApi(
   'currentState/goForward',
   Apis.POST,
@@ -39,6 +50,7 @@ export const goForwardAction = createAsyncThunkApi(
     defaultNotification: {
       showHttpError: true,
     },
+    onSuccessAction: changeTeamStateBroadcastAction,
   }
 );
 
@@ -51,6 +63,7 @@ export const goBackwardAction = createAsyncThunkApi(
     defaultNotification: {
       showHttpError: true,
     },
+    onSuccessAction: changeTeamStateBroadcastAction,
   }
 );
 
