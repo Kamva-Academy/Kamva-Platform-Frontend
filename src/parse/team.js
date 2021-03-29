@@ -1,7 +1,13 @@
 import Parse from 'parse';
 
+import { baseURL } from '../axios';
+
 export const changeTeamState = async ({ stateId, token }) => {
-  await Parse.Cloud.run('changeTeamState', { stateId, token });
+  await Parse.Cloud.run('changeTeamState', {
+    stateId,
+    token,
+    baseURL,
+  });
 };
 
 export const getChangeTeamStateSubscription = async ({ uuid }) => {
