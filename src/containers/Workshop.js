@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
+import { getChangeTeamStateSubscription } from '../parse/team';
 import {
   initCurrentStateAction,
   mentorGetCurrentStateAction,
@@ -84,6 +85,27 @@ const Workshop = ({
   };
 
   useEffect(getCurrentStateIfNeed, [needUpdateState, getCurrentStateIfNeed]);
+
+  useEffect(async () => {
+    if (player.uuid) {
+      const subscription = await getChangeTeamStateSubscription({
+        uuid: player.uuid,
+      });
+      subscription.on('create', (teamState) => {
+        if (+teamState.stateId !== +stateId) {
+          participantGetCurrentState({ fsmId, playerId: player.id });
+        }
+      });
+      subscription.on('update', (teamState) => {
+        if (+teamState.stateId !== +stateId) {
+          participantGetCurrentState({ fsmId, playerId: player.id });
+        }
+      });
+      return () => {
+        subscription.unsubscribe();
+      };
+    }
+  }, [player.uuid]);
 
   return (
     <StatePageContext.Provider value={{ fsmId, stateId, player, isMentor }}>

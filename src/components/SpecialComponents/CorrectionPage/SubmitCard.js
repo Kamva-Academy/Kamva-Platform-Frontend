@@ -32,8 +32,8 @@ function SubmitCard({ submission, markSubmission }) {
     submission?.review?.description
   );
 
-  const problem_name = submission.problem.problem_name
-    ? '- ' + submission.problem.problem_name + ' -'
+  const problem_name = submission.problem_name
+    ? '- ' + submission.problem_name + ' -'
     : '';
   return (
     <Paper className={classes.item}>
@@ -41,7 +41,7 @@ function SubmitCard({ submission, markSubmission }) {
         {'شماره بازیکن: ' + submission.player_id}
       </Typography>
       <Typography gutterBottom>
-        {'شماره سوال:‌ ' + submission.problem.problem_id + problem_name}
+        {'شماره سوال:‌ ' + submission.problem_id + problem_name}
       </Typography>
       <TinyPreview
         frameProps={{
