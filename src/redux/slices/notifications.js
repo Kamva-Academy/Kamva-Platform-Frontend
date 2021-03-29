@@ -22,12 +22,14 @@ export const notificationReducer = createReducer([], (builder) => {
       return state.filter((notification) => notification.key !== key);
     })
     .addCase(addNotificationAction, (state, action) => {
-      if (!action?.payload?.message || !action?.payload?.variant) return;
+      const message = action?.payload?.message;
+      const variant = action?.payload?.variant || action?.payload?.type;
+      if (!message || !variant) return;
       state.push({
         key: new Date().getTime() + Math.random(),
-        message: action.payload.message,
+        message,
         options: {
-          variant: action.payload.variant,
+          variant,
           autoHideDuration: 3000,
         },
       });
