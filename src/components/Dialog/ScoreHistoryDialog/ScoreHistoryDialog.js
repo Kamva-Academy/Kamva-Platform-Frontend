@@ -67,6 +67,7 @@ function ScoreHistoryDialog({
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="center">نام گام</TableCell>
               <TableCell align="center" className={classes.score}>
                 امتیاز
               </TableCell>
@@ -76,6 +77,9 @@ function ScoreHistoryDialog({
           <TableBody>
             {scores.map((result) => (
               <TableRow key={result.id}>
+                <TableCell component="th" scope="row" align="center">
+                  {result.state_name}
+                </TableCell>
                 <TableCell
                   component="th"
                   scope="row"
