@@ -12,12 +12,20 @@ export const MINI_GAMES = [
     url: 'https://mini-games-sigma.vercel.app/Conways_Game_Of_Life'
   },
   {
-    label: 'رفتار جمعی ماهی‌ها',
-    url: 'https://mini-games-sigma.vercel.app/Conways_Game_Of_Life'
+    label: 'شبیه‌ساز بازی زندگی',
+    url: 'https://mini-games-sigma.vercel.app/Game_Of_Life_Simulation'
   },
   {
-    label: 'بهینه‌سازی مورچه‌ها',
-    url: 'http://www.netlogoweb.org/web?http://www.netlogoweb.org/assets/modelslib/Sample%20Models/Biology/Ants.nlogo'
+    label: 'رفتار جمعی ماهی‌ها',
+    url: 'https://mini-games-sigma.vercel.app/Collective_Behavior_Of_Fish'
+  },
+  {
+    label: 'بهینه‌سازی کلونی مورچه‌ها',
+    url: 'https://mini-games-sigma.vercel.app/Ant_Colony_Optimization',
+  },
+  {
+    label: 'واکسیناسیون شبکه',
+    url: 'https://mini-games-sigma.vercel.app/Network_Vaccination',
   },
   {
     label: 'حساب به نقطه‌ها',
