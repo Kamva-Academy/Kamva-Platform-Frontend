@@ -32,7 +32,10 @@ function StatePasswordDialog({ open, handleClose, onSubmit }) {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => onSubmit(password)}>
+          onClick={() => {
+            onSubmit(password);
+            handleClose();
+          }}>
           {t('submit')}
         </Button>
       </DialogActions>
