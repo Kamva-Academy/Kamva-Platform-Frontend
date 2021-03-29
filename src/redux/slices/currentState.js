@@ -46,7 +46,11 @@ export const goForwardAction = createAsyncThunkApi(
   Apis.POST,
   goForwardUrl,
   {
-    bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+    bodyCreator: ({ edgeId, playerId, password }) => ({
+      edge: edgeId,
+      player: playerId,
+      key: password,
+    }),
     defaultNotification: {
       showHttpError: true,
     },
