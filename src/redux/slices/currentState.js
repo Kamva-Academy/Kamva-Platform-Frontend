@@ -159,7 +159,7 @@ export const startWorkshopAction = createAsyncThunkApi(
   Apis.POST,
   startWorkshopUrl,
   {
-    bodyCreator: ({ fsmId, password }) => ({ fsm: fsmId, password }),
+    bodyCreator: ({ fsmId, password }) => ({ fsm: fsmId, key: password }),
     defaultNotification: {
       showHttpError: true,
     },
@@ -204,10 +204,10 @@ const sentAnswer = (state, { payload: { response } }) => {
   state.state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
-          ...widget,
-          last_submit: response.xanswer,
-          answer: response.answer,
-        }
+        ...widget,
+        last_submit: response.xanswer,
+        answer: response.answer,
+      }
       : widget
   );
 };
