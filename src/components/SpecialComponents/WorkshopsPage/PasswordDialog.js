@@ -20,7 +20,7 @@ function PasswordDialog({ open, handleClose, fsmId, startWorkshop }) {
       </DialogTitle>
       <DialogContent>
         <TextField
-          type="password"
+          type="text"
           fullWidth
           autoFocus
           label={t('رمز')}

@@ -18,7 +18,7 @@ function StatePasswordDialog({ open, handleClose, onSubmit }) {
       <DialogTitle>برای ورود به این گام باید رمز آن را وارد کنید!</DialogTitle>
       <DialogContent>
         <TextField
-          type="password"
+          type="text"
           fullWidth
           autoFocus
           label={t('رمز')}
