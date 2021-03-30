@@ -65,9 +65,9 @@ function SubmitCard({ submission, markSubmission }) {
         type="number"
         inputProps={{
           min: '0',
-          max: '100',
+          max: '2000',
           step: '1',
-          maxLength: '3',
+          maxLength: '4',
         }}
         onChange={(e) => e.target.value <= 100 && setScore(e.target.value)}
       />
