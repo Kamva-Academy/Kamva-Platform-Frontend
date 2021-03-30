@@ -97,16 +97,13 @@ function Correction({
             {submissionsIsLoading ? (
               <CircularProgress size={24} />
             ) : (
-              submissions
-                .slice()
-                .reverse()
-                .map((submission) => (
-                  <Grid item key={submission.id} xs={12} sm={4} md={3}>
-                    <LazyLoad height={200} once>
-                      <SubmitCard submission={submission} />
-                    </LazyLoad>
-                  </Grid>
-                ))
+              submissions.map((submission) => (
+                <Grid item key={submission.id} xs={12} sm={4} md={3}>
+                  <LazyLoad height={200} once>
+                    <SubmitCard submission={submission} />
+                  </LazyLoad>
+                </Grid>
+              ))
             )}
           </Grid>
         </Paper>
@@ -120,7 +117,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     states:
       state.mentor.problems.find((fsm) => +fsm.fsm_id === +fsmId)?.states || [],
-    submissions: state.mentor.submissions,
+    submissions: state.mentor.submissions
+      .slice()
+      .sort(
+        (a, b) => new Date(b.submission_date) - new Date(a.submission_date)
+      ),
     submissionsIsLoading: state.mentor.submissionsIsLoading,
     fsmId,
   };

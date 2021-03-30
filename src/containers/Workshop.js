@@ -1,7 +1,7 @@
 import { Fab, makeStyles, Toolbar } from '@material-ui/core';
 import Container from '@material-ui/core/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 
@@ -10,11 +10,11 @@ import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
 import {
-  initCurrentStateAction,
   mentorGetCurrentStateAction,
   participantGetCurrentStateAction,
   startWorkshopAction,
 } from '../redux/slices/currentState';
+import { addNotificationAction } from '../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -46,17 +46,13 @@ const Workshop = ({
   player,
   isMentor,
   startWorkshop,
-  initCurrentState,
   participantGetCurrentState,
   mentorGetCurrentState,
+  addNotification,
 }) => {
   const classes = useStyles();
 
   const history = useHistory();
-
-  useEffect(() => {
-    initCurrentState();
-  }, [initCurrentState, stateId]);
 
   useEffect(() => {
     if (isMentor) {
@@ -86,21 +82,29 @@ const Workshop = ({
 
   useEffect(getCurrentStateIfNeed, [needUpdateState, getCurrentStateIfNeed]);
 
+  const [parseTeamState, setParseTeamState] = useState('');
+
+  const onUpdateStateFromParse = (teamState) =>
+    setParseTeamState(teamState.get('stateId'));
+
+  useEffect(() => {
+    if (!workshopState.id || !parseTeamState) return;
+    if (+parseTeamState !== +workshopState.id) {
+      addNotification({
+        type: 'info',
+        message: 'هم‌تیمیت مکان تیم رو جا‌به‌جا کرد!',
+      });
+      participantGetCurrentState({ fsmId, playerId: player.id });
+    }
+  }, [parseTeamState]);
+
   useEffect(async () => {
     if (player.uuid) {
       const subscription = await getChangeTeamStateSubscription({
         uuid: player.uuid,
       });
-      subscription.on('create', (teamState) => {
-        if (+teamState.stateId !== +stateId) {
-          participantGetCurrentState({ fsmId, playerId: player.id });
-        }
-      });
-      subscription.on('update', (teamState) => {
-        if (+teamState.stateId !== +stateId) {
-          participantGetCurrentState({ fsmId, playerId: player.id });
-        }
-      });
+      subscription.on('create', onUpdateStateFromParse);
+      subscription.on('update', onUpdateStateFromParse);
       return () => {
         subscription.unsubscribe();
       };
@@ -142,6 +146,6 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(mapStateToProps, {
   participantGetCurrentState: participantGetCurrentStateAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
-  initCurrentState: initCurrentStateAction,
   startWorkshop: startWorkshopAction,
+  addNotification: addNotificationAction,
 })(Workshop);

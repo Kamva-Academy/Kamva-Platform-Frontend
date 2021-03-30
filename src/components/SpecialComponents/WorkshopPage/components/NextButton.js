@@ -7,10 +7,12 @@ import { useHistory } from 'react-router-dom';
 import { StatePageContext } from '../../../../containers/Workshop';
 import { goForwardAction } from '../../../../redux/slices/currentState';
 import ChangeStateDialog from './ChangeStateDialog';
+import StatePasswordDialog from './PasswordDialog';
 
 function NextButton({ outwardEdges = [], goForward }) {
   const t = useTranslate();
   const [openChangeStateDialog, setOpenChangeStateDialog] = useState(false);
+  const [selectedEdge, setSelectedEdge] = useState(null);
   const { player, fsmId, isMentor } = useContext(StatePageContext);
 
   const history = useHistory();
@@ -19,7 +21,11 @@ function NextButton({ outwardEdges = [], goForward }) {
     if (isMentor) {
       history.push(`/workshop/${player.uuid}/${fsmId}/${edge.head}`);
     } else {
-      goForward({ edgeId: edge.id, playerId: player.id });
+      if (edge.has_lock) {
+        setSelectedEdge(edge);
+      } else {
+        goForward({ edgeId: edge.id, playerId: player.id });
+      }
     }
   };
 
@@ -48,6 +54,13 @@ function NextButton({ outwardEdges = [], goForward }) {
         handleClose={() => setOpenChangeStateDialog(false)}
         edges={outwardEdges}
         changeState={changeState}
+      />
+      <StatePasswordDialog
+        open={!!selectedEdge}
+        handleClose={() => setSelectedEdge(null)}
+        onSubmit={(password) =>
+          goForward({ edgeId: selectedEdge.id, playerId: player.id, password })
+        }
       />
     </>
   );
