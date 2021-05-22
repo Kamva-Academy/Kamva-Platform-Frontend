@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 
-import AuthDialog from '../../../components/Dialog/AuthDialog/AuthDialog';
+import AuthDialog from '../../../components/Dialog/AuthDialog';
 import FAQ from '../../../components/SpecialComponents/Homepage/FAQ';
 import Footer from '../../../components/SpecialComponents/Homepage/Footer';
 import LandingOurTeam from '../../../components/SpecialComponents/Homepage/LandingOurTeam';

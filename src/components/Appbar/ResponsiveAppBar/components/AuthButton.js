@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { logoutAction } from '../../../../redux/slices/account';
-import AuthDialog from '../../../Dialog/AuthDialog/AuthDialog';
+import AuthDialog from '../../../Dialog/AuthDialog';
 
 function AuthButton({ isLoggedIn, logout }) {
   const t = useTranslate();
@@ -17,13 +17,13 @@ function AuthButton({ isLoggedIn, logout }) {
           {t('logout')}
         </Button>
       ) : (
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setAuthDialogOpen(true)}>
-          ورود به کارگاه بدون منتور
-        </Button>
-      )}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setAuthDialogOpen(true)}>
+            ورود به کارگاه بدون منتور
+          </Button>
+        )}
       <AuthDialog
         open={authDialogOpen}
         handleClose={() => setAuthDialogOpen(false)}

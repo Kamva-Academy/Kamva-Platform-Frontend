@@ -8,7 +8,7 @@ import {
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import AuthDialog from '../components/Dialog/AuthDialog/AuthDialog';
+import AuthDialog from '../components/Dialog/AuthDialog';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -52,21 +52,21 @@ function Survey({ isLoggedIn }) {
               </Button>
             </>
           ) : (
-            <>
-              <Typography component="h3" variant="h2" gutterBottom>
-                برای شرکت در نظرسنجی ابتدا وارد شوید
+              <>
+                <Typography component="h3" variant="h2" gutterBottom>
+                  برای شرکت در نظرسنجی ابتدا وارد شوید
               </Typography>
-              <Button
-                color="primary"
-                variant="contained"
-                size="large"
-                fullWidth
-                className={classes.button}
-                onClick={() => setAuthDialogOpen(true)}>
-                <Typography variant="h4">ورود</Typography>
-              </Button>
-            </>
-          )}
+                <Button
+                  color="primary"
+                  variant="contained"
+                  size="large"
+                  fullWidth
+                  className={classes.button}
+                  onClick={() => setAuthDialogOpen(true)}>
+                  <Typography variant="h4">ورود</Typography>
+                </Button>
+              </>
+            )}
         </Paper>
       </Container>
       <AuthDialog

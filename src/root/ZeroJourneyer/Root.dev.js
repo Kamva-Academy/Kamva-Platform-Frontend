@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import MiniGames from '../../components/MiniGames';
 import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
 import Correction from '../../containers/Correction';
@@ -39,7 +38,6 @@ const Root = () => {
       </Route>
       <Route path="/loading/"></Route>
       <Route path="/admin" component={LoginPage}></Route>
-      <Route path="/game/:gameId" component={MiniGames} />
       <PrivateRoute
         path="/edit_workshop/:fsmId/"
         component={EditWorkshop}

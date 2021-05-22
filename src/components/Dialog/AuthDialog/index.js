@@ -111,7 +111,7 @@ function AuthDialog({
           <Grid item>
             <TextField
               value={username}
-              label="نام‌کاربری"
+              label={t('username')}
               type="text"
               fullWidth
               onChange={(e) => setUsername(e.target.value)}
@@ -150,8 +150,8 @@ function AuthDialog({
                   className={classes.buttonProgress}
                 />
               ) : (
-                t('login')
-              )}
+                  t('login')
+                )}
             </Button>
           </Grid>
         </Grid>

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 
 import ResponsiveAppBar from '../../components/Appbar/ResponsiveAppBar';
-import AuthDialog from '../../components/Dialog/AuthDialog/AuthDialog';
+import AuthDialog from '../../components/Dialog/AuthDialog';
 import ScrollTop from '../../components/ScrollToTop/ScrollToTop';
 
 const useStyles = makeStyles((theme) => ({
