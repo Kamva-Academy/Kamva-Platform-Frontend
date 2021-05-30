@@ -9,15 +9,16 @@ const DashboardItems = () => {
   const logoButton = <LogoButton />;
   const eventsButton = <DashboardButton name={'رویدادها'} to={'/events/'} />;
   const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/workshops/'} />;
+  const profileButton = <DashboardButton name={'پروفایل'} to={'/profile/'} />;
   const logoutButton = <LogoutButton />;
   const Avatar = <AvatarComponent />;
 
   return {
-    desktopLeftItems: [logoutButton, Avatar],
+    desktopLeftItems: [profileButton, logoutButton, Avatar],
     desktopRightItems: [logoButton, eventsButton, workshopButton],
-    mobileLeftItems: [logoButton],
-    mobileRightItems: [],
-    mobileMenuListItems: [eventsButton, workshopButton],
+    mobileLeftItems: [],
+    mobileRightItems: [logoButton],
+    mobileMenuListItems: [profileButton, eventsButton, workshopButton],
   };
 };
 

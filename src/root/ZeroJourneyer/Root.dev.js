@@ -9,6 +9,7 @@ import Dashboard from '../../containers/Dashboard';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
+import Profile from '../../containers/Dashboard/Profile';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
 import EditArticle from '../../containers/EditArticle';
 import EditWorkshop from '../../containers/EditWorkshop';
@@ -29,6 +30,7 @@ const Root = () => {
       <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />
+      <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
       <Route path="/event/">
         <Switch>

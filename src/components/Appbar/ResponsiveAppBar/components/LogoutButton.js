@@ -26,7 +26,7 @@ function LogoutButton({ logout }) {
           />
         </Icon>
       }>
-      <Typography variant="caption">{'خروج'}</Typography>
+      <Typography variant="caption">خروج</Typography>
     </Button>
   );
 }

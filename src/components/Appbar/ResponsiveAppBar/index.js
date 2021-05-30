@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     transition: '0.2s',
   },
   menuButton: {
-    marginRight: 5,
     color: theme.palette.primary.main,
     display: 'none',
     [theme.breakpoints.down('xs')]: {
@@ -85,16 +84,6 @@ function ResponsiveAppBar({
           color="inherit">
           <Container>
             <Toolbar className={classes.toolbar} disableGutters>
-              {mobileMenuListItems.length > 0 && (
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="open drawer"
-                  className={classes.menuButton}
-                  onClick={() => setDrawerOpen(true)}>
-                  <MenuIcon />
-                </IconButton>
-              )}
               <Grid container justify="space-between">
                 <Grid
                   xs={6}
@@ -119,6 +108,16 @@ function ResponsiveAppBar({
                       {item}
                     </Grid>
                   ))}
+                  {mobileMenuListItems.length > 0 && (
+                    <IconButton
+                      edge="start"
+                      color="inherit"
+                      aria-label="open drawer"
+                      className={classes.menuButton}
+                      onClick={() => setDrawerOpen(true)}>
+                      <MenuIcon />
+                    </IconButton>
+                  )}
                 </Grid>
               </Grid>
             </Toolbar>
@@ -128,7 +127,7 @@ function ResponsiveAppBar({
       {mobileMenuListItems.length > 0 && (
         <Hidden smUp>
           <Drawer
-            anchor="left"
+            anchor="right"
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}>
             <div className={classes.list}>
