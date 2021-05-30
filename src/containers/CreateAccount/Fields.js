@@ -1,17 +1,10 @@
 import {
   Button,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
   Grid,
-  InputLabel,
   makeStyles,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
   TextField,
 } from '@material-ui/core';
+import { Redirect } from "react-router-dom";
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -37,7 +30,9 @@ const InputFields = ({
   createAccount,
   getVerificationCode,
   addNotification,
+  token,
 }) => {
+
   const classes = useStyles();
   const [buttonText, setButtonText] = useState('دریافت کد');
   const [data, setData] = useState({
@@ -47,6 +42,12 @@ const InputFields = ({
     verifyCode: '',
   });
 
+  if (token) {
+    return (
+      <Redirect to='/dashboard/' />
+    );
+  }
+
   const putData = (event) => {
     setData({
       ...data,
@@ -54,23 +55,6 @@ const InputFields = ({
     });
   };
 
-  const putFile = async (e) => {
-    e.preventDefault();
-    if (e.target.files[0]) {
-      if (e.target.files[0].size <= 8e6) {
-        setData({
-          ...data,
-          [e.target.name]: e.target.files[0],
-        });
-      } else {
-        e.target.value = '';
-        e.target.setCustomValidity(
-          'حجم فایلت بیشتر از ۶ مگابایته! کمترش کن اگه می‌تونی.'
-        );
-        e.target.reportValidity();
-      }
-    }
-  };
 
   const isEnglishDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
@@ -81,14 +65,6 @@ const InputFields = ({
     }
   };
 
-  const isEnglish = (string) => {
-    var regex = new RegExp(`[a-zA-Z0-9-_.]{${string.length}}`);
-    if (regex.test(string)) {
-      return string;
-    } else {
-      return 'error';
-    }
-  };
 
   const isPhoneNumberValid = (phoneNumber) => {
     var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
@@ -122,16 +98,6 @@ const InputFields = ({
     });
   };
 
-  const isValidEmail = (email) => {
-    var regex = new RegExp(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-    if (regex.test(email)) {
-      return email;
-    } else {
-      return 'error';
-    }
-  };
 
   const doRegistration = () => {
     const { username, password, confirmationPassword } = data;
@@ -173,7 +139,6 @@ const InputFields = ({
         />
       </Grid>
 
-
       <Grid item container justify="center" alignItems="stretch" spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
@@ -186,7 +151,7 @@ const InputFields = ({
             }}
             value={data.verify_code}
             name='verify_code'
-            label='کد پیامک‌شده رو وارد کنید'
+            label='کد پیامک‌شده'
             inputProps={{ className: 'ltr-input' }}
             type='text'
           />
@@ -208,7 +173,7 @@ const InputFields = ({
           variant='outlined'
           fullWidth
           onBlur={putData}
-          label="رمز عبور"
+          label="گذرواژه"
           name="password"
           inputProps={{ className: 'ltr-input' }}
           type="password"
@@ -220,7 +185,7 @@ const InputFields = ({
           variant='outlined'
           fullWidth
           onBlur={putData}
-          label="تکرار رمز عبور"
+          label="تکرار گذرواژه"
           type="password"
           inputProps={{ className: 'ltr-input' }}
           name="confirmationPassword"
@@ -242,6 +207,7 @@ const InputFields = ({
 };
 
 const mapStateToProps = (state) => ({
+  token: state.account.token,
   isFetching: state.account.isFetching,
 });
 

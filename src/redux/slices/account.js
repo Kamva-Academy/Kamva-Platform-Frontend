@@ -31,7 +31,7 @@ export const createAccountAction = createAsyncThunkApi(
     defaultNotification: {
       success:
         'ایول! حساب کاربریت با موفقیت ایجاد شد.',
-      error: 'ایجاد حساب با مشکل روبه‌رو شده. یه چند لحظه دیگه دوباره تلاش کن!',
+      error: 'ایجاد حساب با مشکل روبه‌رو شد. یه چند لحظه دیگه دوباره تلاش کن!',
     },
   }
 );
@@ -93,7 +93,12 @@ const accountSlice = createSlice({
     [loginAction.rejected.toString()]: isNotFetching,
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
     [changePasswordAction.rejected.toString()]: isNotFetching,
-    [createAccountAction.fulfilled.toString()]: isNotFetching,
+    [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      console.log(response);
+      state.user = response.user_info;
+      state.token = response.access;
+      state.isFetching = false;
+    },
     [createAccountAction.rejected.toString()]: isNotFetching,
   },
 });

@@ -60,13 +60,9 @@ function AuthDialog({
 
   useEffect(() => {
     if (open && isLoggedIn) {
-      if (user.is_mentor) {
-        history.push('/mentor');
-      } else {
-        history.push('/events');
-      }
+      history.push('/dashboard');
     }
-  }, [isLoggedIn, user, open, history]);
+  }, [isLoggedIn, open]);
 
   const doLogin = () => {
     if (!username || !password) {
@@ -111,7 +107,7 @@ function AuthDialog({
           <Grid item>
             <TextField
               value={username}
-              label={t('username')}
+              label={'شماره‌تلفن، ایمیل یا نام کاربری'}
               type="text"
               fullWidth
               onChange={(e) => setUsername(e.target.value)}
