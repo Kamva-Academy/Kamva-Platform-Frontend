@@ -1,0 +1,252 @@
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+} from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import {
+  createAccountAction,
+  getVerificationCodeAction,
+} from '../../redux/slices/account';
+import { addNotificationAction } from '../../redux/slices/notifications';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    width: '100%',
+  },
+  input: {
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: '5px',
+    padding: theme.spacing(1),
+  },
+}));
+
+const InputFields = ({
+  isFetching,
+  createAccount,
+  getVerificationCode,
+  addNotification,
+}) => {
+  const classes = useStyles();
+  const [buttonText, setButtonText] = useState('دریافت کد');
+  const [data, setData] = useState({
+    username: '',
+    password: '',
+    confirmationPassword: '',
+    verifyCode: '',
+  });
+
+  const putData = (event) => {
+    setData({
+      ...data,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const putFile = async (e) => {
+    e.preventDefault();
+    if (e.target.files[0]) {
+      if (e.target.files[0].size <= 8e6) {
+        setData({
+          ...data,
+          [e.target.name]: e.target.files[0],
+        });
+      } else {
+        e.target.value = '';
+        e.target.setCustomValidity(
+          'حجم فایلت بیشتر از ۶ مگابایته! کمترش کن اگه می‌تونی.'
+        );
+        e.target.reportValidity();
+      }
+    }
+  };
+
+  const isEnglishDigits = (number) => {
+    var regex = new RegExp(`\\d{${number.length}}`);
+    if (regex.test(number)) {
+      return number;
+    } else {
+      return 'error';
+    }
+  };
+
+  const isEnglish = (string) => {
+    var regex = new RegExp(`[a-zA-Z0-9-_.]{${string.length}}`);
+    if (regex.test(string)) {
+      return string;
+    } else {
+      return 'error';
+    }
+  };
+
+  const isPhoneNumberValid = (phoneNumber) => {
+    var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
+    if (regex.test(phoneNumber)) {
+      return phoneNumber;
+    } else {
+      return;
+    }
+  };
+
+  const doGetVerificationCode = () => {
+    if (!data.phone) {
+      addNotification({
+        message: 'یه شماره تلفن‌همراه وارد کن!',
+        type: 'error',
+      });
+      return;
+    }
+    if (!isPhoneNumberValid(data.phone)) {
+      addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' });
+      return;
+    }
+    setButtonText('۱ دقیقه صبر کن');
+    getVerificationCode({ phone: data.phone, codeType: 'verify' }).then(() => {
+      setTimeout(
+        () => {
+          setButtonText('دریافت کد');
+        },
+        process.env.NODE_ENV === 'production' ? 60000 : 1000
+      );
+    });
+  };
+
+  const isValidEmail = (email) => {
+    var regex = new RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+    if (regex.test(email)) {
+      return email;
+    } else {
+      return 'error';
+    }
+  };
+
+  const doRegistration = () => {
+    const { username, password, confirmationPassword } = data;
+    if (!username || !password || !confirmationPassword) {
+      addNotification({
+        message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
+        type: 'error',
+      });
+      return;
+    }
+
+    if (password !== confirmationPassword) {
+      addNotification({
+        message: 'رمزهایی که وارد کردی مشابه هم نیستند!',
+        type: 'error',
+      });
+      return;
+    }
+
+    createAccount(data);
+  };
+
+  return (
+    <>
+      <Grid item>
+        <TextField
+          variant='outlined'
+          fullWidth
+          onChange={(e) => {
+            if (isEnglishDigits(e.target.value) !== 'error') {
+              putData(e);
+            }
+          }}
+          value={data.phone}
+          name='username'
+          label='شماره تلفن‌همراه'
+          inputProps={{ className: 'ltr-input' }}
+          type='tel'
+        />
+      </Grid>
+
+
+      <Grid item container justify="center" alignItems="stretch" spacing={1}>
+        <Grid item xs={8} sm={9}>
+          <TextField
+            variant='outlined'
+            fullWidth
+            onChange={(e) => {
+              if (isEnglishDigits(e.target.value) !== 'error') {
+                putData(e);
+              }
+            }}
+            value={data.verify_code}
+            name='verify_code'
+            label='کد پیامک‌شده رو وارد کنید'
+            inputProps={{ className: 'ltr-input' }}
+            type='text'
+          />
+        </Grid>
+        <Grid item xs={4} sm={3} container>
+          <Button
+            fullWidth
+            variant='contained'
+            color='primary'
+            onClick={doGetVerificationCode}
+            disabled={buttonText !== 'دریافت کد'}>
+            {buttonText}
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Grid item>
+        <TextField
+          variant='outlined'
+          fullWidth
+          onBlur={putData}
+          label="رمز عبور"
+          name="password"
+          inputProps={{ className: 'ltr-input' }}
+          type="password"
+        />
+      </Grid>
+
+      <Grid item>
+        <TextField
+          variant='outlined'
+          fullWidth
+          onBlur={putData}
+          label="تکرار رمز عبور"
+          type="password"
+          inputProps={{ className: 'ltr-input' }}
+          name="confirmationPassword"
+        />
+      </Grid>
+
+      <Grid container item direction="row" justify="center">
+        <Button
+          onClick={doRegistration}
+          variant="contained"
+          color="primary"
+          disabled={isFetching}
+          fullWidth>
+          بزن بریم...
+        </Button>
+      </Grid>
+    </>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  isFetching: state.account.isFetching,
+});
+
+export default connect(mapStateToProps, {
+  createAccount: createAccountAction,
+  getVerificationCode: getVerificationCodeAction,
+  addNotification: addNotificationAction,
+})(InputFields);

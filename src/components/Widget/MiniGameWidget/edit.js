@@ -14,6 +14,9 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { createMiniGameWidgetAction } from '../../../redux/slices/mentor';
 
+
+// todo: get minigames list from backend
+
 export const MINI_GAMES = [
   {
     label: 'بازی زندگی کانوی',

@@ -36,9 +36,9 @@ export const requestMentorUrl = 'fsm/requestmentor/';
 
 export const changePasswordUrl = 'auth/changepass/';
 
-export const getVerificationCodeUrl = 'auth/sendVerify/';
+export const getVerificationCodeUrl = 'auth/send-verify/';
 
-export const registerUrl = 'auth/signup/';
+export const registerUrl = 'auth/create-account/';
 
 export const getEventRegistrationInfoUrl = 'auth/registration-info/';
 

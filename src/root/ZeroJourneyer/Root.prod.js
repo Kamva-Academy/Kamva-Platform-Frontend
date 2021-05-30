@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
 import Correction from '../../containers/Correction';
+import CreateAccount from '../../containers/CreateAccount';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
@@ -14,7 +15,6 @@ import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import LoginPage from '../../containers/LoginPage';
 import MentorPage from '../../containers/MentorPage';
 import OurTeam from '../../containers/OurTeam';
-import Registration from '../../containers/Registration';
 import Workshop from '../../containers/Workshop';
 import Workshops from '../../containers/Workshops';
 import PrivateRoute from '../PrivateRoute';
@@ -24,7 +24,7 @@ const Root = () => {
     <Switch>
       <Route path="/our_team" component={OurTeam} />
       <Route path="/change-password" component={ChangePassword} />
-      <Route path="/registration" component={Registration} />
+      <Route path="/create-account" component={CreateAccount} />
       <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
       <PrivateRoute path="/events/" component={Events} />

@@ -23,15 +23,15 @@ export const loginAction = createAsyncThunkApi(
   }
 );
 
-export const registerAction = createAsyncThunkApi(
+export const createAccountAction = createAsyncThunkApi(
   'users/register',
   Apis.POST_FORM_DATA,
   registerUrl,
   {
     defaultNotification: {
       success:
-        'ایول! ثبت‌نامت با موفقیت انجام شد. یه پیامک برات میاد که جزئیات ثبت‌نامت توشه.',
-      error: 'ثبت‌نامت با مشکل روبه‌رو شده. یه چند لحظه دیگه دوباره تلاش کن!',
+        'ایول! حساب کاربریت با موفقیت ایجاد شد.',
+      error: 'ایجاد حساب با مشکل روبه‌رو شده. یه چند لحظه دیگه دوباره تلاش کن!',
     },
   }
 );
@@ -82,7 +82,7 @@ const accountSlice = createSlice({
   },
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
-    [registerAction.pending.toString()]: isFetching,
+    [createAccountAction.pending.toString()]: isFetching,
     [changePasswordAction.pending.toString()]: isFetching,
 
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -93,8 +93,8 @@ const accountSlice = createSlice({
     [loginAction.rejected.toString()]: isNotFetching,
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
     [changePasswordAction.rejected.toString()]: isNotFetching,
-    [registerAction.fulfilled.toString()]: isNotFetching,
-    [registerAction.rejected.toString()]: isNotFetching,
+    [createAccountAction.fulfilled.toString()]: isNotFetching,
+    [createAccountAction.rejected.toString()]: isNotFetching,
   },
 });
 
