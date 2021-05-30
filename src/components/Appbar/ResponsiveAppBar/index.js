@@ -96,31 +96,29 @@ function ResponsiveAppBar({
                 </IconButton>
               )}
               <Grid container justify="space-between">
-                <Grid item>
-                  <Grid
-                    spacing={1}
-                    container
-                    justify="flex-start"
-                    alignItems="center">
-                    {rightItems.map((item, index) => (
-                      <Grid key={index} item>
-                        {item}
-                      </Grid>
-                    ))}
-                  </Grid>
+                <Grid
+                  xs={6}
+                  spacing={1}
+                  container item
+                  justify="flex-start"
+                  alignItems="center">
+                  {rightItems.map((item, index) => (
+                    <Grid key={index} item>
+                      {item}
+                    </Grid>
+                  ))}
                 </Grid>
-                <Grid item>
-                  <Grid
-                    spacing={1}
-                    container
-                    justify="flex-end"
-                    alignItems="center">
-                    {leftItems.map((item, index) => (
-                      <Grid key={index} item>
-                        {item}
-                      </Grid>
-                    ))}
-                  </Grid>
+                <Grid
+                  xs={6}
+                  spacing={1}
+                  container item
+                  justify="flex-end"
+                  alignItems="center">
+                  {leftItems.map((item, index) => (
+                    <Grid key={index} item>
+                      {item}
+                    </Grid>
+                  ))}
                 </Grid>
               </Grid>
             </Toolbar>

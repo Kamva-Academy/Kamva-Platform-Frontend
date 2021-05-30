@@ -1,8 +1,8 @@
 import ArticleAppBarItems from './ArticleAppBarItems';
+import StudentDashboardItems from './DashboardItems';
 import LandingAppBarItems from './LandingAppBarItems';
 import MathHouseProblemDayItems from './MathHouseProblemDayLanding'
 import MentorDashboardItems from './MentorDashboardItems';
-import StudentDashboardItems from './StudentDashboardItems';
 import WorkshopAppBarItems from './WorkshopAppBarItems';
 
 const AppbarModes = {

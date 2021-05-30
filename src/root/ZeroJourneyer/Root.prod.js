@@ -4,7 +4,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
 import Correction from '../../containers/Correction';
-import CreateAccount from '../../containers/CreateAccount/sindex';
+import CreateAccount from '../../containers/CreateAccount/index';
+import Dashboard from '../../containers/Dashboard';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
@@ -27,7 +28,8 @@ const Root = () => {
       <Route path="/create-account" component={CreateAccount} />
       <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
-      <PrivateRoute path="/dashboard/" component={Events} />
+      <PrivateRoute path="/dashboard/" component={Dashboard} />
+      <PrivateRoute path="/events/" component={Events} />
       <Route path="/event/">
         <Switch>
           <PrivateRoute

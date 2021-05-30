@@ -38,9 +38,7 @@ function Dashboard() {
               <Grid item>salam</Grid>
               <Grid item>salam</Grid>
               <Grid item>
-                <Button variant="contained" color="primary" fullWidth>
-                  پرداخت
-                </Button>
+                <Button variant="contained" color="primary" fullWidth>پرداخت</Button>
               </Grid>
             </Paper>
           </Grid>
