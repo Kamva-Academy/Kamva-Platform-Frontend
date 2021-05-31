@@ -55,6 +55,7 @@ function ResponsiveAppBar({
   mode = 'LANDING',
   showBackOnScroll = false,
   hideOnScroll = false,
+  position = 'fixed',
   width,
 }) {
   const classes = useStyles();
@@ -76,12 +77,13 @@ function ResponsiveAppBar({
     <>
       <HideOnScroll disable={!hideOnScroll}>
         <AppBar
-          id="appBar"
+          id='appBar'
           className={clsx(
             classes.appBar,
             showBackOnScroll && !trigger && classes.hideBack
           )}
-          color="inherit">
+          position={position}
+          color='inherit'>
           <Container>
             <Toolbar className={classes.toolbar} disableGutters>
               <Grid container justify="space-between">

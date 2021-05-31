@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import Layout from './Layout';
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
@@ -32,38 +33,44 @@ const Profile = () => {
   const classes = useStyles();
 
   return (
-    <>
-      <AppBar mode="STUDENT_DASHBOARD" />
-      <div className={classes.container}>
-        <Grid container justify='center' direction='column' spacing={3} xs={12} sm={9}>
+    <Layout>
+      <Grid container justify='center' direction='column' spacing={3} xs={12} sm={9}>
+        <Grid item>
+          <Typography variant='h2'>تصویر</Typography>
+          <Divider />
+        </Grid>
+        <Grid item container spacing={2} alignItems='center'>
           <Grid item>
-            <Typography variant='h2'>تصویر</Typography>
-            <Divider />
-          </Grid>
-          <Grid item container spacing={2}>
-            <Grid item xs={10} sm={4} md={3}>
-              <img src={process.env.PUBLIC_URL + '/profile.png'} alt='' className={classes.profileImage} />
-            </Grid>
-            <Grid item xs={6}>
-              <Typography >برای </Typography>
-              <Button variant='contained' >سلام</Button>
-            </Grid>
+            <img src={process.env.PUBLIC_URL + '/profile.png'} alt='' className={classes.profileImage} />
           </Grid>
           <Grid item>
-            <Typography variant='h2'>مشخصات فردی</Typography>
-            <Divider />
-          </Grid>
-          <Grid item container spacing={2}>
-            <Grid item xs={6}>
-              <TextField fullWidth variant='outlined' size='small' label='نام' />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField fullWidth variant='outlined' size='small' label='نام' />
-            </Grid>
+            <Typography >برای تغییر تصویر بر روی گزینه‌ی زیر کلیک کنید.</Typography>
+            <br />
+            <Button variant='contained' color='secondary' >تغییر تصویر</Button>
           </Grid>
         </Grid>
-      </div>
-    </>
+        <Grid item>
+          <Typography variant='h2'>مشخصات فردی</Typography>
+          <Divider />
+        </Grid>
+        <Grid item container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth variant='outlined' size='small' label='نام' />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth variant='outlined' size='small' label='نام خانوادگی' />
+          </Grid>
+        </Grid>
+        <Grid item container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth variant='outlined' size='small' label='نام' />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField fullWidth variant='outlined' size='small' label='نام خانوادگی' />
+          </Grid>
+        </Grid>
+      </Grid>
+    </Layout>
   );
 };
 
