@@ -4,9 +4,9 @@ import {
   makeStyles,
   TextField,
 } from '@material-ui/core';
-import { Redirect } from "react-router-dom";
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 
 import {
   createAccountAction,
@@ -36,7 +36,7 @@ const InputFields = ({
   const classes = useStyles();
   const [buttonText, setButtonText] = useState('دریافت کد');
   const [data, setData] = useState({
-    username: '',
+    phoneNumber: '',
     password: '',
     confirmationPassword: '',
     verifyCode: '',
@@ -76,19 +76,19 @@ const InputFields = ({
   };
 
   const doGetVerificationCode = () => {
-    if (!data.phone) {
+    if (!data.phoneNumber) {
       addNotification({
         message: 'یه شماره تلفن‌همراه وارد کن!',
         type: 'error',
       });
       return;
     }
-    if (!isPhoneNumberValid(data.phone)) {
+    if (!isPhoneNumberValid(data.phoneNumber)) {
       addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' });
       return;
     }
     setButtonText('۱ دقیقه صبر کن');
-    getVerificationCode({ phone: data.phone, codeType: 'verify' }).then(() => {
+    getVerificationCode({ phoneNumber: data.phoneNumber, codeType: 'verify' }).then(() => {
       setTimeout(
         () => {
           setButtonText('دریافت کد');
@@ -100,8 +100,8 @@ const InputFields = ({
 
 
   const doRegistration = () => {
-    const { username, password, confirmationPassword } = data;
-    if (!username || !password || !confirmationPassword) {
+    const { phoneNumber, password, confirmationPassword } = data;
+    if (!phoneNumber || !password || !confirmationPassword) {
       addNotification({
         message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
         type: 'error',
@@ -132,7 +132,7 @@ const InputFields = ({
             }
           }}
           value={data.phone}
-          name='username'
+          name='phoneNumber'
           label='شماره تلفن‌همراه'
           inputProps={{ className: 'ltr-input' }}
           type='tel'
@@ -150,7 +150,7 @@ const InputFields = ({
               }
             }}
             value={data.verify_code}
-            name='verify_code'
+            name='verifyCode'
             label='کد پیامک‌شده'
             inputProps={{ className: 'ltr-input' }}
             type='text'

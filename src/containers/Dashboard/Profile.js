@@ -2,22 +2,12 @@ import { Button, Divider, Grid, makeStyles, Paper, TextField, Typography } from 
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import { updateProfileAction } from '../../redux/slices/account';
 import Layout from './Layout';
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
     maxHeight: '100px',
-  },
-  container: {
-    marginTop: 80,
-    minHeight: `calc(100vh - ${80}px)`,
-    padding: theme.spacing(2),
-    display: 'flex',
-    justifyContent: 'center',
-    maxWidth: '900px !important',
-    marginRight: 'auto !important',
-    marginLeft: 'auto !important',
   },
   logo: {
     height: 100,
@@ -29,8 +19,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = () => {
+const Profile = ({ updateProfile }) => {
   const classes = useStyles();
+
+  const onSubmit = () => {
+    console.log("@@@@")
+    updateProfile({ 'username': 'salam' });
+  }
 
   return (
     <Layout>
@@ -46,7 +41,7 @@ const Profile = () => {
           <Grid item>
             <Typography >برای تغییر تصویر بر روی گزینه‌ی زیر کلیک کنید.</Typography>
             <br />
-            <Button variant='contained' color='secondary' >تغییر تصویر</Button>
+            <Button variant='contained' color='secondary' onClick={onSubmit} >تغییر تصویر</Button>
           </Grid>
         </Grid>
         <Grid item>
@@ -80,4 +75,4 @@ const mapStateToProps = (state) => ({
   payments: state.account.payments,
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, { updateProfile: updateProfileAction })(Profile);

@@ -7,9 +7,22 @@ import {
   getVerificationCodeUrl,
   loginUrl,
   registerUrl,
+  updateProfileUrl,
 } from '../constants/urls';
 
 const initialState = { token: null, user: {} };
+
+export const updateProfileAction = createAsyncThunkApi(
+  'users/update-profile',
+  Apis.POST,
+  updateProfileUrl,
+  {
+    defaultNotification: {
+      success: 'اطلاعات حساب با موفقیت به‌روز‌رسانی شد!',
+      error: 'یه جای کار می‌لنگه! مرگ بر آمریکا',
+    },
+  }
+);
 
 export const loginAction = createAsyncThunkApi(
   'users/login',
@@ -28,6 +41,7 @@ export const createAccountAction = createAsyncThunkApi(
   Apis.POST_FORM_DATA,
   registerUrl,
   {
+    bodyCreator: ({ phoneNumber, password, verifyCode }) => ({ phone_number: phoneNumber, username: phoneNumber, password, verify_code: verifyCode }),
     defaultNotification: {
       success:
         'ایول! حساب کاربریت با موفقیت ایجاد شد.',
@@ -41,7 +55,7 @@ export const getVerificationCodeAction = createAsyncThunkApi(
   Apis.POST,
   getVerificationCodeUrl,
   {
-    bodyCreator: ({ phone, codeType }) => ({ phone, code_type: codeType }),
+    bodyCreator: ({ phoneNumber, codeType }) => ({ phone_number: phoneNumber, code_type: codeType }),
     defaultNotification: {
       success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
       error: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',

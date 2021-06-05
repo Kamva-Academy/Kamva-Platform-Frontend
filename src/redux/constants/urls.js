@@ -1,5 +1,7 @@
 export const loginUrl = 'auth/token/obtain/';
 
+export const updateProfileUrl = 'auth/update-profile/';
+
 export const workshopsUrl = 'fsm/fsm/';
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
@@ -36,7 +38,7 @@ export const requestMentorUrl = 'fsm/requestmentor/';
 
 export const changePasswordUrl = 'auth/changepass/';
 
-export const getVerificationCodeUrl = 'auth/send-verify/';
+export const getVerificationCodeUrl = 'auth/send-verification-code/';
 
 export const registerUrl = 'auth/create-account/';
 
