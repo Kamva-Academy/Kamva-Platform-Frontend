@@ -1,4 +1,7 @@
-export const loginUrl = 'auth/token/obtain/';
+export const loginUrl = 'auth/accounts/login/';
+export const createAccountUrl = 'auth/accounts/';
+export const changePasswordUrl = 'auth/accounts/change_pass/';
+export const verificationCodeUrl = 'auth/accounts/verification_code/';
 
 export const updateProfileUrl = 'auth/update-profile/';
 
@@ -35,12 +38,6 @@ export const sendAnswerUrl = 'fsm/sendanswer/';
 export const startWorkshopUrl = 'fsm/startWorkshop/';
 
 export const requestMentorUrl = 'fsm/requestmentor/';
-
-export const changePasswordUrl = 'auth/changepass/';
-
-export const getVerificationCodeUrl = 'auth/send-verification-code/';
-
-export const registerUrl = 'auth/create-account/';
 
 export const getEventRegistrationInfoUrl = 'auth/registration-info/';
 

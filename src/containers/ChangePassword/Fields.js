@@ -27,8 +27,8 @@ const InputFields = ({
   const [data, setData] = useState({
     password: '',
     confirmationPassword: '',
-    phone: '',
-    verificationCode: '',
+    phoneNumber: '',
+    code: '',
   });
 
   const putData = (event) => {
@@ -57,7 +57,7 @@ const InputFields = ({
   };
 
   const doGetVerificationCode = () => {
-    if (!data.phone) {
+    if (!data.phoneNumber) {
       addNotification({
         message: 'یه شماره تلفن‌همراه وارد کن!',
         type: 'error',
@@ -65,13 +65,13 @@ const InputFields = ({
       return;
     }
 
-    if (!isPhoneNumberValid(data.phone)) {
+    if (!isPhoneNumberValid(data.phoneNumber)) {
       addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' });
       return;
     }
 
     setButtonText('۱ دقیقه صبر کن');
-    getVerificationCode({ phone: data.phone, codeType: 'changePass' }).then(
+    getVerificationCode({ phoneNumber: data.phoneNumber, codeType: 'change_pass' }).then(
       () => {
         setTimeout(
           () => {
@@ -84,8 +84,8 @@ const InputFields = ({
   };
 
   const doChangePassword = () => {
-    const { phone, password, confirmationPassword } = data;
-    if (!phone || !password) {
+    const { phoneNumber, password, confirmationPassword } = data;
+    if (!phoneNumber || !password) {
       addNotification({
         message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
         type: 'error',
@@ -132,8 +132,8 @@ const InputFields = ({
               putData(e);
             }
           }}
-          value={data.phone}
-          name="phone"
+          value={data.phoneNumber}
+          name="phoneNumber"
           inputProps={{ className: 'ltr-input' }}
           label="شماره تلفن‌همراه"
           type="tel"
@@ -153,8 +153,8 @@ const InputFields = ({
                 putData(e);
               }
             }}
-            value={data.verificationCode}
-            name="verificationCode"
+            value={data.code}
+            name="code"
             inputProps={{ className: 'ltr-input' }}
             label="کد پیامک‌شده رو وارد کنید"
             type="text"

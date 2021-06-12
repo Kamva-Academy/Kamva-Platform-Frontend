@@ -4,10 +4,10 @@ import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   changePasswordUrl,
-  getVerificationCodeUrl,
+  createAccountUrl,
   loginUrl,
-  registerUrl,
   updateProfileUrl,
+  verificationCodeUrl,
 } from '../constants/urls';
 
 const initialState = { token: null, user: {} };
@@ -39,26 +39,13 @@ export const loginAction = createAsyncThunkApi(
 export const createAccountAction = createAsyncThunkApi(
   'users/register',
   Apis.POST_FORM_DATA,
-  registerUrl,
+  createAccountUrl,
   {
-    bodyCreator: ({ phoneNumber, password, verifyCode }) => ({ phone_number: phoneNumber, username: phoneNumber, password, verify_code: verifyCode }),
+    bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
     defaultNotification: {
       success:
         'ایول! حساب کاربریت با موفقیت ایجاد شد.',
       error: 'ایجاد حساب با مشکل روبه‌رو شد. یه چند لحظه دیگه دوباره تلاش کن!',
-    },
-  }
-);
-
-export const getVerificationCodeAction = createAsyncThunkApi(
-  'users/getVerificationCode',
-  Apis.POST,
-  getVerificationCodeUrl,
-  {
-    bodyCreator: ({ phoneNumber, codeType }) => ({ phone_number: phoneNumber, code_type: codeType }),
-    defaultNotification: {
-      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
-      error: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',
     },
   }
 );
@@ -68,17 +55,28 @@ export const changePasswordAction = createAsyncThunkApi(
   Apis.POST,
   changePasswordUrl,
   {
-    bodyCreator: ({ phone, password, verificationCode }) => ({
-      phone,
-      password,
-      verify_code: verificationCode,
-    }),
+    bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
     defaultNotification: {
       success: 'حله! رمزت با موفقیت عوض شد.',
       error: 'یه مشکلی وجود داره، رمزت تغییر نکرد!',
     },
   }
 );
+
+export const getVerificationCodeAction = createAsyncThunkApi(
+  'users/getVerificationCode',
+  Apis.POST,
+  verificationCodeUrl,
+  {
+    bodyCreator: ({ phoneNumber, codeType }) => ({ phone_number: phoneNumber, code_type: codeType }),
+    defaultNotification: {
+      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
+      error: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',
+    },
+  }
+);
+
+
 
 const isFetching = (state) => {
   state.isFetching = true;
@@ -100,7 +98,7 @@ const accountSlice = createSlice({
     [changePasswordAction.pending.toString()]: isFetching,
 
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.user = response.user_info;
+      state.accountInfo = response.account;
       state.token = response.access;
       state.isFetching = false;
     },
@@ -109,7 +107,7 @@ const accountSlice = createSlice({
     [changePasswordAction.rejected.toString()]: isNotFetching,
     [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       console.log(response);
-      state.user = response.user_info;
+      state.accountInfo = response.account;
       state.token = response.access;
       state.isFetching = false;
     },

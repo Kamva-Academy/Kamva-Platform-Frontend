@@ -39,7 +39,7 @@ const InputFields = ({
     phoneNumber: '',
     password: '',
     confirmationPassword: '',
-    verifyCode: '',
+    code: '',
   });
 
   if (token) {
@@ -149,8 +149,8 @@ const InputFields = ({
                 putData(e);
               }
             }}
-            value={data.verify_code}
-            name='verifyCode'
+            value={data.code}
+            name='code'
             label='کد پیامک‌شده'
             inputProps={{ className: 'ltr-input' }}
             type='text'
