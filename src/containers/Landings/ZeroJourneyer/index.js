@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import AuthDialog from '../../../components/Dialog/AuthDialog';
 import FAQ from '../../../components/SpecialComponents/Homepage/FAQ';
@@ -229,6 +230,7 @@ const ZeroJourneyer = () => {
                   دریافت سوالات
                 </Button> */}
                 <Button onClick={() => setAuthDialogOpen(true)}>ورود</Button>
+                <Button component={Link} to='/create-account'>ثبت‌نام</Button>
               </ButtonGroup>
             </Grid>
           </Grid>

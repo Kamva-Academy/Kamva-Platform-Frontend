@@ -1,3 +1,5 @@
+import { persianMessages } from './messages';
+
 export const errorHandler = (
   error,
   dispatch,
@@ -5,9 +7,18 @@ export const errorHandler = (
   errorMessage,
   showHttpError
 ) => {
+
+  console.log(error.response.data)
+
   if (!error.response) {
     return rejectWithValue({
       message: 'ارتباطت با مشکل مواجه شده. یه چند لحظه دیگه دوباره تلاش کن!',
+    });
+  }
+
+  if (error.response.data?.code) {
+    return rejectWithValue({
+      message: persianMessages[error.response.data?.code]
     });
   }
 
