@@ -6,7 +6,7 @@ import {
   accountCRUDUrl,
   changePasswordUrl,
   loginUrl,
-  profileUrl,
+  profileCRUDUrl,
   verificationCodeUrl,
 } from '../constants/urls';
 
@@ -39,17 +39,21 @@ export const createUserAccountAction = createAsyncThunkApi(
 );
 
 export const getUserAccountAction = createAsyncThunkApi(
-  'users/register',
-  Apis.POST_FORM_DATA,
-  accountCRUDUrl,
-  {
-    bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
-    defaultNotification: {
-      success:
-        'ایول! حساب کاربریت با موفقیت ایجاد شد.',
-      error: 'ایجاد حساب با مشکل روبه‌رو شد. یه چند لحظه دیگه دوباره تلاش کن!',
-    },
-  }
+  'users/get/userAccount',
+  Apis.GET,
+  accountCRUDUrl
+);
+
+export const updateUserAccountAction = createAsyncThunkApi(
+  'users/update/userAccount',
+  Apis.GET,
+  accountCRUDUrl
+);
+
+export const getUserProfileAction = createAsyncThunkApi(
+  'users/userProfile',
+  Apis.GET,
+  profileCRUDUrl
 );
 
 
@@ -82,7 +86,7 @@ export const getVerificationCodeAction = createAsyncThunkApi(
 export const updateProfileAction = createAsyncThunkApi(
   'users/update-profile',
   Apis.POST,
-  profileUrl,
+  profileCRUDUrl,
   {
     defaultNotification: {
       success: 'اطلاعات حساب با موفقیت به‌روز‌رسانی شد!',
@@ -109,7 +113,7 @@ const accountSlice = createSlice({
     [loginAction.pending.toString()]: isFetching,
     [createUserAccountAction.pending.toString()]: isFetching,
     [changePasswordAction.pending.toString()]: isFetching,
-
+    [getUserProfileAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       console.log(response.account);
 
@@ -120,6 +124,7 @@ const accountSlice = createSlice({
     [loginAction.rejected.toString()]: isNotFetching,
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
     [changePasswordAction.rejected.toString()]: isNotFetching,
+    [getUserProfileAction.rejected.toString()]: isNotFetching,
     [createUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       console.log(response);
       state.userAccount = response.account;
@@ -127,6 +132,11 @@ const accountSlice = createSlice({
       state.isFetching = false;
     },
     [createUserAccountAction.rejected.toString()]: isNotFetching,
+    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.userProfile = response;
+      state.isFetching = false;
+    },
+
   },
 });
 

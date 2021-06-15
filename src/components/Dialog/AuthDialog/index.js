@@ -72,7 +72,6 @@ function AuthDialog({
       });
       return;
     }
-
     login({ username, password });
   };
 

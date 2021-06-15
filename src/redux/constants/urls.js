@@ -1,8 +1,8 @@
 export const loginUrl = 'auth/accounts/login/';
 export const changePasswordUrl = 'auth/accounts/change_pass/';
 export const verificationCodeUrl = 'auth/accounts/verification_code/';
-export const accountCRUDUrl = 'auth/accounts/';
-export const profileUrl = 'auth/profile/';
+export const accountCRUDUrl = ({ id }) => id ? `auth/accounts/${id}/` : 'auth/accounts/';
+export const profileCRUDUrl = ({ id }) => id ? `auth/profile/${id}/` : 'auth/profile/';
 export const studentshipCRUDUrl = 'auth/studentship/';
 
 export const workshopsUrl = 'fsm/fsm/';

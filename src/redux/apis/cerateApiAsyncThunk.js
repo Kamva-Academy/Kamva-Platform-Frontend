@@ -5,7 +5,7 @@ import { persianMessages } from './messages';
 
 export const createAsyncThunkApi = (typePrefix, api, url, options) =>
   createAsyncThunk(typePrefix, async (input, { rejectWithValue, dispatch }) => {
-    console.log(input);
+
     try {
       const body = options?.bodyCreator?.(input) || input;
       const stringUrl = typeof url === 'function' ? url(input) : url;
