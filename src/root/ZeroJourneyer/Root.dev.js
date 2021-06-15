@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
 import Correction from '../../containers/Correction';
-import CreateAccount from '../../containers/CreateAccount/index';
+import CreateAccount from '../../containers/CreateUserAccount';
 import Dashboard from '../../containers/Dashboard';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';

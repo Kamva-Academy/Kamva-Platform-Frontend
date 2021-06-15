@@ -1,9 +1,9 @@
 export const loginUrl = 'auth/accounts/login/';
-export const createAccountUrl = 'auth/accounts/';
 export const changePasswordUrl = 'auth/accounts/change_pass/';
 export const verificationCodeUrl = 'auth/accounts/verification_code/';
-
-export const updateProfileUrl = 'auth/update-profile/';
+export const accountCRUDUrl = 'auth/accounts/';
+export const profileUrl = 'auth/profile/';
+export const studentshipCRUDUrl = 'auth/studentship/';
 
 export const workshopsUrl = 'fsm/fsm/';
 

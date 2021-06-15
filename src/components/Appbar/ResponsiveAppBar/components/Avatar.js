@@ -24,7 +24,7 @@ function AvatarComponent({ name = 'هاشم' }) {
 }
 
 const mapStateToProps = (state) => ({
-  name: state.account.accountInfo.first_name,
+  name: state.account.userAccount?.first_name,
 });
 
 export default connect(mapStateToProps)(AvatarComponent);

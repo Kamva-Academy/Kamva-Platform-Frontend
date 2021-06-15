@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { errorHandler } from './errorHandler';
+import { persianMessages } from './messages';
 
 export const createAsyncThunkApi = (typePrefix, api, url, options) =>
   createAsyncThunk(typePrefix, async (input, { rejectWithValue, dispatch }) => {
@@ -9,19 +10,19 @@ export const createAsyncThunkApi = (typePrefix, api, url, options) =>
       const body = options?.bodyCreator?.(input) || input;
       const stringUrl = typeof url === 'function' ? url(input) : url;
 
-      console.log("####")
       const response = await api(stringUrl, body);
-      console.log("####")
 
       if (options?.onSuccessAction) {
         dispatch(options?.onSuccessAction(response));
       }
-      console.log(response)
+
       return {
         response,
         ...(options?.defaultNotification?.success
           ? { message: options.defaultNotification.success }
-          : {}),//todo
+          : (response.code ?
+            { message: persianMessages[response.code] } //todo: make cleaner + support english messages
+            : {})),
       };
     } catch (error) {
       return errorHandler(

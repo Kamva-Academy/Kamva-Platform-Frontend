@@ -29,7 +29,7 @@ reduxStore.subscribe(() => {
     'rastaState',
     JSON.stringify({
       account: {
-        user: state.account.user,
+        userAccount: state.account.userAccount,
         token: state.account.token,
       },
       mentor: {

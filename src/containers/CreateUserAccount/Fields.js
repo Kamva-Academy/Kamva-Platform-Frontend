@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 
 import {
-  createAccountAction,
+  createUserAccountAction,
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const InputFields = ({
   isFetching,
-  createAccount,
+  createUserAccount,
   getVerificationCode,
   addNotification,
   token,
@@ -117,7 +117,7 @@ const InputFields = ({
       return;
     }
 
-    createAccount(data);
+    createUserAccount(data);
   };
 
   return (
@@ -158,6 +158,7 @@ const InputFields = ({
         </Grid>
         <Grid item xs={4} sm={3} container>
           <Button
+            size='small'
             fullWidth
             variant='contained'
             color='primary'
@@ -212,7 +213,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  createAccount: createAccountAction,
+  createUserAccount: createUserAccountAction,
   getVerificationCode: getVerificationCodeAction,
   addNotification: addNotificationAction,
 })(InputFields);

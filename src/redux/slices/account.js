@@ -3,26 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
+  accountCRUDUrl,
   changePasswordUrl,
-  createAccountUrl,
   loginUrl,
-  updateProfileUrl,
+  profileUrl,
   verificationCodeUrl,
 } from '../constants/urls';
 
 const initialState = { token: null, user: {} };
-
-export const updateProfileAction = createAsyncThunkApi(
-  'users/update-profile',
-  Apis.POST,
-  updateProfileUrl,
-  {
-    defaultNotification: {
-      success: 'اطلاعات حساب با موفقیت به‌روز‌رسانی شد!',
-      error: 'یه جای کار می‌لنگه! مرگ بر آمریکا',
-    },
-  }
-);
 
 export const loginAction = createAsyncThunkApi(
   'users/login',
@@ -36,10 +24,10 @@ export const loginAction = createAsyncThunkApi(
   }
 );
 
-export const createAccountAction = createAsyncThunkApi(
+export const createUserAccountAction = createAsyncThunkApi(
   'users/register',
   Apis.POST_FORM_DATA,
-  createAccountUrl,
+  accountCRUDUrl,
   {
     bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
     defaultNotification: {
@@ -49,6 +37,21 @@ export const createAccountAction = createAsyncThunkApi(
     },
   }
 );
+
+export const getUserAccountAction = createAsyncThunkApi(
+  'users/register',
+  Apis.POST_FORM_DATA,
+  accountCRUDUrl,
+  {
+    bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
+    defaultNotification: {
+      success:
+        'ایول! حساب کاربریت با موفقیت ایجاد شد.',
+      error: 'ایجاد حساب با مشکل روبه‌رو شد. یه چند لحظه دیگه دوباره تلاش کن!',
+    },
+  }
+);
+
 
 export const changePasswordAction = createAsyncThunkApi(
   'users/changePassword',
@@ -76,7 +79,17 @@ export const getVerificationCodeAction = createAsyncThunkApi(
   }
 );
 
-
+export const updateProfileAction = createAsyncThunkApi(
+  'users/update-profile',
+  Apis.POST,
+  profileUrl,
+  {
+    defaultNotification: {
+      success: 'اطلاعات حساب با موفقیت به‌روز‌رسانی شد!',
+      error: 'یه جای کار می‌لنگه! مرگ بر آمریکا',
+    },
+  }
+);
 
 const isFetching = (state) => {
   state.isFetching = true;
@@ -94,24 +107,26 @@ const accountSlice = createSlice({
   },
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
-    [createAccountAction.pending.toString()]: isFetching,
+    [createUserAccountAction.pending.toString()]: isFetching,
     [changePasswordAction.pending.toString()]: isFetching,
 
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.accountInfo = response.account;
+      console.log(response.account);
+
+      state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
     },
     [loginAction.rejected.toString()]: isNotFetching,
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
     [changePasswordAction.rejected.toString()]: isNotFetching,
-    [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [createUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       console.log(response);
-      state.accountInfo = response.account;
+      state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
     },
-    [createAccountAction.rejected.toString()]: isNotFetching,
+    [createUserAccountAction.rejected.toString()]: isNotFetching,
   },
 });
 
