@@ -46,7 +46,7 @@ export const getUserAccountAction = createAsyncThunkApi(
 
 export const updateUserAccountAction = createAsyncThunkApi(
   'users/update/userAccount',
-  Apis.GET,
+  Apis.PATCH,
   accountCRUDUrl
 );
 
@@ -115,8 +115,6 @@ const accountSlice = createSlice({
     [changePasswordAction.pending.toString()]: isFetching,
     [getUserProfileAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      console.log(response.account);
-
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
@@ -126,7 +124,6 @@ const accountSlice = createSlice({
     [changePasswordAction.rejected.toString()]: isNotFetching,
     [getUserProfileAction.rejected.toString()]: isNotFetching,
     [createUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      console.log(response);
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;

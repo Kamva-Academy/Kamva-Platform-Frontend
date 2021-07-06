@@ -1,11 +1,30 @@
-import { Button, Divider, FormControl, FormControlLabel, FormLabel, Grid, InputLabel, makeStyles, MenuItem, Paper, Radio, RadioGroup, Select, TextField, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Paper,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+  Typography
+} from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 import jMoment from 'jalali-moment';
+import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker2";
 import { connect } from 'react-redux';
 
-import { getUserProfileAction, updateProfileAction } from '../../redux/slices/account';
+import { getUserProfileAction, updateUserAccountAction } from '../../redux/slices/account';
 import Layout from './Layout';
+
+const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
@@ -25,8 +44,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) => {
-  const [image, setImage] = useState(process.env.PUBLIC_URL + '/profile.png');
+const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }) => {
+  const [_, refresh] = useState();
+  const [picture, setPicture] = useState('');
+  const [newProfile, setNewProfile] = useState({});
   const [birthday, setBirthday] = useState(jMoment());
 
   const classes = useStyles();
@@ -35,28 +56,35 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
     getUserProfile({ id: userAccount.id });
   }, [getUserProfile])
 
-  const onSubmit = () => {
-    console.log("@@@@")
-    updateProfile({ 'username': 'salam' });
-  }
-
-
   useEffect(() => {
-    setImage(userProfile?.profile_picture);
-  }, [userProfile?.profile_picture])
-
-  console.log(userProfile);
-
+    refresh(Math.random());
+  }, [userProfile])
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setImage(URL.createObjectURL(img))
+      setPicture(event.target.files[0])
     }
   };
 
-  const submitChanges = (event) => {
+  const handleOnBlur = (event) => {
+    setNewProfile({
+      ...newProfile,
+      [event.target.name]: event.target.value,
+    })
+  }
 
+  const onChangeSubmit = () => {
+    updateUserAccount(
+      {
+        id: userAccount.id,
+        profile_picture: picture,
+        ...newProfile,
+      }
+    );
+  }
+
+  if (!userProfile) {
+    return (<></>);
   }
 
   return (
@@ -68,7 +96,7 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
         </Grid>
         <Grid item container spacing={2} alignItems='center'>
           <Grid item>
-            <img alt='' className={classes.profileImage} src={image} />
+            <img alt='' className={classes.profileImage} src={(picture && URL.createObjectURL(picture)) || userProfile?.profile_picture || PROFILE_PICTURE} />
           </Grid>
           <Grid item>
             <Typography >برای تغییر تصویر بر روی گزینه‌ی زیر کلیک کنید.</Typography>
@@ -85,35 +113,34 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userAccount?.first_name}
-              name='first_name'
+              name='first_name' onBlur={handleOnBlur}
               size='small' label='نام' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userAccount?.last_name}
-              name='last_name'
+              name='last_name' onBlur={handleOnBlur}
               size='small' label='نام خانوادگی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              defaultValue={userAccount?.national_code}
-              name='national_code'
+              defaultValue={userProfile?.national_code}
+              name='national_code' onBlur={handleOnBlur}
               size='small' label='کد ملی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              defaultValue={userAccount?.phone_number}
-              name='phone_number'
+              defaultValue={userProfile?.phone_number}
+              name='phone_number' onBlur={handleOnBlur}
               size='small' label='شماره موبایل' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.email}
-              name='email'
+              name='email' onBlur={handleOnBlur}
               size='small' label='ایمیل' />
           </Grid>
           <Grid item xs={12} sm={6}>
-
             <div style={{ display: 'none' }} >
               <DatePicker id='birthdayDatePicker' showTodayButton={false} timePicker={false} max={jMoment()} persianDigits={true}
                 isGregorian={false} value={birthday} onChange={value => setBirthday(value)} />
@@ -121,7 +148,7 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
             <TextField fullWidth variant='outlined' onClick={() => document?.getElementById('birthdayDatePicker').click()}
               defaultValue={birthday.format('jDD jMMMM jYYYY')}
               name='national_code'
-              size='small' label='کد ملی' />
+              size='small' label='تاریخ تولد' />
 
           </Grid>
           <Grid item>
@@ -131,7 +158,7 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
                 name="gender"
                 row
                 defaultValue={userProfile?.gender}
-              // onChange={putData}
+                onBlur={handleOnBlur}
               >
                 <FormControlLabel
                   value="Male"
@@ -158,11 +185,11 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
-                // onClick={handleProvinceChange}
+                onBlur={handleOnBlur}
                 name='province'
                 label='استان'
               >
-                <MenuItem value={"DDD"}>{"salam"}</MenuItem>
+                <MenuItem value={"DDD"}>{'اصفهان'}</MenuItem>
               </Select>
             </FormControl >
           </Grid>
@@ -174,30 +201,30 @@ const Profile = ({ updateProfile, getUserProfile, userAccount, userProfile }) =>
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
-                // onClick={handleProvinceChange}
+                onBlur={handleOnBlur}
                 name='city'
                 label='شهر'
               >
-                <MenuItem value={"DDD"}>{"salam"}</MenuItem>
+                <MenuItem value={"DDD"}>{'اصفهان'}</MenuItem>
               </Select>
             </FormControl >
           </Grid>
           <Grid item xs={12}>
             <TextField fullWidth variant='outlined'
-              defaultValue={userAccount?.address}
-              name='address' multiline rows={2}
+              defaultValue={userProfile?.address}
+              name='address' multiline rows={2} onBlur={handleOnBlur}
               size='small' label='آدرس منزل ' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              defaultValue={userAccount?.postal_code}
-              name='postal_code'
+              defaultValue={userProfile?.postal_code}
+              name='postal_code' onBlur={handleOnBlur}
               size='small' label='کد پستی' />
           </Grid>
         </Grid>
         <Grid item container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Button onClick={submitChanges} variant='contained' color='secondary'>ثبت تغییرات</Button>
+            <Button onClick={onChangeSubmit} variant='contained' color='secondary'>ثبت تغییرات</Button>
           </Grid>
         </Grid>
       </Grid>
@@ -214,7 +241,12 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps,
   {
-    updateProfile: updateProfileAction,
+    updateUserAccount: updateUserAccountAction,
     getUserProfile: getUserProfileAction
   }
 )(Profile);
+
+
+// todo: add loading
+// todo: remove userAccount and replace userProfile
+// todo: cast english digits to persian
