@@ -11,12 +11,10 @@ import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import Profile from '../../containers/Dashboard/Profile';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
-import EditArticle from '../../containers/EditArticle';
-import EditWorkshop from '../../containers/EditWorkshop';
 import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import LoginPage from '../../containers/LoginPage';
-import MentorPage from '../../containers/MentorPage';
 import OurTeam from '../../containers/OurTeam';
+import RegistrationForm from '../../containers/RegistrationForm';
 import Workshop from '../../containers/Workshop';
 import Workshops from '../../containers/Workshops';
 import PrivateRoute from '../PrivateRoute';
@@ -31,7 +29,8 @@ const Root = () => {
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />
-      <PrivateRoute path="/events/" component={Events} />
+      <PrivateRoute path="/event/:eventId/registration_form/:registrationFormId" component={RegistrationForm} />
+      <PrivateRoute path="/event/" component={Events} />
       <Route path="/event/">
         <Switch>
           <PrivateRoute
@@ -42,16 +41,6 @@ const Root = () => {
       </Route>
       <Route path="/loading/"></Route>
       <Route path="/admin" component={LoginPage}></Route>
-      <PrivateRoute
-        path="/edit_workshop/:fsmId/"
-        component={EditWorkshop}
-        onlyMentor
-      />
-      <PrivateRoute
-        path="/edit_article/:articleId/"
-        component={EditArticle}
-        onlyMentor
-      />
       <PrivateRoute path="/workshops/" component={Workshops} />
       <Route path="/workshop/">
         <Switch>
@@ -64,7 +53,6 @@ const Root = () => {
         </Switch>
       </Route>
       <Route path="/article/:articleId" component={Article} />
-      <PrivateRoute path="/mentor/" component={MentorPage} onlyMentor />
       <PrivateRoute
         path="/correction/:fsmId/"
         component={Correction}

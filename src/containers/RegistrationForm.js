@@ -1,10 +1,10 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import AppBar from '../../components/Appbar/ResponsiveAppBar';
-import EventCard from '../../components/Cards/Event';
-import { getAllEventsInfoAction } from '../../redux/slices/events'
+import AppBar from '../components/Appbar/ResponsiveAppBar';
+import { getOneEventInfoAction, getOneRegistrationFormAction } from '../redux/slices/events'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,12 +41,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Events = ({ getAllEventsInfo, events }) => {
+const RegistrationForm = ({ getOneRegistrationForm, getOneEventInfo }) => {
   const classes = useStyles();
+  const { registrationFormId, eventId } = useParams()
 
   useEffect(() => {
-    getAllEventsInfo();
-  }, [getAllEventsInfo])
+    getOneRegistrationForm({ id: registrationFormId })
+    getOneEventInfo({ id: eventId })
+  }, [getOneRegistrationForm])
 
   return (
     <>
@@ -67,7 +69,7 @@ const Events = ({ getAllEventsInfo, events }) => {
             style={{ minHeight: '100%' }}
             spacing={2}>
             <Grid item>
-              <Typography className={classes.title}>{'رویدادها'}</Typography>
+              <Typography className={classes.title}>{'فرم ثبت‌نام'}</Typography>
             </Grid>
             <Grid
               item
@@ -76,13 +78,7 @@ const Events = ({ getAllEventsInfo, events }) => {
               justify="center"
               alignItems="center"
               spacing={2}>
-              {events.map((event, index) => (
-                <Grid key={index} item>
-                  <EventCard
-                    {...event}
-                  />
-                </Grid>
-              ))}
+
             </Grid>
           </Grid>
         </Grid>
@@ -98,6 +94,7 @@ const mapStateToProps = (state) => ({
 export default connect(
   mapStateToProps,
   {
-    getAllEventsInfo: getAllEventsInfoAction,
+    getOneRegistrationForm: getOneRegistrationFormAction,
+    getOneEventInfo: getOneEventInfoAction,
   }
-)(Events);
+)(RegistrationForm);

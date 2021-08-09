@@ -3,13 +3,10 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AboutUs from '../../containers/AboutUs';
 import Article from '../../containers/Article';
-import EditArticle from '../../containers/EditArticle';
-import EditWorkshop from '../../containers/EditWorkshop';
 import MathHouseProblemDayLanding from '../../containers/Landings/MathHouseProblemDay';
 import PhysicsDayLanding from '../../containers/Landings/PhysicsDay';
 import WorkshopLanding from '../../containers/Landings/Workshop';
 import LoginPage from '../../containers/LoginPage';
-import MentorPage from '../../containers/MentorPage';
 import OurTeam from '../../containers/OurTeam';
 import Survey from '../../containers/Survey';
 import Workshop from '../../containers/Workshop';
@@ -21,8 +18,6 @@ const Root = () => {
     <Switch>
       <Route path="/loading/"></Route>
       <Route path="/admin" component={LoginPage}></Route>
-      <PrivateRoute path="/edit_workshop/:fsmId/" component={EditWorkshop} />
-      <PrivateRoute path="/edit_article/:articleId/" component={EditArticle} />
       <PrivateRoute path="/workshops/" component={Workshops} />
       <Route path="/workshop/">
         <Switch>
@@ -35,7 +30,6 @@ const Root = () => {
         </Switch>
       </Route>
       <Route path="/article/:articleId" component={Article} />
-      <PrivateRoute path="/mentor/" component={MentorPage} />
       <PrivateRoute path="/survey" component={Survey} />
       <Route path="/our_team" component={OurTeam} />
       <Route path="/about_us" component={AboutUs} />

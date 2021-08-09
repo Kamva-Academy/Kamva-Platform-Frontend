@@ -6,6 +6,8 @@ import {
   applyDiscountUrl,
   getAllEventsInfoUrl,
   getEventRegistrationInfoUrl,
+  getOneEventInfoUrl,
+  getOneRegistrationFormUrl,
   getWorkshopsDescriptionUrl,
   paymentRequestUrl,
 } from '../constants/urls';
@@ -15,6 +17,18 @@ export const getAllEventsInfoAction = createAsyncThunkApi(
   'events/getAllEventsInfoAction',
   Apis.GET,
   getAllEventsInfoUrl,
+);
+
+export const getOneEventInfoAction = createAsyncThunkApi(
+  'events/getOneEventInfoAction',
+  Apis.GET,
+  getOneEventInfoUrl,
+);
+
+export const getOneRegistrationFormAction = createAsyncThunkApi(
+  'events/getOneRegistrationForm',
+  Apis.GET,
+  getOneRegistrationFormUrl,
 );
 
 export const getEventRegistrationInfoAction = createAsyncThunkApi(

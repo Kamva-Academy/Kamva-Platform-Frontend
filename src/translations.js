@@ -73,6 +73,9 @@ const dictionary = {
       uploadFile: 'Upload File',
       file: 'File',
       text: 'Text',
+      register: 'Register',
+      person: 'Man',
+      preRegister: 'Pre-Register',
     },
   },
   fa: {
@@ -150,6 +153,9 @@ const dictionary = {
       uploadFile: 'بارگذاری فایل',
       file: 'فایل',
       text: 'متن',
+      register: 'ثبت‌نام',
+      person: 'نفره',
+      preRegister: 'پیش‌ثبت‌نام',
     },
   },
 };

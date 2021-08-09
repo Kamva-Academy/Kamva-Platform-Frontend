@@ -6,6 +6,8 @@ export const profileCRUDUrl = ({ id }) => id ? `auth/profile/${id}/` : 'auth/pro
 export const studentshipCRUDUrl = 'auth/studentship/';
 
 export const getAllEventsInfoUrl = 'fsm/event/';
+export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}`;
+export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}`;
 
 export const workshopsUrl = 'fsm/fsm/';
 
