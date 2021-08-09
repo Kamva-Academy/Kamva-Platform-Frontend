@@ -140,7 +140,7 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
               name='email' onBlur={handleOnBlur}
               size='small' label='ایمیل' />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          {/* <Grid item xs={12} sm={6}> todo
             <div style={{ display: 'none' }} >
               <DatePicker id='birthdayDatePicker' showTodayButton={false} timePicker={false} max={jMoment()} persianDigits={true}
                 isGregorian={false} value={birthday} onChange={value => setBirthday(value)} />
@@ -149,8 +149,7 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
               defaultValue={birthday.format('jDD jMMMM jYYYY')}
               name='national_code'
               size='small' label='تاریخ تولد' />
-
-          </Grid>
+          </Grid> */}
           <Grid item>
             <FormControl size='small' >
               <FormLabel>جنیست</FormLabel>

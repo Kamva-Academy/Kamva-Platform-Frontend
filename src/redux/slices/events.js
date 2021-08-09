@@ -4,11 +4,18 @@ import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   applyDiscountUrl,
+  getAllEventsInfoUrl,
   getEventRegistrationInfoUrl,
   getWorkshopsDescriptionUrl,
   paymentRequestUrl,
 } from '../constants/urls';
 import { loginAction } from './account';
+
+export const getAllEventsInfoAction = createAsyncThunkApi(
+  'events/getAllEventsInfoAction',
+  Apis.GET,
+  getAllEventsInfoUrl,
+);
 
 export const getEventRegistrationInfoAction = createAsyncThunkApi(
   'events/getEventRegistrationInfo',
@@ -75,39 +82,41 @@ const eventSlice = createSlice({
   name: 'events',
   initialState,
   extraReducers: {
-    [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.events = response.events;
+    [getAllEventsInfoAction.pending.toString()]: isFetching,
+    [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
+    [getAllEventsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.events = response;
     },
-    [getEventRegistrationInfoAction.fulfilled.toString()]: (
-      state,
-      { payload: { response }, meta: { arg } }
-    ) => {
-      if (!state.registeredEvents) {
-        state.registeredEvents = {};
-      }
-      state.registeredEvents[arg.eventId] = {
-        ...state.registeredEvents[arg.eventId],
-        participantId: response.me,
-        event: response.event,
-        team: response.team,
-      };
-    },
-    [paymentRequestAction.pending.toString()]: isFetching,
-    [paymentRequestAction.fulfilled.toString()]: isNotFetching,
-    [paymentRequestAction.rejected.toString()]: isNotFetching,
-    [getWorkshopsDescriptionAction.pending.toString()]: (state) => {
-      state.getWorkshopsLoading = true;
-    },
-    [getWorkshopsDescriptionAction.rejected.toString()]: (state) => {
-      state.getWorkshopsLoading = false;
-    },
-    [getWorkshopsDescriptionAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
-      state.workshops = response;
-      state.getWorkshopsLoading = false;
-    },
+    // [getEventRegistrationInfoAction.fulfilled.toString()]: (
+    //   state,
+    //   { payload: { response }, meta: { arg } }
+    // ) => {
+    //   if (!state.registeredEvents) {
+    //     state.registeredEvents = {};
+    //   }
+    //   state.registeredEvents[arg.eventId] = {
+    //     ...state.registeredEvents[arg.eventId],
+    //     participantId: response.me,
+    //     event: response.event,
+    //     team: response.team,
+    //   };
+    // },
+    // [paymentRequestAction.pending.toString()]: isFetching,
+    // [paymentRequestAction.fulfilled.toString()]: isNotFetching,
+    // [paymentRequestAction.rejected.toString()]: isNotFetching,
+    // [getWorkshopsDescriptionAction.pending.toString()]: (state) => {
+    //   state.getWorkshopsLoading = true;
+    // },
+    // [getWorkshopsDescriptionAction.rejected.toString()]: (state) => {
+    //   state.getWorkshopsLoading = false;
+    // },
+    // [getWorkshopsDescriptionAction.fulfilled.toString()]: (
+    //   state,
+    //   { payload: { response } }
+    // ) => {
+    //   state.workshops = response;
+    //   state.getWorkshopsLoading = false;
+    // },
   },
 });
 

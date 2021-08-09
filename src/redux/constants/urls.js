@@ -5,6 +5,8 @@ export const accountCRUDUrl = ({ id }) => id ? `auth/accounts/${id}/` : 'auth/ac
 export const profileCRUDUrl = ({ id }) => id ? `auth/profile/${id}/` : 'auth/profile/';
 export const studentshipCRUDUrl = 'auth/studentship/';
 
+export const getAllEventsInfoUrl = 'fsm/event/';
+
 export const workshopsUrl = 'fsm/fsm/';
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';

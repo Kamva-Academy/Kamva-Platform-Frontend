@@ -1,7 +1,7 @@
 import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-
+import { getAllEventsInfoAction } from '../../redux/slices/events'
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 import EventCard from '../../components/Cards/Event';
 
@@ -40,8 +40,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Events = ({ events }) => {
+const Events = ({ getAllEventsInfo, events }) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    getAllEventsInfo();
+  }, [getAllEventsInfo])
 
   return (
     <>
@@ -101,4 +105,9 @@ const mapStateToProps = (state) => ({
   events: state.events.events || [],
 });
 
-export default connect(mapStateToProps)(Events);
+export default connect(
+  mapStateToProps,
+  {
+    getAllEventsInfo: getAllEventsInfoAction
+  }
+)(Events);
