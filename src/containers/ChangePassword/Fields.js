@@ -59,7 +59,7 @@ const InputFields = ({
   const doGetVerificationCode = () => {
     if (!data.phoneNumber) {
       addNotification({
-        message: 'یه شماره تلفن‌همراه وارد کن!',
+        message: 'یک شماره تلفن‌همراه وارد کن!',
         type: 'error',
       });
       return;
