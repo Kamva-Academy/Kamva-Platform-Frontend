@@ -1,7 +1,7 @@
 import { Button, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
 
-import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import AppBar from '../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
   container: {

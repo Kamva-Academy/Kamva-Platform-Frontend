@@ -5,6 +5,7 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
+
 import { toPersianNumber } from '../../utils/translateNumber';
 
 
@@ -31,7 +32,13 @@ const useStyles = makeStyles((theme) => ({
   },
   noPadding: {
     padding: '0px !important',
-  }
+  },
+  eventImage: {
+    height: '100%',
+    maxHeight: '300px',
+    width: '100%',
+    objectFit: 'cover',
+  },
 }));
 
 const Event = ({
@@ -42,6 +49,8 @@ const Event = ({
   is_active,
   team_size,
   registration_form,
+  user_purchase_status,
+  user_registration_status,
 }) => {
   const classes = useStyles();
   const t = useTranslate()
@@ -60,7 +69,7 @@ const Event = ({
           <img
             src={cover_page}
             alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            className={classes.eventImage}
           />
         </Grid>
         <Grid
@@ -90,16 +99,18 @@ const Event = ({
             />
           </Grid>
           <Grid item>
-            <Button
-              disabled={!is_active}
-              size='small'
-              variant='outlined'
-              fullWidth
-              component={Link}
-              to={`${process.env.PUBLIC_URL}/event/${id}/registration_form/${registration_form}`}
-              color='secondary'>
-              {t('preRegister')}
-            </Button>
+            {user_registration_status == 'NotRegistered' &&
+              <Button
+                disabled={!is_active}
+                size='small'
+                variant='outlined'
+                fullWidth
+                component={Link}
+                to={`${process.env.PUBLIC_URL}/event/${id}/registration_form/${registration_form}`}
+                color='secondary'>
+                {t('register')}
+              </Button>
+            }
           </Grid>
         </Grid>
       </Grid>

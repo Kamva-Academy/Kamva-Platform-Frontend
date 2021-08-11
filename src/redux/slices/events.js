@@ -7,6 +7,7 @@ import {
   getAllEventsInfoUrl,
   getEventRegistrationInfoUrl,
   getOneEventInfoUrl,
+  getOneMerchandiseUrl,
   getOneRegistrationFormUrl,
   getWorkshopsDescriptionUrl,
   paymentRequestUrl,
@@ -30,6 +31,16 @@ export const getOneRegistrationFormAction = createAsyncThunkApi(
   Apis.GET,
   getOneRegistrationFormUrl,
 );
+
+
+export const getOneMerchandiseAction = createAsyncThunkApi(
+  'events/getOneMerchandiseAction',
+  Apis.GET,
+  getOneMerchandiseUrl,
+);
+
+
+
 
 export const getEventRegistrationInfoAction = createAsyncThunkApi(
   'events/getEventRegistrationInfo',
@@ -101,6 +112,22 @@ const eventSlice = createSlice({
     [getAllEventsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.events = response;
     },
+    [getOneEventInfoAction.pending.toString()]: isFetching,
+    [getOneEventInfoAction.rejected.toString()]: isNotFetching,
+    [getOneEventInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.event = response;
+    },
+    [getOneRegistrationFormAction.pending.toString()]: isFetching,
+    [getOneRegistrationFormAction.rejected.toString()]: isNotFetching,
+    [getOneRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.registrationForm = response;
+    },
+    [getOneMerchandiseAction.pending.toString()]: isFetching,
+    [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
+    [getOneMerchandiseAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.merchandise = response;
+    },
+
     // [getEventRegistrationInfoAction.fulfilled.toString()]: (
     //   state,
     //   { payload: { response }, meta: { arg } }

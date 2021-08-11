@@ -22,7 +22,7 @@ import DatePicker from "react-datepicker2";
 import { connect } from 'react-redux';
 
 import { getUserProfileAction, updateUserAccountAction } from '../../redux/slices/account';
-import Layout from './Layout';
+import Layout from '../Layout';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
 
