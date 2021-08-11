@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 
 import {
-  createUserAccountAction,
+  createAccountAction,
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const InputFields = ({
   isFetching,
-  createUserAccount,
+  createAccount,
   getVerificationCode,
   addNotification,
   token,
@@ -78,7 +78,7 @@ const InputFields = ({
   const doGetVerificationCode = () => {
     if (!data.phoneNumber) {
       addNotification({
-        message: 'یه شماره تلفن‌همراه وارد کن!',
+        message: 'یک شماره تلفن‌همراه وارد کن!',
         type: 'error',
       });
       return;
@@ -117,7 +117,7 @@ const InputFields = ({
       return;
     }
 
-    createUserAccount(data);
+    createAccount(data);
   };
 
   return (
@@ -200,7 +200,7 @@ const InputFields = ({
           color="primary"
           disabled={isFetching}
           fullWidth>
-          بزن بریم...
+          ایجاد
         </Button>
       </Grid>
     </>
@@ -213,7 +213,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  createUserAccount: createUserAccountAction,
+  createAccount: createAccountAction,
   getVerificationCode: getVerificationCodeAction,
   addNotification: addNotificationAction,
 })(InputFields);

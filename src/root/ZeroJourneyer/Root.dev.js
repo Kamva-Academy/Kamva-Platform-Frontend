@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Article from '../../containers/Article';
 import ChangePassword from '../../containers/ChangePassword';
 import Correction from '../../containers/Correction';
-import CreateAccount from '../../containers/CreateUserAccount';
+import CreateAccount from '../../containers/CreateAccount';
 import Dashboard from '../../containers/Dashboard';
 import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
 import Events from '../../containers/Dashboard/Events';
@@ -12,6 +12,7 @@ import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import Profile from '../../containers/Dashboard/Profile';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
 import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
+import Login from '../../containers/Login';
 import LoginPage from '../../containers/LoginPage';
 import OurTeam from '../../containers/OurTeam';
 import RegistrationForm from '../../containers/RegistrationForm';
@@ -25,6 +26,7 @@ const Root = () => {
       <Route path="/our_team" component={OurTeam} />
       <Route path="/change-password" component={ChangePassword} />
       <Route path="/create-account" component={CreateAccount} />
+      <Route path="/login" component={Login} />
       <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />

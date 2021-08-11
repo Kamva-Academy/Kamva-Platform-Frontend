@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { createUserAccountAction } from './account';
+import { createAccountAction } from './account';
 import { startWorkshopAction } from './currentState';
 import { createArticleAction, createWorkshopAction } from './mentor';
 
@@ -13,7 +13,7 @@ const redirectSlice = createSlice({
     initRedirect: () => initialState,
   },
   extraReducers: {
-    [createUserAccountAction.fulfilled.toString()]: (state, action) => {
+    [createAccountAction.fulfilled.toString()]: (state, action) => {
       return ({
         redirectTo: '/dashboard/'
       })

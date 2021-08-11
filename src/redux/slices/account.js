@@ -18,13 +18,13 @@ export const loginAction = createAsyncThunkApi(
   loginUrl,
   {
     defaultNotification: {
-      success: 'دوباره سلام!',
-      error: 'نام کاربری یا رمز عبورت اشتباهه!',
+      success: 'سلام!',
+      error: 'نام کاربری یا رمز عبور اشتباه است!',
     },
   }
 );
 
-export const createUserAccountAction = createAsyncThunkApi(
+export const createAccountAction = createAsyncThunkApi(
   'users/register',
   Apis.POST_FORM_DATA,
   accountCRUDUrl,
@@ -32,8 +32,8 @@ export const createUserAccountAction = createAsyncThunkApi(
     bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
     defaultNotification: {
       success:
-        'ایول! حساب کاربریت با موفقیت ایجاد شد.',
-      error: 'ایجاد حساب با مشکل روبه‌رو شد. یه چند لحظه دیگه دوباره تلاش کن!',
+        'تبریک! حساب شما با موفقیت ایجاد شد.',
+      error: 'ایجاد حساب با مشکل روبه‌رو شد. چند لحظه‌ی دیگر دوباره تلاش کن!',
     },
   }
 );
@@ -111,7 +111,7 @@ const accountSlice = createSlice({
   },
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
-    [createUserAccountAction.pending.toString()]: isFetching,
+    [createAccountAction.pending.toString()]: isFetching,
     [changePasswordAction.pending.toString()]: isFetching,
     [getUserProfileAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -123,12 +123,12 @@ const accountSlice = createSlice({
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
     [changePasswordAction.rejected.toString()]: isNotFetching,
     [getUserProfileAction.rejected.toString()]: isNotFetching,
-    [createUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
     },
-    [createUserAccountAction.rejected.toString()]: isNotFetching,
+    [createAccountAction.rejected.toString()]: isNotFetching,
     [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userProfile = response;
       state.isFetching = false;

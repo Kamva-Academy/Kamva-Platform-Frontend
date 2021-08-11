@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const DesktopCreateAccount = () => {
+const Index = () => {
   const classes = useStyles();
 
   return (
@@ -67,4 +67,4 @@ const DesktopCreateAccount = () => {
   )
 }
 
-export default (DesktopCreateAccount);
+export default (Index);
