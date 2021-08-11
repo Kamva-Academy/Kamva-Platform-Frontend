@@ -125,13 +125,15 @@ function AuthDialog({
               variant="outlined"
             />
           </Grid>
+
           <Grid item>
             <Typography align="center">
-              {'اگر رمزتون رو فراموش کردین، به '}
-              <Link to="/change-password">{'این‌جا'}</Link>
-              {' مراجعه کنید.'}
+              {'اگر رمزت رو فراموش کردی، به '}
+              <Link to="/change_password">{'این‌جا'}</Link>
+              {' مراجعه کن.'}
             </Typography>
           </Grid>
+
           <Grid item>
             <Button
               fullWidth

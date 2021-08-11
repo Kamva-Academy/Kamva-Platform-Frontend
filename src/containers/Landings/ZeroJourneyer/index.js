@@ -184,7 +184,7 @@ const ZeroJourneyer = () => {
             <Grid item>
               <ButtonGroup size="large" variant="contained" color="primary">
                 <Button component={Link} to='/login'>ورود</Button>
-                <Button component={Link} to='/create-account'>ثبت‌نام</Button>
+                <Button component={Link} to='/create_account'>ثبت‌نام</Button>
               </ButtonGroup>
             </Grid>
           </Grid>

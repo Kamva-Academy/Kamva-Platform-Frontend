@@ -24,8 +24,8 @@ const Root = () => {
   return (
     <Switch>
       <Route path="/our_team" component={OurTeam} />
-      <Route path="/change-password" component={ChangePassword} />
-      <Route path="/create-account" component={CreateAccount} />
+      <Route path="/change_password" component={ChangePassword} />
+      <Route path="/create_account" component={CreateAccount} />
       <Route path="/login" component={Login} />
       <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />

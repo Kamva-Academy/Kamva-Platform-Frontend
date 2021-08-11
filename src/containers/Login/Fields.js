@@ -3,13 +3,13 @@ import {
   Grid,
   makeStyles,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import {
-  getVerificationCodeAction,
   loginAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
@@ -91,6 +91,13 @@ const InputFields = ({
         />
       </Grid>
 
+      {/* <Grid item>
+        <Typography align="center">
+          {'اگر رمزت رو فراموش کردی، به '}
+          <Link to="/change_password">{'این‌جا'}</Link>
+          {' مراجعه کن.'}
+        </Typography>
+      </Grid> */}
 
       <Grid container item direction="row" justify="center">
         <Button
