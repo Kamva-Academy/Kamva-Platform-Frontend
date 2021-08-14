@@ -11,7 +11,7 @@ import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import Profile from '../../containers/Dashboard/Profile';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
-import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
+import Landing from '../../containers/Landing';
 import Login from '../../containers/Login';
 import LoginPage from '../../containers/LoginPage';
 import OurTeam from '../../containers/OurTeam';
@@ -63,7 +63,7 @@ const Root = () => {
         component={Correction}
         onlyMentor
       />
-      <Route path="/" component={ZeroJourneyer} />
+      <Route path="/" component={Landing} />
       <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
     </Switch>
   );

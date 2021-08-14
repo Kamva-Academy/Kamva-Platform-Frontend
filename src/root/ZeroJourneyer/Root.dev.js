@@ -11,7 +11,7 @@ import Events from '../../containers/Dashboard/Events';
 import FailedPayment from '../../containers/Dashboard/FailedPayment';
 import Profile from '../../containers/Dashboard/Profile';
 import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
-import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
+import Landing from '../../containers/Landing';
 import Login from '../../containers/Login';
 import LoginPage from '../../containers/LoginPage';
 import OurTeam from '../../containers/OurTeam';
@@ -28,6 +28,14 @@ const Root = () => {
       <Route path="/change_password" component={ChangePassword} />
       <Route path="/create_account" component={CreateAccount} />
       <Route path="/login" component={Login} />
+      <Route path="/login" component={Login} />
+
+      <PrivateRoute path="/message/successful_payment/" component={SuccessfulPayment} />
+      <PrivateRoute path="/message/failed_payment/" component={SuccessfulPayment} />
+      <PrivateRoute path="/message/success/" component={SuccessfulPayment} />
+
+
+
       <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />
@@ -62,7 +70,7 @@ const Root = () => {
         component={Correction}
         onlyMentor
       />
-      <Route path="/" component={ZeroJourneyer} />
+      <Route path="/" component={Landing} />
       <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
     </Switch>
   );

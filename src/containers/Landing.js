@@ -11,14 +11,6 @@ import {
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import AuthDialog from '../../../components/Dialog/AuthDialog';
-import FAQ from '../../../components/SpecialComponents/Homepage/FAQ';
-import Footer from '../../../components/SpecialComponents/Homepage/Footer';
-import LandingOurTeam from '../../../components/SpecialComponents/Homepage/LandingOurTeam';
-import WorkshopList from '../../../components/SpecialComponents/Homepage/WorkshopList';
-import questions from './FAQs';
-import workshops from './Workshops';
-
 export const BOMB_HEIGHT = 500;
 
 const useStyles = makeStyles((theme) => ({
@@ -158,11 +150,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ZeroJourneyer = () => {
   const classes = useStyles();
-  const [authDialogOpen, setAuthDialogOpen] = useState(false);
 
   return (
     <div className={classes.container}>
-      <Container className={classes.secondSection}>
+      <Container>
         <Grid
           container
           justify="center"
@@ -179,7 +170,7 @@ const ZeroJourneyer = () => {
             xs={12}
             md={6}>
             <Grid item>
-              <Typography variant="h1" >پلتفرم برگزاری رویداد و کارگاه</Typography>
+              <Typography variant="h1" align='center'>پلتفرم برگزاری رویداد و کارگاه</Typography>
             </Grid>
             <Grid item>
               <ButtonGroup size="large" variant="contained" color="primary">
@@ -190,11 +181,6 @@ const ZeroJourneyer = () => {
           </Grid>
         </Grid>
       </Container>
-
-      <AuthDialog
-        open={authDialogOpen}
-        handleClose={() => setAuthDialogOpen(false)}
-      />
     </div>
   );
 };
