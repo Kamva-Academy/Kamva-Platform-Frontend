@@ -7,7 +7,6 @@ import AppBar from '../components/Appbar/ResponsiveAppBar';
 import Widget from '../components/Widget';
 import {
   getOneEventInfoAction,
-  getOneMerchandiseAction,
   getOneRegistrationFormAction,
   submitRegistrationFormAction
 } from '../redux/slices/events'
@@ -72,7 +71,6 @@ const EVENT_TYPE = {
 const RegistrationForm = ({
   getOneRegistrationForm,
   getOneEventInfo,
-  getOneMerchandise,
   event,
   registrationForm,
   submitRegistrationForm,
@@ -90,9 +88,6 @@ const RegistrationForm = ({
     if (event?.registration_form) {
       getOneRegistrationForm({ id: event?.registration_form })
     }
-    if (event?.merchandise) {
-      getOneMerchandise({ id: event?.merchandise })
-    }
   }, [event]);
 
   const doRegister = () => {
@@ -103,22 +98,21 @@ const RegistrationForm = ({
     })
   }
 
-  if (event?.user_registration_status == 'Registered' && registrationForm?.accepting_status == 'AutoAccept') {
-    history.push(`event/${eventId}/payment/`);
+  if (event?.user_registration_status == 'Accepted') {
+    history.push(`/event/${eventId}/payment/`);
   }
 
   return (
     <Layout>
       <Grid
         container
-        direction='column'
         justify="space-evenly"
         alignItems="center"
         spacing={4}>
-        <Grid item>
+        <Grid item xs={12}>
           <Typography align='center' className={classes.title}>{'ثبت‌نام'}</Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Grid
             component={Paper}
             container
@@ -153,12 +147,12 @@ const RegistrationForm = ({
                 }
               </Grid>
               <Grid item>
-                <Typography>{`قیمت: ${toPersianNumber(60000)} تومان`}</Typography>
+                <Typography>{`قیمت: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Grid
             component={Paper}
             container
@@ -195,7 +189,6 @@ export default connect(
   {
     getOneRegistrationForm: getOneRegistrationFormAction,
     getOneEventInfo: getOneEventInfoAction,
-    getOneMerchandise: getOneMerchandiseAction,
     submitRegistrationForm: submitRegistrationFormAction,
   }
 )(RegistrationForm);

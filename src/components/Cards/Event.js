@@ -49,7 +49,8 @@ const Event = ({
   is_active,
   team_size,
   registration_form,
-  user_purchase_status,
+  merchandise,
+  is_paid,
   user_registration_status,
 }) => {
   const classes = useStyles();
@@ -106,9 +107,32 @@ const Event = ({
                 variant='outlined'
                 fullWidth
                 component={Link}
-                to={`${process.env.PUBLIC_URL}/event/${id}/registration_form/${registration_form}`}
+                to={`/event/${id}/registration_form/`}
                 color='secondary'>
                 {t('register')}
+              </Button>
+            }
+            {!is_paid && user_registration_status != 'NotRegistered' &&
+              <Button
+                size='small'
+                variant='outlined'
+                fullWidth
+                component={Link}
+                to={`/event/${id}/payment/${merchandise?.id}`}
+                color='secondary'>
+                {'پرداخت'}
+              </Button>
+            }
+            {is_paid &&
+              <Button
+                size='small'
+                variant='outlined'
+                fullWidth
+                disabled={true}
+                component={Link}
+                to={`/event/${id}/payment/${merchandise?.id}`}
+                color='secondary'>
+                {'ورود'}
               </Button>
             }
           </Grid>

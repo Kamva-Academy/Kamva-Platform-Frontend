@@ -60,7 +60,7 @@ function AuthDialog({
 
   useEffect(() => {
     if (open && isLoggedIn) {
-      history.push('/dashboard/');
+      history.push('/events/');
     }
   }, [isLoggedIn, open]);
 

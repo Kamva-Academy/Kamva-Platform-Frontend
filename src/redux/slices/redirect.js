@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { createAccountAction } from './account';
 import { startWorkshopAction } from './currentState';
-import { submitRegistrationFormAction } from './events';
+import { goForPurchaseUrlAction, submitRegistrationFormAction } from './events';
 import { createArticleAction, createWorkshopAction } from './mentor';
 
 const initialState = { redirectTo: null, force: false };
@@ -14,13 +14,9 @@ const redirectSlice = createSlice({
     initRedirect: () => initialState,
   },
   extraReducers: {
-    [submitRegistrationFormAction.rejected.toString()]: (state, action) => {
-      console.log(state.event);
-
-    },
     [createAccountAction.fulfilled.toString()]: (state, action) => {
       return ({
-        redirectTo: '/dashboard/'
+        redirectTo: '/events/'
       })
     },
     [createWorkshopAction.fulfilled.toString()]: (

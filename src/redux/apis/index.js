@@ -3,14 +3,7 @@ import jsonToFormData from '../../utils/jsonToFromDate';
 
 const putApi = async (url, body) => (await baseAxios.put(url, body)).data;
 
-const postApi = async (url, body) =>
-  (
-    await baseAxios.post(url, jsonToFormData(body), {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-  ).data;
+const postApi = async (url, body) => (await baseAxios.post(url, body)).data;
 
 const patchApi = async (url, body) =>
   (

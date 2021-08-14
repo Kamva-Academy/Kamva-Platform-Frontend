@@ -5,11 +5,12 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   applyDiscountUrl,
   getAllEventsInfoUrl,
+  getAllUserMerchandisesUrl,
   getEventRegistrationInfoUrl,
   getOneEventInfoUrl,
-  getOneMerchandiseUrl,
   getOneRegistrationFormUrl,
   getWorkshopsDescriptionUrl,
+  goForPurchaseUrl,
   paymentRequestUrl,
   submitRegistrationFormUrl,
 } from '../constants/urls';
@@ -37,14 +38,27 @@ export const submitRegistrationFormAction = createAsyncThunkApi(
   'events/submitRegistrationFormAction',
   Apis.POST,
   submitRegistrationFormUrl,
+  {
+    bodyCreator: ({ answer_sheet_type, answers }) => ({
+      answer_sheet_type, answers: [],
+    }),
+  }
 );
 
 
 export const getOneMerchandiseAction = createAsyncThunkApi(
   'events/getOneMerchandiseAction',
   Apis.GET,
-  getOneMerchandiseUrl,
+  getAllUserMerchandisesUrl,
 );
+
+
+export const goForPurchaseUrlAction = createAsyncThunkApi(
+  'events/goForPurchaseUrlAction',
+  Apis.POST,
+  goForPurchaseUrl,
+);
+
 
 
 
@@ -120,21 +134,39 @@ const eventSlice = createSlice({
     [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
     [getAllEventsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.events = response;
+      state.isFetching = false;
     },
     [getOneEventInfoAction.pending.toString()]: isFetching,
     [getOneEventInfoAction.rejected.toString()]: isNotFetching,
     [getOneEventInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.event = response;
+      state.isFetching = false;
     },
     [getOneRegistrationFormAction.pending.toString()]: isFetching,
     [getOneRegistrationFormAction.rejected.toString()]: isNotFetching,
     [getOneRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.registrationForm = response;
+      state.isFetching = false;
     },
     [getOneMerchandiseAction.pending.toString()]: isFetching,
     [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
     [getOneMerchandiseAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.merchandise = response;
+    },
+    [submitRegistrationFormAction.pending.toString()]: isFetching,
+    [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
+    [submitRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      window.location.reload();
+    },
+
+    [goForPurchaseUrlAction.pending.toString()]: isFetching,
+    [goForPurchaseUrlAction.rejected.toString()]: isNotFetching,
+    [goForPurchaseUrlAction.fulfilled.toString()]: isNotFetching,
+
+    [goForPurchaseUrlAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      console.log(response)
+      window.location.href = response.payment_link;
     },
 
     // [getEventRegistrationInfoAction.fulfilled.toString()]: (

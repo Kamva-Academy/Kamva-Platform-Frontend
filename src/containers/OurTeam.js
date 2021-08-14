@@ -10,6 +10,7 @@ import { getLandingDataAction } from '../redux/slices/landing';
 const teams = ['کمیته برگزاری', 'فنی', 'برندینگ', 'علمی', 'رسانه', 'مسابقه'];
 
 function OurTeam({ members = [], getLandingData }) {
+
   useEffect(() => {
     getLandingData();
     document.getElementById('tab0').checked = true;

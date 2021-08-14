@@ -45,13 +45,13 @@ const Workshop = ({
   stateId,
   player,
   isMentor,
+
   startWorkshop,
   participantGetCurrentState,
   mentorGetCurrentState,
   addNotification,
 }) => {
   const classes = useStyles();
-
   const history = useHistory();
 
   useEffect(() => {

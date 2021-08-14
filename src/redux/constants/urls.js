@@ -2,6 +2,7 @@ export const loginUrl = 'auth/accounts/login/';
 export const changePasswordUrl = 'auth/accounts/change_pass/';
 export const verificationCodeUrl = 'auth/accounts/verification_code/';
 export const accountCRUDUrl = ({ id }) => id ? `auth/accounts/${id}/` : 'auth/accounts/';
+
 export const profileCRUDUrl = ({ id }) => id ? `auth/profile/${id}/` : 'auth/profile/';
 
 export const studentShipUrl = 'auth/studentship/';
@@ -9,11 +10,14 @@ export const studentshipCRUDUrl = ({ id }) => `auth/studentship/${id}/`;
 
 export const institutesUrl = 'auth/institutes/';
 
+export const getAllUserMerchandisesUrl = ({ id }) => `auth/payment/${id}/`;
+export const goForPurchaseUrl = 'auth/payment/purchase/';
+
+
 export const getAllEventsInfoUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/register/`;
-export const getOneMerchandiseUrl = ({ id }) => `fsm/merchandises/${id}`;
 
 export const workshopsUrl = 'fsm/fsm/';
 
