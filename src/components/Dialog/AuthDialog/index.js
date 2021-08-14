@@ -129,7 +129,7 @@ function AuthDialog({
           <Grid item>
             <Typography align="center">
               {'اگر رمزت رو فراموش کردی، به '}
-              <Link to="/change_password">{'این‌جا'}</Link>
+              <Link to="/reset_password">{'این‌جا'}</Link>
               {' مراجعه کن.'}
             </Typography>
           </Grid>

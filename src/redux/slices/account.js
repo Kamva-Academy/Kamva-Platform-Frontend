@@ -60,10 +60,6 @@ export const getInstitutesAction = createAsyncThunkApi(
 );
 
 
-
-
-
-
 export const getUserAccountAction = createAsyncThunkApi(
   'users/get/userAccount',
   Apis.GET,
@@ -75,6 +71,9 @@ export const updateUserAccountAction = createAsyncThunkApi(
   Apis.PATCH,
   accountCRUDUrl
 );
+
+
+
 
 export const getUserProfileAction = createAsyncThunkApi(
   'users/userProfile',

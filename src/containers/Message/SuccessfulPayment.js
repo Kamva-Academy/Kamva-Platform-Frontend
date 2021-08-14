@@ -36,13 +36,10 @@ const Index = () => {
             xs={12}
             md={6}>
             <Grid item>
-              <Typography variant="h1" align='center'>پلتفرم برگزاری رویداد و کارگاه</Typography>
+              <Typography gutterBottom variant="h1" align='center'>ثبت‌نام شما با موفقیت انجام شد!</Typography>
             </Grid>
             <Grid item>
-              <ButtonGroup size="large" variant="contained" color="primary">
-                <Button component={Link} to='/login'>ورود</Button>
-                <Button component={Link} to='/create_account'>ثبت‌نام</Button>
-              </ButtonGroup>
+              <Button component={Link} to='/events' variant='contained' color='primary'>بازگشت</Button>
             </Grid>
           </Grid>
         </Grid>

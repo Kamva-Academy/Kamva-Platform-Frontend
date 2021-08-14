@@ -1,6 +1,7 @@
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
   changePasswordAction,
@@ -10,10 +11,8 @@ import { addNotificationAction } from '../../redux/slices/notifications';
 
 const MyTextField = ({ ...rest }) => (
   <TextField
-    style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', borderRadius: '5px' }}
-    variant="filled"
+    variant='outlined'
     fullWidth
-    {...rest}
   />
 );
 
@@ -106,7 +105,9 @@ const InputFields = ({
   return (
     <>
       <Grid item>
-        <MyTextField
+        <TextField
+          variant='outlined'
+          fullWidth
           onBlur={putData}
           label="رمز عبور جدید"
           name="password"
@@ -116,7 +117,9 @@ const InputFields = ({
       </Grid>
 
       <Grid item>
-        <MyTextField
+        <TextField
+          variant='outlined'
+          fullWidth
           onBlur={putData}
           label="تکرار رمز عبور جدید"
           type="password"
@@ -126,7 +129,9 @@ const InputFields = ({
       </Grid>
 
       <Grid item>
-        <MyTextField
+        <TextField
+          variant='outlined'
+          fullWidth
           onChange={(e) => {
             if (isEnglishDigits(e.target.value) !== 'error') {
               putData(e);
@@ -147,7 +152,9 @@ const InputFields = ({
         alignItems="stretch"
         spacing={1}>
         <Grid item xs={8} sm={9}>
-          <MyTextField
+          <TextField
+            variant='outlined'
+            fullWidth
             onChange={(e) => {
               if (isEnglishDigits(e.target.value) !== 'error') {
                 putData(e);
@@ -156,7 +163,7 @@ const InputFields = ({
             value={data.code}
             name="code"
             inputProps={{ className: 'ltr-input' }}
-            label="کد پیامک‌شده رو وارد کنید"
+            label="کد پیامک‌شده"
             type="text"
           />
         </Grid>
@@ -179,8 +186,16 @@ const InputFields = ({
           color="primary"
           disabled={isFetching}
           fullWidth>
-          تغییر بده
+          تغییر
         </Button>
+      </Grid>
+
+      <Grid item>
+        <Typography align="center">
+          {'از '}
+          <Link to="/login">{'این‌جا'}</Link>
+          {' می‌توانی وارد حسابت شوی.'}
+        </Typography>
       </Grid>
     </>
   );

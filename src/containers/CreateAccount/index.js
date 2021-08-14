@@ -54,7 +54,7 @@ const Index = () => {
                   justify='center'
                   spacing={2}>
                   <Grid item>
-                    <Typography gutterBottom variant='h2' align='center'>ایجاد حساب کاربری</Typography>
+                    <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
                   </Grid>
                   <InputFields />
                 </Grid>

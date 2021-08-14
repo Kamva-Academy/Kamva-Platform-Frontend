@@ -91,14 +91,6 @@ const InputFields = ({
         />
       </Grid>
 
-      {/* <Grid item>
-        <Typography align="center">
-          {'اگر رمزت رو فراموش کردی، به '}
-          <Link to="/change_password">{'این‌جا'}</Link>
-          {' مراجعه کن.'}
-        </Typography>
-      </Grid> */}
-
       <Grid container item direction="row" justify="center">
         <Button
           onClick={doLogin}
@@ -106,8 +98,21 @@ const InputFields = ({
           color="primary"
           disabled={isFetching}
           fullWidth>
-          بزن بریم...
+          بزن بریم
         </Button>
+      </Grid>
+
+      <Grid item>
+        <Typography align="center" gutterBottom>
+          {'اگر گذرواژه‌ات را فراموش کردی، به '}
+          <Link to="/reset_password">{'این‌جا'}</Link>
+          {' مراجعه کن.'}
+        </Typography>
+        <Typography align="center">
+          {'اگر هم حساب کاربری نداری، '}
+          <Link to="/create_account">{'این‌جا'}</Link>
+          {' یک حساب جدید برای خودت بساز!'}
+        </Typography>
       </Grid>
     </>
   );

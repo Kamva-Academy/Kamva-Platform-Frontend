@@ -54,7 +54,9 @@ const Index = () => {
                   justify='center'
                   spacing={2}>
                   <Grid item>
-                    <Typography gutterBottom component='h1' variant='h2' align='center'>ورود</Typography>
+                    <Typography gutterBottom component='h1' variant='h2' align='center'>
+                      {'ورود'}
+                    </Typography>
                   </Grid>
                   <InputFields />
                 </Grid>

@@ -1,35 +1,36 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import Article from '../../containers/Article';
-import ChangePassword from '../../containers/ChangePassword';
-import Correction from '../../containers/Correction';
-import CreateAccount from '../../containers/CreateAccount';
-import Dashboard from '../../containers/Dashboard';
-import EventRegistrationId from '../../containers/Dashboard/EventRegistration';
-import Events from '../../containers/Dashboard/Events';
-import FailedPayment from '../../containers/Dashboard/FailedPayment';
-import Profile from '../../containers/Dashboard/Profile';
-import SuccessfulPayment from '../../containers/Dashboard/SuccessfulPayment';
-import Landing from '../../containers/Landing';
-import Login from '../../containers/Login';
-import LoginPage from '../../containers/LoginPage';
-import OurTeam from '../../containers/OurTeam';
-import Payment from '../../containers/Payment';
-import RegistrationForm from '../../containers/RegistrationForm';
-import Workshop from '../../containers/Workshop';
-import Workshops from '../../containers/Workshops';
-import PrivateRoute from '../PrivateRoute';
+import ChangePassword from '../containers/ChangePassword';
+import Correction from '../containers/Correction';
+import CreateAccount from '../containers/CreateAccount';
+import Dashboard from '../containers/Dashboard';
+import EventRegistrationId from '../containers/Dashboard/EventRegistration';
+import Events from '../containers/Dashboard/Events';
+import Profile from '../containers/Dashboard/Profile';
+import Landing from '../containers/Landing';
+import Login from '../containers/Login';
+import FailedPayment from '../containers/Message/FailedPayment';
+import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
+import OurTeam from '../containers/OurTeam';
+import Payment from '../containers/Payment';
+import RegistrationForm from '../containers/RegistrationForm';
+import Workshop from '../containers/Workshop';
+import Workshops from '../containers/Workshops';
+import PrivateRoute from './PrivateRoute';
 
 const Root = () => {
   return (
     <Switch>
       <Route path="/our_team" component={OurTeam} />
-      <Route path="/change_password" component={ChangePassword} />
+      <Route path="/reset_password" component={ChangePassword} />
       <Route path="/create_account" component={CreateAccount} />
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/payment/success/" component={SuccessfulPayment} />
-      <PrivateRoute path="/payment/failure/" component={FailedPayment} />
+      <Route path="/login" component={Login} />
+
+      <PrivateRoute path="/message/payment/success/" component={SuccessfulPayment} />
+      <PrivateRoute path="/message/payment/failure/" component={FailedPayment} />
+
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
@@ -44,7 +45,6 @@ const Root = () => {
         </Switch>
       </Route>
       <Route path="/loading/"></Route>
-      <Route path="/admin" component={LoginPage}></Route>
       <PrivateRoute path="/workshops/" component={Workshops} />
       <Route path="/workshop/">
         <Switch>
@@ -54,10 +54,8 @@ const Root = () => {
             onlyMentor
           />
           <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
-          <Route path="/workshop/" component={Workshops} />
         </Switch>
       </Route>
-      <Route path="/article/:articleId" component={Article} />
       <PrivateRoute
         path="/correction/:fsmId/"
         component={Correction}

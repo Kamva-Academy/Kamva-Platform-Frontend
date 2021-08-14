@@ -3,10 +3,11 @@ import {
   Grid,
   makeStyles,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import {
   createAccountAction,
@@ -200,9 +201,18 @@ const InputFields = ({
           color="primary"
           disabled={isFetching}
           fullWidth>
-          ایجاد
+          ثبت
         </Button>
       </Grid>
+
+      <Grid item>
+        <Typography align="center">
+          {' از قبل حساب داشتی؟ به '}
+          <Link to="/login">{'این‌جا'}</Link>
+          {' برو.'}
+        </Typography>
+      </Grid>
+
     </>
   );
 };

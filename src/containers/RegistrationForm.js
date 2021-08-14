@@ -168,7 +168,7 @@ const RegistrationForm = ({
             ))}
             <Grid item>
               <Button variant='contained' color='primary' onClick={doRegister}>
-                ثبت اطلاعات
+                ثبت
               </Button>
             </Grid>
           </Grid>

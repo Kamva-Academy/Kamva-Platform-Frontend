@@ -13,8 +13,8 @@ import { useHistory } from 'react-router';
 import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
+import Root from './root';
 import WorkshopRoot from './root/Workshop';
-import ZeroJourneyerRoot from './root/ZeroJourneyer';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
 import translations from './translations';
@@ -22,21 +22,6 @@ import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
 // Pushe.subscribe();
 
-const Workshop = () => (
-  <SnackbarProvider>
-    <Notifier />
-    <CssBaseline />
-    <WorkshopRoot />
-  </SnackbarProvider>
-);
-
-const ZeroJourneyer = () => (
-  <SnackbarProvider>
-    <Notifier />
-    <CssBaseline />
-    <ZeroJourneyerRoot />
-  </SnackbarProvider>
-);
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
   const history = useHistory();
@@ -68,17 +53,25 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect }) => {
         <>
           <ThemeProvider theme={ZeroJourneyerMuiTheme}>
             <StylesProvider jss={jss}>
-              <ZeroJourneyer />
+              <SnackbarProvider>
+                <Notifier />
+                <CssBaseline />
+                <Root />
+              </SnackbarProvider>
             </StylesProvider>
           </ThemeProvider>
         </>
       ) : (
-        <>
-          <ThemeProvider theme={MuiTheme}>
-            <Workshop />
-          </ThemeProvider>
-        </>
-      )}
+          <>
+            <ThemeProvider theme={MuiTheme}>
+              <SnackbarProvider>
+                <Notifier />
+                <CssBaseline />
+                <Root />
+              </SnackbarProvider>
+            </ThemeProvider>
+          </>
+        )}
     </IntlProvider>
   );
 };
@@ -89,6 +82,4 @@ const mapStateToProps = (state) => ({
   forceRedirect: state.redirect.force,
 });
 
-export default connect(mapStateToProps, { initRedirect: initRedirectAction })(
-  App
-);
+export default connect(mapStateToProps, { initRedirect: initRedirectAction })(App);
