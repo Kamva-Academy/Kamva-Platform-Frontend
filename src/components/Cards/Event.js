@@ -95,7 +95,7 @@ const Event = ({
             <Chip
               variant="outlined"
               icon={<PeopleAltIcon />}
-              label={`${toPersianNumber(team_size)} ${t('person')}`}
+              label={team_size == 1 ? 'انفرادی' : `${toPersianNumber(team_size)} ${t('person')}`}
             />
           </Grid>
           <Grid item>

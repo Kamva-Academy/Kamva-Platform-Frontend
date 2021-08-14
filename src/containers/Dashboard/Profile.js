@@ -21,7 +21,13 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker2";
 import { connect } from 'react-redux';
 
-import { getUserProfileAction, updateUserAccountAction } from '../../redux/slices/account';
+import {
+  createStudentShipAction,
+  getInstitutesAction,
+  getUserProfileAction,
+  updateStudentShipAction,
+  updateUserAccountAction,
+} from '../../redux/slices/account';
 import Layout from '../Layout';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
@@ -44,17 +50,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }) => {
+const GRADES = [
+  // { value: '1', name: 'اول' },
+  // { value: '2', name: 'دوم' },
+  // { value: '3', name: 'سوم' },
+  // { value: '4', name: 'چهارم' },
+  // { value: '5', name: 'پنجم' },
+  // { value: '6', name: 'ششم' },
+  { value: '7', name: 'هفتم' },
+  { value: '8', name: 'هشتم' },
+  { value: '9', name: 'نهم' },
+  { value: '10', name: 'دهم' },
+  { value: '11', name: 'یازدهم' },
+  { value: '12', name: 'دوازدهم' },
+]
+
+const Profile = ({
+  updateUserAccount,
+  getUserProfile,
+  createStudentShip,
+  updateStudentShip,
+  getInstitutes,
+  userAccount,
+  userProfile,
+  studentship,
+  institutes,
+}) => {
   const [_, refresh] = useState();
   const [picture, setPicture] = useState('');
   const [newProfile, setNewProfile] = useState({});
+  const [newStudentship, setNewStudentship] = useState();
   const [birthday, setBirthday] = useState(jMoment());
-
   const classes = useStyles();
 
   useEffect(() => {
     getUserProfile({ id: userAccount.id });
-  }, [getUserProfile])
+    getInstitutes();
+  }, [getUserProfile, getInstitutes])
 
   useEffect(() => {
     refresh(Math.random());
@@ -66,14 +98,21 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
     }
   };
 
-  const handleOnBlur = (event) => {
+  const handleProfileChange = (event) => {
     setNewProfile({
       ...newProfile,
       [event.target.name]: event.target.value,
     })
   }
 
-  const onChangeSubmit = () => {
+  const handleStudentshipChange = (event) => {
+    // setNewStudentship({
+    //   ...newStudentship,
+    //   [event.target.name]: event.target.value,
+    // })
+  }
+
+  const submitProfile = () => {
     updateUserAccount(
       {
         id: userAccount.id,
@@ -81,6 +120,20 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
         ...newProfile,
       }
     );
+  }
+
+  const submitStudentship = () => {
+    updateStudentShip({
+      id: studentship?.id,
+      ...newStudentship,
+    })
+  }
+
+  const addNewStudentship = () => {
+    createStudentShip({
+      studentship_type: "School",
+      is_currently_studying: true,
+    });
   }
 
   if (!userProfile) {
@@ -113,31 +166,31 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userAccount?.first_name}
-              name='first_name' onBlur={handleOnBlur}
+              name='first_name' onBlur={handleProfileChange}
               size='small' label='نام' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userAccount?.last_name}
-              name='last_name' onBlur={handleOnBlur}
+              name='last_name' onBlur={handleProfileChange}
               size='small' label='نام خانوادگی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.national_code}
-              name='national_code' onBlur={handleOnBlur}
+              name='national_code' onBlur={handleProfileChange}
               size='small' label='کد ملی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.phone_number}
-              name='phone_number' onBlur={handleOnBlur}
+              name='phone_number' onBlur={handleProfileChange}
               size='small' label='شماره موبایل' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.email}
-              name='email' onBlur={handleOnBlur}
+              name='email' onBlur={handleProfileChange}
               size='small' label='ایمیل' />
           </Grid>
           {/* <Grid item xs={12} sm={6}> todo
@@ -157,7 +210,7 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
                 name="gender"
                 row
                 defaultValue={userProfile?.gender}
-                onBlur={handleOnBlur}
+                onBlur={handleProfileChange}
               >
                 <FormControlLabel
                   value="Male"
@@ -184,11 +237,11 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
-                onBlur={handleOnBlur}
+                onBlur={handleProfileChange}
                 name='province'
                 label='استان'
               >
-                <MenuItem value={"DDD"}>{'اصفهان'}</MenuItem>
+                <MenuItem value={"Isfahan"}>{'اصفهان'}</MenuItem>
               </Select>
             </FormControl >
           </Grid>
@@ -200,30 +253,77 @@ const Profile = ({ updateUserAccount, getUserProfile, userAccount, userProfile }
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
-                onBlur={handleOnBlur}
+                onBlur={handleProfileChange}
                 name='city'
                 label='شهر'
               >
-                <MenuItem value={"DDD"}>{'اصفهان'}</MenuItem>
+                <MenuItem value={"Isfahan"}>{'اصفهان'}</MenuItem>
               </Select>
             </FormControl >
           </Grid>
           <Grid item xs={12}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.address}
-              name='address' multiline rows={2} onBlur={handleOnBlur}
+              name='address' multiline rows={2} onBlur={handleProfileChange}
               size='small' label='آدرس منزل ' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.postal_code}
-              name='postal_code' onBlur={handleOnBlur}
+              name='postal_code' onBlur={handleProfileChange}
               size='small' label='کد پستی' />
           </Grid>
         </Grid>
         <Grid item container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Button onClick={onChangeSubmit} variant='contained' color='secondary'>ثبت تغییرات</Button>
+            <Button onClick={submitProfile} variant='contained' color='secondary'>ذخیره اطلاعات شخصی</Button>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Typography variant='h2'>مشخصات دانش‌آموزی</Typography>
+          <Divider />
+        </Grid>
+        <Grid item container spacing={2}>
+          <Grid item container xs={12} sm={6}>
+            <FormControl size='small' variant="outlined" className={classes.formControl}>
+              <InputLabel>مدرسه</InputLabel>
+              <Select
+                className={classes.dropDown}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                defaultValue={studentship?.school}
+                onBlur={handleStudentshipChange}
+                name='school'
+                label='مدرسه'
+              >
+                {institutes?.map((school) => (
+                  <MenuItem key={school.id} value={school.id}>{school.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl >
+          </Grid>
+          <Grid item container xs={12} sm={6}>
+            <FormControl size='small' variant="outlined" className={classes.formControl}>
+              <InputLabel>پایه</InputLabel>
+              <Select
+                className={classes.dropDown}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                defaultValue={studentship?.grade}
+                onBlur={handleStudentshipChange}
+                name='grade'
+                label='پایه'
+              >
+                {GRADES.map((grade) => (
+                  <MenuItem key={grade.value} value={grade.value}>{grade.name}</MenuItem>
+                ))}
+              </Select>
+            </FormControl >
+          </Grid>
+        </Grid>
+        <Grid item container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Button onClick={submitStudentship} variant='contained' color='secondary'>ذخیره اطلاعات دانش‌آموزی</Button>
           </Grid>
         </Grid>
       </Grid>
@@ -236,12 +336,16 @@ const mapStateToProps = (state) => ({
   userProfile: state.account.userProfile,
   isFetching: state.account.isFetching,
   payments: state.account.payments,
+  institutes: state.account.institutes,
 });
 
 export default connect(mapStateToProps,
   {
     updateUserAccount: updateUserAccountAction,
-    getUserProfile: getUserProfileAction
+    getUserProfile: getUserProfileAction,
+    createStudentShip: createStudentShipAction,
+    updateStudentShip: updateStudentShipAction,
+    getInstitutes: getInstitutesAction,
   }
 )(Profile);
 

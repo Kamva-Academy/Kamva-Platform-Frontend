@@ -16,29 +16,29 @@ import UploadFileQuestionWidget, {
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 const WIDGET_TYPES = {
-  ProblemSmallAnswer: {
+  SmallAnswerProblem: {
     WidgetComponent: SmallAnswerQuestionWidget,
     WidgetEditDialog: SmallAnswerQuestionEditWidget,
     label: 'کوتاه پاسخ',
-    backendType: 'ProblemSmallAnswer',
+    backendType: 'SmallAnswerProblem',
   },
-  ProblemBigAnswer: {
+  BigAnswerProblem: {
     WidgetComponent: BigAnswerQuestionWidget,
     WidgetEditDialog: BigAnswerQuestionEditWidget,
     label: 'بلند پاسخ',
-    backendType: 'ProblemBigAnswer',
+    backendType: 'BigAnswerProblem',
   },
-  ProblemMultiChoice: {
+  MultiChoiceProblem: {
     WidgetComponent: MultiChoiceQuestionWidget,
     WidgetEditDialog: MultiChoiceQuestionEditWidget,
     label: 'چند گزینه‌ای',
-    backendType: 'ProblemMultiChoice',
+    backendType: 'MultiChoiceProblem',
   },
-  ProblemUploadFileAnswer: {
+  UploadFileAnswerProblem: {
     WidgetComponent: UploadFileQuestionWidget,
     WidgetEditDialog: UploadFileQuestionEditWidget,
     label: 'فایل',
-    backendType: 'ProblemUploadFileAnswer',
+    backendType: 'UploadFileAnswerProblem',
   },
   Description: {
     WidgetComponent: TextWidget,

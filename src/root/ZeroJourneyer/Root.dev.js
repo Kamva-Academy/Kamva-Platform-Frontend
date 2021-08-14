@@ -15,6 +15,7 @@ import ZeroJourneyer from '../../containers/Landings/ZeroJourneyer';
 import Login from '../../containers/Login';
 import LoginPage from '../../containers/LoginPage';
 import OurTeam from '../../containers/OurTeam';
+import Payment from '../../containers/Payment';
 import RegistrationForm from '../../containers/RegistrationForm';
 import Workshop from '../../containers/Workshop';
 import Workshops from '../../containers/Workshops';
@@ -31,8 +32,9 @@ const Root = () => {
       <PrivateRoute path="/payment/failure/" component={FailedPayment} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />
+      <PrivateRoute path="/events/" component={Events} />
       <PrivateRoute path="/event/:eventId/registration_form/" component={RegistrationForm} />
-      <PrivateRoute path="/event/" component={Events} />
+      <PrivateRoute path="/event/:eventId/payment/" component={Payment} />
       <Route path="/event/">
         <Switch>
           <PrivateRoute

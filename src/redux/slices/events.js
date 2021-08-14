@@ -11,6 +11,7 @@ import {
   getOneRegistrationFormUrl,
   getWorkshopsDescriptionUrl,
   paymentRequestUrl,
+  submitRegistrationFormUrl,
 } from '../constants/urls';
 import { loginAction } from './account';
 
@@ -32,12 +33,20 @@ export const getOneRegistrationFormAction = createAsyncThunkApi(
   getOneRegistrationFormUrl,
 );
 
+export const submitRegistrationFormAction = createAsyncThunkApi(
+  'events/submitRegistrationFormAction',
+  Apis.POST,
+  submitRegistrationFormUrl,
+);
+
 
 export const getOneMerchandiseAction = createAsyncThunkApi(
   'events/getOneMerchandiseAction',
   Apis.GET,
   getOneMerchandiseUrl,
 );
+
+
 
 
 

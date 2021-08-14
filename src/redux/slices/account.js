@@ -5,15 +5,18 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   accountCRUDUrl,
   changePasswordUrl,
+  institutesUrl,
   loginUrl,
   profileCRUDUrl,
+  studentshipCRUDUrl,
+  studentShipUrl,
   verificationCodeUrl,
 } from '../constants/urls';
 
 const initialState = { token: null, user: {} };
 
 export const loginAction = createAsyncThunkApi(
-  'users/login',
+  'users/loginAction',
   Apis.POST,
   loginUrl,
   {
@@ -25,7 +28,7 @@ export const loginAction = createAsyncThunkApi(
 );
 
 export const createAccountAction = createAsyncThunkApi(
-  'users/register',
+  'users/createAccountAction',
   Apis.POST_FORM_DATA,
   accountCRUDUrl,
   {
@@ -37,6 +40,29 @@ export const createAccountAction = createAsyncThunkApi(
     },
   }
 );
+
+export const createStudentShipAction = createAsyncThunkApi(
+  'users/createStudentShipAction',
+  Apis.POST,
+  studentShipUrl,
+);
+
+export const updateStudentShipAction = createAsyncThunkApi(
+  'users/updateStudentShipAction',
+  Apis.PATCH,
+  studentshipCRUDUrl,
+);
+
+export const getInstitutesAction = createAsyncThunkApi(
+  'users/getInstitutesAction',
+  Apis.GET,
+  institutesUrl,
+);
+
+
+
+
+
 
 export const getUserAccountAction = createAsyncThunkApi(
   'users/get/userAccount',
@@ -133,7 +159,11 @@ const accountSlice = createSlice({
       state.userProfile = response;
       state.isFetching = false;
     },
-
+    [getInstitutesAction.pending.toString()]: isFetching,
+    [getInstitutesAction.fulfilled.toString()]: isNotFetching,
+    [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.institutes = response;
+    },
   },
 });
 

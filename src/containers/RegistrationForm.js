@@ -1,10 +1,16 @@
-import { Container, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import { Button, Container, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import AppBar from '../components/Appbar/ResponsiveAppBar';
-import { getOneEventInfoAction, getOneRegistrationFormAction, getOneMerchandiseAction } from '../redux/slices/events'
+import Widget from '../components/Widget';
+import {
+  getOneEventInfoAction,
+  getOneMerchandiseAction,
+  getOneRegistrationFormAction,
+  submitRegistrationFormAction
+} from '../redux/slices/events'
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
 
@@ -69,9 +75,12 @@ const RegistrationForm = ({
   getOneMerchandise,
   event,
   registrationForm,
+  submitRegistrationForm,
 }) => {
   const classes = useStyles();
+  const history = useHistory();
   const { eventId } = useParams()
+  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     getOneEventInfo({ id: eventId })
@@ -85,6 +94,18 @@ const RegistrationForm = ({
       getOneMerchandise({ id: event?.merchandise })
     }
   }, [event]);
+
+  const doRegister = () => {
+    submitRegistrationForm({
+      "answer_sheet_type": "RegistrationReceipt",
+      id: event?.registration_form,
+      answers,
+    })
+  }
+
+  if (event?.user_registration_status == 'Registered' && registrationForm?.accepting_status == 'AutoAccept') {
+    history.push(`event/${eventId}/payment/`);
+  }
 
   return (
     <Layout>
@@ -144,20 +165,17 @@ const RegistrationForm = ({
             justify="center"
             alignItems="center"
             spacing={2}>
-            <Grid item xs={12}>
-              <Typography gutterBottom align='center' variant='h1'>فرم ثبت‌نام</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Grid
-            component={Paper}
-            container
-            justify="center"
-            alignItems="center"
-            spacing={2}>
-            <Grid item xs={12}>
-              <Typography gutterBottom align='center' variant='h1'>فرم ثبت‌نام</Typography>
+            {registrationForm?.widgets?.map((widget) => (
+              <Grid item key={widget.id} xs={12}>
+                <Paper className={classes.paper}>
+                  <Widget widget={widget} />
+                </Paper>
+              </Grid>
+            ))}
+            <Grid item>
+              <Button variant='contained' color='primary' onClick={doRegister}>
+                ثبت اطلاعات
+              </Button>
             </Grid>
           </Grid>
         </Grid>
@@ -178,5 +196,6 @@ export default connect(
     getOneRegistrationForm: getOneRegistrationFormAction,
     getOneEventInfo: getOneEventInfoAction,
     getOneMerchandise: getOneMerchandiseAction,
+    submitRegistrationForm: submitRegistrationFormAction,
   }
 )(RegistrationForm);
