@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SmallAnswerQuestionWidget = ({
+  pushAnswer,
   id,
   text = '',
   answer,
@@ -51,6 +52,20 @@ const SmallAnswerQuestionWidget = ({
   const classes = useStyles();
   const [value, setValue] = useState(last_submit?.text);
   const [isButtonDisabled, setButtonDisable] = useState(false);
+
+
+  const handleTextFieldChange = (e) => {
+    pushAnswer('text', e.target.value);
+    setValue(value);
+  }
+
+  const handleButtonClick = (e) => {
+    setButtonDisable(true);
+    setTimeout(() => {
+      setButtonDisable(false);
+    }, 20000);
+    sendSmallAnswer({ playerId, problemId: id, answer: value });
+  }
 
   return (
     <>
@@ -72,9 +87,9 @@ const SmallAnswerQuestionWidget = ({
               <Grid item xs>
                 <TextField
                   fullWidth
-                  variant={'outlined'}
+                  variant='outlined'
                   value={value}
-                  onChange={(e) => setValue(e.target.value)}
+                  onChange={handleTextFieldChange}
                   size="small"
                   error={
                     answer?.text &&
@@ -89,25 +104,19 @@ const SmallAnswerQuestionWidget = ({
                   }
                 />
               </Grid>
-
-              <Grid item xs={3} sm={2} md={3}>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  disabled={mode === MODES.EDIT || isButtonDisabled}
-                  onClick={() => {
-                    setButtonDisable(true);
-                    setTimeout(() => {
-                      setButtonDisable(false);
-                    }, 20000);
-                    sendSmallAnswer({ playerId, problemId: id, answer: value })
-                  }
-                  }>
-                  {t('submit')}
-                </Button>
-              </Grid>
+              {!pushAnswer &&
+                <Grid item xs={3} sm={2} md={3}>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    disabled={mode === MODES.EDIT || isButtonDisabled}
+                    onClick={handleButtonClick}>
+                    {t('submit')}
+                  </Button>
+                </Grid>
+              }
             </>
           )}
 

@@ -45,7 +45,7 @@ const UploadFileQuestionWidget = ({
   text = 'محل آپلود فایل',
   last_submit,
   disabled,
-  playerId,
+  answerSheetId,
   sendFileAnswer,
 }) => {
   const t = useTranslate();
@@ -56,7 +56,7 @@ const UploadFileQuestionWidget = ({
       if (e.target.files[0].size <= 8e6) {
         sendFileAnswer({
           answer_file: e.target.files[0],
-          playerId,
+          answerSheetId,
           problemId: id,
         });
       } else {
@@ -80,8 +80,8 @@ const UploadFileQuestionWidget = ({
         />
         <Button
           component="label"
-          htmlFor={disabled || !playerId ? '' : 'raised-button-file' + id}
-          disabled={disabled || !playerId}
+          htmlFor={disabled || !answerSheetId ? '' : 'raised-button-file' + id}
+          disabled={disabled || !answerSheetId}
           variant="contained"
           color="primary"
           size="small"

@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '0px !important',
   },
   eventImage: {
+    borderRadius: '5px',
     height: '100%',
     maxHeight: '300px',
     width: '100%',
@@ -102,6 +103,31 @@ const RegistrationForm = ({
     history.push(`/event/${eventId}/payment/`);
   }
 
+  const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
+    const temporaryAnswer = answers;
+
+    let doesFind = false;
+    for (let i = 0; i < temporaryAnswer.length; i++) {
+      if (temporaryAnswer[i].answer_type === widgetType) {
+        temporaryAnswer[i] = {
+          ...temporaryAnswer[i],
+          [fieldName]: answer,
+        }
+        doesFind = true;
+      }
+    }
+    if (!doesFind) {
+      temporaryAnswer.push({
+        [fieldName]: answer,
+        answer_type: widgetType,
+        problem: problemId,
+      })
+    }
+    setAnswers(temporaryAnswer);
+  }
+
+  console.log(answers)
+
   return (
     <Layout>
       <Grid
@@ -109,9 +135,6 @@ const RegistrationForm = ({
         justify="space-evenly"
         alignItems="center"
         spacing={4}>
-        <Grid item xs={12}>
-          <Typography align='center' className={classes.title}>{'ثبت‌نام'}</Typography>
-        </Grid>
         <Grid item xs={12}>
           <Grid
             component={Paper}
@@ -138,19 +161,22 @@ const RegistrationForm = ({
                 <Typography gutterBottom align='center' variant='h1'>{`رویداد ${event?.name}`}</Typography>
               </Grid>
               <Grid item>
-                <Typography>{event?.description}</Typography>
+                <Typography align='center'>{event?.description}</Typography>
               </Grid>
               <Grid item>
-                <Typography>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type]}`}</Typography>
+                <Typography align='center'>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type]}`}</Typography>
                 {event.event_type == 'Team' &&
-                  <Typography>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
+                  <Typography align='center'>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
                 }
               </Grid>
               <Grid item>
-                <Typography>{`قیمت: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
+                <Typography align='center'>{`قیمت: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
               </Grid>
             </Grid>
           </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography align='center' className={classes.title}>{'فرم ثبت‌نام'}</Typography>
         </Grid>
         <Grid item xs={12}>
           <Grid
@@ -162,7 +188,7 @@ const RegistrationForm = ({
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper}>
-                  <Widget widget={widget} />
+                  <Widget pushAnswer={pushAnswer(widget?.id, widget?.widget_type)} widget={widget} />
                 </Paper>
               </Grid>
             ))}

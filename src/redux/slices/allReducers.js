@@ -9,6 +9,7 @@ import { notificationReducer } from './notifications';
 import { redirectReducer } from './redirect';
 import { translatorReducer } from './translator';
 import { whiteboardReducer } from './whiteboard';
+import { widgetReducer } from './widget';
 
 const allReducers = combineReducers({
   account: accountReducer,
@@ -16,6 +17,7 @@ const allReducers = combineReducers({
   notifications: notificationReducer,
   mentor: mentorReducer,
   whiteboard: whiteboardReducer,
+  widget: widgetReducer,
   redirect: redirectReducer,
   landing: landingReducer,
   events: eventsReducer,
