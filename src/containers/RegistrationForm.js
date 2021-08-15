@@ -91,16 +91,16 @@ const RegistrationForm = ({
     }
   }, [event]);
 
-  const doRegister = () => {
-    submitRegistrationForm({
-      "answer_sheet_type": "RegistrationReceipt",
-      id: event?.registration_form,
-      answers,
-    })
+  if (event?.user_registration_status != 'NotRegistered') {
+    history.push(`/event/${eventId}/payment`);
   }
 
-  if (event?.user_registration_status == 'Accepted') {
-    history.push(`/event/${eventId}/payment/`);
+  const doRegister = () => {
+    submitRegistrationForm({
+      id: event?.registration_form,
+      answers,
+      eventId,
+    })
   }
 
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {

@@ -14,6 +14,11 @@ const redirectSlice = createSlice({
     initRedirect: () => initialState,
   },
   extraReducers: {
+    [submitRegistrationFormAction.fulfilled.toString()]: (state, action) => {
+      return ({
+        redirectTo: `/event/${action?.meta?.arg.eventId}/payment/`
+      })
+    },
     [createAccountAction.fulfilled.toString()]: (state, action) => {
       return ({
         redirectTo: '/events/'

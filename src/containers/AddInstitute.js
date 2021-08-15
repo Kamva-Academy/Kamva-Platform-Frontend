@@ -2,9 +2,10 @@ import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import EventCard from '../../components/Cards/Event';
-import { getAllEventsInfoAction } from '../../redux/slices/events'
-import Layout from '../Layout';
+import EventCard from '../components/Cards/Event';
+import { getAllEventsInfoAction } from '../redux/slices/events'
+import Layout from './Layout';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,14 +42,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Events = ({ getAllEventsInfo, events }) => {
+const Index = ({ getAllEventsInfo, events }) => {
   const classes = useStyles();
 
   useEffect(() => {
     getAllEventsInfo();
   }, [getAllEventsInfo])
-
-  window.open('/institute/', '_blank', 'height=600,width=400');
 
 
   return (
@@ -69,7 +68,7 @@ const Events = ({ getAllEventsInfo, events }) => {
             style={{ minHeight: '100%' }}
             spacing={2}>
             <Grid item>
-              <Typography className={classes.title}>{'رویدادها'}</Typography>
+              <Typography className={classes.title}>{'موسسسات'}</Typography>
             </Grid>
             <Grid
               item
@@ -102,4 +101,4 @@ export default connect(
   {
     getAllEventsInfo: getAllEventsInfoAction,
   }
-)(Events);
+)(Index);

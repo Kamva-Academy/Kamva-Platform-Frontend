@@ -38,6 +38,12 @@ export const submitRegistrationFormAction = createAsyncThunkApi(
   'events/submitRegistrationFormAction',
   Apis.POST,
   submitRegistrationFormUrl,
+  {
+    bodyCreator: ({ answers }) => ({
+      answer_sheet_type: "RegistrationReceipt",
+      answers,
+    }),
+  }
 );
 
 export const applyDiscountCodeAction = createAsyncThunkApi(
@@ -164,10 +170,7 @@ const eventSlice = createSlice({
     [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
 
     [submitRegistrationFormAction.pending.toString()]: isFetching,
-    [submitRegistrationFormAction.fulfilled.toString()]: (state) => {
-      state.isFetching = false;
-      window.location.reload(); //todo
-    },
+    [submitRegistrationFormAction.fulfilled.toString()]: isNotFetching,
     [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
 
     [purchaseEventUrlAction.pending.toString()]: isFetching,

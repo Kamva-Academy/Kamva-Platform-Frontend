@@ -1,11 +1,11 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import AddInstitute from '../containers/AddInstitute';
 import ChangePassword from '../containers/ChangePassword';
 import Correction from '../containers/Correction';
 import CreateAccount from '../containers/CreateAccount';
 import Dashboard from '../containers/Dashboard';
-import EventRegistrationId from '../containers/Dashboard/EventRegistration';
 import Events from '../containers/Dashboard/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Landing from '../containers/Landing';
@@ -31,19 +31,14 @@ const Root = () => {
       <PrivateRoute path="/message/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/message/payment/failure/" component={FailedPayment} />
 
+      <PrivateRoute path="/institute/" component={AddInstitute} />
+
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
       <PrivateRoute path="/event/:eventId/registration_form/" component={RegistrationForm} />
       <PrivateRoute path="/event/:eventId/payment/" component={Payment} />
-      <Route path="/event/">
-        <Switch>
-          <PrivateRoute
-            path="/event/registration/:eventId?"
-            component={EventRegistrationId}
-          />
-        </Switch>
-      </Route>
+
       <Route path="/loading/"></Route>
       <PrivateRoute path="/workshops/" component={Workshops} />
       <Route path="/workshop/">
