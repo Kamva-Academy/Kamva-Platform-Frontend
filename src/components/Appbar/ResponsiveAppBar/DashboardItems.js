@@ -15,10 +15,10 @@ const DashboardItems = () => {
 
   return {
     desktopLeftItems: [profileButton, logoutButton, Avatar],
-    desktopRightItems: [eventsButton, workshopButton],
+    desktopRightItems: [eventsButton],
     mobileLeftItems: [],
     mobileRightItems: [],
-    mobileMenuListItems: [profileButton, eventsButton, workshopButton],
+    mobileMenuListItems: [profileButton, eventsButton],
   };
 };
 

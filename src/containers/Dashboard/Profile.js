@@ -51,24 +51,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GRADES = [
-  // { value: '1', name: 'اول' },
-  // { value: '2', name: 'دوم' },
-  // { value: '3', name: 'سوم' },
-  // { value: '4', name: 'چهارم' },
-  // { value: '5', name: 'پنجم' },
-  // { value: '6', name: 'ششم' },
-  { value: '7', name: 'هفتم' },
-  { value: '8', name: 'هشتم' },
-  { value: '9', name: 'نهم' },
-  { value: '10', name: 'دهم' },
-  { value: '11', name: 'یازدهم' },
-  { value: '12', name: 'دوازدهم' },
+  // { value: 1, name: 'اول' },
+  // { value: 2, name: 'دوم' },
+  // { value: 3, name: 'سوم' },
+  // { value: 4, name: 'چهارم' },
+  // { value: 5, name: 'پنجم' },
+  // { value: 6, name: 'ششم' },
+  { value: 7, name: 'هفتم' },
+  { value: 8, name: 'هشتم' },
+  { value: 9, name: 'نهم' },
+  { value: 10, name: 'دهم' },
+  { value: 11, name: 'یازدهم' },
+  { value: 12, name: 'دوازدهم' },
 ]
 
 const Profile = ({
   updateUserAccount,
   getUserProfile,
-  createStudentShip,
   updateStudentShip,
   getInstitutes,
   userAccount,
@@ -76,7 +75,6 @@ const Profile = ({
   studentship,
   institutes,
 }) => {
-  const [_, refresh] = useState();
   const [picture, setPicture] = useState('');
   const [newProfile, setNewProfile] = useState({});
   const [newStudentship, setNewStudentship] = useState();
@@ -87,10 +85,6 @@ const Profile = ({
     getUserProfile({ id: userAccount.id });
     getInstitutes();
   }, [getUserProfile, getInstitutes])
-
-  useEffect(() => {
-    refresh(Math.random());
-  }, [userProfile])
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -106,10 +100,10 @@ const Profile = ({
   }
 
   const handleStudentshipChange = (event) => {
-    // setNewStudentship({
-    //   ...newStudentship,
-    //   [event.target.name]: event.target.value,
-    // })
+    setNewStudentship({
+      ...newStudentship,
+      [event.target.name]: event.target.value,
+    })
   }
 
   const submitProfile = () => {
@@ -124,16 +118,9 @@ const Profile = ({
 
   const submitStudentship = () => {
     updateStudentShip({
-      id: studentship?.id,
+      id: userProfile?.school_studentship?.id,
       ...newStudentship,
     })
-  }
-
-  const addNewStudentship = () => {
-    createStudentShip({
-      studentship_type: "School",
-      is_currently_studying: true,
-    });
   }
 
   if (!userProfile) {
@@ -165,38 +152,38 @@ const Profile = ({
         <Grid item container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              defaultValue={userAccount?.first_name}
-              name='first_name' onBlur={handleProfileChange}
+              defaultValue={userProfile?.first_name}
+              name='first_name' onChange={handleProfileChange}
               size='small' label='نام' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              defaultValue={userAccount?.last_name}
-              name='last_name' onBlur={handleProfileChange}
+              defaultValue={userProfile?.last_name}
+              name='last_name' onChange={handleProfileChange}
               size='small' label='نام خانوادگی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.national_code}
-              name='national_code' onBlur={handleProfileChange}
+              name='national_code' onChange={handleProfileChange}
               size='small' label='کد ملی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.phone_number}
-              name='phone_number' onBlur={handleProfileChange}
+              name='phone_number' onChange={handleProfileChange}
               size='small' label='شماره موبایل' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.email}
-              name='email' onBlur={handleProfileChange}
+              name='email' onChange={handleProfileChange}
               size='small' label='ایمیل' />
           </Grid>
           {/* <Grid item xs={12} sm={6}> todo
             <div style={{ display: 'none' }} >
               <DatePicker id='birthdayDatePicker' showTodayButton={false} timePicker={false} max={jMoment()} persianDigits={true}
-                isGregorian={false} value={birthday} onChange={value => setBirthday(value)} />
+                isGregorian={false} defaultValue={birthday} onChange={value => setBirthday(value)} />
             </div>
             <TextField fullWidth variant='outlined' onClick={() => document?.getElementById('birthdayDatePicker').click()}
               defaultValue={birthday.format('jDD jMMMM jYYYY')}
@@ -210,7 +197,7 @@ const Profile = ({
                 name="gender"
                 row
                 defaultValue={userProfile?.gender}
-                onBlur={handleProfileChange}
+                onChange={handleProfileChange}
               >
                 <FormControlLabel
                   value="Male"
@@ -237,7 +224,7 @@ const Profile = ({
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
-                onBlur={handleProfileChange}
+                onChange={handleProfileChange}
                 name='province'
                 label='استان'
               >
@@ -253,7 +240,7 @@ const Profile = ({
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
-                onBlur={handleProfileChange}
+                onChange={handleProfileChange}
                 name='city'
                 label='شهر'
               >
@@ -264,19 +251,19 @@ const Profile = ({
           <Grid item xs={12}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.address}
-              name='address' multiline rows={2} onBlur={handleProfileChange}
+              name='address' multiline rows={2} onChange={handleProfileChange}
               size='small' label='آدرس منزل ' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
               defaultValue={userProfile?.postal_code}
-              name='postal_code' onBlur={handleProfileChange}
+              name='postal_code' onChange={handleProfileChange}
               size='small' label='کد پستی' />
           </Grid>
         </Grid>
         <Grid item container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Button onClick={submitProfile} variant='contained' color='secondary'>ذخیره اطلاعات شخصی</Button>
+          <Grid item xs={12}>
+            <Button onClick={submitProfile} fullWidth variant='contained' color='secondary'>ذخیره اطلاعات شخصی</Button>
           </Grid>
         </Grid>
         <Grid item>
@@ -291,8 +278,8 @@ const Profile = ({
                 className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                defaultValue={studentship?.school}
-                onBlur={handleStudentshipChange}
+                defaultValue={userProfile?.school_studentship?.school}
+                onChange={handleStudentshipChange}
                 name='school'
                 label='مدرسه'
               >
@@ -309,8 +296,8 @@ const Profile = ({
                 className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                defaultValue={studentship?.grade}
-                onBlur={handleStudentshipChange}
+                defaultValue={userProfile?.school_studentship?.grade}
+                onChange={handleStudentshipChange}
                 name='grade'
                 label='پایه'
               >
@@ -322,8 +309,8 @@ const Profile = ({
           </Grid>
         </Grid>
         <Grid item container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Button onClick={submitStudentship} variant='contained' color='secondary'>ذخیره اطلاعات دانش‌آموزی</Button>
+          <Grid item xs={12}>
+            <Button onClick={submitStudentship} fullWidth variant='contained' color='secondary'>ذخیره اطلاعات دانش‌آموزی</Button>
           </Grid>
         </Grid>
       </Grid>

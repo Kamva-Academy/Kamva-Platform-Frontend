@@ -44,7 +44,7 @@ const UploadFileQuestionWidget = ({
   id,
   text = 'محل آپلود فایل',
   last_submit,
-  disabled = true,
+  disabled,
   playerId,
   sendFileAnswer,
 }) => {

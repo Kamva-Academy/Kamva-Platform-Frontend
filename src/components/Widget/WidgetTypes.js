@@ -34,11 +34,11 @@ const WIDGET_TYPES = {
     label: 'چند گزینه‌ای',
     backendType: 'MultiChoiceProblem',
   },
-  UploadFileAnswerProblem: {
+  UploadFileProblem: {
     WidgetComponent: UploadFileQuestionWidget,
     WidgetEditDialog: UploadFileQuestionEditWidget,
     label: 'فایل',
-    backendType: 'UploadFileAnswerProblem',
+    backendType: 'UploadFileProblem',
   },
   Description: {
     WidgetComponent: TextWidget,
