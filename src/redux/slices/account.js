@@ -108,18 +108,6 @@ export const getVerificationCodeAction = createAsyncThunkApi(
   }
 );
 
-export const updateProfileAction = createAsyncThunkApi(
-  'users/update-profile',
-  Apis.POST,
-  profileCRUDUrl,
-  {
-    defaultNotification: {
-      success: 'اطلاعات حساب با موفقیت به‌روز‌رسانی شد!',
-      error: 'یه جای کار می‌لنگه! مرگ بر آمریکا',
-    },
-  }
-);
-
 const isFetching = (state) => {
   state.isFetching = true;
 };
@@ -136,28 +124,32 @@ const accountSlice = createSlice({
   },
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
-    [createAccountAction.pending.toString()]: isFetching,
-    [changePasswordAction.pending.toString()]: isFetching,
-    [getUserProfileAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
     },
     [loginAction.rejected.toString()]: isNotFetching,
+
+    [changePasswordAction.pending.toString()]: isFetching,
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
     [changePasswordAction.rejected.toString()]: isNotFetching,
+
+    [getUserProfileAction.pending.toString()]: isFetching,
+    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.userProfile = response;
+      state.isFetching = false;
+    },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
+
+    [createAccountAction.pending.toString()]: isFetching,
     [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
     },
     [createAccountAction.rejected.toString()]: isNotFetching,
-    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userProfile = response;
-      state.isFetching = false;
-    },
+
     [getInstitutesAction.pending.toString()]: isFetching,
     [getInstitutesAction.fulfilled.toString()]: isNotFetching,
     [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {

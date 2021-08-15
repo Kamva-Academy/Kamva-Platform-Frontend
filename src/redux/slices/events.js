@@ -10,11 +10,11 @@ import {
   getOneEventInfoUrl,
   getOneRegistrationFormUrl,
   getWorkshopsDescriptionUrl,
-  goForPurchaseUrl,
   paymentRequestUrl,
+  purchaseEventUrl,
+  submitDiscountCodeUrl,
   submitRegistrationFormUrl,
 } from '../constants/urls';
-import { loginAction } from './account';
 
 export const getAllEventsInfoAction = createAsyncThunkApi(
   'events/getAllEventsInfoAction',
@@ -38,12 +38,13 @@ export const submitRegistrationFormAction = createAsyncThunkApi(
   'events/submitRegistrationFormAction',
   Apis.POST,
   submitRegistrationFormUrl,
-  {
-    bodyCreator: ({ answer_sheet_type, answers }) => ({
-      answer_sheet_type, answers: [],
-    }),
-  }
 );
+
+export const applyDiscountCodeAction = createAsyncThunkApi(
+  'events/submitDiscountAction',
+  Apis.POST,
+  submitDiscountCodeUrl,
+)
 
 
 export const getOneMerchandiseAction = createAsyncThunkApi(
@@ -53,10 +54,15 @@ export const getOneMerchandiseAction = createAsyncThunkApi(
 );
 
 
-export const goForPurchaseUrlAction = createAsyncThunkApi(
-  'events/goForPurchaseUrlAction',
+export const purchaseEventUrlAction = createAsyncThunkApi(
+  'events/purchaseEventUrlAction',
   Apis.POST,
-  goForPurchaseUrl,
+  purchaseEventUrl,
+  {
+    defaultNotification: {
+      success: 'در حال انتقال به صفحه‌ی پرداخت...',
+    },
+  }
 );
 
 
@@ -131,43 +137,52 @@ const eventSlice = createSlice({
   initialState,
   extraReducers: {
     [getAllEventsInfoAction.pending.toString()]: isFetching,
-    [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
     [getAllEventsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.events = response;
       state.isFetching = false;
     },
+    [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
+
     [getOneEventInfoAction.pending.toString()]: isFetching,
-    [getOneEventInfoAction.rejected.toString()]: isNotFetching,
     [getOneEventInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.event = response;
       state.isFetching = false;
     },
+    [getOneEventInfoAction.rejected.toString()]: isNotFetching,
+
     [getOneRegistrationFormAction.pending.toString()]: isFetching,
-    [getOneRegistrationFormAction.rejected.toString()]: isNotFetching,
     [getOneRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.registrationForm = response;
       state.isFetching = false;
     },
+    [getOneRegistrationFormAction.rejected.toString()]: isNotFetching,
+
     [getOneMerchandiseAction.pending.toString()]: isFetching,
-    [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
     [getOneMerchandiseAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.merchandise = response;
     },
+    [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
+
     [submitRegistrationFormAction.pending.toString()]: isFetching,
-    [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
-    [submitRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [submitRegistrationFormAction.fulfilled.toString()]: (state) => {
       state.isFetching = false;
-      window.location.reload();
+      window.location.reload(); //todo
     },
+    [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
 
-    [goForPurchaseUrlAction.pending.toString()]: isFetching,
-    [goForPurchaseUrlAction.rejected.toString()]: isNotFetching,
-    [goForPurchaseUrlAction.fulfilled.toString()]: isNotFetching,
-
-    [goForPurchaseUrlAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      console.log(response)
-      window.location.href = response.payment_link;
+    [purchaseEventUrlAction.pending.toString()]: isFetching,
+    [purchaseEventUrlAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      window.location.href = response.payment_link; //todo
     },
+    [purchaseEventUrlAction.rejected.toString()]: isNotFetching,
+
+    [applyDiscountCodeAction.pending.toString()]: isFetching,
+    [applyDiscountCodeAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.discountedPrice = response.new_price;
+    },
+    [applyDiscountCodeAction.rejected.toString()]: isNotFetching,
 
     // [getEventRegistrationInfoAction.fulfilled.toString()]: (
     //   state,

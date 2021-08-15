@@ -1,3 +1,4 @@
+// account
 export const loginUrl = 'auth/accounts/login/';
 export const changePasswordUrl = 'auth/accounts/change_pass/';
 export const verificationCodeUrl = 'auth/accounts/verification_code/';
@@ -10,14 +11,20 @@ export const studentshipCRUDUrl = ({ id }) => `auth/studentship/${id}/`;
 
 export const institutesUrl = 'auth/institutes/';
 
+
+// payment
 export const getAllUserMerchandisesUrl = ({ id }) => `auth/payment/${id}/`;
-export const goForPurchaseUrl = 'auth/payment/purchase/';
+export const purchaseEventUrl = 'auth/payment/purchase/';
+export const submitDiscountCodeUrl = 'auth/payment/verify_discount/';
 
 
+// fsm
 export const getAllEventsInfoUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/register/`;
+
+
 
 export const workshopsUrl = 'fsm/fsm/';
 

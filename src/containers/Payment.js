@@ -3,14 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import AppBar from '../components/Appbar/ResponsiveAppBar';
 import Widget from '../components/Widget';
 import {
+  applyDiscountCodeAction,
   getOneEventInfoAction,
   getOneRegistrationFormAction,
-  goForPurchaseUrlAction,
+  purchaseEventUrlAction,
   submitRegistrationFormAction,
 } from '../redux/slices/events'
+import { addNotificationAction } from '../redux/slices/notifications';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
 
@@ -71,17 +72,33 @@ const EVENT_TYPE = {
 
 const Payment = ({
   getOneEventInfo,
-  goForPurchaseUrl,
+  purchaseEventUrl,
+  addNotification,
+  applyDiscountCode,
+  discountedPrice,
   event,
 }) => {
   const classes = useStyles();
   const history = useHistory();
   const { eventId } = useParams()
   const [discountCode, setDiscountCode] = useState();
+  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     getOneEventInfo({ id: eventId })
   }, [getOneEventInfo])
+
+  useEffect(() => {
+    if (event?.merchandise?.price) {
+      setPrice(event?.merchandise?.price)
+    }
+  }, [event])
+
+  useEffect(() => {
+    if (discountedPrice) {
+      setPrice(discountedPrice);
+    }
+  }, [discountedPrice]);
 
   useEffect(() => {
     if (event?.registration_form) {
@@ -90,11 +107,18 @@ const Payment = ({
   }, [event]);
 
   const goForPurchase = () => {
-    goForPurchaseUrl({ merchandise: event?.merchandise?.id, code: discountCode })
+    purchaseEventUrl({ merchandise: event?.merchandise?.id, code: discountCode })
   }
 
   const submitDiscount = () => {
-    // todo
+    if (!discountCode) {
+      addNotification({
+        message: 'کد تخفیفت را وارد کن!',
+        type: 'error',
+      });
+      return;
+    }
+    applyDiscountCode({ merchandise: event?.merchandise?.id, code: discountCode })
   }
 
   if (event?.user_registration_status == 'NotRegistered') {
@@ -105,14 +129,13 @@ const Payment = ({
     <Layout>
       <Grid
         container
-        direction='column'
         justify="space-evenly"
         alignItems="center"
         spacing={4}>
         <Grid item>
           <Typography align='center' className={classes.title}>{'پرداخت'}</Typography>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Grid
             component={Paper}
             container
@@ -132,7 +155,7 @@ const Payment = ({
             <Grid item container justify='center' alignItems='center' spacing={1}>
               <Grid item>
                 <Typography fullWidth >
-                  {`مبلغ قابل پرداخت: ${toPersianNumber(event?.merchandise?.price)} تومان`}
+                  {`مبلغ قابل پرداخت: ${toPersianNumber(price)} تومان`}
                 </Typography>
               </Grid>
               <Grid item>
@@ -152,6 +175,7 @@ const mapStateToProps = (state) => ({
   events: state.events.events || [],
   event: state.events.event,
   registrationForm: state.events.registrationForm,
+  discountedPrice: state.events.discountedPrice,
 });
 
 export default connect(
@@ -159,7 +183,9 @@ export default connect(
   {
     getOneRegistrationForm: getOneRegistrationFormAction,
     getOneEventInfo: getOneEventInfoAction,
-    goForPurchaseUrl: goForPurchaseUrlAction,
+    purchaseEventUrl: purchaseEventUrlAction,
     submitRegistrationForm: submitRegistrationFormAction,
+    addNotification: addNotificationAction,
+    applyDiscountCode: applyDiscountCodeAction,
   }
 )(Payment);

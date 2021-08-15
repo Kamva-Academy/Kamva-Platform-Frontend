@@ -9,12 +9,6 @@ import {
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
 
-const MyTextField = ({ ...rest }) => (
-  <TextField
-    variant='outlined'
-    fullWidth
-  />
-);
 
 const InputFields = ({
   isFetching,
@@ -58,7 +52,7 @@ const InputFields = ({
   const doGetVerificationCode = () => {
     if (!data.phoneNumber) {
       addNotification({
-        message: 'یک شماره تلفن‌همراه وارد کن!',
+        message: 'شماره تلفنی را وارد کن!',
         type: 'error',
       });
       return;
