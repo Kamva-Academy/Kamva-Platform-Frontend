@@ -73,8 +73,6 @@ function AreYouSure({
     }, 2000)
   }
 
-  console.log(Iran.Provinces)
-
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose} >
       <DialogTitle>

@@ -35,7 +35,7 @@ export const createAccountAction = createAsyncThunkApi(
     bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
     defaultNotification: {
       success:
-        'تبریک! حساب شما با موفقیت ایجاد شد.',
+        'حساب شما با موفقیت ایجاد شد.',
       error: 'ایجاد حساب با مشکل روبه‌رو شد. چند لحظه‌ی دیگر دوباره تلاش کن!',
     },
   }
@@ -45,12 +45,22 @@ export const updateStudentShipAction = createAsyncThunkApi(
   'users/updateStudentShipAction',
   Apis.PATCH,
   studentshipCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'اطلاعات با موفقیت به‌روز شدند!',
+    },
+  }
 );
 
 export const createInstitutesAction = createAsyncThunkApi(
   'users/createInstitutesAction',
   Apis.POST,
   institutesUrl,
+  {
+    defaultNotification: {
+      success: 'مدرسه با موفقیت ایجاد شد!',
+    },
+  }
 );
 
 export const getInstitutesAction = createAsyncThunkApi(
@@ -61,32 +71,37 @@ export const getInstitutesAction = createAsyncThunkApi(
 
 // todo: clean these 3 functions
 export const getUserAccountAction = createAsyncThunkApi(
-  'users/get/userAccount',
+  'users/getUserAccountAction',
   Apis.GET,
   accountCRUDUrl
 );
 
 export const updateUserAccountAction = createAsyncThunkApi(
-  'users/update/userAccount',
+  'users/updateUserAccountAction',
   Apis.PATCH,
-  accountCRUDUrl
+  accountCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'اطلاعات با موفقیت به‌روز شدند.',
+    },
+  }
 );
 
 export const getUserProfileAction = createAsyncThunkApi(
-  'users/userProfile',
+  'users/getUserProfileAction',
   Apis.GET,
   profileCRUDUrl
 );
 
 export const changePasswordAction = createAsyncThunkApi(
-  'users/changePassword',
+  'users/changePasswordAction',
   Apis.POST,
   changePasswordUrl,
   {
     bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
     defaultNotification: {
-      success: 'حله! رمزت با موفقیت عوض شد.',
-      error: 'یه مشکلی وجود داره، رمزت تغییر نکرد!',
+      success: 'گذرواژه با موفقیت تغییر یافت!',
+      error: 'مشکلی وجود دارد، رمز تغییر نکرد.',
     },
   }
 );
@@ -98,8 +113,8 @@ export const getVerificationCodeAction = createAsyncThunkApi(
   {
     bodyCreator: ({ phoneNumber, codeType }) => ({ phone_number: phoneNumber, code_type: codeType }),
     defaultNotification: {
-      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی میشه.',
-      error: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره درخواست بده!',
+      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی می‌شود.',
+      error: 'مشکلی وجود دارد. چند لحظه دیگر دوباره تلاش کن!',
     },
   }
 );
@@ -152,6 +167,10 @@ const accountSlice = createSlice({
       state.isFetching = false;
     },
     [getInstitutesAction.rejected.toString()]: isNotFetching,
+
+    [getUserAccountAction.pending.toString()]: isFetching,
+    [getUserAccountAction.fulfilled.toString()]: isNotFetching,
+    [getUserAccountAction.rejected.toString()]: isNotFetching,
 
     [createInstitutesAction.pending.toString()]: isFetching,
     [createInstitutesAction.fulfilled.toString()]: isNotFetching,

@@ -53,9 +53,6 @@ const SmallAnswerQuestionWidget = ({
   const [value, setValue] = useState(last_submit?.text);
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
-
-  console.log(pushAnswer)
-
   const handleTextFieldChange = (e) => {
     pushAnswer('text', e.target.value);
     setValue(value);

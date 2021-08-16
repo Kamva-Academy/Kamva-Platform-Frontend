@@ -48,7 +48,6 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
 
   const Loading = () => {
     if (loading) {
-      console.log(111)
       return (
         <div style={{ width: '100%', position: 'fixed', top: '0px', zIndex: '1000' }}>
           <LinearProgress />

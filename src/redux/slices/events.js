@@ -30,7 +30,7 @@ export const getOneEventInfoAction = createAsyncThunkApi(
 );
 
 export const getOneRegistrationFormAction = createAsyncThunkApi(
-  'events/getOneRegistrationForm',
+  'events/getOneRegistrationFormAction',
   Apis.GET,
   getOneRegistrationFormUrl,
 );
@@ -44,13 +44,21 @@ export const submitRegistrationFormAction = createAsyncThunkApi(
       answer_sheet_type: "RegistrationReceipt",
       answers,
     }),
+    defaultNotification: {
+      success: 'فرم ثبت‌نام با موفقیت ثبت شد!',
+    },
   }
 );
 
 export const applyDiscountCodeAction = createAsyncThunkApi(
-  'events/submitDiscountAction',
+  'events/applyDiscountCodeAction',
   Apis.POST,
   submitDiscountCodeUrl,
+  {
+    defaultNotification: {
+      success: 'کد تخفیف با موفقیت اعمال شد!',
+    },
+  }
 )
 
 export const getOneMerchandiseAction = createAsyncThunkApi(
@@ -66,6 +74,7 @@ export const purchaseEventUrlAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'در حال انتقال به صفحه‌ی پرداخت...',
+      error: 'مشکلی در ارتباط با سرور پرداخت وجود دارد. اگر از وی‌پی‌ان استفاده می‌کنید، آن را خاموش کن!'
     },
   }
 );
@@ -75,7 +84,6 @@ export const getOneRegistrationReceiptAction = createAsyncThunkApi(
   Apis.GET,
   registrationReceiptUrl,
 );
-
 
 
 

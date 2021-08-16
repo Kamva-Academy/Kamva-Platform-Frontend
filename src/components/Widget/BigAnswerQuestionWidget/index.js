@@ -36,7 +36,6 @@ const BigAnswerQuestionWidget = ({
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
   const handleTextChange = (text) => {
-    console.log(pushAnswer)
     pushAnswer('text', text);
     setValue(text);
   }

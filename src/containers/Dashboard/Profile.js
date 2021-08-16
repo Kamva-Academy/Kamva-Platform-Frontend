@@ -112,7 +112,6 @@ const Profile = ({
   };
 
   const handleProfileChange = (event) => {
-    console.log(event.target.value)
     setNewProfile({
       ...newProfile,
       [event.target.name]: event.target.value,
@@ -127,7 +126,6 @@ const Profile = ({
   }
 
   const submitProfile = () => {
-    console.log(newProfile)
     updateUserAccount(
       {
         id: userProfile?.id,
@@ -153,7 +151,6 @@ const Profile = ({
     )
   }
 
-  console.log(newProfile)
 
   if (!userProfile) {
     return (<></>);
