@@ -26,7 +26,7 @@ function AreYouSure({
   const classes = useStyles()
 
   return (
-    <Dialog maxWidth="sm" open={open} onClose={handleClose}  >
+    <Dialog maxWidth="xs" open={open} onClose={handleClose}  >
       <DialogContent>
         <Grid item>
           <Typography variant='h5' align='center'>آیا مطمئن هستید؟</Typography>
