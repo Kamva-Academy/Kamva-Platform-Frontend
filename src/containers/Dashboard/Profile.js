@@ -319,7 +319,7 @@ const Profile = ({
           </Grid>
           <Grid item container xs={12} sm={6}>
             <Button fullWidth variant='outlined' color='secondary' onClick={() => document.getElementById('school-studentship-document').click()}>انتخاب مدرک شناسایی تحصیلی</Button>
-            <Typography variant='caption' align='center'>* منظور از مدرک شناسایی تحصیلی، سندی‌ست که نشان دهد شما مشغول به تحصیل در این پایه‌ی تحصیلی هستید.</Typography>
+            <Typography variant='caption' align='center'>* منظور از مدرک شناسایی تحصیلی، سندی‌ست که نشان دهد شما مشغول به تحصیل در این پایه هستید.</Typography>
             <input id='school-studentship-document' style={{ display: 'none' }} type="file" onChange={handleStudentshipDocumentChange} />
           </Grid>
         </Grid>

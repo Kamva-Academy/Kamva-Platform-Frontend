@@ -118,9 +118,9 @@ const Event = ({
                 variant='outlined'
                 fullWidth
                 component={Link}
-                to={`/event/${id}/payment/${merchandise?.id}`}
+                to={`/event/${id}/status/`}
                 color='secondary'>
-                {'پرداخت'}
+                {'وضعیت ثبت‌نام'}
               </Button>
             }
             {is_paid &&
@@ -130,7 +130,7 @@ const Event = ({
                 fullWidth
                 disabled={true}
                 component={Link}
-                to={`/event/${id}/payment/${merchandise?.id}`}
+                to={''} // todo
                 color='secondary'>
                 {'ورود'}
               </Button>

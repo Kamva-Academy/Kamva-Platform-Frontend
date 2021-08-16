@@ -103,7 +103,7 @@ const RegistrationForm = ({
   }, [event]);
 
   if (event?.user_registration_status != 'NotRegistered') {
-    history.push(`/event/${eventId}/payment`);
+    history.push(`/event/${eventId}/status`);
   }
 
   const doRegister = () => {

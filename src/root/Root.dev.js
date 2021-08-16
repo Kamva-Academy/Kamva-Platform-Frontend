@@ -13,8 +13,8 @@ import Login from '../containers/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
 import OurTeam from '../containers/OurTeam';
-import Payment from '../containers/Payment';
 import RegistrationForm from '../containers/RegistrationForm';
+import Status from '../containers/Status';
 import Workshop from '../containers/Workshop';
 import Workshops from '../containers/Workshops';
 import PrivateRoute from './PrivateRoute';
@@ -37,7 +37,7 @@ const Root = () => {
       <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
       <PrivateRoute path="/event/:eventId/registration_form/" component={RegistrationForm} />
-      <PrivateRoute path="/event/:eventId/payment/" component={Payment} />
+      <PrivateRoute path="/event/:eventId/status/" component={Status} />
 
       <Route path="/loading/"></Route>
       <PrivateRoute path="/workshops/" component={Workshops} />

@@ -125,6 +125,10 @@ const Payment = ({
     history.push(`/event/${eventId}/registration_form/`);
   }
 
+  if (event?.is_user_participating) {
+    history.push('/events/');
+  }
+
   return (
     <Layout>
       <Grid
@@ -132,38 +136,68 @@ const Payment = ({
         justify="space-evenly"
         alignItems="center"
         spacing={4}>
-        <Grid item>
-          <Typography align='center' className={classes.title}>{'پرداخت'}</Typography>
+        <Grid item xs={12}>
+          <Typography align='center' className={classes.title}>{'وضعیت ثبت‌نام'}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Grid
-            component={Paper}
-            container
-            justify="center"
-            alignItems="center"
-            spacing={2}>
-            <Grid item container justify='center' alignItems='center' spacing={1}>
-              <Grid item xs={9}>
-                <TextField fullWidth variant='outlined' label='کد تخفیف' onChange={e => setDiscountCode(e.target.value)} />
-              </Grid>
-              <Grid item xs={3}>
-                <Button fullWidth variant='contained' color='primary' onClick={submitDiscount}>
-                  اعمال
-                </Button>
-              </Grid>
-            </Grid>
-            <Grid item container justify='center' alignItems='center' spacing={1}>
-              <Grid item>
-                <Typography fullWidth >
-                  {`مبلغ قابل پرداخت: ${toPersianNumber(price)} تومان`}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Button variant='contained' color='primary' onClick={goForPurchase}>
-                  پرداخت
-                </Button>
-              </Grid>
-            </Grid>
+          <Grid component={Paper} container justify="center" alignItems='flex-end' spacing={2}>
+            {event?.user_registration_status == 'Accepted' &&
+              <>
+                <Grid item container justify='center' alignItems='center'>
+                  <Typography fullWidth align='center'>
+                    {'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'}
+                  </Typography>
+                </Grid>
+                <Grid xs={12} sm={6} md={4} item container justify='center' alignItems='center' spacing={1}>
+                  <Grid item xs={12}>
+                    <TextField fullWidth variant='outlined' label='کد تخفیف' onChange={e => setDiscountCode(e.target.value)} />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button fullWidth variant='contained' color='primary' onClick={submitDiscount}>
+                      {'اعمال'}
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Grid xs={12} sm={6} md={4} item container justify='center' alignItems='center' spacing={1}>
+                  <Grid item xs={12}>
+                    <Typography fullWidth align='center' gutterBottom>
+                      {'مبلغ قابل پرداخت:'}
+                    </Typography>
+                    <Typography fullWidth align='center' className={classes.subtitle}>
+                      {`${toPersianNumber(price)} تومان`}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button fullWidth variant='contained' color='primary' onClick={goForPurchase}>
+                      {'پرداخت'}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </>
+            }
+            {event?.user_registration_status == 'Waiting' &&
+              <>
+                <Grid item container justify='center' alignItems='center' spacing={1}>
+                  <Typography fullWidth >
+                    {'شما فرم‌ثبت‌نام در این رویداد را پر کرده‌اید! منتظر نتیجه‌ی بررسی از جانب ما باشید.'}
+                  </Typography>
+                </Grid>
+              </>
+            }
+            {event?.user_registration_status == 'Rejected' &&
+              <>
+                <Grid item container justify='center' alignItems='center' spacing={1}>
+                  <Typography fullWidth >
+                    {'متاسفانه شما برای شرکت در این رویداد پذیرفته‌نشده‌اید :('}
+                  </Typography>
+                </Grid>
+              </>
+            }
+          </Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Grid component={Paper} container justify="center" alignItems="center" spacing={2}>
+            <Typography align='center' className={classes.subtitle}>{'پاسخ‌های شما'}</Typography>
           </Grid>
         </Grid>
       </Grid>
