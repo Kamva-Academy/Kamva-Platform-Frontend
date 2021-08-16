@@ -54,6 +54,8 @@ const SmallAnswerQuestionWidget = ({
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
 
+  console.log(pushAnswer)
+
   const handleTextFieldChange = (e) => {
     pushAnswer('text', e.target.value);
     setValue(value);
@@ -132,8 +134,9 @@ const SmallAnswerQuestionWidget = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   playerId: state.currentState.player?.id,
+  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
 });
 
 export default connect(mapStateToProps, {

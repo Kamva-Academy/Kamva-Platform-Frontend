@@ -69,6 +69,17 @@ const EVENT_TYPE = {
   'Individual': 'انفرادی',
 }
 
+const ANSWER_TYPES = {
+  SmallAnswerProblem: 'SmallAnswer',
+  BigAnswerProblem: 'BigAnswer',
+  UploadFileProblem: 'UploadFileAnswer',
+  MultiChoiceProblem: 'MultiChoiceAnswer',
+  Description: 'Description',
+  Image: 'Image',
+  Video: 'Video',
+  Game: 'Game',
+}
+
 const RegistrationForm = ({
   getOneRegistrationForm,
   getOneEventInfo,
@@ -130,11 +141,7 @@ const RegistrationForm = ({
 
   return (
     <Layout>
-      <Grid
-        container
-        justify="space-evenly"
-        alignItems="center"
-        spacing={4}>
+      <Grid container justify="space-evenly" alignItems="center" spacing={4}>
         <Grid item xs={12}>
           <Grid
             component={Paper}
@@ -188,13 +195,13 @@ const RegistrationForm = ({
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper}>
-                  <Widget pushAnswer={pushAnswer(widget?.id, widget?.widget_type)} widget={widget} />
+                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type])} widget={widget} />
                 </Paper>
               </Grid>
             ))}
-            <Grid item>
-              <Button variant='contained' color='primary' onClick={doRegister}>
-                ثبت
+            <Grid item xs={12}>
+              <Button fullWidth variant='contained' color='primary' onClick={doRegister}>
+                {'ثبت'}
               </Button>
             </Grid>
           </Grid>

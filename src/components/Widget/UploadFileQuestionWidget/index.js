@@ -3,7 +3,7 @@ import {
   CloudUpload as CloudUploadIcon,
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@material-ui/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadFileQuestionWidget = ({
-  pushAnswers,
+  pushAnswer,
   id,
   text = 'محل آپلود فایل',
   last_submit,
@@ -51,14 +51,15 @@ const UploadFileQuestionWidget = ({
 }) => {
   const t = useTranslate();
   const classes = useStyles({ haveFile: !!last_submit });
-  const onChangeFile = async (e) => {
+  const [file, setFile] = useState();
+
+  const handleFileChange = async (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 8e6) {
-        sendFileAnswer({
-          answer_file: e.target.files[0],
-          answerSheetId,
-          problemId: id,
+        pushAnswer('file', e.target.files[0]);
+        setFile({
+          answer_file: e.target.files[0], // todo
         });
       } else {
         e.target.value = '';
@@ -67,6 +68,10 @@ const UploadFileQuestionWidget = ({
       }
     }
   };
+
+  const handleButtonClick = () => {
+    sendFileAnswer(file);
+  }
 
   return (
     <div>
@@ -77,7 +82,7 @@ const UploadFileQuestionWidget = ({
           style={{ display: 'none' }}
           id={'raised-button-file' + id}
           type="file"
-          onChange={onChangeFile}
+          onChange={handleFileChange}
         />
         <Button
           component="label"
@@ -114,12 +119,21 @@ const UploadFileQuestionWidget = ({
           </div>
         </>
       )}
+      {!pushAnswer &&
+        <>
+          <br />
+          <Button fullWidth variant='contained' color='primary'>
+            {'ارسال'}
+          </Button>
+        </>
+      }
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   playerId: state.currentState.player?.id,
+  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
 });
 
 export default connect(mapStateToProps, {

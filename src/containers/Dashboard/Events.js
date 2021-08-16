@@ -52,42 +52,40 @@ const Events = ({ getAllEventsInfo, events }) => {
 
   return (
     <Layout>
-      <Container className={classes.container}>
+      <Grid
+        container
+        justify="space-evenly"
+        alignItems="flex-start"
+        spacing={2}>
         <Grid
+          item
           container
+          sm={6}
+          direction="column"
           justify="space-evenly"
-          alignItems="flex-start"
+          alignItems="center"
+          style={{ minHeight: '100%' }}
           spacing={2}>
+          <Grid item>
+            <Typography className={classes.title}>{'رویدادها'}</Typography>
+          </Grid>
           <Grid
             item
             container
-            sm={6}
             direction="column"
-            justify="space-evenly"
+            justify="center"
             alignItems="center"
-            style={{ minHeight: '100%' }}
             spacing={2}>
-            <Grid item>
-              <Typography className={classes.title}>{'رویدادها'}</Typography>
-            </Grid>
-            <Grid
-              item
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              spacing={2}>
-              {events.map((event, index) => (
-                <Grid key={index} item>
-                  <EventCard
-                    {...event}
-                  />
-                </Grid>
-              ))}
-            </Grid>
+            {events.map((event, index) => (
+              <Grid key={index} item>
+                <EventCard
+                  {...event}
+                />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
-      </Container>
+      </Grid>
     </Layout>
   );
 };

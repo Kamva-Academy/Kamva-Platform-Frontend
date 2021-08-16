@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BigAnswerQuestionWidget = ({
+  pushAnswer,
   id,
   text = '',
   answer,
@@ -33,6 +34,21 @@ const BigAnswerQuestionWidget = ({
   const classes = useStyles();
   const [value, setValue] = useState(last_submit?.text);
   const [isButtonDisabled, setButtonDisable] = useState(false);
+
+  const handleTextChange = (text) => {
+    console.log(pushAnswer)
+    pushAnswer('text', text);
+    setValue(text);
+  }
+
+  const handleButtonClick = () => {
+    setButtonDisable(true);
+    setTimeout(() => {
+      setButtonDisable(false);
+    }, 20000)
+    sendBigAnswer({ playerId, problemId: id, answer: value })
+  }
+
 
   return (
     <>
@@ -49,7 +65,7 @@ const BigAnswerQuestionWidget = ({
         <TinyEditorComponent
           id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
           content={value}
-          onChange={setValue}
+          onChange={handleTextChange}
         />
       ) : (
           <Paper className={classes.showAnswer}>
@@ -63,7 +79,7 @@ const BigAnswerQuestionWidget = ({
           </Paper>
         )}
 
-      {mode !== MODES.CORRECTION && (
+      {(mode !== MODES.CORRECTION && !pushAnswer) && (
         <Button
           fullWidth
           variant="contained"
@@ -71,14 +87,7 @@ const BigAnswerQuestionWidget = ({
           size="small"
           className={classes.submit}
           disabled={mode === MODES.EDIT || isButtonDisabled}
-          onClick={() => {
-            setButtonDisable(true);
-            setTimeout(() => {
-              setButtonDisable(false);
-            }, 20000)
-            sendBigAnswer({ playerId, problemId: id, answer: value })
-          }
-          }>
+          onClick={handleButtonClick}>
           {t('submitAnswer')}
         </Button>
       )}
@@ -86,8 +95,9 @@ const BigAnswerQuestionWidget = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   playerId: state.currentState.player?.id,
+  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
 });
 
 export default connect(mapStateToProps, { sendBigAnswer: sendBigAnswerAction })(
