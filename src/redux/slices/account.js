@@ -41,16 +41,16 @@ export const createAccountAction = createAsyncThunkApi(
   }
 );
 
-export const createStudentShipAction = createAsyncThunkApi(
-  'users/createStudentShipAction',
-  Apis.POST,
-  studentShipUrl,
-);
-
 export const updateStudentShipAction = createAsyncThunkApi(
   'users/updateStudentShipAction',
   Apis.PATCH,
   studentshipCRUDUrl,
+);
+
+export const createInstitutesAction = createAsyncThunkApi(
+  'users/createInstitutesAction',
+  Apis.POST,
+  institutesUrl,
 );
 
 export const getInstitutesAction = createAsyncThunkApi(
@@ -59,7 +59,7 @@ export const getInstitutesAction = createAsyncThunkApi(
   institutesUrl,
 );
 
-
+// todo: clean these 3 functions
 export const getUserAccountAction = createAsyncThunkApi(
   'users/get/userAccount',
   Apis.GET,
@@ -72,15 +72,11 @@ export const updateUserAccountAction = createAsyncThunkApi(
   accountCRUDUrl
 );
 
-
-
-
 export const getUserProfileAction = createAsyncThunkApi(
   'users/userProfile',
   Apis.GET,
   profileCRUDUrl
 );
-
 
 export const changePasswordAction = createAsyncThunkApi(
   'users/changePassword',
@@ -151,10 +147,16 @@ const accountSlice = createSlice({
     [createAccountAction.rejected.toString()]: isNotFetching,
 
     [getInstitutesAction.pending.toString()]: isFetching,
-    [getInstitutesAction.fulfilled.toString()]: isNotFetching,
     [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.institutes = response;
+      state.isFetching = false;
     },
+    [getInstitutesAction.rejected.toString()]: isNotFetching,
+
+    [createInstitutesAction.pending.toString()]: isFetching,
+    [createInstitutesAction.fulfilled.toString()]: isNotFetching,
+    [createInstitutesAction.rejected.toString()]: isNotFetching,
+
   },
 });
 

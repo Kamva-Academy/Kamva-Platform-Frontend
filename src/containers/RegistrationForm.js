@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-import AppBar from '../components/Appbar/ResponsiveAppBar';
+import AreYouSure from '../components/Dialog/AreYouSure';
 import Widget from '../components/Widget';
 import {
   getOneEventInfoAction,
@@ -12,6 +12,7 @@ import {
 } from '../redux/slices/events'
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -90,6 +91,7 @@ const RegistrationForm = ({
   const classes = useStyles();
   const history = useHistory();
   const { eventId } = useParams()
+  const [isDialogOpen, setDialogStatus] = useState(false);
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
@@ -106,7 +108,7 @@ const RegistrationForm = ({
     history.push('/events/');
   }
 
-  if (event?.user_registration_status != 'NotRegistered') {
+  if (event?.user_registration_status && event?.user_registration_status != 'NotRegistered') {
     history.push(`/event/${eventId}/status`);
   }
 
@@ -175,13 +177,13 @@ const RegistrationForm = ({
                 <Typography align='center'>{event?.description}</Typography>
               </Grid>
               <Grid item>
-                <Typography align='center'>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type || '']}`}</Typography>
+                <Typography align='center'>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type || 'Team']}`}</Typography>
                 {event.event_type == 'Team' &&
                   <Typography align='center'>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
                 }
               </Grid>
               <Grid item>
-                <Typography align='center'>{`قیمت: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
+                <Typography align='center'>{`قیمت برای هر نفر: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -199,18 +201,23 @@ const RegistrationForm = ({
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper}>
-                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type || ''])} widget={widget} />
+                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type || 'Description'])} widget={widget} />
                 </Paper>
               </Grid>
             ))}
             <Grid item xs={12}>
-              <Button fullWidth variant='contained' color='primary' onClick={doRegister}>
+              <Button fullWidth variant='contained' color='primary' onClick={() => { setDialogStatus(true) }}>
                 {'ثبت'}
               </Button>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+      <AreYouSure
+        open={isDialogOpen}
+        handleClose={() => { setDialogStatus(!isDialogOpen) }}
+        callBackFunction={doRegister}
+      />
     </Layout>
   );
 };

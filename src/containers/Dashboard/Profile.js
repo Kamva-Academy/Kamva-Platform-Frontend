@@ -11,6 +11,8 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  IconButton,
+  Tooltip,
   Select,
   TextField,
   Typography
@@ -21,8 +23,8 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker2";
 import { connect } from 'react-redux';
 
+import AddInstitute from '../../components/Dialog/AddInstitute';
 import {
-  createStudentShipAction,
   getInstitutesAction,
   getUserProfileAction,
   updateStudentShipAction,
@@ -30,7 +32,10 @@ import {
 } from '../../redux/slices/account';
 import Layout from '../Layout';
 
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
+
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
@@ -78,6 +83,7 @@ const Profile = ({
   const [newProfile, setNewProfile] = useState({});
   const [newStudentship, setNewStudentship] = useState();
   const [birthday, setBirthday] = useState(jMoment());
+  const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -122,7 +128,7 @@ const Profile = ({
   const submitProfile = () => {
     updateUserAccount(
       {
-        id: userAccount?.id,
+        id: userProfile?.id,
         ...newProfile,
       }
     );
@@ -133,6 +139,16 @@ const Profile = ({
       id: userProfile?.school_studentship?.id,
       ...newStudentship,
     })
+  }
+
+  const AddSchoolInstituteIcon = () => {
+    return (
+      <Tooltip title={'افزودن مدرسه‌ی جدید'} arrow>
+        <IconButton size='small' onClick={() => setAddInstituteDialogStatus(true)}>
+          <AddCircleOutlineIcon />
+        </IconButton>
+      </Tooltip>
+    )
   }
 
   if (!userProfile) {
@@ -214,13 +230,13 @@ const Profile = ({
                 <FormControlLabel
                   value="Male"
                   control={<Radio />}
-                  label="مرد"
+                  label="پسر"
                   labelPlacement="end"
                 />
                 <FormControlLabel
                   value="Female"
                   control={<Radio />}
-                  label="زن"
+                  label="دختر"
                   labelPlacement="end"
                 />
               </RadioGroup>
@@ -287,6 +303,7 @@ const Profile = ({
             <FormControl size='small' variant="outlined" className={classes.formControl}>
               <InputLabel>مدرسه</InputLabel>
               <Select
+                IconComponent={AddSchoolInstituteIcon}
                 className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
@@ -331,6 +348,10 @@ const Profile = ({
           </Grid>
         </Grid>
       </Grid>
+      <AddInstitute
+        open={addInstituteDialog}
+        handleClose={() => { setAddInstituteDialogStatus(false) }}
+      />
     </Layout>
   );
 };
@@ -347,13 +368,10 @@ export default connect(mapStateToProps,
   {
     updateUserAccount: updateUserAccountAction,
     getUserProfile: getUserProfileAction,
-    createStudentShip: createStudentShipAction,
     updateStudentShip: updateStudentShipAction,
     getInstitutes: getInstitutesAction,
   }
 )(Profile);
 
 
-// todo: add loading
-// todo: remove userAccount and replace userProfile
 // todo: cast english digits to persian

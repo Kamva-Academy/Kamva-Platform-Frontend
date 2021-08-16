@@ -1,7 +1,6 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import AddInstitute from '../containers/AddInstitute';
 import ChangePassword from '../containers/ChangePassword';
 import Correction from '../containers/Correction';
 import CreateAccount from '../containers/CreateAccount';
@@ -30,8 +29,6 @@ const Root = () => {
 
       <PrivateRoute path="/message/payment/success/" component={SuccessfulPayment} />
       <PrivateRoute path="/message/payment/failure/" component={FailedPayment} />
-
-      <PrivateRoute path="/institute/" component={AddInstitute} />
 
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />

@@ -105,7 +105,7 @@ const Payment = ({
   }, [discountedPrice]);
 
   useEffect(() => {
-    if (event?.registration_form) {
+    if (event?.registration_receipt) {
       getOneRegistrationReceipt({ id: event?.registration_receipt })
     }
   }, [event]);
