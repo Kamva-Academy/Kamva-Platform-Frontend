@@ -14,7 +14,6 @@ import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
 import Root from './root';
-import WorkshopRoot from './root/Workshop';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
 import translations from './translations';

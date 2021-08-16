@@ -178,7 +178,7 @@ const Payment = ({
             {event?.user_registration_status == 'Waiting' &&
               <>
                 <Grid item container justify='center' alignItems='center' spacing={1}>
-                  <Typography fullWidth >
+                  <Typography fullWidth align='center'>
                     {'شما فرم‌ثبت‌نام در این رویداد را پر کرده‌اید! منتظر نتیجه‌ی بررسی از جانب ما باشید.'}
                   </Typography>
                 </Grid>
@@ -187,7 +187,7 @@ const Payment = ({
             {event?.user_registration_status == 'Rejected' &&
               <>
                 <Grid item container justify='center' alignItems='center' spacing={1}>
-                  <Typography fullWidth >
+                  <Typography fullWidth align='center'>
                     {'متاسفانه شما برای شرکت در این رویداد پذیرفته‌نشده‌اید :('}
                   </Typography>
                 </Grid>

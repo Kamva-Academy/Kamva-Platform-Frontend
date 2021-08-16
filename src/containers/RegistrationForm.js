@@ -102,6 +102,10 @@ const RegistrationForm = ({
     }
   }, [event]);
 
+  if (event?.is_user_participating) {
+    history.push('/events/');
+  }
+
   if (event?.user_registration_status != 'NotRegistered') {
     history.push(`/event/${eventId}/status`);
   }
@@ -171,7 +175,7 @@ const RegistrationForm = ({
                 <Typography align='center'>{event?.description}</Typography>
               </Grid>
               <Grid item>
-                <Typography align='center'>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type]}`}</Typography>
+                <Typography align='center'>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type || '']}`}</Typography>
                 {event.event_type == 'Team' &&
                   <Typography align='center'>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
                 }
@@ -195,7 +199,7 @@ const RegistrationForm = ({
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper}>
-                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type])} widget={widget} />
+                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type || ''])} widget={widget} />
                 </Paper>
               </Grid>
             ))}
