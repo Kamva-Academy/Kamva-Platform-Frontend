@@ -59,7 +59,7 @@ const SmallAnswerQuestionWidget = ({
     setValue(value);
   }
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = () => {
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);

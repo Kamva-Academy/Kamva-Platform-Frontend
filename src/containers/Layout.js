@@ -18,7 +18,7 @@ const Layout = (props) => {
   const classes = useStyles();
   return (
     <>
-      <AppBar mode='STUDENT_DASHBOARD' position='fixed' />
+      <AppBar mode='STUDENT_DASHBOARD' position='relative' />
       <Container className={classes.container} >
         {props.children}
       </Container>

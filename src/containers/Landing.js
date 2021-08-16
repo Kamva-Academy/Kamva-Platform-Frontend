@@ -19,35 +19,33 @@ const Index = () => {
   const classes = useStyles();
 
   return (
-    <div>
-      <Container>
+    <Container>
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        className={classes.fullHeight}>
         <Grid
+          direction="column"
+          item
           container
-          justify="center"
+          spacing={2}
           alignItems="center"
-          className={classes.fullHeight}>
-          <Grid
-            direction="column"
-            item
-            container
-            spacing={2}
-            alignItems="center"
-            justify="space-around"
-            xs={12}
-            md={6}>
-            <Grid item>
-              <Typography variant="h1" align='center'>پلتفرم برگزاری رویداد و کارگاه</Typography>
-            </Grid>
-            <Grid item>
-              <ButtonGroup size="large" variant="contained" color="primary">
-                <Button component={Link} to='/login'>ورود</Button>
-                <Button component={Link} to='/create_account'>ثبت‌نام</Button>
-              </ButtonGroup>
-            </Grid>
+          justify="space-around"
+          xs={12}
+          md={6}>
+          <Grid item>
+            <Typography variant="h1" align='center'>پلتفرم برگزاری رویداد و کارگاه</Typography>
+          </Grid>
+          <Grid item>
+            <ButtonGroup size="large" variant="contained" color="primary">
+              <Button component={Link} to='/login'>ورود</Button>
+              <Button component={Link} to='/create_account'>ثبت‌نام</Button>
+            </ButtonGroup>
           </Grid>
         </Grid>
-      </Container>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 

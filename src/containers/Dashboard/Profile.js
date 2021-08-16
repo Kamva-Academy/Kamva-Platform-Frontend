@@ -75,7 +75,6 @@ const Profile = ({
   studentship,
   institutes,
 }) => {
-  const [picture, setPicture] = useState('');
   const [newProfile, setNewProfile] = useState({});
   const [newStudentship, setNewStudentship] = useState();
   const [birthday, setBirthday] = useState(jMoment());
@@ -86,9 +85,21 @@ const Profile = ({
     getInstitutes();
   }, [getUserProfile, getInstitutes])
 
-  const onImageChange = (event) => {
+  const handleProfilePictureChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setPicture(event.target.files[0])
+      setNewProfile({
+        ...newProfile,
+        profile_picture: event.target.files[0],
+      })
+    }
+  };
+
+  const handleStudentshipDocumentChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setNewStudentship({
+        ...newProfile,
+        document: event.target.files[0],
+      })
     }
   };
 
@@ -109,8 +120,7 @@ const Profile = ({
   const submitProfile = () => {
     updateUserAccount(
       {
-        id: userAccount.id,
-        profile_picture: picture,
+        id: userAccount?.id,
         ...newProfile,
       }
     );
@@ -136,13 +146,13 @@ const Profile = ({
         </Grid>
         <Grid item container spacing={2} alignItems='center'>
           <Grid item>
-            <img alt='' className={classes.profileImage} src={(picture && URL.createObjectURL(picture)) || userProfile?.profile_picture || PROFILE_PICTURE} />
+            <img alt='' className={classes.profileImage} src={(newProfile?.profile_picture && URL.createObjectURL(newProfile?.profile_picture)) || userProfile?.profile_picture || PROFILE_PICTURE} />
           </Grid>
           <Grid item>
             <Typography >برای تغییر تصویر بر روی گزینه‌ی زیر کلیک کنید.</Typography>
             <br />
             <Button variant='contained' color='secondary' onClick={() => document.getElementById('userProfilePicture').click()}>انتخاب تصویر</Button>
-            <input id='userProfilePicture' style={{ display: 'none' }} type="file" onChange={onImageChange} />
+            <input id='userProfilePicture' style={{ display: 'none' }} type="file" onChange={handleProfilePictureChange} />
           </Grid>
         </Grid>
         <Grid item>
@@ -306,6 +316,11 @@ const Profile = ({
                 ))}
               </Select>
             </FormControl >
+          </Grid>
+          <Grid item container xs={12} sm={6}>
+            <Button fullWidth variant='outlined' color='secondary' onClick={() => document.getElementById('school-studentship-document').click()}>انتخاب مدرک شناسایی تحصیلی</Button>
+            <Typography variant='caption' align='center'>* منظور از مدرک شناسایی تحصیلی، سندی‌ست که نشان دهد شما مشغول به تحصیل در این پایه‌ی تحصیلی هستید.</Typography>
+            <input id='school-studentship-document' style={{ display: 'none' }} type="file" onChange={handleStudentshipDocumentChange} />
           </Grid>
         </Grid>
         <Grid item container spacing={2}>

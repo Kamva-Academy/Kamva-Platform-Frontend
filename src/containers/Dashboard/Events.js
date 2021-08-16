@@ -48,8 +48,7 @@ const Events = ({ getAllEventsInfo, events }) => {
     getAllEventsInfo();
   }, [getAllEventsInfo])
 
-  window.open('/institute/', '_blank', 'height=600,width=400');
-
+  // window.open('/institute/', '_blank', 'height=600,width=400');
 
   return (
     <Layout>

@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UploadFileQuestionWidget = ({
+  pushAnswers,
   id,
   text = 'محل آپلود فایل',
   last_submit,
