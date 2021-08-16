@@ -2,6 +2,8 @@ import {
   Button,
   ButtonGroup,
   Dialog,
+  DialogActions,
+  DialogContent,
   Grid,
   makeStyles,
   Typography,
@@ -24,18 +26,18 @@ function AreYouSure({
   const classes = useStyles()
 
   return (
-    <Dialog maxWidth="xl" open={open} onClose={handleClose}  >
-      <Grid container spacing={2} direction='column' justify='center' alignItems='center' className={classes.padding}>
+    <Dialog maxWidth="sm" open={open} onClose={handleClose}  >
+      <DialogContent>
         <Grid item>
           <Typography variant='h5' align='center'>آیا مطمئن هستید؟</Typography>
         </Grid>
-        <Grid item>
-          <ButtonGroup variant='contained' color='primary' fullWidth>
-            <Button onClick={() => { callBackFunction(); handleClose(); }} >بله</Button>
-            <Button onClick={handleClose}>انصراف</Button>
-          </ButtonGroup>
-        </Grid>
-      </Grid>
+      </DialogContent>
+      <DialogActions>
+        <ButtonGroup variant='contained' color='primary' fullWidth>
+          <Button onClick={() => { callBackFunction(); handleClose(); }} >بله</Button>
+          <Button onClick={handleClose}>انصراف</Button>
+        </ButtonGroup>
+      </DialogActions>
     </Dialog>
   );
 }
