@@ -30,7 +30,10 @@ reduxStore.subscribe(() => {
     JSON.stringify({
       // account: state.account,
       account: {
-        user: state.account.userAccount || state.account.userProfile,
+        userAccount: {
+          ...state.account.userAccount,
+          ...state.account.userProfile,
+        },
         token: state.account.token,
       },
       // mentor: {

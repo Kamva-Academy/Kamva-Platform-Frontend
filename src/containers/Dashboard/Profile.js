@@ -81,7 +81,9 @@ const Profile = ({
   const classes = useStyles();
 
   useEffect(() => {
-    getUserProfile({ id: userAccount.id });
+    if (userAccount?.id) {
+      getUserProfile({ id: userAccount.id });
+    }
     getInstitutes();
   }, [getUserProfile, getInstitutes])
 

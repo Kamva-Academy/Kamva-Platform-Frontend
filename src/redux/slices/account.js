@@ -138,8 +138,6 @@ const accountSlice = createSlice({
     [getUserProfileAction.pending.toString()]: isFetching,
     [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userProfile = response;
-      console.log(response)
-      // state.userAccount = response.account;
       state.isFetching = false;
     },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
