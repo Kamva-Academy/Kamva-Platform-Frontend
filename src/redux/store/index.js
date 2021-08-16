@@ -28,11 +28,11 @@ reduxStore.subscribe(() => {
   localStorage.setItem(
     'rastaState',
     JSON.stringify({
-      account: state.account,
-      // account: {
-      //   userAccount: state.account.userAccount,
-      //   token: state.account.token,
-      // },
+      // account: state.account,
+      account: {
+        user: state.account.userAccount || state.account.userProfile,
+        token: state.account.token,
+      },
       // mentor: {
       //   teams: state.mentor.teams,
       // },

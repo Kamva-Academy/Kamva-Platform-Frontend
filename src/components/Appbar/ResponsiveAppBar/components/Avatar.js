@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
   avatar: {},
 }));
 
-function AvatarComponent({ name = 'هاشم' }) {
+function AvatarComponent({ name }) {
   const classes = useStyles();
   return (
     <Tooltip title={name} arrow>
@@ -17,14 +17,16 @@ function AvatarComponent({ name = 'هاشم' }) {
         style={{ backgroundColor: stringToColor(name) }}
         alt="logo"
         className={classes.avatar}>
-        {name[0]}
+        {name ? name[0] : ''}
       </Avatar>
     </Tooltip>
   );
 }
 
 const mapStateToProps = (state) => ({
-  name: `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`,
+  name: (state.account.user?.first_name && state.account.user?.last_name)
+    ? `${state.account.user?.first_name} ${state.account.user?.last_name}`
+    : '',
 });
 
 export default connect(mapStateToProps)(AvatarComponent);
