@@ -175,9 +175,14 @@ const RegistrationForm = ({
                 <Typography align='center'>{event?.description}</Typography>
               </Grid>
               <Grid item>
-                <Typography align='center'>{`نوع مسابقه: ${EVENT_TYPE[event?.event_type]}`}</Typography>
                 {event?.event_type == 'Team' &&
-                  <Typography align='center'>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
+                  <>
+                    <Typography align='center'>{'نوع رویداد: تیمی'}</Typography>
+                    <Typography align='center'>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
+                  </>
+                }
+                {event?.event_type == 'Individual' &&
+                  <Typography align='center'>{'نوع پاسخ: انفرادی'}</Typography>
                 }
               </Grid>
               <Grid item>
