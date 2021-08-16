@@ -157,6 +157,14 @@ const accountSlice = createSlice({
     [createInstitutesAction.fulfilled.toString()]: isNotFetching,
     [createInstitutesAction.rejected.toString()]: isNotFetching,
 
+    [updateUserAccountAction.pending.toString()]: isFetching,
+    [updateUserAccountAction.fulfilled.toString()]: isNotFetching,
+    [updateUserAccountAction.rejected.toString()]: isNotFetching,
+
+    [updateStudentShipAction.pending.toString()]: isFetching,
+    [updateStudentShipAction.fulfilled.toString()]: isNotFetching,
+    [updateStudentShipAction.rejected.toString()]: isNotFetching,
+
   },
 });
 

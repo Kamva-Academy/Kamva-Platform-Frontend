@@ -5,18 +5,19 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   InputLabel,
   makeStyles,
   MenuItem,
   Paper,
   Radio,
   RadioGroup,
-  IconButton,
-  Tooltip,
   Select,
   TextField,
+  Tooltip,
   Typography
 } from '@material-ui/core';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Skeleton from '@material-ui/lab/Skeleton';
 import jMoment from 'jalali-moment';
 import React, { useEffect, useState } from 'react';
@@ -30,9 +31,8 @@ import {
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../redux/slices/account';
+import Iran from '../../utils/iran';
 import Layout from '../Layout';
-
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
 
@@ -112,6 +112,7 @@ const Profile = ({
   };
 
   const handleProfileChange = (event) => {
+    console.log(event.target.value)
     setNewProfile({
       ...newProfile,
       [event.target.name]: event.target.value,
@@ -126,6 +127,7 @@ const Profile = ({
   }
 
   const submitProfile = () => {
+    console.log(newProfile)
     updateUserAccount(
       {
         id: userProfile?.id,
@@ -150,6 +152,8 @@ const Profile = ({
       </Tooltip>
     )
   }
+
+  console.log(newProfile)
 
   if (!userProfile) {
     return (<></>);
@@ -251,12 +255,14 @@ const Profile = ({
                 className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                defaultValue={userProfile?.city}
+                defaultValue={userProfile?.province}
                 onChange={handleProfileChange}
                 name='province'
                 label='استان'
               >
-                <MenuItem value={"Isfahan"}>{'اصفهان'}</MenuItem>
+                {Iran.Provinces.map((province) => (
+                  <MenuItem key={province.id} value={province.id} >{province.title}</MenuItem>
+                ))}
               </Select>
             </FormControl >
           </Grid>
@@ -265,6 +271,7 @@ const Profile = ({
               <InputLabel>شهر</InputLabel>
               <Select
                 className={classes.dropDown}
+                disabled={!newProfile?.province && !userProfile?.city}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.city}
@@ -272,7 +279,11 @@ const Profile = ({
                 name='city'
                 label='شهر'
               >
-                <MenuItem value={"Isfahan"}>{'اصفهان'}</MenuItem>
+                {Iran.Cities
+                  .filter((city) => (city.province_id == newProfile?.province || city.province_id == userProfile.province))
+                  .map((city) => (
+                    <MenuItem key={city.id} value={city.id} >{city.title}</MenuItem>
+                  ))}
               </Select>
             </FormControl >
           </Grid>
@@ -336,10 +347,15 @@ const Profile = ({
               </Select>
             </FormControl >
           </Grid>
-          <Grid item container xs={12} sm={6}>
+          <Grid item container justify='center' xs={12} sm={6}>
             <Button fullWidth variant='outlined' color='secondary' onClick={() => document.getElementById('school-studentship-document').click()}>انتخاب مدرک شناسایی تحصیلی</Button>
-            <Typography variant='caption' align='center'>* منظور از مدرک شناسایی تحصیلی، سندی‌ست که نشان دهد شما مشغول به تحصیل در این پایه هستید.</Typography>
             <input id='school-studentship-document' style={{ display: 'none' }} type="file" onChange={handleStudentshipDocumentChange} />
+            {userProfile?.school_studentship?.document &&
+              <a target="_blank" rel="noreferrer" href={userProfile?.school_studentship?.document}>آخرین مدرک بارگذاری‌شده</a>
+            }
+            {!userProfile?.school_studentship?.document &&
+              <Typography variant='caption' align='center'>* منظور از مدرک شناسایی تحصیلی، سندی‌ست که نشان دهد شما مشغول به تحصیل در این پایه هستید.</Typography>
+            }
           </Grid>
         </Grid>
         <Grid item container spacing={2}>
