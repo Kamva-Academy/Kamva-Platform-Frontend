@@ -12,6 +12,7 @@ import {
   getWorkshopsDescriptionUrl,
   paymentRequestUrl,
   purchaseEventUrl,
+  registrationReceiptUrl,
   submitDiscountCodeUrl,
   submitRegistrationFormUrl,
 } from '../constants/urls';
@@ -52,13 +53,11 @@ export const applyDiscountCodeAction = createAsyncThunkApi(
   submitDiscountCodeUrl,
 )
 
-
 export const getOneMerchandiseAction = createAsyncThunkApi(
   'events/getOneMerchandiseAction',
   Apis.GET,
   getAllUserMerchandisesUrl,
 );
-
 
 export const purchaseEventUrlAction = createAsyncThunkApi(
   'events/purchaseEventUrlAction',
@@ -69,6 +68,12 @@ export const purchaseEventUrlAction = createAsyncThunkApi(
       success: 'در حال انتقال به صفحه‌ی پرداخت...',
     },
   }
+);
+
+export const getOneRegistrationReceiptAction = createAsyncThunkApi(
+  'events/getOneRegistrationReceiptAction',
+  Apis.GET,
+  registrationReceiptUrl,
 );
 
 
@@ -186,6 +191,13 @@ const eventSlice = createSlice({
       state.discountedPrice = response.new_price;
     },
     [applyDiscountCodeAction.rejected.toString()]: isNotFetching,
+
+    [getOneRegistrationReceiptAction.pending.toString()]: isFetching,
+    [getOneRegistrationReceiptAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.receipt = response;
+    },
+    [getOneRegistrationReceiptAction.rejected.toString()]: isNotFetching,
 
     // [getEventRegistrationInfoAction.fulfilled.toString()]: (
     //   state,

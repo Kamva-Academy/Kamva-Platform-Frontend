@@ -8,6 +8,7 @@ import {
   applyDiscountCodeAction,
   getOneEventInfoAction,
   getOneRegistrationFormAction,
+  getOneRegistrationReceiptAction,
   purchaseEventUrlAction,
   submitRegistrationFormAction,
 } from '../redux/slices/events'
@@ -75,8 +76,11 @@ const Payment = ({
   purchaseEventUrl,
   addNotification,
   applyDiscountCode,
+  getOneRegistrationReceipt,
+
   discountedPrice,
   event,
+  receipt,
 }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -102,7 +106,7 @@ const Payment = ({
 
   useEffect(() => {
     if (event?.registration_form) {
-      // getOneRegistrationForm({ id: event?.registration_form })
+      getOneRegistrationReceipt({ id: event?.registration_receipt })
     }
   }, [event]);
 
@@ -195,11 +199,20 @@ const Payment = ({
             }
           </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <Grid component={Paper} container justify="center" alignItems="center" spacing={2}>
-            <Typography align='center' className={classes.subtitle}>{'پاسخ‌های شما'}</Typography>
+        {/* <Grid item xs={12}>
+          <Grid component={Paper} container justify="center" alignItems='flex-end' spacing={2}>
+            <Grid item container justify='center' alignItems='center'>
+              <Typography align='center' className={classes.subtitle}>{'پاسخ‌های شما'}</Typography>
+            </Grid>
+            {receipt?.answers?.map((widget) => (
+              <Grid item key={widget.id} xs={12}>
+                <Paper className={classes.paper}>
+                  <Widget mode='EDIT' widget={widget} />
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Layout>
   );
@@ -208,6 +221,7 @@ const Payment = ({
 const mapStateToProps = (state) => ({
   events: state.events.events || [],
   event: state.events.event,
+  receipt: state.events.receipt,
   registrationForm: state.events.registrationForm,
   discountedPrice: state.events.discountedPrice,
 });
@@ -221,5 +235,6 @@ export default connect(
     submitRegistrationForm: submitRegistrationFormAction,
     addNotification: addNotificationAction,
     applyDiscountCode: applyDiscountCodeAction,
+    getOneRegistrationReceipt: getOneRegistrationReceiptAction,
   }
 )(Payment);

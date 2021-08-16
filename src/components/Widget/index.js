@@ -11,12 +11,24 @@ export const MODES = {
   CORRECTION: 'CORRECTION',
 };
 
+const ANSWER_TYPE_TO_WIDGET_TYPES = {
+  SmallAnswer: 'SmallAnswerProblem',
+  BigAnswer: 'BigAnswerProblem',
+  UploadFileAnswer: 'UploadFileProblem',
+  MultiChoiceAnswer: 'MultiChoiceProblem',
+  Description: 'Description',
+  Image: 'Image',
+  Video: 'Video',
+  Game: 'Game',
+}
+
+
 const Widget = ({ widget, mode = MODES.VIEW, stateId, ...props }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
 
   const { WidgetComponent, WidgetEditDialog } = WIDGET_TYPES[
-    widget.widget_type
+    widget.widget_type || ANSWER_TYPE_TO_WIDGET_TYPES[widget.answer_type]
   ];
 
   return (

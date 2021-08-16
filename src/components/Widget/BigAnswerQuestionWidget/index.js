@@ -74,7 +74,7 @@ const BigAnswerQuestionWidget = ({
                 frameBorder: '0',
                 width: '100%',
               }}
-              content={mode === MODES.EDIT ? answer.text : value}
+              content={mode === MODES.EDIT ? answer?.text : value}
             />
           </Paper>
         )}
