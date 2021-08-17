@@ -169,7 +169,9 @@ const RegistrationForm = ({
             </Grid>
             <Grid item container direction='column' xs={12} sm={8} spacing={1}>
               <Grid item>
-                <Typography gutterBottom align='center' variant='h1'>{`رویداد ${event?.name}`}</Typography>
+                {event?.name &&
+                  <Typography gutterBottom align='center' variant='h1'>{`رویداد ${event?.name}`}</Typography>
+                }
               </Grid>
               <Grid item>
                 <Typography align='center'>{event?.description}</Typography>
