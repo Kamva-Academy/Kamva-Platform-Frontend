@@ -54,7 +54,9 @@ function AreYouSure({
   getInstitutes,
   open,
   handleClose,
-  createInstitutes
+  createInstitutes,
+
+  isFetching,
 }) {
   const classes = useStyles()
   const [data, setData] = useState();
@@ -67,7 +69,9 @@ function AreYouSure({
   }
 
   const handleButtonClick = (e) => {
-    createInstitutes({ institute_type: 'School', ...data }); //todo
+    createInstitutes({ institute_type: 'School', ...data }).then(() => {
+      handleClose(false);
+    }); //todo
     setTimeout(() => {
       getInstitutes();
     }, 2000)
@@ -170,7 +174,7 @@ function AreYouSure({
       </DialogContent>
       <DialogActions>
         <Grid item xs={12}>
-          <Button onClick={handleButtonClick} fullWidth variant='contained' color='secondary'>ثبت</Button>
+          <Button disabled={isFetching} onClick={handleButtonClick} fullWidth variant='contained' color='secondary'>ثبت</Button>
         </Grid>
       </DialogActions>
     </Dialog>
@@ -178,6 +182,7 @@ function AreYouSure({
 }
 
 const mapStateToProps = (state) => ({
+  isFetching: state.account.isFetching,
 })
 
 

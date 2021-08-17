@@ -325,6 +325,7 @@ const Profile = ({
                 ))}
               </Select>
             </FormControl >
+            <Typography variant='caption' align='center'>اگر مدرسه‌ی شما در لیست فوق نیست، خودتان آن را اضافه کنید!</Typography>
           </Grid>
           <Grid item container xs={12} sm={6}>
             <FormControl size='small' variant="outlined" className={classes.formControl}>
@@ -343,6 +344,7 @@ const Profile = ({
                 ))}
               </Select>
             </FormControl >
+            <Typography variant='caption' align='center'>پایه‌ای را انتخاب کنید که در سال جدید به تحصیل در آن خواهید پرداخت.</Typography>
           </Grid>
           <Grid item container justify='center' xs={12} sm={6}>
             <Button fullWidth variant='outlined' color='secondary' onClick={() => document.getElementById('school-studentship-document').click()}>انتخاب مدرک شناسایی تحصیلی</Button>
