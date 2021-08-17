@@ -187,9 +187,9 @@ const RegistrationForm = ({
                   <Typography align='center'>{'نوع پاسخ: انفرادی'}</Typography>
                 }
               </Grid>
-              <Grid item>
+              {/* <Grid item>
                 <Typography align='center'>{`قیمت برای هر نفر: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
         </Grid>
