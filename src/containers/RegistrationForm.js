@@ -146,8 +146,6 @@ const RegistrationForm = ({
     setAnswers(temporaryAnswer);
   }
 
-  console.log(answers)
-
   return (
     <Layout>
       <Grid container justify="space-evenly" alignItems="center" spacing={4}>

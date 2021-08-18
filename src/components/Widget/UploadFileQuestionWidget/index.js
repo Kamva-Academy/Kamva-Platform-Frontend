@@ -15,10 +15,6 @@ import UploadFileQuestionEditWidget from './edit';
 export { UploadFileQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
-  flex: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   uploadButton: {
     marginLeft: 'auto',
     whiteSpace: 'nowrap',
@@ -64,17 +60,11 @@ const UploadFileQuestionWidget = ({
           answerFile: e.target.files[0],
         }).then((response) => {
           if (response.type?.endsWith('fulfilled')) {
-            console.log(response.payload?.response);
             setFile({
               link: response.payload?.response?.answer_file,
               name: e.target.files[0].name,
             });
             pushAnswer('upload_file_answer', response.payload?.response?.id);
-          } else {
-            addNotification({
-              message: 'مشکلی در ارسال فایل وجود داشت. چند لحظه‌ی دیگه دوباره تلاش کن.',
-              type: 'error',
-            });
           }
         })
       } else {
@@ -84,6 +74,11 @@ const UploadFileQuestionWidget = ({
       }
     }
   };
+
+  const clearFile = () => {
+    setFile();
+    pushAnswer('upload_file_answer', '');
+  }
 
   return (
     <Grid container>
@@ -113,24 +108,33 @@ const UploadFileQuestionWidget = ({
             />
           </Grid>
           {file &&
-            <div className={classes.flex}>
-              <Typography
-                component="small"
-                variant="body2"
-                className={classes.small}>
-                {'آخرین ارسال:'}
-              </Typography>
-              <Button
-                size="small"
-                endIcon={<DescriptionOutlinedIcon />}
-                className={classes.lastUploadButton}
-                href={file.link}
-                component="a"
-                download
-                target="_blank">
-                {file.name}
-              </Button>
-            </div>
+            <Grid container justify='center' alignItems='center'>
+              <Grid item>
+                <Typography
+                  component="small"
+                  variant="body2"
+                  className={classes.small}>
+                  {'آخرین ارسال:'}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Button
+                  size="small"
+                  endIcon={<DescriptionOutlinedIcon />}
+                  className={classes.lastUploadButton}
+                  href={file.link}
+                  component="a"
+                  download
+                  target="_blank">
+                  {file.name}
+                </Button>
+              </Grid>
+              {/* <Grid item> //todo: handle clear data from answer in registration form
+                <IconButton size='small' onClick={clearFile}>
+                  <ClearIcon />
+                </IconButton>
+              </Grid> */}
+            </Grid>
           }
         </Grid>
       </Grid>

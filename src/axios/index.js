@@ -7,7 +7,7 @@ export const baseURL =
 
 const baseAxios = Axios.create({
   baseURL: baseURL + '/api/',
-  timeout: 20000,
+  timeout: 60000,
   maxRedirects: 5,
 });
 
