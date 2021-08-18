@@ -1,6 +1,7 @@
 import getLocale from './getLocale';
 
 export const toPersianNumber = (num) => {
+  if (!num) return undefined;
   const persian = {
     0: '۰',
     1: '۱',
@@ -13,7 +14,7 @@ export const toPersianNumber = (num) => {
     8: '۸',
     9: '۹',
   };
-  num = num.toString();
+  // num = num?.toString();
   let len = num.length;
   let converted = '';
   for (let i = 0; i < len; i++) {
@@ -23,6 +24,7 @@ export const toPersianNumber = (num) => {
 };
 
 export const toEnglishNumber = (num) => {
+  if (!num) return undefined;
   const english = {
     '۰': '0',
     '۱': '1',
@@ -35,7 +37,7 @@ export const toEnglishNumber = (num) => {
     '۸': '8',
     '۹': '9',
   };
-  num = num.toString();
+  // num = num?.toString();
   let len = num.length;
   let converted = '';
   for (let i = 0; i < len; i++) {

@@ -32,6 +32,7 @@ import {
   updateUserAccountAction,
 } from '../../redux/slices/account';
 import Iran from '../../utils/iran';
+import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
 import Layout from '../Layout';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
@@ -93,6 +94,15 @@ const Profile = ({
     getInstitutes();
   }, [getUserProfile, getInstitutes])
 
+  const isJustDigits = (number) => {
+    var regex = new RegExp(`\\d{${number.length}}`);
+    if (regex.test(toEnglishNumber(number))) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handleProfilePictureChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setNewProfile({
@@ -114,14 +124,14 @@ const Profile = ({
   const handleProfileChange = (event) => {
     setNewProfile({
       ...newProfile,
-      [event.target.name]: event.target.value,
+      [event.target.name]: toEnglishNumber(event.target.value),
     })
   }
 
   const handleStudentshipChange = (event) => {
     setNewStudentship({
       ...newStudentship,
-      [event.target.name]: event.target.value,
+      [event.target.name]: toEnglishNumber(event.target.value),
     })
   }
 
@@ -181,32 +191,55 @@ const Profile = ({
         <Grid item container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.first_name}
+              value={newProfile.first_name}
               name='first_name' onChange={handleProfileChange}
               size='small' label='نام' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.last_name}
+              value={newProfile.last_name}
               name='last_name' onChange={handleProfileChange}
               size='small' label='نام خانوادگی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.national_code}
-              name='national_code' onChange={handleProfileChange}
+              value={newProfile.national_code}
+              name='national_code'
+              onChange={(e) => {
+                if (isJustDigits(e.target.value)) {
+                  handleProfileChange(e);
+                }
+              }}
+              inputProps={{ className: 'ltr-input' }}
               size='small' label='کد ملی' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.phone_number}
-              name='phone_number' onChange={handleProfileChange}
+              name='phone_number'
+              value={newProfile.phone_number}
+              onChange={(e) => {
+                if (isJustDigits(e.target.value)) {
+                  handleProfileChange(e);
+                }
+              }}
+              inputProps={{ className: 'ltr-input' }}
               size='small' label='شماره موبایل' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.email}
+              value={newProfile.email}
               name='email' onChange={handleProfileChange}
+              inputProps={{ className: 'ltr-input' }}
               size='small' label='ایمیل' />
           </Grid>
           {/* <Grid item xs={12} sm={6}> todo
@@ -286,14 +319,24 @@ const Profile = ({
           </Grid>
           <Grid item xs={12}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.address}
+              value={newProfile.address}
               name='address' multiline rows={2} onChange={handleProfileChange}
               size='small' label='آدرس منزل ' />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
+              autoComplete='off'
               defaultValue={userProfile?.postal_code}
-              name='postal_code' onChange={handleProfileChange}
+              name='postal_code'
+              value={newProfile.postal_code}
+              onChange={(e) => {
+                if (isJustDigits(e.target.value)) {
+                  handleProfileChange(e);
+                }
+              }}
+              inputProps={{ className: 'ltr-input' }}
               size='small' label='کد پستی' />
           </Grid>
         </Grid>
@@ -343,7 +386,7 @@ const Profile = ({
                   <MenuItem key={grade.value} value={grade.value}>{grade.name}</MenuItem>
                 ))}
               </Select>
-            </FormControl >
+            </FormControl>
             <Typography variant='caption' align='center'>پایه‌ای را انتخاب کنید که در سال جدید به تحصیل در آن خواهید پرداخت.</Typography>
           </Grid>
           <Grid item container justify='center' xs={12} sm={6}>
