@@ -84,9 +84,11 @@ const ANSWER_TYPES = {
 const RegistrationForm = ({
   getOneRegistrationForm,
   getOneEventInfo,
+
   event,
   registrationForm,
   submitRegistrationForm,
+  isFetching,
 }) => {
   const classes = useStyles();
   const history = useHistory();
@@ -113,7 +115,7 @@ const RegistrationForm = ({
   }
 
   const doRegister = () => {
-    
+
     submitRegistrationForm({
       id: event?.registration_form,
       answers,
@@ -209,12 +211,14 @@ const RegistrationForm = ({
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper}>
-                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type || 'Description'])} widget={widget} />
+                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type])} widget={widget} />
                 </Paper>
               </Grid>
             ))}
             <Grid item xs={12}>
-              <Button fullWidth variant='contained' color='primary' onClick={() => { setDialogStatus(true) }}>
+              <Button disabled={isFetching} fullWidth
+                variant='contained' color='primary'
+                onClick={() => { setDialogStatus(true) }}>
                 {'ثبت'}
               </Button>
             </Grid>
@@ -234,6 +238,7 @@ const mapStateToProps = (state) => ({
   events: state.events.events || [],
   event: state.events.event,
   registrationForm: state.events.registrationForm,
+  isFetching: state.events.isFetching,
 });
 
 export default connect(

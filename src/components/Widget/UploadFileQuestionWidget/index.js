@@ -3,15 +3,15 @@ import {
   CloudUpload as CloudUploadIcon,
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@material-ui/icons';
+import ClearIcon from '@material-ui/icons/Clear';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { baseURL } from '../../../axios';
 import { uploadFileAction } from '../../../redux/slices/events';
+import { addNotificationAction } from '../../../redux/slices/notifications';
 import UploadFileQuestionEditWidget from './edit';
-
-import ClearIcon from '@material-ui/icons/Clear';
 export { UploadFileQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
@@ -43,12 +43,13 @@ const useStyles = makeStyles((theme) => ({
 
 const UploadFileQuestionWidget = ({
   pushAnswer,
-  widgetId,
+  addNotification,
+
+  id,
   text = 'محل آپلود فایل',
   last_submit,
-  disabled,
-  answerSheetId,
   uploadFile,
+  isFetching,
 }) => {
   const t = useTranslate();
   const classes = useStyles({ haveFile: !!last_submit });
@@ -58,10 +59,24 @@ const UploadFileQuestionWidget = ({
     e.preventDefault();
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 8e6) {
-        pushAnswer('answer_file', e.target.files[0]);
-        setFile(
-          e.target.files[0] // todo
-        );
+        uploadFile({
+          id,
+          answerFile: e.target.files[0],
+        }).then((response) => {
+          if (response.type?.endsWith('fulfilled')) {
+            console.log(response.payload?.response);
+            setFile({
+              link: response.payload?.response?.answer_file,
+              name: e.target.files[0].name,
+            });
+            pushAnswer('upload_file_answer', response.payload?.response?.id);
+          } else {
+            addNotification({
+              message: 'مشکلی در ارسال فایل وجود داشت. چند لحظه‌ی دیگه دوباره تلاش کن.',
+              type: 'error',
+            });
+          }
+        })
       } else {
         e.target.value = '';
         e.target.setCustomValidity('Maximum upload file size is 8 MB.');
@@ -69,12 +84,6 @@ const UploadFileQuestionWidget = ({
       }
     }
   };
-
-  const handleButtonClick = () => {
-    uploadFile(file);
-  }
-
-  console.log(file)
 
   return (
     <Grid container>
@@ -87,7 +96,7 @@ const UploadFileQuestionWidget = ({
             <Button
               component="label"
               htmlFor={'raised-button-file' + pushAnswer}
-              disabled={disabled || !answerSheetId}
+              disabled={isFetching}
               variant="contained"
               color="primary"
               size="small"
@@ -103,48 +112,28 @@ const UploadFileQuestionWidget = ({
               onChange={handleFileChange}
             />
           </Grid>
-          {file?.name &&
-            <Grid item>
-              <IconButton size='small' onClick={() => setFile()}>
-                <ClearIcon />
-              </IconButton>
-              <Typography variant='caption'>{file?.name}</Typography>
-            </Grid>
+          {file &&
+            <div className={classes.flex}>
+              <Typography
+                component="small"
+                variant="body2"
+                className={classes.small}>
+                {'آخرین ارسال:'}
+              </Typography>
+              <Button
+                size="small"
+                endIcon={<DescriptionOutlinedIcon />}
+                className={classes.lastUploadButton}
+                href={file.link}
+                component="a"
+                download
+                target="_blank">
+                {file.name}
+              </Button>
+            </div>
           }
         </Grid>
-
       </Grid>
-      {last_submit && (
-        <>
-          <Divider className={classes.divider} />
-          <div className={classes.flex}>
-            <Typography
-              component="small"
-              variant="body2"
-              className={classes.small}>
-              آخرین ارسال:
-            </Typography>
-            <Button
-              size="small"
-              endIcon={<DescriptionOutlinedIcon />}
-              className={classes.lastUploadButton}
-              href={baseURL + last_submit.answer_file} // TODO: fix in back
-              component="a"
-              download
-              target="_blank">
-              {last_submit.file_name}
-            </Button>
-          </div>
-        </>
-      )}
-      {!pushAnswer &&
-        <>
-          <br />
-          <Button fullWidth variant='contained' color='primary' onClick={pushAnswer}>
-            {'ارسال'}
-          </Button>
-        </>
-      }
     </Grid>
   );
 };
@@ -152,8 +141,10 @@ const UploadFileQuestionWidget = ({
 const mapStateToProps = (state, ownProps) => ({
   playerId: state.currentState.player?.id,
   pushAnswer: ownProps.pushAnswer, //todo: redundant?!
+  isFetching: state.events.isFetching,
 });
 
 export default connect(mapStateToProps, {
   uploadFile: uploadFileAction,
+  addNotification: addNotificationAction,
 })(UploadFileQuestionWidget);

@@ -90,6 +90,13 @@ export const uploadFileAction = createAsyncThunkApi(
   'events/uploadFileAction',
   Apis.POST_FORM_DATA,
   uploadFileUrl,
+  {
+    bodyCreator: ({ answerFile, id, name }) => ({
+      answer_file: answerFile,
+      problem: id,
+      file_name: name,
+    }),
+  }
 );
 
 
