@@ -65,7 +65,7 @@ const InputFields = ({
     }
 
     setButtonText('۱ دقیقه صبر کن');
-    getVerificationCode({ phoneNumber: data.phoneNumber, codeType: 'change_pass' }).then(
+    getVerificationCode({ phoneNumber: data.phoneNumber, codeType: 'changePass' }).then(
       () => {
         setTimeout(
           () => {

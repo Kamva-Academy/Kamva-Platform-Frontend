@@ -212,6 +212,10 @@ const eventSlice = createSlice({
     },
     [getOneRegistrationReceiptAction.rejected.toString()]: isNotFetching,
 
+    [uploadFileAction.pending.toString()]: isFetching,
+    [uploadFileAction.fulfilled.toString()]: isNotFetching,
+    [uploadFileAction.rejected.toString()]: isNotFetching,
+
     // [getEventRegistrationInfoAction.fulfilled.toString()]: (
     //   state,
     //   { payload: { response }, meta: { arg } }

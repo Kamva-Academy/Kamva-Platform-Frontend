@@ -113,6 +113,7 @@ const RegistrationForm = ({
   }
 
   const doRegister = () => {
+    
     submitRegistrationForm({
       id: event?.registration_form,
       answers,
