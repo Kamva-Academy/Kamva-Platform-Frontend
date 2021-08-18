@@ -14,6 +14,7 @@ import {
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
+import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -52,17 +53,17 @@ const InputFields = ({
   const putData = (event) => {
     setData({
       ...data,
-      [event.target.name]: event.target.value,
+      [event.target.name]: toEnglishNumber(event.target.value),
     });
   };
 
 
-  const isEnglishDigits = (number) => {
+  const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
-    if (regex.test(number)) {
-      return number;
+    if (regex.test(toEnglishNumber(number))) {
+      return true;
     } else {
-      return 'error';
+      return false;
     }
   };
 
@@ -94,7 +95,7 @@ const InputFields = ({
         () => {
           setButtonText('دریافت کد');
         },
-        process.env.NODE_ENV === 'production' ? 60000 : 1000
+        60000
       );
     });
   };
@@ -125,14 +126,15 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onChange={(e) => {
-            if (isEnglishDigits(e.target.value) !== 'error') {
+            if (isJustDigits(e.target.value)) {
               putData(e);
             }
           }}
-          value={data.phone}
+          value={toPersianNumber(data.phoneNumber)}
           name='phoneNumber'
           label='شماره تلفن‌همراه'
           inputProps={{ className: 'ltr-input' }}
@@ -143,16 +145,17 @@ const InputFields = ({
       <Grid item container justify="center" alignItems="stretch" spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
+            autoComplete='off'
             variant='outlined'
             fullWidth
             onChange={(e) => {
-              if (isEnglishDigits(e.target.value) !== 'error') {
+              if (isJustDigits(e.target.value)) {
                 putData(e);
               }
             }}
-            value={data.code}
+            value={toPersianNumber(data.code)}
             name='code'
-            label='کد پیامک‌شده'
+            label="کد تایید پیامک‌شده"
             inputProps={{ className: 'ltr-input' }}
             type='text'
           />
@@ -172,6 +175,7 @@ const InputFields = ({
 
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onBlur={putData}
@@ -184,6 +188,7 @@ const InputFields = ({
 
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onBlur={putData}

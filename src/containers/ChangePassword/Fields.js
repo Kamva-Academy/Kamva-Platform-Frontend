@@ -8,6 +8,7 @@ import {
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
+import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
 
 
 const InputFields = ({
@@ -27,16 +28,16 @@ const InputFields = ({
   const putData = (event) => {
     setData({
       ...data,
-      [event.target.name]: event.target.value,
+      [event.target.name]: toEnglishNumber(event.target.value),
     });
   };
 
-  const isEnglishDigits = (number) => {
+  const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
-    if (regex.test(number)) {
-      return number;
+    if (regex.test(toEnglishNumber(number))) {
+      return true;
     } else {
-      return 'error';
+      return false;
     }
   };
 
@@ -100,6 +101,7 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onBlur={putData}
@@ -112,6 +114,7 @@ const InputFields = ({
 
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onBlur={putData}
@@ -124,14 +127,15 @@ const InputFields = ({
 
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onChange={(e) => {
-            if (isEnglishDigits(e.target.value) !== 'error') {
+            if (isJustDigits(e.target.value)) {
               putData(e);
             }
           }}
-          value={data.phoneNumber}
+          value={toPersianNumber(data.phoneNumber)}
           name="phoneNumber"
           inputProps={{ className: 'ltr-input' }}
           label="شماره تلفن‌همراه"
@@ -147,17 +151,18 @@ const InputFields = ({
         spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
+            autoComplete='off'
             variant='outlined'
             fullWidth
             onChange={(e) => {
-              if (isEnglishDigits(e.target.value) !== 'error') {
+              if (isJustDigits(e.target.value)) {
                 putData(e);
               }
             }}
-            value={data.code}
+            value={toPersianNumber(data.code)}
             name="code"
             inputProps={{ className: 'ltr-input' }}
-            label="کد پیامک‌شده"
+            label="کد تایید پیامک‌شده"
             type="text"
           />
         </Grid>

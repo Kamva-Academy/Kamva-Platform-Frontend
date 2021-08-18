@@ -15,6 +15,7 @@ import {
   registrationReceiptUrl,
   submitDiscountCodeUrl,
   submitRegistrationFormUrl,
+  uploadFileUrl,
 } from '../constants/urls';
 
 export const getAllEventsInfoAction = createAsyncThunkApi(
@@ -85,7 +86,11 @@ export const getOneRegistrationReceiptAction = createAsyncThunkApi(
   registrationReceiptUrl,
 );
 
-
+export const uploadFileAction = createAsyncThunkApi(
+  'events/uploadFileAction',
+  Apis.POST_FORM_DATA,
+  uploadFileUrl,
+);
 
 
 

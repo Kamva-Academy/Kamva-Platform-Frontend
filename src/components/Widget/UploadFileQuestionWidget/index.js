@@ -1,4 +1,4 @@
-import { Button, Divider, makeStyles, Typography } from '@material-ui/core';
+import { Button, Divider, Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
 import {
   CloudUpload as CloudUploadIcon,
   DescriptionOutlined as DescriptionOutlinedIcon,
@@ -8,9 +8,10 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { baseURL } from '../../../axios';
-import { sendFileAnswerAction } from '../../../redux/slices/currentState';
+import { uploadFileAction } from '../../../redux/slices/events';
 import UploadFileQuestionEditWidget from './edit';
 
+import ClearIcon from '@material-ui/icons/Clear';
 export { UploadFileQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
@@ -42,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
 
 const UploadFileQuestionWidget = ({
   pushAnswer,
-  id,
+  widgetId,
   text = 'محل آپلود فایل',
   last_submit,
   disabled,
   answerSheetId,
-  sendFileAnswer,
+  uploadFile,
 }) => {
   const t = useTranslate();
   const classes = useStyles({ haveFile: !!last_submit });
@@ -57,10 +58,10 @@ const UploadFileQuestionWidget = ({
     e.preventDefault();
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 8e6) {
-        pushAnswer('file', e.target.files[0]);
-        setFile({
-          answer_file: e.target.files[0], // todo
-        });
+        pushAnswer('answer_file', e.target.files[0]);
+        setFile(
+          e.target.files[0] // todo
+        );
       } else {
         e.target.value = '';
         e.target.setCustomValidity('Maximum upload file size is 8 MB.');
@@ -70,32 +71,49 @@ const UploadFileQuestionWidget = ({
   };
 
   const handleButtonClick = () => {
-    sendFileAnswer(file);
+    uploadFile(file);
   }
 
+  console.log(file)
+
   return (
-    <div>
-      <div className={classes.flex}>
-        <Typography>{text}</Typography>
-        <input
-          accept="application/pdf,image/*"
-          style={{ display: 'none' }}
-          id={'raised-button-file' + id}
-          type="file"
-          onChange={handleFileChange}
-        />
-        <Button
-          component="label"
-          htmlFor={disabled || !answerSheetId ? '' : 'raised-button-file' + id}
-          disabled={disabled || !answerSheetId}
-          variant="contained"
-          color="primary"
-          size="small"
-          startIcon={<CloudUploadIcon />}
-          className={classes.uploadButton}>
-          {t('uploadFile')}
-        </Button>
-      </div>
+    <Grid container>
+      <Grid item container justify='center' alignItems='center'>
+        <Grid item xs={12} sm={6}>
+          <Typography>{text}</Typography>
+        </Grid>
+        <Grid item container xs={12} sm={6} direction='column' alignItems='center'>
+          <Grid item>
+            <Button
+              component="label"
+              htmlFor={'raised-button-file' + pushAnswer}
+              disabled={disabled || !answerSheetId}
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<CloudUploadIcon />}
+              className={classes.uploadButton}>
+              {t('uploadFile')}
+            </Button>
+            <input
+              accept="application/pdf,image/*"
+              style={{ display: 'none' }}
+              id={'raised-button-file' + pushAnswer}
+              type="file"
+              onChange={handleFileChange}
+            />
+          </Grid>
+          {file?.name &&
+            <Grid item>
+              <IconButton size='small' onClick={() => setFile()}>
+                <ClearIcon />
+              </IconButton>
+              <Typography variant='caption'>{file?.name}</Typography>
+            </Grid>
+          }
+        </Grid>
+
+      </Grid>
       {last_submit && (
         <>
           <Divider className={classes.divider} />
@@ -122,12 +140,12 @@ const UploadFileQuestionWidget = ({
       {!pushAnswer &&
         <>
           <br />
-          <Button fullWidth variant='contained' color='primary'>
+          <Button fullWidth variant='contained' color='primary' onClick={pushAnswer}>
             {'ارسال'}
           </Button>
         </>
       }
-    </div>
+    </Grid>
   );
 };
 
@@ -137,5 +155,5 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
-  sendFileAnswer: sendFileAnswerAction,
+  uploadFile: uploadFileAction,
 })(UploadFileQuestionWidget);

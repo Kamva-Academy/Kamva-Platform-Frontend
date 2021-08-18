@@ -24,6 +24,8 @@ export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/register/`;
 export const registrationReceiptUrl = ({ id }) => `fsm/receipts/${id}/`;
+export const uploadFileUrl = 'fsm/upload_answer/';
+
 
 export const workshopsUrl = 'fsm/fsm/';
 

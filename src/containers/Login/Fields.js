@@ -13,6 +13,7 @@ import {
   loginAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
+import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -44,10 +45,21 @@ const InputFields = ({
     );
   }
 
+
+  const isJustDigits = (number) => {
+    var regex = new RegExp(`\\d{${number.length}}`);
+    if (regex.test(toEnglishNumber(number))) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+
   const putData = (event) => {
     setData({
       ...data,
-      [event.target.name]: event.target.value,
+      [event.target.name]: toEnglishNumber(event.target.value),
     });
   };
 
@@ -68,10 +80,15 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
-          onChange={putData}
-          value={data.phone}
+          onChange={(e) => {
+            if (isJustDigits(e.target.value)) {
+              putData(e);
+            }
+          }}
+          value={toPersianNumber(data.username)}
           name='username'
           label='شماره تلفن‌همراه'
           inputProps={{ className: 'ltr-input' }}
@@ -81,6 +98,7 @@ const InputFields = ({
 
       <Grid item>
         <TextField
+          autoComplete='off'
           variant='outlined'
           fullWidth
           onBlur={putData}
