@@ -20,7 +20,7 @@ export const submitDiscountCodeUrl = 'auth/payment/verify_discount/';
 
 // fsm
 export const getAllEventsInfoUrl = 'fsm/event/';
-export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}`;
+export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/register/`;
 export const registrationReceiptUrl = ({ id }) => `fsm/receipts/${id}/`;
@@ -43,7 +43,7 @@ export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
 export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
   Math.random() * 10000000
-)}/rasta/landing-zero-v3_d5lbgq.json`;
+)}/rasta/landing-zero-v3_d5lbgq.json/`;
 
 export const goBackwardUrl = 'fsm/gobackward/';
 
