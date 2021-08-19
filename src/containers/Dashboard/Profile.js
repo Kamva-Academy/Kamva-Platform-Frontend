@@ -223,7 +223,7 @@ const Profile = ({
             <TextField fullWidth variant='outlined'
               disabled={true}
               defaultValue={toPersianNumber(userProfile?.phone_number)}
-              name='phone_number'
+              name='phone_number' inputProps={{ className: 'ltr-input' }}
               size='small' label='شماره موبایل' />
           </Grid>
           <Grid item xs={12} sm={6}>
