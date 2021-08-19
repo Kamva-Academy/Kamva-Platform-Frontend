@@ -221,16 +221,9 @@ const Profile = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              autoComplete='off'
-              defaultValue={userProfile?.phone_number}
+              disabled={true}
+              defaultValue={toPersianNumber(userProfile?.phone_number)}
               name='phone_number'
-              value={newProfile.phone_number}
-              onChange={(e) => {
-                if (isJustDigits(e.target.value)) {
-                  handleProfileChange(e);
-                }
-              }}
-              inputProps={{ className: 'ltr-input' }}
               size='small' label='شماره موبایل' />
           </Grid>
           <Grid item xs={12} sm={6}>
