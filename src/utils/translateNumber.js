@@ -1,7 +1,6 @@
 import getLocale from './getLocale';
 
 export const toPersianNumber = (num) => {
-  if (!num) return undefined;
   const persian = {
     0: '۰',
     1: '۱',
@@ -24,7 +23,6 @@ export const toPersianNumber = (num) => {
 };
 
 export const toEnglishNumber = (num) => {
-  if (!num) return undefined;
   const english = {
     '۰': '0',
     '۱': '1',
