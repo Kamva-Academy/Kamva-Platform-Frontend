@@ -135,7 +135,7 @@ const InputFields = ({
               putData(e);
             }
           }}
-          value={toPersianNumber(data.phoneNumber)}
+          value={data.phoneNumber}
           name="phoneNumber"
           inputProps={{ className: 'ltr-input' }}
           label="شماره تلفن همراه"
@@ -159,7 +159,7 @@ const InputFields = ({
                 putData(e);
               }
             }}
-            value={toPersianNumber(data.code)}
+            value={data.code}
             name="code"
             inputProps={{ className: 'ltr-input' }}
             label="کد تایید پیامک‌شده"
