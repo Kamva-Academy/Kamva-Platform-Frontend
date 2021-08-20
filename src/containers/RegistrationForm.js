@@ -124,16 +124,22 @@ const RegistrationForm = ({
   }
 
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
-    const temporaryAnswer = answers;
+    const temporaryAnswer = [...answers];
 
     let doesFind = false;
     for (let i = 0; i < temporaryAnswer.length; i++) {
-      if (temporaryAnswer[i].answer_type === widgetType && temporaryAnswer[i].problem == problemId) {
-        temporaryAnswer[i] = {
-          ...temporaryAnswer[i],
-          [fieldName]: answer,
+      // todo: remove answer_type from world :/
+      if (temporaryAnswer[i].answer_type === widgetType && temporaryAnswer[i].problem === problemId) {
+        if (answer) {
+          temporaryAnswer[i] = {
+            ...temporaryAnswer[i],
+            [fieldName]: answer,
+          }
+        } else {
+          temporaryAnswer.splice(i, 1);
         }
         doesFind = true;
+        break;
       }
     }
     if (!doesFind) {
@@ -143,11 +149,8 @@ const RegistrationForm = ({
         problem: problemId,
       })
     }
-    console.log(temporaryAnswer)
     setAnswers(temporaryAnswer);
   }
-
-  console.log(answers);
 
   return (
     <Layout>
