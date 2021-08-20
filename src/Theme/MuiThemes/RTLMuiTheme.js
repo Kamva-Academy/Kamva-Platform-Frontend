@@ -1,10 +1,10 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 
 import { Workshop } from '../MuiVariables';
 import theme from '../theme';
 import typography from '../typography';
 
-const RTLMuiTheme = createMuiTheme({
+const RTLMuiTheme = createTheme({
   direction: 'rtl',
   ...theme(Workshop),
   typography
