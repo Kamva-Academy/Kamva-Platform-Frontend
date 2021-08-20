@@ -38,7 +38,7 @@ function UploadFileQuestionEditWidget({
       <DialogTitle>{t('file')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          متن درخواستی که برای ارسال فایل دارید در قسمت پایین وارد کنید.
+          متن درخواستی را که برای ارسال فایل دارید، در قسمت پایین وارد کنید.
         </DialogContentText>
         <TextField
           autoFocus

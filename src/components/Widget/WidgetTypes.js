@@ -16,14 +16,12 @@ import UploadFileQuestionWidget, {
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 const WIDGET_TYPES = {
-  // fixed "pushAnswer"
   SmallAnswerProblem: {
     WidgetComponent: SmallAnswerQuestionWidget,
     WidgetEditDialog: SmallAnswerQuestionEditWidget,
     label: 'کوتاه پاسخ',
     backendType: 'SmallAnswerProblem',
   },
-  // fixed "pushAnswer"
   BigAnswerProblem: {
     WidgetComponent: BigAnswerQuestionWidget,
     WidgetEditDialog: BigAnswerQuestionEditWidget,

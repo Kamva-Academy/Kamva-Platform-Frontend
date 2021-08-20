@@ -90,7 +90,7 @@ const UploadFileQuestionWidget = ({
           <Grid item>
             <Button
               component="label"
-              htmlFor={'raised-button-file' + pushAnswer}
+              htmlFor={'raised-button-file' + id}
               disabled={isFetching}
               variant="contained"
               color="primary"
@@ -102,7 +102,7 @@ const UploadFileQuestionWidget = ({
             <input
               accept="application/pdf,image/*"
               style={{ display: 'none' }}
-              id={'raised-button-file' + pushAnswer}
+              id={'raised-button-file' + id}
               type="file"
               onChange={handleFileChange}
             />
@@ -129,11 +129,11 @@ const UploadFileQuestionWidget = ({
                   {file.name}
                 </Button>
               </Grid>
-              {/* <Grid item> //todo: handle clear data from answer in registration form
+              <Grid item>
                 <IconButton size='small' onClick={clearFile}>
                   <ClearIcon />
                 </IconButton>
-              </Grid> */}
+              </Grid>
             </Grid>
           }
         </Grid>

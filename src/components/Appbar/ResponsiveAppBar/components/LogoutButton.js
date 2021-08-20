@@ -17,10 +17,10 @@ function LogoutButton({ logout }) {
     <Button
       variant="outlined"
       onClick={logout}
-      startIcon={
+      endIcon={
         <Icon>
           <img
-            src={`${process.env.PUBLIC_URL}/ZeroJourneyer/IconImages/logout.png`}
+            src={`${process.env.PUBLIC_URL}/icons/logout.png`}
             alt="iconImage"
             className={classes.iconImage}
           />
