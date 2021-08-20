@@ -138,7 +138,7 @@ const InputFields = ({
           value={toPersianNumber(data.phoneNumber)}
           name="phoneNumber"
           inputProps={{ className: 'ltr-input' }}
-          label="شماره تلفن‌همراه"
+          label="شماره تلفن همراه"
           type="tel"
         />
       </Grid>

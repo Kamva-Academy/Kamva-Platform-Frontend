@@ -8,20 +8,30 @@ export const errorHandler = (
   showHttpError
 ) => {
 
+  console.log(error.response)
+
+
   if (!error.response) {
     return rejectWithValue({
       message: 'ارتباطت با مشکل مواجه شده. یه چند لحظه دیگه دوباره تلاش کن!',
     });
   }
 
-  if (error.response.data?.code) {
+  console.log(error.response)
+
+
+  if (error.response.data?.code && persianMessages[error.response.data?.code]) {
     return rejectWithValue({
       message: persianMessages[error.response.data?.code]
     });
   }
 
+  console.log(error.response)
+
+
   switch (error.response.status) {
     case 401:
+      console.log(error.response)
       if (error.config.url === 'auth/token/obtain/') {
         break;
       }

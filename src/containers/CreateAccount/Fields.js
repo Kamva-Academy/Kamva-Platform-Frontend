@@ -80,7 +80,7 @@ const InputFields = ({
   const doGetVerificationCode = () => {
     if (!data.phoneNumber) {
       addNotification({
-        message: 'یک شماره تلفن‌همراه وارد کن!',
+        message: 'یک شماره تلفن همراه وارد کن!',
         type: 'error',
       });
       return;
@@ -136,7 +136,7 @@ const InputFields = ({
           }}
           value={toPersianNumber(data.phoneNumber)}
           name='phoneNumber'
-          label='شماره تلفن‌همراه'
+          label='شماره تلفن همراه'
           inputProps={{ className: 'ltr-input' }}
           type='tel'
         />
