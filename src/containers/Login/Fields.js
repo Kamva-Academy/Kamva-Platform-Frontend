@@ -88,7 +88,7 @@ const InputFields = ({
               putData(e);
             }
           }}
-          value={toPersianNumber(data.username)}
+          value={data.username}
           name='username'
           label='شماره تلفن همراه'
           inputProps={{ className: 'ltr-input' }}

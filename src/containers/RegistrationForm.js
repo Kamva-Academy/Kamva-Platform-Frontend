@@ -128,7 +128,7 @@ const RegistrationForm = ({
 
     let doesFind = false;
     for (let i = 0; i < temporaryAnswer.length; i++) {
-      if (temporaryAnswer[i].answer_type === widgetType) {
+      if (temporaryAnswer[i].answer_type === widgetType && temporaryAnswer[i].problem == problemId) {
         temporaryAnswer[i] = {
           ...temporaryAnswer[i],
           [fieldName]: answer,
@@ -143,8 +143,11 @@ const RegistrationForm = ({
         problem: problemId,
       })
     }
+    console.log(temporaryAnswer)
     setAnswers(temporaryAnswer);
   }
+
+  console.log(answers);
 
   return (
     <Layout>
