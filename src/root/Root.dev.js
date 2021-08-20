@@ -2,7 +2,6 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import ChangePassword from '../containers/ChangePassword';
-import Correction from '../containers/Correction';
 import CreateAccount from '../containers/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../containers/Dashboard/Events';
@@ -11,7 +10,6 @@ import Landing from '../containers/Landing';
 import Login from '../containers/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
-import OurTeam from '../containers/OurTeam';
 import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
@@ -22,10 +20,8 @@ import PrivateRoute from './PrivateRoute';
 const Root = () => {
   return (
     <Switch>
-      <Route path="/our_team" component={OurTeam} />
       <Route path="/reset_password" component={ChangePassword} />
       <Route path="/create_account" component={CreateAccount} />
-      <Route path="/login" component={Login} />
       <Route path="/login" component={Login} />
 
       <PrivateRoute path="/message/payment/success/" component={SuccessfulPayment} />
@@ -50,11 +46,6 @@ const Root = () => {
           <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
         </Switch>
       </Route>
-      <PrivateRoute
-        path="/correction/:fsmId/"
-        component={Correction}
-        onlyMentor
-      />
       <Route path="/" component={Landing} />
       <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
     </Switch>
