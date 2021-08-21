@@ -30,7 +30,7 @@ const Layout = ({
   const history = useHistory();
 
   useEffect(() => {
-    if ((!userProfile?.first_name ||
+    if (userProfile && (!userProfile?.first_name ||
       !userProfile?.last_name ||
       !userProfile?.gender ||
       !userProfile?.province ||
