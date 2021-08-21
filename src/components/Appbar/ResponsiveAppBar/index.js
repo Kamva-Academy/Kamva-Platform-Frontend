@@ -93,6 +93,16 @@ function ResponsiveAppBar({
                   container item
                   justify="flex-start"
                   alignItems="center">
+                  {mobileMenuListItems.length > 0 && (
+                    <IconButton
+                      edge="start"
+                      color="inherit"
+                      aria-label="open drawer"
+                      className={classes.menuButton}
+                      onClick={() => setDrawerOpen(true)}>
+                      <MenuIcon />
+                    </IconButton>
+                  )}
                   {rightItems.map((item, index) => (
                     <Grid key={index} item>
                       {item}
@@ -110,16 +120,6 @@ function ResponsiveAppBar({
                       {item}
                     </Grid>
                   ))}
-                  {mobileMenuListItems.length > 0 && (
-                    <IconButton
-                      edge="start"
-                      color="inherit"
-                      aria-label="open drawer"
-                      className={classes.menuButton}
-                      onClick={() => setDrawerOpen(true)}>
-                      <MenuIcon />
-                    </IconButton>
-                  )}
                 </Grid>
               </Grid>
             </Toolbar>
@@ -129,8 +129,7 @@ function ResponsiveAppBar({
       {mobileMenuListItems.length > 0 && (
         <Hidden smUp>
           <Drawer
-            anchor="right"
-            open={drawerOpen}
+            anchor="left" open={drawerOpen}
             onClose={() => setDrawerOpen(false)}>
             <div className={classes.list}>
               <List>
