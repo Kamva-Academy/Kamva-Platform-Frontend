@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { createAccountAction } from './account';
+import { createAccountAction, loginAction } from './account';
 import { startWorkshopAction } from './currentState';
 import { goForPurchaseUrlAction, submitRegistrationFormAction } from './events';
 import { createArticleAction, createWorkshopAction } from './mentor';
@@ -20,6 +20,11 @@ const redirectSlice = createSlice({
       })
     },
     [createAccountAction.fulfilled.toString()]: (state, action) => {
+      return ({
+        redirectTo: '/events/'
+      })
+    },
+    [loginAction.fulfilled.toString()]: (state, action) => {
       return ({
         redirectTo: '/events/'
       })

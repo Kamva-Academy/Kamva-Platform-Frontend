@@ -191,7 +191,7 @@ const Profile = ({
         <Grid item container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              autoComplete='off'
+              autoComplete='off' required
               defaultValue={userProfile?.first_name}
               value={newProfile.first_name}
               name='first_name' onChange={handleProfileChange}
@@ -199,7 +199,7 @@ const Profile = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              autoComplete='off'
+              autoComplete='off' required
               defaultValue={userProfile?.last_name}
               value={newProfile.last_name}
               name='last_name' onChange={handleProfileChange}
@@ -207,7 +207,7 @@ const Profile = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              autoComplete='off'
+              autoComplete='off' required
               defaultValue={userProfile?.national_code}
               value={newProfile.national_code}
               name='national_code'
@@ -221,7 +221,7 @@ const Profile = ({
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth variant='outlined'
-              disabled={true}
+              disabled={true} required
               defaultValue={userProfile?.phone_number}
               name='phone_number' inputProps={{ className: 'ltr-input' }}
               size='small' label='شماره موبایل' />
@@ -246,11 +246,11 @@ const Profile = ({
               size='small' label='تاریخ تولد' />
           </Grid> */}
           <Grid item>
-            <FormControl size='small' >
+            <FormControl size='small' required>
               <FormLabel>جنیست</FormLabel>
               <RadioGroup
                 name="gender"
-                row
+                row required
                 defaultValue={userProfile?.gender}
                 onChange={handleProfileChange}
               >
@@ -272,7 +272,7 @@ const Profile = ({
         </Grid>
         <Grid item container spacing={2}>
           <Grid item container xs={12} sm={6}>
-            <FormControl size='small' variant="outlined" className={classes.formControl}>
+            <FormControl required size='small' variant="outlined" className={classes.formControl}>
               <InputLabel>استان</InputLabel>
               <Select
                 className={classes.dropDown}
@@ -290,7 +290,7 @@ const Profile = ({
             </FormControl >
           </Grid>
           <Grid item container xs={12} sm={6}>
-            <FormControl size='small' variant="outlined" className={classes.formControl}>
+            <FormControl required size='small' variant="outlined" className={classes.formControl}>
               <InputLabel>شهر</InputLabel>
               <Select
                 className={classes.dropDown}
@@ -344,7 +344,7 @@ const Profile = ({
         </Grid>
         <Grid item container spacing={2}>
           <Grid item container xs={12} sm={6}>
-            <FormControl size='small' variant="outlined" className={classes.formControl}>
+            <FormControl required size='small' variant="outlined" className={classes.formControl}>
               <InputLabel>مدرسه</InputLabel>
               <Select
                 IconComponent={AddSchoolInstituteIcon}
@@ -364,7 +364,7 @@ const Profile = ({
             <Typography variant='caption' align='center'>اگر مدرسه‌ی شما در لیست فوق نیست، خودتان آن را اضافه کنید!</Typography>
           </Grid>
           <Grid item container xs={12} sm={6}>
-            <FormControl size='small' variant="outlined" className={classes.formControl}>
+            <FormControl required size='small' variant="outlined" className={classes.formControl}>
               <InputLabel>پایه</InputLabel>
               <Select
                 className={classes.dropDown}
@@ -383,7 +383,7 @@ const Profile = ({
             <Typography variant='caption' align='center'>پایه‌ای را انتخاب کنید که در سال جدید به تحصیل در آن خواهید پرداخت.</Typography>
           </Grid>
           <Grid item container justify='center' xs={12} sm={6}>
-            <Button fullWidth variant='outlined' color='secondary' onClick={() => document.getElementById('school-studentship-document').click()}>انتخاب مدرک شناسایی تحصیلی</Button>
+            <Button fullWidth variant='outlined' color='secondary' onClick={() => document.getElementById('school-studentship-document').click()}>انتخاب مدرک شناسایی تحصیلی*</Button>
             <input id='school-studentship-document' style={{ display: 'none' }} type="file" onChange={handleStudentshipDocumentChange} />
             {userProfile?.school_studentship?.document &&
               <a target="_blank" rel="noreferrer" href={userProfile?.school_studentship?.document}>آخرین مدرک بارگذاری‌شده</a>
