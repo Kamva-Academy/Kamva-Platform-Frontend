@@ -2894,6 +2894,14 @@ const Cities = [
     "province_id": 18,
     "latitude": 36.645556,
     "longitude": 59.121111
+  },
+  {
+    "id": 430,
+    "title": "یزد",
+    "slug": "Yazd",
+    "province_id": 22,
+    "latitude": 0,
+    "longitude": 0
   }
 ]
 
