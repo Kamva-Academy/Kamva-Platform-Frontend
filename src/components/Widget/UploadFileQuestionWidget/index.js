@@ -23,14 +23,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 10,
   },
   lastUploadButton: {
-    fontSize: 10,
     color: '#334499',
-    '& .MuiButton-endIcon': {
-      marginLeft: 2,
-      '& > *:first-child': {
-        fontSize: 11,
-      },
-    },
   },
   divider: {
     margin: theme.spacing(1, 0),
@@ -40,16 +33,22 @@ const useStyles = makeStyles((theme) => ({
 const UploadFileQuestionWidget = ({
   pushAnswer,
   addNotification,
+  uploadFile,
 
   id,
   text = 'محل آپلود فایل',
   last_submit,
-  uploadFile,
+  uploadedFile,
   isFetching,
 }) => {
   const t = useTranslate();
-  const classes = useStyles({ haveFile: !!last_submit });
-  const [file, setFile] = useState();
+  const [file, setFile] = useState({ link: '', name: '', value: '', });
+  const classes = useStyles({ haveFile: file });
+
+  React.useEffect(() => {
+    setFile(uploadedFile);
+    pushAnswer('upload_file_answer', uploadedFile?.id);
+  }, [uploadedFile])
 
   const handleFileChange = async (e) => {
     e.preventDefault();
@@ -57,16 +56,8 @@ const UploadFileQuestionWidget = ({
       if (e.target.files[0].size <= 8e6) {
         uploadFile({
           id,
-          answerFile: e.target.files[0],
-        }).then((response) => {
-          if (response.type?.endsWith('fulfilled')) {
-            setFile({
-              link: response.payload?.response?.answer_file,
-              name: e.target.files[0].name,
-            });
-            pushAnswer('upload_file_answer', response.payload?.response?.id);
-          }
-        })
+          answerFile: e.target.files[0]
+        });
       } else {
         e.target.value = '';
         e.target.setCustomValidity('Maximum upload file size is 8 MB.');
@@ -75,8 +66,9 @@ const UploadFileQuestionWidget = ({
     }
   };
 
-  const clearFile = () => {
-    setFile();
+  const clearFile = (e) => {
+    e.preventDefault();
+    setFile({ link: '', name: '', value: '', });
     pushAnswer('upload_file_answer', '');
   }
 
@@ -86,7 +78,7 @@ const UploadFileQuestionWidget = ({
         <Grid item xs={12} sm={6}>
           <Typography>{text}</Typography>
         </Grid>
-        <Grid item container xs={12} sm={6} direction='column' alignItems='center'>
+        <Grid item container xs={12} sm={6} justify='center' alignItems='center'>
           <Grid item>
             <Button
               component="label"
@@ -100,6 +92,7 @@ const UploadFileQuestionWidget = ({
               {t('uploadFile')}
             </Button>
             <input
+              value={file?.value}
               accept="application/pdf,image/*"
               style={{ display: 'none' }}
               id={'raised-button-file' + id}
@@ -107,44 +100,34 @@ const UploadFileQuestionWidget = ({
               onChange={handleFileChange}
             />
           </Grid>
-          {file &&
-            <Grid container justify='center' alignItems='center'>
-              <Grid item>
-                <Typography
-                  component="small"
-                  variant="body2"
-                  className={classes.small}>
-                  {'آخرین ارسال:'}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Button
-                  size="small"
-                  endIcon={<DescriptionOutlinedIcon />}
-                  className={classes.lastUploadButton}
-                  href={file.link}
-                  component="a"
-                  download
-                  target="_blank">
-                  {file.name}
-                </Button>
-              </Grid>
-              <Grid item>
-                <IconButton size='small' onClick={clearFile}>
-                  <ClearIcon />
-                </IconButton>
-              </Grid>
+          {file?.name && file?.link &&
+            <Grid item justify='center' alignItems='center'>
+              <Button
+                size="small"
+                startIcon={
+                  <IconButton size='small' onClick={clearFile}>
+                    <ClearIcon />
+                  </IconButton>
+                }
+                className={classes.lastUploadButton}
+                href={file.link}
+                component="a"
+                download
+                target="_blank">
+                {file.name}
+              </Button>
             </Grid>
           }
         </Grid>
       </Grid>
-    </Grid>
+    </Grid >
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
   playerId: state.currentState.player?.id,
   pushAnswer: ownProps.pushAnswer, //todo: redundant?!
+  uploadedFile: state.events.uploadedFile,
   isFetching: state.events.isFetching,
 });
 

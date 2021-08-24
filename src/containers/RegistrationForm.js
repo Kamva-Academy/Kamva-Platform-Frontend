@@ -125,7 +125,6 @@ const RegistrationForm = ({
 
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
     const temporaryAnswer = [...answers];
-
     let doesFind = false;
     for (let i = 0; i < temporaryAnswer.length; i++) {
       // todo: remove answer_type from world :/
@@ -151,6 +150,7 @@ const RegistrationForm = ({
     }
     setAnswers(temporaryAnswer);
   }
+
 
   return (
     <Layout>

@@ -153,6 +153,7 @@ const initialState = {
   workshops: [],
   events: [],
   registeredEvents: {},
+  uploadedFile: { link: '', name: '', value: '', }
 };
 
 const isFetching = (state) => {
@@ -220,8 +221,19 @@ const eventSlice = createSlice({
     [getOneRegistrationReceiptAction.rejected.toString()]: isNotFetching,
 
     [uploadFileAction.pending.toString()]: isFetching,
-    [uploadFileAction.fulfilled.toString()]: isNotFetching,
-    [uploadFileAction.rejected.toString()]: isNotFetching,
+    [uploadFileAction.fulfilled.toString()]: (state, action) => {
+      state.uploadedFile = {
+        link: action.payload?.response?.answer_file,
+        id: action.payload?.response?.id,
+        name: action?.meta?.arg?.answerFile?.name,
+      };
+      state.isFetching = false;
+    },
+    [uploadFileAction.rejected.toString()]: (state) => {
+      state.uploadedFile = '';
+      state.isFetching = false;
+    },
+
 
     // [getEventRegistrationInfoAction.fulfilled.toString()]: (
     //   state,
