@@ -8,7 +8,6 @@ import Events from '../containers/Dashboard/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Landing from '../containers/Landing';
 import Login from '../containers/Login';
-import SelectTeam from '../containers/TeamSelection';
 import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
 import RegistrationForm from '../containers/RegistrationForm';
@@ -28,7 +27,6 @@ const Root = () => {
       <PrivateRoute path="/message/payment/success/:paymentId?" component={SuccessfulPayment} />
       <PrivateRoute path="/message/payment/failure/:paymentId?" component={FailedPayment} />
 
-      <PrivateRoute path="/team_selection/" component={TeamSelection} />
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />

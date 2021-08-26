@@ -238,8 +238,8 @@ const TeamSelection = ({
                       justify='center' alignItems='center'
                       key={index}>
                       <Grid item>
-                        <img alt='' style={{ borderRadius: '5px' }}
-                          src={PROFILE_PICTURE} width='100px' />
+                        <img alt='' style={{ borderRadius: '5px', objectFit: 'cover' }}
+                          src={member.profile_picture || PROFILE_PICTURE} width='150px' height='150px' />
                       </Grid>
                       <Grid item>
                         <Typography align='center'>
