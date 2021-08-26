@@ -128,11 +128,10 @@ const Event = ({
                 size='small'
                 variant='outlined'
                 fullWidth
-                disabled={true}
                 component={Link}
-                to={''} // todo
+                to={`/event/${id}/team_selection/`}
                 color='secondary'>
-                {'ورود'}
+                {'تیم‌کشی'}
               </Button>
             }
           </Grid>

@@ -33,7 +33,6 @@ function Index({
 
   const sendInvitation = () => {
     if (!phoneNumber) return;
-    console.log(teamId, invitee, phoneNumber)
     inviteSomeone({ teamId, invitee, username: phoneNumber });
     handleClose();
   }

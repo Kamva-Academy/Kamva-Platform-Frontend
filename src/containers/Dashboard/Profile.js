@@ -129,7 +129,6 @@ const Profile = ({
   }
 
   const handleStudentshipChange = (event) => {
-    console.log(event.target.name, event.target.value, toEnglishNumber(event.target.value))
     setNewStudentship({
       ...newStudentship,
       [event.target.name]: toEnglishNumber(event.target.value),

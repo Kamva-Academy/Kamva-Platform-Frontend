@@ -118,7 +118,9 @@ const TeamSelection = ({
   const { eventId } = useParams()
   const [isCreateInvitationDialogOpen, changeCreateInvitationDialogStatus] = React.useState(false);
   const [isDeleteTeamDialogOpen, changeDeleteTeamDialogStatus] = React.useState(false);
+  const [respondingInvitationId, setRespondingInvitationId] = React.useState('');
   const [newTeamName, setNewTeamName] = React.useState('');
+  const [isHead, setHeadStatus] = React.useState(false);
 
   useEffect(() => {
     getOneEventInfo({ id: eventId })
@@ -144,6 +146,13 @@ const TeamSelection = ({
     history.push(`/event/${eventId}/registration_form/`);
   }
 
+  useEffect(() => {
+    if (receipt?.id && receipt?.id === team?.members[0]?.id) {
+      setHeadStatus(true);
+    }
+  }, [receipt, team])
+
+
   const doCreateTeam = () => {
     if (!newTeamName) {
       addNotification({
@@ -155,7 +164,7 @@ const TeamSelection = ({
     createTeam({ name: newTeamName, registration_form: event?.registration_form });
   }
 
-  console.log(myInvitations)
+  console.log(respondingInvitationId)
 
   return (
     <Layout>
@@ -175,7 +184,7 @@ const TeamSelection = ({
               </Typography>
             </Grid>
             <Grid xs={12}>
-              <Divider />
+              <Divider variant="middle" />
             </Grid>
             {(!team && !receipt?.team) &&
               <>
@@ -213,11 +222,13 @@ const TeamSelection = ({
                     </Typography>
                   </Grid>
                   <Grid item container justify='flex-end' xs={2}>
-                    <Tooltip title='حذف تیم' arrow>
-                      <IconButton size='small' onClick={() => changeDeleteTeamDialogStatus(true)}>
-                        <ClearIcon style={{ fontSize: '20px', color: 'red' }} />
-                      </IconButton>
-                    </Tooltip>
+                    {isHead &&
+                      <Tooltip title='حذف تیم' arrow>
+                        <IconButton size='small' onClick={() => changeDeleteTeamDialogStatus(true)}>
+                          <ClearIcon style={{ fontSize: '20px', color: 'red' }} />
+                        </IconButton>
+                      </Tooltip>
+                    }
                   </Grid>
                 </Grid>
                 {team?.members?.map((member, index) => {
@@ -250,30 +261,27 @@ const TeamSelection = ({
               </Typography>
             </Grid>
             <Grid item container justify='flex-end' xs={2}>
-              <Tooltip title={
-                team?.id
-                  ? 'ایجاد دعوت‌نامه'
-                  : 'برای ارسال دعوت‌نامه، ابتدا باید یک تیم بسازید.'
-              } arrow>
-                <IconButton size='small' onClick={
-                  team?.id
-                    ? () => { changeCreateInvitationDialogStatus(true) }
-                    : () => { }
-                }>
-                  <AddCircleOutlineIcon fontSize='large' />
-                </IconButton>
-              </Tooltip>
+              {isHead &&
+                <Tooltip title={'دعوت کاربر دیگری به گروه'} arrow>
+                  <IconButton size='small' onClick={
+                    team?.id
+                      ? () => { changeCreateInvitationDialogStatus(true) }
+                      : () => { }
+                  }>
+                    <AddCircleOutlineIcon fontSize='large' />
+                  </IconButton>
+                </Tooltip>
+              }
             </Grid>
             <Grid xs={12}>
-              <Divider />
+              <Divider variant="middle" />
             </Grid>
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align='center'>دعوت‌شده</TableCell>
-                    <TableCell align='center'>آیا قبول کرده؟</TableCell>
-                    <TableCell align='center'>لغو</TableCell>
+                    <TableCell align='center'>فرد دعوت‌شده</TableCell>
+                    <TableCell align='center'>لغو دعوت</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -283,10 +291,7 @@ const TeamSelection = ({
                         {`${invitation?.first_name} ${invitation.last_name}`}
                       </TableCell>
                       <TableCell align='center'>
-                        {invitation?.has_accepted ? 'بله' : 'خیر'}
-                      </TableCell>
-                      <TableCell align='center'>
-                        <Tooltip title='پس‌گرفتن دعوت‌نامه' arroiw>
+                        <Tooltip title='پس‌گرفتن دعوت‌نامه' arrow>
                           <IconButton size='small'
                             onClick={() => { deleteInvitation({ invitationId: invitation?.id }) }}>
                             <ClearIcon />
@@ -309,40 +314,47 @@ const TeamSelection = ({
               </Typography>
             </Grid>
             <Grid xs={12}>
-              <Divider />
+              <Divider variant="middle" />
             </Grid>
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align='center'>تیم ارسال‌کننده</TableCell>
+                    <TableCell align='center'>تیم</TableCell>
                     <TableCell align='center'>نام سرگروه</TableCell>
+                    <TableCell align='center'>شماره تلفن سرگروه</TableCell>
                     <TableCell align='center'>پاسخ</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {myInvitations
-                    .filter(invitation => invitation.team !== team?.id) //todo: handle not showing self invitation in back
-                    .map((invitation, index) =>
-                      <TableRow key={index}>
-                        <TableCell align='center'>
-                          {invitation.team}
-                        </TableCell>
-                        <TableCell align='center'>
-                          {invitation.first_name}
-                        </TableCell>
-                        <TableCell align='center'>
-                          <IconButton size='small' disabled={team}
-                            onClick={() => { respondInvitation({ invitationId: invitation?.id, has_accepted: 'true' }) }}>
-                            <CheckCircleIcon color='secondary' />
+                  {myInvitations.map((invitation, index) =>
+                    <TableRow key={index}>
+                      <TableCell align='center'>
+                        {invitation.team_name}
+                      </TableCell>
+                      <TableCell align='center'>
+                        {`${invitation.head_first_name} ${invitation.head_last_name}`}
+                      </TableCell>
+                      <TableCell align='center'>
+                        {invitation.head_phone_number}
+                      </TableCell>
+                      <TableCell align='center'>
+                        {invitation.has_accepted &&
+                          <IconButton size='small' disabled={team}>
+                            <CheckCircleIcon style={{ color: '#00d130' }} />
                           </IconButton>
-                          <IconButton size='small' disabled={team}
-                            onClick={() => { respondInvitation({ invitationId: invitation?.id, has_accepted: 'false' }) }}>
-                            <CancelIcon color='primary' />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    )}
+                        }
+                        {!invitation.has_accepted &&
+                          <Tooltip arrow title={'پذیرفتن درخواست'}>
+                            <IconButton size='small'
+                              onClick={() => { console.log(invitation?.id); setRespondingInvitationId(invitation?.id) }}>
+                              <CheckCircleIcon color={team === invitation.team ? 'secondary' : ''} />
+                            </IconButton>
+                          </Tooltip>
+                        }
+                      </TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -360,7 +372,12 @@ const TeamSelection = ({
         handleClose={() => changeDeleteTeamDialogStatus(!isDeleteTeamDialogOpen)}
         callBackFunction={() => deleteTeam({ teamId: team.id })}
       />
-    </Layout>
+      <AreYouSure
+        open={respondingInvitationId}
+        handleClose={() => setRespondingInvitationId('')}
+        callBackFunction={() => respondInvitation({ invitationId: respondingInvitationId, has_accepted: 'true' })}
+      />
+    </Layout >
   );
 };
 
@@ -370,7 +387,8 @@ const mapStateToProps = (state) => ({
   event: state.events.event,
   receipt: state.events.receipt,
   team: state.events.team,
-  myInvitations: state.events.myInvitations,
+  //todo: handle not showing self invitation, in back:
+  myInvitations: state.events.myInvitations.filter(invitation => invitation.head_phone_number !== invitation.phone_number),
   teamInvitations: state.events.teamInvitations,
 });
 
