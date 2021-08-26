@@ -149,7 +149,7 @@ const Payment = ({
               <>
                 <Grid item container justify='center' alignItems='center'>
                   <Typography fullWidth align='center'>
-                    {'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'}
+                    {'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است. پس از پرداخت، به صفحه‌ی تیم‌کشی بروید و آن‌جا هم‌تیمی‌های خود را انتخاب کنید. توجه کنید که هر تیم باید ۳ نفره باشد.'}
                   </Typography>
                 </Grid>
                 <Grid xs={12} sm={6} md={4} item container justify='center' alignItems='center' spacing={1}>

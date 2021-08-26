@@ -51,6 +51,7 @@ const Event = ({
   registration_form,
   merchandise,
   is_paid,
+  is_user_participating,
   user_registration_status,
 }) => {
   const classes = useStyles();
@@ -100,7 +101,7 @@ const Event = ({
             />
           </Grid>
           <Grid item>
-            {user_registration_status == 'NotRegistered' &&
+            {user_registration_status === 'NotRegistered' &&
               <Button
                 disabled={!is_active}
                 size='small'
@@ -112,7 +113,7 @@ const Event = ({
                 {t('register')}
               </Button>
             }
-            {!is_paid && user_registration_status != 'NotRegistered' &&
+            {!is_user_participating && user_registration_status != 'NotRegistered' &&
               <Button
                 size='small'
                 variant='outlined'
@@ -123,7 +124,7 @@ const Event = ({
                 {'وضعیت ثبت‌نام'}
               </Button>
             }
-            {is_paid &&
+            {is_user_participating &&
               <Button
                 size='small'
                 variant='outlined'
