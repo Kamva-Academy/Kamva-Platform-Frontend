@@ -147,8 +147,10 @@ const TeamSelection = ({
   }
 
   useEffect(() => {
-    if (receipt?.id && receipt?.id === team?.members[0]?.id) {
+    if (receipt?.id && receipt?.id === team?.team_head) {
       setHeadStatus(true);
+    } else {
+      setHeadStatus(false);
     }
   }, [receipt, team])
 
