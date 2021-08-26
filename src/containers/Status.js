@@ -73,7 +73,7 @@ const EVENT_TYPE = {
 
 const Payment = ({
   getOneEventInfo,
-  purchaseEventUrl,
+  purchaseEvent,
   addNotification,
   applyDiscountCode,
   getOneRegistrationReceipt,
@@ -111,7 +111,7 @@ const Payment = ({
   }, [event]);
 
   const goForPurchase = () => {
-    purchaseEventUrl({ merchandise: event?.merchandise?.id, code: discountCode })
+    purchaseEvent({ merchandise: event?.merchandise?.id, code: discountCode })
   }
 
   const submitDiscount = () => {
@@ -231,7 +231,7 @@ export default connect(
   {
     getOneRegistrationForm: getOneRegistrationFormAction,
     getOneEventInfo: getOneEventInfoAction,
-    purchaseEventUrl: purchaseEventUrlAction,
+    purchaseEvent: purchaseEventUrlAction,
     submitRegistrationForm: submitRegistrationFormAction,
     addNotification: addNotificationAction,
     applyDiscountCode: applyDiscountCodeAction,

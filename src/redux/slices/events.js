@@ -4,17 +4,24 @@ import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   applyDiscountUrl,
+  deleteInvitationUrl,
   getAllEventsInfoUrl,
   getAllUserMerchandisesUrl,
   getEventRegistrationInfoUrl,
+  getMyInvitationsUrl,
   getOneEventInfoUrl,
   getOneRegistrationFormUrl,
+  getTeamInvitationsUrl,
+  getTeamUrl,
   getWorkshopsDescriptionUrl,
+  inviteSomeoneUrl,
   paymentRequestUrl,
   purchaseEventUrl,
   registrationReceiptUrl,
+  respondInvitationUrl,
   submitDiscountCodeUrl,
   submitRegistrationFormUrl,
+  TeamCRUDUrl,
   uploadFileUrl,
 } from '../constants/urls';
 
@@ -99,6 +106,84 @@ export const uploadFileAction = createAsyncThunkApi(
   }
 );
 
+export const getTeamAction = createAsyncThunkApi(
+  'events/getTeamAction',
+  Apis.GET,
+  getTeamUrl,
+);
+
+export const getTeamInvitationsAction = createAsyncThunkApi(
+  'events/getTeamInvitationsAction',
+  Apis.GET,
+  getTeamInvitationsUrl,
+);
+
+export const getMyInvitationsAction = createAsyncThunkApi(
+  'events/getMyInvitationsAction',
+  Apis.GET,
+  getMyInvitationsUrl,
+);
+
+export const inviteSomeoneAction = createAsyncThunkApi(
+  'events/inviteSomeoneAction',
+  Apis.POST,
+  inviteSomeoneUrl,
+  {
+    defaultNotification: {
+      success: 'دعوت‌نامه‌ی شما با موفقیت ارسال شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+    },
+  }
+);
+
+export const deleteInvitationAction = createAsyncThunkApi(
+  'events/deleteInvitationAction',
+  Apis.DELETE,
+  deleteInvitationUrl,
+  {
+    defaultNotification: {
+      success: 'دعوت‌نامه پس گرفته شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+    },
+  }
+);
+
+export const respondInvitationAction = createAsyncThunkApi(
+  'events/respondInvitationAction',
+  Apis.POST,
+  respondInvitationUrl,
+  {
+    defaultNotification: {
+      success: 'پاسخ به دعوت‌نامه با موفقیت ثبت شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+    },
+  }
+);
+
+
+export const createTeamAction = createAsyncThunkApi(
+  'events/createTeamAction',
+  Apis.POST,
+  TeamCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'تیم با موفقیت ساخته شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+    },
+  }
+);
+
+export const deleteTeamAction = createAsyncThunkApi(
+  'events/deleteTeamAction',
+  Apis.DELETE,
+  TeamCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'تیم با موفقیت حذف شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+    },
+  }
+);
 
 
 
@@ -153,7 +238,9 @@ const initialState = {
   workshops: [],
   events: [],
   registeredEvents: {},
-  uploadedFile: { link: '', name: '', value: '', }
+  uploadedFile: { link: '', name: '', value: '', },
+  myInvitations: [],
+  teamInvitations: [],
 };
 
 const isFetching = (state) => {
@@ -175,12 +262,14 @@ const eventSlice = createSlice({
     },
     [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
 
+
     [getOneEventInfoAction.pending.toString()]: isFetching,
     [getOneEventInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.event = response;
       state.isFetching = false;
     },
     [getOneEventInfoAction.rejected.toString()]: isNotFetching,
+
 
     [getOneRegistrationFormAction.pending.toString()]: isFetching,
     [getOneRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -189,15 +278,18 @@ const eventSlice = createSlice({
     },
     [getOneRegistrationFormAction.rejected.toString()]: isNotFetching,
 
+
     [getOneMerchandiseAction.pending.toString()]: isFetching,
     [getOneMerchandiseAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.merchandise = response;
     },
     [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
 
+
     [submitRegistrationFormAction.pending.toString()]: isFetching,
     [submitRegistrationFormAction.fulfilled.toString()]: isNotFetching,
     [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
+
 
     [purchaseEventUrlAction.pending.toString()]: isFetching,
     [purchaseEventUrlAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -206,6 +298,7 @@ const eventSlice = createSlice({
     },
     [purchaseEventUrlAction.rejected.toString()]: isNotFetching,
 
+
     [applyDiscountCodeAction.pending.toString()]: isFetching,
     [applyDiscountCodeAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
@@ -213,12 +306,14 @@ const eventSlice = createSlice({
     },
     [applyDiscountCodeAction.rejected.toString()]: isNotFetching,
 
+
     [getOneRegistrationReceiptAction.pending.toString()]: isFetching,
     [getOneRegistrationReceiptAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.receipt = response;
     },
     [getOneRegistrationReceiptAction.rejected.toString()]: isNotFetching,
+
 
     [uploadFileAction.pending.toString()]: isFetching,
     [uploadFileAction.fulfilled.toString()]: (state, action) => {
@@ -235,36 +330,88 @@ const eventSlice = createSlice({
     },
 
 
-    // [getEventRegistrationInfoAction.fulfilled.toString()]: (
-    //   state,
-    //   { payload: { response }, meta: { arg } }
-    // ) => {
-    //   if (!state.registeredEvents) {
-    //     state.registeredEvents = {};
-    //   }
-    //   state.registeredEvents[arg.eventId] = {
-    //     ...state.registeredEvents[arg.eventId],
-    //     participantId: response.me,
-    //     event: response.event,
-    //     team: response.team,
-    //   };
-    // },
-    // [paymentRequestAction.pending.toString()]: isFetching,
-    // [paymentRequestAction.fulfilled.toString()]: isNotFetching,
-    // [paymentRequestAction.rejected.toString()]: isNotFetching,
-    // [getWorkshopsDescriptionAction.pending.toString()]: (state) => {
-    //   state.getWorkshopsLoading = true;
-    // },
-    // [getWorkshopsDescriptionAction.rejected.toString()]: (state) => {
-    //   state.getWorkshopsLoading = false;
-    // },
-    // [getWorkshopsDescriptionAction.fulfilled.toString()]: (
-    //   state,
-    //   { payload: { response } }
-    // ) => {
-    //   state.workshops = response;
-    //   state.getWorkshopsLoading = false;
-    // },
+    [getTeamAction.pending.toString()]: isFetching,
+    [getTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.team = response;
+    },
+    [getTeamAction.rejected.toString()]: isNotFetching,
+
+
+    [getTeamInvitationsAction.pending.toString()]: isFetching,
+    [getTeamInvitationsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.teamInvitations = response;
+    },
+    [getTeamInvitationsAction.rejected.toString()]: isNotFetching,
+
+
+    [inviteSomeoneAction.pending.toString()]: isFetching,
+    [inviteSomeoneAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.teamInvitations = [response, ...state.teamInvitations];
+    },
+    [inviteSomeoneAction.rejected.toString()]: isNotFetching,
+
+
+    [deleteInvitationAction.pending.toString()]: isFetching,
+    [deleteInvitationAction.fulfilled.toString()]: (state, action) => {
+      state.isFetching = false;
+      let newTeamInvitations = [...state.teamInvitations];
+      for (let i = 0; i < newTeamInvitations.length; i++) {
+        if (newTeamInvitations[i].id == action.meta.arg.invitationId) {
+          newTeamInvitations.splice(i, 1); // todo
+        }
+      }
+      state.teamInvitations = newTeamInvitations;
+    },
+    [deleteInvitationAction.rejected.toString()]: isNotFetching,
+
+
+    [getMyInvitationsAction.pending.toString()]: isFetching,
+    [getMyInvitationsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.myInvitations = response;
+    },
+    [getMyInvitationsAction.rejected.toString()]: isNotFetching,
+
+
+
+    [respondInvitationAction.pending.toString()]: isFetching,
+    [respondInvitationAction.fulfilled.toString()]: (state, action) => {
+      state.isFetching = false;
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
+      // let newMyInvitations = [...state.myInvitations];
+      // for (let i = 0; i < newMyInvitations.length; i++) {
+      //   if (newMyInvitations[i].id == action.meta.arg.invitationId) {
+      //     newMyInvitations[i] = action.payload.response; //todo
+      //   }
+      // }
+      // state.myInvitations = newMyInvitations;
+    },
+    [respondInvitationAction.rejected.toString()]: isNotFetching,
+
+
+    [createTeamAction.pending.toString()]: isFetching,
+    [createTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.team = response;
+    },
+    [createTeamAction.rejected.toString()]: isNotFetching,
+
+
+    [deleteTeamAction.pending.toString()]: isFetching,
+    [deleteTeamAction.fulfilled.toString()]: (state, action) => {
+      state.isFetching = false;
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
+    },
+    [deleteTeamAction.rejected.toString()]: isNotFetching,
+
+
   },
 });
 
