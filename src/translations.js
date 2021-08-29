@@ -86,7 +86,7 @@ const dictionary = {
       logout: 'خروج',
       backToEvent: 'بازگشت به رویداد',
       callMentor: 'درخواست تصحیح',
-      mentor: 'منتور',
+      mentor: 'همیار',
       edit: 'ویرایش',
       team: 'تیم',
       readArticle: 'مطالعه مقاله',
