@@ -2,42 +2,44 @@
 export const loginUrl = 'auth/accounts/login/';
 export const changePasswordUrl = 'auth/accounts/change_pass/';
 export const verificationCodeUrl = 'auth/accounts/verification_code/';
-export const accountCRUDUrl = ({ id }) => id ? `auth/accounts/${id}/` : 'auth/accounts/';
+export const accountCRUDUrl = ({ id }) =>
+  id ? `auth/accounts/${id}/` : 'auth/accounts/';
 
-export const profileCRUDUrl = ({ id }) => id ? `auth/profile/${id}/` : 'auth/profile/';
+export const profileCRUDUrl = ({ id }) =>
+  id ? `auth/profile/${id}/` : 'auth/profile/';
 
 export const studentShipUrl = 'auth/studentship/';
 export const studentshipCRUDUrl = ({ id }) => `auth/studentship/${id}/`;
 
 export const institutesUrl = 'auth/institutes/';
 
-
 // payment
 export const getAllUserMerchandisesUrl = ({ id }) => `auth/payment/${id}/`;
 export const purchaseEventUrl = 'auth/payment/purchase/';
 export const submitDiscountCodeUrl = 'auth/payment/verify_discount/';
 
-
 // fsm
+export const getEventWorkshopsUrl = ({ id }) => `fsm/event/${id}/get_fsms/`;
 export const getAllEventsInfoUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
-export const submitRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/register/`;
+export const submitRegistrationFormUrl = ({ id }) =>
+  `fsm/registration/${id}/register/`;
 export const registrationReceiptUrl = ({ id }) => `fsm/receipts/${id}/`;
 export const uploadFileUrl = 'fsm/upload_answer/';
-export const getTeamUrl = ({ teamId }) => `fsm/team/${teamId}/`
-export const getTeamInvitationsUrl = ({ teamId }) => `/fsm/team/${teamId}/get_invitations/`
-export const getMyInvitationsUrl = ({ registrationReceiptId }) => `fsm/registration/${registrationReceiptId}/my_invitations/`
-export const inviteSomeoneUrl = ({ teamId }) => `fsm/team/${teamId}/invite_member/`;
-export const deleteInvitationUrl = ({ invitationId }) => `fsm/invitations/${invitationId}/`;
-export const respondInvitationUrl = ({ invitationId }) => `fsm/invitations/${invitationId}/respond/`;
-export const TeamCRUDUrl = ({ teamId }) => teamId ? `fsm/team/${teamId}/` : 'fsm/team/'
-
-
-
-
-
-
+export const getTeamUrl = ({ teamId }) => `fsm/team/${teamId}/`;
+export const getTeamInvitationsUrl = ({ teamId }) =>
+  `/fsm/team/${teamId}/get_invitations/`;
+export const getMyInvitationsUrl = ({ registrationReceiptId }) =>
+  `fsm/registration/${registrationReceiptId}/my_invitations/`;
+export const inviteSomeoneUrl = ({ teamId }) =>
+  `fsm/team/${teamId}/invite_member/`;
+export const deleteInvitationUrl = ({ invitationId }) =>
+  `fsm/invitations/${invitationId}/`;
+export const respondInvitationUrl = ({ invitationId }) =>
+  `fsm/invitations/${invitationId}/respond/`;
+export const TeamCRUDUrl = ({ teamId }) =>
+  teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
 
 export const workshopsUrl = 'fsm/fsm/';
 
@@ -86,5 +88,3 @@ export const getProblemsUrl = 'fsm/getproblems/';
 export const getSubmissionsUrl = 'fsm/getsubmissions/';
 
 export const markSubmissionUrl = 'fsm/marksubmission/';
-
-export const getWorkshopsDescriptionUrl = 'fsm/getworkshopsdescription/';

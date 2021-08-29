@@ -8,12 +8,12 @@ import {
   getAllEventsInfoUrl,
   getAllUserMerchandisesUrl,
   getEventRegistrationInfoUrl,
+  getEventWorkshopsUrl,
   getMyInvitationsUrl,
   getOneEventInfoUrl,
   getOneRegistrationFormUrl,
   getTeamInvitationsUrl,
   getTeamUrl,
-  getWorkshopsDescriptionUrl,
   inviteSomeoneUrl,
   paymentRequestUrl,
   purchaseEventUrl,
@@ -24,6 +24,12 @@ import {
   TeamCRUDUrl,
   uploadFileUrl,
 } from '../constants/urls';
+
+export const getEventWorkshopsAction = createAsyncThunkApi(
+  'events/getEventWorkshopsAction',
+  Apis.GET,
+  getEventWorkshopsUrl
+);
 
 export const getAllEventsInfoAction = createAsyncThunkApi(
   'events/getAllEventsInfoAction',
@@ -224,12 +230,6 @@ export const applyDiscountAction = createAsyncThunkApi(
   }
 );
 
-export const getWorkshopsDescriptionAction = createAsyncThunkApi(
-  'events/getWorkshops',
-  Apis.GET,
-  getWorkshopsDescriptionUrl
-);
-
 const initialState = {
   isFetching: false,
   getWorkshopsLoading: false,
@@ -253,6 +253,20 @@ const eventSlice = createSlice({
   name: 'events',
   initialState,
   extraReducers: {
+    [getEventWorkshopsAction.pending.toString()]: (state) => {
+      state.getWorkshopsLoading = true;
+    },
+    [getEventWorkshopsAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
+      state.getWorkshopsLoading = false;
+      state.workshops = response;
+    },
+    [getEventWorkshopsAction.rejected.toString()]: (state) => {
+      state.getWorkshopsLoading = false;
+    },
+
     [getAllEventsInfoAction.pending.toString()]: isFetching,
     [getAllEventsInfoAction.fulfilled.toString()]: (
       state,

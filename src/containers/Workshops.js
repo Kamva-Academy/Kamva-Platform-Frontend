@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import WorkshopGridItems from '../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
-import { getWorkshopsDescriptionAction } from '../redux/slices/events';
+import { getEventWorkshopsAction } from '../redux/slices/events';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -15,11 +15,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Workshops({ workshops, isLoading, getWorkshopsDescription }) {
+function Workshops({ eventId, workshops, isLoading, getEventWorkshops }) {
   const classes = useStyles();
 
   useEffect(() => {
-    getWorkshopsDescription();
+    getEventWorkshops({ id: eventId });
   }, []);
 
   return (
@@ -42,11 +42,12 @@ function Workshops({ workshops, isLoading, getWorkshopsDescription }) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+  eventId: ownProps.match.params.eventId,
   workshops: state.events.workshops || [],
   isLoading: state.events.getWorkshopsLoading,
 });
 
 export default connect(mapStateToProps, {
-  getWorkshopsDescription: getWorkshopsDescriptionAction,
+  getEventWorkshops: getEventWorkshopsAction,
 })(Workshops);
