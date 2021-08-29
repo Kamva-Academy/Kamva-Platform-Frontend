@@ -127,25 +127,22 @@ const Workshop = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
-  alert(JSON.stringify(state.account.userAccount));
-  return {
-    workshopState: state.currentState.state,
-    needUpdateState: state.currentState.needUpdateState,
-    isMentor: state.account.userAccount.is_mentor,
-    fsmId: ownProps.match.params.fsmId,
-    stateId: ownProps.match.params.stateId,
-    player: state.account.userAccount.is_mentor
-      ? {
-          uuid: ownProps.match.params.playerUUID,
-          id: ownProps.match.params.playerId,
-        }
-      : {
-          uuid: state.currentState.player?.uuid,
-          id: state.currentState.player?.id,
-        },
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  workshopState: state.currentState.state,
+  needUpdateState: state.currentState.needUpdateState,
+  isMentor: state.account.userAccount.is_mentor,
+  fsmId: ownProps.match.params.fsmId,
+  stateId: ownProps.match.params.stateId,
+  player: state.account.userAccount.is_mentor
+    ? {
+        uuid: ownProps.match.params.playerUUID,
+        id: ownProps.match.params.playerId,
+      }
+    : {
+        uuid: state.currentState.player?.uuid,
+        id: state.currentState.player?.id,
+      },
+});
 
 export default connect(mapStateToProps, {
   participantGetCurrentState: participantGetCurrentStateAction,
