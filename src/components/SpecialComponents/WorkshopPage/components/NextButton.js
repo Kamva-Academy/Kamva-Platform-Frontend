@@ -59,7 +59,12 @@ function NextButton({ outwardEdges = [], goForward }) {
         open={!!selectedEdge}
         handleClose={() => setSelectedEdge(null)}
         onSubmit={(password) =>
-          goForward({ edgeId: selectedEdge.id, playerId: player.id, password })
+          goForward({
+            edgeId: selectedEdge.id,
+            playerId: player.id,
+            password,
+            uuid: player.uuid,
+          })
         }
       />
     </>

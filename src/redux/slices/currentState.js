@@ -16,11 +16,11 @@ import {
 
 const changeTeamStateBroadcastAction = createAsyncThunk(
   'currentState/changeTeamStateBroadcast',
-  async ({ id }, { getState }) => {
-    const {
-      account: { token },
-    } = getState();
-    await changeTeamState({ stateId: id.toString(), token });
+  async ({ response: { id }, arg: { uuid } }) => {
+    await changeTeamState({
+      stateId: id.toString(),
+      uuid,
+    });
   }
 );
 
@@ -176,10 +176,6 @@ export const getScoresAction = createAsyncThunkApi(
 
 const stateNeedUpdate = (state) => {
   state.needUpdateState = true;
-};
-
-const stateDontNeedUpdate = (state) => {
-  state.needUpdateState = false;
 };
 
 const getNewState = (state, { payload: { response } }) => {

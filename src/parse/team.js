@@ -1,12 +1,9 @@
 import Parse from 'parse';
 
-import { baseURL } from '../axios';
-
-export const changeTeamState = async ({ stateId, token }) => {
+export const changeTeamState = async ({ stateId, uuid }) => {
   await Parse.Cloud.run('changeTeamState', {
     stateId,
-    token,
-    baseURL,
+    uuid,
   });
 };
 
