@@ -1,10 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 
-import VideoEditWidget from './edit';
-
-export { VideoEditWidget };
-
 const useStyles = makeStyles(() => ({
   videoWidget: {
     width: '100%',

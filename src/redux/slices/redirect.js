@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { createAccountAction, loginAction } from './account';
 import { startWorkshopAction } from './currentState';
-import { goForPurchaseUrlAction, submitRegistrationFormAction } from './events';
-import { createArticleAction, createWorkshopAction } from './mentor';
+import { submitRegistrationFormAction } from './events';
 
 const initialState = { redirectTo: null, force: false };
 
@@ -15,32 +14,20 @@ const redirectSlice = createSlice({
   },
   extraReducers: {
     [submitRegistrationFormAction.fulfilled.toString()]: (state, action) => {
-      return ({
-        redirectTo: `/event/${action?.meta?.arg.eventId}/status/`
-      })
+      return {
+        redirectTo: `/event/${action?.meta?.arg.eventId}/status/`,
+      };
     },
     [createAccountAction.fulfilled.toString()]: (state, action) => {
-      return ({
-        redirectTo: '/events/'
-      })
+      return {
+        redirectTo: '/events/',
+      };
     },
     [loginAction.fulfilled.toString()]: (state, action) => {
-      return ({
-        redirectTo: '/events/'
-      })
+      return {
+        redirectTo: '/events/',
+      };
     },
-    [createWorkshopAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => ({
-      redirectTo: `/edit_workshop/${response.id}`,
-    }),
-    [createArticleAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => ({
-      redirectTo: `/edit_article/${response.id}`,
-    }),
     [startWorkshopAction.fulfilled.toString()]: (state, { meta: { arg } }) => ({
       redirectTo: `/workshop/${arg.fsmId}`,
     }),

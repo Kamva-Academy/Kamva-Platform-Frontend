@@ -1,66 +1,50 @@
-import BigAnswerQuestionWidget, {
-  BigAnswerQuestionEditWidget,
-} from './BigAnswerQuestionWidget';
-import ImageWidget, { ImageEditWidget } from './ImageWidget';
-import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
-import MultiChoiceQuestionWidget, {
-  MultiChoiceQuestionEditWidget,
-} from './MultiChoiceQuestionWidget';
-import SmallAnswerQuestionWidget, {
-  SmallAnswerQuestionEditWidget,
-} from './SmallAnswerQuestionWidget';
-import TextWidget, { TextEditWidget } from './TextWidget';
-import UploadFileQuestionWidget, {
-  UploadFileQuestionEditWidget,
-} from './UploadFileQuestionWidget';
-import VideoWidget, { VideoEditWidget } from './VideoWidget';
+import BigAnswerQuestionWidget from './BigAnswerQuestionWidget';
+import ImageWidget from './ImageWidget';
+import MiniGameWidget from './MiniGameWidget';
+import MultiChoiceQuestionWidget from './MultiChoiceQuestionWidget';
+import SmallAnswerQuestionWidget from './SmallAnswerQuestionWidget';
+import TextWidget from './TextWidget';
+import UploadFileQuestionWidget from './UploadFileQuestionWidget';
+import VideoWidget from './VideoWidget';
 
 const WIDGET_TYPES = {
   SmallAnswerProblem: {
     WidgetComponent: SmallAnswerQuestionWidget,
-    WidgetEditDialog: SmallAnswerQuestionEditWidget,
     label: 'کوتاه پاسخ',
     backendType: 'SmallAnswerProblem',
   },
   BigAnswerProblem: {
     WidgetComponent: BigAnswerQuestionWidget,
-    WidgetEditDialog: BigAnswerQuestionEditWidget,
     label: 'بلند پاسخ',
     backendType: 'BigAnswerProblem',
   },
   MultiChoiceProblem: {
     WidgetComponent: MultiChoiceQuestionWidget,
-    WidgetEditDialog: MultiChoiceQuestionEditWidget,
     label: 'چند گزینه‌ای',
     backendType: 'MultiChoiceProblem',
   },
   UploadFileProblem: {
     WidgetComponent: UploadFileQuestionWidget,
-    WidgetEditDialog: UploadFileQuestionEditWidget,
     label: 'فایل',
     backendType: 'UploadFileProblem',
   },
   Description: {
     WidgetComponent: TextWidget,
-    WidgetEditDialog: TextEditWidget,
     label: 'متن',
     backendType: 'Description',
   },
   Image: {
     WidgetComponent: ImageWidget,
-    WidgetEditDialog: ImageEditWidget,
     label: 'عکس',
     backendType: 'Image',
   },
   Video: {
     WidgetComponent: VideoWidget,
-    WidgetEditDialog: VideoEditWidget,
     label: 'فیلم',
     backendType: 'Video',
   },
   Game: {
     WidgetComponent: MiniGameWidget,
-    WidgetEditDialog: MiniGameEditWidget,
     label: 'بازی',
     backendType: 'Game',
   },

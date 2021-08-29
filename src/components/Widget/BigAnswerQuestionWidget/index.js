@@ -7,9 +7,6 @@ import { sendBigAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 import { MODES } from '..';
-import BigAnswerQuestionEditWidget from './edit';
-
-export { BigAnswerQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -38,16 +35,15 @@ const BigAnswerQuestionWidget = ({
   const handleTextChange = (text) => {
     pushAnswer('text', text);
     setValue(text);
-  }
+  };
 
   const handleButtonClick = () => {
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);
-    }, 20000)
-    sendBigAnswer({ playerId, problemId: id, answer: value })
-  }
-
+    }, 20000);
+    sendBigAnswer({ playerId, problemId: id, answer: value });
+  };
 
   return (
     <>
@@ -67,18 +63,18 @@ const BigAnswerQuestionWidget = ({
           onChange={handleTextChange}
         />
       ) : (
-          <Paper className={classes.showAnswer}>
-            <TinyPreview
-              frameProps={{
-                frameBorder: '0',
-                width: '100%',
-              }}
-              content={mode === MODES.EDIT ? answer?.text : value}
-            />
-          </Paper>
-        )}
+        <Paper className={classes.showAnswer}>
+          <TinyPreview
+            frameProps={{
+              frameBorder: '0',
+              width: '100%',
+            }}
+            content={mode === MODES.EDIT ? answer?.text : value}
+          />
+        </Paper>
+      )}
 
-      {(mode !== MODES.CORRECTION && !pushAnswer) && (
+      {mode !== MODES.CORRECTION && !pushAnswer && (
         <Button
           fullWidth
           variant="contained"

@@ -57,7 +57,7 @@ const Workshop = ({
   useEffect(() => {
     if (isMentor) {
       if (!player.uuid) {
-        history.push('/mentor');
+        history.push('/mentor'); // TODO: remove
       } else {
         mentorGetCurrentState({ stateId, playerUUID: player.uuid });
       }
@@ -127,21 +127,25 @@ const Workshop = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  workshopState: state.currentState.state,
-  needUpdateState: state.currentState.needUpdateState,
-  isMentor: state.account.user.is_mentor,
-  fsmId: ownProps.match.params.fsmId,
-  stateId: ownProps.match.params.stateId,
-  player: {
-    uuid: state.account.user.is_mentor
-      ? ownProps.match.params.playerUUID
-      : state.currentState.player?.uuid,
-    id: state.account.user.is_mentor
-      ? ownProps.match.params.playerId
-      : state.currentState.player?.id,
-  },
-});
+const mapStateToProps = (state, ownProps) => {
+  alert(JSON.stringify(state.account.userAccount));
+  return {
+    workshopState: state.currentState.state,
+    needUpdateState: state.currentState.needUpdateState,
+    isMentor: state.account.userAccount.is_mentor,
+    fsmId: ownProps.match.params.fsmId,
+    stateId: ownProps.match.params.stateId,
+    player: state.account.userAccount.is_mentor
+      ? {
+          uuid: ownProps.match.params.playerUUID,
+          id: ownProps.match.params.playerId,
+        }
+      : {
+          uuid: state.currentState.player?.uuid,
+          id: state.currentState.player?.id,
+        },
+  };
+};
 
 export default connect(mapStateToProps, {
   participantGetCurrentState: participantGetCurrentStateAction,

@@ -94,7 +94,7 @@ function Whiteboard({
 }
 
 const mapStateToProps = (state) => ({
-  userUUID: state.account.user.uuid,
+  userUUID: state.account.userAccount.uuid,
   nodes: state.whiteboard.present.nodes,
   drawingMode: state.whiteboard.present.mode,
   paintingConfig: state.whiteboard.present.paintingConfig,

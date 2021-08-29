@@ -1,9 +1,6 @@
 import React from 'react';
 
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
-import TextEditWidget from './edit';
-
-export { TextEditWidget };
 
 const TextWidget = ({ text = '' }) => {
   return (

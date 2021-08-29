@@ -78,7 +78,9 @@ function Jitsi({ handleClose, width, displayName = 'User' }) {
 }
 
 const mapStatesToProps = (state) => ({
-  displayName: state.account.user.is_mentor ? 'منتور' : state.account.user.name,
+  displayName: state.account.userAccount.is_mentor
+    ? 'همیار'
+    : state.account.userAccount.name,
 });
 
 export default withWidth()(connect(mapStatesToProps)(Jitsi));

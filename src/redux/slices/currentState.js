@@ -13,14 +13,6 @@ import {
   sendAnswerUrl,
   startWorkshopUrl,
 } from '../constants/urls';
-import {
-  createHelpAction,
-  createWidgetAction,
-  deleteWidgetAction,
-  getArticleAction,
-  getArticlesAction,
-  getStateAction,
-} from './mentor';
 
 const changeTeamStateBroadcastAction = createAsyncThunk(
   'currentState/changeTeamStateBroadcast',
@@ -218,20 +210,13 @@ const currentStateSlice = createSlice({
     totalScore: 0,
   },
   extraReducers: {
-    [createHelpAction.fulfilled.toString()]: stateNeedUpdate,
-    [createWidgetAction.fulfilled.toString()]: stateNeedUpdate,
-    [deleteWidgetAction.fulfilled.toString()]: stateNeedUpdate,
     [goForwardAction.rejected.toString()]: stateNeedUpdate,
     [goBackwardAction.rejected.toString()]: stateNeedUpdate,
-
-    [getArticleAction.fulfilled.toString()]: stateDontNeedUpdate,
-    [getArticlesAction.fulfilled.toString()]: stateDontNeedUpdate,
 
     [goForwardAction.fulfilled.toString()]: getNewState,
     [goBackwardAction.fulfilled.toString()]: getNewState,
     [participantGetCurrentStateAction.fulfilled.toString()]: getNewState,
     [mentorGetCurrentStateAction.fulfilled.toString()]: getNewState,
-    [getStateAction.fulfilled.toString()]: getNewState,
 
     [sendAnswerAction.fulfilled.toString()]: sentAnswer,
     [sendFileAnswerAction.fulfilled.toString()]: sentAnswer,
@@ -256,8 +241,7 @@ const currentStateSlice = createSlice({
   },
 });
 
-export const {
-  initCurrentState: initCurrentStateAction,
-} = currentStateSlice.actions;
+export const { initCurrentState: initCurrentStateAction } =
+  currentStateSlice.actions;
 
 export const { reducer: currentStateReducer } = currentStateSlice;

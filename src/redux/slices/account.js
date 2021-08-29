@@ -9,7 +9,6 @@ import {
   loginUrl,
   profileCRUDUrl,
   studentshipCRUDUrl,
-  studentShipUrl,
   verificationCodeUrl,
 } from '../constants/urls';
 
@@ -32,10 +31,13 @@ export const createAccountAction = createAsyncThunkApi(
   Apis.POST_FORM_DATA,
   accountCRUDUrl,
   {
-    bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
+    bodyCreator: ({ phoneNumber, password, code }) => ({
+      phone_number: phoneNumber,
+      password,
+      code,
+    }),
     defaultNotification: {
-      success:
-        'حساب شما با موفقیت ایجاد شد.',
+      success: 'حساب شما با موفقیت ایجاد شد.',
       error: 'ایجاد حساب با مشکل روبه‌رو شد. چند لحظه‌ی دیگر دوباره تلاش کن!',
     },
   }
@@ -66,7 +68,7 @@ export const createInstitutesAction = createAsyncThunkApi(
 export const getInstitutesAction = createAsyncThunkApi(
   'users/getInstitutesAction',
   Apis.GET,
-  institutesUrl,
+  institutesUrl
 );
 
 // todo: clean these 3 functions
@@ -98,7 +100,11 @@ export const changePasswordAction = createAsyncThunkApi(
   Apis.POST,
   changePasswordUrl,
   {
-    bodyCreator: ({ phoneNumber, password, code }) => ({ phone_number: phoneNumber, password, code }),
+    bodyCreator: ({ phoneNumber, password, code }) => ({
+      phone_number: phoneNumber,
+      password,
+      code,
+    }),
     defaultNotification: {
       success: 'گذرواژه با موفقیت تغییر یافت!',
       error: 'مشکلی وجود دارد، رمز تغییر نکرد.',
@@ -111,7 +117,10 @@ export const getVerificationCodeAction = createAsyncThunkApi(
   Apis.POST,
   verificationCodeUrl,
   {
-    bodyCreator: ({ phoneNumber, codeType }) => ({ phone_number: phoneNumber, code_type: codeType }),
+    bodyCreator: ({ phoneNumber, codeType }) => ({
+      phone_number: phoneNumber,
+      code_type: codeType,
+    }),
     defaultNotification: {
       success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی می‌شود.',
       error: 'مشکلی وجود دارد. چند لحظه دیگر دوباره تلاش کن!',
@@ -147,14 +156,20 @@ const accountSlice = createSlice({
     [changePasswordAction.rejected.toString()]: isNotFetching,
 
     [getUserProfileAction.pending.toString()]: isFetching,
-    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [getUserProfileAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
       state.userProfile = response;
       state.isFetching = false;
     },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
 
     [createAccountAction.pending.toString()]: isFetching,
-    [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [createAccountAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
@@ -162,7 +177,10 @@ const accountSlice = createSlice({
     [createAccountAction.rejected.toString()]: isNotFetching,
 
     [getInstitutesAction.pending.toString()]: isFetching,
-    [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [getInstitutesAction.fulfilled.toString()]: (
+      state,
+      { payload: { response } }
+    ) => {
       state.institutes = response;
       state.isFetching = false;
     },
@@ -183,7 +201,6 @@ const accountSlice = createSlice({
     [updateStudentShipAction.pending.toString()]: isFetching,
     [updateStudentShipAction.fulfilled.toString()]: isNotFetching,
     [updateStudentShipAction.rejected.toString()]: isNotFetching,
-
   },
 });
 

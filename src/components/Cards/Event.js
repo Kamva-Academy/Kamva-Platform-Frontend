@@ -1,6 +1,5 @@
-import { Button, Card, CardActions, Chip, Grid, Typography } from '@material-ui/core';
+import { Button, Card, Chip, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -8,8 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { toPersianNumber } from '../../utils/translateNumber';
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   notificationTitle: {
     color: '#4d4a70',
   },
@@ -48,18 +46,15 @@ const Event = ({
   description,
   is_active,
   team_size,
-  registration_form,
-  merchandise,
-  is_paid,
   is_user_participating,
   user_registration_status,
 }) => {
   const classes = useStyles();
-  const t = useTranslate()
+  const t = useTranslate();
 
   return (
     <Card className={classes.paper}>
-      <Grid container justify='center' spacing={1} >
+      <Grid container justify="center" spacing={1}>
         <Grid
           className={classes.noPadding}
           item
@@ -68,11 +63,7 @@ const Event = ({
           alignItems="center"
           xs={12}
           sm={5}>
-          <img
-            src={cover_page}
-            alt=""
-            className={classes.eventImage}
-          />
+          <img src={cover_page} alt="" className={classes.eventImage} />
         </Grid>
         <Grid
           item
@@ -93,48 +84,53 @@ const Event = ({
               {description}
             </Typography>
           </Grid>
-          <Grid item >
+          <Grid item>
             <Chip
               variant="outlined"
               icon={<PeopleAltIcon />}
-              label={team_size == 1 ? 'انفرادی' : `${toPersianNumber(team_size)} ${t('person')}`}
+              label={
+                team_size == 1
+                  ? 'انفرادی'
+                  : `${toPersianNumber(team_size)} ${t('person')}`
+              }
             />
           </Grid>
           <Grid item>
-            {user_registration_status === 'NotRegistered' &&
+            {user_registration_status === 'NotRegistered' && (
               <Button
                 disabled={!is_active}
-                size='small'
-                variant='outlined'
+                size="small"
+                variant="outlined"
                 fullWidth
                 component={Link}
                 to={`/event/${id}/registration_form/`}
-                color='secondary'>
+                color="secondary">
                 {t('register')}
               </Button>
-            }
-            {!is_user_participating && user_registration_status != 'NotRegistered' &&
+            )}
+            {!is_user_participating &&
+              user_registration_status != 'NotRegistered' && (
+                <Button
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  component={Link}
+                  to={`/event/${id}/status/`}
+                  color="secondary">
+                  {'وضعیت ثبت‌نام'}
+                </Button>
+              )}
+            {is_user_participating && (
               <Button
-                size='small'
-                variant='outlined'
-                fullWidth
-                component={Link}
-                to={`/event/${id}/status/`}
-                color='secondary'>
-                {'وضعیت ثبت‌نام'}
-              </Button>
-            }
-            {is_user_participating &&
-              <Button
-                size='small'
-                variant='outlined'
+                size="small"
+                variant="outlined"
                 fullWidth
                 component={Link}
                 to={`/event/${id}/team_selection/`}
-                color='secondary'>
+                color="secondary">
                 {'تیم‌کشی'}
               </Button>
-            }
+            )}
           </Grid>
         </Grid>
       </Grid>
@@ -143,4 +139,3 @@ const Event = ({
 };
 
 export default Event;
-

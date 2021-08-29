@@ -13,9 +13,6 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { sendSmallAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import { MODES } from '..';
-import SmallAnswerQuestionEditWidget from './edit';
-
-export { SmallAnswerQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   success: {

@@ -64,9 +64,6 @@ function CardDialogue({ open, handleClose, name, image, description }) {
             </Grid>
           ))}
         </Grid>
-        {/* <Hidden xsDown="true">
-          <Grid sm={6} item className={classes.image}></Grid>
-        </Hidden> */}
       </Grid>
     </Dialog>
   );

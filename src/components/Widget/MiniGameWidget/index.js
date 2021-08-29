@@ -2,10 +2,6 @@ import { makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import MiniGameEditWidget from './edit';
-
-export { MiniGameEditWidget };
-
 const useStyles = makeStyles(() => ({
   gameWidget: {
     width: '100%',
@@ -33,19 +29,19 @@ const GameWidget = ({ link = '' }) => {
         height: iFrameHeight,
         transform: `scale(${scale})`,
         width: `${(1 / scale) * 100}%`,
-        marginRight: `-${((1 / scale) * 100 - 100) / 2}%`
+        marginRight: `-${((1 / scale) * 100 - 100) / 2}%`,
       }}
-    // onLoad={(e) => {
-    //   const body =
-    //     e.target?.contentDocument?.body ??
-    //     e.target?.contentWindow?.document?.body;
-    //   setTimeout(() => {
-    //     setIFrameHeight(body.scrollHeight);
-    //     body.style.maxHeight = '100vh';
-    //     body.style.overflowY = 'auto';
-    //     body.style.overflowX = 'hidden';
-    //   }, 10);
-    // }}
+      // onLoad={(e) => {
+      //   const body =
+      //     e.target?.contentDocument?.body ??
+      //     e.target?.contentWindow?.document?.body;
+      //   setTimeout(() => {
+      //     setIFrameHeight(body.scrollHeight);
+      //     body.style.maxHeight = '100vh';
+      //     body.style.overflowY = 'auto';
+      //     body.style.overflowX = 'hidden';
+      //   }, 10);
+      // }}
     />
   );
 };

@@ -1,12 +1,12 @@
 import Parse from 'parse';
 
 export const initParseServer = () => {
-  let PARSE_SERVER_URL =
+  const PARSE_SERVER_URL =
     process.env.NODE_ENV === 'development'
       ? 'https://parse.rastaiha.ir/parse_server'
       : 'https://parse.rastaiha.ir/parse_server';
 
-  let liveQueryServerURL =
+  const liveQueryServerURL =
     process.env.NODE_ENV === 'development'
       ? 'wss://parse.rastaiha.ir/ws/'
       : 'wss://parse.rastaiha.ir/ws/';

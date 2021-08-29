@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveAppBar({
-  mode = 'LANDING',
+  mode = 'WORKSHOP',
   showBackOnScroll = false,
   hideOnScroll = false,
   position = 'fixed',

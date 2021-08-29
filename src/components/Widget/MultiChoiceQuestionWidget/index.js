@@ -6,9 +6,6 @@ import { connect } from 'react-redux';
 import { sendMultiChoiceAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import { MODES } from '..';
-import MultiChoiceQuestionEditWidget from './edit';
-
-export { MultiChoiceQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   choice: {
