@@ -20,30 +20,43 @@ import PrivateRoute from './PrivateRoute';
 const Root = () => {
   return (
     <Switch>
+      <Route path="/loading/"></Route>
+
       <Route path="/reset_password" component={ChangePassword} />
       <Route path="/create_account" component={CreateAccount} />
       <Route path="/login" component={Login} />
 
-      <PrivateRoute path="/message/payment/success/:paymentId?" component={SuccessfulPayment} />
-      <PrivateRoute path="/message/payment/failure/:paymentId?" component={FailedPayment} />
+      <PrivateRoute
+        path="/message/payment/success/:paymentId?"
+        component={SuccessfulPayment}
+      />
+      <PrivateRoute
+        path="/message/payment/failure/:paymentId?"
+        component={FailedPayment}
+      />
 
       <PrivateRoute path="/dashboard/" component={Dashboard} />
       <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
-      <PrivateRoute path="/event/:eventId/registration_form/" component={RegistrationForm} />
+      <PrivateRoute
+        path="/event/:eventId/registration_form/"
+        component={RegistrationForm}
+      />
       <PrivateRoute path="/event/:eventId/status/" component={Status} />
-      <PrivateRoute path="/event/:eventId/team_selection/" component={TeamSelection} />
+      <PrivateRoute
+        path="/event/:eventId/team_selection/"
+        component={TeamSelection}
+      />
 
-      <Route path="/loading/"></Route>
-      <PrivateRoute path="/workshops/" component={Workshops} />
-      <Route path="/workshop/">
+      <Route path="/event/:eventId/">
         <Switch>
           <PrivateRoute
-            path="/workshop/:playerUUID/:playerId/:fsmId/:stateId/"
+            path="/event/:eventId/:playerUUID/:playerId/:fsmId/:stateId/"
             component={Workshop}
             onlyMentor
           />
-          <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
+          <PrivateRoute path="/event/:eventId/:fsmId/" component={Workshop} />
+          <PrivateRoute path="/event/:eventId/" component={Workshops} />
         </Switch>
       </Route>
       <Route path="/" component={Landing} />
