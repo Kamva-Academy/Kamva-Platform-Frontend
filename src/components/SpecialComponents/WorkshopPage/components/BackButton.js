@@ -7,7 +7,7 @@ import { StatePageContext } from '../../../../containers/Workshop';
 import { goBackwardAction } from '../../../../redux/slices/currentState';
 
 function BackButton({ inwardEdges = [], goBackward }) {
-  const { player, fsmId, isMentor } = useContext(StatePageContext);
+  const { playerId, teamId, fsmId, isMentor } = useContext(StatePageContext);
 
   const history = useHistory();
 
@@ -17,12 +17,13 @@ function BackButton({ inwardEdges = [], goBackward }) {
 
   const handleClick = () => {
     if (isMentor) {
-      history.push(`/workshop/${player.uuid}/${fsmId}/${inwardEdges[0].tail}`);
+      history.push(
+        `/workshop/${teamId}/${playerId}/${fsmId}/${inwardEdges[0].tail}`
+      );
     } else {
       goBackward({
         edgeId: inwardEdges[0].id,
-        playerId: player.id,
-        uuid: player.uuid,
+        playerId,
       });
     }
   };

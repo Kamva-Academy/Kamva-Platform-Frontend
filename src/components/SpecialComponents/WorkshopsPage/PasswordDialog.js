@@ -9,7 +9,7 @@ import {
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-function PasswordDialog({ open, handleClose, fsmId, startWorkshop }) {
+function PasswordDialog({ open, handleClose, fsmId, enterWorkshop }) {
   const t = useTranslate();
   const [password, setPassword] = useState('');
 
@@ -31,7 +31,7 @@ function PasswordDialog({ open, handleClose, fsmId, startWorkshop }) {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => startWorkshop({ fsmId, password })}>
+          onClick={() => enterWorkshop({ fsmId, password })}>
           {t('submit')}
         </Button>
       </DialogActions>

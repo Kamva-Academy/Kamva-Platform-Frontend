@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { createAccountAction, loginAction } from './account';
-import { startWorkshopAction } from './currentState';
+import { enterWorkshopAction } from './currentState';
 import { submitRegistrationFormAction } from './events';
 
 const initialState = { redirectTo: null, force: false };
@@ -28,7 +28,7 @@ const redirectSlice = createSlice({
         redirectTo: '/events/',
       };
     },
-    [startWorkshopAction.fulfilled.toString()]: (state, { meta: { arg } }) => ({
+    [enterWorkshopAction.fulfilled.toString()]: (state, { meta: { arg } }) => ({
       redirectTo: `/workshop/${arg.fsmId}`,
     }),
   },

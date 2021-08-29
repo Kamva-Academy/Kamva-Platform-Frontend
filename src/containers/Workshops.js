@@ -35,7 +35,11 @@ function Workshops({ eventId, workshops, isLoading, getEventWorkshops }) {
           alignItems="center"
           className={classes.grid}
           spacing={3}>
-          <WorkshopGridItems workshops={workshops} isLoading={isLoading} />
+          <WorkshopGridItems
+            eventId={eventId}
+            workshops={workshops}
+            isLoading={isLoading}
+          />
         </Grid>
       </Container>
     </>

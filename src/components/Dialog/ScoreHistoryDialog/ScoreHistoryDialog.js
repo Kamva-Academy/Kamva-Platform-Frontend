@@ -42,11 +42,11 @@ function ScoreHistoryDialog({
 }) {
   const classes = useStyles();
 
-  const { fsmId, player } = useContext(StatePageContext);
+  const { fsmId, playerId } = useContext(StatePageContext);
 
   useEffect(() => {
     if (open) {
-      getScores({ fsmId, playerId: player.id });
+      getScores({ fsmId, playerId });
     }
   }, [open]);
 

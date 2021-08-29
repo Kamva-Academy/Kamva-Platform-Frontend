@@ -4,22 +4,22 @@ import { changeTeamState } from '../../parse/team';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
+  enterWorkshopUrl,
   getScoresUrl,
+  getSelfUrl,
   goBackwardUrl,
   goForwardUrl,
   mentorGetCurrentStateUrl,
-  participantGetCurrentStateUrl,
   requestMentorUrl,
   sendAnswerUrl,
-  startWorkshopUrl,
 } from '../constants/urls';
 
 const changeTeamStateBroadcastAction = createAsyncThunk(
   'currentState/changeTeamStateBroadcast',
-  async ({ response: { id }, arg: { uuid } }) => {
+  async ({ response: { id }, arg: { playerId } }) => {
     await changeTeamState({
       stateId: id.toString(),
-      uuid,
+      uuid: playerId,
     });
   }
 );
@@ -54,16 +54,10 @@ export const goBackwardAction = createAsyncThunkApi(
   }
 );
 
-export const participantGetCurrentStateAction = createAsyncThunkApi(
-  'currentState/participantGetCurrentState',
-  Apis.POST,
-  participantGetCurrentStateUrl,
-  {
-    bodyCreator: ({ fsmId, playerId }) => ({
-      fsm: fsmId,
-      player: playerId,
-    }),
-  }
+export const getSelfAction = createAsyncThunkApi(
+  'currentState/getSelf',
+  Apis.GET,
+  getSelfUrl
 );
 
 export const mentorGetCurrentStateAction = createAsyncThunkApi(
@@ -71,9 +65,9 @@ export const mentorGetCurrentStateAction = createAsyncThunkApi(
   Apis.POST,
   mentorGetCurrentStateUrl,
   {
-    bodyCreator: ({ stateId, playerUUID }) => ({
+    bodyCreator: ({ stateId, playerId }) => ({
       state: stateId,
-      player_uuid: playerUUID,
+      player_id: playerId,
     }),
   }
 );
@@ -141,10 +135,10 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
     },
   });
 
-export const startWorkshopAction = createAsyncThunkApi(
-  'currentState/startWorkshop',
+export const enterWorkshopAction = createAsyncThunkApi(
+  'currentState/enterWorkshop',
   Apis.POST,
-  startWorkshopUrl,
+  enterWorkshopUrl,
   {
     bodyCreator: ({ fsmId, password }) => ({ fsm: fsmId, key: password }),
     defaultNotification: {
@@ -158,7 +152,11 @@ export const requestMentorAction = createAsyncThunkApi(
   Apis.POST,
   requestMentorUrl,
   {
-    bodyCreator: ({ fsmId, playerId }) => ({ fsm: fsmId, player: playerId }),
+    bodyCreator: ({ fsmId, teamId, playerId }) => ({
+      fsm: fsmId,
+      teamId,
+      player: playerId,
+    }),
     defaultNotification: {
       success: 'درخواست شما ارسال شد.',
     },
@@ -195,12 +193,18 @@ const sentAnswer = (state, { payload: { response } }) => {
   );
 };
 
+const getPlayer = (state, { payload: { response } }) => {
+  state.playerId = response.id;
+  state.teamId = response.team.id;
+  state.state = response.current_state;
+};
+
 const currentStateSlice = createSlice({
   name: 'currentState',
   initialState: {
     state: {
       widgets: [],
-      help_states: [],
+      hints: [],
     },
     scores: [],
     totalScore: 0,
@@ -211,20 +215,19 @@ const currentStateSlice = createSlice({
 
     [goForwardAction.fulfilled.toString()]: getNewState,
     [goBackwardAction.fulfilled.toString()]: getNewState,
-    [participantGetCurrentStateAction.fulfilled.toString()]: getNewState,
-    [mentorGetCurrentStateAction.fulfilled.toString()]: getNewState,
+    [getSelfAction.fulfilled.toString()]: getPlayer,
+    [mentorGetCurrentStateAction.fulfilled.toString()]: getPlayer,
 
     [sendAnswerAction.fulfilled.toString()]: sentAnswer,
     [sendFileAnswerAction.fulfilled.toString()]: sentAnswer,
 
-    [startWorkshopAction.fulfilled.toString()]: (
+    [enterWorkshopAction.fulfilled.toString()]: (
       state,
       { payload: { response } }
     ) => {
       if (response.error) {
         return state;
-      } // TODO: check backend
-      state.player = response.player;
+      }
     },
 
     [getScoresAction.fulfilled.toString()]: (

@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { baseURL } from '../../../axios';
-import { startWorkshopAction } from '../../../redux/slices/currentState';
+import { enterWorkshopAction } from '../../../redux/slices/currentState';
 import PasswordDialog from './PasswordDialog';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
+export const WorkshopCard = ({
+  eventId,
+  workshop,
+  isLoading,
+  enterWorkshop,
+}) => {
   const classes = useStyles();
 
   const [openPassword, setOpenPassword] = useState(false);
@@ -89,7 +94,7 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
       </CardActionArea>
       <CardActions>
         {!isLoading &&
-          (workshop.has_started ? (
+          (workshop.player !== 'NotStarted' ? (
             <Button
               size="large"
               fullWidth
@@ -108,7 +113,7 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
               onClick={
                 workshop.has_lock
                   ? () => setOpenPassword(true)
-                  : () => startWorkshop({ fsmId: workshop.id })
+                  : () => enterWorkshop({ id: workshop.id })
               }>
               بزن بریم!
             </Button>
@@ -118,12 +123,12 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
         open={openPassword}
         handleClose={() => setOpenPassword(false)}
         fsmId={workshop?.id}
-        startWorkshop={startWorkshop}
+        enterWorkshop={enterWorkshop}
       />
     </Card>
   );
 };
 
-export default connect(null, { startWorkshop: startWorkshopAction })(
+export default connect(null, { enterWorkshop: enterWorkshopAction })(
   WorkshopCard
 );

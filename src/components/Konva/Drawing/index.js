@@ -80,13 +80,11 @@ function Drawing({
     }
   };
 
-  const {
-    player: { uuid },
-  } = useContext(StatePageContext);
+  const { teamId } = useContext(StatePageContext);
 
   const onTouchStageEnd = () => {
     if (activeLine) {
-      addNewLineNode({ uuid, line: activeLine });
+      addNewLineNode({ uuid: teamId, line: activeLine });
     }
     setIsRemoving(false);
     setActiveLine(null);
@@ -128,19 +126,23 @@ function Drawing({
               drawingMode={drawingMode}
               {...node}
               onChange={(newAttrs) =>
-                updateShapeProps({ uuid, nodeId: node.id, shape: newAttrs })
+                updateShapeProps({
+                  uuid: teamId,
+                  nodeId: node.id,
+                  shape: newAttrs,
+                })
               }
               onSelect={() => {
                 onDeselectNodes();
                 if (drawingMode === DrawingModes.DELETE) {
-                  removeNode({ uuid, nodeId: node.id });
+                  removeNode({ uuid: teamId, nodeId: node.id });
                 } else {
                   onSelectNode({ nodeId: node.id });
                 }
               }}
               onTouchMove={() => {
                 if (drawingMode === DrawingModes.DELETE && isRemoving) {
-                  removeNode({ uuid, nodeId: node.id });
+                  removeNode({ uuid: teamId, nodeId: node.id });
                 }
               }}
             />

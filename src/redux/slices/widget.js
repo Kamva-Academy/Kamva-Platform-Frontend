@@ -2,10 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
-import {
-  sendAnswerUrl,
-} from '../constants/urls';
-
+import { sendAnswerUrl } from '../constants/urls';
 
 export const sendAnswerAction = createAsyncThunkApi(
   'widget/sendAnswer',
@@ -70,24 +67,19 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
     },
   });
 
-
 const widgetSlice = createSlice({
   name: 'currentState',
   initialState: {
     state: {
       widgets: [],
-      help_states: [],
+      hints: [],
     },
     scores: [],
     totalScore: 0,
   },
-  extraReducers: {
-
-  },
+  extraReducers: {},
 });
 
-export const {
-  initCurrentState: initCurrentStateAction,
-} = widgetSlice.actions;
+export const { initCurrentState: initCurrentStateAction } = widgetSlice.actions;
 
 export const { reducer: widgetReducer } = widgetSlice;

@@ -17,7 +17,7 @@ function MentorButton({ callMentor, isMentor, disabled = false }) {
 
   const t = useTranslate();
 
-  const { fsmId, player } = useContext(StatePageContext);
+  const { fsmId, playerId } = useContext(StatePageContext);
 
   return (
     <Button
@@ -25,7 +25,7 @@ function MentorButton({ callMentor, isMentor, disabled = false }) {
       color="primary"
       className={classes.mentorButton}
       disabled={isMentor || disabled}
-      onClick={() => callMentor({ fsmId, playerId: player.id })}>
+      onClick={() => callMentor({ fsmId, playerId })}>
       {t('callMentor')}
     </Button>
   );

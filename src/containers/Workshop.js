@@ -10,9 +10,8 @@ import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
 import {
+  getSelfAction,
   mentorGetCurrentStateAction,
-  participantGetCurrentStateAction,
-  startWorkshopAction,
 } from '../redux/slices/currentState';
 import { addNotificationAction } from '../redux/slices/notifications';
 
@@ -43,11 +42,11 @@ const Workshop = ({
   needUpdateState,
   fsmId,
   stateId,
-  player,
+  playerId,
+  teamId,
   isMentor,
 
-  startWorkshop,
-  participantGetCurrentState,
+  getSelf,
   mentorGetCurrentState,
   addNotification,
 }) => {
@@ -56,27 +55,23 @@ const Workshop = ({
 
   useEffect(() => {
     if (isMentor) {
-      if (!player.uuid) {
-        history.push('/mentor'); // TODO: remove
+      if (!playerId) {
+        history.push('/');
       } else {
-        mentorGetCurrentState({ stateId, playerUUID: player.uuid });
+        mentorGetCurrentState({ stateId, playerId });
       }
     }
-  }, [fsmId, stateId, player.uuid, isMentor, mentorGetCurrentState, history]);
+  }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState, history]);
 
   useEffect(() => {
     if (!isMentor) {
-      if (!player.id) {
-        startWorkshop({ fsmId });
-      } else {
-        participantGetCurrentState({ fsmId, playerId: player.id });
-      }
+      getSelf({ id: fsmId });
     }
-  }, [fsmId, player.id, isMentor, participantGetCurrentState, startWorkshop]);
+  }, [fsmId, playerId, isMentor, getSelf]);
 
   const getCurrentStateIfNeed = () => {
-    if (needUpdateState && !isMentor && player.id) {
-      participantGetCurrentState({ fsmId, playerId: player.id });
+    if (needUpdateState && !isMentor) {
+      getSelf({ id: fsmId });
     }
   };
 
@@ -94,14 +89,14 @@ const Workshop = ({
         type: 'info',
         message: 'هم‌تیمیت مکان تیم رو جا‌به‌جا کرد!',
       });
-      participantGetCurrentState({ fsmId, playerId: player.id });
+      getSelf({ id: fsmId });
     }
   }, [parseTeamState]);
 
   useEffect(async () => {
-    if (player.uuid) {
+    if (teamId) {
       const subscription = await getChangeTeamStateSubscription({
-        uuid: player.uuid,
+        uuid: teamId,
       });
       subscription.on('create', onUpdateStateFromParse);
       subscription.on('update', onUpdateStateFromParse);
@@ -109,10 +104,11 @@ const Workshop = ({
         subscription.unsubscribe();
       };
     }
-  }, [player.uuid]);
+  }, [teamId]);
 
   return (
-    <StatePageContext.Provider value={{ fsmId, stateId, player, isMentor }}>
+    <StatePageContext.Provider
+      value={{ fsmId, stateId, playerId, teamId, isMentor }}>
       <Container component="main" className={classes.body}>
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
@@ -133,20 +129,16 @@ const mapStateToProps = (state, ownProps) => ({
   isMentor: state.account.userAccount.is_mentor,
   fsmId: ownProps.match.params.fsmId,
   stateId: ownProps.match.params.stateId,
-  player: state.account.userAccount.is_mentor
-    ? {
-        uuid: ownProps.match.params.playerUUID,
-        id: ownProps.match.params.playerId,
-      }
-    : {
-        uuid: state.currentState.player?.uuid,
-        id: state.currentState.player?.id,
-      },
+  playerId: state.account.userAccount.is_mentor
+    ? ownProps.match.params.playerId
+    : state.currentState.playerId,
+  teamId: state.account.userAccount.is_mentor
+    ? ownProps.match.params.teamId
+    : state.currentState.teamId,
 });
 
 export default connect(mapStateToProps, {
-  participantGetCurrentState: participantGetCurrentStateAction,
+  getSelf: getSelfAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
-  startWorkshop: startWorkshopAction,
   addNotification: addNotificationAction,
 })(Workshop);

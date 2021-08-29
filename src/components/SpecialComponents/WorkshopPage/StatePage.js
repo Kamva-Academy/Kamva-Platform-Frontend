@@ -44,11 +44,11 @@ function StatePage({ state = {} }) {
   const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
   const widgets = [...state.widgets];
-  const help_states = [...state.help_states];
+  const hints = [...state.hints];
 
   const { inward_edges, outward_edges } = state;
 
-  help_states.sort((a, b) => a.id - b.id);
+  hints.sort((a, b) => a.id - b.id);
   widgets.sort((a, b) => a.id - b.id);
 
   const questions = widgets.filter((widget) =>
@@ -104,7 +104,7 @@ function StatePage({ state = {} }) {
         </Grid>
       </Grid>
 
-      {help_states.length > 0 && (
+      {hints.length > 0 && (
         <>
           <Fab
             size="small"
@@ -117,7 +117,7 @@ function StatePage({ state = {} }) {
           <HelpDialog
             open={openHelpDialog}
             handleClose={() => setOpenHelpDialog(false)}
-            helps={help_states}
+            helps={hints}
           />
         </>
       )}

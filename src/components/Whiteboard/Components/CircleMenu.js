@@ -26,13 +26,11 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
     popupId: 'circleMenu',
   });
 
-  const {
-    player: { uuid },
-  } = useContext(StatePageContext);
+  const { teamId } = useContext(StatePageContext);
 
   const onClick = (type) => {
     changeMode({ mode: DrawingModes.MOVE });
-    addNewCircleNode({ uuid, type });
+    addNewCircleNode({ uuid: teamId, type });
     popupState.close();
   };
 

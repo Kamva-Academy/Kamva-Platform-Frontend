@@ -131,7 +131,6 @@ const UploadFileQuestionWidget = ({
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  playerId: state.currentState.player?.id,
   pushAnswer: ownProps.pushAnswer, //todo: redundant?!
   uploadedFile: state.events.uploadedFile,
   isFetching: state.events.isFetching,

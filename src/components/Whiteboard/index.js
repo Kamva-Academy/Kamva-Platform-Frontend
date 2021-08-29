@@ -48,15 +48,13 @@ function Whiteboard({
 
   const [stage, setStage] = useState();
 
-  const {
-    player: { uuid },
-  } = useContext(StatePageContext);
+  const { teamId } = useContext(StatePageContext);
 
   useEffect(async () => {
-    if (uuid) {
-      getWhiteboardNodes({ uuid });
+    if (teamId) {
+      getWhiteboardNodes({ uuid: teamId });
       const subscription = await getWhiteboardActionSubscription({
-        uuid,
+        uuid: teamId,
       });
       subscription.on('create', (whiteboardAction) =>
         offlineUpdateWhiteboard(whiteboardAction.get('action'))
@@ -65,7 +63,7 @@ function Whiteboard({
         subscription.unsubscribe();
       };
     }
-  }, [uuid]);
+  }, [teamId]);
 
   return (
     <div className={classes.whiteboard}>
@@ -94,7 +92,6 @@ function Whiteboard({
 }
 
 const mapStateToProps = (state) => ({
-  userUUID: state.account.userAccount.uuid,
   nodes: state.whiteboard.present.nodes,
   drawingMode: state.whiteboard.present.mode,
   paintingConfig: state.whiteboard.present.paintingConfig,

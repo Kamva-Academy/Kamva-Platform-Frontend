@@ -63,7 +63,7 @@ export const goBackwardUrl = 'fsm/gobackward/';
 
 export const goForwardUrl = 'fsm/goforward/';
 
-export const participantGetCurrentStateUrl = 'fsm/getcurrentstate/';
+export const getSelfUrl = ({ id }) => `fsm/fsm/${id}/get_self/`;
 
 export const mentorGetCurrentStateUrl = 'fsm/mentorgetplayerstate/';
 
@@ -71,7 +71,7 @@ export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 
 export const sendAnswerUrl = 'fsm/sendanswer/';
 
-export const startWorkshopUrl = 'fsm/startWorkshop/';
+export const enterWorkshopUrl = ({ id }) => `fsm/fsm/${id}/enter/`;
 
 export const requestMentorUrl = 'fsm/requestmentor/';
 

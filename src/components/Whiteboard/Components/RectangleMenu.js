@@ -26,13 +26,11 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
     popupId: 'RectangleMenu',
   });
 
-  const {
-    player: { uuid },
-  } = useContext(StatePageContext);
+  const { teamId } = useContext(StatePageContext);
 
   const onClick = (type) => {
     changeMode({ mode: DrawingModes.MOVE });
-    addNewRectangleNode({ uuid, type });
+    addNewRectangleNode({ uuid: teamId, type });
     popupState.close();
   };
 

@@ -48,15 +48,15 @@ const Root = () => {
         component={TeamSelection}
       />
 
-      <Route path="/event/:eventId/">
+      <PrivateRoute path="/event/:eventId/" component={Workshops} />
+      <Route path="/workshop/">
         <Switch>
           <PrivateRoute
-            path="/event/:eventId/:playerUUID/:playerId/:fsmId/:stateId/"
+            path="/workshop/:teamId/:playerId/:fsmId/:stateId/"
             component={Workshop}
             onlyMentor
           />
-          <PrivateRoute path="/event/:eventId/:fsmId/" component={Workshop} />
-          <PrivateRoute path="/event/:eventId/" component={Workshops} />
+          <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
         </Switch>
       </Route>
       <Route path="/" component={Landing} />

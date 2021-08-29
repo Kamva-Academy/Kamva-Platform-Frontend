@@ -37,13 +37,13 @@ function Jitsi({ handleClose, width, displayName = 'User' }) {
   const classes = useStyles();
   const jitsiElement = useRef();
 
-  const { player } = useContext(StatePageContext);
+  const { teamId } = useContext(StatePageContext);
 
   const refresh = useCallback(() => {
-    if (player.uuid) {
+    if (teamId) {
       jitsiFuncs.destroy();
       jitsiFuncs.initJitsi({
-        roomName: 'ra_' + player.uuid,
+        roomName: 'ra_' + teamId,
         parentNode: jitsiElement.current,
         height: width === 'xs' ? '100%' : '300px',
         userInfo: {
@@ -51,7 +51,7 @@ function Jitsi({ handleClose, width, displayName = 'User' }) {
         },
       });
     }
-  }, [width, displayName, player.uuid]);
+  }, [width, displayName, teamId]);
 
   useEffect(() => {
     setTimeout(() => {

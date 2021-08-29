@@ -13,25 +13,25 @@ function NextButton({ outwardEdges = [], goForward }) {
   const t = useTranslate();
   const [openChangeStateDialog, setOpenChangeStateDialog] = useState(false);
   const [selectedEdge, setSelectedEdge] = useState(null);
-  const { player, fsmId, isMentor } = useContext(StatePageContext);
+  const { playerId, teamId, fsmId, isMentor } = useContext(StatePageContext);
 
   const history = useHistory();
 
   const changeState = (edge) => {
     if (isMentor) {
-      history.push(`/workshop/${player.uuid}/${fsmId}/${edge.head}`);
+      history.push(`/workshop/${teamId}/${playerId}/${fsmId}/${edge.head}`);
     } else {
       if (edge.has_lock) {
         setSelectedEdge(edge);
       } else {
-        goForward({ edgeId: edge.id, playerId: player.id });
+        goForward({ edgeId: edge.id, playerId });
       }
     }
   };
 
   const handleClick = () => {
     if (outwardEdges.length === 0) {
-      history.push('/workshops');
+      history.push('/events/');
     }
     if (outwardEdges.length === 1) {
       changeState(outwardEdges[0]);
@@ -61,9 +61,8 @@ function NextButton({ outwardEdges = [], goForward }) {
         onSubmit={(password) =>
           goForward({
             edgeId: selectedEdge.id,
-            playerId: player.id,
+            playerId,
             password,
-            uuid: player.uuid,
           })
         }
       />

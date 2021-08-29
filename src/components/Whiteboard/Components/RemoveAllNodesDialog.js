@@ -14,9 +14,7 @@ export default function RemoveAllNodesDialog({
   handleClose,
   removeAllNodes,
 }) {
-  const {
-    player: { uuid },
-  } = useContext(StatePageContext);
+  const { teamId } = useContext(StatePageContext);
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -31,7 +29,7 @@ export default function RemoveAllNodesDialog({
         </Button>
         <Button
           onClick={() => {
-            removeAllNodes({ uuid });
+            removeAllNodes({ uuid: teamId });
             handleClose();
           }}
           color="primary"
