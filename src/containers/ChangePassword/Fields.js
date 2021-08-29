@@ -146,7 +146,7 @@ const InputFields = ({
       <Grid
         item
         container
-        justify="space-between"
+        justifyContent="space-between"
         alignItems="stretch"
         spacing={1}>
         <Grid item xs={8} sm={9}>
@@ -178,7 +178,7 @@ const InputFields = ({
         </Grid>
       </Grid>
 
-      <Grid container item direction="row" justify="center">
+      <Grid container item direction="row" justifyContent="center">
         <Button
           onClick={doChangePassword}
           variant="contained"

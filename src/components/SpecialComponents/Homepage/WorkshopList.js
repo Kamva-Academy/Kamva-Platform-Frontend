@@ -5,13 +5,13 @@ import WorkshopCard from './WorkshopCard';
 
 function WorkshopList({ workshops }) {
   return (
-    <Grid container spacing={4} alignItems="center" justify="center">
+    <Grid container spacing={4} alignItems="center" justifyContent="center">
       {workshops.map((workshop, index) => (
         <Grid
           key={index}
           container
           alignItems="center"
-          justify="center"
+          justifyContent="center"
           item
           xs={12}
           sm={6}

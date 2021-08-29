@@ -174,7 +174,7 @@ const TeamSelection = ({
     <Layout>
       <Grid
         container
-        justify="space-evenly"
+        justifyContent="space-evenly"
         alignItems="flex-start"
         spacing={4}>
         <Grid item xs={12}>
@@ -186,7 +186,7 @@ const TeamSelection = ({
           <Grid
             component={Paper}
             container
-            justify="center"
+            justifyContent="center"
             alignItems="flex-end"
             spacing={2}>
             <Grid item xs={12}>
@@ -238,12 +238,12 @@ const TeamSelection = ({
               <>
                 <Grid item container alignItems="flex-start">
                   <Grid item xs={2} />
-                  <Grid item container justify="center" xs={8}>
+                  <Grid item container justifyContent="center" xs={8}>
                     <Typography fullWidth align="center" variant="h1">
                       {`«${team.name}»`}
                     </Typography>
                   </Grid>
-                  <Grid item container justify="flex-end" xs={2}>
+                  <Grid item container justifyContent="flex-end" xs={2}>
                     {isHead && (
                       <Tooltip title="حذف تیم" arrow>
                         <IconButton
@@ -263,7 +263,7 @@ const TeamSelection = ({
                       item
                       container
                       direction="column"
-                      justify="center"
+                      justifyContent="center"
                       alignItems="center"
                       key={index}>
                       <Grid item>
@@ -291,7 +291,7 @@ const TeamSelection = ({
           <Grid
             component={Paper}
             container
-            justify="center"
+            justifyContent="center"
             alignItems="flex-end"
             spacing={2}>
             <Grid item xs={2} />
@@ -300,7 +300,7 @@ const TeamSelection = ({
                 {'دعوت‌نامه‌های ارسالی'}
               </Typography>
             </Grid>
-            <Grid item container justify="flex-end" xs={2}>
+            <Grid item container justifyContent="flex-end" xs={2}>
               {isHead && (
                 <Tooltip title={'دعوت کاربر دیگری به گروه'} arrow>
                   <IconButton
@@ -359,7 +359,7 @@ const TeamSelection = ({
           <Grid
             component={Paper}
             container
-            justify="center"
+            justifyContent="center"
             alignItems="flex-end"
             spacing={2}>
             <Grid item xs={12}>

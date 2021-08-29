@@ -152,19 +152,19 @@ const RegistrationForm = ({
 
   return (
     <Layout>
-      <Grid container justify="space-evenly" alignItems="center" spacing={4}>
+      <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
         <Grid item xs={12}>
           <Grid
             component={Paper}
             container
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             spacing={2}>
             <Grid
               className={classes.noPadding}
               item
               container
-              justify="center"
+              justifyContent="center"
               alignItems="center"
               xs={12}
               sm={4}>
@@ -214,7 +214,7 @@ const RegistrationForm = ({
           <Grid
             component={Paper}
             container
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             spacing={2}>
             {registrationForm?.widgets?.map((widget) => (

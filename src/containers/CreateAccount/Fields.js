@@ -118,7 +118,7 @@ const InputFields = ({
         />
       </Grid>
 
-      <Grid item container justify="center" alignItems="stretch" spacing={1}>
+      <Grid item container justifyContent="center" alignItems="stretch" spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
             autoComplete="off"
@@ -175,7 +175,7 @@ const InputFields = ({
         />
       </Grid>
 
-      <Grid container item direction="row" justify="center">
+      <Grid container item direction="row" justifyContent="center">
         <Button
           onClick={doRegistration}
           variant="contained"

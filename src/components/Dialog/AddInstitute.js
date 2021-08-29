@@ -84,7 +84,7 @@ function AreYouSure({
         <Divider />
       </DialogTitle>
       <DialogContent>
-        <Grid container spacing={2} justify="center" alignItems="center">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item container xs={12} sm={6}>
             <TextField
               required
@@ -122,7 +122,7 @@ function AreYouSure({
             </FormControl >
           </Grid> */}
         </Grid>
-        <Grid container spacing={2} justify="center" alignItems="center">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
@@ -145,7 +145,7 @@ function AreYouSure({
           </Grid>
         </Grid>
         <br />
-        <Grid container spacing={2} justify="center" alignItems="center">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item container xs={12} sm={6}>
             <FormControl
               size="small"
@@ -188,7 +188,7 @@ function AreYouSure({
             </FormControl>
           </Grid>
         </Grid>
-        <Grid container spacing={2} justify="center" alignItems="center">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item container xs={12}>
             <TextField
               multiline
@@ -202,7 +202,7 @@ function AreYouSure({
             />
           </Grid>
         </Grid>
-        <Grid container spacing={2} justify="center" alignItems="center">
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth

@@ -36,7 +36,7 @@ const Index = () => {
       <Container className={classes.container}>
         <Grid
           container item
-          justify='center'
+          justifyContent='center'
           alignItems='center'
           xs={12} sm={8} md={4}>
           <Paper className={classes.paper}>
@@ -45,7 +45,7 @@ const Index = () => {
                 container
                 item
                 direction='column'
-                justify='center'
+                justifyContent='center'
                 spacing={2}>
                 <Grid item>
                   <Typography gutterBottom variant='h2' align='center'>

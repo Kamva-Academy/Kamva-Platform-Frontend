@@ -28,7 +28,7 @@ function Dashboard() {
       <Container className={classes.container}>
         <Grid
           container
-          justify="space-evenly"
+          justifyContent="space-evenly"
           alignItems="center"
           style={{ height: '100%' }}>
           <Grid container item direction="column" sm={5}>
@@ -43,7 +43,7 @@ function Dashboard() {
             </Paper>
           </Grid>
 
-          <Grid container item sm={5} justify="center" alignItems="center">
+          <Grid container item sm={5} justifyContent="center" alignItems="center">
             <img
               src={process.env.PUBLIC_URL + '/logo.png'}
               alt="logo"

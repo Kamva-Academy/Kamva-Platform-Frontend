@@ -93,7 +93,7 @@ const NotificationButton = ({ notifications = [] }) => {
                     classes.notification,
                     notification.seen && classes.seen
                   )}>
-                  <Grid container justify="flex-start" spacing={1}>
+                  <Grid container justifyContent="flex-start" spacing={1}>
                     <Grid item>
                       <div style={{ textAlign: 'center' }}>
                         <div>

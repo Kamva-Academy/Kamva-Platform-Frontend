@@ -8,7 +8,7 @@ const Supporters = ({ Institutions }) => {
     <Grid
       container
       direction="column"
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       spacing={2}>
       <Grid item style={{ marginBottom: '15px' }}>
@@ -16,7 +16,7 @@ const Supporters = ({ Institutions }) => {
           دوستان
         </Typography>
       </Grid>
-      <Grid container item direction="row" justify="center" xs={10} md={8}>
+      <Grid container item direction="row" justifyContent="center" xs={10} md={8}>
         {Institutions.map((institution, index) => {
           return (
             <InstitutionCard

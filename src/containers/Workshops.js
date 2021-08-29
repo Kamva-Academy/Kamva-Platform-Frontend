@@ -31,7 +31,7 @@ function Workshops({ workshops, isLoading, getWorkshopsDescription }) {
         </Typography>
         <Grid
           container
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           className={classes.grid}
           spacing={3}>

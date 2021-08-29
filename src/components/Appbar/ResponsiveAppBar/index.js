@@ -86,12 +86,12 @@ function ResponsiveAppBar({
           color='inherit'>
           <Container>
             <Toolbar className={classes.toolbar} disableGutters>
-              <Grid container justify="space-between">
+              <Grid container justifyContent="space-between">
                 <Grid
                   xs={6}
                   spacing={1}
                   container item
-                  justify="flex-start"
+                  justifyContent="flex-start"
                   alignItems="center">
                   {mobileMenuListItems.length > 0 && (
                     <IconButton
@@ -113,7 +113,7 @@ function ResponsiveAppBar({
                   xs={6}
                   spacing={1}
                   container item
-                  justify="flex-end"
+                  justifyContent="flex-end"
                   alignItems="center">
                   {leftItems.map((item, index) => (
                     <Grid key={index} item>

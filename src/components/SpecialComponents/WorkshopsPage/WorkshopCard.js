@@ -50,22 +50,22 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
             />
           </>
         ) : (
-            <>
-              <CardHeader
-                avatar={workshop.has_lock ? <Lock /> : <LockOpen />}
-                className={classes.header}
-                title="تیمی"
+          <>
+            <CardHeader
+              avatar={workshop.has_lock ? <Lock /> : <LockOpen />}
+              className={classes.header}
+              title="تیمی"
+            />
+            {workshop.cover_page && (
+              <CardMedia
+                className={classes.media}
+                image={baseURL + workshop.cover_page}
+                title={workshop.name}
               />
-              {workshop.cover_page && (
-                <CardMedia
-                  className={classes.media}
-                  image={baseURL + workshop.cover_page}
-                  title={workshop.name}
-                />
-              )}
-            </>
-          )}
-        <CardContent className={classes.justify}>
+            )}
+          </>
+        )}
+        <CardContent>
           {isLoading ? (
             <>
               <Skeleton
@@ -76,15 +76,15 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
               <Skeleton animation="wave" height={10} width="80%" />
             </>
           ) : (
-              <>
-                <Typography gutterBottom variant="h4" component="h2">
-                  {workshop.name}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {workshop.description}
-                </Typography>
-              </>
-            )}
+            <>
+              <Typography gutterBottom variant="h4" component="h2">
+                {workshop.name}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {workshop.description}
+              </Typography>
+            </>
+          )}
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -100,19 +100,19 @@ export const WorkshopCard = ({ workshop, isLoading, startWorkshop }) => {
               بزن بریم!
             </Button>
           ) : (
-              <Button
-                size="large"
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={
-                  workshop.has_lock
-                    ? () => setOpenPassword(true)
-                    : () => startWorkshop({ fsmId: workshop.id })
-                }>
-                بزن بریم!
-              </Button>
-            ))}
+            <Button
+              size="large"
+              fullWidth
+              variant="contained"
+              color="primary"
+              onClick={
+                workshop.has_lock
+                  ? () => setOpenPassword(true)
+                  : () => startWorkshop({ fsmId: workshop.id })
+              }>
+              بزن بریم!
+            </Button>
+          ))}
       </CardActions>
       <PasswordDialog
         open={openPassword}

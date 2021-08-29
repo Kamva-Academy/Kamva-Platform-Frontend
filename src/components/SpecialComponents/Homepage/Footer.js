@@ -18,8 +18,8 @@ function Footer() {
   const classes = useStyles();
   return (
     <Container className={classes.container}>
-      <Grid container justify="center" alignItems="center">
-        <Grid xs={12} item container justify='center' alignItems='center' spacing={2}>
+      <Grid container justifyContent="center" alignItems="center">
+        <Grid xs={12} item container justifyContent='center' alignItems='center' spacing={2}>
           <Grid item>
             <IconButton
               component="a"

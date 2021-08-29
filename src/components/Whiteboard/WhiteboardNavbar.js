@@ -75,7 +75,7 @@ function WhiteboardNavbar({
   return (
     <Grid
       container
-      justify="space-between"
+      justifyContent="space-between"
       className={classes.whiteboardNavbar}>
       <Grid item>
         <IconButton onClick={handleClose}>

@@ -64,7 +64,7 @@ function StatePage({ state = {} }) {
         container
         spacing={2}
         className={classes.workshopContent}
-        justify="center">
+        justifyContent="center">
         {notQuestions.length > 0 && (
           <Grid item xs={12} md={7} lg={7}>
             <Paper className={classes.paper}>

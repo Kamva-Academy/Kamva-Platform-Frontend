@@ -54,7 +54,7 @@ const Events = ({ getAllEventsInfo, events }) => {
     <Layout>
       <Grid
         container
-        justify="space-evenly"
+        justifyContent="space-evenly"
         alignItems="flex-start"
         spacing={2}>
         <Grid
@@ -62,7 +62,7 @@ const Events = ({ getAllEventsInfo, events }) => {
           container
           sm={6}
           direction="column"
-          justify="space-evenly"
+          justifyContent="space-evenly"
           alignItems="center"
           style={{ minHeight: '100%' }}
           spacing={2}>
@@ -73,7 +73,7 @@ const Events = ({ getAllEventsInfo, events }) => {
             item
             container
             direction="column"
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             spacing={2}>
             {events.map((event, index) => (

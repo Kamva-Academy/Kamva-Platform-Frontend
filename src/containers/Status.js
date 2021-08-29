@@ -138,7 +138,7 @@ const Payment = ({
 
   return (
     <Layout>
-      <Grid container justify="space-evenly" alignItems="center" spacing={4}>
+      <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
         <Grid item xs={12}>
           <Typography align="center" className={classes.title}>
             {'وضعیت ثبت‌نام'}
@@ -148,12 +148,12 @@ const Payment = ({
           <Grid
             component={Paper}
             container
-            justify="center"
+            justifyContent="center"
             alignItems="flex-end"
             spacing={2}>
             {event?.user_registration_status == 'Accepted' && (
               <>
-                <Grid item container justify="center" alignItems="center">
+                <Grid item container justifyContent="center" alignItems="center">
                   <Typography fullWidth align="center">
                     {
                       'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است. پس از پرداخت، به صفحه‌ی تیم‌کشی بروید و آن‌جا هم‌تیمی‌های خود را انتخاب کنید. توجه کنید که هر تیم باید ۳ نفره باشد.'
@@ -166,7 +166,7 @@ const Payment = ({
                   md={4}
                   item
                   container
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   spacing={1}>
                   <Grid item xs={12}>
@@ -193,7 +193,7 @@ const Payment = ({
                   md={4}
                   item
                   container
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   spacing={1}>
                   <Grid item xs={12}>
@@ -224,7 +224,7 @@ const Payment = ({
                 <Grid
                   item
                   container
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   spacing={1}>
                   <Typography fullWidth align="center">
@@ -240,7 +240,7 @@ const Payment = ({
                 <Grid
                   item
                   container
-                  justify="center"
+                  justifyContent="center"
                   alignItems="center"
                   spacing={1}>
                   <Typography fullWidth align="center">

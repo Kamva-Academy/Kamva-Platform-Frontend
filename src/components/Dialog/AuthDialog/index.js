@@ -77,14 +77,14 @@ function AuthDialog({
 
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
-      <Grid container direction="row" justify="center">
+      <Grid container direction="row" justifyContent="center">
         <Grid
           item
           xs={12}
           sm={7}
           container
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           alignItems="stretch"
           className={classes.leftContainer}>
           <Grid container item direction="row">
@@ -96,7 +96,7 @@ function AuthDialog({
                 <CloseIcon />
               </IconButton>
             </Grid>
-            <Grid item container xs={6} justify="center" alignItems="center">
+            <Grid item container xs={6} justifyContent="center" alignItems="center">
               <Typography component="h3" variant="h2" align="center">
                 {t('login')}
               </Typography>

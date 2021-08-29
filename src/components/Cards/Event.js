@@ -54,12 +54,12 @@ const Event = ({
 
   return (
     <Card className={classes.paper}>
-      <Grid container justify="center" spacing={1}>
+      <Grid container justifyContent="center" spacing={1}>
         <Grid
           className={classes.noPadding}
           item
           container
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           xs={12}
           sm={5}>
@@ -71,7 +71,7 @@ const Event = ({
           xs={12}
           sm={7}
           direction="column"
-          justify="space-between"
+          justifyContent="space-between"
           spacing={2}
           className={classes.content}>
           <Grid item>

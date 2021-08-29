@@ -35,7 +35,7 @@ function HelpDialog({ open, handleClose, helps }) {
             <Widget key={widget.id} widget={widget} />
           ))}
         </div>
-        <Grid container justify="space-between">
+        <Grid container justifyContent="space-between">
           <Grid item>
             {index > 0 && (
               <Button color="primary" onClick={() => setIndex(index - 1)}>

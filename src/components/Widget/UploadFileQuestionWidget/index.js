@@ -74,7 +74,7 @@ const UploadFileQuestionWidget = ({
 
   return (
     <Grid container>
-      <Grid item container justify="center" alignItems="center">
+      <Grid item container justifyContent="center" alignItems="center">
         <Grid item xs={12} sm={6}>
           <Typography>{text}</Typography>
         </Grid>
@@ -83,7 +83,7 @@ const UploadFileQuestionWidget = ({
           container
           xs={12}
           sm={6}
-          justify="center"
+          justifyContent="center"
           alignItems="center">
           <Grid item>
             <Button
@@ -107,7 +107,7 @@ const UploadFileQuestionWidget = ({
             />
           </Grid>
           {file?.name && file?.link && (
-            <Grid item justify="center" alignItems="center">
+            <Grid item justifyContent="center" alignItems="center">
               <Button
                 size="small"
                 startIcon={

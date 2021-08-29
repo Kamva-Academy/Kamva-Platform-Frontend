@@ -37,7 +37,7 @@ function CardDialogue({ open, handleClose, name, image, description }) {
         container
         className={classes.container}
         alignItems="center"
-        justify="center">
+        justifyContent="center">
         <Grid item xs={12} sm={4}>
           <Typography gutterBottom variant="h4" align="center">
             {'«' + name + '»'}
@@ -50,7 +50,7 @@ function CardDialogue({ open, handleClose, name, image, description }) {
           xs={12}
           sm={8}
           spacing={1}
-          justify="center"
+          justifyContent="center"
           className={classes.text}>
           {description.map((paragraph, index) => (
             <Grid item key={index}>

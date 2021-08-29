@@ -22,7 +22,7 @@ const Index = () => {
     <Container>
       <Grid
         container
-        justify="center"
+        justifyContent="center"
         alignItems="center"
         className={classes.fullHeight}>
         <Grid
@@ -31,7 +31,7 @@ const Index = () => {
           container
           spacing={2}
           alignItems="center"
-          justify="space-around"
+          justifyContent="space-around"
           xs={12}
           md={6}>
           <Grid item>

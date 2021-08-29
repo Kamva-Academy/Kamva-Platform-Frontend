@@ -162,7 +162,7 @@ const Profile = ({
     <Layout>
       <Grid
         container
-        justify="center"
+        justifyContent="center"
         direction="column"
         spacing={3}
         xs={12}
@@ -475,7 +475,7 @@ const Profile = ({
               پرداخت.
             </Typography>
           </Grid>
-          <Grid item container justify="center" xs={12} sm={6}>
+          <Grid item container justifyContent="center" xs={12} sm={6}>
             <Button
               fullWidth
               variant="outlined"

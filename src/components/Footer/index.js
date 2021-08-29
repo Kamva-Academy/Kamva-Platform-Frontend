@@ -9,14 +9,14 @@ const Footer = ({ Media }) => {
     <Grid
       container
       direction='column'
-      justify='center'
+      justifyContent='center'
       alignItems='center'
       spacing={2}
     >
       <Grid item>
         <Media />
       </Grid>
-      <Grid item justify='center'>
+      <Grid item justifyContent='center'>
         <Typography align='center'>
           تمامی حقوق برای کارسوق ریاضی مهرگان محفوظ است. ۱۳۹۹-۱۴۰۰
         </Typography>

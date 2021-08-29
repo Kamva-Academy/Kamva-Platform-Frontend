@@ -79,7 +79,7 @@ const InputFields = ({ isFetching, login, addNotification, token }) => {
         />
       </Grid>
 
-      <Grid container item direction="row" justify="center">
+      <Grid container item direction="row" justifyContent="center">
         <Button
           onClick={doLogin}
           variant="contained"
