@@ -1,9 +1,9 @@
-import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import EventCard from '../../components/Cards/Event';
-import { getAllEventsInfoAction } from '../../redux/slices/events'
+import { getAllEventsInfoAction } from '../../redux/slices/events';
 import Layout from '../Layout';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +46,7 @@ const Events = ({ getAllEventsInfo, events }) => {
 
   useEffect(() => {
     getAllEventsInfo();
-  }, [getAllEventsInfo])
+  }, [getAllEventsInfo]);
 
   // window.open('/institute/', '_blank', 'height=600,width=400');
 
@@ -78,9 +78,7 @@ const Events = ({ getAllEventsInfo, events }) => {
             spacing={2}>
             {events.map((event, index) => (
               <Grid key={index} item>
-                <EventCard
-                  {...event}
-                />
+                <EventCard {...event} />
               </Grid>
             ))}
           </Grid>
@@ -94,9 +92,6 @@ const mapStateToProps = (state) => ({
   events: state.events.events || [],
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getAllEventsInfo: getAllEventsInfoAction,
-  }
-)(Events);
+export default connect(mapStateToProps, {
+  getAllEventsInfo: getAllEventsInfoAction,
+})(Events);
