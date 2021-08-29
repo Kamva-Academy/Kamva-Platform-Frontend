@@ -19,7 +19,7 @@ const ANSWER_TYPE_TO_WIDGET_TYPES = {
   Game: 'Game',
 };
 
-const Widget = ({ widget, mode = MODES.VIEW, stateId, ...props }) => {
+const Widget = ({ widget, mode = MODES.VIEW, ...props }) => {
   const { WidgetComponent } =
     WIDGET_TYPES[
       widget.widget_type || ANSWER_TYPE_TO_WIDGET_TYPES[widget.answer_type]

@@ -1,31 +1,14 @@
-import {
-  Button,
-  Grid,
-  makeStyles,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from 'react-router-dom';
 
 import {
   createAccountAction,
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
-import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    width: '100%',
-  },
-  input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    borderRadius: '5px',
-    padding: theme.spacing(1),
-  },
-}));
+import { toEnglishNumber } from '../../utils/translateNumber';
 
 const InputFields = ({
   isFetching,
@@ -34,8 +17,6 @@ const InputFields = ({
   addNotification,
   token,
 }) => {
-
-  const classes = useStyles();
   const [buttonText, setButtonText] = useState('دریافت کد');
   const [data, setData] = useState({
     phoneNumber: '',
@@ -45,9 +26,7 @@ const InputFields = ({
   });
 
   if (token) {
-    return (
-      <Redirect to='/events/' />
-    );
+    return <Redirect to="/events/" />;
   }
 
   const putData = (event) => {
@@ -57,7 +36,6 @@ const InputFields = ({
     });
   };
 
-
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
     if (regex.test(toEnglishNumber(number))) {
@@ -66,7 +44,6 @@ const InputFields = ({
       return false;
     }
   };
-
 
   const isPhoneNumberValid = (phoneNumber) => {
     var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
@@ -90,16 +67,15 @@ const InputFields = ({
       return;
     }
     setButtonText('۱ دقیقه صبر کن');
-    getVerificationCode({ phoneNumber: data.phoneNumber, codeType: 'verify' }).then(() => {
-      setTimeout(
-        () => {
-          setButtonText('دریافت کد');
-        },
-        60000
-      );
+    getVerificationCode({
+      phoneNumber: data.phoneNumber,
+      codeType: 'verify',
+    }).then(() => {
+      setTimeout(() => {
+        setButtonText('دریافت کد');
+      }, 60000);
     });
   };
-
 
   const doRegistration = () => {
     const { phoneNumber, password, confirmationPassword } = data;
@@ -126,8 +102,8 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onChange={(e) => {
             if (isJustDigits(e.target.value)) {
@@ -135,18 +111,18 @@ const InputFields = ({
             }
           }}
           value={data.phoneNumber}
-          name='phoneNumber'
-          label='شماره تلفن همراه'
+          name="phoneNumber"
+          label="شماره تلفن همراه"
           inputProps={{ className: 'ltr-input' }}
-          type='tel'
+          type="tel"
         />
       </Grid>
 
       <Grid item container justify="center" alignItems="stretch" spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
-            autoComplete='off'
-            variant='outlined'
+            autoComplete="off"
+            variant="outlined"
             fullWidth
             onChange={(e) => {
               if (isJustDigits(e.target.value)) {
@@ -154,18 +130,18 @@ const InputFields = ({
               }
             }}
             value={data.code}
-            name='code'
+            name="code"
             label="کد تایید پیامک‌شده"
             inputProps={{ className: 'ltr-input' }}
-            type='text'
+            type="text"
           />
         </Grid>
         <Grid item xs={4} sm={3} container>
           <Button
-            size='small'
+            size="small"
             fullWidth
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             onClick={doGetVerificationCode}
             disabled={buttonText !== 'دریافت کد'}>
             {buttonText}
@@ -175,8 +151,8 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onBlur={putData}
           label="گذرواژه"
@@ -188,8 +164,8 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onBlur={putData}
           label="تکرار گذرواژه"
@@ -217,7 +193,6 @@ const InputFields = ({
           {' برو.'}
         </Typography>
       </Grid>
-
     </>
   );
 };

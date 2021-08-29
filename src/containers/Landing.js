@@ -6,10 +6,10 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   fullHeight: {
     minHeight: '100vh',
   },
@@ -35,12 +35,18 @@ const Index = () => {
           xs={12}
           md={6}>
           <Grid item>
-            <Typography variant="h1" align='center'>پلتفرم برگزاری رویداد و کارگاه</Typography>
+            <Typography variant="h1" align="center">
+              پلتفرم برگزاری رویداد و کارگاه
+            </Typography>
           </Grid>
           <Grid item>
             <ButtonGroup size="large" variant="contained" color="primary">
-              <Button component={Link} to='/login'>ورود</Button>
-              <Button component={Link} to='/create_account'>ثبت‌نام</Button>
+              <Button component={Link} to="/login">
+                ورود
+              </Button>
+              <Button component={Link} to="/create_account">
+                ثبت‌نام
+              </Button>
             </ButtonGroup>
           </Grid>
         </Grid>

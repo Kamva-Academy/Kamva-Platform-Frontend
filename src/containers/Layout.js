@@ -1,4 +1,4 @@
-import { Button, Container, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Container, makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -24,50 +24,47 @@ const Layout = ({
   userProfile,
   userAccount,
   ...props
-}
-) => {
+}) => {
   const classes = useStyles();
   const history = useHistory();
 
   useEffect(() => {
-    if (userProfile && (!userProfile?.first_name ||
-      !userProfile?.last_name ||
-      !userProfile?.gender ||
-      !userProfile?.province ||
-      !userProfile?.city) &&
-      !window.location.href.includes('profile')) {
+    if (
+      userProfile &&
+      (!userProfile?.first_name ||
+        !userProfile?.last_name ||
+        !userProfile?.gender ||
+        !userProfile?.province ||
+        !userProfile?.city) &&
+      !window.location.href.includes('profile')
+    ) {
       addNotification({
-        message: 'پیش از هر چیز، لطفاً موارد الزامی در پروفایل رو تکمیل کن! موارد الزامی با ستاره مشخص شده‌اند.',
+        message:
+          'پیش از هر چیز، لطفاً موارد الزامی در پروفایل رو تکمیل کن! موارد الزامی با ستاره مشخص شده‌اند.',
         type: 'error',
-      })
+      });
       history.push('/profile/');
     }
   }, [userProfile]);
 
   useEffect(() => {
     getUserProfile({ id: userAccount.id });
-  }, [getUserProfile])
+  }, [getUserProfile]);
 
   return (
     <>
-      <AppBar mode='STUDENT_DASHBOARD' position='relative' />
-      <Container className={classes.container} >
-        {props.children}
-      </Container>
+      <AppBar mode="STUDENT_DASHBOARD" position="relative" />
+      <Container className={classes.container}>{props.children}</Container>
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   userProfile: state.account.userProfile,
   userAccount: state.account.userAccount,
 });
 
-
-export default connect(
-  mapStateToProps,
-  {
-    getUserProfile: getUserProfileAction,
-    addNotification: addNotificationAction,
-  }
-)(Layout);
+export default connect(mapStateToProps, {
+  getUserProfile: getUserProfileAction,
+  addNotification: addNotificationAction,
+})(Layout);

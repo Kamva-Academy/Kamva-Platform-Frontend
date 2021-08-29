@@ -1,15 +1,14 @@
 import {
   Button,
-  ButtonGroup,
   Container,
   Grid,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   fullHeight: {
     minHeight: '100vh',
   },
@@ -36,11 +35,21 @@ const Index = () => {
             xs={12}
             md={6}>
             <Grid item>
-              <Typography gutterBottom variant="h1" align='center'>ثبت‌نام شما موفق نبود :(</Typography>
-              <Typography variant="h4" align='center'>چنانچه هزینه‌ای از حساب شما کسر شده، به ما بگویید.</Typography>
+              <Typography gutterBottom variant="h1" align="center">
+                ثبت‌نام شما موفق نبود :(
+              </Typography>
+              <Typography variant="h4" align="center">
+                چنانچه هزینه‌ای از حساب شما کسر شده، به ما بگویید.
+              </Typography>
             </Grid>
             <Grid item>
-              <Button component={Link} to='/events' variant='contained' color='primary'>بازگشت</Button>
+              <Button
+                component={Link}
+                to="/events"
+                variant="contained"
+                color="primary">
+                بازگشت
+              </Button>
             </Grid>
           </Grid>
         </Grid>

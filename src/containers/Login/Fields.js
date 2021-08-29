@@ -1,50 +1,21 @@
-import {
-  Button,
-  Grid,
-  makeStyles,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from 'react-router-dom';
 
-import {
-  loginAction,
-} from '../../redux/slices/account';
+import { loginAction } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
-import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
+import { toEnglishNumber } from '../../utils/translateNumber';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    width: '100%',
-  },
-  input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    borderRadius: '5px',
-    padding: theme.spacing(1),
-  },
-}));
-
-const InputFields = ({
-  isFetching,
-  login,
-  addNotification,
-  token,
-}) => {
-
-  const classes = useStyles();
+const InputFields = ({ isFetching, login, addNotification, token }) => {
   const [data, setData] = useState({
     password: '',
     username: '',
   });
 
   if (token) {
-    return (
-      <Redirect to='/events/' />
-    );
+    return <Redirect to="/events/" />;
   }
-
 
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
@@ -54,7 +25,6 @@ const InputFields = ({
       return false;
     }
   };
-
 
   const putData = (event) => {
     setData({
@@ -80,8 +50,8 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onChange={(e) => {
             if (isJustDigits(e.target.value)) {
@@ -89,17 +59,17 @@ const InputFields = ({
             }
           }}
           value={data.username}
-          name='username'
-          label='شماره تلفن همراه'
+          name="username"
+          label="شماره تلفن همراه"
           inputProps={{ className: 'ltr-input' }}
-          type='tel'
+          type="tel"
         />
       </Grid>
 
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onBlur={putData}
           label="گذرواژه"

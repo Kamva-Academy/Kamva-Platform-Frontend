@@ -13,10 +13,9 @@ import {
   TableRow,
   TextField,
   Tooltip,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import CancelIcon from '@material-ui/icons/Cancel';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ClearIcon from '@material-ui/icons/Clear';
 import React, { useEffect } from 'react';
@@ -36,9 +35,8 @@ import {
   getTeamInvitationsAction,
   inviteSomeoneAction,
   respondInvitationAction,
-} from '../redux/slices/events'
+} from '../redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
-import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
 
 const useStyles = makeStyles((theme) => ({
@@ -93,7 +91,6 @@ const useStyles = makeStyles((theme) => ({
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
 
-
 const TeamSelection = ({
   getMyInvitations,
   deleteTeam,
@@ -115,16 +112,19 @@ const TeamSelection = ({
 }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { eventId } = useParams()
-  const [isCreateInvitationDialogOpen, changeCreateInvitationDialogStatus] = React.useState(false);
-  const [isDeleteTeamDialogOpen, changeDeleteTeamDialogStatus] = React.useState(false);
-  const [respondingInvitationId, setRespondingInvitationId] = React.useState('');
+  const { eventId } = useParams();
+  const [isCreateInvitationDialogOpen, changeCreateInvitationDialogStatus] =
+    React.useState(false);
+  const [isDeleteTeamDialogOpen, changeDeleteTeamDialogStatus] =
+    React.useState(false);
+  const [respondingInvitationId, setRespondingInvitationId] =
+    React.useState('');
   const [newTeamName, setNewTeamName] = React.useState('');
   const [isHead, setHeadStatus] = React.useState(false);
 
   useEffect(() => {
-    getOneEventInfo({ id: eventId })
-  }, [getOneEventInfo])
+    getOneEventInfo({ id: eventId });
+  }, [getOneEventInfo]);
 
   useEffect(() => {
     if (event?.registration_receipt) {
@@ -137,10 +137,10 @@ const TeamSelection = ({
 
   useEffect(() => {
     if (receipt?.team) {
-      getTeam({ teamId: receipt?.team })
+      getTeam({ teamId: receipt?.team });
       getTeamInvitations({ teamId: receipt?.team });
     }
-  }, [receipt])
+  }, [receipt]);
 
   if (event?.user_registration_status == 'NotRegistered') {
     history.push(`/event/${eventId}/registration_form/`);
@@ -152,8 +152,7 @@ const TeamSelection = ({
     } else {
       setHeadStatus(false);
     }
-  }, [receipt, team])
-
+  }, [receipt, team]);
 
   const doCreateTeam = () => {
     if (!newTeamName) {
@@ -163,117 +162,160 @@ const TeamSelection = ({
       });
       return;
     }
-    createTeam({ name: newTeamName, registration_form: event?.registration_form });
-  }
+    createTeam({
+      name: newTeamName,
+      registration_form: event?.registration_form,
+    });
+  };
 
-  console.log(respondingInvitationId)
+  console.log(respondingInvitationId);
 
   return (
     <Layout>
       <Grid
         container
-        justify='space-evenly'
-        alignItems='flex-start'
+        justify="space-evenly"
+        alignItems="flex-start"
         spacing={4}>
         <Grid item xs={12}>
-          <Typography align='center' className={classes.title}>{'تیم‌کشی'}</Typography>
+          <Typography align="center" className={classes.title}>
+            {'تیم‌کشی'}
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Grid component={Paper} container justify="center" alignItems='flex-end' spacing={2}>
+          <Grid
+            component={Paper}
+            container
+            justify="center"
+            alignItems="flex-end"
+            spacing={2}>
             <Grid item xs={12}>
-              <Typography fullWidth align='center' variant='h2'>
+              <Typography fullWidth align="center" variant="h2">
                 {'تیم شما'}
               </Typography>
             </Grid>
             <Grid xs={12}>
               <Divider variant="middle" />
             </Grid>
-            {(!team && !receipt?.team) &&
+            {!team && !receipt?.team && (
               <>
                 <Grid item xs={12}>
-                  <Typography fullWidth variant='caption'>
-                    {'شما در تیمی عضو نیستید. یا خودتان یک تیم بسازید  و دیگران را به آن دعوت کنید، یا یکی از دعوت‌نامه‌هایی را که برایتان ارسال شده، قبول کنید.'}
+                  <Typography fullWidth variant="caption">
+                    {
+                      'شما در تیمی عضو نیستید. یا خودتان یک تیم بسازید  و دیگران را به آن دعوت کنید، یا یکی از دعوت‌نامه‌هایی را که برایتان ارسال شده، قبول کنید.'
+                    }
                   </Typography>
                 </Grid>
                 <Grid item container xs={12} spacing={1}>
                   <Grid item xs={12}>
-                    <Typography fullWidth align='center' variant='h5'>
+                    <Typography fullWidth align="center" variant="h5">
                       {'ایجاد تیم جدید'}
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
-                      size='small' fullWidth variant='outlined' value={newTeamName}
-                      label='نام تیم' onChange={e => setNewTeamName(e.target.value)} />
+                      size="small"
+                      fullWidth
+                      variant="outlined"
+                      value={newTeamName}
+                      label="نام تیم"
+                      onChange={(e) => setNewTeamName(e.target.value)}
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <Button fullWidth variant='contained' color='primary' onClick={doCreateTeam}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      onClick={doCreateTeam}>
                       {'ایجاد'}
                     </Button>
                   </Grid>
                 </Grid>
               </>
-            }
-            {team &&
+            )}
+            {team && (
               <>
-                <Grid item container alignItems='flex-start'>
+                <Grid item container alignItems="flex-start">
                   <Grid item xs={2} />
-                  <Grid item container justify='center' xs={8}>
-                    <Typography fullWidth align='center' variant='h1'>
+                  <Grid item container justify="center" xs={8}>
+                    <Typography fullWidth align="center" variant="h1">
                       {`«${team.name}»`}
                     </Typography>
                   </Grid>
-                  <Grid item container justify='flex-end' xs={2}>
-                    {isHead &&
-                      <Tooltip title='حذف تیم' arrow>
-                        <IconButton size='small' onClick={() => changeDeleteTeamDialogStatus(true)}>
-                          <ClearIcon style={{ fontSize: '20px', color: 'red' }} />
+                  <Grid item container justify="flex-end" xs={2}>
+                    {isHead && (
+                      <Tooltip title="حذف تیم" arrow>
+                        <IconButton
+                          size="small"
+                          onClick={() => changeDeleteTeamDialogStatus(true)}>
+                          <ClearIcon
+                            style={{ fontSize: '20px', color: 'red' }}
+                          />
                         </IconButton>
                       </Tooltip>
-                    }
+                    )}
                   </Grid>
                 </Grid>
                 {team?.members?.map((member, index) => {
                   return (
                     <Grid
-                      item container direction='column'
-                      justify='center' alignItems='center'
+                      item
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
                       key={index}>
                       <Grid item>
-                        <img alt='' style={{ borderRadius: '5px', objectFit: 'cover' }}
-                          src={member.profile_picture || PROFILE_PICTURE} width='150px' height='150px' />
+                        <img
+                          alt=""
+                          style={{ borderRadius: '5px', objectFit: 'cover' }}
+                          src={member.profile_picture || PROFILE_PICTURE}
+                          width="150px"
+                          height="150px"
+                        />
                       </Grid>
                       <Grid item>
-                        <Typography align='center'>
+                        <Typography align="center">
                           {`${member.first_name} ${member.last_name}`}
                         </Typography>
                       </Grid>
-                    </Grid>)
+                    </Grid>
+                  );
                 })}
               </>
-            }
+            )}
           </Grid>
         </Grid>
         <Grid item xs={12} sm={8}>
-          <Grid component={Paper} container justify="center" alignItems='flex-end' spacing={2}>
+          <Grid
+            component={Paper}
+            container
+            justify="center"
+            alignItems="flex-end"
+            spacing={2}>
             <Grid item xs={2} />
             <Grid item xs={8}>
-              <Typography fullWidth align='center' variant='h2'>
+              <Typography fullWidth align="center" variant="h2">
                 {'دعوت‌نامه‌های ارسالی'}
               </Typography>
             </Grid>
-            <Grid item container justify='flex-end' xs={2}>
-              {isHead &&
+            <Grid item container justify="flex-end" xs={2}>
+              {isHead && (
                 <Tooltip title={'دعوت کاربر دیگری به گروه'} arrow>
-                  <IconButton size='small' onClick={
-                    team?.id
-                      ? () => { changeCreateInvitationDialogStatus(true) }
-                      : () => { }
-                  }>
-                    <AddCircleOutlineIcon fontSize='large' />
+                  <IconButton
+                    size="small"
+                    onClick={
+                      team?.id
+                        ? () => {
+                            changeCreateInvitationDialogStatus(true);
+                          }
+                        : () => {}
+                    }>
+                    <AddCircleOutlineIcon fontSize="large" />
                   </IconButton>
                 </Tooltip>
-              }
+              )}
             </Grid>
             <Grid xs={12}>
               <Divider variant="middle" />
@@ -282,26 +324,31 @@ const TeamSelection = ({
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align='center'>فرد دعوت‌شده</TableCell>
-                    <TableCell align='center'>لغو دعوت</TableCell>
+                    <TableCell align="center">فرد دعوت‌شده</TableCell>
+                    <TableCell align="center">لغو دعوت</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {teamInvitations?.map((invitation, index) =>
+                  {teamInvitations?.map((invitation, index) => (
                     <TableRow key={index}>
-                      <TableCell align='center'>
+                      <TableCell align="center">
                         {`${invitation?.first_name} ${invitation.last_name}`}
                       </TableCell>
-                      <TableCell align='center'>
-                        <Tooltip title='پس‌گرفتن دعوت‌نامه' arrow>
-                          <IconButton size='small'
-                            onClick={() => { deleteInvitation({ invitationId: invitation?.id }) }}>
+                      <TableCell align="center">
+                        <Tooltip title="پس‌گرفتن دعوت‌نامه" arrow>
+                          <IconButton
+                            size="small"
+                            onClick={() => {
+                              deleteInvitation({
+                                invitationId: invitation?.id,
+                              });
+                            }}>
                             <ClearIcon />
                           </IconButton>
                         </Tooltip>
                       </TableCell>
                     </TableRow>
-                  )}
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -309,9 +356,14 @@ const TeamSelection = ({
 
           <div style={{ height: '40px' }} />
 
-          <Grid component={Paper} container justify="center" alignItems='flex-end' spacing={2}>
+          <Grid
+            component={Paper}
+            container
+            justify="center"
+            alignItems="flex-end"
+            spacing={2}>
             <Grid item xs={12}>
-              <Typography fullWidth align='center' variant='h2'>
+              <Typography fullWidth align="center" variant="h2">
                 {'دعوت‌نامه‌های دریافتی'}
               </Typography>
             </Grid>
@@ -322,41 +374,49 @@ const TeamSelection = ({
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell align='center'>تیم</TableCell>
-                    <TableCell align='center'>نام سرگروه</TableCell>
-                    <TableCell align='center'>شماره تلفن سرگروه</TableCell>
-                    <TableCell align='center'>پاسخ</TableCell>
+                    <TableCell align="center">تیم</TableCell>
+                    <TableCell align="center">نام سرگروه</TableCell>
+                    <TableCell align="center">شماره تلفن سرگروه</TableCell>
+                    <TableCell align="center">پاسخ</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {myInvitations.map((invitation, index) =>
+                  {myInvitations.map((invitation, index) => (
                     <TableRow key={index}>
-                      <TableCell align='center'>
+                      <TableCell align="center">
                         {invitation.team_name}
                       </TableCell>
-                      <TableCell align='center'>
+                      <TableCell align="center">
                         {`${invitation.head_first_name} ${invitation.head_last_name}`}
                       </TableCell>
-                      <TableCell align='center'>
+                      <TableCell align="center">
                         {invitation.head_phone_number}
                       </TableCell>
-                      <TableCell align='center'>
-                        {invitation.has_accepted &&
-                          <IconButton size='small' disabled={team}>
+                      <TableCell align="center">
+                        {invitation.has_accepted && (
+                          <IconButton size="small" disabled={team}>
                             <CheckCircleIcon style={{ color: '#00d130' }} />
                           </IconButton>
-                        }
-                        {!invitation.has_accepted &&
+                        )}
+                        {!invitation.has_accepted && (
                           <Tooltip arrow title={'پذیرفتن درخواست'}>
-                            <IconButton size='small'
-                              onClick={() => { console.log(invitation?.id); setRespondingInvitationId(invitation?.id) }}>
-                              <CheckCircleIcon color={team === invitation.team ? 'secondary' : ''} />
+                            <IconButton
+                              size="small"
+                              onClick={() => {
+                                console.log(invitation?.id);
+                                setRespondingInvitationId(invitation?.id);
+                              }}>
+                              <CheckCircleIcon
+                                color={
+                                  team === invitation.team ? 'secondary' : ''
+                                }
+                              />
                             </IconButton>
                           </Tooltip>
-                        }
+                        )}
                       </TableCell>
                     </TableRow>
-                  )}
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -366,47 +426,53 @@ const TeamSelection = ({
       <MakeInvitation
         open={isCreateInvitationDialogOpen}
         inviteSomeone={inviteSomeone}
-        handleClose={() => changeCreateInvitationDialogStatus(!isCreateInvitationDialogOpen)}
+        handleClose={() =>
+          changeCreateInvitationDialogStatus(!isCreateInvitationDialogOpen)
+        }
         teamId={team?.id}
       />
       <AreYouSure
         open={isDeleteTeamDialogOpen}
-        handleClose={() => changeDeleteTeamDialogStatus(!isDeleteTeamDialogOpen)}
+        handleClose={() =>
+          changeDeleteTeamDialogStatus(!isDeleteTeamDialogOpen)
+        }
         callBackFunction={() => deleteTeam({ teamId: team.id })}
       />
       <AreYouSure
         open={respondingInvitationId}
         handleClose={() => setRespondingInvitationId('')}
-        callBackFunction={() => respondInvitation({ invitationId: respondingInvitationId, has_accepted: 'true' })}
+        callBackFunction={() =>
+          respondInvitation({
+            invitationId: respondingInvitationId,
+            has_accepted: 'true',
+          })
+        }
       />
-    </Layout >
+    </Layout>
   );
 };
-
-
 
 const mapStateToProps = (state) => ({
   event: state.events.event,
   receipt: state.events.receipt,
   team: state.events.team,
   //todo: handle not showing self invitation, in back:
-  myInvitations: state.events.myInvitations.filter(invitation => invitation.head_phone_number !== invitation.phone_number),
+  myInvitations: state.events.myInvitations.filter(
+    (invitation) => invitation.head_phone_number !== invitation.phone_number
+  ),
   teamInvitations: state.events.teamInvitations,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getMyInvitations: getMyInvitationsAction,
-    deleteTeam: deleteTeamAction,
-    respondInvitation: respondInvitationAction,
-    deleteInvitation: deleteInvitationAction,
-    createTeam: createTeamAction,
-    inviteSomeone: inviteSomeoneAction,
-    getTeamInvitations: getTeamInvitationsAction,
-    getOneEventInfo: getOneEventInfoAction,
-    addNotification: addNotificationAction,
-    getOneRegistrationReceipt: getOneRegistrationReceiptAction,
-    getTeam: getTeamAction,
-  }
-)(TeamSelection);
+export default connect(mapStateToProps, {
+  getMyInvitations: getMyInvitationsAction,
+  deleteTeam: deleteTeamAction,
+  respondInvitation: respondInvitationAction,
+  deleteInvitation: deleteInvitationAction,
+  createTeam: createTeamAction,
+  inviteSomeone: inviteSomeoneAction,
+  getTeamInvitations: getTeamInvitationsAction,
+  getOneEventInfo: getOneEventInfoAction,
+  addNotification: addNotificationAction,
+  getOneRegistrationReceipt: getOneRegistrationReceiptAction,
+  getTeam: getTeamAction,
+})(TeamSelection);

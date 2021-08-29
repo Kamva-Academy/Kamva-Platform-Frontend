@@ -66,7 +66,7 @@ function AreYouSure({
     });
   };
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = () => {
     createInstitutes({ institute_type: 'School', ...data }).then(() => {
       handleClose(false);
     }); //todo

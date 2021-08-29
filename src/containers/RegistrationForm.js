@@ -1,4 +1,4 @@
-import { Button, Container, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
@@ -8,11 +8,10 @@ import Widget from '../components/Widget';
 import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
-  submitRegistrationFormAction
-} from '../redux/slices/events'
+  submitRegistrationFormAction,
+} from '../redux/slices/events';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
-
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -65,11 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EVENT_TYPE = {
-  'Team': 'تیمی',
-  'Individual': 'انفرادی',
-}
-
 const ANSWER_TYPES = {
   SmallAnswerProblem: 'SmallAnswer',
   BigAnswerProblem: 'BigAnswer',
@@ -79,7 +73,7 @@ const ANSWER_TYPES = {
   Image: 'Image',
   Video: 'Video',
   Game: 'Game',
-}
+};
 
 const RegistrationForm = ({
   getOneRegistrationForm,
@@ -92,17 +86,17 @@ const RegistrationForm = ({
 }) => {
   const classes = useStyles();
   const history = useHistory();
-  const { eventId } = useParams()
+  const { eventId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-    getOneEventInfo({ id: eventId })
-  }, [getOneRegistrationForm])
+    getOneEventInfo({ id: eventId });
+  }, [getOneRegistrationForm]);
 
   useEffect(() => {
     if (event?.registration_form) {
-      getOneRegistrationForm({ id: event?.registration_form })
+      getOneRegistrationForm({ id: event?.registration_form });
     }
   }, [event]);
 
@@ -110,30 +104,35 @@ const RegistrationForm = ({
     history.push('/events/');
   }
 
-  if (event?.user_registration_status && event?.user_registration_status != 'NotRegistered') {
+  if (
+    event?.user_registration_status &&
+    event?.user_registration_status != 'NotRegistered'
+  ) {
     history.push(`/event/${eventId}/status`);
   }
 
   const doRegister = () => {
-
     submitRegistrationForm({
       id: event?.registration_form,
       answers,
       eventId,
-    })
-  }
+    });
+  };
 
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
     const temporaryAnswer = [...answers];
     let doesFind = false;
     for (let i = 0; i < temporaryAnswer.length; i++) {
       // todo: remove answer_type from world :/
-      if (temporaryAnswer[i].answer_type === widgetType && temporaryAnswer[i].problem === problemId) {
+      if (
+        temporaryAnswer[i].answer_type === widgetType &&
+        temporaryAnswer[i].problem === problemId
+      ) {
         if (answer) {
           temporaryAnswer[i] = {
             ...temporaryAnswer[i],
             [fieldName]: answer,
-          }
+          };
         } else {
           temporaryAnswer.splice(i, 1);
         }
@@ -146,11 +145,10 @@ const RegistrationForm = ({
         [fieldName]: answer,
         answer_type: widgetType,
         problem: problemId,
-      })
+      });
     }
     setAnswers(temporaryAnswer);
-  }
-
+  };
 
   return (
     <Layout>
@@ -176,25 +174,30 @@ const RegistrationForm = ({
                 className={classes.eventImage}
               />
             </Grid>
-            <Grid item container direction='column' xs={12} sm={8} spacing={1}>
+            <Grid item container direction="column" xs={12} sm={8} spacing={1}>
               <Grid item>
-                {event?.name &&
-                  <Typography gutterBottom align='center' variant='h1'>{`رویداد ${event?.name}`}</Typography>
-                }
+                {event?.name && (
+                  <Typography
+                    gutterBottom
+                    align="center"
+                    variant="h1">{`رویداد ${event?.name}`}</Typography>
+                )}
               </Grid>
               <Grid item>
-                <Typography align='center'>{event?.description}</Typography>
+                <Typography align="center">{event?.description}</Typography>
               </Grid>
               <Grid item>
-                {event?.event_type == 'Team' &&
+                {event?.event_type == 'Team' && (
                   <>
-                    <Typography align='center'>{'نوع رویداد: تیمی'}</Typography>
-                    <Typography align='center'>{`تعداد اعضای هر تیم: ${toPersianNumber(event?.team_size)}`}</Typography>
+                    <Typography align="center">{'نوع رویداد: تیمی'}</Typography>
+                    <Typography align="center">{`تعداد اعضای هر تیم: ${toPersianNumber(
+                      event?.team_size
+                    )}`}</Typography>
                   </>
-                }
-                {event?.event_type == 'Individual' &&
-                  <Typography align='center'>{'نوع پاسخ: انفرادی'}</Typography>
-                }
+                )}
+                {event?.event_type == 'Individual' && (
+                  <Typography align="center">{'نوع پاسخ: انفرادی'}</Typography>
+                )}
               </Grid>
               {/* <Grid item>
                 <Typography align='center'>{`قیمت برای هر نفر: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
@@ -203,7 +206,9 @@ const RegistrationForm = ({
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography align='center' className={classes.title}>{'فرم ثبت‌نام'}</Typography>
+          <Typography align="center" className={classes.title}>
+            {'فرم ثبت‌نام'}
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <Grid
@@ -215,14 +220,25 @@ const RegistrationForm = ({
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper}>
-                  <Widget pushAnswer={pushAnswer(widget?.id, ANSWER_TYPES[widget?.widget_type])} widget={widget} />
+                  <Widget
+                    pushAnswer={pushAnswer(
+                      widget?.id,
+                      ANSWER_TYPES[widget?.widget_type]
+                    )}
+                    widget={widget}
+                  />
                 </Paper>
               </Grid>
             ))}
             <Grid item xs={12}>
-              <Button disabled={isFetching} fullWidth
-                variant='contained' color='primary'
-                onClick={() => { setDialogStatus(true) }}>
+              <Button
+                disabled={isFetching}
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setDialogStatus(true);
+                }}>
                 {'ثبت'}
               </Button>
             </Grid>
@@ -231,7 +247,9 @@ const RegistrationForm = ({
       </Grid>
       <AreYouSure
         open={isDialogOpen}
-        handleClose={() => { setDialogStatus(!isDialogOpen) }}
+        handleClose={() => {
+          setDialogStatus(!isDialogOpen);
+        }}
         callBackFunction={doRegister}
       />
     </Layout>
@@ -245,11 +263,8 @@ const mapStateToProps = (state) => ({
   isFetching: state.events.isFetching,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getOneRegistrationForm: getOneRegistrationFormAction,
-    getOneEventInfo: getOneEventInfoAction,
-    submitRegistrationForm: submitRegistrationFormAction,
-  }
-)(RegistrationForm);
+export default connect(mapStateToProps, {
+  getOneRegistrationForm: getOneRegistrationFormAction,
+  getOneEventInfo: getOneEventInfoAction,
+  submitRegistrationForm: submitRegistrationFormAction,
+})(RegistrationForm);

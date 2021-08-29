@@ -8,8 +8,7 @@ import {
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
-import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
-
+import { toEnglishNumber } from '../../utils/translateNumber';
 
 const InputFields = ({
   isFetching,
@@ -65,16 +64,17 @@ const InputFields = ({
     }
 
     setButtonText('۱ دقیقه صبر کن');
-    getVerificationCode({ phoneNumber: data.phoneNumber, codeType: 'changePass' }).then(
-      () => {
-        setTimeout(
-          () => {
-            setButtonText('دریافت کد');
-          },
-          process.env.NODE_ENV === 'production' ? 60000 : 1000
-        );
-      }
-    );
+    getVerificationCode({
+      phoneNumber: data.phoneNumber,
+      codeType: 'changePass',
+    }).then(() => {
+      setTimeout(
+        () => {
+          setButtonText('دریافت کد');
+        },
+        process.env.NODE_ENV === 'production' ? 60000 : 1000
+      );
+    });
   };
 
   const doChangePassword = () => {
@@ -101,8 +101,8 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onBlur={putData}
           label="رمز عبور جدید"
@@ -114,8 +114,8 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onBlur={putData}
           label="تکرار رمز عبور جدید"
@@ -127,8 +127,8 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete='off'
-          variant='outlined'
+          autoComplete="off"
+          variant="outlined"
           fullWidth
           onChange={(e) => {
             if (isJustDigits(e.target.value)) {
@@ -151,8 +151,8 @@ const InputFields = ({
         spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
-            autoComplete='off'
-            variant='outlined'
+            autoComplete="off"
+            variant="outlined"
             fullWidth
             onChange={(e) => {
               if (isJustDigits(e.target.value)) {
