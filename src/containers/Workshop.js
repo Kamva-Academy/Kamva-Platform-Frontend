@@ -10,7 +10,6 @@ import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
 import {
   enterWorkshopAction,
-  getSelfAction,
   mentorGetCurrentStateAction,
 } from '../redux/slices/currentState';
 import { addNotificationAction } from '../redux/slices/notifications';
@@ -45,9 +44,8 @@ const Workshop = ({
   playerId,
   teamId,
   isMentor,
-  enterWorkshop,
 
-  getSelf,
+  enterWorkshop,
   mentorGetCurrentState,
   addNotification,
 }) => {
@@ -61,17 +59,13 @@ const Workshop = ({
 
   useEffect(() => {
     if (!isMentor) {
-      if (!playerId) {
-        enterWorkshop({ id: fsmId });
-      } else {
-        getSelf({ id: fsmId });
-      }
+      enterWorkshop({ id: fsmId });
     }
-  }, [fsmId, playerId, isMentor, getSelf]);
+  }, [fsmId, playerId, isMentor]);
 
   const getCurrentStateIfNeed = () => {
     if (needUpdateState && !isMentor) {
-      getSelf({ id: fsmId });
+      enterWorkshop({ id: fsmId });
     }
   };
 
@@ -89,7 +83,7 @@ const Workshop = ({
         type: 'info',
         message: 'هم‌تیمیت مکان تیم رو جا‌به‌جا کرد!',
       });
-      getSelf({ id: fsmId });
+      enterWorkshop({ id: fsmId });
     }
   }, [parseTeamState]);
 
@@ -137,7 +131,6 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(mapStateToProps, {
   enterWorkshop: enterWorkshopAction,
-  getSelf: getSelfAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
 })(Workshop);
