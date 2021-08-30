@@ -18,10 +18,10 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
   const [selectedEdge, setSelectedEdge] = useState(null);
   const { isMentor, teamId } = useContext(StatePageContext);
 
-  // const edges = isMentor
-  //   ? outwardEdges
-  //   : outwardEdges.filter((edge) => edge.is_hidden);
-  const edges = outwardEdges;
+  const edges = isMentor
+    ? outwardEdges
+    : outwardEdges.filter((edge) => edge.is_hidden);
+  // const edges = outwardEdges;
 
   const history = useHistory();
 
@@ -57,9 +57,13 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
         fullWidth
         variant="contained"
         color="primary"
-        disabled={edges.length === 0}
+        disabled={edges.length === 0 && outwardEdges.length !== 0}
         onClick={handleClick}>
-        {outwardEdges.length === 0 ? t('end') : t('next')}
+        {outwardEdges.length === 0
+          ? t('end')
+          : edges.length === 0
+          ? 'جابجایی با همیار'
+          : t('next')}
       </Button>
       <ChangeStateDialog
         open={openChangeStateDialog}
