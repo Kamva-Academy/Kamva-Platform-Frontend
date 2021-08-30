@@ -131,6 +131,17 @@ const Event = ({
                 {'تیم‌کشی'}
               </Button>
             )}
+            {/* {is_user_participating && (
+              <Button
+                size="small"
+                variant="outlined"
+                fullWidth
+                component={Link}
+                to={`/event/${id}/`}
+                color="secondary">
+                {'ورود'}
+              </Button>
+            )} */}
           </Grid>
         </Grid>
       </Grid>
