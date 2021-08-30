@@ -21,11 +21,12 @@ function BackButton({ inwardEdges = [], goBackward, mentorMoveBackward }) {
         id: inwardEdges[0].id,
         teamId,
       });
+    } else {
+      goBackward({
+        id: inwardEdges[0].id,
+        teamId,
+      });
     }
-    goBackward({
-      id: inwardEdges[0].id,
-      teamId,
-    });
   };
 
   return (

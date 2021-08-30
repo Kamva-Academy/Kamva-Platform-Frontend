@@ -20,7 +20,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
 
   const edges = isMentor
     ? outwardEdges
-    : outwardEdges.filter((edge) => edge.is_hidden);
+    : outwardEdges.filter((edge) => edge.is_visible);
   // const edges = outwardEdges;
 
   const history = useHistory();
@@ -31,12 +31,12 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
         id: edge.id,
         teamId,
       });
-    }
-
-    if (edge.has_lock) {
-      setSelectedEdge(edge);
     } else {
-      goForward({ id: edge.id, teamId });
+      if (edge.has_lock) {
+        setSelectedEdge(edge);
+      } else {
+        goForward({ id: edge.id, teamId });
+      }
     }
   };
 
@@ -76,7 +76,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
         handleClose={() => setSelectedEdge(null)}
         onSubmit={(password) =>
           goForward({
-            edgeId: selectedEdge.id,
+            id: selectedEdge.id,
             password,
             teamId,
           })
