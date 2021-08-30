@@ -3,13 +3,13 @@ import Container from '@material-ui/core/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
 import {
+  enterWorkshopAction,
   getSelfAction,
   mentorGetCurrentStateAction,
 } from '../redux/slices/currentState';
@@ -45,27 +45,27 @@ const Workshop = ({
   playerId,
   teamId,
   isMentor,
+  enterWorkshop,
 
   getSelf,
   mentorGetCurrentState,
   addNotification,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
 
   useEffect(() => {
     if (isMentor) {
-      if (!playerId) {
-        history.push('/');
-      } else {
-        mentorGetCurrentState({ id: playerId });
-      }
+      mentorGetCurrentState({ id: playerId });
     }
-  }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState, history]);
+  }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState]);
 
   useEffect(() => {
     if (!isMentor) {
-      getSelf({ id: fsmId });
+      if (!playerId) {
+        enterWorkshop({ id: fsmId });
+      } else {
+        getSelf({ id: fsmId });
+      }
     }
   }, [fsmId, playerId, isMentor, getSelf]);
 
@@ -136,6 +136,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
+  enterWorkshop: enterWorkshopAction,
   getSelf: getSelfAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,

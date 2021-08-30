@@ -27,6 +27,7 @@ const jitsiConfig = {
     MOBILE_APP_PROMO: false,
     PROVIDER_NAME: 'Rasta',
     TOOLBAR_BUTTONS: [
+      'microphone',
       'camera',
       'closedcaptions',
       'desktop',
