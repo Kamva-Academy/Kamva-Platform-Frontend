@@ -76,7 +76,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
         handleClose={() => setSelectedEdge(null)}
         onSubmit={(password) =>
           goForward({
-            edgeId: selectedEdge.id,
+            id: selectedEdge.id,
             password,
             teamId,
           })
