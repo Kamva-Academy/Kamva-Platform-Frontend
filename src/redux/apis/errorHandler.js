@@ -8,20 +8,23 @@ export const errorHandler = (
   showHttpError
 ) => {
 
-
   if (!error.response) {
     return rejectWithValue({
-      message: 'ارتباطت با مشکل مواجه شده. یه چند لحظه دیگه دوباره تلاش کن!',
+      message: 'ارتباط با سرور دچار مشکل شده!',
     });
   }
 
-
-  if (error.response.data?.code && persianMessages[error.response.data?.code]) {
+  if (error.response.data?.code) {
     return rejectWithValue({
-      message: persianMessages[error.response.data?.code]
+      message: persianMessages[error.response.data?.code],
     });
   }
 
+  if (error.response.detail) {
+    return rejectWithValue({
+      message: error.response.detail,
+    });
+  }
 
   switch (error.response.status) {
     case 401:
@@ -34,11 +37,11 @@ export const errorHandler = (
       });
     case 404:
       return rejectWithValue({
-        message: 'موردی یافت نشد!',
+        message: 'موردی یافت نشد.',
       });
     case 500:
       return rejectWithValue({
-        message: 'ایرادی پیش اومده! لطفا ما را در جریان بذار!',
+        message: 'ایراد سروری پیش اومده! لطفاً ما را در جریان بذار.',
       });
   }
 
