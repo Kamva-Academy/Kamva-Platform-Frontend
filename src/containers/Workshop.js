@@ -83,13 +83,17 @@ const Workshop = ({
   useEffect(() => {
     if (!workshopState.id || !parseTeamState) return;
     if (+parseTeamState !== +workshopState.id) {
-      addNotification({
-        type: 'info',
-        message: 'هم‌تیمیت مکان تیم رو جا‌به‌جا کرد!',
-      });
       if (isMentor) {
+        addNotification({
+          type: 'info',
+          message: 'یکی از بچه‌ها مکان تیم رو جا‌به‌جا کرد!',
+        });
         mentorGetCurrentState({ id: playerId });
       } else {
+        addNotification({
+          type: 'info',
+          message: 'جابه‌جا شدید!',
+        });
         enterWorkshop({ id: fsmId });
       }
     }
