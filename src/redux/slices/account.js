@@ -141,6 +141,10 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     logout: () => initialState,
+    setMentorToken: (state, { payload: { token } }) => ({
+      token,
+      user: { is_mentor: true },
+    }),
   },
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
@@ -204,6 +208,7 @@ const accountSlice = createSlice({
   },
 });
 
-export const { logout: logoutAction } = accountSlice.actions;
+export const { logout: logoutAction, setMentorToken: setMentorTokenAction } =
+  accountSlice.actions;
 
 export const { reducer: accountReducer } = accountSlice;

@@ -6,6 +6,7 @@ import CreateAccount from '../containers/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../containers/Dashboard/Events';
 import Profile from '../containers/Dashboard/Profile';
+import JoinMentor from '../containers/JoinMentor';
 import Landing from '../containers/Landing';
 import Login from '../containers/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
@@ -51,6 +52,7 @@ const Root = () => {
       <PrivateRoute path="/event/:eventId/" component={Workshops} />
       <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
       <PrivateRoute path="/watch/:playerId/" component={Workshop} onlyMentor />
+      <PrivateRoute path="/join/:playerId/" component={JoinMentor} />
       <Route path="/" component={Landing} />
       <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
     </Switch>
