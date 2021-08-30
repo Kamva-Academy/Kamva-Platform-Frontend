@@ -31,7 +31,7 @@ function PasswordDialog({ open, handleClose, fsmId, enterWorkshop }) {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => enterWorkshop({ fsmId, password })}>
+          onClick={() => enterWorkshop({ id: fsmId, password })}>
           {t('submit')}
         </Button>
       </DialogActions>

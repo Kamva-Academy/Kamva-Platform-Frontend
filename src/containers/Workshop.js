@@ -9,6 +9,7 @@ import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
 import {
+  enterWorkshopAction,
   getSelfAction,
   mentorGetCurrentStateAction,
 } from '../redux/slices/currentState';
@@ -44,6 +45,7 @@ const Workshop = ({
   playerId,
   teamId,
   isMentor,
+  enterWorkshop,
 
   getSelf,
   mentorGetCurrentState,
@@ -59,7 +61,11 @@ const Workshop = ({
 
   useEffect(() => {
     if (!isMentor) {
-      getSelf({ id: fsmId });
+      if (!playerId) {
+        enterWorkshop({ id: fsmId });
+      } else {
+        getSelf({ id: fsmId });
+      }
     }
   }, [fsmId, playerId, isMentor, getSelf]);
 
@@ -130,6 +136,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
+  enterWorkshop: enterWorkshopAction,
   getSelf: getSelfAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
