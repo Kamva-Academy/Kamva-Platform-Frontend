@@ -120,7 +120,7 @@ const Event = ({
                   {'وضعیت ثبت‌نام'}
                 </Button>
               )}
-            {is_user_participating && (
+            {/* {is_user_participating && (
               <Button
                 size="small"
                 variant="outlined"
@@ -129,6 +129,17 @@ const Event = ({
                 to={`/event/${id}/team_selection/`}
                 color="secondary">
                 {'تیم‌کشی'}
+              </Button>
+            )} */}
+            {is_user_participating && (
+              <Button
+                size="small"
+                variant="outlined"
+                fullWidth
+                component={Link}
+                to={`/event/${id}/`}
+                color="secondary">
+                {'ورود'}
               </Button>
             )}
           </Grid>
