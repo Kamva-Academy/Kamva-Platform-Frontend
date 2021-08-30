@@ -89,14 +89,8 @@ export const getSelfAction = createAsyncThunkApi(
 
 export const mentorGetCurrentStateAction = createAsyncThunkApi(
   'currentState/mentorGetCurrentState',
-  Apis.POST,
-  mentorGetCurrentStateUrl,
-  {
-    bodyCreator: ({ stateId, playerId }) => ({
-      state: stateId,
-      player_id: playerId,
-    }),
-  }
+  Apis.GET,
+  mentorGetCurrentStateUrl
 );
 
 export const sendAnswerAction = createAsyncThunkApi(
