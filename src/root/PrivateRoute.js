@@ -17,8 +17,8 @@ const PrivateRoute = ({
         hasAccess ? (
           <Component {...props} />
         ) : (
-            <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-          )
+          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+        )
       }
     />
   );
@@ -26,7 +26,7 @@ const PrivateRoute = ({
 
 const mapStateToProps = (state) => ({
   isLoggedIn: !!state.account.token,
-  isMentor: state.account.user?.is_mentor,
+  isMentor: state.account.userAccount?.is_mentor,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

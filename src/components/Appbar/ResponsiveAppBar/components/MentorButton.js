@@ -32,7 +32,7 @@ function MentorButton({ callMentor, isMentor, disabled = false }) {
 }
 
 const mapStatesToProps = (state) => ({
-  isMentor: state.account.user?.is_mentor,
+  isMentor: state.account.userAccount?.is_mentor,
 });
 
 export default connect(mapStatesToProps, { callMentor: requestMentorAction })(
