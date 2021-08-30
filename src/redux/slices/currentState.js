@@ -7,7 +7,6 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   enterWorkshopUrl,
   getScoresUrl,
-  getSelfUrl,
   goBackwardUrl,
   goForwardUrl,
   mentorGetCurrentStateUrl,
@@ -81,12 +80,6 @@ export const mentorMoveBackwardAction = createAsyncThunkApi(
     },
     // onSuccessAction: changeTeamStateBroadcastAction,
   }
-);
-
-export const getSelfAction = createAsyncThunkApi(
-  'currentState/getSelf',
-  Apis.GET,
-  getSelfUrl
 );
 
 export const mentorGetCurrentStateAction = createAsyncThunkApi(
@@ -242,22 +235,12 @@ const currentStateSlice = createSlice({
     [mentorMoveForwardAction.fulfilled.toString()]: getNewState,
     [mentorMoveBackwardAction.fulfilled.toString()]: getNewState,
 
-    [getSelfAction.fulfilled.toString()]: getPlayer,
     [mentorGetCurrentStateAction.fulfilled.toString()]: getPlayer,
 
     [sendAnswerAction.fulfilled.toString()]: sentAnswer,
     [sendFileAnswerAction.fulfilled.toString()]: sentAnswer,
 
-    [enterWorkshopAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
-      if (response.error) {
-        return state;
-      }
-      state.state = response.current_state;
-      state.needUpdateState = false;
-    },
+    [enterWorkshopAction.fulfilled.toString()]: getPlayer,
 
     [getScoresAction.fulfilled.toString()]: (
       state,
