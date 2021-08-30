@@ -10,11 +10,11 @@ export default function JitsiMicButton() {
     if (isMute) {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(() => {
         jitsiFuncs.unmute();
-        setIsMute(!isMute);
+        setIsMute(false);
       });
     } else {
       jitsiFuncs.mute();
-      setIsMute(!isMute);
+      setIsMute(true);
     }
   };
   return (
