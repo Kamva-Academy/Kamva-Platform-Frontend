@@ -120,7 +120,7 @@ const Event = ({
                   {'وضعیت ثبت‌نام'}
                 </Button>
               )}
-            {is_user_participating && (
+            {/* {is_user_participating && (
               <Button
                 size="small"
                 variant="outlined"
@@ -130,8 +130,8 @@ const Event = ({
                 color="secondary">
                 {'تیم‌کشی'}
               </Button>
-            )}
-            {/* {is_user_participating && (
+            )} */}
+            {is_user_participating && (
               <Button
                 size="small"
                 variant="outlined"
@@ -141,7 +141,7 @@ const Event = ({
                 color="secondary">
                 {'ورود'}
               </Button>
-            )} */}
+            )}
           </Grid>
         </Grid>
       </Grid>
