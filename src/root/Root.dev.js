@@ -52,7 +52,7 @@ const Root = () => {
       <PrivateRoute path="/event/:eventId/" component={Workshops} />
       <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
       <PrivateRoute path="/watch/:playerId/" component={Workshop} onlyMentor />
-      <PrivateRoute path="/join/:playerId/" component={JoinMentor} />
+      <PrivateRoute path="/join/:playerId/:token/" component={JoinMentor} />
       <Route path="/" component={Landing} />
       <Route path="*" render={() => <Redirect to={{ pathname: '/' }} />} />
     </Switch>
