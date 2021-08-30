@@ -73,7 +73,9 @@ export const mentorMoveBackwardAction = createAsyncThunkApi(
   Apis.POST,
   mentorMoveBackwardUrl,
   {
-    bodyCreator: ({ edgeId }) => ({ edge: edgeId }),
+    bodyCreator: ({ teamId }) => ({
+      team: teamId,
+    }),
     defaultNotification: {
       showHttpError: true,
     },
