@@ -143,7 +143,7 @@ const accountSlice = createSlice({
     logout: () => initialState,
     setMentorToken: (state, { payload: { token } }) => ({
       token,
-      user: { is_mentor: true },
+      userAccount: { is_mentor: true },
     }),
   },
   extraReducers: {

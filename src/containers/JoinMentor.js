@@ -8,7 +8,7 @@ const JoinMentor = ({ playerId, token, setMentorToken }) => {
   const history = useHistory();
 
   useEffect(() => {
-    setMentorToken(token);
+    setMentorToken({ token });
     history.push(`/watch/${playerId}/`);
   }, []);
   return <div></div>;
