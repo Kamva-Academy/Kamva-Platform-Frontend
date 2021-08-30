@@ -32,12 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const WorkshopCard = ({
-  eventId,
-  workshop,
-  isLoading,
-  enterWorkshop,
-}) => {
+export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
   const classes = useStyles();
 
   const [openPassword, setOpenPassword] = useState(false);
