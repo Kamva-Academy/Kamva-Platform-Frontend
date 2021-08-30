@@ -31,12 +31,12 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
         id: edge.id,
         teamId,
       });
-    }
-
-    if (edge.has_lock) {
-      setSelectedEdge(edge);
     } else {
-      goForward({ id: edge.id, teamId });
+      if (edge.has_lock) {
+        setSelectedEdge(edge);
+      } else {
+        goForward({ id: edge.id, teamId });
+      }
     }
   };
 
