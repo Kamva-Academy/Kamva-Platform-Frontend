@@ -63,13 +63,15 @@ export const goBackwardUrl = ({ id }) => `fsm/edge/${id}/go_backward/`;
 
 export const goForwardUrl = ({ id }) => `fsm/edge/${id}/go_forward/`;
 
-export const mentorMoveBackwardUrl = ({ id }) => `fsm/edge/${id}/mentor_move_backward/`;
+export const mentorMoveBackwardUrl = ({ id }) =>
+  `fsm/edge/${id}/mentor_move_backward/`;
 
-export const mentorMoveForwardUrl = ({ id }) => `fsm/edge/${id}/mentor_move_forward/`;
+export const mentorMoveForwardUrl = ({ id }) =>
+  `fsm/edge/${id}/mentor_move_forward/`;
 
 export const getSelfUrl = ({ id }) => `fsm/fsm/${id}/get_self/`;
 
-export const mentorGetCurrentStateUrl = 'fsm/mentorgetplayerstate/';
+export const mentorGetCurrentStateUrl = ({ id }) => `fsm/player/${id}`;
 
 export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 

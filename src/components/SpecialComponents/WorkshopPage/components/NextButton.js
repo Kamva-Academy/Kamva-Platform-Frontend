@@ -20,7 +20,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
 
   const edges = isMentor
     ? outwardEdges
-    : outwardEdges.filter((edge) => !edge.is_hidden);
+    : outwardEdges.filter((edge) => edge.is_hidden);
 
   const history = useHistory();
 

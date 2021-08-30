@@ -163,7 +163,7 @@ function AuthDialog({
 const mapStateToProps = (state) => ({
   isFetching: state.account.isFetching,
   isLoggedIn: !!state.account.token,
-  user: state.account.user,
+  user: state.account.userAccount,
 });
 
 export default connect(mapStateToProps, {

@@ -58,7 +58,7 @@ const Workshop = ({
       if (!playerId) {
         history.push('/');
       } else {
-        mentorGetCurrentState({ stateId, playerId });
+        mentorGetCurrentState({ id: playerId });
       }
     }
   }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState, history]);
