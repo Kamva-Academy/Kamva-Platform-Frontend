@@ -8,11 +8,14 @@ export default function JitsiMicButton() {
   const [isMute, setIsMute] = useState(true);
   const toggleAudio = () => {
     if (isMute) {
-      jitsiFuncs.unmute();
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(() => {
+        jitsiFuncs.unmute();
+        setIsMute(!isMute);
+      });
     } else {
       jitsiFuncs.mute();
+      setIsMute(!isMute);
     }
-    setIsMute(!isMute);
   };
   return (
     <>
