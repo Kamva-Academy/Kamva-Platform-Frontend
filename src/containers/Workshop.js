@@ -64,8 +64,12 @@ const Workshop = ({
   }, [fsmId, playerId, isMentor]);
 
   const getCurrentStateIfNeed = () => {
-    if (needUpdateState && !isMentor) {
-      enterWorkshop({ id: fsmId });
+    if (needUpdateState) {
+      if (isMentor) {
+        mentorGetCurrentState({ id: playerId });
+      } else {
+        enterWorkshop({ id: fsmId });
+      }
     }
   };
 
@@ -83,7 +87,11 @@ const Workshop = ({
         type: 'info',
         message: 'هم‌تیمیت مکان تیم رو جا‌به‌جا کرد!',
       });
-      enterWorkshop({ id: fsmId });
+      if (isMentor) {
+        mentorGetCurrentState({ id: playerId });
+      } else {
+        enterWorkshop({ id: fsmId });
+      }
     }
   }, [parseTeamState]);
 
