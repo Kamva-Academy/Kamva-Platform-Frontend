@@ -168,8 +168,6 @@ const TeamSelection = ({
     });
   };
 
-  console.log(respondingInvitationId);
-
   return (
     <Layout>
       <Grid
@@ -308,9 +306,9 @@ const TeamSelection = ({
                     onClick={
                       team?.id
                         ? () => {
-                            changeCreateInvitationDialogStatus(true);
-                          }
-                        : () => {}
+                          changeCreateInvitationDialogStatus(true);
+                        }
+                        : () => { }
                     }>
                     <AddCircleOutlineIcon fontSize="large" />
                   </IconButton>
@@ -403,7 +401,6 @@ const TeamSelection = ({
                             <IconButton
                               size="small"
                               onClick={() => {
-                                console.log(invitation?.id);
                                 setRespondingInvitationId(invitation?.id);
                               }}>
                               <CheckCircleIcon

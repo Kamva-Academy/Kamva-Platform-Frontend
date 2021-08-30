@@ -54,21 +54,18 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
         </div>
       )
     } else {
-      return (
-        <>
-        </>
-      )
+      return (<></>)
     }
   }
 
   return (
     <IntlProvider translations={translations}>
-      <Loading />
       {dir === 'rtl' ? (
         <>
           <ThemeProvider theme={ZeroJourneyerMuiTheme}>
             <StylesProvider jss={jss}>
               <SnackbarProvider>
+                <Loading />
                 <Notifier />
                 <CssBaseline />
                 <Root />
@@ -80,6 +77,7 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
           <>
             <ThemeProvider theme={MuiTheme}>
               <SnackbarProvider>
+                <Loading />
                 <Notifier />
                 <CssBaseline />
                 <Root />
