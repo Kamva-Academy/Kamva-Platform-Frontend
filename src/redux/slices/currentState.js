@@ -37,7 +37,7 @@ export const goForwardAction = createAsyncThunkApi(
     defaultNotification: {
       showHttpError: true,
     },
-    onSuccessAction: changeTeamStateBroadcastAction,
+    // onSuccessAction: changeTeamStateBroadcastAction,
   }
 );
 
@@ -49,7 +49,7 @@ export const goBackwardAction = createAsyncThunkApi(
     defaultNotification: {
       showHttpError: true,
     },
-    onSuccessAction: changeTeamStateBroadcastAction,
+    // onSuccessAction: changeTeamStateBroadcastAction,
   }
 );
 
@@ -64,7 +64,7 @@ export const mentorMoveForwardAction = createAsyncThunkApi(
     defaultNotification: {
       showHttpError: true,
     },
-    onSuccessAction: changeTeamStateBroadcastAction,
+    // onSuccessAction: changeTeamStateBroadcastAction,
   }
 );
 
@@ -79,7 +79,7 @@ export const mentorMoveBackwardAction = createAsyncThunkApi(
     defaultNotification: {
       showHttpError: true,
     },
-    onSuccessAction: changeTeamStateBroadcastAction,
+    // onSuccessAction: changeTeamStateBroadcastAction,
   }
 );
 
