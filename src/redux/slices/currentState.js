@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { requestMentor } from '../../parse/mentor';
 import { changeTeamState } from '../../parse/team';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
@@ -10,16 +11,17 @@ import {
   goBackwardUrl,
   goForwardUrl,
   mentorGetCurrentStateUrl,
-  requestMentorUrl,
+  mentorMoveBackwardUrl,
+  mentorMoveForwardUrl,
   sendAnswerUrl,
 } from '../constants/urls';
 
 const changeTeamStateBroadcastAction = createAsyncThunk(
   'currentState/changeTeamStateBroadcast',
-  async ({ response: { id }, arg: { playerId } }) => {
+  async ({ response: { current_state }, arg: { teamId } }) => {
     await changeTeamState({
-      stateId: id.toString(),
-      uuid: playerId,
+      stateId: current_state.id.toString(),
+      uuid: teamId,
     });
   }
 );
@@ -29,9 +31,7 @@ export const goForwardAction = createAsyncThunkApi(
   Apis.POST,
   goForwardUrl,
   {
-    bodyCreator: ({ edgeId, playerId, password }) => ({
-      edge: edgeId,
-      player: playerId,
+    bodyCreator: ({ password }) => ({
       key: password,
     }),
     defaultNotification: {
@@ -46,7 +46,34 @@ export const goBackwardAction = createAsyncThunkApi(
   Apis.POST,
   goBackwardUrl,
   {
-    bodyCreator: ({ edgeId, playerId }) => ({ edge: edgeId, player: playerId }),
+    defaultNotification: {
+      showHttpError: true,
+    },
+    onSuccessAction: changeTeamStateBroadcastAction,
+  }
+);
+
+export const mentorMoveForwardAction = createAsyncThunkApi(
+  'currentState/mentorMoveForward',
+  Apis.POST,
+  mentorMoveForwardUrl,
+  {
+    bodyCreator: ({ teamId }) => ({
+      team: teamId,
+    }),
+    defaultNotification: {
+      showHttpError: true,
+    },
+    onSuccessAction: changeTeamStateBroadcastAction,
+  }
+);
+
+export const mentorMoveBackwardAction = createAsyncThunkApi(
+  'currentState/mentorMoveBackward',
+  Apis.POST,
+  mentorMoveBackwardUrl,
+  {
+    bodyCreator: ({ edgeId }) => ({ edge: edgeId }),
     defaultNotification: {
       showHttpError: true,
     },
@@ -147,19 +174,19 @@ export const enterWorkshopAction = createAsyncThunkApi(
   }
 );
 
-export const requestMentorAction = createAsyncThunkApi(
-  'currentState/requestMentor',
-  Apis.POST,
-  requestMentorUrl,
-  {
-    bodyCreator: ({ fsmId, teamId, playerId }) => ({
-      fsm: fsmId,
-      teamId,
-      player: playerId,
-    }),
-    defaultNotification: {
-      success: 'درخواست شما ارسال شد.',
-    },
+export const requestMentorAction = createAsyncThunk(
+  'requestMentor',
+  async ({ playerId, teamId, fsmId }, { rejectWithValue }) => {
+    try {
+      await requestMentor({ playerId, teamId, fsmId });
+      return {
+        message: 'درخواست شما ارسال شد.',
+      };
+    } catch (err) {
+      return rejectWithValue({
+        message: 'یه مشکلی وجود داره. یه چند لحظه دیگه دوباره تلاش کن!',
+      });
+    }
   }
 );
 
@@ -178,7 +205,7 @@ const stateNeedUpdate = (state) => {
 
 const getNewState = (state, { payload: { response } }) => {
   state.needUpdateState = false;
-  state.state = response;
+  state.state = response.current_state;
 };
 
 const sentAnswer = (state, { payload: { response } }) => {
@@ -194,6 +221,7 @@ const sentAnswer = (state, { payload: { response } }) => {
 };
 
 const getPlayer = (state, { payload: { response } }) => {
+  state.needUpdateState = false;
   state.playerId = response.id;
   state.teamId = response.team.id;
   state.state = response.current_state;
@@ -215,6 +243,9 @@ const currentStateSlice = createSlice({
 
     [goForwardAction.fulfilled.toString()]: getNewState,
     [goBackwardAction.fulfilled.toString()]: getNewState,
+    [mentorMoveForwardAction.fulfilled.toString()]: getNewState,
+    [mentorMoveBackwardAction.fulfilled.toString()]: getNewState,
+
     [getSelfAction.fulfilled.toString()]: getPlayer,
     [mentorGetCurrentStateAction.fulfilled.toString()]: getPlayer,
 

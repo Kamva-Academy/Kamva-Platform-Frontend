@@ -24,7 +24,7 @@ function ChangeStateDialog({ open, handleClose, edges, changeState }) {
               handleClose();
             }}
             key={edge.id}>
-            {edge.text}
+            {edge.str}
           </ListItem>
         ))}
       </List>

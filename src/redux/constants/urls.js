@@ -59,9 +59,13 @@ export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/uploa
   Math.random() * 10000000
 )}/rasta/landing-zero-v3_d5lbgq.json/`;
 
-export const goBackwardUrl = 'fsm/gobackward/';
+export const goBackwardUrl = ({ id }) => `fsm/edge/${id}/go_backward/`;
 
-export const goForwardUrl = 'fsm/goforward/';
+export const goForwardUrl = ({ id }) => `fsm/edge/${id}/go_forward/`;
+
+export const mentorMoveBackwardUrl = ({ id }) => `fsm/edge/${id}/mentor_move_backward/`;
+
+export const mentorMoveForwardUrl = ({ id }) => `fsm/edge/${id}/mentor_move_forward/`;
 
 export const getSelfUrl = ({ id }) => `fsm/fsm/${id}/get_self/`;
 

@@ -5,36 +5,46 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router-dom';
 
 import { StatePageContext } from '../../../../containers/Workshop';
-import { goForwardAction } from '../../../../redux/slices/currentState';
+import {
+  goForwardAction,
+  mentorMoveForwardAction,
+} from '../../../../redux/slices/currentState';
 import ChangeStateDialog from './ChangeStateDialog';
 import StatePasswordDialog from './PasswordDialog';
 
-function NextButton({ outwardEdges = [], goForward }) {
+function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
   const t = useTranslate();
   const [openChangeStateDialog, setOpenChangeStateDialog] = useState(false);
   const [selectedEdge, setSelectedEdge] = useState(null);
-  const { playerId, teamId, fsmId, isMentor } = useContext(StatePageContext);
+  const { isMentor, teamId } = useContext(StatePageContext);
+
+  const edges = isMentor
+    ? outwardEdges
+    : outwardEdges.filter((edge) => !edge.is_hidden);
 
   const history = useHistory();
 
   const changeState = (edge) => {
     if (isMentor) {
-      history.push(`/workshop/${teamId}/${playerId}/${fsmId}/${edge.head}`);
+      mentorMoveForward({
+        id: edge.id,
+        teamId,
+      });
+    }
+
+    if (edge.has_lock) {
+      setSelectedEdge(edge);
     } else {
-      if (edge.has_lock) {
-        setSelectedEdge(edge);
-      } else {
-        goForward({ edgeId: edge.id, playerId });
-      }
+      goForward({ id: edge.id, teamId });
     }
   };
 
   const handleClick = () => {
-    if (outwardEdges.length === 0) {
+    if (edges.length === 0) {
       history.push('/events/');
     }
-    if (outwardEdges.length === 1) {
-      changeState(outwardEdges[0]);
+    if (edges.length === 1) {
+      changeState(edges[0]);
     } else {
       setOpenChangeStateDialog(true);
     }
@@ -46,13 +56,14 @@ function NextButton({ outwardEdges = [], goForward }) {
         fullWidth
         variant="contained"
         color="primary"
+        disabled={edges.length === 0}
         onClick={handleClick}>
         {outwardEdges.length === 0 ? t('end') : t('next')}
       </Button>
       <ChangeStateDialog
         open={openChangeStateDialog}
         handleClose={() => setOpenChangeStateDialog(false)}
-        edges={outwardEdges}
+        edges={edges}
         changeState={changeState}
       />
       <StatePasswordDialog
@@ -61,8 +72,8 @@ function NextButton({ outwardEdges = [], goForward }) {
         onSubmit={(password) =>
           goForward({
             edgeId: selectedEdge.id,
-            playerId,
             password,
+            teamId,
           })
         }
       />
@@ -70,4 +81,7 @@ function NextButton({ outwardEdges = [], goForward }) {
   );
 }
 
-export default connect(null, { goForward: goForwardAction })(NextButton);
+export default connect(null, {
+  goForward: goForwardAction,
+  mentorMoveForward: mentorMoveForwardAction,
+})(NextButton);

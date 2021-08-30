@@ -132,9 +132,7 @@ const mapStateToProps = (state, ownProps) => ({
   playerId: state.account.userAccount.is_mentor
     ? ownProps.match.params.playerId
     : state.currentState.playerId,
-  teamId: state.account.userAccount.is_mentor
-    ? ownProps.match.params.teamId
-    : state.currentState.teamId,
+  teamId: state.currentState.teamId,
 });
 
 export default connect(mapStateToProps, {
