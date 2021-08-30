@@ -133,7 +133,7 @@ const Event = ({
             )} */}
             {is_user_participating && (
               <Button
-                disabled
+                // disabled
                 size="small"
                 variant="outlined"
                 fullWidth
