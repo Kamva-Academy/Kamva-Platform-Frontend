@@ -3,7 +3,6 @@ import Container from '@material-ui/core/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -51,17 +50,12 @@ const Workshop = ({
   addNotification,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
 
   useEffect(() => {
     if (isMentor) {
-      if (!playerId) {
-        history.push('/');
-      } else {
-        mentorGetCurrentState({ id: playerId });
-      }
+      mentorGetCurrentState({ id: playerId });
     }
-  }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState, history]);
+  }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState]);
 
   useEffect(() => {
     if (!isMentor) {
