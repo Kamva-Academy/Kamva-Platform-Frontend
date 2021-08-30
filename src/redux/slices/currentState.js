@@ -255,6 +255,8 @@ const currentStateSlice = createSlice({
       if (response.error) {
         return state;
       }
+      state.state = response.current_state;
+      state.needUpdateState = false;
     },
 
     [getScoresAction.fulfilled.toString()]: (
