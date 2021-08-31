@@ -15,7 +15,7 @@ import {
 const initialState = { token: null, user: {} };
 
 export const loginAction = createAsyncThunkApi(
-  'users/loginAction',
+  'account/loginAction',
   Apis.POST,
   loginUrl,
   {
@@ -27,7 +27,7 @@ export const loginAction = createAsyncThunkApi(
 );
 
 export const createAccountAction = createAsyncThunkApi(
-  'users/createAccountAction',
+  'account/createAccountAction',
   Apis.POST_FORM_DATA,
   accountCRUDUrl,
   {
@@ -44,7 +44,7 @@ export const createAccountAction = createAsyncThunkApi(
 );
 
 export const updateStudentShipAction = createAsyncThunkApi(
-  'users/updateStudentShipAction',
+  'account/updateStudentShipAction',
   Apis.PATCH,
   studentshipCRUDUrl,
   {
@@ -55,7 +55,7 @@ export const updateStudentShipAction = createAsyncThunkApi(
 );
 
 export const createInstitutesAction = createAsyncThunkApi(
-  'users/createInstitutesAction',
+  'account/createInstitutesAction',
   Apis.POST,
   institutesUrl,
   {
@@ -66,20 +66,20 @@ export const createInstitutesAction = createAsyncThunkApi(
 );
 
 export const getInstitutesAction = createAsyncThunkApi(
-  'users/getInstitutesAction',
+  'account/getInstitutesAction',
   Apis.GET,
   institutesUrl
 );
 
 // todo: clean these 3 functions
 export const getUserAccountAction = createAsyncThunkApi(
-  'users/getUserAccountAction',
+  'account/getUserAccountAction',
   Apis.GET,
   accountCRUDUrl
 );
 
 export const updateUserAccountAction = createAsyncThunkApi(
-  'users/updateUserAccountAction',
+  'account/updateUserAccountAction',
   Apis.PATCH,
   accountCRUDUrl,
   {
@@ -90,13 +90,13 @@ export const updateUserAccountAction = createAsyncThunkApi(
 );
 
 export const getUserProfileAction = createAsyncThunkApi(
-  'users/getUserProfileAction',
+  'account/getUserProfileAction',
   Apis.GET,
   profileCRUDUrl
 );
 
 export const changePasswordAction = createAsyncThunkApi(
-  'users/changePasswordAction',
+  'account/changePasswordAction',
   Apis.POST,
   changePasswordUrl,
   {
@@ -113,7 +113,7 @@ export const changePasswordAction = createAsyncThunkApi(
 );
 
 export const getVerificationCodeAction = createAsyncThunkApi(
-  'users/getVerificationCode',
+  'account/getVerificationCode',
   Apis.POST,
   verificationCodeUrl,
   {

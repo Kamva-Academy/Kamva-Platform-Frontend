@@ -13,7 +13,6 @@ function AvatarComponent({ name = 'بی‌نام' }) {
   return (
     <Tooltip title={name} arrow>
       <Avatar
-        // src={process.env.PUBLIC_URL + '/logo.png'}
         style={{ backgroundColor: stringToColor(name) }}
         alt="logo"
         className={classes.avatar}>
@@ -24,7 +23,9 @@ function AvatarComponent({ name = 'بی‌نام' }) {
 }
 
 const mapStateToProps = (state) => ({
-  name: state.account.userAccount?.first_name || ''
+  name: state.account.userAccount?.first_name && state.account.userAccount?.last_name
+    ? `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`
+    : ''
 });
 
 export default connect(mapStateToProps)(AvatarComponent);
