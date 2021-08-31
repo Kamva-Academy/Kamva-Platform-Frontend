@@ -12,6 +12,7 @@ const WorkshopAppBarItems = () => {
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const usersAvatar = <UsersAvatar />;
+
   return {
     desktopLeftItems: [whiteboardButton, mentorButton],
     desktopRightItems: [usersAvatar, jitsiMicButton, jitsiButton],

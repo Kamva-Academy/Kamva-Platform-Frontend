@@ -45,6 +45,8 @@ const Workshop = ({
   teamId,
   isMentor,
 
+  myTeam,
+
   enterWorkshop,
   mentorGetCurrentState,
   addNotification,
@@ -72,6 +74,8 @@ const Workshop = ({
       }
     }
   };
+
+  console.log(myTeam)
 
   useEffect(getCurrentStateIfNeed, [needUpdateState, getCurrentStateIfNeed]);
 
@@ -114,7 +118,7 @@ const Workshop = ({
 
   return (
     <StatePageContext.Provider
-      value={{ fsmId, stateId, playerId, teamId, isMentor }}>
+      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam }}>
       <Container component="main" className={classes.body}>
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
@@ -130,6 +134,8 @@ const Workshop = ({
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  myTeam: state.currentState.myTeam,
+
   workshopState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
   isMentor: state.account.userAccount.is_mentor,

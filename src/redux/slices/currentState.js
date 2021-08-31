@@ -201,10 +201,10 @@ const sentAnswer = (state, { payload: { response } }) => {
   state.state.widgets = state.state.widgets.map((widget) =>
     +widget.id === +response.problem
       ? {
-          ...widget,
-          last_submit: response.xanswer,
-          answer: response.answer,
-        }
+        ...widget,
+        last_submit: response.xanswer,
+        answer: response.answer,
+      }
       : widget
   );
 };
@@ -214,6 +214,7 @@ const getPlayer = (state, { payload: { response } }) => {
   state.playerId = response.id;
   state.teamId = response.team.id;
   state.state = response.current_state;
+  state.myTeam = response.team;
 };
 
 const currentStateSlice = createSlice({
