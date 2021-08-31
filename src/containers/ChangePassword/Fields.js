@@ -101,10 +101,10 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
-          autoComplete="off"
+          autoComplete="on"
           variant="outlined"
           fullWidth
-          onBlur={putData}
+          onChange={putData}
           label="رمز عبور جدید"
           name="password"
           inputProps={{ className: 'ltr-input' }}
@@ -114,10 +114,10 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete="off"
+          autoComplete="on"
           variant="outlined"
           fullWidth
-          onBlur={putData}
+          onChange={putData}
           label="تکرار رمز عبور جدید"
           type="password"
           inputProps={{ className: 'ltr-input' }}
@@ -127,7 +127,7 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete="off"
+          autoComplete="on"
           variant="outlined"
           fullWidth
           onChange={(e) => {
@@ -151,7 +151,7 @@ const InputFields = ({
         spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
-            autoComplete="off"
+            autoComplete="on"
             variant="outlined"
             fullWidth
             onChange={(e) => {

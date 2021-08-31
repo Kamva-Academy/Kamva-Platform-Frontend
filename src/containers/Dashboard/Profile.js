@@ -214,7 +214,7 @@ const Profile = ({
             <TextField
               fullWidth
               variant="outlined"
-              autoComplete="off"
+              autoComplete="on"
               required
               defaultValue={userProfile?.first_name}
               value={newProfile.first_name}
@@ -228,7 +228,7 @@ const Profile = ({
             <TextField
               fullWidth
               variant="outlined"
-              autoComplete="off"
+              autoComplete="on"
               required
               defaultValue={userProfile?.last_name}
               value={newProfile.last_name}
@@ -242,7 +242,7 @@ const Profile = ({
             <TextField
               fullWidth
               variant="outlined"
-              autoComplete="off"
+              autoComplete="on"
               required
               defaultValue={userProfile?.national_code}
               value={newProfile.national_code}
@@ -274,7 +274,7 @@ const Profile = ({
             <TextField
               fullWidth
               variant="outlined"
-              autoComplete="off"
+              autoComplete="on"
               defaultValue={userProfile?.email}
               value={newProfile.email}
               name="email"
@@ -375,7 +375,7 @@ const Profile = ({
             <TextField
               fullWidth
               variant="outlined"
-              autoComplete="off"
+              autoComplete="on"
               defaultValue={userProfile?.address}
               value={newProfile.address}
               name="address"
@@ -390,7 +390,7 @@ const Profile = ({
             <TextField
               fullWidth
               variant="outlined"
-              autoComplete="off"
+              autoComplete="on"
               defaultValue={userProfile?.postal_code}
               name="postal_code"
               value={newProfile.postal_code}
