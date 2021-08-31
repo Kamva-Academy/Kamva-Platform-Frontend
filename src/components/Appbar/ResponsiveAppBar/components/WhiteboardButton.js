@@ -1,4 +1,10 @@
-import { Dialog, IconButton, makeStyles, Paper } from '@material-ui/core';
+import {
+  Dialog,
+  IconButton,
+  makeStyles,
+  Paper,
+  Tooltip,
+} from '@material-ui/core';
 import { Brush as BrushIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 
@@ -37,9 +43,11 @@ function WhiteboardButton() {
 
   return (
     <>
-      <IconButton onClick={() => setOpen(!open)}>
-        <BrushIcon />
-      </IconButton>
+      <Tooltip title='تخته' arrow>
+        <IconButton size={width > 400 ? 'medium' : 'small'} onClick={() => setOpen(!open)}>
+          <BrushIcon />
+        </IconButton>
+      </Tooltip>
       <Dialog
         maxWidth="lg"
         open={open}

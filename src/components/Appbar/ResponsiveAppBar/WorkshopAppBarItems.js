@@ -16,8 +16,8 @@ const WorkshopAppBarItems = () => {
   return {
     desktopLeftItems: [whiteboardButton, mentorButton],
     desktopRightItems: [usersAvatar, jitsiMicButton, jitsiButton],
-    mobileLeftItems: [jitsiMicButton, jitsiButton, mentorButton],
-    mobileRightItems: [whiteboardButton],
+    mobileLeftItems: [mentorButton],
+    mobileRightItems: [jitsiMicButton, jitsiButton, whiteboardButton],
     mobileMenuListItems: [],
   };
 };
