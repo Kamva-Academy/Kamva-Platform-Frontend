@@ -65,17 +65,6 @@ function StatePage({ state = {} }) {
         spacing={2}
         className={classes.workshopContent}
         justifyContent="center">
-        {notQuestions.length > 0 && (
-          <Grid item xs={12} md={7} lg={7}>
-            <Paper className={classes.paper}>
-              {notQuestions.map((widget) => (
-                <div className={classes.mainItem} key={widget.id}>
-                  <Widget widget={widget} />
-                </div>
-              ))}
-            </Paper>
-          </Grid>
-        )}
         <Grid
           item
           xs={12}
@@ -102,6 +91,17 @@ function StatePage({ state = {} }) {
             )}
           </Paper>
         </Grid>
+        {notQuestions.length > 0 && (
+          <Grid item xs={12} md={7} lg={7}>
+            <Paper className={classes.paper}>
+              {notQuestions.map((widget) => (
+                <div className={classes.mainItem} key={widget.id}>
+                  <Widget widget={widget} />
+                </div>
+              ))}
+            </Paper>
+          </Grid>
+        )}
       </Grid>
 
       {hints.length > 0 && (
