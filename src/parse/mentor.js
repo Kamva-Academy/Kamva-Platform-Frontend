@@ -7,11 +7,11 @@ export const haveRequest = async({ teamId, fsmId }) =>{
   query.equalTo('teamId', teamId);
   query.equalTo('fsmId', fsmId);
   const requests = await query.find();
-  return requests.length > 0
+  return requests.length > 0;
 }
 
 export const requestMentor = async ({ playerId, teamId, fsmId }) => {
-  if(await haveRequest({ teamId, fsmId })) return;
+  // if(await haveRequest({ teamId, fsmId })) return;
   const requestMentor = new RequestMentor();
   requestMentor.set('playerId', playerId);
   requestMentor.set('teamId', teamId);
