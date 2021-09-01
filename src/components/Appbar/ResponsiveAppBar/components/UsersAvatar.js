@@ -8,6 +8,9 @@ import { stringToColor } from '../../../../utils/stringToColor';
 
 const UsersAvatar = () => {
   const { myTeam } = useContext(StatePageContext);
+
+  console.log(myTeam.length)
+
   return (
     <AvatarGroup max={4}>
       {myTeam?.members?.map((member) => (
@@ -16,7 +19,7 @@ const UsersAvatar = () => {
           arrow
           title={
             `${member.first_name} ${member.last_name}` +
-            (myTeam?.team_head === member.id ? ' (سرگروه) ' : '')
+            ((myTeam?.team_head === member.id && myTeam.members.length != 1) ? ' (سرگروه) ' : '')
           }>
           <Badge
             overlap="circle"
