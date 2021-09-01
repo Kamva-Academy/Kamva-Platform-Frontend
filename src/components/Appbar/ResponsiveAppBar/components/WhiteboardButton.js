@@ -4,6 +4,7 @@ import {
   makeStyles,
   Paper,
   Tooltip,
+  withWidth,
 } from '@material-ui/core';
 import { Brush as BrushIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
@@ -20,7 +21,7 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-function WhiteboardButton() {
+function WhiteboardButton({ width: themeWidth }) {
   const [open, setOpen] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -39,12 +40,12 @@ function WhiteboardButton() {
     setHeight(window.innerHeight);
   };
 
-  const isDraggable = width > 1100 && !isFullScreen;
+  const isDraggable = themeWidth != 'xs' && !isFullScreen;
 
   return (
     <>
       <Tooltip title='تخته' arrow>
-        <IconButton size={width > 400 ? 'medium' : 'small'} onClick={() => setOpen(!open)}>
+        <IconButton size={themeWidth == 'xs' ? 'small' : 'medium'} onClick={() => setOpen(!open)}>
           <BrushIcon />
         </IconButton>
       </Tooltip>
@@ -73,4 +74,4 @@ function WhiteboardButton() {
   );
 }
 
-export default WhiteboardButton;
+export default withWidth()(WhiteboardButton);
