@@ -1,4 +1,4 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles, withWidth } from '@material-ui/core';
 import React, { useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -12,32 +12,28 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function MentorButton({ callMentor, isMentor, disabled = false }) {
+function MentorButton({ callMentor, isMentor, disabled = false, width }) {
   const classes = useStyles();
   const t = useTranslate();
   const { playerId, teamId, fsmId } = useContext(StatePageContext);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    updateWindowDimensions();
-    window.addEventListener('resize', updateWindowDimensions);
-    return () => window.removeEventListener('resize', updateWindowDimensions);
-  });
-
-  const updateWindowDimensions = () => {
-    setWidth(window.innerWidth);
-  };
+  const [isEnable, setEnable] = useState(true);
 
   return (
     <Button
-      size={width > 400 ? '' : 'small'}
+      size={width == 'xs' ? 'small' : ''}
       variant="contained"
       color="primary"
+      disabled={!isEnable}
       className={classes.mentorButton}
-      disabled={isMentor || disabled}
-      style={{ fontSize: width > 400 ? 18 : 12 }}
-      onClick={() => callMentor({ playerId, teamId, fsmId: +fsmId })}>
-      {t('callMentor')}
+      style={{ fontSize: width == 'xs' ? 12 : 18 }}
+      onClick={() => {
+        callMentor({ playerId, teamId, fsmId: +fsmId })
+        setEnable(false);
+        setTimeout(() => {
+          setEnable(true);
+        }, 60000)
+      }}>
+      {isEnable ? t('callMentor') : 'یک دقیقه صبر کنید'}
     </Button>
   );
 }
@@ -46,6 +42,6 @@ const mapStatesToProps = (state) => ({
   isMentor: state.account.userAccount?.is_mentor,
 });
 
-export default connect(mapStatesToProps, { callMentor: requestMentorAction })(
+export default withWidth()(connect(mapStatesToProps, { callMentor: requestMentorAction })(
   MentorButton
-);
+));
