@@ -9,6 +9,7 @@ import { stringToColor } from '../../../../utils/stringToColor';
 const UsersAvatar = () => {
   const { myTeam } = useContext(StatePageContext);
 
+
   return (
     <AvatarGroup max={4}>
       {myTeam?.members?.map((member) => (
