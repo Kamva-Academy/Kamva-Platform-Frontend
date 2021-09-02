@@ -1,5 +1,17 @@
-body {
+html {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body,
+#root {
   margin: 0;
+  position: absolute;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
 }
 
 input.ltr-input,
