@@ -219,7 +219,7 @@ const RegistrationForm = ({
             spacing={2}>
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper} elevation={2}>
                   <Widget
                     pushAnswer={pushAnswer(
                       widget?.id,

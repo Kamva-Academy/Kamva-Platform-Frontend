@@ -34,6 +34,12 @@ export default function Frame({
     doc.close();
 
     doc.fonts.ready.then(fixHeight);
+
+    // todo: fix TOF:
+    setTimeout(() => {
+      fixHeight();
+    }, 1000)
+
   }, [doc, content, fixHeight]);
 
   useEffect(() => {

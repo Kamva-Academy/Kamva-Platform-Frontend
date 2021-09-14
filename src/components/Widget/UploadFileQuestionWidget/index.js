@@ -15,18 +15,18 @@ import { uploadFileAction } from '../../../redux/slices/events';
 import { addNotificationAction } from '../../../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
-  uploadButton: {
-    marginLeft: 'auto',
-    whiteSpace: 'nowrap',
-  },
-  small: {
-    fontSize: 10,
-  },
   lastUploadButton: {
     color: '#334499',
+    fontSize: 12,
   },
   divider: {
     margin: theme.spacing(1, 0),
+  },
+  clearIcon: {
+    fontSize: 12,
+  },
+  required: {
+    color: 'red',
   },
 }));
 
@@ -35,9 +35,9 @@ const UploadFileQuestionWidget = ({
   addNotification,
   uploadFile,
 
-  id,
+  required,
+  id: widgetId,
   text = 'محل آپلود فایل',
-  last_submit,
   uploadedFile,
   isFetching,
 }) => {
@@ -55,7 +55,7 @@ const UploadFileQuestionWidget = ({
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 8e6) {
         uploadFile({
-          id,
+          id: widgetId,
           answerFile: e.target.files[0],
         });
       } else {
@@ -74,34 +74,32 @@ const UploadFileQuestionWidget = ({
 
   return (
     <Grid container>
-      <Grid item container justifyContent="center" alignItems="center">
+      <Grid item container justifyContent="center" alignItems="center" spacing={1}>
         <Grid item xs={12} sm={6}>
-          <Typography>{text}</Typography>
+          <Typography>
+            {text}
+            {required
+              ? <span className={classes.required}>{'*'}</span>
+              : ''
+            }
+          </Typography>
         </Grid>
-        <Grid
-          item
-          container
-          xs={12}
-          sm={6}
-          justifyContent="center"
-          alignItems="center">
+        <Grid item container xs={12} sm={6} spacing={1} justifyContent="center" alignItems="center">
           <Grid item>
             <Button
               component="label"
-              htmlFor={'raised-button-file' + id}
+              htmlFor={'raised-button-file-' + widgetId}
               disabled={isFetching}
               variant="contained"
               color="primary"
-              size="small"
-              startIcon={<CloudUploadIcon />}
-              className={classes.uploadButton}>
+              startIcon={<CloudUploadIcon />}>
               {t('uploadFile')}
             </Button>
             <input
               value={file?.value}
               accept="application/pdf,image/*"
               style={{ display: 'none' }}
-              id={'raised-button-file' + id}
+              id={'raised-button-file-' + widgetId}
               type="file"
               onChange={handleFileChange}
             />
@@ -112,15 +110,16 @@ const UploadFileQuestionWidget = ({
                 size="small"
                 startIcon={
                   <IconButton size="small" onClick={clearFile}>
-                    <ClearIcon />
+                    <ClearIcon className={classes.clearIcon} />
                   </IconButton>
                 }
+                variant='outlined'
                 className={classes.lastUploadButton}
                 href={file.link}
                 component="a"
                 download
                 target="_blank">
-                {file.name}
+                {file.name.length <= 20 ? file.name : file.name.substring(0, 20) + '...'}
               </Button>
             </Grid>
           )}
@@ -130,8 +129,7 @@ const UploadFileQuestionWidget = ({
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
+const mapStateToProps = (state) => ({
   uploadedFile: state.events.uploadedFile,
   isFetching: state.events.isFetching,
 });

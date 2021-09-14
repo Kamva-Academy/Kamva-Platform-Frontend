@@ -19,16 +19,17 @@ const ANSWER_TYPE_TO_WIDGET_TYPES = {
   Game: 'Game',
 };
 
-const Widget = ({ widget, mode = MODES.VIEW, ...props }) => {
+const Widget = ({ widget, ...props }) => {
+
+  console.log(widget)
+
   const { WidgetComponent } =
-    WIDGET_TYPES[
-      widget.widget_type || ANSWER_TYPE_TO_WIDGET_TYPES[widget.answer_type]
-    ];
+    WIDGET_TYPES[widget.widget_type];
 
   return (
-    <div>
-      <WidgetComponent {...props} {...widget} mode={mode} />
-    </div>
+    <>
+      <WidgetComponent  {...widget} {...props} />
+    </>
   );
 };
 
