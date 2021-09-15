@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { errorHandler } from './errorHandler';
 
 export const createAsyncThunkApi = (typePrefix, api, url, options) =>
-  createAsyncThunk(typePrefix, async (arg, { rejectWithValue, dispatch }) => {
+  createAsyncThunk(typePrefix, async (arg, { rejectWithValue, dispatch, getState }) => {
     try {
       const body = options?.bodyCreator?.(arg) || arg;
       const stringUrl = typeof url === 'function' ? url(arg) : url;
@@ -21,12 +21,14 @@ export const createAsyncThunkApi = (typePrefix, api, url, options) =>
           : {}),
       };
     } catch (error) {
-      return errorHandler(
-        error,
-        dispatch,
-        rejectWithValue,
-        options?.defaultNotification?.error,
-        options?.defaultNotification?.showHttpError || false
-      );
+      if (getState().Intl.locale == 'fa') {
+        return errorHandler(
+          error,
+          dispatch,
+          rejectWithValue,
+          options?.defaultNotification?.error,
+          options?.defaultNotification?.showHttpError || false
+        );
+      }
     }
   });

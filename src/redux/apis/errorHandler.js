@@ -10,13 +10,13 @@ export const errorHandler = (
 
   if (!error.response) {
     return rejectWithValue({
-      message: 'ارتباط با سرور دچار مشکل شده!',
+      message: 'ارتباط با سرور دچار مشکل شده است. دوباره تلاش کنید.',
     });
   }
 
-  if (error.response.data?.code) {
+  if (persianMessages?.[error.response.data?.code]) {
     return rejectWithValue({
-      message: persianMessages[error.response.data?.code],
+      message: persianMessages[error.response.data.code],
     });
   }
 
@@ -33,7 +33,7 @@ export const errorHandler = (
       }
       dispatch({ type: 'account/logout' });
       return rejectWithValue({
-        message: 'لطفا دوباره وارد سامانه شو!',
+        message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
       });
     case 404:
       return rejectWithValue({
@@ -41,7 +41,7 @@ export const errorHandler = (
       });
     case 500:
       return rejectWithValue({
-        message: 'ایراد سروری پیش اومده! لطفاً ما را در جریان بذار.',
+        message: 'ایراد سروری پیش آمده! لطفاً ما را در جریان بگذارید.',
       });
   }
 
