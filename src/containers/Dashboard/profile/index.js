@@ -20,16 +20,16 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import AddInstitute from '../../components/Dialog/AddInstitute';
+import AddInstitute from '../../../components/Dialog/AddInstitute';
 import {
   getInstitutesAction,
   getUserProfileAction,
   updateStudentShipAction,
   updateUserAccountAction,
-} from '../../redux/slices/account';
-import Iran from '../../utils/iran';
-import { toEnglishNumber } from '../../utils/translateNumber';
-import Layout from '../Layout';
+} from '../../../redux/slices/account';
+import Iran from '../../../utils/iran';
+import { toEnglishNumber } from '../../../utils/translateNumber';
+import Layout from '../../Layout';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
 
@@ -444,9 +444,6 @@ const Profile = ({
                 ))}
               </Select>
             </FormControl>
-            <Typography variant="caption" align="center">
-              اگر مدرسه‌ی شما در لیست فوق نیست، خودتان آن را اضافه کنید!
-            </Typography>
           </Grid>
           <Grid item container xs={12} sm={6}>
             <FormControl
@@ -470,10 +467,6 @@ const Profile = ({
                 ))}
               </Select>
             </FormControl>
-            <Typography variant="caption" align="center">
-              پایه‌ای را انتخاب کنید که در سال جدید به تحصیل در آن خواهید
-              پرداخت.
-            </Typography>
           </Grid>
           <Grid item container justifyContent="center" xs={12} sm={6}>
             <Button

@@ -5,7 +5,7 @@ import ChangePassword from '../containers/ChangePassword';
 import CreateAccount from '../containers/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../containers/Dashboard/Events';
-import Profile from '../containers/Dashboard/Profile';
+import Profile from '../containers/Dashboard/profile';
 import JoinMentor from '../containers/JoinMentor';
 import Landing from '../containers/Landing';
 import Login from '../containers/Login';
