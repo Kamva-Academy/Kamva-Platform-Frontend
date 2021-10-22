@@ -195,7 +195,14 @@ const accountSlice = createSlice({
     [getUserAccountAction.rejected.toString()]: isNotFetching,
 
     [createInstitutesAction.pending.toString()]: isFetching,
-    [createInstitutesAction.fulfilled.toString()]: isNotFetching,
+    [createInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.institutes = [
+        ...state.institutes,
+        response,
+      ];
+      state.newlyAddedInstitute = response; 
+      state.isFetching = false;
+    },
     [createInstitutesAction.rejected.toString()]: isNotFetching,
 
     [updateUserAccountAction.pending.toString()]: isFetching,

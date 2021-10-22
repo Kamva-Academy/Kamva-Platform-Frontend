@@ -29,10 +29,7 @@ import {
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
-import Iran from '../../../utils/iran';
-import { toEnglishNumber } from '../../../utils/translateNumber';
 import Layout from '../../Layout';
-
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
@@ -51,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
 }));
-
 
 const tabs = [
   {
@@ -77,18 +73,6 @@ const Index = ({
 }) => {
   const [tabNumber, setTabNumber] = useState(0);
   const classes = useStyles();
-
-  useEffect(() => {
-    if (userAccount?.id) {
-      getUserProfile({ id: userAccount.id });
-    }
-  }, [getUserProfile, getInstitutes]);
-
-
-  if (!userProfile) {
-    return <></>;
-  }
-
   const TabComponent = tabs[tabNumber].component;
 
   return (
@@ -104,11 +88,11 @@ const Index = ({
             value={tabNumber}
             onChange={(event, newValue) => setTabNumber(newValue)}>
             {
-            tabs.map((tab, index) => {
-              return (
-                <Tab key={index} label={tab.label} />
-              )
-            })
+              tabs.map((tab, index) => {
+                return (
+                  <Tab key={index} label={tab.label} />
+                )
+              })
             }
           </Tabs>
         </Grid>
@@ -134,5 +118,3 @@ export default connect(mapStateToProps, {
   updateStudentShip: updateStudentShipAction,
   getInstitutes: getInstitutesAction,
 })(Index);
-
-// todo: cast english digits to persian

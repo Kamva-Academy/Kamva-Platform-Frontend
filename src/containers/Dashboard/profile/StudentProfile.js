@@ -35,7 +35,7 @@ import {
 } from '../../../redux/slices/notifications';
 import { toEnglishNumber, toPersianNumber } from '../../../utils/translateNumber';
 import AddInstitute from '../../../components/Dialog/AddInstitute';
-
+import Iran from '../../../utils/iran';
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
@@ -56,12 +56,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const GRADES = [
-  // { value: 1, name: 'اول' },
-  // { value: 2, name: 'دوم' },
-  // { value: 3, name: 'سوم' },
-  // { value: 4, name: 'چهارم' },
-  // { value: 5, name: 'پنجم' },
-  // { value: 6, name: 'ششم' },
+  { value: 1, name: 'اول' },
+  { value: 2, name: 'دوم' },
+  { value: 3, name: 'سوم' },
+  { value: 4, name: 'چهارم' },
+  { value: 5, name: 'پنجم' },
+  { value: 6, name: 'ششم' },
   { value: 7, name: 'هفتم' },
   { value: 8, name: 'هشتم' },
   { value: 9, name: 'نهم' },
@@ -75,22 +75,45 @@ function Index({
   getUserProfile,
   updateStudentShip,
   getInstitutes,
+
   userAccount,
   userProfile,
   institutes,
+  newlyAddedInstitute,
 }) {
   const classes = useStyles();
-  const [value, setValue] = useState();
-  const [username, setUsername] = useState();
-  const [newProfile, setNewProfile] = useState({});
   const [newStudentship, setNewStudentship] = useState();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
 
+  useEffect(() => {
+    if (userAccount?.id) {
+      getUserProfile({ id: userAccount.id });
+    }
+  }, [userAccount])
+
+  useEffect(() => {
+    if (userProfile?.city) {
+      getInstitutes({ cityTitle: Iran.Cities.find(city => userProfile?.city == city.title).title });
+      setNewStudentship({
+        ...newStudentship,
+        school: '',
+      })
+    }
+  }, [userProfile])
+
+  useEffect(() => {
+    if (newlyAddedInstitute) {
+      setNewStudentship({
+        ...newStudentship,
+        school: newlyAddedInstitute.id,
+      })
+    }
+  }, [newlyAddedInstitute])
 
   const handleStudentshipDocumentChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setNewStudentship({
-        ...newProfile,
+        ...newStudentship,
         document: event.target.files[0],
       });
     }
@@ -122,6 +145,9 @@ function Index({
     );
   };
 
+  if (!userProfile) {
+    return <></>;
+  }
 
   return (
     <>
@@ -141,9 +167,9 @@ function Index({
               <Select
                 IconComponent={AddSchoolInstituteIcon}
                 className={classes.dropDown}
-                defaultValue={userProfile?.school_studentship?.school}
                 onChange={handleStudentshipChange}
                 name="school"
+                value={newStudentship?.school || userProfile?.school_studentship?.school}
                 label="مدرسه">
                 {institutes?.map((school) => (
                   <MenuItem key={school.id} value={school.id}>
@@ -226,6 +252,8 @@ function Index({
         </Grid>
       </Grid>
       <AddInstitute
+        province={userProfile?.province}
+        city={userProfile?.city}
         open={addInstituteDialog}
         handleClose={() => {
           setAddInstituteDialogStatus(false);
@@ -236,6 +264,7 @@ function Index({
 }
 
 const mapStateToProps = (state) => ({
+  newlyAddedInstitute: state.account.newlyAddedInstitute,
   userAccount: state.account.userAccount,
   userProfile: state.account.userProfile,
   isFetching: state.account.isFetching,

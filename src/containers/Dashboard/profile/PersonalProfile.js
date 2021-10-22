@@ -21,7 +21,6 @@ import {
   TableRow,
   TextField,
 } from '@material-ui/core';
-import ClearIcon from '@material-ui/icons/Clear';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
@@ -70,13 +69,11 @@ function Index({
   const [username, setUsername] = useState();
   const [newProfile, setNewProfile] = useState({});
 
-
   useEffect(() => {
-    if (userProfile?.city || newProfile?.city) {
-      getInstitutes({ cityId: Iran.Cities.find(city => userProfile?.city == city.title || newProfile?.city == city.title).id });
+    if (userAccount?.id) {
+      getUserProfile({ id: userAccount.id });
     }
-  }, [userProfile?.city, newProfile?.city])
-
+  }, [])
 
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
@@ -111,6 +108,10 @@ function Index({
     });
   };
 
+
+  if (!userProfile) {
+    return <></>;
+  }
 
   return (
     <>
@@ -279,7 +280,7 @@ function Index({
                 className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                defaultValue={userProfile?.province}
+                value={newProfile?.province || userProfile?.province}
                 onChange={handleProfileChange}
                 name="province"
                 label="استان">
@@ -303,7 +304,7 @@ function Index({
                 disabled={!newProfile?.province && !userProfile?.city}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                defaultValue={userProfile?.city}
+                value={newProfile?.city || userProfile?.city}
                 onChange={handleProfileChange}
                 name="city"
                 label="شهر">

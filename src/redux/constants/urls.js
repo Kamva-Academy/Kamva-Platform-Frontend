@@ -11,7 +11,7 @@ export const profileCRUDUrl = ({ id }) =>
 export const studentShipUrl = 'auth/studentship/';
 export const studentshipCRUDUrl = ({ id }) => `auth/studentship/${id}/`;
 
-export const institutesUrl = ({ cityId }) => `auth/institutes?city=${cityId}`;
+export const institutesUrl = ({ cityTitle }) => cityTitle ? `auth/institutes?city=${cityTitle}` : 'auth/institutes/';
 
 // payment
 export const getAllUserMerchandisesUrl = ({ id }) => `auth/payment/${id}/`;

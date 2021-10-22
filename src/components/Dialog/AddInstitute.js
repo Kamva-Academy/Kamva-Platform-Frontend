@@ -16,12 +16,13 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
+import {
+  addNotificationAction,
+} from '../../redux/slices/notifications';
 import {
   createInstitutesAction,
   getInstitutesAction,
 } from '../../redux/slices/account';
-import Iran from '../../utils/iran';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,12 +49,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AreYouSure({
+function Index({
   getInstitutes,
   open,
   handleClose,
   createInstitutes,
+  addNotification,
 
+  province,
+  city,
   isFetching,
 }) {
   const classes = useStyles();
@@ -67,12 +71,21 @@ function AreYouSure({
   };
 
   const handleButtonClick = () => {
-    createInstitutes({ institute_type: 'School', ...data }).then(() => {
+    if (!data?.name) {
+      addNotification({
+        message: 'لطفاً نام مدرسه را وارد کنید.',
+        type: 'error',
+      });
+      return;
+    }
+    createInstitutes({
+      institute_type: 'School',
+      ...data,
+      province,
+      city,
+    }).then(() => {
       handleClose(false);
-    }); //todo
-    setTimeout(() => {
-      getInstitutes();
-    }, 2000);
+    });
   };
 
   return (
@@ -147,45 +160,26 @@ function AreYouSure({
         <br />
         <Grid container spacing={2} justifyContent="center" alignItems="center">
           <Grid item container xs={12} sm={6}>
-            <FormControl
-              size="small"
+            <TextField
+              fullWidth
+              disabled
               variant="outlined"
-              className={classes.formControl}>
-              <InputLabel>استان</InputLabel>
-              <Select
-                className={classes.dropDown}
-                onChange={doSetData}
-                name="province"
-                label="استان">
-                {Iran.Provinces.map((province) => (
-                  <MenuItem key={province.id} value={province.id}>
-                    {province.title}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+              name="province"
+              size="small"
+              label="استان"
+              value={province}
+            />
           </Grid>
           <Grid item container xs={12} sm={6}>
-            <FormControl
-              disabled={!data?.province}
-              size="small"
+            <TextField
+              fullWidth
+              disabled
               variant="outlined"
-              className={classes.formControl}>
-              <InputLabel>شهر</InputLabel>
-              <Select
-                className={classes.dropDown}
-                onChange={doSetData}
-                name="city"
-                label="شهر">
-                {Iran.Cities.filter(
-                  (city) => city.province_id === data?.province
-                ).map((city) => (
-                  <MenuItem key={city.id} value={city.id}>
-                    {city.title}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+              name="province"
+              size="small"
+              label="شهر"
+              value={city}
+            />
           </Grid>
         </Grid>
         <Grid container spacing={2} justifyContent="center" alignItems="center">
@@ -237,6 +231,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  addNotification: addNotificationAction,
   createInstitutes: createInstitutesAction,
   getInstitutes: getInstitutesAction,
-})(AreYouSure);
+})(Index);
