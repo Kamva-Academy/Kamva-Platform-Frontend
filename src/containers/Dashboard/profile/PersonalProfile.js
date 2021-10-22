@@ -361,7 +361,7 @@ function Index({
               fullWidth
               variant="contained"
               color="secondary">
-              ذخیره اطلاعات شخصی
+              ذخیره
             </Button>
           </Grid>
         </Grid>

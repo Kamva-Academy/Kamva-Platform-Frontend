@@ -246,7 +246,7 @@ function Index({
               fullWidth
               variant="contained"
               color="secondary">
-              ذخیره اطلاعات دانش‌آموزی
+              ذخیره
             </Button>
           </Grid>
         </Grid>
