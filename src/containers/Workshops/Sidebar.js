@@ -7,8 +7,12 @@ import {
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import { getCertificateAction } from '../../redux/slices/events';
+import {
+	getCertificateAction,
+	getOneEventInfoAction,
+} from '../../redux/slices/events';
 
 const useStyles = makeStyles(() => ({
 
@@ -16,12 +20,22 @@ const useStyles = makeStyles(() => ({
 
 function Workshops({
 	getCertificate,
+	getOneEventInfo,
+
+	event,
 }) {
 	const classes = useStyles();
+	const { eventId } = useParams();
 
 	useEffect(() => {
-		getCertificate({});
-	}, []);
+		getOneEventInfo({ id: eventId });
+	}, [getOneEventInfo]);
+
+	useEffect(() => {
+		if (event?.registration_receipt) {
+			getCertificate({ registrationReceiptId: event?.registration_receipt });
+		}
+	}, [event]);
 
 	return (
 		<Grid container spacing={2}>
@@ -36,13 +50,17 @@ function Workshops({
 				</Button>
 			</Grid>
 		</Grid>
-
 	);
 }
 
+const mapStateToProps = (state) => ({
+	event: state.events.event,
+});
+
 export default connect(
-	null,
+	mapStateToProps,
 	{
 		getCertificate: getCertificateAction,
+		getOneEventInfo: getOneEventInfoAction,
 	}
 )(Workshops);
