@@ -60,7 +60,7 @@ const Events = ({ getAllEventsInfo, events }) => {
         </Grid>
         <Grid item container justify="center" spacing={2} xs={12}>
           {events.map((event, index) => (
-            <Grid key={index} item>
+            <Grid key={index} item xs={12} sm={6} md={3}>
               <EventCard {...event} />
             </Grid>
           ))}

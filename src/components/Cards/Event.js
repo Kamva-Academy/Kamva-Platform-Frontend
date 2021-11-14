@@ -39,19 +39,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Event = ({
-  cover_page,
-  id,
-  name,
-  description,
-  is_active,
-  team_size,
-  is_user_participating,
-  user_registration_status,
-}) => {
+const Event = (event) => {
   const classes = useStyles();
   const t = useTranslate();
-
+  // console.log(event)
   return (
     <Card className={classes.paper}>
       <Grid container justifyContent="center" spacing={1}>
@@ -63,7 +54,7 @@ const Event = ({
           alignItems="center"
           xs={12}
           sm={5}>
-          <img src={cover_page} alt="" className={classes.eventImage} />
+          <img src={event?.cover_page} alt="" className={classes.eventImage} />
         </Grid>
         <Grid
           item
@@ -76,12 +67,12 @@ const Event = ({
           className={classes.content}>
           <Grid item>
             <Typography variant="h3" className={classes.notificationTitle}>
-              {name}
+              {event?.name}
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="body2" color="textSecondary">
-              {description}
+              {event?.description}
             </Typography>
           </Grid>
           <Grid item>
@@ -89,33 +80,33 @@ const Event = ({
               variant="outlined"
               icon={<PeopleAltIcon />}
               label={
-                team_size == 1
+                event?.event_type == 'Individual'
                   ? 'انفرادی'
-                  : `${toPersianNumber(team_size)} ${t('person')}`
+                  : `${toPersianNumber(event?.team_size)} ${t('person')}`
               }
             />
           </Grid>
           <Grid item>
-            {user_registration_status === 'NotRegistered' && (
+            {event?.user_registration_status === 'NotRegistered' && (
               <Button
-                disabled={!is_active}
+                disabled={!event?.is_active}
                 size="small"
                 variant="outlined"
                 fullWidth
                 component={Link}
-                to={`/event/${id}/registration_form/`}
+                to={`/event/${event?.id}/registration_form/`}
                 color="secondary">
                 {t('register')}
               </Button>
             )}
-            {!is_user_participating &&
-              user_registration_status != 'NotRegistered' && (
+            {!event?.is_user_participating &&
+              event?.user_registration_status != 'NotRegistered' && (
                 <Button
                   size="small"
                   variant="outlined"
                   fullWidth
                   component={Link}
-                  to={`/event/${id}/status/`}
+                  to={`/event/${event?.id}/status/`}
                   color="secondary">
                   {'وضعیت ثبت‌نام'}
                 </Button>
@@ -131,13 +122,13 @@ const Event = ({
                 {'تیم‌کشی'}
               </Button>
             )} */}
-            {is_user_participating && (
+            {event?.is_user_participating && (
               <Button
                 size="small"
                 variant="outlined"
                 fullWidth
                 component={Link}
-                to={`/event/${id}/`}
+                to={`/event/${event?.id}/`}
                 color="secondary">
                 {'ورود'}
               </Button>
