@@ -41,7 +41,7 @@ function Workshops({
 		<Grid container spacing={2}>
 			<Grid item xs={12}>
 				<Typography variant="h1" align='center' component="h2">
-					کارگاه‌ها
+					{'کارگاه‌ها'}
 				</Typography>
 			</Grid>
 			<Grid item xs={12}>
