@@ -21,7 +21,7 @@ import PasswordDialog from './PasswordDialog';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    width: 230,
+    width: '100%',
   },
   media: {
     height: 140,
@@ -42,8 +42,9 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
       <CardActionArea disabled>
         {isLoading ? (
           <>
-            <Skeleton animation="wave" height={10} width="80%" />
+            <Skeleton animation="wave" height={10} width={180}/>
             <Skeleton
+              width={180}
               animation="wave"
               variant="rect"
               className={classes.media}
@@ -124,6 +125,9 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
   );
 };
 
-export default connect(null, { enterWorkshop: enterWorkshopAction })(
-  WorkshopCard
-);
+export default connect(
+  null,
+  {
+    enterWorkshop: enterWorkshopAction
+  }
+)(WorkshopCard);

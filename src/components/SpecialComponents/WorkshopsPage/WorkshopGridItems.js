@@ -12,7 +12,7 @@ export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
     ));
 
   return workshops.map((workshop) => (
-    <Grid item key={workshop.id}>
+    <Grid item key={workshop.id} xs={12} sm={6} md={4}>
       <WorkshopCard eventId={eventId} workshop={workshop} />
     </Grid>
   ));

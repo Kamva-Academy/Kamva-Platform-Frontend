@@ -84,6 +84,8 @@ export const getEventRegistrationInfoUrl = 'auth/registration-info/';
 
 export const paymentRequestUrl = 'auth/pay/';
 
+export const getCertificateUrl = ({ registrationReceiptId }) => `/api/fsm/receipts/${registrationReceiptId}/get_certificate/`;
+
 export const applyDiscountUrl = 'auth/verify-discount/';
 
 export const getScoresUrl = 'fsm/getscores/';

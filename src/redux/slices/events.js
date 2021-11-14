@@ -23,6 +23,7 @@ import {
   submitRegistrationFormUrl,
   TeamCRUDUrl,
   uploadFileUrl,
+  getCertificateUrl,
 } from '../constants/urls';
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
@@ -229,6 +230,18 @@ export const applyDiscountAction = createAsyncThunkApi(
     }),
   }
 );
+
+export const getCertificateAction = createAsyncThunkApi(
+  'events/getCertificate',
+  Apis.GET,
+  getCertificateUrl,
+  {
+    defaultNotification: {
+      error: 'مشکلی در دریافت گواهی حضور وجود داشت. دوباره تلاش کنید.',
+    },
+  }
+);
+
 
 const initialState = {
   isFetching: false,

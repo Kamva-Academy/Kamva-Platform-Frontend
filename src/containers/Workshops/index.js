@@ -1,10 +1,17 @@
-import { Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  makeStyles,
+  Typography,
+  Button,
+} from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import WorkshopGridItems from '../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
-import { getEventWorkshopsAction } from '../redux/slices/events';
+import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
+import { getEventWorkshopsAction } from '../../redux/slices/events';
+import Layout from '../Layout';
+import Sidebar from './Sidebar';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -23,17 +30,16 @@ function Workshops({ eventId, workshops, isLoading, getEventWorkshops }) {
   }, []);
 
   return (
-    <>
-      <ResponsiveAppBar mode="STUDENT_DASHBOARD" />
-      <Container maxWidth="md" className={classes.root}>
-        <Typography variant="h1" component="h2">
-          کارگاه‌ها
-        </Typography>
+    <Layout>
+      <Grid container spacing={4} justify='center'>
+        <Grid item xs={12} sm={3}>
+          <Sidebar />
+        </Grid>
         <Grid
-          container
-          justifyContent="center"
-          alignItems="center"
-          className={classes.grid}
+          xs={12} sm={9}
+          container item
+          justify='flex-start'
+          alignItems='flex-start'
           spacing={3}>
           <WorkshopGridItems
             eventId={eventId}
@@ -41,8 +47,8 @@ function Workshops({ eventId, workshops, isLoading, getEventWorkshops }) {
             isLoading={isLoading}
           />
         </Grid>
-      </Container>
-    </>
+      </Grid>
+    </Layout>
   );
 }
 
