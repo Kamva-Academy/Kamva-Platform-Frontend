@@ -9,7 +9,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
-import { getEventWorkshopsAction } from '../../redux/slices/events';
+import { 
+  getEventWorkshopsAction,
+ } from '../../redux/slices/events';
 import Layout from '../Layout';
 import Sidebar from './Sidebar';
 
@@ -22,7 +24,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function Workshops({ eventId, workshops, isLoading, getEventWorkshops }) {
+function Workshops({
+  eventId,
+  workshops,
+  isLoading,
+  getEventWorkshops,
+}) {
   const classes = useStyles();
 
   useEffect(() => {
