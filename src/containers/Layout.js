@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(4),
     display: 'flex',
     justifyContent: 'center',
-    maxWidth: '900px !important',
+    maxWidth: '1280x !important',
     marginRight: 'auto !important',
     marginLeft: 'auto !important',
   },
