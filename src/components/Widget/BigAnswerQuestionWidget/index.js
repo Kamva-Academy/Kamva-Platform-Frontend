@@ -1,8 +1,11 @@
 import { Button, makeStyles, Paper } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
+import {
+  addNotificationAction,
+} from '../../../redux/slices/notifications'
 import {
   sendBigAnswerAction,
 } from '../../../redux/slices/widget';
@@ -14,37 +17,48 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     marginTop: theme.spacing(1),
   },
-  showAnswer: {
-    background: '#eee',
-  },
 }));
 
 const BigAnswerQuestionWidget = ({
+  addNotification,
   pushAnswer,
-  id,
-  text = '',
-  answer,
-  last_submit,
-  mode,
-  playerId,
   sendBigAnswer,
+
+  last_submitted_answer,
+  id: widgetId,
+  text: problemText,
 }) => {
   const t = useTranslate();
   const classes = useStyles();
-  const [value, setValue] = useState(last_submit?.text);
+  const [recentAnswer, setRecentAnswer] = useState();
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
+  useEffect(() => {
+    if (last_submitted_answer) {
+      setRecentAnswer(last_submitted_answer?.text);
+    }
+  }, [last_submitted_answer])
+
   const handleTextChange = (text) => {
-    pushAnswer('text', text);
-    setValue(text);
+    if (pushAnswer) {
+      pushAnswer('text', text);
+    }
+    setRecentAnswer(text);
   };
 
   const handleButtonClick = () => {
+    if (!recentAnswer) {
+      addNotification({
+        message: 'لظفاً پاسخی وارد کنید.',
+        type: 'error',
+      });
+      return;
+    }
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);
     }, 20000);
-    sendBigAnswer({ playerId, problemId: id, answer: value });
+    sendBigAnswer({ widgetId, text: recentAnswer });
   };
 
   return (
@@ -55,48 +69,36 @@ const BigAnswerQuestionWidget = ({
           scrolling: 'no',
           width: '100%',
         }}
-        content={text}
+        content={problemText}
       />
-      <label>{t('answer')}</label>
-      {mode === MODES.VIEW ? (
-        <TinyEditorComponent
-          id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
-          content={value}
-          onChange={handleTextChange}
-        />
-      ) : (
-        <Paper className={classes.showAnswer}>
-          <TinyPreview
-            frameProps={{
-              frameBorder: '0',
-              width: '100%',
-            }}
-            content={mode === MODES.EDIT ? answer?.text : value}
-          />
-        </Paper>
-      )}
-
-      {mode !== MODES.CORRECTION && !pushAnswer && (
+      <TinyEditorComponent
+        id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
+        content={recentAnswer}
+        onChange={handleTextChange}
+      />
+      {!pushAnswer &&
         <Button
           fullWidth
           variant="contained"
           color="primary"
           size="small"
           className={classes.submit}
-          disabled={mode === MODES.EDIT || isButtonDisabled}
+          disabled={isButtonDisabled}
           onClick={handleButtonClick}>
-          {t('submitAnswer')}
+          {t('submit')}
         </Button>
-      )}
+      }
     </>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  playerId: state.currentState.player?.id,
-  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
 });
 
-export default connect(mapStateToProps, { sendBigAnswer: sendBigAnswerAction })(
-  BigAnswerQuestionWidget
-);
+export default connect(
+  mapStateToProps,
+  {
+    sendBigAnswer: sendBigAnswerAction,
+    addNotification: addNotificationAction,
+  }
+)(BigAnswerQuestionWidget);

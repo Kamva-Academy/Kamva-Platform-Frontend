@@ -78,12 +78,10 @@ const UploadFileQuestionWidget = ({
         <Grid item xs={12} sm={6}>
           <Typography>
             {text}
-            {required
-              ? <span className={classes.required}>{'*'}</span>
-              : ''
-            }
+            {required ? <span className={classes.required}>{'*'}</span> : ''}
           </Typography>
         </Grid>
+
         <Grid item container xs={12} sm={6} spacing={1} justifyContent="center" alignItems="center">
           <Grid item>
             <Button
@@ -104,6 +102,7 @@ const UploadFileQuestionWidget = ({
               onChange={handleFileChange}
             />
           </Grid>
+
           {file?.name && file?.link && (
             <Grid item justifyContent="center" alignItems="center">
               <Button

@@ -6,10 +6,13 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
+import {
+  addNotificationAction,
+} from '../../../redux/slices/notifications'
 import {
   sendSmallAnswerAction,
 } from '../../../redux/slices/widget';
@@ -20,32 +23,48 @@ const useStyles = makeStyles((theme) => ({
 
 
 const SmallAnswerQuestionWidget = ({
-  pushAnswer,
-  required,
-  id: widgetId,
-  text = '',
+  addNotification,
   sendSmallAnswer,
+  pushAnswer,
+
+  required,
+  last_submitted_answer,
+  id: widgetId,
+  text: problemText,
 }) => {
   const t = useTranslate();
   const classes = useStyles();
-  const [value, setValue] = useState();
+  const [recentAnswer, setRecentAnswer] = useState();
   const [isButtonDisabled, setButtonDisable] = useState(false);
+
+  useEffect(() => {
+    if (last_submitted_answer) {
+      setRecentAnswer(last_submitted_answer?.text);
+    }
+  }, [last_submitted_answer])
 
   const handleTextFieldChange = (e) => {
     if (pushAnswer) {
       pushAnswer('text', e.target.value);
     }
-    setValue(e.target.value);
+    setRecentAnswer(e.target.value);
   }
 
-  console.log(value)
+  console.log(recentAnswer)
 
   const handleButtonClick = () => {
+    if (!recentAnswer) {
+      addNotification({
+        message: 'لظفاً پاسخی وارد کنید.',
+        type: 'error',
+      });
+      return;
+    }
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);
     }, 20000);
-    sendSmallAnswer({ widgetId, text: value });
+    sendSmallAnswer({ widgetId, text: recentAnswer });
   }
 
   return (
@@ -56,13 +75,13 @@ const SmallAnswerQuestionWidget = ({
           scrolling: 'no',
           width: '100%',
         }}
-        content={required ? text + '<span style="color: #ff0000;">*</span>' : text}
+        content={required ? problemText + '<span style="color: #ff0000;">*</span>' : problemText}
       />
       <Grid container alignItems="center" spacing={1}>
         <Grid item xs>
           <TextField
             fullWidth
-            value={value}
+            value={recentAnswer}
             onChange={handleTextFieldChange}
           />
         </Grid>
@@ -92,12 +111,12 @@ const SmallAnswerQuestionWidget = ({
 };
 
 const mapStateToProps = (state) => ({
-  playerId: state.currentState.player?.id,
 });
 
 export default connect(
   mapStateToProps,
   {
+    addNotification: addNotificationAction,
     sendSmallAnswer: sendSmallAnswerAction,
   }
 )(SmallAnswerQuestionWidget);

@@ -39,7 +39,7 @@ export const sendFileAction = createAsyncThunkApi(
 export const sendBigAnswerAction = ({ widgetId, text }) =>
   sendWidgetAnswerAction({
     widgetId,
-    problem_type: 'BigAnswer',
+    text,
     answer_type: 'BigAnswer',
   });
 
