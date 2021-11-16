@@ -3,7 +3,9 @@ import clsx from 'clsx';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { sendMultiChoiceAnswerAction } from '../../../redux/slices/currentState';
+import {
+  sendMultiChoiceAnswerAction,
+} from '../../../redux/slices/widget';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import { MODES } from '..';
 

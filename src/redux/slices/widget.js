@@ -2,15 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
-import { sendAnswerUrl } from '../constants/urls';
+import {
+  sendWidgetAnswerUrl,
+} from '../constants/urls';
 
-export const sendAnswerAction = createAsyncThunkApi(
-  'widget/sendAnswer',
+export const sendWidgetAnswerAction = createAsyncThunkApi(
+  'widget/sendWidgetAnswerAction',
   Apis.POST,
-  sendAnswerUrl,
+  sendWidgetAnswerUrl,
   {
     defaultNotification: {
-      success: 'جوابت با موفقیت ثبت شد!',
+      success: 'پاسخ شما با موفقیت ثبت شد.',
       showHttpError: true,
     },
   }
@@ -19,7 +21,7 @@ export const sendAnswerAction = createAsyncThunkApi(
 export const sendFileAction = createAsyncThunkApi(
   'widget/sendFileAction',
   Apis.POST,
-  sendAnswerUrl,
+  sendWidgetAnswerUrl,
   {
     bodyCreator: ({ playerId, problemId, answerFile }) => ({
       player: playerId,
@@ -34,30 +36,22 @@ export const sendFileAction = createAsyncThunkApi(
   }
 );
 
-export const sendBigAnswerAction = ({ playerId, problemId, answer }) =>
-  sendAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemBigAnswer',
-    answer: {
-      text: answer,
-      answer_type: 'BigAnswer',
-    },
+export const sendBigAnswerAction = ({ widgetId, text }) =>
+  sendWidgetAnswerAction({
+    widgetId,
+    problem_type: 'BigAnswer',
+    answer_type: 'BigAnswer',
   });
 
-export const sendSmallAnswerAction = ({ playerId, problemId, answer }) =>
-  sendAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemSmallAnswer',
-    answer: {
-      text: answer,
-      answer_type: 'SmallAnswer',
-    },
+export const sendSmallAnswerAction = ({ widgetId, text }) =>
+  sendWidgetAnswerAction({
+    widgetId,
+    text,
+    answer_type: 'SmallAnswer',
   });
 
 export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
-  sendAnswerAction({
+  sendWidgetAnswerAction({
     player: playerId,
     problem: problemId,
     problem_type: 'ProblemMultiChoice',

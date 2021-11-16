@@ -12,7 +12,6 @@ import {
   mentorGetCurrentStateUrl,
   mentorMoveBackwardUrl,
   mentorMoveForwardUrl,
-  sendAnswerUrl,
 } from '../constants/urls';
 
 const changeTeamStateBroadcastAction = createAsyncThunk(
@@ -87,69 +86,6 @@ export const mentorGetCurrentStateAction = createAsyncThunkApi(
   Apis.GET,
   mentorGetCurrentStateUrl
 );
-
-export const sendAnswerAction = createAsyncThunkApi(
-  'currentState/sendAnswer',
-  Apis.POST,
-  sendAnswerUrl,
-  {
-    defaultNotification: {
-      success: 'جوابت با موفقیت ثبت شد!',
-      showHttpError: true,
-    },
-  }
-);
-
-export const sendFileAnswerAction = createAsyncThunkApi(
-  'currentState/sendFileAnswer',
-  Apis.POST,
-  sendAnswerUrl,
-  {
-    bodyCreator: ({ playerId, problemId, answerFile }) => ({
-      player: playerId,
-      problem: problemId,
-      problem_type: 'ProblemUploadFileAnswer',
-      answer_file: answerFile,
-    }),
-    defaultNotification: {
-      success: 'جوابت با موفقیت ثبت شد!',
-      showHttpError: true,
-    },
-  }
-);
-
-export const sendBigAnswerAction = ({ playerId, problemId, answer }) =>
-  sendAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemBigAnswer',
-    answer: {
-      text: answer,
-      answer_type: 'BigAnswer',
-    },
-  });
-
-export const sendSmallAnswerAction = ({ playerId, problemId, answer }) =>
-  sendAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemSmallAnswer',
-    answer: {
-      text: answer,
-      answer_type: 'SmallAnswer',
-    },
-  });
-
-export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
-  sendAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemMultiChoice',
-    answer: {
-      text: answer,
-      answer_type: 'MultiChoiceAnswer',
-    },
-  });
 
 export const enterWorkshopAction = createAsyncThunkApi(
   'currentState/enterWorkshop',
@@ -237,9 +173,6 @@ const currentStateSlice = createSlice({
     [mentorMoveBackwardAction.fulfilled.toString()]: getNewState,
 
     [mentorGetCurrentStateAction.fulfilled.toString()]: getPlayer,
-
-    [sendAnswerAction.fulfilled.toString()]: sentAnswer,
-    [sendFileAnswerAction.fulfilled.toString()]: sentAnswer,
 
     [enterWorkshopAction.fulfilled.toString()]: getPlayer,
 

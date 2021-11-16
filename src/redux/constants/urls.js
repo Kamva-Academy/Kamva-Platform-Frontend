@@ -74,8 +74,6 @@ export const mentorGetCurrentStateUrl = ({ id }) => `fsm/player/${id}`;
 
 export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 
-export const sendAnswerUrl = 'fsm/sendanswer/';
-
 export const enterWorkshopUrl = ({ id }) => `fsm/fsm/${id}/enter/`;
 
 export const requestMentorUrl = 'fsm/requestmentor/';
@@ -83,6 +81,9 @@ export const requestMentorUrl = 'fsm/requestmentor/';
 export const getEventRegistrationInfoUrl = 'auth/registration-info/';
 
 export const paymentRequestUrl = 'auth/pay/';
+
+// widget
+export const sendWidgetAnswerUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/submit_answer/`;
 
 //event
 export const getCertificateUrl = ({ registrationReceiptId }) => `/fsm/receipts/${registrationReceiptId}/get_certificate/`;

@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { sendBigAnswerAction } from '../../../redux/slices/currentState';
+import {
+  sendBigAnswerAction,
+} from '../../../redux/slices/widget';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 import { MODES } from '..';
