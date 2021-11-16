@@ -133,18 +133,6 @@ const getNewState = (state, { payload: { response } }) => {
   state.state = response.current_state;
 };
 
-const sentAnswer = (state, { payload: { response } }) => {
-  state.state.widgets = state.state.widgets.map((widget) =>
-    +widget.id === +response.problem
-      ? {
-        ...widget,
-        last_submit: response.xanswer,
-        answer: response.answer,
-      }
-      : widget
-  );
-};
-
 const getPlayer = (state, { payload: { response } }) => {
   state.needUpdateState = false;
   state.playerId = response.id;
