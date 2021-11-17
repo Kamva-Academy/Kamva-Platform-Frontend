@@ -18,8 +18,9 @@ export const getAllUserMerchandisesUrl = ({ id }) => `auth/payment/${id}/`;
 export const purchaseEventUrl = 'auth/payment/purchase/';
 export const submitDiscountCodeUrl = 'auth/payment/verify_discount/';
 
-// fsm
-export const getEventWorkshopsUrl = ({ id }) => `fsm/event/${id}/get_fsms/`;
+// workshop
+export const getWorkshopsUrl = ({ eventId }) => eventId ? `fsm/fsm/?event=${eventId}` : 'fsm/fsm/';
+
 export const getAllEventsInfoUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
@@ -41,7 +42,6 @@ export const respondInvitationUrl = ({ invitationId }) =>
 export const TeamCRUDUrl = ({ teamId }) =>
   teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
 
-export const workshopsUrl = 'fsm/fsm/';
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
 

@@ -13,7 +13,6 @@ const useStyles = makeStyles(() => ({
   },
   paper: {
     padding: '0px !important',
-    maxWidth: '400px',
     backgroundColor: 'rgb(255, 255, 255, 0.94)',
     fontSize: '1rem',
     textDecoration: 'none',

@@ -7,13 +7,14 @@ import {
   deleteInvitationUrl,
   getAllEventsInfoUrl,
   getAllUserMerchandisesUrl,
+  getCertificateUrl,
   getEventRegistrationInfoUrl,
-  getEventWorkshopsUrl,
   getMyInvitationsUrl,
   getOneEventInfoUrl,
   getOneRegistrationFormUrl,
   getTeamInvitationsUrl,
   getTeamUrl,
+  getWorkshopsUrl,
   inviteSomeoneUrl,
   paymentRequestUrl,
   purchaseEventUrl,
@@ -23,13 +24,12 @@ import {
   submitRegistrationFormUrl,
   TeamCRUDUrl,
   uploadFileUrl,
-  getCertificateUrl,
 } from '../constants/urls';
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
   'events/getEventWorkshopsAction',
   Apis.GET,
-  getEventWorkshopsUrl
+  getWorkshopsUrl
 );
 
 export const getAllEventsInfoAction = createAsyncThunkApi(
@@ -281,11 +281,8 @@ const eventSlice = createSlice({
     },
 
     [getAllEventsInfoAction.pending.toString()]: isFetching,
-    [getAllEventsInfoAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
-      state.events = response;
+    [getAllEventsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.events = response.results;
       state.isFetching = false;
     },
     [getAllEventsInfoAction.rejected.toString()]: isNotFetching,

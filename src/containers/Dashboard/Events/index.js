@@ -3,7 +3,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import EventCard from '../../../components/Cards/Event';
-import { getAllEventsInfoAction } from '../../../redux/slices/events';
+import {
+  getAllEventsInfoAction,
+} from '../../../redux/slices/events';
 import Layout from '../../Layout';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,10 +47,8 @@ const Events = ({ getAllEventsInfo, events }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    getAllEventsInfo();
+    getAllEventsInfo({});
   }, [getAllEventsInfo]);
-
-  // window.open('/institute/', '_blank', 'height=600,width=400');
 
   return (
     <Layout>
@@ -58,9 +58,9 @@ const Events = ({ getAllEventsInfo, events }) => {
             {'رویدادها'}
           </Typography>
         </Grid>
-        <Grid item container justify="center" spacing={2} xs={12}>
+        <Grid item container spacing={2} xs={12}>
           {events.map((event, index) => (
-            <Grid key={index} item xs={12} sm={6}>
+            <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
               <EventCard {...event} />
             </Grid>
           ))}
