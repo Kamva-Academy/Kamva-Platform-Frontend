@@ -50,6 +50,8 @@ const Events = ({ getAllEventsInfo, events }) => {
     getAllEventsInfo({});
   }, [getAllEventsInfo]);
 
+  const activeEvents = events.filter((event) => event?.is_active ? true : false)
+
   return (
     <Layout>
       <Grid container spacing={4} justify='center'>
@@ -59,7 +61,7 @@ const Events = ({ getAllEventsInfo, events }) => {
           </Typography>
         </Grid>
         <Grid item container spacing={2} xs={12}>
-          {events.map((event, index) => (
+          {activeEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
               <EventCard {...event} />
             </Grid>
