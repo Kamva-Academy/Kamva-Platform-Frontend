@@ -269,12 +269,9 @@ const eventSlice = createSlice({
     [getEventWorkshopsAction.pending.toString()]: (state) => {
       state.getWorkshopsLoading = true;
     },
-    [getEventWorkshopsAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getEventWorkshopsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.getWorkshopsLoading = false;
-      state.workshops = response;
+      state.workshops = response.results;
     },
     [getEventWorkshopsAction.rejected.toString()]: (state) => {
       state.getWorkshopsLoading = false;

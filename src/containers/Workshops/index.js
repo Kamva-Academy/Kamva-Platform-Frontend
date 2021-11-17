@@ -1,17 +1,17 @@
 import {
+  Button,
   Container,
   Grid,
   makeStyles,
   Typography,
-  Button,
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
-import { 
+import {
   getEventWorkshopsAction,
- } from '../../redux/slices/events';
+} from '../../redux/slices/events';
 import Layout from '../Layout';
 import Sidebar from './Sidebar';
 
@@ -33,17 +33,17 @@ function Workshops({
   const classes = useStyles();
 
   useEffect(() => {
-    getEventWorkshops({ id: eventId });
+    getEventWorkshops({ eventId });
   }, []);
 
   return (
     <Layout>
       <Grid container spacing={4} justify='center'>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={3} md={2}>
           <Sidebar />
         </Grid>
         <Grid
-          xs={12} sm={9}
+          xs={12} sm={9} md={10}
           container item
           justify='flex-start'
           alignItems='flex-start'
