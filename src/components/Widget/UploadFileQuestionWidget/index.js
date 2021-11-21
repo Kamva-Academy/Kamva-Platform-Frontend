@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import { CloudUpload as CloudUploadIcon } from '@material-ui/icons';
 import ClearIcon from '@material-ui/icons/Clear';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
@@ -45,9 +45,11 @@ const UploadFileQuestionWidget = ({
   const [file, setFile] = useState({ link: '', name: '', value: '' });
   const classes = useStyles({ haveFile: file });
 
-  React.useEffect(() => {
+  useEffect(() => {
     setFile(uploadedFile);
-    pushAnswer('upload_file_answer', uploadedFile?.id);
+    if (pushAnswer) {
+      pushAnswer('upload_file_answer', uploadedFile?.id);
+    }
   }, [uploadedFile]);
 
   const handleFileChange = async (e) => {
@@ -55,7 +57,7 @@ const UploadFileQuestionWidget = ({
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 8e6) {
         uploadFile({
-          id: widgetId,
+          widgetId,
           answerFile: e.target.files[0],
         });
       } else {
@@ -69,7 +71,9 @@ const UploadFileQuestionWidget = ({
   const clearFile = (e) => {
     e.preventDefault();
     setFile({ link: '', name: '', value: '' });
-    pushAnswer('upload_file_answer', '');
+    if (pushAnswer) {
+      pushAnswer('upload_file_answer', '');
+    }
   };
 
   return (

@@ -98,13 +98,6 @@ const SmallAnswerQuestionWidget = ({
             </Button>
           </Grid>
         }
-        {/* {answer?.text &&
-          <Grid item xs={12}>
-            <Typography variant="body2">
-              {t('answer') + ': ' + answer.text}
-            </Typography>
-          </Grid>
-        } */}
       </Grid>
     </>
   );

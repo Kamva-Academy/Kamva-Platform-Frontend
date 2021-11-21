@@ -106,9 +106,9 @@ export const uploadFileAction = createAsyncThunkApi(
   Apis.POST_FORM_DATA,
   uploadFileUrl,
   {
-    bodyCreator: ({ answerFile, id, name }) => ({
+    bodyCreator: ({ answerFile, widgetId, name }) => ({
       answer_file: answerFile,
-      problem: id,
+      problem: widgetId,
       file_name: name,
     }),
   }
