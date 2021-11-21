@@ -10,7 +10,7 @@ export const errorHandler = (
 
   if (!error.response) {
     return rejectWithValue({
-      message: 'ارتباط با سرور دچار مشکل شده است. دوباره تلاش کنید.',
+      message: 'ارتباط با سرور دچار مشکل شده است.',
     });
   }
 

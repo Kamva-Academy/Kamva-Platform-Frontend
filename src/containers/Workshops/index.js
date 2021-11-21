@@ -39,11 +39,11 @@ function Workshops({
   return (
     <Layout>
       <Grid container spacing={4} justify='center'>
-        <Grid item xs={12} sm={3} md={2}>
+        <Grid item xs={12} sm={3}>
           <Sidebar />
         </Grid>
         <Grid
-          xs={12} sm={9} md={10}
+          xs={12} sm={9}
           container item
           justify='flex-start'
           alignItems='flex-start'

@@ -139,7 +139,7 @@ export const inviteSomeoneAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'دعوت‌نامه‌ی شما با موفقیت ارسال شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+      error: 'مشکلی وجود داشت. .',
     },
   }
 );
@@ -151,7 +151,7 @@ export const deleteInvitationAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'دعوت‌نامه پس گرفته شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+      error: 'مشکلی وجود داشت. .',
     },
   }
 );
@@ -163,7 +163,7 @@ export const respondInvitationAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'پاسخ به دعوت‌نامه با موفقیت ثبت شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+      error: 'مشکلی وجود داشت. .',
     },
   }
 );
@@ -175,7 +175,7 @@ export const createTeamAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'تیم با موفقیت ساخته شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+      error: 'مشکلی وجود داشت. .',
     },
   }
 );
@@ -187,7 +187,7 @@ export const deleteTeamAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'تیم با موفقیت حذف شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.',
+      error: 'مشکلی وجود داشت. .',
     },
   }
 );
@@ -237,7 +237,7 @@ export const getCertificateAction = createAsyncThunkApi(
   getCertificateUrl,
   {
     defaultNotification: {
-      error: 'مشکلی در دریافت گواهی حضور وجود داشت. دوباره تلاش کنید.',
+      error: 'مشکلی در دریافت گواهی حضور وجود داشت. .',
     },
   }
 );
@@ -431,14 +431,12 @@ const eventSlice = createSlice({
     [respondInvitationAction.rejected.toString()]: isNotFetching,
 
     [createTeamAction.pending.toString()]: isFetching,
-    [createTeamAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [createTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.team = response;
     },
     [createTeamAction.rejected.toString()]: isNotFetching,
+
 
     [deleteTeamAction.pending.toString()]: isFetching,
     [deleteTeamAction.fulfilled.toString()]: (state, action) => {
@@ -448,6 +446,15 @@ const eventSlice = createSlice({
       }, 1000);
     },
     [deleteTeamAction.rejected.toString()]: isNotFetching,
+
+
+    [getCertificateAction.pending.toString()]: isFetching,
+    [getCertificateAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.certificateLink = response.certificate;
+      state.isFetching = false;
+    },
+    [getCertificateAction.rejected.toString()]: isNotFetching,
+
   },
 });
 
