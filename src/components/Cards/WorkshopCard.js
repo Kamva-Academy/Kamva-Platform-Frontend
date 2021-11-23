@@ -15,9 +15,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { baseURL } from '../../../axios';
-import { enterWorkshopAction } from '../../../redux/slices/currentState';
-import PasswordDialog from './PasswordDialog';
+import { baseURL } from '../../axios';
+import { enterWorkshopAction } from '../../redux/slices/currentState';
+import PasswordDialog from '../SpecialComponents/WorkshopsPage/PasswordDialog';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -42,7 +42,7 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
       <CardActionArea disabled>
         {isLoading ? (
           <>
-            <Skeleton animation="wave" height={10} width={180}/>
+            <Skeleton animation="wave" height={10} width={180} />
             <Skeleton
               width={180}
               animation="wave"

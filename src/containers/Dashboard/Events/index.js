@@ -8,7 +8,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import EventCard from '../../../components/Cards/Event';
-import WorkshopCard from '../../../components/Cards/Workshop';
+import WorkshopCard from '../../../components/Cards/WorkshopCard';
 import {
   getAllEventsInfoAction,
 } from '../../../redux/slices/events';
@@ -84,11 +84,11 @@ const Events = ({
               <EventCard {...event} />
             </Grid>
           ))}
-          {registrableWorkshops?.map((workshop, index) => (
+          {/* {registrableWorkshops?.map((workshop, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
-              <WorkshopCard isWorkshop {...workshop} />
+              <WorkshopCard isWorkshop workshop />
             </Grid>
-          ))}
+          ))} */}
         </Grid>
       </Grid>
     </Layout>

@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
 
-import WorkshopCard from './WorkshopCard';
+import WorkshopCard from '../../Cards/WorkshopCard';
 
 export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
   if (isLoading)
