@@ -46,7 +46,7 @@ const InputFields = ({
   };
 
   const isPhoneNumberValid = (phoneNumber) => {
-    var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
+    var regex = new RegExp('^09\\d{9}$');
     if (regex.test(phoneNumber)) {
       return phoneNumber;
     } else {
@@ -102,7 +102,6 @@ const InputFields = ({
     <>
       <Grid item>
         <TextField
-          autoComplete="on"
           variant="outlined"
           fullWidth
           onChange={(e) => {
@@ -121,7 +120,6 @@ const InputFields = ({
       <Grid item container justifyContent="center" alignItems="stretch" spacing={1}>
         <Grid item xs={8} sm={9}>
           <TextField
-            autoComplete="on"
             variant="outlined"
             fullWidth
             onChange={(e) => {
@@ -151,7 +149,6 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete="on"
           variant="outlined"
           fullWidth
           onChange={putData}
@@ -164,7 +161,6 @@ const InputFields = ({
 
       <Grid item>
         <TextField
-          autoComplete="on"
           variant="outlined"
           fullWidth
           onChange={putData}

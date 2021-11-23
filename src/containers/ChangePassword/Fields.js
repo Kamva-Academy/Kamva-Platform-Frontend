@@ -41,7 +41,7 @@ const InputFields = ({
   };
 
   const isPhoneNumberValid = (phoneNumber) => {
-    var regex = new RegExp('^(\\+98|0)?9\\d{9}$');
+    var regex = new RegExp('^09\\d{9}$');
     if (regex.test(phoneNumber)) {
       return phoneNumber;
     } else {
