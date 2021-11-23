@@ -9,6 +9,7 @@ import { redirectReducer } from './redirect';
 import { translatorReducer } from './translator';
 import { whiteboardReducer } from './whiteboard';
 import { widgetReducer } from './widget';
+import { workshopReducer } from './workshop';
 
 const allReducers = combineReducers({
   account: accountReducer,
@@ -19,6 +20,7 @@ const allReducers = combineReducers({
   redirect: redirectReducer,
   landing: landingReducer,
   events: eventsReducer,
+  workshop: workshopReducer,
   Intl: translatorReducer,
 });
 

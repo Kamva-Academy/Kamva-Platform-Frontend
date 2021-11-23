@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
   noPadding: {
     padding: '0px !important',
   },
-  eventImage: {
+  workshopImage: {
     height: '100%',
     maxHeight: '300px',
     width: '100%',
@@ -38,12 +38,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Event = ({
-  ...event
+const workshop = ({
+  isWorkshop,
+  ...workshop
 }) => {
   const classes = useStyles();
   const t = useTranslate();
-  console.log(event)
+  console.log(workshop)
   return (
     <Card className={classes.paper}>
       <Grid container justifyContent="center" spacing={1}>
@@ -55,7 +56,7 @@ const Event = ({
           alignItems="center"
           xs={12}
           sm={5}>
-          <img src={event?.cover_page} alt="" className={classes.eventImage} />
+          <img src={workshop?.cover_page} alt="" className={classes.workshopImage} />
         </Grid>
         <Grid
           item
@@ -68,12 +69,12 @@ const Event = ({
           className={classes.content}>
           <Grid item>
             <Typography variant="h3" className={classes.notificationTitle}>
-              {event?.name}
+              {workshop?.name}
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="body2" color="textSecondary">
-              {event?.description}
+              {workshop?.description}
             </Typography>
           </Grid>
           <Grid item>
@@ -81,36 +82,36 @@ const Event = ({
               variant="outlined"
               icon={<PeopleAltIcon />}
               label={
-                event?.event_type == 'Individual'
+                workshop?.workshop_type == 'Individual'
                   ? 'انفرادی'
-                  : `${toPersianNumber(event?.team_size)} ${t('person')}`
+                  : `${toPersianNumber(workshop?.team_size)} ${t('person')}`
               }
             />
           </Grid>
           <Grid item>
             {
-              event?.registration_form &&
-              event?.user_registration_status === 'NotRegistered' &&
+              workshop?.registration_form &&
+              workshop?.user_registration_status === 'NotRegistered' &&
               <Button
-                disabled={!event?.is_active}
+                disabled={!workshop?.is_active}
                 size="small"
                 variant="outlined"
                 fullWidth
                 component={Link}
-                to={`/event/${event?.id}/registration_form/`}
+                to={`/workshop/${workshop?.id}/registration_form/`}
                 color="secondary">
                 {t('register')}
               </Button>
             }
             {
-              !event?.is_user_participating &&
-              event?.user_registration_status != 'NotRegistered' &&
+              !workshop?.is_user_participating &&
+              workshop?.user_registration_status != 'NotRegistered' &&
               <Button
                 size="small"
                 variant="outlined"
                 fullWidth
                 component={Link}
-                to={`/event/${event?.id}/status/`}
+                to={`/workshop/${workshop?.id}/status/`}
                 color="secondary">
                 {'وضعیت ثبت‌نام'}
               </Button>
@@ -121,18 +122,18 @@ const Event = ({
                 variant="outlined"
                 fullWidth
                 component={Link}
-                to={`/event/${id}/team_selection/`}
+                to={`/workshop/${id}/team_selection/`}
                 color="secondary">
                 {'تیم‌کشی'}
               </Button>
             )} */}
-            {event?.is_user_participating &&
+            {workshop?.is_user_participating &&
               <Button
                 size="small"
                 variant="outlined"
                 fullWidth
                 component={Link}
-                to={`/event/${event?.id}/`}
+                to={`/workshop/${workshop?.id}/`}
                 color="secondary">
                 {'ورود'}
               </Button>
@@ -144,4 +145,4 @@ const Event = ({
   );
 };
 
-export default Event;
+export default workshop;

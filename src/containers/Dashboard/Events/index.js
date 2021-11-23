@@ -1,11 +1,20 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  Divider,
+  Grid,
+  makeStyles,
+  Typography
+} from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import EventCard from '../../../components/Cards/Event';
+import WorkshopCard from '../../../components/Cards/Workshop';
 import {
   getAllEventsInfoAction,
 } from '../../../redux/slices/events';
+import {
+  getRegistrableWorkshopsAction,
+} from '../../../redux/slices/workshop';
 import Layout from '../../Layout';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,16 +52,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Events = ({ getAllEventsInfo, events }) => {
+const Events = ({
+  getAllEventsInfo,
+  getRegistrableWorkshops,
+  events,
+  registrableWorkshops,
+}) => {
   const classes = useStyles();
 
   useEffect(() => {
     getAllEventsInfo({});
+    getRegistrableWorkshops({});
   }, [getAllEventsInfo]);
 
   const activeEvents = events.filter((event) => event?.is_active ? true : false)
 
-  console.log(events)
+  console.log(registrableWorkshops)
 
   return (
     <Layout>
@@ -61,11 +76,17 @@ const Events = ({ getAllEventsInfo, events }) => {
           <Typography variant="h1" align='center' component="h2">
             {'رویدادها'}
           </Typography>
+          <Divider />
         </Grid>
         <Grid item container spacing={2} xs={12}>
           {activeEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
               <EventCard {...event} />
+            </Grid>
+          ))}
+          {registrableWorkshops?.map((workshop, index) => (
+            <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
+              <WorkshopCard isWorkshop {...workshop} />
             </Grid>
           ))}
         </Grid>
@@ -76,8 +97,10 @@ const Events = ({ getAllEventsInfo, events }) => {
 
 const mapStateToProps = (state) => ({
   events: state.events.events || [],
+  registrableWorkshops: state.workshop.registrableWorkshops,
 });
 
 export default connect(mapStateToProps, {
   getAllEventsInfo: getAllEventsInfoAction,
+  getRegistrableWorkshops: getRegistrableWorkshopsAction,
 })(Events);
