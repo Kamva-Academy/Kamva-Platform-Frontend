@@ -55,15 +55,17 @@ const UploadFileQuestionWidget = ({
   const handleFileChange = async (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
-      if (e.target.files[0].size <= 8e6) {
+      if (e.target.files[0].size <= 11e6) {
         uploadFile({
           widgetId,
           answerFile: e.target.files[0],
         });
       } else {
         e.target.value = '';
-        e.target.setCustomValidity('Maximum upload file size is 8 MB.');
-        e.target.reportValidity();
+        addNotification({
+          message: 'حداکثر حجم فایل ارسالی، ۱۰ مگابایت است.',
+          type: 'error',
+        });
       }
     }
   };
@@ -99,7 +101,7 @@ const UploadFileQuestionWidget = ({
             </Button>
             <input
               value={file?.value}
-              accept="application/pdf,image/*"
+              accept="application/pdf,image/*,.zip,.rar"
               style={{ display: 'none' }}
               id={'raised-button-file-' + widgetId}
               type="file"
