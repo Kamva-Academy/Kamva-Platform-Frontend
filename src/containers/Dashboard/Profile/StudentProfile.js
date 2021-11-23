@@ -1,41 +1,30 @@
 
 import {
   Button,
-  Grid,
-  IconButton,
-  makeStyles,
-  Table,
-  TableBody,
-  Typography,
-  Tooltip,
   Divider,
   FormControl,
+  Grid,
+  IconButton,
   InputLabel,
-  Select,
+  makeStyles,
   MenuItem,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TextField,
+  Select,
+  Tooltip,
+  Typography,
 } from '@material-ui/core';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import ClearIcon from '@material-ui/icons/Clear';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
+import AddInstitute from '../../../components/Dialog/AddInstitute';
 import {
   getInstitutesAction,
   getUserProfileAction,
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
-import {
-  addNotificationAction,
-} from '../../../redux/slices/notifications';
-import { toEnglishNumber, toPersianNumber } from '../../../utils/translateNumber';
-import AddInstitute from '../../../components/Dialog/AddInstitute';
 import Iran from '../../../utils/iran';
+import { toEnglishNumber } from '../../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
