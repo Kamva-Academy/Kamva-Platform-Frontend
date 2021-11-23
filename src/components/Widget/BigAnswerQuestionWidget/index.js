@@ -81,7 +81,6 @@ const BigAnswerQuestionWidget = ({
           fullWidth
           variant="contained"
           color="primary"
-          size="small"
           className={classes.submit}
           disabled={isButtonDisabled}
           onClick={handleButtonClick}>

@@ -77,22 +77,23 @@ const SmallAnswerQuestionWidget = ({
         }}
         content={required ? problemText + '<span style="color: #ff0000;">*</span>' : problemText}
       />
-      <Grid container alignItems="center" spacing={1}>
+      <Grid container spacing={1}>
         <Grid item xs>
           <TextField
             fullWidth
+            size='small'
+            variant='outlined'
             value={recentAnswer}
             onChange={handleTextFieldChange}
           />
         </Grid>
         {!pushAnswer &&
-          <Grid item xs={12} sm={3}>
+          <Grid item container alignItems='stretch' xs={12} sm={3}>
             <Button
               fullWidth
               disabled={isButtonDisabled}
               variant="contained"
               color="primary"
-              size="small"
               onClick={handleButtonClick}>
               {t('submit')}
             </Button>
