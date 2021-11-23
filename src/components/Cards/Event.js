@@ -38,10 +38,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Event = (event) => {
+const Event = ({
+
+  ...event
+}) => {
   const classes = useStyles();
   const t = useTranslate();
-  // console.log(event)
+  console.log(event)
   return (
     <Card className={classes.paper}>
       <Grid container justifyContent="center" spacing={1}>
@@ -86,7 +89,9 @@ const Event = (event) => {
             />
           </Grid>
           <Grid item>
-            {event?.user_registration_status === 'NotRegistered' && (
+            {
+              event?.registration_form &&
+              event?.user_registration_status === 'NotRegistered' &&
               <Button
                 disabled={!event?.is_active}
                 size="small"
@@ -97,19 +102,20 @@ const Event = (event) => {
                 color="secondary">
                 {t('register')}
               </Button>
-            )}
-            {!event?.is_user_participating &&
-              event?.user_registration_status != 'NotRegistered' && (
-                <Button
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  component={Link}
-                  to={`/event/${event?.id}/status/`}
-                  color="secondary">
-                  {'وضعیت ثبت‌نام'}
-                </Button>
-              )}
+            }
+            {
+              !event?.is_user_participating &&
+              event?.user_registration_status != 'NotRegistered' &&
+              <Button
+                size="small"
+                variant="outlined"
+                fullWidth
+                component={Link}
+                to={`/event/${event?.id}/status/`}
+                color="secondary">
+                {'وضعیت ثبت‌نام'}
+              </Button>
+            }
             {/* {is_user_participating && (
               <Button
                 size="small"
@@ -121,7 +127,7 @@ const Event = (event) => {
                 {'تیم‌کشی'}
               </Button>
             )} */}
-            {event?.is_user_participating && (
+            {event?.is_user_participating &&
               <Button
                 size="small"
                 variant="outlined"
@@ -131,7 +137,7 @@ const Event = (event) => {
                 color="secondary">
                 {'ورود'}
               </Button>
-            )}
+            }
           </Grid>
         </Grid>
       </Grid>
