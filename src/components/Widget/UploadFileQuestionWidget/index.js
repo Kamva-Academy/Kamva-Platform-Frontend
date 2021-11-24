@@ -71,7 +71,7 @@ const UploadFileQuestionWidget = ({
   const handleFileChange = async (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
-      if (e.target.files[0].size <= 11e6) {
+      if (e.target.files[0].size <= 21e6) {
         uploadFile({
           widgetId,
           answerFile: e.target.files[0],
@@ -79,7 +79,7 @@ const UploadFileQuestionWidget = ({
       } else {
         e.target.value = '';
         addNotification({
-          message: 'حداکثر حجم فایل ارسالی، ۱۰ مگابایت است.',
+          message: 'حداکثر حجم فایل ارسالی،  ۲۰ مگابایت است.',
           type: 'error',
         });
       }

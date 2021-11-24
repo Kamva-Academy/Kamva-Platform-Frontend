@@ -60,9 +60,8 @@ const InputFields = ({ isFetching, login, addNotification, token }) => {
           }}
           value={data.username}
           name="username"
-          label="شماره تلفن همراه"
+          label="نام کاربری"
           inputProps={{ className: 'ltr-input' }}
-          type="tel"
         />
       </Grid>
 
