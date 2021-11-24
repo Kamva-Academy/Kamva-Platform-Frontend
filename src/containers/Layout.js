@@ -28,24 +28,24 @@ const Layout = ({
   const classes = useStyles();
   const history = useHistory();
 
-  useEffect(() => {
-    if (
-      userProfile &&
-      (!userProfile?.first_name ||
-        !userProfile?.last_name ||
-        !userProfile?.gender ||
-        !userProfile?.province ||
-        !userProfile?.city) &&
-      !window.location.href.includes('profile')
-    ) {
-      addNotification({
-        message:
-          'پیش از هر چیز، لطفاً موارد الزامی در پروفایل رو تکمیل کن! موارد الزامی با ستاره مشخص شده‌اند.',
-        type: 'error',
-      });
-      history.push('/profile/');
-    }
-  }, [userProfile]);
+  // useEffect(() => {
+  //   if (
+  //     userProfile &&
+  //     (!userProfile?.first_name ||
+  //       !userProfile?.last_name ||
+  //       !userProfile?.gender ||
+  //       !userProfile?.province ||
+  //       !userProfile?.city) &&
+  //     !window.location.href.includes('profile')
+  //   ) {
+  //     addNotification({
+  //       message:
+  //         'پیش از هر چیز، لطفاً موارد الزامی در پروفایل رو تکمیل کن! موارد الزامی با ستاره مشخص شده‌اند.',
+  //       type: 'error',
+  //     });
+  //     history.push('/profile/');
+  //   }
+  // }, [userProfile]);
 
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
