@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
+  makeAnswerEmptyUrl,
   sendWidgetAnswerUrl,
 } from '../constants/urls';
 
@@ -61,17 +62,44 @@ export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
     },
   });
 
+
+export const makeAnswerEmptyAction = createAsyncThunkApi(
+  'widget/sendWidgetAnswerAction',
+  Apis.GET,
+  makeAnswerEmptyUrl,
+  {
+    defaultNotification: {
+      success: 'پاسخ شما با حذف شد.',
+      error: 'مشکلی در حذف‌کردن پاسخ وجود داشت.',
+    },
+  }
+);
+
+const isFetching = (state) => {
+  state.isFetching = true;
+};
+
+const isNotFetching = (state) => {
+  state.isFetching = false;
+};
+
+const initialState = {
+  isFetching: false,
+}
+
 const widgetSlice = createSlice({
   name: 'currentState',
-  initialState: {
-    state: {
-      widgets: [],
-      hints: [],
-    },
-    scores: [],
-    totalScore: 0,
+  initialState: initialState,
+  extraReducers: {
+    [sendWidgetAnswerAction.pending.toString()]: isFetching,
+    [sendWidgetAnswerAction.fulfilled.toString()]: isNotFetching,
+    [sendWidgetAnswerAction.rejected.toString()]: isNotFetching,
+
+    [sendFileAction.pending.toString()]: isFetching,
+    [sendFileAction.fulfilled.toString()]: isNotFetching,
+    [sendFileAction.rejected.toString()]: isNotFetching,
+    makeAnswerEmptyAction
   },
-  extraReducers: {},
 });
 
 export const { initCurrentState: initCurrentStateAction } = widgetSlice.actions;

@@ -11,8 +11,13 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { uploadFileAction } from '../../../redux/slices/events';
+import {
+  uploadFileAction,
+} from '../../../redux/slices/events';
 import { addNotificationAction } from '../../../redux/slices/notifications';
+import {
+  makeAnswerEmptyAction,
+} from '../../../redux/slices/widget';
 
 const useStyles = makeStyles((theme) => ({
   lastUploadButton: {
@@ -34,7 +39,9 @@ const UploadFileQuestionWidget = ({
   pushAnswer,
   addNotification,
   uploadFile,
+  makeAnswerEmpty,
 
+  last_submitted_answer,
   required,
   id: widgetId,
   text = 'محل آپلود فایل',
@@ -51,6 +58,15 @@ const UploadFileQuestionWidget = ({
       pushAnswer('upload_file_answer', uploadedFile?.id);
     }
   }, [uploadedFile]);
+
+  useEffect(() => {
+    if (last_submitted_answer) {
+      setFile({
+        link: `https://backend.rastaiha.ir${last_submitted_answer?.answer_file}`,
+        name: 'آخرین فایل ارسالی'
+      })
+    }
+  }, [])
 
   const handleFileChange = async (e) => {
     e.preventDefault();
@@ -73,6 +89,7 @@ const UploadFileQuestionWidget = ({
   const clearFile = (e) => {
     e.preventDefault();
     setFile({ link: '', name: '', value: '' });
+    makeAnswerEmpty({ widgetId });
     if (pushAnswer) {
       pushAnswer('upload_file_answer', '');
     }
@@ -139,7 +156,11 @@ const mapStateToProps = (state) => ({
   isFetching: state.events.isFetching,
 });
 
-export default connect(mapStateToProps, {
-  uploadFile: uploadFileAction,
-  addNotification: addNotificationAction,
-})(UploadFileQuestionWidget);
+export default connect(
+  mapStateToProps,
+  {
+    uploadFile: uploadFileAction,
+    addNotification: addNotificationAction,
+    makeAnswerEmpty: makeAnswerEmptyAction,
+  }
+)(UploadFileQuestionWidget);

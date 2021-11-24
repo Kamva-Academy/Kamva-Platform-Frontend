@@ -110,6 +110,7 @@ export const uploadFileAction = createAsyncThunkApi(
       answer_file: answerFile,
       problem: widgetId,
       file_name: name,
+      is_final_answer: true,
     }),
   }
 );
