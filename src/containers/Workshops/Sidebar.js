@@ -39,6 +39,8 @@ function Workshops({
     });
   }
 
+  console.log(event)
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -46,11 +48,11 @@ function Workshops({
           {'کارگاه‌ها'}
         </Typography>
       </Grid>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Button onClick={doGetCertificate} variant='outlined' fullWidth>
           {'دریافت گواهی حضور'}
         </Button>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }
