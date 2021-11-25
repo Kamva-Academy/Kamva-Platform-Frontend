@@ -51,6 +51,10 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
     }
   };
 
+  if (outwardEdges.length === 0) {
+    return (<></>)
+  }
+
   return (
     <>
       <Button
