@@ -44,9 +44,9 @@ const Index = () => {
               <Button component={Link} to="/login">
                 ورود
               </Button>
-              <Button component={Link} to="/create_account">
+              {/* <Button component={Link} to="/create_account">
                 ثبت‌نام
-              </Button>
+              </Button> */}
             </ButtonGroup>
           </Grid>
         </Grid>
