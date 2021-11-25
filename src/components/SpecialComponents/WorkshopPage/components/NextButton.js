@@ -59,9 +59,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
         color="primary"
         disabled={edges.length === 0 && outwardEdges.length !== 0}
         onClick={handleClick}>
-        {outwardEdges.length === 0
-          ? t('end')
-          : edges.length === 0
+        {edges.length === 0
           ? 'جابجایی با همیار'
           : t('next')}
       </Button>
