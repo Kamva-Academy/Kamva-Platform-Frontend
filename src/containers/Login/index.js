@@ -36,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
 const Index = () => {
   const classes = useStyles();
 
+  // useEffect(() => {
+  //   const script = <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="f614a3c0-ebcd-4f6a-9a7c-d7597d9e1143";(function(){s = document.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+  //   document.body.appendChild(script);
+  // }, [])
+
   return (
     <>
       <Container className={classes.container}>
