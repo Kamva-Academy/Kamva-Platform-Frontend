@@ -68,9 +68,11 @@ const UploadFileQuestionWidget = ({
         setTimeout(() => {
           setButtonDisable(false);
         }, 20000);
+        console.log(e.target.files[0])
         uploadFile({
           widgetId,
           answerFile: e.target.files[0],
+          name: e.target.files[0].name,
         }).then((action) => {
           setFile({
             link: action.payload?.response?.answer_file,
