@@ -69,7 +69,7 @@ export const makeAnswerEmptyAction = createAsyncThunkApi(
   makeAnswerEmptyUrl,
   {
     defaultNotification: {
-      success: 'پاسخ شما با حذف شد.',
+      success: 'پاسخ شما با موفقیت حذف شد.',
       error: 'مشکلی در حذف‌کردن پاسخ وجود داشت.',
     },
   }

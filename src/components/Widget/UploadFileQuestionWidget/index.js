@@ -45,19 +45,11 @@ const UploadFileQuestionWidget = ({
   required,
   id: widgetId,
   text = 'محل آپلود فایل',
-  uploadedFile,
-  isFetching,
 }) => {
   const t = useTranslate();
   const [file, setFile] = useState({ link: '', name: '', value: '' });
+  const [isButtonDisabled, setButtonDisable] = useState(false);
   const classes = useStyles({ haveFile: file });
-
-  useEffect(() => {
-    setFile(uploadedFile);
-    if (pushAnswer) {
-      pushAnswer('upload_file_answer', uploadedFile?.id);
-    }
-  }, [uploadedFile]);
 
   useEffect(() => {
     if (last_submitted_answer) {
@@ -72,9 +64,21 @@ const UploadFileQuestionWidget = ({
     e.preventDefault();
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 21e6) {
+        setButtonDisable(true);
+        setTimeout(() => {
+          setButtonDisable(false);
+        }, 20000);
         uploadFile({
           widgetId,
           answerFile: e.target.files[0],
+        }).then((action) => {
+          setFile({
+            link: action.payload?.response?.answer_file,
+            name: action?.meta?.arg?.answerFile?.name,
+          });
+          if (pushAnswer) {
+            pushAnswer('upload_file_answer', action.payload?.response?.id);
+          }
         });
       } else {
         e.target.value = '';
@@ -110,7 +114,7 @@ const UploadFileQuestionWidget = ({
             <Button
               component="label"
               htmlFor={'raised-button-file-' + widgetId}
-              disabled={isFetching}
+              disabled={isButtonDisabled}
               variant="contained"
               color="primary"
               startIcon={<CloudUploadIcon />}>
@@ -152,8 +156,6 @@ const UploadFileQuestionWidget = ({
 };
 
 const mapStateToProps = (state) => ({
-  uploadedFile: state.events.uploadedFile,
-  isFetching: state.events.isFetching,
 });
 
 export default connect(
