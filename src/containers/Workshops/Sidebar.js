@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import {
   getCertificateAction,
   getOneEventInfoAction,
+  getOneRegistrationFormAction,
 } from '../../redux/slices/events';
 
 const useStyles = makeStyles(() => ({
@@ -20,8 +21,9 @@ const useStyles = makeStyles(() => ({
 function Workshops({
   getCertificate,
   getOneEventInfo,
+  getOneRegistrationForm,
 
-  certificateLink,
+  registrationForm,
   event,
 }) {
   const classes = useStyles();
@@ -48,18 +50,18 @@ function Workshops({
           {'کارگاه‌ها'}
         </Typography>
       </Grid>
-      {/* <Grid item xs={12}>
+      <Grid item xs={12}>
         <Button onClick={doGetCertificate} variant='outlined' fullWidth>
           {'دریافت گواهی حضور'}
         </Button>
-      </Grid> */}
+      </Grid>
     </Grid>
   );
 }
 
 const mapStateToProps = (state) => ({
   event: state.events.event,
-  certificateLink: state.events.certificateLink,
+  registrationForm: state.events.registrationForm,
 });
 
 export default connect(
@@ -67,5 +69,6 @@ export default connect(
   {
     getCertificate: getCertificateAction,
     getOneEventInfo: getOneEventInfoAction,
+    getOneRegistrationForm: getOneRegistrationFormAction,
   }
 )(Workshops);
