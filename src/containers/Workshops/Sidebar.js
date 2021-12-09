@@ -57,11 +57,13 @@ function Workshops({
           </Button>
         </Grid>
       }
-      <Grid item xs={12}>
-        <Button onClick={doGetCertificate} variant='outlined' fullWidth>
-          {'گواهی حضور'}
-        </Button>
-      </Grid>
+      {event?.has_certificate &&
+        <Grid item xs={12}>
+          <Button disabled={!event?.certificates_ready} onClick={doGetCertificate} variant='outlined' fullWidth>
+            {'گواهی حضور'}
+          </Button>
+        </Grid>
+      }
     </Grid>
   );
 }
