@@ -75,12 +75,6 @@ function Index({
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
 
   useEffect(() => {
-    if (userAccount?.id) {
-      getUserProfile({ id: userAccount.id });
-    }
-  }, [userAccount])
-
-  useEffect(() => {
     if (userProfile?.city) {
       getInstitutes({ cityTitle: Iran.Cities.find(city => userProfile?.city == city.title).title });
       setNewStudentship({
@@ -124,10 +118,11 @@ function Index({
 
   const AddSchoolInstituteIcon = () => {
     return (
-      <Tooltip title={'افزودن مدرسه‌ی جدید'} arrow>
+      <Tooltip title={
+        userProfile?.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
         <IconButton
           size="small"
-          onClick={() => setAddInstituteDialogStatus(true)}>
+          onClick={userProfile?.city ? () => setAddInstituteDialogStatus(true) : () => { }}>
           <AddCircleOutlineIcon />
         </IconButton>
       </Tooltip>
@@ -137,6 +132,9 @@ function Index({
   if (!userProfile) {
     return <></>;
   }
+
+  console.log(institutes)
+  console.log(userProfile)
 
   return (
     <>
@@ -150,12 +148,11 @@ function Index({
             <FormControl
               required
               size="small"
-              variant="outlined"
-              className={classes.formControl}>
+              fullWidth
+              variant="outlined">
               <InputLabel>مدرسه</InputLabel>
               <Select
                 IconComponent={AddSchoolInstituteIcon}
-                className={classes.dropDown}
                 onChange={handleStudentshipChange}
                 name="school"
                 value={newStudentship?.school || userProfile?.school_studentship?.school}
@@ -177,11 +174,10 @@ function Index({
             <FormControl
               required
               size="small"
-              variant="outlined"
-              className={classes.formControl}>
+              fullWidth
+              variant="outlined">
               <InputLabel>پایه</InputLabel>
               <Select
-                className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 defaultValue={userProfile?.school_studentship?.grade}

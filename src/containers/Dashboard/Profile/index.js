@@ -1,27 +1,11 @@
 import {
-  Button,
-  Divider,
-  FormControl,
-  FormControlLabel,
-  FormLabel,
   Grid,
-  IconButton,
-  InputLabel,
   makeStyles,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
   Tab,
   Tabs,
-  TextField,
-  Tooltip,
-  Typography,
 } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import PersonalProfile from './PersonalProfile'
-import StudentProfile from './StudentProfile';
 
 import {
   getInstitutesAction,
@@ -29,9 +13,9 @@ import {
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
-import Iran from '../../../utils/iran';
-import { toEnglishNumber } from '../../../utils/translateNumber';
 import Layout from '../../Layout';
+import PersonalProfile from './PersonalProfile'
+import StudentProfile from './StudentProfile';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -77,8 +61,6 @@ const Index = ({
 }) => {
   const [tabNumber, setTabNumber] = useState(0);
   const classes = useStyles();
-
-
 
   const TabComponent = tabs[tabNumber].component;
 

@@ -12,7 +12,6 @@ import {
   verificationCodeUrl,
 } from '../constants/urls';
 
-const initialState = { token: null, user: {} };
 
 export const loginAction = createAsyncThunkApi(
   'account/loginAction',
@@ -136,6 +135,13 @@ const isNotFetching = (state) => {
   state.isFetching = false;
 };
 
+const initialState = {
+  institutes: [],
+  token: null,
+  user: {}
+};
+
+
 const accountSlice = createSlice({
   name: 'account',
   initialState,
@@ -160,20 +166,14 @@ const accountSlice = createSlice({
     [changePasswordAction.rejected.toString()]: isNotFetching,
 
     [getUserProfileAction.pending.toString()]: isFetching,
-    [getUserProfileAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userProfile = response;
       state.isFetching = false;
     },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
 
     [createAccountAction.pending.toString()]: isFetching,
-    [createAccountAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
       state.token = response.access;
       state.isFetching = false;
@@ -181,10 +181,7 @@ const accountSlice = createSlice({
     [createAccountAction.rejected.toString()]: isNotFetching,
 
     [getInstitutesAction.pending.toString()]: isFetching,
-    [getInstitutesAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.institutes = response;
       state.isFetching = false;
     },
@@ -196,11 +193,8 @@ const accountSlice = createSlice({
 
     [createInstitutesAction.pending.toString()]: isFetching,
     [createInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.institutes = [
-        ...state.institutes,
-        response,
-      ];
-      state.newlyAddedInstitute = response; 
+      state.institutes = [...state.institutes, response,];
+      state.newlyAddedInstitute = response;
       state.isFetching = false;
     },
     [createInstitutesAction.rejected.toString()]: isNotFetching,

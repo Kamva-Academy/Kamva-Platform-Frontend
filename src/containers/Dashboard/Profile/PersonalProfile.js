@@ -1,25 +1,18 @@
 import {
   Button,
-  Grid,
-  IconButton,
-  makeStyles,
-  Table,
-  Typography,
   Divider,
   FormControl,
-  FormLabel,
-  RadioGroup,
   FormControlLabel,
-  Radio,
+  FormLabel,
+  Grid,
   InputLabel,
-  Select,
+  makeStyles,
   MenuItem,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
+  Radio,
+  RadioGroup,
+  Select,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -31,11 +24,8 @@ import {
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
-import {
-  addNotificationAction,
-} from '../../../redux/slices/notifications';
-import { toEnglishNumber, toPersianNumber } from '../../../utils/translateNumber';
 import Iran from '../../../utils/iran';
+import { toEnglishNumber } from '../../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({
   profileImage: {
@@ -68,12 +58,6 @@ function Index({
   const [value, setValue] = useState();
   const [username, setUsername] = useState();
   const [newProfile, setNewProfile] = useState({});
-
-  useEffect(() => {
-    if (userAccount?.id) {
-      getUserProfile({ id: userAccount.id });
-    }
-  }, [])
 
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
@@ -108,6 +92,9 @@ function Index({
     });
   };
 
+
+  console.log(userAccount);
+  console.log(userProfile);
 
   if (!userProfile) {
     return <></>;
