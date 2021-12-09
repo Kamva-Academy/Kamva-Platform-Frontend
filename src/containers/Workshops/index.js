@@ -48,6 +48,11 @@ function Workshops({
           justify='flex-start'
           alignItems='flex-start'
           spacing={3}>
+          <Grid item xs={12}>
+            <Typography variant="h1" component="h2">
+              {'کارگاه‌ها'}
+            </Typography>
+          </Grid>
           <WorkshopGridItems
             eventId={eventId}
             workshops={workshops}

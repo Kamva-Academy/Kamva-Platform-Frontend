@@ -35,10 +35,10 @@ export const errorHandler = (
       return rejectWithValue({
         message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
       });
-    case 404:
-      return rejectWithValue({
-        message: 'موردی یافت نشد.',
-      });
+    // case 404:
+    //   return rejectWithValue({
+    //     message: 'موردی یافت نشد.',
+    //   });
     case 500:
       return rejectWithValue({
         message: 'ایراد سروری پیش آمده! لطفاً ما را در جریان بگذارید.',

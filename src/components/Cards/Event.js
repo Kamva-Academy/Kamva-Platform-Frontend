@@ -103,8 +103,8 @@ const Event = ({
               </Button>
             }
             {
+              event.registration_receipt &&
               !event?.is_user_participating &&
-              event?.user_registration_status != 'NotRegistered' &&
               <Button
                 size="small"
                 variant="outlined"
@@ -115,17 +115,6 @@ const Event = ({
                 {'وضعیت ثبت‌نام'}
               </Button>
             }
-            {/* {is_user_participating && (
-              <Button
-                size="small"
-                variant="outlined"
-                fullWidth
-                component={Link}
-                to={`/event/${id}/team_selection/`}
-                color="secondary">
-                {'تیم‌کشی'}
-              </Button>
-            )} */}
             {event?.is_user_participating &&
               <Button
                 size="small"

@@ -37,6 +37,8 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
 
   const [openPassword, setOpenPassword] = useState(false);
 
+  console.log(workshop)
+
   return (
     <Card className={classes.card}>
       <CardActionArea disabled>
@@ -89,8 +91,8 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {!isLoading &&
-          (workshop.player !== 'NotStarted' ? (
+        {!isLoading && workshop?.is_active &&
+          (workshop?.player !== 'NotStarted' ? (
             <Button
               size="large"
               fullWidth
@@ -114,6 +116,16 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
               بزن بریم!
             </Button>
           ))}
+        {!workshop?.is_active &&
+          <Button
+            size="large"
+            fullWidth
+            disabled
+            variant="contained"
+            color="primary">
+            {'غیرفعال'}
+          </Button>
+        }
       </CardActions>
       <PasswordDialog
         open={openPassword}
