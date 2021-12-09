@@ -8,10 +8,21 @@ import {
   institutesUrl,
   loginUrl,
   profileCRUDUrl,
+  refreshTokenUrl,
   studentshipCRUDUrl,
   verificationCodeUrl,
 } from '../constants/urls';
 
+export const refreshTokenAction = createAsyncThunkApi(
+  'account/refreshTokenAction',
+  Apis.POST,
+  refreshTokenUrl,
+  {
+    defaultNotification: {
+      error: 'ایرادی در تازه‌سازی توکن وجود داشت.',
+    },
+  }
+);
 
 export const loginAction = createAsyncThunkApi(
   'account/loginAction',
@@ -137,7 +148,8 @@ const isNotFetching = (state) => {
 
 const initialState = {
   institutes: [],
-  token: null,
+  token: '',
+  refresh: '',
   user: {}
 };
 
@@ -157,9 +169,20 @@ const accountSlice = createSlice({
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
       state.token = response.access;
+      state.refresh = response.refresh;
       state.isFetching = false;
     },
     [loginAction.rejected.toString()]: isNotFetching,
+
+
+    [refreshTokenAction.pending.toString()]: isFetching,
+    [refreshTokenAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.token = response.access;
+      state.refresh = response.refresh;
+      state.isFetching = false;
+    },
+    [refreshTokenAction.rejected.toString()]: isNotFetching,
+
 
     [changePasswordAction.pending.toString()]: isFetching,
     [changePasswordAction.fulfilled.toString()]: isNotFetching,
@@ -176,6 +199,7 @@ const accountSlice = createSlice({
     [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
       state.token = response.access;
+      state.refresh = response.refresh;
       state.isFetching = false;
     },
     [createAccountAction.rejected.toString()]: isNotFetching,

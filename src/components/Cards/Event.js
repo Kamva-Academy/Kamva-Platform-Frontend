@@ -1,6 +1,7 @@
 import { Button, Card, Chip, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import Moment from 'moment';
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
@@ -43,6 +44,8 @@ const Event = ({
 }) => {
   const classes = useStyles();
   const t = useTranslate();
+
+  console.log(event)
 
   return (
     <Card className={classes.paper}>
@@ -89,8 +92,40 @@ const Event = ({
           </Grid>
           <Grid item>
             {
-              event?.registration_form &&
-              event?.user_registration_status === 'NotRegistered' &&
+              event?.user_registration_status == 'NotStarted' &&
+              <Button
+                disabled
+                size="small"
+                variant="outlined"
+                fullWidth
+                color="secondary">
+                {'ثبت‌نام شروع نشده'}
+              </Button>
+            }
+            {
+              event?.user_registration_status == 'DeadlineMissed' &&
+              <Button
+                disabled
+                size="small"
+                variant="outlined"
+                fullWidth
+                color="secondary">
+                {'مهلت ثبت‌نام تمام شده'}
+              </Button>
+            }
+            {
+              event?.user_registration_status == 'GradeNotAvailable' &&
+              <Button
+                disabled
+                size="small"
+                variant="outlined"
+                fullWidth
+                color="secondary">
+                {'اطلاعاتتان ناقص است'}
+              </Button>
+            }
+            {
+              event?.user_registration_status === 'Permitted' &&
               <Button
                 disabled={!event?.is_active}
                 size="small"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
@@ -6,10 +6,11 @@ const PrivateRoute = ({
   component: Component,
   onlyMentor = false,
   isMentor = false,
-  isLoggedIn,
+  token,
   ...rest
 }) => {
-  const hasAccess = isLoggedIn && (isMentor || !onlyMentor);
+  const hasAccess = token && (isMentor || !onlyMentor);
+
   return (
     <Route
       {...rest}
@@ -25,7 +26,7 @@ const PrivateRoute = ({
 };
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: !!state.account.token,
+  token: state.account.token,
   isMentor: state.account.userAccount?.is_mentor,
 });
 

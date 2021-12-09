@@ -29,6 +29,7 @@ export const errorHandler = (
   switch (error.response.status) {
     case 401:
       if (error.config.url === 'auth/token/obtain/') {
+        dispatch({ type: 'account/refreshTokenAction' });
         break;
       }
       dispatch({ type: 'account/logout' });

@@ -18,6 +18,7 @@ reduxStore.subscribe(() => {
           ...state.account.userProfile,
         },
         token: state.account.token,
+        refresh: state.account.refresh,
       },
       Intl: state.Intl,
     })
