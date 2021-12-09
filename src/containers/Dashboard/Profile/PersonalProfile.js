@@ -59,6 +59,10 @@ function Index({
   const [username, setUsername] = useState();
   const [newProfile, setNewProfile] = useState({});
 
+  useEffect(() => {
+    getUserProfile({ id: userAccount?.id });
+  }, [getUserProfile]);
+
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
     if (regex.test(toEnglishNumber(number))) {

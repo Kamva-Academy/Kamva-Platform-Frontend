@@ -104,10 +104,7 @@ const RegistrationForm = ({
     history.push('/events/');
   }
 
-  if (
-    event?.user_registration_status &&
-    event?.user_registration_status != 'NotRegistered'
-  ) {
+  if (event?.user_registration_status && event?.user_registration_status != 'Permitted') {
     history.push(`/event/${eventId}/status`);
   }
 

@@ -75,6 +75,10 @@ function Index({
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
 
   useEffect(() => {
+    getUserProfile({ id: userAccount?.id });
+  }, [getUserProfile]);
+
+  useEffect(() => {
     if (userProfile?.city) {
       getInstitutes({ cityTitle: Iran.Cities.find(city => userProfile?.city == city.title).title });
       setNewStudentship({
