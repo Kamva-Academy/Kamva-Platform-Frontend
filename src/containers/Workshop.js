@@ -75,8 +75,6 @@ const Workshop = ({
     }
   };
 
-  console.log(myTeam)
-
   useEffect(getCurrentStateIfNeed, [needUpdateState, getCurrentStateIfNeed]);
 
   const [parseTeamState, setParseTeamState] = useState('');

@@ -50,8 +50,6 @@ const SmallAnswerQuestionWidget = ({
     setRecentAnswer(e.target.value);
   }
 
-  console.log(recentAnswer)
-
   const handleButtonClick = () => {
     if (!recentAnswer) {
       addNotification({

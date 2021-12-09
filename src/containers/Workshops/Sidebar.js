@@ -42,8 +42,6 @@ function Workshops({
     });
   }
 
-  console.log(event)
-
   return (
     <Grid container spacing={2}>
       {event?.event_type == 'Team' &&

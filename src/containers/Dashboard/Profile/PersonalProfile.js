@@ -92,10 +92,6 @@ function Index({
     });
   };
 
-
-  console.log(userAccount);
-  console.log(userProfile);
-
   if (!userProfile) {
     return <></>;
   }

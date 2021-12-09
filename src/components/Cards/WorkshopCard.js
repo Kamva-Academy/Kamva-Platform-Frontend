@@ -37,8 +37,6 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
 
   const [openPassword, setOpenPassword] = useState(false);
 
-  console.log(workshop)
-
   return (
     <Card className={classes.card}>
       <CardActionArea disabled>

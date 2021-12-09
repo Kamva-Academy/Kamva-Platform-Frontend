@@ -67,8 +67,6 @@ const Events = ({
 
   const activeEvents = events.filter((event) => event?.is_active ? true : false)
 
-  console.log(registrableWorkshops)
-
   return (
     <Layout>
       <Grid container spacing={4} justify='center'>

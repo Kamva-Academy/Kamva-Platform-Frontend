@@ -44,7 +44,7 @@ const workshop = ({
 }) => {
   const classes = useStyles();
   const t = useTranslate();
-  console.log(workshop)
+
   return (
     <Card className={classes.paper}>
       <Grid container justifyContent="center" spacing={1}>

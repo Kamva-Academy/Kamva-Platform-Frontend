@@ -43,7 +43,7 @@ const Event = ({
 }) => {
   const classes = useStyles();
   const t = useTranslate();
-  console.log(event)
+
   return (
     <Card className={classes.paper}>
       <Grid container justifyContent="center" spacing={1}>

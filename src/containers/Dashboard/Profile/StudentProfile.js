@@ -133,9 +133,6 @@ function Index({
     return <></>;
   }
 
-  console.log(institutes)
-  console.log(userProfile)
-
   return (
     <>
       <Grid container item spacing={2}>
