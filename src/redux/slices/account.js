@@ -171,6 +171,7 @@ const accountSlice = createSlice({
       state.token = response.access;
       state.refresh = response.refresh;
       state.isFetching = false;
+      window.location.reload();
     },
     [loginAction.rejected.toString()]: isNotFetching,
 

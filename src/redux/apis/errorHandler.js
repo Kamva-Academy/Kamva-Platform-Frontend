@@ -29,13 +29,14 @@ export const errorHandler = (
   switch (error.response.status) {
     case 401:
       if (error.config.url === 'auth/token/obtain/') {
-        dispatch({ type: 'account/refreshTokenAction' });
         break;
       }
-      dispatch({ type: 'account/logout' });
-      return rejectWithValue({
-        message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
-      });
+      dispatch({ type: 'account/refreshTokenAction' });
+      break;
+    // dispatch({ type: 'account/logout' });
+    // return rejectWithValue({
+    //   message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
+    // });
     // case 404:
     //   return rejectWithValue({
     //     message: 'موردی یافت نشد.',
