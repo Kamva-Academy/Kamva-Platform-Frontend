@@ -121,7 +121,7 @@ const Event = ({
                 variant="outlined"
                 fullWidth
                 color="secondary">
-                {'اطلاعاتتان ناقص است'}
+                {'اطلاعاتتان را تکمیل کنید.'}
               </Button>
             }
             {
@@ -150,7 +150,7 @@ const Event = ({
                 {'وضعیت ثبت‌نام'}
               </Button>
             }
-            {event?.is_user_participating &&
+            {event?.user_registration_status == 'Accepted' &&
               <Button
                 size="small"
                 variant="outlined"
