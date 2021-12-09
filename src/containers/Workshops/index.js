@@ -36,6 +36,8 @@ function Workshops({
     getEventWorkshops({ eventId });
   }, []);
 
+  const filteredWorkshops = workshops.filter((workshop) => workshop.is_active)
+
   return (
     <Layout>
       <Grid container spacing={4} justify='center'>
@@ -55,7 +57,7 @@ function Workshops({
           </Grid>
           <WorkshopGridItems
             eventId={eventId}
-            workshops={workshops}
+            workshops={filteredWorkshops}
             isLoading={isLoading}
           />
         </Grid>

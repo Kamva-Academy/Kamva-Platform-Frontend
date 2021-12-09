@@ -116,7 +116,7 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
               بزن بریم!
             </Button>
           ))}
-        {!workshop?.is_active &&
+        {!isLoading && !workshop?.is_active &&
           <Button
             size="large"
             fullWidth
