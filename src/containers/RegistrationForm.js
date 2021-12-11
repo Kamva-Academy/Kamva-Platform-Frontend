@@ -182,20 +182,19 @@ const RegistrationForm = ({
               </Grid>
               <Grid item>
                 {event?.event_type == 'Team' && (
-                  <>
-                    <Typography align="center">{'نوع رویداد: تیمی'}</Typography>
-                    <Typography align="center">{`تعداد اعضای هر تیم: ${toPersianNumber(
-                      event?.team_size
-                    )}`}</Typography>
-                  </>
+                  <Typography align="center">{`شرکت در این رویداد در قالب تیم‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
                 )}
                 {event?.event_type == 'Individual' && (
-                  <Typography align="center">{'نوع پاسخ: انفرادی'}</Typography>
+                  <Typography align="center">{'شرکت در این رویداد به صورت فردی است.'}</Typography>
                 )}
               </Grid>
-              {/* <Grid item>
-                <Typography align='center'>{`قیمت برای هر نفر: ${toPersianNumber(event?.merchandise?.price || 0)} تومان`}</Typography>
-              </Grid> */}
+              <Grid item>
+                {event?.merchandise?.price > 0 ? (
+                  <Typography align="center">{`هزینه‌ی ثبت‌نام برای هر نفر ${toPersianNumber(event?.merchandise?.price)} تومان است.`}</Typography>
+                ) : (
+                  <Typography align="center">{'هزینه‌ی ثبت‌نام رایگان است!'}</Typography>
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
@@ -233,7 +232,7 @@ const RegistrationForm = ({
                 onClick={() => {
                   setDialogStatus(true);
                 }}>
-                {'ثبت'}
+                {'ثبت‌نام'}
               </Button>
             </Grid>
           </Grid>

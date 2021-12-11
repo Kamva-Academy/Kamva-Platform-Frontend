@@ -157,6 +157,7 @@ const currentStateSlice = createSlice({
 
     [goForwardAction.fulfilled.toString()]: getNewState,
     [goBackwardAction.fulfilled.toString()]: getNewState,
+
     [mentorMoveForwardAction.fulfilled.toString()]: getNewState,
     [mentorMoveBackwardAction.fulfilled.toString()]: getNewState,
 
@@ -164,10 +165,7 @@ const currentStateSlice = createSlice({
 
     [enterWorkshopAction.fulfilled.toString()]: getPlayer,
 
-    [getScoresAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getScoresAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.scores = response.score_transactions;
       state.totalScore = response.scores_sum;
     },
