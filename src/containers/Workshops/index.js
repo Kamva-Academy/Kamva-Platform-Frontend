@@ -1,8 +1,8 @@
 import {
-  Button,
-  Container,
+  Divider,
   Grid,
   makeStyles,
+  Paper,
   Typography,
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
@@ -44,22 +44,24 @@ function Workshops({
         <Grid item xs={12} sm={3}>
           <Sidebar />
         </Grid>
-        <Grid
-          xs={12} sm={9}
-          container item
-          justify='flex-start'
-          alignItems='flex-start'
-          spacing={3}>
-          <Grid item xs={12}>
-            <Typography variant="h1" component="h2">
-              {'کارگاه‌ها'}
-            </Typography>
+        <Grid item xs={12} sm={9}>
+          <Grid container
+            component={Paper}
+            justify='flex-start'
+            alignItems='flex-start'
+            spacing={2}>
+            <Grid item xs={12}>
+              <Typography gutterBottom variant="h1">
+                {'کارگاه‌ها'}
+              </Typography>
+              <Divider />
+            </Grid>
+            <WorkshopGridItems
+              eventId={eventId}
+              workshops={filteredWorkshops}
+              isLoading={isLoading}
+            />
           </Grid>
-          <WorkshopGridItems
-            eventId={eventId}
-            workshops={filteredWorkshops}
-            isLoading={isLoading}
-          />
         </Grid>
       </Grid>
     </Layout>

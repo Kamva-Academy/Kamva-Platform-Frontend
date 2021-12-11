@@ -3,6 +3,7 @@ import {
   Container,
   Grid,
   makeStyles,
+  Paper,
   Typography,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
@@ -43,25 +44,27 @@ function Workshops({
   }
 
   return (
-    <Grid container spacing={2}>
-      {event?.event_type == 'Team' &&
-        <Grid item xs={12}>
-          <Button
-            variant="outlined"
-            fullWidth
-            component={Link}
-            to={`/event/${event.id}/team_selection/`}>
-            {'تیم‌کشی'}
-          </Button>
-        </Grid>
-      }
-      {event?.has_certificate &&
-        <Grid item xs={12}>
-          <Button disabled={!event?.certificates_ready} onClick={doGetCertificate} variant='outlined' fullWidth>
-            {'گواهی حضور'}
-          </Button>
-        </Grid>
-      }
+    <Grid container spacing={2} alignItems='center' component={Paper}>
+      <Grid item xs={12}>
+        <Typography variant='h4'>
+          {`به رویداد ${event?.name} خوش آمدید!`}
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Button
+          disabled={event?.event_type == 'Individual'}
+          variant="outlined"
+          fullWidth
+          component={Link}
+          to={`/event/${event?.id}/team_selection/`}>
+          {'تیم‌کشی'}
+        </Button>
+      </Grid>
+      <Grid item xs={12}>
+        <Button disabled={!event?.has_certificate || !event?.certificates_ready} onClick={doGetCertificate} variant='outlined' fullWidth>
+          {'گواهی حضور'}
+        </Button>
+      </Grid>
     </Grid>
   );
 }
