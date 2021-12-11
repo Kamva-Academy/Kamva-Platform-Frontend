@@ -121,7 +121,7 @@ const Event = ({
                 variant="outlined"
                 fullWidth
                 color="secondary">
-                {'اطلاعاتتان را تکمیل کنید.'}
+                {'سن شما مناسب نیست.'}
               </Button>
             }
             {
@@ -137,9 +137,7 @@ const Event = ({
                 {t('register')}
               </Button>
             }
-            {
-              event.registration_receipt &&
-              !event?.is_user_participating &&
+            {event?.user_registration_status == 'Waiting' &&
               <Button
                 size="small"
                 variant="outlined"
