@@ -24,6 +24,7 @@ const BigAnswerQuestionWidget = ({
   pushAnswer,
   sendBigAnswer,
 
+  disabled,
   last_submitted_answer,
   id: widgetId,
   text: problemText,
@@ -74,7 +75,7 @@ const BigAnswerQuestionWidget = ({
       <TinyEditorComponent
         id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
         content={recentAnswer}
-        onChange={handleTextChange}
+        onChange={disabled ? () => { } : handleTextChange}
       />
       {!pushAnswer &&
         <Button

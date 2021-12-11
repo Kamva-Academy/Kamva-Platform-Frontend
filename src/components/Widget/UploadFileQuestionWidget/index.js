@@ -41,6 +41,7 @@ const UploadFileQuestionWidget = ({
   uploadFile,
   makeAnswerEmpty,
 
+  disabled,
   last_submitted_answer,
   required,
   id: widgetId,
@@ -115,7 +116,7 @@ const UploadFileQuestionWidget = ({
             <Button
               component="label"
               htmlFor={'raised-button-file-' + widgetId}
-              disabled={isButtonDisabled}
+              disabled={isButtonDisabled || disabled}
               variant="contained"
               color="primary"
               startIcon={<CloudUploadIcon />}>

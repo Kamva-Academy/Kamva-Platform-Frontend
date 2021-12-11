@@ -28,6 +28,7 @@ const SmallAnswerQuestionWidget = ({
   pushAnswer,
 
   required,
+  disabled,
   last_submitted_answer,
   id: widgetId,
   text: problemText,
@@ -78,6 +79,7 @@ const SmallAnswerQuestionWidget = ({
       <Grid container spacing={1}>
         <Grid item xs>
           <TextField
+            disabled={disabled}
             fullWidth
             size='small'
             variant='outlined'

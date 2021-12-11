@@ -121,10 +121,7 @@ const RegistrationForm = ({
     let doesFind = false;
     for (let i = 0; i < temporaryAnswer.length; i++) {
       // todo: remove answer_type from world :/
-      if (
-        temporaryAnswer[i].answer_type === widgetType &&
-        temporaryAnswer[i].problem === problemId
-      ) {
+      if (temporaryAnswer[i].answer_type === widgetType && temporaryAnswer[i].problem === problemId) {
         if (answer) {
           temporaryAnswer[i] = {
             ...temporaryAnswer[i],
@@ -218,6 +215,7 @@ const RegistrationForm = ({
               <Grid item key={widget.id} xs={12}>
                 <Paper className={classes.paper} elevation={2}>
                   <Widget
+                    disabled={isFetching}
                     pushAnswer={pushAnswer(
                       widget?.id,
                       ANSWER_TYPES[widget?.widget_type]
@@ -229,7 +227,6 @@ const RegistrationForm = ({
             ))}
             <Grid item xs={12}>
               <Button
-                disabled={isFetching}
                 fullWidth
                 variant="contained"
                 color="primary"
