@@ -58,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
   eventImage: {
     borderRadius: '5px',
     height: '100%',
-    maxHeight: '300px',
     width: '100%',
     objectFit: 'cover',
   },
