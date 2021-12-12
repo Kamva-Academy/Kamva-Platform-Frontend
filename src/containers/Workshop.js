@@ -12,7 +12,12 @@ import {
   enterWorkshopAction,
   mentorGetCurrentStateAction,
 } from '../redux/slices/currentState';
-import { addNotificationAction } from '../redux/slices/notifications';
+import {
+  addNotificationAction,
+} from '../redux/slices/notifications';
+import {
+  getOneWorkshopAction,
+} from '../redux/slices/workshop';
 
 const useStyles = makeStyles((theme) => ({
   centerItems: {
@@ -47,11 +52,16 @@ const Workshop = ({
 
   myTeam,
 
+  getOneWorkshop,
   enterWorkshop,
   mentorGetCurrentState,
   addNotification,
 }) => {
   const classes = useStyles();
+
+  useEffect(() => {
+    getOneWorkshop({ workshopId: fsmId });
+  }, [])
 
   useEffect(() => {
     if (isMentor) {
@@ -146,6 +156,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 export default connect(mapStateToProps, {
+  getOneWorkshop: getOneWorkshopAction,
   enterWorkshop: enterWorkshopAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,

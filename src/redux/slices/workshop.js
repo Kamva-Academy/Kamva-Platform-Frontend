@@ -3,8 +3,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
+  getOneWorkshopUrl,
   getRegistrableWorkshopsUrl,
 } from '../constants/urls';
+
+export const getOneWorkshopAction = createAsyncThunkApi(
+  'workshop/getOneWorkshopAction',
+  Apis.GET,
+  getOneWorkshopUrl
+);
 
 export const getRegistrableWorkshopsAction = createAsyncThunkApi(
   'workshop/getRegistrableWorkshopsAction',
@@ -37,6 +44,13 @@ const IndexSlice = createSlice({
       state.isFetching = false;
     },
     [getRegistrableWorkshopsAction.rejected.toString()]: isNotFetching,
+
+    [getOneWorkshopAction.pending.toString()]: isFetching,
+    [getOneWorkshopAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.workshop = response;
+      state.isFetching = false;
+    },
+    [getOneWorkshopAction.rejected.toString()]: isNotFetching,
 
   },
 });

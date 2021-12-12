@@ -32,7 +32,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
+export const WorkshopCard = ({
+  workshop,
+  isLoading,
+  enterWorkshop,
+}) => {
   const classes = useStyles();
 
   const [openPassword, setOpenPassword] = useState(false);
@@ -53,9 +57,9 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
         ) : (
           <>
             <CardHeader
-              avatar={workshop.has_lock ? <Lock /> : <LockOpen />}
+              avatar={workshop?.has_lock ? <Lock /> : <LockOpen />}
               className={classes.header}
-              title="تیمی"
+              title={workshop?.fsm_p_type == 'Team' ? 'تیمی' : 'فردی'}
             />
             {workshop.cover_page && (
               <CardMedia
@@ -97,7 +101,7 @@ export const WorkshopCard = ({ workshop, isLoading, enterWorkshop }) => {
               variant="contained"
               color="primary"
               component={Link}
-              to={`/workshop/${workshop.id}`}>
+              to={`/workshop/${workshop.id}/`}>
               بزن بریم!
             </Button>
           ) : (

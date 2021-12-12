@@ -70,7 +70,7 @@ function Workshops({
 
 const mapStateToProps = (state, ownProps) => ({
   eventId: ownProps.match.params.eventId,
-  workshops: state.events.workshops || [],
+  workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
 });
 

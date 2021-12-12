@@ -19,6 +19,7 @@ export const purchaseEventUrl = 'auth/payment/purchase/';
 export const submitDiscountCodeUrl = 'auth/payment/verify_discount/';
 
 // workshop
+export const getOneWorkshopUrl = ({ workshopId }) => `fsm/fsm/${workshopId}/`;
 export const getWorkshopsUrl = ({ eventId }) => eventId ? `fsm/fsm/?event=${eventId}` : 'fsm/fsm/';
 export const getRegistrableWorkshopsUrl = 'fsm/fsm/?registrable=true';
 

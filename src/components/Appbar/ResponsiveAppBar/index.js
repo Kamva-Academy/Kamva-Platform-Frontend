@@ -15,6 +15,7 @@ import {
 import { Menu as MenuIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
+import { connect } from 'react-redux'
 
 import HideOnScroll from './components/HideOnScroll';
 import modes from './modes';
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveAppBar({
+  workshop,
   mode = 'WORKSHOP',
   showBackOnScroll = false,
   hideOnScroll = false,
@@ -68,7 +70,7 @@ function ResponsiveAppBar({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = modes[mode]();
+  } = modes[mode]({ workshop });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
@@ -145,4 +147,8 @@ function ResponsiveAppBar({
   );
 }
 
-export default withWidth()(ResponsiveAppBar);
+const mapStateToProps = (state) => ({
+  workshop: state.workshop.workshop,
+})
+
+export default withWidth()(connect(mapStateToProps)(ResponsiveAppBar));
