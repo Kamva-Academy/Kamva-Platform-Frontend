@@ -20,7 +20,7 @@ const WorkshopAppBarItems = ({ workshop }) => {
   const userAvatar = <UserAvatar />;
 
   const desktopLeftItems = [];
-  const desktopRightItems = [teamAvatar];
+  const desktopRightItems = [];
   const mobileLeftItems = [];
   const mobileRightItems = [];
   const mobileMenuListItems = [backToEventsButton];
