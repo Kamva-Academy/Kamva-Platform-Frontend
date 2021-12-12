@@ -90,7 +90,7 @@ const Payment = ({
 
   useEffect(() => {
     getOneEventInfo({ id: eventId });
-  }, [getOneEventInfo]);
+  }, []);
 
   useEffect(() => {
     if (event?.merchandise?.price) {
@@ -128,15 +128,9 @@ const Payment = ({
     });
   };
 
-
-  // todo
-  // if (event?.user_registration_status == 'NotRegistered') {
-  //   history.push(`/event/${eventId}/registration_form/`);
-  // }
-
-  // if (event?.is_user_participating) {
-  //   history.push('/events/');
-  // }
+  if (event?.user_registration_status && event?.user_registration_status != 'Waiting' && event?.user_registration_status != 'Permitted') {
+    history.push(`/event/${eventId}/`);
+  }
 
   return (
     <Layout>

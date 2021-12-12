@@ -91,7 +91,7 @@ const RegistrationForm = ({
 
   useEffect(() => {
     getOneEventInfo({ id: eventId });
-  }, [getOneRegistrationForm]);
+  }, []);
 
   useEffect(() => {
     if (event?.registration_form) {
@@ -99,12 +99,8 @@ const RegistrationForm = ({
     }
   }, [event]);
 
-  if (event?.is_user_participating) {
-    history.push('/events/');
-  }
-
   if (event?.user_registration_status && event?.user_registration_status != 'Permitted') {
-    history.push(`/event/${eventId}/status`);
+    history.push(`/event/${eventId}/status/`);
   }
 
   const doRegister = () => {

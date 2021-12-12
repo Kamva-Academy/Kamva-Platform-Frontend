@@ -7,6 +7,7 @@ import {
 } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
 import {
@@ -27,14 +28,21 @@ const useStyles = makeStyles(() => ({
 function Workshops({
   eventId,
   workshops,
+  event,
   isLoading,
   getEventWorkshops,
 }) {
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     getEventWorkshops({ eventId });
   }, []);
+
+  console.log(event?.user_registration_status)
+  if (event?.user_registration_status && event?.user_registration_status != 'Accepted') {
+    history.push(`/events/`);
+  }
 
   const filteredWorkshops = workshops.filter((workshop) => workshop.is_active)
 
@@ -72,6 +80,7 @@ const mapStateToProps = (state, ownProps) => ({
   eventId: ownProps.match.params.eventId,
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
+  event: state.events.event,
 });
 
 export default connect(mapStateToProps, {

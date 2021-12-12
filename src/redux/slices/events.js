@@ -319,10 +319,7 @@ const eventSlice = createSlice({
     [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
 
     [purchaseEventUrlAction.pending.toString()]: isFetching,
-    [purchaseEventUrlAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [purchaseEventUrlAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       window.location.href = response.payment_link; //todo
     },
