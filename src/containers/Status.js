@@ -128,13 +128,15 @@ const Payment = ({
     });
   };
 
-  if (event?.user_registration_status == 'NotRegistered') {
-    history.push(`/event/${eventId}/registration_form/`);
-  }
 
-  if (event?.is_user_participating) {
-    history.push('/events/');
-  }
+  // todo
+  // if (event?.user_registration_status == 'NotRegistered') {
+  //   history.push(`/event/${eventId}/registration_form/`);
+  // }
+
+  // if (event?.is_user_participating) {
+  //   history.push('/events/');
+  // }
 
   return (
     <Layout>
