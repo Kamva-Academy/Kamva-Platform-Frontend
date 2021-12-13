@@ -128,7 +128,7 @@ const Payment = ({
     });
   };
 
-  if (event?.user_registration_status && event?.user_registration_status != 'Waiting' && event?.user_registration_status != 'Permitted') {
+  if (event?.is_user_participating) {
     history.push(`/event/${eventId}/`);
   }
 

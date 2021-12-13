@@ -39,7 +39,6 @@ function Workshops({
     getEventWorkshops({ eventId });
   }, []);
 
-  console.log(event?.user_registration_status)
   if (event?.user_registration_status && event?.user_registration_status != 'Accepted') {
     history.push(`/events/`);
   }
