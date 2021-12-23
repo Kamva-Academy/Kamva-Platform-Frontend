@@ -135,6 +135,7 @@ const getNewState = (state, { payload: { response } }) => {
 
 const getPlayer = (state, { payload: { response } }) => {
   state.needUpdateState = false;
+  state.workshopId = response.fsm;
   state.playerId = response.id;
   state.teamId = response.team?.id;
   state.state = response.current_state;

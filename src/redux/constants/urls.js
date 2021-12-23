@@ -72,7 +72,7 @@ export const mentorMoveForwardUrl = ({ id }) =>
   `fsm/edge/${id}/mentor_move_forward/`;
 
 
-export const mentorGetCurrentStateUrl = ({ id }) => `fsm/player/${id}`;
+export const mentorGetCurrentStateUrl = ({ id }) => `fsm/player/${id}/`;
 
 export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 

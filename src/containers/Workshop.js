@@ -60,14 +60,16 @@ const Workshop = ({
   const classes = useStyles();
 
   useEffect(() => {
-    getOneWorkshop({ workshopId: fsmId });
-  }, [])
+    if (fsmId) {
+      getOneWorkshop({ workshopId: fsmId });
+    }
+  }, [fsmId])
 
   useEffect(() => {
     if (isMentor) {
       mentorGetCurrentState({ id: playerId });
     }
-  }, [fsmId, stateId, playerId, isMentor, mentorGetCurrentState]);
+  }, [playerId, isMentor]);
 
   useEffect(() => {
     if (!isMentor) {
@@ -147,7 +149,7 @@ const mapStateToProps = (state, ownProps) => ({
   workshopState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
   isMentor: state.account.userAccount.is_mentor,
-  fsmId: ownProps.match.params.fsmId,
+  fsmId: ownProps.match.params.fsmId || state.currentState.workshopId,
   stateId: ownProps.match.params.stateId,
   playerId: state.account.userAccount.is_mentor
     ? ownProps.match.params.playerId
