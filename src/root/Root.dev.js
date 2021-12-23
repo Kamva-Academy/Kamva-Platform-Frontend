@@ -15,7 +15,7 @@ import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
-import Workshops from '../containers/Workshops';
+import Workshops from '../containers/Event';
 import PrivateRoute from './PrivateRoute';
 
 const Root = () => {
