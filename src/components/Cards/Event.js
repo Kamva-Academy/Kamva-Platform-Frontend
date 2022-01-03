@@ -1,18 +1,18 @@
 import { Button, Card, Chip, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import Moment from 'moment';
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
 import { toPersianNumber } from '../../utils/translateNumber';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   notificationTitle: {
     color: '#4d4a70',
   },
   paper: {
+    height: '100%',
     padding: '0px !important',
     backgroundColor: 'rgb(255, 255, 255, 0.94)',
     fontSize: '1rem',
@@ -26,14 +26,13 @@ const useStyles = makeStyles(() => ({
     },
   },
   content: {
-    padding: '10px !important',
+    padding: theme.spacing(2),
   },
   noPadding: {
     padding: '0px !important',
   },
   eventImage: {
     height: '100%',
-    maxHeight: '300px',
     width: '100%',
     objectFit: 'cover',
   },
@@ -49,7 +48,7 @@ const Event = ({
 
   return (
     <Card className={classes.paper}>
-      <Grid container justifyContent="center" spacing={1}>
+      <Grid container justifyContent="space-between" alignItems='stretch' style={{ height: '100%' }}>
         <Grid
           className={classes.noPadding}
           item

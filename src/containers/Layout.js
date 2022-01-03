@@ -16,6 +16,15 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto !important',
     marginLeft: 'auto !important',
   },
+  background: {
+    height: '100vh',
+    width: '100%',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    backgroundColor: '#EBECED',
+    zIndex: '-10000',
+  },
 }));
 
 const Layout = ({
@@ -53,6 +62,7 @@ const Layout = ({
 
   return (
     <>
+      <div className={classes.background} />
       <AppBar mode="STUDENT_DASHBOARD" position="relative" />
       <Container className={classes.container}>{props.children}</Container>
     </>

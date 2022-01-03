@@ -74,7 +74,6 @@ const Events = ({
           <Typography variant="h1" align='center' component="h2">
             {'رویدادها'}
           </Typography>
-          <Divider />
         </Grid>
         <Grid item container spacing={2} xs={12}>
           {activeEvents.map((event, index) => (

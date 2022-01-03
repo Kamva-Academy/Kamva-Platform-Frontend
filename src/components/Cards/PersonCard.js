@@ -15,6 +15,10 @@ import MentorIntroduction from '../Dialog/MentorIntroduction';
 const useStyles = makeStyles({
   root: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '100%',
     fontSize: '1rem',
     textDecoration: 'none',
     overflow: 'hidden',

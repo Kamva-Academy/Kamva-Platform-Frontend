@@ -47,22 +47,17 @@ function Workshops({
 
   return (
     <Layout>
-      <Grid container spacing={4} justify='center'>
-        <Grid item xs={12} sm={3}>
+      <Grid container justify='space-between' alignItems='flex-start'>
+        <Grid container item xs={12} sm={3} direction='column' spacing={3}>
           <Sidebar />
         </Grid>
-        <Grid item xs={12} sm={9}>
-          <Grid container
-            component={Paper}
-            justify='flex-start'
-            alignItems='flex-start'
-            spacing={2}>
-            <Grid item xs={12}>
-              <Typography gutterBottom variant="h1">
-                {'کارگاه‌ها'}
-              </Typography>
-              <Divider />
-            </Grid>
+        <Grid container item xs={12} sm={9} direction='column' spacing={3}>
+          <Grid item>
+            <Typography variant="h1" align='center'>
+              {'کارگاه‌ها'}
+            </Typography>
+          </Grid>
+          <Grid container item spacing={3} justifyContent='center'>
             <WorkshopGridItems
               eventId={eventId}
               workshops={filteredWorkshops}

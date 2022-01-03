@@ -22,6 +22,10 @@ import PasswordDialog from '../SpecialComponents/WorkshopsPage/PasswordDialog';
 const useStyles = makeStyles((theme) => ({
   card: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '100%',
   },
   media: {
     height: 140,
@@ -46,9 +50,8 @@ export const WorkshopCard = ({
       <CardActionArea disabled>
         {isLoading ? (
           <>
-            <Skeleton animation="wave" height={10} width={180} />
             <Skeleton
-              width={180}
+              width='100%'
               animation="wave"
               variant="rect"
               className={classes.media}
@@ -76,9 +79,10 @@ export const WorkshopCard = ({
               <Skeleton
                 animation="wave"
                 height={10}
+                width='100%'
                 style={{ marginBottom: 6 }}
               />
-              <Skeleton animation="wave" height={10} width="80%" />
+              <Skeleton animation="wave" height={10} width='100%' />
             </>
           ) : (
             <>
