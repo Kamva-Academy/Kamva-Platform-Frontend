@@ -9,10 +9,9 @@ import { addNotificationAction } from '../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(4),
     display: 'flex',
+    marginTop: theme.spacing(4),
     justifyContent: 'center',
-    maxWidth: '1280x !important',
     marginRight: 'auto !important',
     marginLeft: 'auto !important',
   },
@@ -64,7 +63,7 @@ const Layout = ({
     <>
       <div className={classes.background} />
       <AppBar mode="STUDENT_DASHBOARD" position="relative" />
-      <Container className={classes.container}>{props.children}</Container>
+      <Container maxWidth='lg' className={classes.container}>{props.children}</Container>
     </>
   );
 };

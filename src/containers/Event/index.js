@@ -47,7 +47,7 @@ function Workshops({
 
   return (
     <Layout>
-      <Grid container justify='space-between' alignItems='flex-start'>
+      <Grid container justifyContent='space-evenly' alignItems='flex-start' spacing={2}>
         <Grid container item xs={12} sm={3} direction='column' spacing={3}>
           <Sidebar />
         </Grid>
@@ -57,7 +57,7 @@ function Workshops({
               {'کارگاه‌ها'}
             </Typography>
           </Grid>
-          <Grid container item spacing={3} justifyContent='center'>
+          <Grid container item spacing={3} justifyContent='space-between'>
             <WorkshopGridItems
               eventId={eventId}
               workshops={filteredWorkshops}
