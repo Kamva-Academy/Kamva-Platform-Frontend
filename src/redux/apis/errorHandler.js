@@ -38,8 +38,8 @@ export const errorHandler = (
         });
       } else {
         dispatch({ type: 'account/refreshTokenAction' });
+        return;
       }
-      break;
 
     // case 404:
     //   return rejectWithValue({
