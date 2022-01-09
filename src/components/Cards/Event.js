@@ -44,8 +44,6 @@ const Event = ({
   const classes = useStyles();
   const t = useTranslate();
 
-  console.log(event)
-
   return (
     <Card className={classes.paper}>
       <Grid container justifyContent="space-between" alignItems='stretch' style={{ height: '100%' }}>
