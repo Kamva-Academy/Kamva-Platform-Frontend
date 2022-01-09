@@ -148,6 +148,7 @@ const isNotFetching = (state) => {
 
 const initialState = {
   institutes: [],
+  isFetching: false,
   token: '',
   refresh: '',
   user: {}
@@ -180,6 +181,7 @@ const accountSlice = createSlice({
       state.token = response.access;
       state.refresh = response.refresh;
       state.isFetching = false;
+      window.location.reload();
     },
     [refreshTokenAction.rejected.toString()]: isNotFetching,
 

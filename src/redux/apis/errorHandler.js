@@ -1,6 +1,10 @@
+import {
+  refreshTokenAction,
+} from '../slices/account';
 import { persianMessages } from './messages';
 
 export const errorHandler = (
+  state,
   error,
   dispatch,
   rejectWithValue,
@@ -37,8 +41,8 @@ export const errorHandler = (
           message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
         });
       } else {
-        dispatch({ type: 'account/refreshTokenAction' });
-        return;
+        dispatch(refreshTokenAction({ refresh: state?.account?.refresh }));
+        return rejectWithValue();
       }
 
     // case 404:

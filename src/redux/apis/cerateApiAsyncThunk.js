@@ -25,6 +25,7 @@ export const createAsyncThunkApi = (typePrefix, api, url, options) =>
     } catch (error) {
       if (getState().Intl.locale == 'fa') {
         return errorHandler(
+          getState(),
           error,
           dispatch,
           rejectWithValue,
