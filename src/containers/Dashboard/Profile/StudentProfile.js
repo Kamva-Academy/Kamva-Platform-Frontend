@@ -150,7 +150,7 @@ function Index({
               required
               size="small"
               fullWidth
-              variant="outlined">
+            >
               <InputLabel>مدرسه</InputLabel>
               <Select
                 IconComponent={AddSchoolInstituteIcon}
@@ -176,7 +176,7 @@ function Index({
               required
               size="small"
               fullWidth
-              variant="outlined">
+            >
               <InputLabel>پایه</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
@@ -196,7 +196,7 @@ function Index({
           <Grid item container justifyContent="center" xs={12} sm={6}>
             <Button
               fullWidth
-              variant="outlined"
+              variant='outlined'
               color="secondary"
               onClick={() =>
                 document.getElementById('school-studentship-document').click()

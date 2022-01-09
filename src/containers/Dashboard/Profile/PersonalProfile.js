@@ -27,6 +27,20 @@ import {
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
 
+import moment from "moment";
+import jMoment from "moment-jalaali";
+import JalaliUtils from "@date-io/jalaali";
+import {
+  TimePicker,
+  DateTimePicker,
+  DatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+
+
+jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
+
+
 const useStyles = makeStyles((theme) => ({
   profileImage: {
     maxHeight: '100px',
@@ -55,13 +69,18 @@ function Index({
   institutes,
 }) {
   const classes = useStyles();
-  const [value, setValue] = useState();
-  const [username, setUsername] = useState();
   const [newProfile, setNewProfile] = useState({});
+  const [birthDate, setBirthDate] = useState();
 
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
   }, [getUserProfile]);
+
+  useEffect(() => {
+    if (userProfile?.birth_date) {
+      setBirthDate(moment(userProfile.birth_date));
+    }
+  }, [userProfile])
 
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
@@ -92,6 +111,7 @@ function Index({
   const submitProfile = () => {
     updateUserAccount({
       id: userProfile?.id,
+      birth_date: birthDate.format('YYYY-MM-DD'),
       ...newProfile,
     });
   };
@@ -149,7 +169,6 @@ function Index({
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               autoComplete="on"
               required
               defaultValue={userProfile?.first_name}
@@ -157,13 +176,12 @@ function Index({
               name="first_name"
               onChange={handleProfileChange}
               size="small"
-              label="نام"
+              label='نام'
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               autoComplete="on"
               required
               defaultValue={userProfile?.last_name}
@@ -177,7 +195,6 @@ function Index({
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               autoComplete="on"
               required
               defaultValue={userProfile?.national_code}
@@ -196,7 +213,6 @@ function Index({
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               disabled={true}
               required
               defaultValue={userProfile?.phone_number}
@@ -209,7 +225,6 @@ function Index({
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               autoComplete="on"
               defaultValue={userProfile?.email}
               value={newProfile.email}
@@ -220,16 +235,20 @@ function Index({
               label="ایمیل"
             />
           </Grid>
-          {/* <Grid item xs={12} sm={6}> todo
-            <div style={{ display: 'none' }} >
-              <DatePicker id='birthdayDatePicker' showTodayButton={false} timePicker={false} max={jMoment()} persianDigits={true}
-                isGregorian={false} defaultValue={birthday} onChange={value => setBirthday(value)} />
-            </div>
-            <TextField fullWidth variant='outlined' onClick={() => document?.getElementById('birthdayDatePicker').click()}
-              defaultValue={birthday.format('jDD jMMMM jYYYY')}
-              name='national_code'
-              size='small' label='تاریخ تولد' />
-          </Grid> */}
+          <Grid item xs={12} sm={6}>
+            <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
+              <DatePicker
+                required
+                label='تاریخ تولد'
+                fullWidth
+                okLabel="تأیید"
+                cancelLabel="لغو"
+                labelFunc={date => (date ? date.format("jYYYY/jMM/jDD") : "")}
+                value={birthDate}
+                onChange={setBirthDate}
+              />
+            </MuiPickersUtilsProvider>
+          </Grid>
           <Grid item>
             <FormControl size="small" required>
               <FormLabel>جنیست</FormLabel>
@@ -260,7 +279,7 @@ function Index({
             <FormControl
               required
               size="small"
-              variant="outlined"
+
               className={classes.formControl}>
               <InputLabel>استان</InputLabel>
               <Select
@@ -283,7 +302,7 @@ function Index({
             <FormControl
               required
               size="small"
-              variant="outlined"
+
               className={classes.formControl}>
               <InputLabel>شهر</InputLabel>
               <Select
@@ -310,7 +329,7 @@ function Index({
           <Grid item xs={12}>
             <TextField
               fullWidth
-              variant="outlined"
+
               autoComplete="on"
               defaultValue={userProfile?.address}
               value={newProfile.address}
@@ -325,7 +344,7 @@ function Index({
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
+
               autoComplete="on"
               defaultValue={userProfile?.postal_code}
               name="postal_code"
