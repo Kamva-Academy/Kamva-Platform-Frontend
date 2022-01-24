@@ -1,7 +1,5 @@
-import {
-  logoutAction,
-  refreshTokenAction,
-} from '../slices/account';
+import { lazy } from 'react'
+const { logoutAction, refreshTokenAction } = lazy(() => import('../slices/account'))
 import { persianMessages } from './messages';
 
 export const errorHandler = (
