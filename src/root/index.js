@@ -25,7 +25,7 @@ const Root = () => {
 
       <Route path="/reset_password" component={ChangePassword} />
       <Route path="/create_account" component={CreateAccount} />
-      <Route path="/login" component={Login} />
+      <Route path="/login/" component={Login} />
 
       <PrivateRoute
         path="/message/payment/success/:paymentId?"

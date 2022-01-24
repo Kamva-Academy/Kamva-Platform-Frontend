@@ -1,5 +1,3 @@
-import './Theme/Styles/App.css';
-
 import { CssBaseline, LinearProgress } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -15,7 +13,7 @@ import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
 import Root from './root';
 import MuiTheme from './Theme/MuiThemes/MuiTheme';
-import ZeroJourneyerMuiTheme from './Theme/MuiThemes/ZeroJourneyerMuiTheme';
+import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
 // Pushe.init('ld838ykvn2n75poe');
@@ -62,7 +60,7 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
     <IntlProvider translations={translations}>
       {dir === 'rtl' ? (
         <>
-          <ThemeProvider theme={ZeroJourneyerMuiTheme}>
+          <ThemeProvider theme={RTLMuiTheme}>
             <StylesProvider jss={jss}>
               <SnackbarProvider>
                 <Loading />
@@ -74,17 +72,17 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
           </ThemeProvider>
         </>
       ) : (
-          <>
-            <ThemeProvider theme={MuiTheme}>
-              <SnackbarProvider>
-                <Loading />
-                <Notifier />
-                <CssBaseline />
-                <Root />
-              </SnackbarProvider>
-            </ThemeProvider>
-          </>
-        )}
+        <>
+          <ThemeProvider theme={MuiTheme}>
+            <SnackbarProvider>
+              <Loading />
+              <Notifier />
+              <CssBaseline />
+              <Root />
+            </SnackbarProvider>
+          </ThemeProvider>
+        </>
+      )}
     </IntlProvider>
   );
 };
