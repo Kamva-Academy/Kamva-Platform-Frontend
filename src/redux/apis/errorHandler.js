@@ -1,4 +1,5 @@
 import {
+  logoutAction,
   refreshTokenAction,
 } from '../slices/account';
 import { persianMessages } from './messages';
@@ -37,6 +38,7 @@ export const errorHandler = (
       }
       if (error.response.config.url.includes('refresh')) {
         dispatch({ type: 'account/logout' });
+        dispatch(logoutAction({}));
         return rejectWithValue({
           message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
         });

@@ -13,29 +13,6 @@ import {
   verificationCodeUrl,
 } from '../constants/urls';
 
-export const refreshTokenAction = createAsyncThunkApi(
-  'account/refreshTokenAction',
-  Apis.POST,
-  refreshTokenUrl,
-  {
-    defaultNotification: {
-      error: 'ایرادی در تازه‌سازی توکن وجود داشت.',
-    },
-  }
-);
-
-export const loginAction = createAsyncThunkApi(
-  'account/loginAction',
-  Apis.POST,
-  loginUrl,
-  {
-    defaultNotification: {
-      success: 'سلام!',
-      error: 'نام کاربری یا رمز عبور اشتباه است!',
-    },
-  }
-);
-
 export const createAccountAction = createAsyncThunkApi(
   'account/createAccountAction',
   Apis.POST_FORM_DATA,
@@ -48,10 +25,70 @@ export const createAccountAction = createAsyncThunkApi(
     }),
     defaultNotification: {
       success: 'حساب شما با موفقیت ایجاد شد.',
-      error: 'ایجاد حساب با مشکل روبه‌رو شد. چند لحظه‌ی دیگر دوباره تلاش کن!',
+      error: 'ایجاد حساب با مشکل روبه‌رو شد.',
     },
   }
 );
+
+export const getVerificationCodeAction = createAsyncThunkApi(
+  'account/getVerificationCode',
+  Apis.POST,
+  verificationCodeUrl,
+  {
+    bodyCreator: ({ phoneNumber, codeType }) => ({
+      phone_number: phoneNumber,
+      code_type: codeType,
+    }),
+    defaultNotification: {
+      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی می‌شود.',
+      error: 'مشکلی وجود دارد. چند لحظه دیگر دوباره تلاش کن!',
+    },
+  }
+);
+
+export const loginAction = createAsyncThunkApi(
+  'account/loginAction',
+  Apis.POST,
+  loginUrl,
+  {
+    defaultNotification: {
+      success: 'سلام!',
+      error: 'نام کاربری یا رمز عبور اشتباه است.',
+    },
+  }
+);
+
+export const refreshTokenAction = createAsyncThunkApi(
+  'account/refreshTokenAction',
+  Apis.POST,
+  refreshTokenUrl,
+  {
+    defaultNotification: {
+      error: 'ایرادی در تازه‌سازی توکن وجود داشت.',
+    },
+  }
+);
+
+export const changePasswordAction = createAsyncThunkApi(
+  'account/changePasswordAction',
+  Apis.POST,
+  changePasswordUrl,
+  {
+    bodyCreator: ({ phoneNumber, password, code }) => ({
+      phone_number: phoneNumber,
+      password,
+      code,
+    }),
+    defaultNotification: {
+      success: 'گذرواژه با موفقیت تغییر یافت!',
+      error: 'مشکلی وجود دارد، رمز تغییر نکرد.',
+    },
+  }
+);
+
+
+////////////////
+
 
 export const updateStudentShipAction = createAsyncThunkApi(
   'account/updateStudentShipAction',
@@ -105,38 +142,7 @@ export const getUserProfileAction = createAsyncThunkApi(
   profileCRUDUrl
 );
 
-export const changePasswordAction = createAsyncThunkApi(
-  'account/changePasswordAction',
-  Apis.POST,
-  changePasswordUrl,
-  {
-    bodyCreator: ({ phoneNumber, password, code }) => ({
-      phone_number: phoneNumber,
-      password,
-      code,
-    }),
-    defaultNotification: {
-      success: 'گذرواژه با موفقیت تغییر یافت!',
-      error: 'مشکلی وجود دارد، رمز تغییر نکرد.',
-    },
-  }
-);
 
-export const getVerificationCodeAction = createAsyncThunkApi(
-  'account/getVerificationCode',
-  Apis.POST,
-  verificationCodeUrl,
-  {
-    bodyCreator: ({ phoneNumber, codeType }) => ({
-      phone_number: phoneNumber,
-      code_type: codeType,
-    }),
-    defaultNotification: {
-      success: 'کد تایید فرستاده شد! این کد بعد از ۵ دقیقه منقضی می‌شود.',
-      error: 'مشکلی وجود دارد. چند لحظه دیگر دوباره تلاش کن!',
-    },
-  }
-);
 
 const isFetching = (state) => {
   state.isFetching = true;
@@ -175,7 +181,6 @@ const accountSlice = createSlice({
     },
     [loginAction.rejected.toString()]: isNotFetching,
 
-
     [refreshTokenAction.pending.toString()]: isFetching,
     [refreshTokenAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.token = response.access;
@@ -186,17 +191,6 @@ const accountSlice = createSlice({
     [refreshTokenAction.rejected.toString()]: isNotFetching,
 
 
-    [changePasswordAction.pending.toString()]: isFetching,
-    [changePasswordAction.fulfilled.toString()]: isNotFetching,
-    [changePasswordAction.rejected.toString()]: isNotFetching,
-
-    [getUserProfileAction.pending.toString()]: isFetching,
-    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userProfile = response;
-      state.isFetching = false;
-    },
-    [getUserProfileAction.rejected.toString()]: isNotFetching,
-
     [createAccountAction.pending.toString()]: isFetching,
     [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userAccount = response.account;
@@ -205,6 +199,20 @@ const accountSlice = createSlice({
       state.isFetching = false;
     },
     [createAccountAction.rejected.toString()]: isNotFetching,
+
+
+    [changePasswordAction.pending.toString()]: isFetching,
+    [changePasswordAction.fulfilled.toString()]: isNotFetching,
+    [changePasswordAction.rejected.toString()]: isNotFetching,
+
+
+
+    [getUserProfileAction.pending.toString()]: isFetching,
+    [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.userProfile = response;
+      state.isFetching = false;
+    },
+    [getUserProfileAction.rejected.toString()]: isNotFetching,
 
     [getInstitutesAction.pending.toString()]: isFetching,
     [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
