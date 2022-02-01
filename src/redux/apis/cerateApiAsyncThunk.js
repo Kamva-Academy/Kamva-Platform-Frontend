@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { errorHandler } from './errorHandler';
+import errorHandler from './errorHandler';
 
 export const createAsyncThunkApi = (typePrefix, api, url, options) =>
   createAsyncThunk(typePrefix, async (arg, { rejectWithValue, dispatch, getState }) => {

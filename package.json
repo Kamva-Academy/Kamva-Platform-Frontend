@@ -62,7 +62,6 @@
     "redux-devtools": "^3.7.0",
     "redux-devtools-dock-monitor": "^1.2.0",
     "redux-devtools-log-monitor": "^2.1.0",
-    "redux-logger": "^3.0.6",
-    "sass": "^1.38.2"
+    "redux-logger": "^3.0.6"
   }
 }

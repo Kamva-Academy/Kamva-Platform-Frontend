@@ -8,7 +8,6 @@ import {
   institutesUrl,
   loginUrl,
   profileCRUDUrl,
-  refreshTokenUrl,
   studentshipCRUDUrl,
   verificationCodeUrl,
 } from '../constants/urls';
@@ -54,17 +53,6 @@ export const loginAction = createAsyncThunkApi(
     defaultNotification: {
       success: 'سلام!',
       error: 'نام کاربری یا رمز عبور اشتباه است.',
-    },
-  }
-);
-
-export const refreshTokenAction = createAsyncThunkApi(
-  'account/refreshTokenAction',
-  Apis.POST,
-  refreshTokenUrl,
-  {
-    defaultNotification: {
-      error: 'ایرادی در تازه‌سازی توکن وجود داشت.',
     },
   }
 );
@@ -170,6 +158,11 @@ const accountSlice = createSlice({
       token,
       userAccount: { is_mentor: true },
     }),
+    refreshToken: (state, action) => {
+      state.token = action.payload.access;
+      state.refresh = action.payload.refresh;
+      window.location.reload();
+    },
   },
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
@@ -180,15 +173,6 @@ const accountSlice = createSlice({
       state.isFetching = false;
     },
     [loginAction.rejected.toString()]: isNotFetching,
-
-    [refreshTokenAction.pending.toString()]: isFetching,
-    [refreshTokenAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.token = response.access;
-      state.refresh = response.refresh;
-      state.isFetching = false;
-      window.location.reload();
-    },
-    [refreshTokenAction.rejected.toString()]: isNotFetching,
 
 
     [createAccountAction.pending.toString()]: isFetching,
