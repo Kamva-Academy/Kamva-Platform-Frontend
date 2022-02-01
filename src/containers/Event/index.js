@@ -5,7 +5,8 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import Pagination from '@material-ui/lab/Pagination';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -28,22 +29,22 @@ const useStyles = makeStyles(() => ({
 function Workshops({
   eventId,
   workshops,
+  eventWorkshopsCount,
   event,
   isLoading,
   getEventWorkshops,
 }) {
   const classes = useStyles();
   const history = useHistory();
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    getEventWorkshops({ eventId });
-  }, []);
+    getEventWorkshops({ eventId, pageNumber });
+  }, [pageNumber]);
 
   if (event?.user_registration_status && event?.user_registration_status != 'Accepted') {
     history.push(`/events/`);
   }
-
-  const filteredWorkshops = workshops.filter((workshop) => workshop.is_active)
 
   return (
     <Layout>
@@ -60,9 +61,21 @@ function Workshops({
           <Grid container item spacing={3} justifyContent='space-between'>
             <WorkshopGridItems
               eventId={eventId}
-              workshops={filteredWorkshops}
+              workshops={workshops}
               isLoading={isLoading}
             />
+          </Grid>
+          <Grid item>
+            <Grid item>
+              <Pagination
+                variant="outlined"
+                color="primary"
+                shape='rounded'
+                count={Math.ceil(eventWorkshopsCount / 12)}
+                page={pageNumber}
+                onChange={(e, value) => setPageNumber(value)}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -75,6 +88,7 @@ const mapStateToProps = (state, ownProps) => ({
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
   event: state.events.event,
+  eventWorkshopsCount: state.events.eventWorkshopsCount,
 });
 
 export default connect(mapStateToProps, {
