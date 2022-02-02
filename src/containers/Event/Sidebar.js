@@ -6,15 +6,16 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+
 import {
   getCertificateAction,
   getOneEventInfoAction,
@@ -106,7 +107,7 @@ function Workshops({
           </Grid>
         </Paper>
       </Grid>
-      <Grid item>
+      {/* <Grid item>
         <Paper className={classes.paper}>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
@@ -151,7 +152,7 @@ function Workshops({
             </Grid>
           </Grid>
         </Paper>
-      </Grid>
+      </Grid> */}
     </>
   );
 }
