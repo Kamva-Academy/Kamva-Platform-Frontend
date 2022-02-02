@@ -15,7 +15,7 @@ const DashboardItems = () => {
 
   return {
     desktopLeftItems: [profileButton, logoutButton, Avatar],
-    desktopRightItems: [eventsButton],
+    desktopRightItems: [logoButton, eventsButton],
     mobileLeftItems: [Avatar],
     mobileRightItems: [],
     mobileMenuListItems: [profileButton, eventsButton, logoutButton],

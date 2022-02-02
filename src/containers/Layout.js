@@ -59,7 +59,7 @@ const Layout = ({
 
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
-  }, [getUserProfile]);
+  }, []);
 
   return (
     <>

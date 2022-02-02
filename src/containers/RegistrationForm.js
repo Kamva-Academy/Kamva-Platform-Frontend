@@ -104,7 +104,7 @@ const RegistrationForm = ({
     if (event?.registration_form) {
       getOneRegistrationForm({ id: event?.registration_form });
     }
-  }, [event]);
+  }, [event?.registration_form]);
 
   if (event?.user_registration_status &&
     event?.user_registration_status != 'NotPermitted' &&

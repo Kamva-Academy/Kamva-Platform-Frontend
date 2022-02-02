@@ -74,7 +74,7 @@ function Index({
 
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
-  }, [getUserProfile]);
+  }, []);
 
   useEffect(() => {
     if (userProfile?.birth_date) {
