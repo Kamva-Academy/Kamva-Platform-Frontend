@@ -13,7 +13,7 @@ import { Lock, LockOpen } from '@material-ui/icons';
 import { Skeleton } from '@material-ui/lab';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { baseURL } from '../../axios';
 import { enterWorkshopAction } from '../../redux/slices/currentState';
@@ -42,8 +42,11 @@ export const WorkshopCard = ({
   enterWorkshop,
 }) => {
   const classes = useStyles();
-
+  const { eventId } = useParams();
   const [openPassword, setOpenPassword] = useState(false);
+
+
+  console.log(eventId)
 
   return (
     <Card className={classes.card}>
@@ -105,7 +108,7 @@ export const WorkshopCard = ({
               variant="contained"
               color="primary"
               component={Link}
-              to={`/workshop/${workshop.id}/`}>
+              to={`/event/${eventId}/workshop/${workshop.id}/`}>
               بزن بریم!
             </Button>
           ) : (
@@ -117,7 +120,7 @@ export const WorkshopCard = ({
               onClick={
                 workshop.has_lock
                   ? () => setOpenPassword(true)
-                  : () => enterWorkshop({ id: workshop.id })
+                  : () => enterWorkshop({ fsmId: workshop.id, eventId })
               }>
               بزن بریم!
             </Button>

@@ -86,7 +86,7 @@ export const mentorGetCurrentStateUrl = ({ id }) => `fsm/player/${id}/`;
 
 export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 
-export const enterWorkshopUrl = ({ id }) => `fsm/fsm/${id}/enter/`;
+export const enterWorkshopUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/enter/`;
 
 export const requestMentorUrl = 'fsm/requestmentor/';
 

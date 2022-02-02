@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -57,6 +58,7 @@ const Workshop = ({
   mentorGetCurrentState,
   addNotification,
 }) => {
+  const { eventId } = useParams();
   const classes = useStyles();
 
   useEffect(() => {
@@ -73,7 +75,7 @@ const Workshop = ({
 
   useEffect(() => {
     if (!isMentor) {
-      enterWorkshop({ id: fsmId });
+      enterWorkshop({ eventId, fsmId });
     }
   }, [fsmId, playerId, isMentor]);
 
@@ -82,7 +84,7 @@ const Workshop = ({
       if (isMentor) {
         mentorGetCurrentState({ id: playerId });
       } else {
-        enterWorkshop({ id: fsmId });
+        enterWorkshop({ eventId, fsmId });
       }
     }
   };
@@ -108,7 +110,7 @@ const Workshop = ({
           type: 'info',
           message: 'جابه‌جا شدید!',
         });
-        enterWorkshop({ id: fsmId });
+        enterWorkshop({ eventId, fsmId });
       }
     }
   }, [parseTeamState]);

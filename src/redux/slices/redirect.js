@@ -28,9 +28,11 @@ const redirectSlice = createSlice({
     //     redirectTo: '/events/',
     //   };
     // },
-    [enterWorkshopAction.fulfilled.toString()]: (state, { meta }) => ({
-      redirectTo: `/workshop/${meta.arg.id}`,
-    }),
+    [enterWorkshopAction.fulfilled.toString()]: (state, { meta }) => {
+      return ({
+        redirectTo: `/event/${meta.arg.eventId}/workshop/${meta.arg.fsmId}`,
+      })
+    },
   },
 });
 

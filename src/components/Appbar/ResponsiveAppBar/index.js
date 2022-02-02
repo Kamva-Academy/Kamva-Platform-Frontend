@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveAppBar({
+  isMentor,
   getOneEventInfo,
   workshop,
   event,
@@ -83,7 +84,7 @@ function ResponsiveAppBar({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = modes[mode]({ workshop, event });
+  } = modes[mode]({ workshop, event, isMentor });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
@@ -161,6 +162,7 @@ function ResponsiveAppBar({
 }
 
 const mapStateToProps = (state) => ({
+  isMentor: state.account.userAccount.is_mentor,
   event: state.events.event,
   workshop: state.workshop.workshop,
 })
