@@ -25,8 +25,19 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: '0 0.5em 1rem -1rem rgba(0, 0, 0, 0.5)',
     },
   },
+  grid: {
+    height: '100%',
+    justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'center',
+    },
+  },
   content: {
     padding: theme.spacing(2),
+    paddingLeft: theme.spacing(0),
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: theme.spacing(2),
+    },
   },
   noPadding: {
     padding: '0px !important',
@@ -46,7 +57,7 @@ const Event = ({
 
   return (
     <Card className={classes.paper}>
-      <Grid container justifyContent="space-between" alignItems='stretch' style={{ height: '100%' }}>
+      <Grid container alignItems='stretch' className={classes.grid}>
         <Grid
           className={classes.noPadding}
           item
@@ -54,14 +65,14 @@ const Event = ({
           justifyContent="center"
           alignItems="center"
           xs={12}
-          sm={5}>
+          md={5}>
           <img src={event?.cover_page} alt="" className={classes.eventImage} />
         </Grid>
         <Grid
           item
           container
           xs={12}
-          sm={7}
+          md={7}
           direction="column"
           justifyContent="space-between"
           spacing={2}

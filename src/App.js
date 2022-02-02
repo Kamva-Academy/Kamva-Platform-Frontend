@@ -4,7 +4,6 @@ import { CssBaseline, LinearProgress } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider } from 'notistack';
-// import Pushe from 'pushe-webpush';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
@@ -18,8 +17,6 @@ import MuiTheme from './Theme/MuiThemes/MuiTheme';
 import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
 import translations from './translations';
 import jss from './utils/jssRTL';
-// Pushe.init('ld838ykvn2n75poe');
-// Pushe.subscribe();
 
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
