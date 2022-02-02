@@ -49,6 +49,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const EventButton = ({ to, text, ...props }) => (
+  <Button
+    size="small"
+    variant="outlined"
+    fullWidth
+    color="secondary"
+    {...props}
+    component={to ? Link : Button}
+    target="_blank"
+    to={to}
+  >
+    {text}
+  </Button>
+)
+
 const Event = ({
   ...event
 }) => {
@@ -58,25 +73,10 @@ const Event = ({
   return (
     <Card className={classes.paper}>
       <Grid container alignItems='stretch' className={classes.grid}>
-        <Grid
-          className={classes.noPadding}
-          item
-          container
-          justifyContent="center"
-          alignItems="center"
-          xs={12}
-          md={5}>
+        <Grid className={classes.noPadding} item container justifyContent="center" alignItems="center" xs={12} md={5}>
           <img src={event?.cover_page} alt="" className={classes.eventImage} />
         </Grid>
-        <Grid
-          item
-          container
-          xs={12}
-          md={7}
-          direction="column"
-          justifyContent="space-between"
-          spacing={2}
-          className={classes.content}>
+        <Grid item container xs={12} md={7} direction="column" justifyContent="space-between" spacing={2} className={classes.content}>
           <Grid item>
             <Typography variant="h3" className={classes.notificationTitle}>
               {event?.name}
@@ -101,71 +101,27 @@ const Event = ({
           <Grid item>
             {
               event?.user_registration_status == 'NotStarted' &&
-              <Button
-                disabled
-                size="small"
-                variant="outlined"
-                fullWidth
-                color="secondary">
-                {'ثبت‌نام شروع نشده'}
-              </Button>
+              <EventButton text={'ثبت‌نام شروع نشده'} disabled />
             }
             {
               event?.user_registration_status == 'DeadlineMissed' &&
-              <Button
-                disabled
-                size="small"
-                variant="outlined"
-                fullWidth
-                color="secondary">
-                {'مهلت ثبت‌نام تمام شده'}
-              </Button>
+              <EventButton text={'مهلت ثبت‌نام تمام شده'} disabled />
             }
             {
               event?.user_registration_status == 'GradeNotAvailable' &&
-              <Button
-                disabled
-                size="small"
-                variant="outlined"
-                fullWidth
-                color="secondary">
-                {'سن شما مناسب نیست.'}
-              </Button>
+              <EventButton text={'سن شما مناسب نیست.'} disabled />
             }
             {
               event?.user_registration_status === 'Permitted' &&
-              <Button
-                disabled={!event?.is_active}
-                size="small"
-                variant="outlined"
-                fullWidth
-                component={Link}
-                to={`/event/${event?.id}/registration_form/`}
-                color="secondary">
-                {t('register')}
-              </Button>
+              <EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} disabled={!event?.is_active} />
             }
-            {event?.user_registration_status == 'Waiting' &&
-              <Button
-                size="small"
-                variant="outlined"
-                fullWidth
-                component={Link}
-                to={`/event/${event?.id}/status/`}
-                color="secondary">
-                {'وضعیت ثبت‌نام'}
-              </Button>
+            {
+              event?.user_registration_status == 'Waiting' &&
+              <EventButton to={`/event/${event?.id}/status/`} text={'وضعیت ثبت‌نام'} />
             }
-            {event?.user_registration_status == 'Accepted' &&
-              <Button
-                size="small"
-                variant="outlined"
-                fullWidth
-                component={Link}
-                to={`/event/${event?.id}/`}
-                color="secondary">
-                {'ورود'}
-              </Button>
+            {
+              event?.user_registration_status == 'Accepted' &&
+              <EventButton to={`/event/${event?.id}/`} text={'ورود'} />
             }
           </Grid>
         </Grid>
