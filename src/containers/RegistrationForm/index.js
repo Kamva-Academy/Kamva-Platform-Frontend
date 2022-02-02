@@ -9,15 +9,15 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import AreYouSure from '../components/Dialog/AreYouSure';
-import Widget from '../components/Widget';
+import AreYouSure from '../../components/Dialog/AreYouSure';
+import Widget from '../../components/Widget';
 import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
-} from '../redux/slices/events';
-import { toPersianNumber } from '../utils/translateNumber';
-import Layout from './Layout';
+} from '../../redux/slices/events';
+import { toPersianNumber } from '../../utils/translateNumber';
+import Layout from '../Layout';
 
 
 const useStyles = makeStyles((theme) => ({

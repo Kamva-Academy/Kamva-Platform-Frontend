@@ -39,7 +39,7 @@ const Index = () => {
                 ثبت‌نام شما موفق نبود :(
               </Typography>
               <Typography variant="h4" align="center">
-                چنانچه هزینه‌ای از حساب شما کسر شده، به ما بگویید.
+                چنانچه هزینه‌ای از حساب شما کسر شده، به پاسخگوی سایت بگویید.
               </Typography>
             </Grid>
             {/* <Grid item>
