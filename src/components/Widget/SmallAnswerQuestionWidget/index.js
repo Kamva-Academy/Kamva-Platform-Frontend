@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Grid,
   makeStyles,
@@ -76,30 +77,33 @@ const SmallAnswerQuestionWidget = ({
         }}
         content={required ? problemText + '<span style="color: #ff0000;">*</span>' : problemText}
       />
-      <Grid container spacing={1}>
-        <Grid item xs>
-          <TextField
-            disabled={disabled}
-            fullWidth
-            size='small'
-            variant='outlined'
-            value={recentAnswer}
-            onChange={handleTextFieldChange}
-          />
-        </Grid>
-        {!pushAnswer &&
-          <Grid item container alignItems='stretch' xs={12} sm={3}>
-            <Button
+      <Box mt={1}>
+        <Grid container spacing={1}>
+          <Grid item xs>
+            <TextField
+              disabled={disabled}
               fullWidth
-              disabled={isButtonDisabled}
-              variant="contained"
-              color="primary"
-              onClick={handleButtonClick}>
-              {t('submit')}
-            </Button>
+              size='small'
+              placeholder='پاسخ خودت رو اینجا بنویس...'
+              value={recentAnswer}
+              onChange={handleTextFieldChange}
+            />
           </Grid>
-        }
-      </Grid>
+          {!pushAnswer &&
+            <Grid item container alignItems='stretch' xs={12} sm={3}>
+              <Button
+                fullWidth
+                disabled={isButtonDisabled}
+                variant="contained"
+                color="primary"
+                onClick={handleButtonClick}>
+                {t('submit')}
+              </Button>
+            </Grid>
+          }
+        </Grid>
+      </Box>
+
     </>
   );
 };
