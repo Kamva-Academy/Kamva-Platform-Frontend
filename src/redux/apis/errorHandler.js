@@ -38,7 +38,6 @@ const errorHandler = async (
       }
       try {
         const response = await Apis.POST(refreshTokenUrl, { refresh: state?.account?.refresh });
-        console.log(response)
         dispatch({ type: 'account/refreshToken', payload: { access: response.access, refresh: response.refresh } });
         return rejectWithValue();
       }

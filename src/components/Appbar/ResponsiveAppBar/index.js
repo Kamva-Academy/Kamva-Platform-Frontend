@@ -14,9 +14,13 @@ import {
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom';
 
+import {
+  getOneEventInfoAction,
+} from '../../../redux/slices/events';
 import HideOnScroll from './components/HideOnScroll';
 import modes from './modes';
 
@@ -53,16 +57,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResponsiveAppBar({
+  getOneEventInfo,
   workshop,
+  event,
   mode = 'WORKSHOP',
   showBackOnScroll = false,
   hideOnScroll = false,
   position = 'fixed',
   width,
 }) {
+  const { eventId } = useParams();
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
+
+  useEffect(() => {
+    if (eventId) {
+      getOneEventInfo({ eventId });
+    }
+  }, [])
 
   const {
     desktopLeftItems,
@@ -70,7 +83,7 @@ function ResponsiveAppBar({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = modes[mode]({ workshop });
+  } = modes[mode]({ workshop, event });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
@@ -148,7 +161,10 @@ function ResponsiveAppBar({
 }
 
 const mapStateToProps = (state) => ({
+  event: state.events.event,
   workshop: state.workshop.workshop,
 })
 
-export default withWidth()(connect(mapStateToProps)(ResponsiveAppBar));
+export default withWidth()(connect(mapStateToProps, {
+  getOneEventInfo: getOneEventInfoAction,
+})(ResponsiveAppBar));

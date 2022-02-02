@@ -43,7 +43,7 @@ function Workshops({
   }, [pageNumber]);
 
   if (event?.user_registration_status && event?.user_registration_status != 'Accepted') {
-    history.push(`/events/`);
+    history.push(`/event/${eventId}/registration_form/`);
   }
 
   return (

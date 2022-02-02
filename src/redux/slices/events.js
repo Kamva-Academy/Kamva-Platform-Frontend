@@ -287,10 +287,7 @@ const eventSlice = createSlice({
     [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
 
     [getOneEventInfoAction.pending.toString()]: isFetching,
-    [getOneEventInfoAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getOneEventInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.event = response;
       state.isFetching = false;
     },

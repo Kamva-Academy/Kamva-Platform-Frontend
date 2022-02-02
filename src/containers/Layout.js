@@ -2,6 +2,7 @@ import { Container, makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AppBar from '../components/Appbar/ResponsiveAppBar';
 import { getUserProfileAction } from '../redux/slices/account';
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Layout = ({
+  appbarMode = 'STUDENT_DASHBOARD',
   getUserProfile,
   addNotification,
   userProfile,
@@ -62,7 +64,10 @@ const Layout = ({
   return (
     <>
       <div className={classes.background} />
-      <AppBar mode="STUDENT_DASHBOARD" position="relative" />
+      <Switch>
+        <Route path={'/event/:eventId/'} render={() => <AppBar mode='EVENT' position="relative" />} />
+        <Route path={'/'} render={() => <AppBar mode={appbarMode} position="relative" />} />
+      </Switch>
       <Container maxWidth='lg' className={classes.container}>{props.children}</Container>
     </>
   );

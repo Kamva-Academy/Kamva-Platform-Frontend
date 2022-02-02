@@ -6,7 +6,7 @@ import CreateAccount from '../containers/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../containers/Dashboard/Events';
 import Profile from '../containers/Dashboard/Profile';
-import Workshops from '../containers/Event';
+import Event from '../containers/Event';
 import JoinMentor from '../containers/JoinMentor';
 import Landing from '../containers/Landing';
 import Login from '../containers/Login';
@@ -40,18 +40,19 @@ const Root = () => {
       <PrivateRoute path="/profile/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
 
-      <Route
+
+      <PrivateRoute path="/event/:eventId/profile/" component={Profile} />
+      <PrivateRoute
         path="/event/:eventId/registration_form/"
         component={RegistrationForm}
       />
-
       <PrivateRoute path="/event/:eventId/status/" component={Status} />
       <PrivateRoute
         path="/event/:eventId/team_selection/"
         component={TeamSelection}
       />
+      <PrivateRoute path="/event/:eventId/" component={Event} />
 
-      <PrivateRoute path="/event/:eventId/" component={Workshops} />
       <PrivateRoute path="/workshop/:fsmId/" component={Workshop} />
       <PrivateRoute path="/watch/:playerId/" component={Workshop} />
       <Route path="/join/:playerId/:token/" component={JoinMentor} />

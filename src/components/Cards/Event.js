@@ -56,7 +56,7 @@ const EventButton = ({ to, text, ...props }) => (
     fullWidth
     color="secondary"
     {...props}
-    component={to ? Link : Button}
+    component={Link}
     target="_blank"
     to={to}
   >

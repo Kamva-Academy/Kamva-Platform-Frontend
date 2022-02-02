@@ -21,7 +21,7 @@ function LogoutButton({ logout }) {
         <Icon>
           <img
             src={`${process.env.PUBLIC_URL}/icons/logout.png`}
-            alt="iconImage"
+            alt=''
             className={classes.iconImage}
           />
         </Icon>

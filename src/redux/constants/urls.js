@@ -34,7 +34,7 @@ export const getWorkshopsUrl = ({ eventId, pageNumber }) => {
 export const getRegistrableWorkshopsUrl = 'fsm/fsm/?registrable=true';
 
 export const getAllEventsInfoUrl = 'fsm/event/';
-export const getOneEventInfoUrl = ({ id }) => `fsm/event/${id}/`;
+export const getOneEventInfoUrl = ({ eventId }) => `fsm/event/${eventId}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) =>
   `fsm/registration/${id}/register/`;
