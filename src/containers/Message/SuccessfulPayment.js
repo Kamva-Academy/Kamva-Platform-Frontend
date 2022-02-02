@@ -39,7 +39,7 @@ const Index = () => {
                 ثبت‌نام شما با موفقیت انجام شد!
               </Typography>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Button
                 component={Link}
                 to="/events"
@@ -47,7 +47,7 @@ const Index = () => {
                 color="primary">
                 بازگشت
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Container>

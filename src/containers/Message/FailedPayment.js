@@ -42,7 +42,7 @@ const Index = () => {
                 چنانچه هزینه‌ای از حساب شما کسر شده، به ما بگویید.
               </Typography>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Button
                 component={Link}
                 to="/events"
@@ -50,7 +50,7 @@ const Index = () => {
                 color="primary">
                 بازگشت
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Container>
