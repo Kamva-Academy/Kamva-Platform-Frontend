@@ -147,8 +147,8 @@ function AuthDialog({
                   className={classes.buttonProgress}
                 />
               ) : (
-                  t('login')
-                )}
+                t('login')
+              )}
             </Button>
           </Grid>
         </Grid>

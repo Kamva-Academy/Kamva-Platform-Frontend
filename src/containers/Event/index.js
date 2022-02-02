@@ -38,13 +38,13 @@ function Workshops({
   const history = useHistory();
   const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    getEventWorkshops({ eventId, pageNumber });
-  }, [pageNumber]);
-
   if (event?.user_registration_status && event?.user_registration_status != 'Accepted') {
     history.push(`/event/${eventId}/registration_form/`);
   }
+
+  useEffect(() => {
+    getEventWorkshops({ eventId, pageNumber });
+  }, [pageNumber]);
 
   return (
     <Layout>

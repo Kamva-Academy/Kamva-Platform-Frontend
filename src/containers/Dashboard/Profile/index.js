@@ -1,4 +1,5 @@
 import {
+  Button,
   Grid,
   makeStyles,
   Tab,
@@ -6,6 +7,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 
 import {
   getInstitutesAction,
@@ -50,16 +52,11 @@ const tabs = [
   },
 ];
 
-const Index = ({
-  updateUserAccount,
-  getUserProfile,
-  updateStudentShip,
-  getInstitutes,
-  userAccount,
-  userProfile,
-  institutes,
-}) => {
+
+const Index = () => {
+  const { eventId } = useParams();
   const [tabNumber, setTabNumber] = useState(0);
+
   const classes = useStyles();
 
   const TabComponent = tabs[tabNumber].component;
@@ -69,21 +66,30 @@ const Index = ({
       <Grid
         container
         justifyContent="center"
-        spacing={3}>
-        <Grid container item xs={12} sm={3}>
-          <Tabs
-            orientation="vertical"
-            variant="scrollable"
-            value={tabNumber}
-            onChange={(event, newValue) => setTabNumber(newValue)}>
-            {
-              tabs.map((tab, index) => {
-                return (
-                  <Tab key={index} label={tab.label} />
-                )
-              })
-            }
-          </Tabs>
+        spacing={4}>
+        <Grid container item xs={12} sm={3} direction='column' spacing={2}>
+          <Grid item>
+            <Tabs
+              orientation="vertical"
+              variant="scrollable"
+              value={tabNumber}
+              onChange={(event, newValue) => setTabNumber(newValue)}>
+              {
+                tabs.map((tab, index) => {
+                  return (
+                    <Tab key={index} label={tab.label} />
+                  )
+                })
+              }
+            </Tabs>
+          </Grid>
+          {eventId &&
+            <Grid item>
+              <Button component={Link} to={`/event/${eventId}/`} fullWidth variant='outlined'>
+                {'بازگشت به رویداد'}
+              </Button>
+            </Grid>
+          }
         </Grid>
         <Grid container item xs={12} sm={9}>
           <TabComponent />

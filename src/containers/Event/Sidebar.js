@@ -43,7 +43,7 @@ function Workshops({
   const [amount, setAmount] = React.useState('');
 
   useEffect(() => {
-    getOneEventInfo({ id: eventId });
+    getOneEventInfo({ eventId });
   }, [getOneEventInfo]);
 
   const handleAmountChange = (event) => {

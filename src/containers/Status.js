@@ -89,7 +89,7 @@ const Payment = ({
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
-    getOneEventInfo({ id: eventId });
+    getOneEventInfo({ eventId });
   }, []);
 
   useEffect(() => {

@@ -1,7 +1,13 @@
-import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  makeStyles,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 import AreYouSure from '../components/Dialog/AreYouSure';
 import Widget from '../components/Widget';
@@ -12,6 +18,7 @@ import {
 } from '../redux/slices/events';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -90,7 +97,7 @@ const RegistrationForm = ({
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
-    getOneEventInfo({ id: eventId });
+    getOneEventInfo({ eventId });
   }, []);
 
   useEffect(() => {
@@ -99,7 +106,9 @@ const RegistrationForm = ({
     }
   }, [event]);
 
-  if (event?.user_registration_status && event?.user_registration_status != 'Permitted') {
+  if (event?.user_registration_status &&
+    event?.user_registration_status != 'NotPermitted' &&
+    event?.user_registration_status != 'Permitted') {
     history.push(`/event/${eventId}/status/`);
   }
 
@@ -220,15 +229,27 @@ const RegistrationForm = ({
               </Grid>
             ))}
             <Grid item xs={12}>
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setDialogStatus(true);
-                }}>
-                {'ثبت‌نام'}
-              </Button>
+              {
+                event?.user_registration_status == 'NotPermitted' &&
+                <Typography variant='h4' color='error' align="center" gutterBottom>
+                  {'لطفاً برای ادامه‌ی ثبت‌نام، ابتدا مشخصات خود را در قسمت '}
+                  <Link to={`/event/${eventId}/profile`}>{'پروفایل'}</Link>
+                  {' تکمیل کنید.'}
+                </Typography>
+              }
+              {
+                <Button
+                  disabled={event?.user_registration_status == 'NotPermitted'}
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setDialogStatus(true);
+                  }}>
+                  {'ثبت‌نام'}
+                </Button>
+              }
+
             </Grid>
           </Grid>
         </Grid>
@@ -240,7 +261,7 @@ const RegistrationForm = ({
         }}
         callBackFunction={doRegister}
       />
-    </Layout>
+    </Layout >
   );
 };
 

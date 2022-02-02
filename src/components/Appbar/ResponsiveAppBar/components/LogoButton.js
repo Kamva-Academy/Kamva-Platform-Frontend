@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 export default function LogoButton({ size }) {
   const classes = useStyles({ size });
   return (
-    <Tooltip title="رستا" arrow>
+    <Tooltip title="کاموا" arrow>
       <IconButton component={Link} className={classes.logoButton} to='/events/'>
         <img
           src={process.env.PUBLIC_URL + '/logo.png'}

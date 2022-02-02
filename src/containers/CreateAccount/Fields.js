@@ -25,8 +25,14 @@ const InputFields = ({
     code: '',
   });
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const eventId = urlParams.get('private_event_enter');
   if (token) {
-    return <Redirect to="/events/" />;
+    if (eventId) {
+      return <Redirect to={`/event/${eventId}/`} />;
+    } else {
+      return <Redirect to="/events/" />;
+    }
   }
 
   const putData = (event) => {

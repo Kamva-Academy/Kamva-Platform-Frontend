@@ -18,16 +18,16 @@ const redirectSlice = createSlice({
         redirectTo: `/event/${action?.meta?.arg.eventId}/status/`,
       };
     },
-    [createAccountAction.fulfilled.toString()]: (state, action) => {
-      return {
-        redirectTo: '/events/',
-      };
-    },
-    [loginAction.fulfilled.toString()]: (state, action) => {
-      return {
-        redirectTo: '/events/',
-      };
-    },
+    // [createAccountAction.fulfilled.toString()]: (state, action) => {
+    //   return {
+    //     redirectTo: '/events/',
+    //   };
+    // },
+    // [loginAction.fulfilled.toString()]: (state, action) => {
+    //   return {
+    //     redirectTo: '/events/',
+    //   };
+    // },
     [enterWorkshopAction.fulfilled.toString()]: (state, { meta }) => ({
       redirectTo: `/workshop/${meta.arg.id}`,
     }),

@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { useHistory } from 'react-router';
+import { useLocation } from "react-router-dom";
 
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
@@ -164,6 +166,7 @@ const accountSlice = createSlice({
       window.location.reload();
     },
   },
+
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -190,7 +193,6 @@ const accountSlice = createSlice({
     [changePasswordAction.rejected.toString()]: isNotFetching,
 
 
-
     [getUserProfileAction.pending.toString()]: isFetching,
     [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userProfile = response;
@@ -205,9 +207,11 @@ const accountSlice = createSlice({
     },
     [getInstitutesAction.rejected.toString()]: isNotFetching,
 
+
     [getUserAccountAction.pending.toString()]: isFetching,
     [getUserAccountAction.fulfilled.toString()]: isNotFetching,
     [getUserAccountAction.rejected.toString()]: isNotFetching,
+
 
     [createInstitutesAction.pending.toString()]: isFetching,
     [createInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -217,9 +221,11 @@ const accountSlice = createSlice({
     },
     [createInstitutesAction.rejected.toString()]: isNotFetching,
 
+
     [updateUserAccountAction.pending.toString()]: isFetching,
     [updateUserAccountAction.fulfilled.toString()]: isNotFetching,
     [updateUserAccountAction.rejected.toString()]: isNotFetching,
+
 
     [updateStudentShipAction.pending.toString()]: isFetching,
     [updateStudentShipAction.fulfilled.toString()]: isNotFetching,

@@ -123,7 +123,7 @@ const TeamSelection = ({
   const [isHead, setHeadStatus] = React.useState(false);
 
   useEffect(() => {
-    getOneEventInfo({ id: eventId });
+    getOneEventInfo({ eventId });
   }, [getOneEventInfo]);
 
   useEffect(() => {

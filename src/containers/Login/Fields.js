@@ -13,8 +13,16 @@ const InputFields = ({ isFetching, login, addNotification, token }) => {
     username: '',
   });
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const eventId = urlParams.get('private_event_enter');
   if (token) {
-    return <Redirect to="/events/" />;
+
+    console.log(eventId)
+    if (eventId) {
+      return <Redirect to={`/event/${eventId}/`} />;
+    } else {
+      return <Redirect to="/events/" />;
+    }
   }
 
   const isJustDigits = (number) => {
