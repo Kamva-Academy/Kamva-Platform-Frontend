@@ -28,19 +28,30 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
 
   console.log("ismentor: ", isMentor)
 
-  if (workshop?.fsm_p_type == 'Individual') {
-    desktopRightItems.push(userAvatar);
+  if (isMentor) {
+    if (workshop?.fsm_p_type == 'Individual') {
+      desktopRightItems.push(userAvatar);
+    } else {
+      desktopRightItems.push(teamAvatar);
+    }
+    desktopLeftItems.push([jitsiMicButton, jitsiButton]);
+    desktopRightItems.push([whiteboardButton,]);
+    mobileLeftItems.push([jitsiMicButton, jitsiButton]);
+    mobileRightItems.push([whiteboardButton,]);
   } else {
-    desktopRightItems.push(teamAvatar);
-  }
-
-  if (workshop?.fsm_learning_type == 'Supervised') {
-    desktopLeftItems.push([whiteboardButton, mentorButton]);
-    desktopRightItems.push([jitsiMicButton, jitsiButton, backToEventButton]);
-    mobileLeftItems.push([mentorButton, whiteboardButton]);
-    mobileRightItems.push([jitsiMicButton, jitsiButton]);
-  } else {
-    desktopLeftItems.push(backToEventButton)
+    if (workshop?.fsm_p_type == 'Individual') {
+      desktopRightItems.push(userAvatar);
+    } else {
+      desktopRightItems.push(teamAvatar);
+    }
+    if (workshop?.fsm_learning_type == 'Supervised') {
+      desktopLeftItems.push([whiteboardButton, mentorButton]);
+      desktopRightItems.push([jitsiMicButton, jitsiButton, backToEventButton]);
+      mobileLeftItems.push([mentorButton, whiteboardButton]);
+      mobileRightItems.push([jitsiMicButton, jitsiButton]);
+    } else {
+      desktopLeftItems.push(backToEventButton)
+    }
   }
 
   return {
