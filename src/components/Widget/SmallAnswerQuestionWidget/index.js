@@ -83,7 +83,6 @@ const SmallAnswerQuestionWidget = ({
             <TextField
               disabled={disabled}
               fullWidth
-              size='small'
               placeholder='پاسخ خودت رو اینجا بنویس...'
               value={recentAnswer}
               onChange={handleTextFieldChange}
