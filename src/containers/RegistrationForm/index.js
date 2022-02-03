@@ -16,57 +16,14 @@ import {
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
 } from '../../redux/slices/events';
-import { toPersianNumber } from '../../utils/translateNumber';
 import Layout from '../Layout';
-
+import Info from './Info';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 80,
-    height: `calc(100vh - ${80}px)`,
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  logo: {
-    maxHeight: '80vh',
-    maxWidth: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
   title: {
     fontSize: 40,
     fontWeight: 600,
     textShadow: '1px 1px #dbd9d9',
-  },
-  subtitle: {
-    fontSize: 25,
-    fontWeight: 400,
-    textShadow: '1px 1px #dbd9d9',
-  },
-  listItem: {
-    fontSize: 20,
-    fontWeight: 300,
-    textShadow: '1px 1px #dbd9d9',
-  },
-  notificationTitle: {
-    color: '#4d4a70',
-  },
-  content: {
-    padding: '10px !important',
-  },
-  noPadding: {
-    padding: '0px !important',
-  },
-  eventImage: {
-    borderRadius: '5px',
-    height: '100%',
-    width: '100%',
-    objectFit: 'cover',
   },
 }));
 
@@ -95,10 +52,6 @@ const RegistrationForm = ({
   const { eventId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
   const [answers, setAnswers] = useState([]);
-
-  useEffect(() => {
-    getOneEventInfo({ eventId });
-  }, []);
 
   useEffect(() => {
     if (event?.registration_form) {
@@ -152,55 +105,7 @@ const RegistrationForm = ({
     <Layout>
       <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
         <Grid item xs={12}>
-          <Grid
-            component={Paper}
-            container
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}>
-            <Grid
-              className={classes.noPadding}
-              item
-              container
-              justifyContent="center"
-              alignItems="center"
-              xs={12}
-              sm={4}>
-              <img
-                src={event?.cover_page}
-                alt=""
-                className={classes.eventImage}
-              />
-            </Grid>
-            <Grid item container direction="column" xs={12} sm={8} spacing={1}>
-              <Grid item>
-                {event?.name && (
-                  <Typography
-                    gutterBottom
-                    align="center"
-                    variant="h1">{`رویداد ${event?.name}`}</Typography>
-                )}
-              </Grid>
-              <Grid item>
-                <Typography align="center">{event?.description}</Typography>
-              </Grid>
-              <Grid item>
-                {event?.event_type == 'Team' && (
-                  <Typography align="center">{`شرکت در این رویداد در قالب تیم‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
-                )}
-                {event?.event_type == 'Individual' && (
-                  <Typography align="center">{'شرکت در این رویداد به صورت فردی است.'}</Typography>
-                )}
-              </Grid>
-              <Grid item>
-                {event?.merchandise?.price > 0 ? (
-                  <Typography align="center">{`هزینه‌ی ثبت‌نام برای هر نفر ${toPersianNumber(event?.merchandise?.price)} تومان است.`}</Typography>
-                ) : (
-                  <Typography align="center">{'هزینه‌ی ثبت‌نام رایگان است!'}</Typography>
-                )}
-              </Grid>
-            </Grid>
-          </Grid>
+          <Info />
         </Grid>
         <Grid item xs={12}>
           <Typography align="center" className={classes.title}>
@@ -209,6 +114,7 @@ const RegistrationForm = ({
         </Grid>
         <Grid item xs={12}>
           <Grid
+            style={{ padding: '20px' }}
             component={Paper}
             container
             justifyContent="center"
@@ -216,16 +122,14 @@ const RegistrationForm = ({
             spacing={2}>
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
-                <Paper className={classes.paper} elevation={2}>
-                  <Widget
-                    disabled={isFetching}
-                    pushAnswer={pushAnswer(
-                      widget?.id,
-                      ANSWER_TYPES[widget?.widget_type]
-                    )}
-                    widget={widget}
-                  />
-                </Paper>
+                <Widget
+                  disabled={isFetching}
+                  pushAnswer={pushAnswer(
+                    widget?.id,
+                    ANSWER_TYPES[widget?.widget_type]
+                  )}
+                  widget={widget}
+                />
               </Grid>
             ))}
             <Grid item xs={12}>
@@ -246,10 +150,9 @@ const RegistrationForm = ({
                   onClick={() => {
                     setDialogStatus(true);
                   }}>
-                  {'ثبت‌نام'}
+                  {'ثبت'}
                 </Button>
               }
-
             </Grid>
           </Grid>
         </Grid>
