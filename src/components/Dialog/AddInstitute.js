@@ -16,13 +16,14 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  addNotificationAction,
-} from '../../redux/slices/notifications';
+
 import {
   createInstitutesAction,
   getInstitutesAction,
 } from '../../redux/slices/account';
+import {
+  addNotificationAction,
+} from '../../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Index({
-  getInstitutes,
   open,
   handleClose,
   createInstitutes,
@@ -71,9 +71,9 @@ function Index({
   };
 
   const handleButtonClick = () => {
-    if (!data?.name) {
+    if (!data?.name || !data.school_type) {
       addNotification({
-        message: 'لطفاً نام مدرسه را وارد کنید.',
+        message: 'لطفاً نام و نوع مدرسه را وارد کنید.',
         type: 'error',
       });
       return;
@@ -92,35 +92,58 @@ function Index({
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h2" gutterBottom align="center">
-          افزودن مدرسه
+          {'افزودن مدرسه‌ی جدید'}
         </Typography>
         <Divider />
       </DialogTitle>
       <DialogContent>
         <Grid container spacing={2} justifyContent="center" alignItems="center">
+
+          <Grid item container xs={12} sm={6}>
+            <FormControl
+              required
+              fullWidth>
+              <InputLabel>نوع</InputLabel>
+              <Select
+                onChange={doSetData}
+                name="school_type"
+                label="پایه">
+                <MenuItem value={'Elementary'}>
+                  {'دبستان'}
+                </MenuItem>
+                <MenuItem value={'JuniorHigh'}>
+                  {'دبیرستان متوسطه اول'}
+                </MenuItem>
+                <MenuItem value={'High'}>
+                  {'دبیرستان متوسطه دوم'}
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
           <Grid item container xs={12} sm={6}>
             <TextField
               required
               fullWidth
-              variant="outlined"
               name="name"
               onChange={doSetData}
-              size="small"
               label="نام مدرسه"
             />
           </Grid>
+
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               name="phone_number"
               onChange={doSetData}
-              size="small"
               label="شماره‌تلفن مدرسه"
             />
           </Grid>
+
+          <Grid item container xs={12} sm={6}></Grid>
+
           {/* <Grid item container xs={12} sm={6}>
-            <FormControl required size='small' variant="outlined" className={classes.formControl}>
+            <FormControl required size='small'  className={classes.formControl}>
               <InputLabel>نوع</InputLabel>
               <Select
                 className={classes.dropDown}
@@ -134,82 +157,70 @@ function Index({
               </Select>
             </FormControl >
           </Grid> */}
-        </Grid>
-        <Grid container spacing={2} justifyContent="center" alignItems="center">
+
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               name="principal_name"
               onChange={doSetData}
-              size="small"
               label="نام مدیر"
             />
           </Grid>
+
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               name="principal_phone"
               onChange={doSetData}
-              size="small"
               label="شماره‌تلفن مدیر"
             />
           </Grid>
-        </Grid>
-        <br />
-        <Grid container spacing={2} justifyContent="center" alignItems="center">
+
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
               disabled
-              variant="outlined"
               name="province"
-              size="small"
               label="استان"
               value={province}
             />
           </Grid>
+
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
               disabled
-              variant="outlined"
               name="province"
-              size="small"
               label="شهر"
               value={city}
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={2} justifyContent="center" alignItems="center">
+
           <Grid item container xs={12}>
             <TextField
               multiline
               rows={2}
               fullWidth
-              variant="outlined"
               name="address"
               onChange={doSetData}
-              size="small"
               label="آدرس"
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={2} justifyContent="center" alignItems="center">
+
           <Grid item container xs={12} sm={6}>
             <TextField
               fullWidth
-              variant="outlined"
               name="postal_code"
               onChange={doSetData}
-              size="small"
               label="کد پستی"
             />
           </Grid>
+
           <Grid item container xs={12} sm={6}></Grid>
         </Grid>
+
       </DialogContent>
+
       <DialogActions>
         <Grid item xs={12}>
           <Button

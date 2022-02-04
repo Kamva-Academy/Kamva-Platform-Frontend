@@ -60,7 +60,6 @@ const GRADES = [
 ];
 
 function Index({
-  updateUserAccount,
   getUserProfile,
   updateStudentShip,
   getInstitutes,
@@ -141,16 +140,14 @@ function Index({
     <>
       <Grid container item spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h2">مشخصات دانش‌آموزی</Typography>
+          <Typography variant="h2" gutterBottom>مشخصات دانش‌آموزی</Typography>
           <Divider />
         </Grid>
         <Grid item container spacing={2}>
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              size="small"
-              fullWidth
-            >
+              fullWidth>
               <InputLabel>مدرسه</InputLabel>
               <Select
                 IconComponent={AddSchoolInstituteIcon}
@@ -171,16 +168,13 @@ function Index({
               </Select>
             </FormControl>
           </Grid>
+
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              size="small"
-              fullWidth
-            >
+              fullWidth>
               <InputLabel>پایه</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
                 defaultValue={userProfile?.school_studentship?.grade}
                 onChange={handleStudentshipChange}
                 name="grade"
@@ -193,7 +187,8 @@ function Index({
               </Select>
             </FormControl>
           </Grid>
-          <Grid item container justifyContent="center" xs={12} sm={6}>
+
+          {/* <Grid item container justifyContent="center" xs={12} sm={6}>
             <Button
               fullWidth
               variant='outlined'
@@ -223,7 +218,8 @@ function Index({
                 تحصیل در این پایه هستید.
               </Typography>
             )}
-          </Grid>
+          </Grid> */}
+
         </Grid>
         <Grid item container spacing={2}>
           <Grid item xs={12}>
@@ -237,6 +233,7 @@ function Index({
           </Grid>
         </Grid>
       </Grid>
+
       <AddInstitute
         province={userProfile?.province}
         city={userProfile?.city}

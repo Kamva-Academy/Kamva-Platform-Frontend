@@ -124,7 +124,7 @@ function Index({
     <>
       <Grid container item spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h2">تصویر</Typography>
+          <Typography variant="h2" gutterBottom>تصویر</Typography>
           <Divider />
         </Grid>
         <Grid item container spacing={2} alignItems="center">
@@ -162,40 +162,40 @@ function Index({
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h2">مشخصات فردی</Typography>
+          <Typography variant="h2" gutterBottom>مشخصات فردی</Typography>
           <Divider />
         </Grid>
         <Grid item container spacing={2}>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              autoComplete="on"
               required
               defaultValue={userProfile?.first_name}
               value={newProfile.first_name}
               name="first_name"
               onChange={handleProfileChange}
-              size="small"
+
               label='نام'
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              autoComplete="on"
               required
               defaultValue={userProfile?.last_name}
               value={newProfile.last_name}
               name="last_name"
               onChange={handleProfileChange}
-              size="small"
+
               label="نام خانوادگی"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              autoComplete="on"
               required
               defaultValue={userProfile?.national_code}
               value={newProfile.national_code}
@@ -206,10 +206,11 @@ function Index({
                 }
               }}
               inputProps={{ className: 'ltr-input' }}
-              size="small"
+
               label="کد ملی"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -218,23 +219,11 @@ function Index({
               defaultValue={userProfile?.phone_number}
               name="phone_number"
               inputProps={{ className: 'ltr-input' }}
-              size="small"
+
               label="شماره موبایل"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              autoComplete="on"
-              defaultValue={userProfile?.email}
-              value={newProfile.email}
-              name="email"
-              onChange={handleProfileChange}
-              inputProps={{ className: 'ltr-input' }}
-              size="small"
-              label="ایمیل"
-            />
-          </Grid>
+
           <Grid item xs={12} sm={6}>
             <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
               <DatePicker
@@ -249,8 +238,22 @@ function Index({
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item>
-            <FormControl size="small" required>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              defaultValue={userProfile?.email}
+              value={newProfile.email}
+              name="email"
+              onChange={handleProfileChange}
+              inputProps={{ className: 'ltr-input' }}
+
+              label="ایمیل"
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormControl required>
               <FormLabel>جنیست</FormLabel>
               <RadioGroup
                 name="gender"
@@ -273,12 +276,11 @@ function Index({
               </RadioGroup>
             </FormControl>
           </Grid>
-        </Grid>
-        <Grid item container spacing={2}>
+
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              size="small"
+
 
               className={classes.formControl}>
               <InputLabel>استان</InputLabel>
@@ -298,10 +300,11 @@ function Index({
               </Select>
             </FormControl>
           </Grid>
+
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              size="small"
+
 
               className={classes.formControl}>
               <InputLabel>شهر</InputLabel>
@@ -329,23 +332,21 @@ function Index({
           <Grid item xs={12}>
             <TextField
               fullWidth
-
-              autoComplete="on"
+              helperText='جوایز و یادگاری‌ها به این آدرس پست می‌شوند.'
               defaultValue={userProfile?.address}
               value={newProfile.address}
               name="address"
               multiline
               rows={2}
               onChange={handleProfileChange}
-              size="small"
+
               label="آدرس منزل"
             />
           </Grid>
+
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-
-              autoComplete="on"
               defaultValue={userProfile?.postal_code}
               name="postal_code"
               value={newProfile.postal_code}
@@ -355,11 +356,12 @@ function Index({
                 }
               }}
               inputProps={{ className: 'ltr-input' }}
-              size="small"
+
               label="کد پستی"
             />
           </Grid>
         </Grid>
+
         <Grid item container spacing={2}>
           <Grid item xs={12}>
             <Button

@@ -107,10 +107,10 @@ const Event = ({
               event?.user_registration_status == 'DeadlineMissed' &&
               <EventButton text={'ثبت‌نام تمام شده'} disabled />
             }
-            {
+            {/* {
               event?.user_registration_status == 'GradeNotAvailable' &&
-              <EventButton text={'سن شما مناسب نیست.'} disabled />
-            }
+              <EventButton text={'پایه تحصیلی شما مناسب نیست.'} disabled />
+            } */}
             {
               (event?.user_registration_status === 'Permitted' || event?.user_registration_status === 'NotPermitted') &&
               <EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} disabled={!event?.is_active} />
