@@ -8,6 +8,7 @@ import {
   getVerificationCodeAction,
 } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
+import appendPreviousParams from '../../utils/AppendPreviousParams';
 import { toEnglishNumber } from '../../utils/translateNumber';
 
 const InputFields = ({
@@ -191,7 +192,7 @@ const InputFields = ({
       <Grid item>
         <Typography align="center">
           {' از قبل حساب داشتی؟ به '}
-          <Link to="/login">{'این‌جا'}</Link>
+          <Link to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
           {' برو.'}
         </Typography>
       </Grid>

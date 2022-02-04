@@ -5,6 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { loginAction } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
+import AppendPreviousParams from '../../utils/AppendPreviousParams';
 import { toEnglishNumber } from '../../utils/translateNumber';
 
 const InputFields = ({ isFetching, login, addNotification, token }) => {
@@ -16,8 +17,6 @@ const InputFields = ({ isFetching, login, addNotification, token }) => {
   const urlParams = new URLSearchParams(window.location.search);
   const eventId = urlParams.get('private_event_enter');
   if (token) {
-
-    console.log(eventId)
     if (eventId) {
       return <Redirect to={`/event/${eventId}/`} />;
     } else {
@@ -100,12 +99,12 @@ const InputFields = ({ isFetching, login, addNotification, token }) => {
       <Grid item>
         <Typography align="center" gutterBottom>
           {'اگر گذرواژه‌ات را فراموش کردی، به '}
-          <Link to="/reset_password">{'این‌جا'}</Link>
+          <Link to={AppendPreviousParams("/reset_password")}>{'این‌جا'}</Link>
           {' مراجعه کن.'}
         </Typography>
         <Typography align="center">
           {'اگر هم حساب کاربری نداری، '}
-          <Link to="/create_account">{'این‌جا'}</Link>
+          <Link to={AppendPreviousParams("/create_account")}>{'این‌جا'}</Link>
           {' یک حساب جدید برای خودت بساز!'}
         </Typography>
       </Grid>
