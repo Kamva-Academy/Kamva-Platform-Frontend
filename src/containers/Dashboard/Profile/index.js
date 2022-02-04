@@ -4,6 +4,7 @@ import {
   makeStyles,
   Tab,
   Tabs,
+  Typography,
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -84,12 +85,20 @@ const Index = () => {
             </Tabs>
           </Grid>
           {eventId &&
-            <Grid item>
-              <Button component={Link} to={`/event/${eventId}/`} fullWidth variant='outlined'>
-                {'بازگشت به رویداد'}
-              </Button>
-            </Grid>
+            <>
+              <Grid item>
+                <Button component={Link} to={`/event/${eventId}/`} fullWidth variant='outlined'>
+                  {'بازگشت به رویداد'}
+                </Button>
+              </Grid>
+              <Grid item>
+                <Typography variant='h3' color='error'>
+                  {'تکمیل موارد ستاره‌دار الزامی است.'}
+                </Typography>
+              </Grid>
+            </>
           }
+
         </Grid>
         <Grid container item xs={12} sm={9}>
           <TabComponent />
