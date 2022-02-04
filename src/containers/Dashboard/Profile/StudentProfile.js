@@ -59,6 +59,12 @@ const GRADES = [
   { value: 12, name: 'دوازدهم' },
 ];
 
+const SCHOOL_TYPES = {
+  'Elementary': 'دبستان',
+  'JuniorHigh': 'دبیرستان دوره اول',
+  'High': 'دبیرستان دوره دوم',
+}
+
 function Index({
   getUserProfile,
   updateStudentShip,
@@ -157,7 +163,7 @@ function Index({
                 label="مدرسه">
                 {institutes?.map((school) => (
                   <MenuItem key={school.id} value={school.id}>
-                    {school.name}
+                    {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : ' ') + school.name}
                   </MenuItem>
                 ))}
                 {institutes?.length == 0 &&

@@ -40,8 +40,8 @@ const ANSWER_TYPES = {
 
 const RegistrationForm = ({
   getOneRegistrationForm,
-  getOneEventInfo,
 
+  userProfile,
   event,
   registrationForm,
   submitRegistrationForm,
@@ -73,6 +73,8 @@ const RegistrationForm = ({
     });
   };
 
+  console.log(registrationForm)
+
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
     const temporaryAnswer = [...answers];
     let doesFind = false;
@@ -100,6 +102,8 @@ const RegistrationForm = ({
     }
     setAnswers(temporaryAnswer);
   };
+
+
 
   return (
     <Layout>
@@ -134,16 +138,8 @@ const RegistrationForm = ({
             ))}
             <Grid item xs={12}>
               {
-                event?.user_registration_status == 'NotPermitted' &&
-                <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'لطفاً برای ادامه‌ی ثبت‌نام، ابتدا مشخصات خود را در قسمت '}
-                  <Link to={`/event/${eventId}/profile`}>{'پروفایل'}</Link>
-                  {' تکمیل کنید.'}
-                </Typography>
-              }
-              {
                 <Button
-                  disabled={event?.user_registration_status == 'NotPermitted'}
+                  disabled={!checkPermission(registrationForm?.audience_type, userProfile)}
                   fullWidth
                   variant="contained"
                   color="primary"
@@ -152,6 +148,14 @@ const RegistrationForm = ({
                   }}>
                   {'ثبت'}
                 </Button>
+              }
+              {
+                !checkPermission(registrationForm?.audience_type, userProfile) &&
+                <Typography variant='h4' color='error' align="center" gutterBottom>
+                  {'لطفاً برای ادامه‌ی ثبت‌نام، ابتدا مشخصات خود را در قسمت '}
+                  <Link to={`/event/${eventId}/profile`}>{'پروفایل'}</Link>
+                  {' تکمیل کنید.'}
+                </Typography>
               }
             </Grid>
           </Grid>
@@ -169,6 +173,7 @@ const RegistrationForm = ({
 };
 
 const mapStateToProps = (state) => ({
+  userProfile: state.account.userProfile,
   events: state.events.events || [],
   event: state.events.event,
   registrationForm: state.events.registrationForm,
@@ -180,3 +185,24 @@ export default connect(mapStateToProps, {
   getOneEventInfo: getOneEventInfoAction,
   submitRegistrationForm: submitRegistrationFormAction,
 })(RegistrationForm);
+
+
+const checkPermission = (audienceType, userProfile = {}) => {
+  const { first_name, last_name, national_code, birth_date, gender, province, city } = userProfile;
+  if (!first_name || !last_name || !national_code || !birth_date || !gender || !province || !city) {
+    return false;
+  }
+
+  if (audienceType == 'Student') {
+    const { grade, school } = userProfile?.school_studentship;
+    if (!grade || !school) {
+      return false;
+    }
+  }
+
+  if (audienceType == 'Academic') {
+    // todo
+  }
+
+  return true;
+}
