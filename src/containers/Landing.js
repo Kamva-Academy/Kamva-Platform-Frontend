@@ -36,7 +36,7 @@ const Index = () => {
           md={6}>
           <Grid item>
             <Typography variant="h1" align="center">
-              آکادمی کاموا
+              کاموا
             </Typography>
           </Grid>
           <Grid item>
