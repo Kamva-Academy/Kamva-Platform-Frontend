@@ -36,7 +36,12 @@ const Index = () => {
           md={6}>
           <Grid item>
             <Typography variant="h1" align="center">
-              پلتفرم برگزاری رویداد و کارگاه
+              آکادمی کاموا
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h2" align="center">
+              بستر برگزاری رویداد و کارگاه آنلاین
             </Typography>
           </Grid>
           <Grid item>
