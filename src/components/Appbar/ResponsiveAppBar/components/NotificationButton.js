@@ -121,7 +121,6 @@ const NotificationButton = ({ notifications = [] }) => {
           </MenuList>
         </Paper>
       </Popover>
-      <></>
     </>
   );
 };

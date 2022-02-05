@@ -1,8 +1,6 @@
 import {
-  Divider,
   Grid,
   makeStyles,
-  Paper,
   Typography,
 } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
@@ -38,13 +36,18 @@ function Workshops({
   const history = useHistory();
   const [pageNumber, setPageNumber] = useState(1);
 
-  if (event?.user_registration_status && event?.user_registration_status != 'Accepted') {
+  if (event?.is_user_participating != undefined && !event?.is_user_participating) {
     history.push(`/event/${eventId}/registration_form/`);
   }
 
   useEffect(() => {
     getEventWorkshops({ eventId, pageNumber });
   }, [pageNumber]);
+
+  // todo: handle in a better way
+  if (event?.is_user_participating == undefined) {
+    return (<Layout></Layout>)
+  }
 
   return (
     <Layout>
