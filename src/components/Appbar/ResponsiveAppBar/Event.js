@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import AvatarComponent from './components/Avatar';
@@ -7,6 +7,12 @@ import EventLogoButton from './components/EventLogoButton';
 import LogoutButton from './components/LogoutButton';
 
 const DashboardItems = ({ event }) => {
+
+  useEffect(() => {
+    if (event?.name) {
+      document.title = `کاموا | ${event?.name}`;
+    }
+  }, [event?.name])
 
   const { eventId } = useParams();
 
