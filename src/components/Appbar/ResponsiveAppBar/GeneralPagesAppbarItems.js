@@ -6,6 +6,9 @@ const Index = () => {
 
   useEffect(() => {
     document.title = 'درباره‌ی ما';
+    return () => {
+      document.title = 'کاموا';
+    }
   }, [])
 
   const backToLanding = <DashboardButton name={'برگشت به صفحه‌ی اصلی'} to={`/`} />;

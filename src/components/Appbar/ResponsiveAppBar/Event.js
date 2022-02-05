@@ -12,6 +12,9 @@ const DashboardItems = ({ event }) => {
     if (event?.name) {
       document.title = event?.name;
     }
+    return () => {
+      document.title = 'کاموا';
+    }
   }, [event?.name])
 
   const { eventId } = useParams();
