@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import appendPreviousParams from '../../../utils/AppendPreviousParams';
 import DashboardButton from './components/DashboardButton';
 
 const Index = () => {
@@ -11,7 +12,7 @@ const Index = () => {
     }
   }, [])
 
-  const backToLanding = <DashboardButton name={'برگشت به صفحه‌ی اصلی'} to={`/`} />;
+  const backToLanding = <DashboardButton name={'برگشت به صفحه‌ی اصلی'} to={appendPreviousParams(`/`)} />;
 
   const desktopLeftItems = [backToLanding];
   const desktopRightItems = [];

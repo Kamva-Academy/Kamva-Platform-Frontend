@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
@@ -11,6 +11,14 @@ const PrivateRoute = ({
 }) => {
   const hasAccess = token && (isMentor || !onlyMentor);
 
+  // todo: improve TOF!
+  const url = window.location.href;
+  const match = /event\/\d+/.exec(url)
+  let eventId;
+  if (match) {
+    eventId = match[0].substring(6, match[0].length);
+  }
+
   return (
     <Route
       {...rest}
@@ -18,7 +26,9 @@ const PrivateRoute = ({
         hasAccess ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          <Redirect to={{
+            pathname: eventId ? `/?private_event_enter=${eventId}` : '/', state: { from: props.location }
+          }} />
         )
       }
     />

@@ -9,6 +9,8 @@ import {
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import appendPreviousParams from '../utils/AppendPreviousParams';
+
 const useStyles = makeStyles(() => ({
   fullHeight: {
     minHeight: '100vh',
@@ -46,13 +48,13 @@ const Index = () => {
           </Grid>
           <Grid item>
             <ButtonGroup size="large" variant="contained" color="primary">
-              <Button component={Link} to="/login">
+              <Button component={Link} to={appendPreviousParams("/login")}>
                 ورود
               </Button>
-              <Button component={Link} to="/create_account">
+              <Button component={Link} to={appendPreviousParams("/create_account")}>
                 ثبت‌نام
               </Button>
-              <Button component={Link} to="/about_us">
+              <Button component={Link} to={appendPreviousParams("/about_us")}>
                 درباره‌ی کاموا
               </Button>
             </ButtonGroup>

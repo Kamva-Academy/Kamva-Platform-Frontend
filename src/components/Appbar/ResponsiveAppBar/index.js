@@ -162,7 +162,7 @@ function ResponsiveAppBar({
 }
 
 const mapStateToProps = (state) => ({
-  isMentor: state.account.userAccount.is_mentor,
+  isMentor: state.account.userAccount?.is_mentor,
   event: state.events.event,
   workshop: state.workshop.workshop,
 })

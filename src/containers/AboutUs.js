@@ -26,7 +26,7 @@ function AboutUs() {
         <br />
 
         <Typography component="h2" variant="h3" gutterBottom>
-          درباره‌ی رستا
+          درباره‌ی ما
         </Typography>
         <Typography variant="subtitle1">
           جمعی از فارغ‌التحصیلان و دانشجویان خانه‌ی ریاضیات اصفهان با برگزاری
@@ -53,7 +53,7 @@ function AboutUs() {
         <br />
 
         <Typography component="h3" variant="h3" gutterBottom>
-          رسالت و اهداف رستا
+          رسالت و اهداف
         </Typography>
         <Typography variant="subtitle1">
           رسالت رستا؛ تلاش جهت تحقق «پرورش در دل آموزش صحیح» است.
@@ -102,7 +102,7 @@ function AboutUs() {
         <br />
 
         <Typography component="h3" variant="h3" gutterBottom>
-          فعالیت‌های رستا تاکنون
+          فعالیت‌ها تاکنون
         </Typography>
         <Typography variant="subtitle1">
           تیم رستا در طول سه سال فعالیت رسمی خود رویدادهای مختلفی را در قالب
@@ -169,7 +169,7 @@ function AboutUs() {
         <br />
 
         <Typography component="h3" variant="h3" gutterBottom>
-          ارتباط با رستا
+          ارتباط با ما
         </Typography>
         <Typography variant="subtitle1">
           برای ارتباط با تیم رستا جهت برگزاری رویداد یا جهت ارائه‌ی پیشنهادات و انتقادات، می‌توانید از راه‌های زیر با ما در ارتباط باشید:

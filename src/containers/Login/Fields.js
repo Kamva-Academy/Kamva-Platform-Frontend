@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { loginAction } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
-import AppendPreviousParams from '../../utils/AppendPreviousParams';
+import appendPreviousParams from '../../utils/AppendPreviousParams';
 import { toEnglishNumber } from '../../utils/translateNumber';
 
 const InputFields = ({ isFetching, login, addNotification, token }) => {
@@ -99,12 +99,12 @@ const InputFields = ({ isFetching, login, addNotification, token }) => {
       <Grid item>
         <Typography align="center" gutterBottom>
           {'اگر گذرواژه‌ات را فراموش کردی، به '}
-          <Link to={AppendPreviousParams("/reset_password")}>{'این‌جا'}</Link>
+          <Link to={appendPreviousParams("/reset_password")}>{'این‌جا'}</Link>
           {' مراجعه کن.'}
         </Typography>
         <Typography align="center">
           {'اگر هم حساب کاربری نداری، '}
-          <Link to={AppendPreviousParams("/create_account")}>{'این‌جا'}</Link>
+          <Link to={appendPreviousParams("/create_account")}>{'این‌جا'}</Link>
           {' یک حساب جدید برای خودت بساز!'}
         </Typography>
       </Grid>
