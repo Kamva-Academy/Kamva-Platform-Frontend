@@ -71,9 +71,9 @@ function Index({
   };
 
   const handleButtonClick = () => {
-    if (!data?.name || !data.school_type) {
+    if (!data?.name || !data.school_type || !data.gender_type) {
       addNotification({
-        message: 'لطفاً نام و نوع مدرسه را وارد کنید.',
+        message: 'لطفاً همه‌ی موارد ستاره‌دار را تکمیل کنید.',
         type: 'error',
       });
       return;
@@ -81,6 +81,7 @@ function Index({
     createInstitutes({
       institute_type: 'School',
       ...data,
+      name: `${data.gender_type} ${data.name}`,
       province,
       city,
     }).then(() => {
@@ -112,10 +113,29 @@ function Index({
                   {'دبستان'}
                 </MenuItem>
                 <MenuItem value={'JuniorHigh'}>
-                  {'دبیرستان متوسطه اول'}
+                  {'دبیرستان دوره اول'}
                 </MenuItem>
                 <MenuItem value={'High'}>
-                  {'دبیرستان متوسطه دوم'}
+                  {'دبیرستان دوره دوم'}
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item container xs={12} sm={6}>
+            <FormControl
+              required
+              fullWidth>
+              <InputLabel>دخترانه یا پسرانه</InputLabel>
+              <Select
+                onChange={doSetData}
+                name="gender_type"
+                label="دخترانه یا پسرانه">
+                <MenuItem value={'دخترانه'}>
+                  {'دخترانه'}
+                </MenuItem>
+                <MenuItem value={'پسرانه'}>
+                  {'پسرانه'}
                 </MenuItem>
               </Select>
             </FormControl>
@@ -139,8 +159,6 @@ function Index({
               label="شماره‌تلفن مدرسه"
             />
           </Grid>
-
-          <Grid item container xs={12} sm={6}></Grid>
 
           {/* <Grid item container xs={12} sm={6}>
             <FormControl required size='small'  className={classes.formControl}>
