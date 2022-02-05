@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
+import AboutUs from '../containers/AboutUs';
 import ChangePassword from '../containers/ChangePassword';
 import CreateAccount from '../containers/CreateAccount';
 import Dashboard from '../containers/Dashboard';
@@ -22,6 +23,8 @@ const Root = () => {
   return (
     <Switch>
       <Route path="/loading/"></Route>
+
+      <Route path="/about_us" component={AboutUs} />
 
       <Route path="/reset_password" component={ChangePassword} />
       <Route path="/create_account" component={CreateAccount} />

@@ -52,6 +52,9 @@ const Index = () => {
               <Button component={Link} to="/create_account">
                 ثبت‌نام
               </Button>
+              <Button component={Link} to="/about_us">
+                درباره‌ی کاموا
+              </Button>
             </ButtonGroup>
           </Grid>
         </Grid>
