@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import appendPreviousParams from '../../../utils/AppendPreviousParams';
 import DashboardButton from './components/DashboardButton';
 
 const Index = () => {
-
-  useEffect(() => {
-    document.title = 'درباره‌ی ما';
-    return () => {
-      document.title = 'کاموا';
-    }
-  }, [])
 
   const backToLanding = <DashboardButton name={'برگشت به صفحه‌ی اصلی'} to={appendPreviousParams(`/`)} />;
 

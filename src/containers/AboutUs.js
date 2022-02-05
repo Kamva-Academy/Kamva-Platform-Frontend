@@ -1,9 +1,7 @@
-import { Container, makeStyles, Paper, Typography } from '@material-ui/core';
-import React from 'react';
+import { makeStyles, Paper, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
 
 import Layout from './Layout';
-// import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-// import Footer from '../components/SpecialComponents/Homepage/Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -13,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
 
 function AboutUs() {
   const classes = useStyles();
+
+  useEffect(() => {
+    document.title = 'کاموا';
+  }, [])
 
   return (
     <Layout appbarMode='GENERAL'>

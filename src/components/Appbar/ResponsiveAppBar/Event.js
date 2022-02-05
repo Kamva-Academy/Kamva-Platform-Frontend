@@ -10,10 +10,7 @@ const DashboardItems = ({ event }) => {
 
   useEffect(() => {
     if (event?.name) {
-      document.title = event?.name;
-    }
-    return () => {
-      document.title = 'کاموا';
+      document.title = `کاموا | ${event?.name}`;
     }
   }, [event?.name])
 

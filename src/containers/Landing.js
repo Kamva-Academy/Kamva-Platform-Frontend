@@ -6,7 +6,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import appendPreviousParams from '../utils/AppendPreviousParams';
@@ -19,6 +19,10 @@ const useStyles = makeStyles(() => ({
 
 const Index = () => {
   const classes = useStyles();
+
+  useEffect(() => {
+    document.title = 'کاموا';
+  }, [])
 
   return (
     <Container>
