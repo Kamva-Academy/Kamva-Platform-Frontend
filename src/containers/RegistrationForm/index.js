@@ -61,7 +61,8 @@ const RegistrationForm = ({
 
   if (event?.user_registration_status &&
     event?.user_registration_status != 'NotPermitted' &&
-    event?.user_registration_status != 'Permitted') {
+    event?.user_registration_status != 'Permitted' &&
+    event?.user_registration_status != 'GradeNotAvailable') {
     history.push(`/event/${eventId}/status/`);
   }
 
@@ -72,8 +73,6 @@ const RegistrationForm = ({
       eventId,
     });
   };
-
-  console.log(registrationForm)
 
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
     const temporaryAnswer = [...answers];
@@ -149,14 +148,18 @@ const RegistrationForm = ({
                   {'ثبت'}
                 </Button>
               }
-              {
+              {event?.user_registration_status == 'GradeNotAvailable' ? (
+                <Typography variant='h4' color='error' align="center" gutterBottom>
+                  {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
+                </Typography>
+              ) : (
                 !checkPermission(registrationForm?.audience_type, userProfile) &&
                 <Typography variant='h4' color='error' align="center" gutterBottom>
                   {'لطفاً برای ادامه‌ی ثبت‌نام، ابتدا مشخصات خود را در قسمت '}
                   <Link to={`/event/${eventId}/profile`}>{'پروفایل'}</Link>
                   {' تکمیل کنید.'}
                 </Typography>
-              }
+              )}
             </Grid>
           </Grid>
         </Grid>
