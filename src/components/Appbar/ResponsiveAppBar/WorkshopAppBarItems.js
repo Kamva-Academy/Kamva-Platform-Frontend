@@ -15,6 +15,9 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     if (workshop?.name) {
       document.title = workshop?.name;
     }
+    return () => {
+      document.title = 'کاموا';
+    }
   }, [workshop?.name])
 
   const { eventId } = useParams();

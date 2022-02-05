@@ -9,6 +9,9 @@ const DashboardItems = () => {
 
   useEffect(() => {
     document.title = 'کاموا';
+    return () => {
+      document.title = 'کاموا';
+    }
   }, [])
 
   const logoButton = <LogoButton />;
