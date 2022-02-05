@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
 import UserAvatar from './components/Avatar';
@@ -10,6 +10,13 @@ import TeamAvatar from './components/UsersAvatar';
 import WhiteboardButton from './components/WhiteboardButton';
 
 const WorkshopAppBarItems = ({ workshop, isMentor }) => {
+
+  useEffect(() => {
+    if (workshop?.name) {
+      document.title = workshop?.name;
+    }
+  }, [workshop?.name])
+
   const { eventId } = useParams();
   const jitsiButton = <JitsiButton />;
   // todo: return to its event, not all events!

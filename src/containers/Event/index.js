@@ -58,7 +58,7 @@ function Workshops({
         <Grid container item xs={12} sm={9} direction='column' spacing={3}>
           <Grid item>
             <Typography variant="h1" align='center'>
-              {'کارگاه‌ها'}
+              {'کارگاه‌ها و آزمون‌ها'}
             </Typography>
           </Grid>
           <Grid container item spacing={3} justifyContent='space-between'>

@@ -10,7 +10,7 @@ const DashboardItems = ({ event }) => {
 
   useEffect(() => {
     if (event?.name) {
-      document.title = `کاموا | ${event?.name}`;
+      document.title = event?.name;
     }
   }, [event?.name])
 
