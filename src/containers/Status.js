@@ -150,9 +150,9 @@ const Payment = ({
             {event?.user_registration_status == 'Accepted' && (
               <>
                 <Grid item container justifyContent="center" alignItems="center">
-                  <Typography fullWidth align="center">
+                  <Typography variant='h6' fullWidth align="center">
                     {
-                      'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است. پس از پرداخت، به صفحه‌ی تیم‌کشی بروید و آن‌جا هم‌تیمی‌های خود را انتخاب کنید. توجه کنید که هر تیم باید ۳ نفره باشد.'
+                      'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'
                     }
                   </Typography>
                 </Grid>

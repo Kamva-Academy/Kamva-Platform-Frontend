@@ -36,10 +36,10 @@ const Index = () => {
             md={6}>
             <Grid item>
               <Typography gutterBottom variant="h1" align="center">
-                ثبت‌نام شما موفق نبود :(
+                ثبت‌نام شما ناموفق بود :(
               </Typography>
               <Typography variant="h4" align="center">
-                چنانچه هزینه‌ای از حساب شما کسر شده، به پاسخگوی سایت بگویید.
+                چنانچه هزینه‌ای از حساب شما کسر شده، به پاسخگوی سایت اطلاع دهید تا بررسی کنیم.
               </Typography>
             </Grid>
             {/* <Grid item>
