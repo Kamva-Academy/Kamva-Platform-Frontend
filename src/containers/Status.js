@@ -204,11 +204,7 @@ const Payment = ({
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography variant='h5' color='error' gutterBottom align='center'>
-                      {'متاسفانه درگاه پرداخت با مشکلی رو‌به‌رو شده. به محض درست‌شدن از طریق پیامک به شما اطلاع‌رسانی می‌شود.'}
-                    </Typography>
                     <Button
-                      // disabled
                       fullWidth
                       variant="contained"
                       color="primary"

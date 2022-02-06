@@ -26,7 +26,7 @@ const DashboardItems = () => {
     desktopRightItems: [logoButton, eventsButton],
     mobileLeftItems: [Avatar],
     mobileRightItems: [],
-    mobileMenuListItems: [profileButton, eventsButton, logoutButton],
+    mobileMenuListItems: [eventsButton, profileButton, logoutButton],
   };
 };
 
