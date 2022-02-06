@@ -81,7 +81,6 @@ function Index({
     createInstitutes({
       institute_type: 'School',
       ...data,
-      name: `${data.gender_type} ${data.name}`,
       province,
       city,
     }).then(() => {
@@ -134,10 +133,10 @@ function Index({
                 onChange={doSetData}
                 name="gender_type"
                 label="دخترانه یا پسرانه">
-                <MenuItem value={'دخترانه'}>
+                <MenuItem value={'Female'}>
                   {'دخترانه'}
                 </MenuItem>
-                <MenuItem value={'پسرانه'}>
+                <MenuItem value={'Male'}>
                   {'پسرانه'}
                 </MenuItem>
               </Select>
