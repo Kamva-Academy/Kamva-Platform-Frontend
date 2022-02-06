@@ -22,7 +22,7 @@ export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
       <Grid item xs={12}>
         <Box my={4}>
           <Typography variant='h3' align='center'>
-            {'هنوز کارگاهی وجود ندارد!'}
+            {'هنوز کارگاه یا آزمونی وجود ندارد!'}
           </Typography>
         </Box>
       </Grid>

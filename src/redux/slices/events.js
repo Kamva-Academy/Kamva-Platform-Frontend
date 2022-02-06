@@ -82,15 +82,15 @@ export const getOneMerchandiseAction = createAsyncThunkApi(
   getAllUserMerchandisesUrl
 );
 
-export const purchaseEventUrlAction = createAsyncThunkApi(
-  'events/purchaseEventUrlAction',
+export const purchaseEventAction = createAsyncThunkApi(
+  'events/purchaseEventAction',
   Apis.POST,
   purchaseEventUrl,
   {
     defaultNotification: {
       success: 'در حال انتقال به صفحه‌ی پرداخت...',
       error:
-        'مشکلی در ارتباط با سرور پرداخت وجود دارد. اگر از وی‌پی‌ان استفاده می‌کنید، آن را خاموش کن!',
+        'مشکلی در ارتباط با سرور پرداخت وجود دارد. اگر از VPN استفاده می‌کنید، آن را خاموش کن!',
     },
   }
 );
@@ -316,12 +316,12 @@ const eventSlice = createSlice({
     [submitRegistrationFormAction.fulfilled.toString()]: isNotFetching,
     [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
 
-    [purchaseEventUrlAction.pending.toString()]: isFetching,
-    [purchaseEventUrlAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [purchaseEventAction.pending.toString()]: isFetching,
+    [purchaseEventAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       window.location.href = response.payment_link; //todo
     },
-    [purchaseEventUrlAction.rejected.toString()]: isNotFetching,
+    [purchaseEventAction.rejected.toString()]: isNotFetching,
 
     [applyDiscountCodeAction.pending.toString()]: isFetching,
     [applyDiscountCodeAction.fulfilled.toString()]: (

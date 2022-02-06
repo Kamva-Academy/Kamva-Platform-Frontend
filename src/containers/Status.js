@@ -15,7 +15,7 @@ import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
   getOneRegistrationReceiptAction,
-  purchaseEventUrlAction,
+  purchaseEventAction,
   submitRegistrationFormAction,
 } from '../redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
@@ -208,7 +208,7 @@ const Payment = ({
                       {'متاسفانه درگاه پرداخت با مشکلی رو‌به‌رو شده. به محض درست‌شدن از طریق پیامک به شما اطلاع‌رسانی می‌شود.'}
                     </Typography>
                     <Button
-                      disabled
+                      // disabled
                       fullWidth
                       variant="contained"
                       color="primary"
@@ -267,7 +267,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getOneRegistrationForm: getOneRegistrationFormAction,
   getOneEventInfo: getOneEventInfoAction,
-  purchaseEvent: purchaseEventUrlAction,
+  purchaseEvent: purchaseEventAction,
   submitRegistrationForm: submitRegistrationFormAction,
   addNotification: addNotificationAction,
   applyDiscountCode: applyDiscountCodeAction,
