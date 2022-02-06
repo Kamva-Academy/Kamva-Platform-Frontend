@@ -63,6 +63,7 @@ const SCHOOL_TYPES = {
   'Elementary': 'دبستان',
   'JuniorHigh': 'دبیرستان دوره اول',
   'High': 'دبیرستان دوره دوم',
+  'SchoolOfArt': 'هنرستان',
 }
 
 function Index({

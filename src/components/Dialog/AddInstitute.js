@@ -118,6 +118,9 @@ function Index({
                 <MenuItem value={'High'}>
                   {'دبیرستان دوره دوم'}
                 </MenuItem>
+                <MenuItem value={'SchoolOfArt'}>
+                  {'هنرستان'}
+                </MenuItem>
               </Select>
             </FormControl>
           </Grid>
