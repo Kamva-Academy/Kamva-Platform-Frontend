@@ -54,13 +54,17 @@ const tabs = [
 ];
 
 
-const Index = () => {
+const Index = ({
+  event,
+}) => {
   const { eventId } = useParams();
   const [tabNumber, setTabNumber] = useState(0);
 
   const classes = useStyles();
 
   const TabComponent = tabs[tabNumber].component;
+
+  console.log(event)
 
   return (
     <Layout>
@@ -92,9 +96,19 @@ const Index = () => {
                 </Button>
               </Grid>
               <Grid item>
-                <Typography variant='h3' color='error'>
-                  {'تکمیل موارد ستاره‌دار الزامی است.'}
-                </Typography>
+                {event?.audience_type == 'Student' ? (
+                  <Typography variant='h3' color='error'>
+                    {'تکمیل موارد ستاره‌دار در هر دو قسمت «مشخصات فردی» و «مشخصات دانش‌آموزی» الزامی است.'}
+                  </Typography>
+                ) : (event?.audience_type == 'Academic' ? (
+                  <Typography variant='h3' color='error'>
+                    {'تکمیل موارد ستاره‌دار در هر دو قسمت «مشخصات فردی» و «مشخصات دانشجویی» الزامی است.'}
+                  </Typography>
+                ) : (
+                  <Typography variant='h3' color='error'>
+                    {'تکمیل موارد ستاره‌دار را الزامی است.'}
+                  </Typography>
+                ))}
               </Grid>
             </>
           }
@@ -109,6 +123,7 @@ const Index = () => {
 };
 
 const mapStateToProps = (state) => ({
+  event: state.events.event,
   userAccount: state.account.userAccount,
   userProfile: state.account.userProfile,
   isFetching: state.account.isFetching,

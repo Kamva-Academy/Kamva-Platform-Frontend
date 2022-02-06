@@ -148,9 +148,17 @@ const RegistrationForm = ({
                   {'ثبت'}
                 </Button>
               }
-              {event?.user_registration_status == 'GradeNotAvailable' ? (
+              {event?.user_registration_status == 'NotPermitted' && (
                 <Typography variant='h4' color='error' align="center" gutterBottom>
                   {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
+                </Typography>
+              )}
+              {(event?.user_registration_status == 'GradeNotAvailable' ||
+                event?.user_registration_status == 'StudentshipDataIncomplete') ? (
+                <Typography variant='h4' color='error' align="center" gutterBottom>
+                  {'لطفاً در '}
+                  <Link to={`/event/${eventId}/profile`}>{'پروفایل'}</Link>
+                  {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
                 </Typography>
               ) : (
                 !checkPermission(registrationForm?.audience_type, userProfile) &&
