@@ -66,6 +66,11 @@ const SCHOOL_TYPES = {
   'SchoolOfArt': 'هنرستان',
 }
 
+const GENDER_TYPES = {
+  'Male': 'پسرانه',
+  'Female': 'دخترانه',
+}
+
 function Index({
   getUserProfile,
   updateStudentShip,
@@ -164,7 +169,7 @@ function Index({
                 label="مدرسه">
                 {institutes?.map((school) => (
                   <MenuItem key={school.id} value={school.id}>
-                    {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : ' ') + school.name}
+                    {(school.school_type && SCHOOL_TYPES[school.school_type] + ' ') + (school.gender_type && GENDER_TYPES[school.gender_type] + ' ') + school.name}
                   </MenuItem>
                 ))}
                 {institutes?.length == 0 &&
