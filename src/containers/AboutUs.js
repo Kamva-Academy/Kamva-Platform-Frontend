@@ -190,7 +190,7 @@ function AboutUs() {
           </li>
           <li>
             <Typography variant="subtitle1">
-              پیام‌رسان تلگرام: <a href='//t.me/rastaiha_info'>@Rastaiha_Info</a>
+              تلگرام: <a href='//t.me/rastaiha_info'>@Rastaiha_Info</a>
             </Typography>
           </li>
           <li>
@@ -200,7 +200,7 @@ function AboutUs() {
           </li>
           <li>
             <Typography variant="subtitle1">
-              شماره‌ی تماس (جهت هماهنگی برگزاری رویداد): ۰۹۳۶۳۳۰۲۷۳۸
+              شماره‌ی تماس: ۰۹۳۶۳۳۰۲۷۳۸
             </Typography>
           </li>
         </ul>

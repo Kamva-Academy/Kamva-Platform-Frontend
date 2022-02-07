@@ -200,9 +200,11 @@ export default connect(mapStateToProps, {
 
 const checkPermission = (audienceType, userProfile = {}) => {
   const { first_name, last_name, national_code, birth_date, gender, province, city } = userProfile;
+  console.log(first_name, last_name, national_code, birth_date, gender, province, city)
   if (!first_name || !last_name || !national_code || !birth_date || !gender || !province || !city) {
     return false;
   }
+
 
   if (audienceType == 'Student') {
     const { grade, school } = userProfile?.school_studentship;

@@ -155,10 +155,12 @@ function Index({
           <Typography variant="h2" gutterBottom>مشخصات دانش‌آموزی</Typography>
           <Divider />
         </Grid>
+
         <Grid item container spacing={2}>
-          <Grid item container xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <FormControl
               required
+              error={!userProfile?.school_studentship?.school}
               fullWidth>
               <InputLabel>مدرسه</InputLabel>
               <Select
@@ -181,9 +183,10 @@ function Index({
             </FormControl>
           </Grid>
 
-          <Grid item container xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <FormControl
               required
+              error={!userProfile?.school_studentship?.grade}
               fullWidth>
               <InputLabel>پایه</InputLabel>
               <Select
@@ -233,16 +236,15 @@ function Index({
           </Grid> */}
 
         </Grid>
-        <Grid item container spacing={2}>
-          <Grid item xs={12}>
-            <Button
-              onClick={submitStudentship}
-              fullWidth
-              variant="contained"
-              color="secondary">
-              ذخیره
-            </Button>
-          </Grid>
+
+        <Grid item xs={12} spacing={2}>
+          <Button
+            onClick={submitStudentship}
+            fullWidth
+            variant="contained"
+            color="secondary">
+            ذخیره
+          </Button>
         </Grid>
       </Grid>
 

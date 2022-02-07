@@ -109,11 +109,17 @@ function Index({
   };
 
   const submitProfile = () => {
-    updateUserAccount({
+    let data = {
       id: userProfile?.id,
-      birth_date: birthDate.format('YYYY-MM-DD'),
       ...newProfile,
-    });
+    }
+    if (birthDate) {
+      data = {
+        ...data,
+        birth_date: birthDate.format('YYYY-MM-DD'),
+      }
+    }
+    updateUserAccount(data);
   };
 
   if (!userProfile) {
@@ -169,6 +175,7 @@ function Index({
 
           <Grid item xs={12} sm={6}>
             <TextField
+              error={!userProfile.first_name}
               fullWidth
               required
               defaultValue={userProfile?.first_name}
@@ -182,6 +189,7 @@ function Index({
 
           <Grid item xs={12} sm={6}>
             <TextField
+              error={!userProfile.last_name ? true : false}
               fullWidth
               required
               defaultValue={userProfile?.last_name}
@@ -195,6 +203,7 @@ function Index({
 
           <Grid item xs={12} sm={6}>
             <TextField
+              error={!userProfile.national_code}
               fullWidth
               required
               defaultValue={userProfile?.national_code}
@@ -227,6 +236,7 @@ function Index({
           <Grid item xs={12} sm={6}>
             <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
               <DatePicker
+                error={!birthDate}
                 required
                 label='تاریخ تولد'
                 fullWidth
@@ -254,7 +264,7 @@ function Index({
 
           <Grid item xs={12}>
             <FormControl required>
-              <FormLabel>جنیست</FormLabel>
+              <FormLabel error={!userProfile?.gender}>جنیست</FormLabel>
               <RadioGroup
                 name="gender"
                 row
@@ -280,8 +290,7 @@ function Index({
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-
-
+              error={!userProfile?.province}
               className={classes.formControl}>
               <InputLabel>استان</InputLabel>
               <Select
@@ -304,8 +313,7 @@ function Index({
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-
-
+              error={!userProfile?.city}
               className={classes.formControl}>
               <InputLabel>شهر</InputLabel>
               <Select
@@ -329,6 +337,7 @@ function Index({
               </Select>
             </FormControl>
           </Grid>
+
           <Grid item xs={12}>
             <TextField
               fullWidth
