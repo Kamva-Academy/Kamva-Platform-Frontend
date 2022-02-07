@@ -167,15 +167,17 @@ function Index({
             />
           </Grid>
         </Grid>
+
         <Grid item xs={12}>
           <Typography variant="h2" gutterBottom>مشخصات فردی</Typography>
           <Divider />
         </Grid>
+
         <Grid item container spacing={2}>
 
           <Grid item xs={12} sm={6}>
             <TextField
-              error={!userProfile.first_name}
+              error={!userProfile.first_name && !newProfile.first_name}
               fullWidth
               required
               defaultValue={userProfile?.first_name}
@@ -189,7 +191,7 @@ function Index({
 
           <Grid item xs={12} sm={6}>
             <TextField
-              error={!userProfile.last_name ? true : false}
+              error={!userProfile.last_name && !newProfile.last_name}
               fullWidth
               required
               defaultValue={userProfile?.last_name}
@@ -203,7 +205,7 @@ function Index({
 
           <Grid item xs={12} sm={6}>
             <TextField
-              error={!userProfile.national_code}
+              error={!userProfile.national_code && !newProfile.national_code}
               fullWidth
               required
               defaultValue={userProfile?.national_code}
@@ -215,7 +217,6 @@ function Index({
                 }
               }}
               inputProps={{ className: 'ltr-input' }}
-
               label="کد ملی"
             />
           </Grid>
@@ -228,7 +229,6 @@ function Index({
               defaultValue={userProfile?.phone_number}
               name="phone_number"
               inputProps={{ className: 'ltr-input' }}
-
               label="شماره موبایل"
             />
           </Grid>
@@ -257,17 +257,18 @@ function Index({
               name="email"
               onChange={handleProfileChange}
               inputProps={{ className: 'ltr-input' }}
-
               label="ایمیل"
             />
           </Grid>
 
           <Grid item xs={12}>
             <FormControl required>
-              <FormLabel error={!userProfile?.gender}>جنیست</FormLabel>
+              <FormLabel
+                error={!userProfile?.gender && !newProfile.gender}>جنیست</FormLabel>
               <RadioGroup
                 name="gender"
                 row
+                value={newProfile.gender}
                 required
                 defaultValue={userProfile?.gender}
                 onChange={handleProfileChange}>
@@ -290,7 +291,7 @@ function Index({
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.province}
+              error={!userProfile?.province && !newProfile?.province}
               className={classes.formControl}>
               <InputLabel>استان</InputLabel>
               <Select
@@ -313,7 +314,7 @@ function Index({
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.city}
+              error={!userProfile?.city && !newProfile?.city}
               className={classes.formControl}>
               <InputLabel>شهر</InputLabel>
               <Select

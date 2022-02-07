@@ -148,12 +148,12 @@ const RegistrationForm = ({
                   {'ثبت'}
                 </Button>
               }
-              {event?.user_registration_status == 'NotPermitted' && (
+              {event?.user_registration_status == 'NotPermitted' ? (
                 <Typography variant='h4' color='error' align="center" gutterBottom>
                   {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
                 </Typography>
-              )}
-              {(event?.user_registration_status == 'GradeNotAvailable' ||
+              ) : ((
+                event?.user_registration_status == 'GradeNotAvailable' ||
                 event?.user_registration_status == 'StudentshipDataIncomplete') ? (
                 <Typography variant='h4' color='error' align="center" gutterBottom>
                   {'لطفاً در '}
@@ -163,11 +163,11 @@ const RegistrationForm = ({
               ) : (
                 !checkPermission(registrationForm?.audience_type, userProfile) &&
                 <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'لطفاً برای ادامه‌ی ثبت‌نام، ابتدا مشخصات خود را در قسمت '}
+                  {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در قسمت '}
                   <Link to={`/event/${eventId}/profile`}>{'پروفایل'}</Link>
                   {' تکمیل کنید.'}
                 </Typography>
-              )}
+              ))}
             </Grid>
           </Grid>
         </Grid>
@@ -200,7 +200,6 @@ export default connect(mapStateToProps, {
 
 const checkPermission = (audienceType, userProfile = {}) => {
   const { first_name, last_name, national_code, birth_date, gender, province, city } = userProfile;
-  console.log(first_name, last_name, national_code, birth_date, gender, province, city)
   if (!first_name || !last_name || !national_code || !birth_date || !gender || !province || !city) {
     return false;
   }

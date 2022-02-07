@@ -160,7 +160,7 @@ function Index({
           <Grid item xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.school_studentship?.school}
+              error={!userProfile?.school_studentship?.school && !newStudentship?.school}
               fullWidth>
               <InputLabel>مدرسه</InputLabel>
               <Select
@@ -186,13 +186,14 @@ function Index({
           <Grid item xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.school_studentship?.grade}
+              error={!userProfile?.school_studentship?.grade && !newStudentship?.grade}
               fullWidth>
               <InputLabel>پایه</InputLabel>
               <Select
                 defaultValue={userProfile?.school_studentship?.grade}
                 onChange={handleStudentshipChange}
                 name="grade"
+                value={newStudentship?.grade}
                 label="پایه">
                 {GRADES.map((grade) => (
                   <MenuItem key={grade.value} value={grade.value}>
