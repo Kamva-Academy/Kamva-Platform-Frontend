@@ -5,6 +5,7 @@ import Layout from './Layout';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
+    width: '100%',
     padding: theme.spacing(2),
   },
 }));
@@ -27,7 +28,7 @@ function AboutUs() {
         </Typography>
         <br />
 
-        <Typography component="h2" variant="h3" gutterBottom>
+        {/* <Typography component="h2" variant="h3" gutterBottom>
           درباره‌ی ما
         </Typography>
         <Typography variant="subtitle1">
@@ -168,7 +169,7 @@ function AboutUs() {
             </Typography>
           </li>
         </ul>
-        <br />
+        <br /> */}
 
         <Typography component="h3" variant="h3" gutterBottom>
           ارتباط با ما
@@ -179,7 +180,7 @@ function AboutUs() {
         <ul>
           <li>
             <Typography variant="subtitle1">
-              سایت رستایی‌ها: <a href='//rastaiha.ir'>rastaiha.ir</a>
+              سایت: <a href='//rastaiha.ir'>rastaiha.ir</a>
             </Typography>
           </li>
           <li>
