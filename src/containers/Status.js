@@ -204,7 +204,7 @@ const Payment = ({
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography error gutterBottom>
+                    <Typography color='error' gutterBottom>
                       {'چنانچه مشکلی در درگاه پرداخت وجود داشت، فردا مجدداً مراجعه کنید.'}
                     </Typography>
                     <Button
