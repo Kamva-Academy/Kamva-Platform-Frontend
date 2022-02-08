@@ -138,7 +138,10 @@ const RegistrationForm = ({
             <Grid item xs={12}>
               {
                 <Button
-                  disabled={!checkPermission(registrationForm?.audience_type, userProfile)}
+                  disabled={event?.user_registration_status == 'NotPermitted' ||
+                    event?.user_registration_status == 'GradeNotAvailable' ||
+                    event?.user_registration_status == 'StudentshipDataIncomplete' ||
+                    !checkPermission(registrationForm?.audience_type, userProfile)}
                   fullWidth
                   variant="contained"
                   color="primary"
