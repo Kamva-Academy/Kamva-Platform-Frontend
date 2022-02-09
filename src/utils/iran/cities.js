@@ -1,5 +1,13 @@
 const Cities = [
   {
+    "id": 450,
+    "title": "خوی",
+    "slug": "Khoy",
+    "province_id": 5,
+    "latitude": 0,
+    "longitude": 0,
+  },
+  {
     "id": 102,
     "title": "آبادان",
     "slug": "Abadan",
