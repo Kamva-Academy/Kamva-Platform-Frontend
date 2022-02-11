@@ -66,6 +66,7 @@ const Events = ({
   }, [getAllEventsInfo]);
 
   const activeEvents = events.filter((event) => event?.is_active ? true : false)
+  const inactiveEvents = events.filter((event) => !event?.is_active ? true : false)
 
   return (
     <Layout>
@@ -75,17 +76,31 @@ const Events = ({
             {'رویدادها'}
           </Typography>
         </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h2' gutterBottom>
+            {'رویدادهای در جریان'}
+          </Typography>
+          <Divider />
+        </Grid>
         <Grid item container spacing={2} xs={12}>
           {activeEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
               <EventCard {...event} />
             </Grid>
           ))}
-          {/* {registrableWorkshops?.map((workshop, index) => (
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h2' gutterBottom>
+            {'رویدادهای گذشته'}
+          </Typography>
+          <Divider />
+        </Grid>
+        <Grid item container spacing={2} xs={12}>
+          {inactiveEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
-              <WorkshopCard isWorkshop workshop />
+              <EventCard {...event} />
             </Grid>
-          ))} */}
+          ))}
         </Grid>
       </Grid>
     </Layout>
