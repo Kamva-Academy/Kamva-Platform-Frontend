@@ -55,7 +55,7 @@ const UploadFileQuestionWidget = ({
   useEffect(() => {
     if (last_submitted_answer) {
       setFile({
-        link: `https://backend.rastaiha.ir${last_submitted_answer?.answer_file}/`,
+        link: `https://backend.rastaiha.ir${last_submitted_answer?.answer_file}`,
         name: 'آخرین فایل ارسالی'
       })
     }
