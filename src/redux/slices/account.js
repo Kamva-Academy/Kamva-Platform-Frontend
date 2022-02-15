@@ -122,6 +122,7 @@ export const updateUserAccountAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'اطلاعات با موفقیت به‌روز شدند.',
+      error: 'مشکلی در به‌روز‌رسانی اطلاعات وجود داشت.',
     },
   }
 );

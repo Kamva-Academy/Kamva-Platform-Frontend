@@ -17,6 +17,13 @@ import {
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
+import JalaliUtils from "@date-io/jalaali";
+import {
+  DatePicker,
+  MuiPickersUtilsProvider,
+} from "@material-ui/pickers";
+import moment from "moment";
+import jMoment from "moment-jalap";
 
 import {
   getInstitutesAction,
@@ -26,16 +33,6 @@ import {
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
-
-import moment from "moment";
-import jMoment from "moment-jalaali";
-import JalaliUtils from "@date-io/jalaali";
-import {
-  TimePicker,
-  DateTimePicker,
-  DatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
 
 
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
