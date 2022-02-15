@@ -136,21 +136,6 @@ const RegistrationForm = ({
               </Grid>
             ))}
             <Grid item xs={12}>
-              {
-                <Button
-                  disabled={event?.user_registration_status == 'NotPermitted' ||
-                    event?.user_registration_status == 'GradeNotAvailable' ||
-                    event?.user_registration_status == 'StudentshipDataIncomplete' ||
-                    !checkPermission(registrationForm?.audience_type, userProfile)}
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    setDialogStatus(true);
-                  }}>
-                  {'ثبت'}
-                </Button>
-              }
               {event?.user_registration_status == 'NotPermitted' ? (
                 <Typography variant='h4' color='error' align="center" gutterBottom>
                   {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
@@ -171,6 +156,19 @@ const RegistrationForm = ({
                   {' تکمیل کنید.'}
                 </Typography>
               ))}
+              <Button
+                disabled={event?.user_registration_status == 'NotPermitted' ||
+                  event?.user_registration_status == 'GradeNotAvailable' ||
+                  event?.user_registration_status == 'StudentshipDataIncomplete' ||
+                  !checkPermission(registrationForm?.audience_type, userProfile)}
+                fullWidth
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  setDialogStatus(true);
+                }}>
+                {'ثبت'}
+              </Button>
             </Grid>
           </Grid>
         </Grid>
