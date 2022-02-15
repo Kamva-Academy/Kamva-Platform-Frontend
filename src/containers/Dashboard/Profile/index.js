@@ -75,10 +75,6 @@ const Index = ({
 
   const TabComponent = tabs[SECTIONS[section]].component;
 
-  console.log(event)
-  console.log(section)
-  console.log(SECTIONS[section])
-
   return (
     <Layout>
       <Grid

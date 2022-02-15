@@ -36,8 +36,6 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const mobileRightItems = [];
   const mobileMenuListItems = [backToEventButton];
 
-  console.log("ismentor: ", isMentor)
-
   if (isMentor) {
     if (workshop?.fsm_p_type == 'Individual') {
       desktopRightItems.push(userAvatar);

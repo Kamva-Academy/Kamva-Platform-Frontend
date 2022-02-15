@@ -45,9 +45,6 @@ export const WorkshopCard = ({
   const { eventId } = useParams();
   const [openPassword, setOpenPassword] = useState(false);
 
-
-  console.log(eventId)
-
   return (
     <Card className={classes.card}>
       <CardActionArea disabled>
