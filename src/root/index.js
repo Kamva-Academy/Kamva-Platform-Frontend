@@ -40,14 +40,14 @@ const Root = () => {
       />
 
       <PrivateRoute path="/dashboard/" component={Dashboard} />
-      <PrivateRoute path="/profile/" component={Profile} />
+      <PrivateRoute path="/profile/:section/" component={Profile} />
       <PrivateRoute path="/events/" component={Events} />
 
       <PrivateRoute path="/event/:eventId/workshop/:fsmId/" component={Workshop} />
       <PrivateRoute path="/watch/:playerId/" component={Workshop} />
       <Route path="/join/:playerId/:token/" component={JoinMentor} />
 
-      <PrivateRoute path="/event/:eventId/profile/" component={Profile} />
+      <PrivateRoute path="/event/:eventId/profile/:section/" component={Profile} />
       <PrivateRoute
         path="/event/:eventId/registration_form/"
         component={RegistrationForm}

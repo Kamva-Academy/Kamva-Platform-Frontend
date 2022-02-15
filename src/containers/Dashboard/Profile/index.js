@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 
 import {
@@ -42,29 +43,41 @@ const useStyles = makeStyles((theme) => ({
 
 const tabs = [
   {
+    name: 'personal',
     label: 'مشخصات فردی',
     icon: '',
     component: PersonalProfile,
   },
   {
+    name: 'student',
     label: 'مشخصات دانش‌آموزی',
     icon: '',
     component: StudentProfile,
   },
 ];
 
+const SECTIONS = {
+  personal: 0,
+  student: 1,
+}
+
+
+
 
 const Index = ({
   event,
 }) => {
-  const { eventId } = useParams();
+  const { eventId, section } = useParams();
+  const history = useHistory();
   const [tabNumber, setTabNumber] = useState(0);
 
   const classes = useStyles();
 
-  const TabComponent = tabs[tabNumber].component;
+  const TabComponent = tabs[SECTIONS[section]].component;
 
   console.log(event)
+  console.log(section)
+  console.log(SECTIONS[section])
 
   return (
     <Layout>
@@ -77,8 +90,8 @@ const Index = ({
             <Tabs
               orientation="vertical"
               variant="scrollable"
-              value={tabNumber}
-              onChange={(event, newValue) => setTabNumber(newValue)}>
+              value={SECTIONS[section]}
+              onChange={(event, newValue) => history.push(eventId ? `/event/${eventId}/profile/${tabs[newValue].name}` : `/profile/${tabs[newValue].name}`)}>
               {
                 tabs.map((tab, index) => {
                   return (

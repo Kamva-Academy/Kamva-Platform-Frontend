@@ -18,7 +18,7 @@ const DashboardItems = ({ event }) => {
 
   const logoButton = <EventLogoButton image={event?.cover_page} name={event?.name} eventId={eventId} />;
   const eventButton = <DashboardButton name={event?.name} to={`/event/${eventId}/`} />;
-  const profileButton = <DashboardButton name={'پروفایل'} to={`/event/${eventId}/profile/`} />;
+  const profileButton = <DashboardButton name={'پروفایل'} to={`/event/${eventId}/profile/personal/`} />;
   const logoutButton = <LogoutButton />;
   const Avatar = <AvatarComponent />;
 

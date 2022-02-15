@@ -61,7 +61,7 @@ function Workshops({
               {'کارگاه‌ها و آزمون‌ها'}
             </Typography>
           </Grid>
-          <Grid container item spacing={3} justifyContent='space-between'>
+          <Grid container item spacing={3} justifyContent='flex-start'>
             <WorkshopGridItems
               eventId={eventId}
               workshops={workshops}

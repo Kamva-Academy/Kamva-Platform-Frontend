@@ -17,7 +17,7 @@ const DashboardItems = () => {
   const logoButton = <LogoButton />;
   const eventsButton = <DashboardButton name={'رویدادها'} to={'/events/'} />;
   const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/workshops/'} />;
-  const profileButton = <DashboardButton name={'پروفایل'} to={'/profile/'} />;
+  const profileButton = <DashboardButton name={'پروفایل'} to={'/profile/personal/'} />;
   const logoutButton = <LogoutButton />;
   const Avatar = <AvatarComponent />;
 
