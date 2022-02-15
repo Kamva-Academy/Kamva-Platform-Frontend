@@ -17,13 +17,13 @@ import {
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
-import JalaliUtils from "@date-io/jalaali";
+import JalaliUtils from "@date-io/moment-jalaali";
 import {
   DatePicker,
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import moment from "moment";
-import jMoment from "moment-jalap";
+import jMoment from "moment-jalaali";
 
 import {
   getInstitutesAction,
