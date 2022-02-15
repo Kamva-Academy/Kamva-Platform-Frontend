@@ -17,7 +17,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
-import JalaliUtils from "@date-io/moment-jalaali";
+import JalaliUtils from "@date-io/jalaali";
 import {
   DatePicker,
   MuiPickersUtilsProvider,
