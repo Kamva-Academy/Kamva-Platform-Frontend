@@ -140,22 +140,23 @@ const RegistrationForm = ({
                 <Typography variant='h4' color='error' align="center" gutterBottom>
                   {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
                 </Typography>
-              ) : ((
-                event?.user_registration_status == 'GradeNotAvailable' ||
-                event?.user_registration_status == 'StudentshipDataIncomplete') ? (
-                <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'لطفاً در '}
-                  <Link to={`/event/${eventId}/profile/student/`}>{'پروفایل'}</Link>
-                  {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
-                </Typography>
               ) : (
-                !checkPermission(registrationForm?.audience_type, userProfile) &&
-                <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در قسمت '}
-                  <Link to={`/event/${eventId}/profile/personal/`}>{'پروفایل'}</Link>
-                  {' تکمیل کنید.'}
-                </Typography>
-              ))}
+                !checkPermission(registrationForm?.audience_type, userProfile) ? (
+                  <Typography variant='h4' color='error' align="center" gutterBottom>
+                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در قسمت '}
+                    <Link to={`/event/${eventId}/profile/personal/`}>{'پروفایل'}</Link>
+                    {' تکمیل کنید.'}
+                  </Typography>
+                ) : (
+                  (event?.user_registration_status == 'GradeNotAvailable' ||
+                    event?.user_registration_status == 'StudentshipDataIncomplete') &&
+                  <Typography variant='h4' color='error' align="center" gutterBottom>
+                    {'لطفاً در '}
+                    <Link to={`/event/${eventId}/profile/student/`}>{'پروفایل'}</Link>
+                    {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
+                  </Typography>
+
+                ))}
               <Button
                 disabled={event?.user_registration_status == 'NotPermitted' ||
                   event?.user_registration_status == 'GradeNotAvailable' ||
