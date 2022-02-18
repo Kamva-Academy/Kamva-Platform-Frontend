@@ -90,7 +90,7 @@ const mapStateToProps = (state) => ({
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
-  loading: state.account.isFetching || state.events.isFetching,
+  loading: state.account.isFetching || state.events.isFetching || state.currentState.isFetching,
 });
 
 export default connect(mapStateToProps, { initRedirect: initRedirectAction })(App);

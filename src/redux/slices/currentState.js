@@ -126,11 +126,13 @@ export const getScoresAction = createAsyncThunkApi(
 
 const stateNeedUpdate = (state) => {
   state.needUpdateState = true;
+  state.isFetching = false;
 };
 
 const getNewState = (state, { payload: { response } }) => {
   state.needUpdateState = false;
   state.state = response.current_state;
+  state.isFetching = false;
 };
 
 const getPlayer = (state, { payload: { response } }) => {
@@ -141,11 +143,22 @@ const getPlayer = (state, { payload: { response } }) => {
   state.teamId = response.team?.id ? response.team?.id : String(response.id);
   state.state = response.current_state;
   state.myTeam = response.team;
+  state.isFetching = false;
+};
+
+
+const isFetching = (state) => {
+  state.isFetching = true;
+};
+
+const isNotFetching = (state) => {
+  state.isFetching = false;
 };
 
 const currentStateSlice = createSlice({
   name: 'currentState',
   initialState: {
+    isFetching: false,
     state: {
       widgets: [],
       hints: [],
@@ -154,18 +167,29 @@ const currentStateSlice = createSlice({
     totalScore: 0,
   },
   extraReducers: {
+    [goForwardAction.pending.toString()]: isFetching,
+    [goForwardAction.fulfilled.toString()]: getNewState,
     [goForwardAction.rejected.toString()]: stateNeedUpdate,
+
+    [goBackwardAction.pending.toString()]: isFetching,
+    [goBackwardAction.fulfilled.toString()]: getNewState,
     [goBackwardAction.rejected.toString()]: stateNeedUpdate,
 
-    [goForwardAction.fulfilled.toString()]: getNewState,
-    [goBackwardAction.fulfilled.toString()]: getNewState,
-
+    [mentorMoveForwardAction.pending.toString()]: isFetching,
     [mentorMoveForwardAction.fulfilled.toString()]: getNewState,
+    [mentorMoveForwardAction.rejected.toString()]: isNotFetching,
+
+    [mentorMoveBackwardAction.pending.toString()]: isFetching,
     [mentorMoveBackwardAction.fulfilled.toString()]: getNewState,
+    [mentorMoveBackwardAction.rejected.toString()]: isNotFetching,
 
+    [mentorGetCurrentStateAction.pending.toString()]: isFetching,
     [mentorGetCurrentStateAction.fulfilled.toString()]: getPlayer,
+    [mentorGetCurrentStateAction.rejected.toString()]: isNotFetching,
 
+    [enterWorkshopAction.pending.toString()]: isFetching,
     [enterWorkshopAction.fulfilled.toString()]: getPlayer,
+    [enterWorkshopAction.rejected.toString()]: isNotFetching,
 
     [getScoresAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.scores = response.score_transactions;
