@@ -135,11 +135,11 @@ const Workshop = ({
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
-        <ScrollTop>
+        {/* <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
-        </ScrollTop>
+        </ScrollTop> */}
       </Container>
     </StatePageContext.Provider>
   );
