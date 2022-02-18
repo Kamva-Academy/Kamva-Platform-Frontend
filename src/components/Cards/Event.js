@@ -105,7 +105,7 @@ const Event = ({
             }
             {
               event?.user_registration_status == 'DeadlineMissed' &&
-              <EventButton text={'بت‌نام تمام شده'} disabled />
+              <EventButton text={'ثبت‌نام تمام شده'} disabled />
             }
             {
               (event?.user_registration_status === 'Permitted' || event?.user_registration_status === 'NotPermitted') &&
