@@ -1,7 +1,7 @@
 import { Button, Card, Chip, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
@@ -69,6 +69,25 @@ const Event = ({
 }) => {
   const classes = useStyles();
   const t = useTranslate();
+  const [EventButtonObj, setEventButtonObj] = useState(<EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} disabled={!event?.is_active} />);
+
+  useEffect(() => {
+
+    if (event?.user_registration_status == 'NotStarted') {
+      setEventButtonObj(<EventButton text={'ثبت‌نام شروع نشده'} disabled />);
+    }
+    if (event?.user_registration_status == 'DeadlineMissed') {
+      setEventButtonObj(<EventButton text={'ثبت‌نام تمام شده'} disabled />);
+    }
+    if (['Waiting', 'Rejected', 'Accepted'].includes(event?.user_registration_status)) {
+      setEventButtonObj(<EventButton to={`/event/${event?.id}/status/`} text={'مشاهده وضعیت ثبت‌نام'} />);
+    }
+    if (event?.is_user_participating) {
+      setEventButtonObj(<EventButton to={`/event/${event?.id}/`} text={'ورود'} />);
+    }
+  }, [event?.user_registration_status, event?.is_user_participating]);
+
+  console.log(event)
 
   return (
     <Card className={classes.paper}>
@@ -99,27 +118,7 @@ const Event = ({
             />
           </Grid>
           <Grid item>
-            {
-              event?.user_registration_status == 'NotStarted' &&
-              <EventButton text={'ثبت‌نام شروع نشده'} disabled />
-            }
-            {
-              event?.user_registration_status == 'DeadlineMissed' &&
-              <EventButton text={'ثبت‌نام تمام شده'} disabled />
-            }
-            {
-              (event?.user_registration_status === 'Permitted' || event?.user_registration_status === 'NotPermitted') &&
-              <EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} disabled={!event?.is_active} />
-            }
-            {
-              event?.user_registration_status == 'Waiting' &&
-              <EventButton to={`/event/${event?.id}/status/`} text={'مشاهده وضعیت ثبت‌نام'} />
-            }
-            {
-              (event?.user_registration_status == 'Accepted' ||
-                event?.user_registration_status == 'GradeNotAvailable') &&
-              <EventButton to={`/event/${event?.id}/`} text={'ورود'} />
-            }
+            {EventButtonObj}
           </Grid>
         </Grid>
       </Grid>
