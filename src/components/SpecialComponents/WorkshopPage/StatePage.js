@@ -68,7 +68,7 @@ function StatePage({ state = {} }) {
         <Grid
           item
           xs={12}
-          md={notQuestions.length > 0 ? 5 : 6}
+          md={notQuestions.length > 0 ? 4 : 6}
           lg={notQuestions.length > 0 ? 4 : 8}>
           <Paper className={clsx(classes.paper, classes.actionPaper)}>
             <Typography align="center" component="h2" variant="h3" gutterBottom>
@@ -92,7 +92,7 @@ function StatePage({ state = {} }) {
           </Paper>
         </Grid>
         {notQuestions.length > 0 && (
-          <Grid item xs={12} md={7} lg={8}>
+          <Grid item xs={12} md={8} lg={8}>
             <Paper className={classes.paper}>
               {notQuestions.map((widget) => (
                 <div className={classes.mainItem} key={widget.id}>
