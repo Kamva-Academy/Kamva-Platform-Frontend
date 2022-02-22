@@ -96,7 +96,7 @@ const SmallAnswerQuestionWidget = ({
                 variant="contained"
                 color="primary"
                 onClick={handleButtonClick}>
-                {t('submit')}
+                {isButtonDisabled ? 'صبر کنید!' : t('submit')}
               </Button>
             </Grid>
           }

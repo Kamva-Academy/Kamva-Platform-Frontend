@@ -85,7 +85,7 @@ const BigAnswerQuestionWidget = ({
           className={classes.submit}
           disabled={isButtonDisabled}
           onClick={handleButtonClick}>
-          {t('submit')}
+          {isButtonDisabled ? 'صبر کنید!' : t('submit')}
         </Button>
       }
     </>
