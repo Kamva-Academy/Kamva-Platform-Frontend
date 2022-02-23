@@ -55,7 +55,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     if (workshop?.fsm_learning_type == 'Supervised') {
       desktopLeftItems.push([whiteboardButton, mentorButton]);
       desktopRightItems.push([jitsiMicButton, jitsiButton, backToEventButton]);
-      mobileLeftItems.push([mentorButton, whiteboardButton]);
+      mobileLeftItems.push([whiteboardButton, mentorButton]);
       mobileRightItems.push([jitsiMicButton, jitsiButton]);
     } else {
       desktopLeftItems.push(backToEventButton)
