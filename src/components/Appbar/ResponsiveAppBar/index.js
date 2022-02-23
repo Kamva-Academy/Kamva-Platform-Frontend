@@ -78,6 +78,18 @@ function ResponsiveAppBar({
     }
   }, [])
 
+  useEffect(() => {
+    if (event?.crispWebsiteId) {
+      window.$crisp = [];
+      window.CRISP_WEBSITE_ID = event?.crispWebsiteId;
+      const d = document;
+      const s = d.createElement("script");
+      s.src = "https://client.crisp.chat/l.js";
+      s.async = 1;
+      d.getElementsByTagName("head")[0].appendChild(s);
+    }
+  }, [event?.crispWebsiteId])
+
   const {
     desktopLeftItems,
     desktopRightItems,
