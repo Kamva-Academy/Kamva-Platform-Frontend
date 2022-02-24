@@ -1,5 +1,13 @@
 const Cities = [
   {
+    "id": 451,
+    "title": "امیدیه",
+    "slug": "Omidie",
+    "province_id": 7,
+    "latitude": 0,
+    "longitude": 0,
+  },
+  {
     "id": 450,
     "title": "خوی",
     "slug": "Khoy",
