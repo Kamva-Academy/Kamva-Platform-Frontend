@@ -60,10 +60,8 @@ const RegistrationForm = ({
     }
   }, [event?.registration_form]);
 
-  if (event?.user_registration_status &&
-    event?.user_registration_status != 'NotPermitted' &&
-    event?.user_registration_status != 'Permitted' &&
-    event?.user_registration_status != 'GradeNotAvailable') {
+
+  if (['Pending', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
     history.push(`/event/${eventId}/status/`);
   }
 
@@ -150,19 +148,18 @@ const RegistrationForm = ({
               ) : (
                 !checkPermission(registrationForm?.audience_type, userProfile) ? (
                   <Typography variant='h4' color='error' align="center" gutterBottom>
-                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در قسمت '}
-                    <Link to={`/event/${eventId}/profile/personal/`}>{'پروفایل'}</Link>
+                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
+                    <Link to={`/event/${eventId}/profile/personal/`}>{'اینجا'}</Link>
                     {' تکمیل کنید.'}
                   </Typography>
                 ) : (
                   (event?.user_registration_status == 'GradeNotAvailable' ||
                     event?.user_registration_status == 'StudentshipDataIncomplete') &&
                   <Typography variant='h4' color='error' align="center" gutterBottom>
-                    {'لطفاً در '}
-                    <Link to={`/event/${eventId}/profile/student/`}>{'پروفایل'}</Link>
+                    {'لطفاً از '}
+                    <Link to={`/event/${eventId}/profile/student/`}>{'اینجا'}</Link>
                     {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
                   </Typography>
-
                 ))}
               <Button
                 disabled={event?.user_registration_status == 'NotPermitted' ||

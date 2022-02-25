@@ -313,7 +313,10 @@ const eventSlice = createSlice({
     [getOneMerchandiseAction.rejected.toString()]: isNotFetching,
 
     [submitRegistrationFormAction.pending.toString()]: isFetching,
-    [submitRegistrationFormAction.fulfilled.toString()]: isNotFetching,
+    [submitRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      window.location.reload()
+      state.isFetching = false;
+    },
     [submitRegistrationFormAction.rejected.toString()]: isNotFetching,
 
     [purchaseEventAction.pending.toString()]: isFetching,
