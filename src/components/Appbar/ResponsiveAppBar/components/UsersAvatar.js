@@ -38,7 +38,7 @@ const UsersAvatar = () => {
         title={`تیم ${myTeam?.name}`}>
         <Avatar
           style={{
-            backgroundColor: stringToColor(myTeam?.name),
+            backgroundColor: stringToColor(`تیم ${myTeam?.name}`),
             border: '0.1px solid lightgray',
           }}>
           {myTeam?.name[0]}
