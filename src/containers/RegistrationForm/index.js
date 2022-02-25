@@ -4,16 +4,13 @@ import {
   makeStyles,
   Paper,
   Typography,
-  Stepper,
-  Box,
-  Step,
-  StepLabel,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import AreYouSure from '../../components/Dialog/AreYouSure';
+import Stepper from '../../components/SpecialComponents/RegistrationProcess/Stepper';
 import Widget from '../../components/Widget';
 import {
   getOneEventInfoAction,
@@ -106,25 +103,16 @@ const RegistrationForm = ({
     setAnswers(temporaryAnswer);
   };
 
-  console.log(event)
-
-  const steps = ['تکمیل فرم ثبت‌نام', 'پرداخت هزینه', 'ورود به رویداد']
-
   return (
     <Layout>
       <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
+
         <Grid item xs={12}>
           <Info />
         </Grid>
 
         <Grid item xs={12}>
-          <Stepper activeStep={0} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+          <Stepper />
         </Grid>
 
         <Grid item xs={12}>
