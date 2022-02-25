@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
+import Stepper from '../components/SpecialComponents/RegistrationProcess/Stepper';
 import {
   applyDiscountCodeAction,
   getOneEventInfoAction,
@@ -21,26 +22,8 @@ import {
 import { addNotificationAction } from '../redux/slices/notifications';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
-import Stepper from '../components/SpecialComponents/RegistrationProcess/Stepper';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 80,
-    height: `calc(100vh - ${80}px)`,
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
-  },
-  logo: {
-    maxHeight: '80vh',
-    maxWidth: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
   title: {
     fontSize: 40,
     fontWeight: 600,
@@ -50,26 +33,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 25,
     fontWeight: 400,
     textShadow: '1px 1px #dbd9d9',
-  },
-  listItem: {
-    fontSize: 20,
-    fontWeight: 300,
-    textShadow: '1px 1px #dbd9d9',
-  },
-  notificationTitle: {
-    color: '#4d4a70',
-  },
-  content: {
-    padding: '10px !important',
-  },
-  noPadding: {
-    padding: '0px !important',
-  },
-  eventImage: {
-    height: '100%',
-    maxHeight: '300px',
-    width: '100%',
-    objectFit: 'cover',
   },
 }));
 
@@ -131,6 +94,10 @@ const Payment = ({
 
   if (event?.is_user_participating) {
     history.push(`/event/${eventId}/`);
+  }
+
+  if (event?.user_registration_status && !['Pending', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
+    history.push('/events/');
   }
 
   let step = 1;
