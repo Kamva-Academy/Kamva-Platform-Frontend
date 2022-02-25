@@ -21,6 +21,7 @@ import {
 import { addNotificationAction } from '../redux/slices/notifications';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
+import Stepper from '../components/SpecialComponents/RegistrationProcess/Stepper';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -132,6 +133,9 @@ const Payment = ({
     history.push(`/event/${eventId}/`);
   }
 
+  let step = 1;
+  if (event?.user_registration_status == 'Accepted') step++;
+
   return (
     <Layout>
       <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
@@ -140,6 +144,11 @@ const Payment = ({
             {'وضعیت ثبت‌نام'}
           </Typography>
         </Grid>
+
+        <Grid item xs={12}>
+          <Stepper step={step} />
+        </Grid>
+
         <Grid item xs={12}>
           <Grid
             component={Paper}

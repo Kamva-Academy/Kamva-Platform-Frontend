@@ -39,7 +39,6 @@ const RegistrationForm = ({
   getOneRegistrationForm,
   getOneEventInfo,
 
-  step = 0,
   registrationForm,
   event,
 }) => {
@@ -47,6 +46,7 @@ const RegistrationForm = ({
   const { eventId } = useParams();
   const [hasPayment, setPayment] = useState(false);
   const [hasPending, setPending] = useState(false);
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     getOneEventInfo({ eventId });
@@ -81,6 +81,15 @@ const RegistrationForm = ({
   }
 
   steps.push('ورود به رویداد')
+
+  useEffect(() => {
+    if (event?.user_registration_status == 'Waiting' || event?.user_registration_status == 'Rejected') {
+      setStep(1);
+    }
+    if (event?.user_registration_status == 'Accepted') {
+      setStep(steps.length - 2)
+    }
+  }, [steps, event?.user_registration_status])
 
   return (
     <Stepper activeStep={step} alternativeLabel>
