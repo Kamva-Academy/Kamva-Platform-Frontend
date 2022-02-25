@@ -4,6 +4,10 @@ import {
   makeStyles,
   Paper,
   Typography,
+  Stepper,
+  Box,
+  Step,
+  StepLabel,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -102,7 +106,9 @@ const RegistrationForm = ({
     setAnswers(temporaryAnswer);
   };
 
+  console.log(event)
 
+  const steps = ['تکمیل فرم ثبت‌نام', 'پرداخت هزینه', 'ورود به رویداد']
 
   return (
     <Layout>
@@ -110,11 +116,23 @@ const RegistrationForm = ({
         <Grid item xs={12}>
           <Info />
         </Grid>
+
+        <Grid item xs={12}>
+          <Stepper activeStep={0} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Grid>
+
         <Grid item xs={12}>
           <Typography align="center" className={classes.title}>
             {'فرم ثبت‌نام'}
           </Typography>
         </Grid>
+
         <Grid item xs={12}>
           <Grid
             style={{ padding: '20px' }}
@@ -122,7 +140,8 @@ const RegistrationForm = ({
             container
             justifyContent="center"
             alignItems="center"
-            spacing={2}>
+            spacing={2}
+          >
             {registrationForm?.widgets?.map((widget) => (
               <Grid item key={widget.id} xs={12}>
                 <Widget
