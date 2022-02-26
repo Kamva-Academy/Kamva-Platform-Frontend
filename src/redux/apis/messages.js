@@ -90,7 +90,7 @@ export const persianMessages = { //todo: handle english
   '4087': 'unable to move on a hidden edge, only mentors can move you on hidden edges, contact them!',
   '4088': 'no one in this team has entered this fsm',
   '4089': 'فقط سرگروه می‌تواند تیم را حرکت دهد.',
-
+  '4104': 'اکنون زمان ارسال پاسخ نیست.',
 
 
   '5000': 'ارسال پیامک با خطا روبه‌رو شد.',
