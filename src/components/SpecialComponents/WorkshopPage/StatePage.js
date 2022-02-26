@@ -1,4 +1,4 @@
-import { Fab, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Divider, Fab, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import { Help as HelpIcon } from '@material-ui/icons';
 import clsx from 'clsx';
 import React, { useState } from 'react';
@@ -74,6 +74,7 @@ function StatePage({ state = {} }) {
             <Typography align="center" component="h2" variant="h3" gutterBottom>
               {state.name}
             </Typography>
+            <Divider style={{ marginBottom: 20 }} />
             {questions.map((widget) => (
               <Paper className={classes.item} key={widget.id}>
                 <Widget widget={widget} />
