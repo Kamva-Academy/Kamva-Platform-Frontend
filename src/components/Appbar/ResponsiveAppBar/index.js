@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Box,
   Container,
   Drawer,
   Grid,
@@ -114,13 +115,8 @@ function ResponsiveAppBar({
           color='inherit'>
           <Container>
             <Toolbar className={classes.toolbar} disableGutters>
-              <Grid container justifyContent="space-between">
-                <Grid
-                  xs={6}
-                  spacing={1}
-                  container item
-                  justifyContent="flex-start"
-                  alignItems="center">
+              <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {mobileMenuListItems.length > 0 && (
                     <IconButton
                       edge="start"
@@ -132,24 +128,20 @@ function ResponsiveAppBar({
                     </IconButton>
                   )}
                   {rightItems.map((item, index) => (
-                    <Grid key={index} item>
+                    <Box mr={1} key={index}>
                       {item}
-                    </Grid>
+                    </Box>
                   ))}
-                </Grid>
-                <Grid
-                  xs={6}
-                  spacing={1}
-                  container item
-                  justifyContent="flex-end"
-                  alignItems="center">
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {leftItems.map((item, index) => (
-                    <Grid key={index} item>
+                    <Box ml={1} key={index}>
                       {item}
-                    </Grid>
+                    </Box>
                   ))}
-                </Grid>
-              </Grid>
+                </div>
+              </div>
             </Toolbar>
           </Container>
         </AppBar>
