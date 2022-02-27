@@ -71,25 +71,33 @@ function StatePage({ state = {} }) {
           md={notQuestions.length > 0 ? 4 : 6}
           lg={notQuestions.length > 0 ? 4 : 8}>
           <Paper className={clsx(classes.paper, classes.actionPaper)}>
-            <Typography align="center" component="h2" variant="h3" gutterBottom>
-              {state.name}
-            </Typography>
-            <Divider style={{ marginBottom: 20 }} />
-            {questions.map((widget) => (
-              <Paper className={classes.item} key={widget.id}>
-                <Widget widget={widget} />
-              </Paper>
-            ))}
-            {inward_edges && outward_edges && (
-              <Grid container spacing={2} style={{ marginTop: 20 }}>
-                <Grid item xs={6}>
-                  <BackButton inwardEdges={inward_edges} />
-                </Grid>
-                <Grid item xs={6}>
-                  <NextButton outwardEdges={outward_edges} />
-                </Grid>
+            <Grid container spacing={2} >
+              <Grid item xs={12}>
+                <Typography align="center" component="h2" variant="h3" gutterBottom>
+                  {state.name}
+                </Typography>
+                <Divider />
               </Grid>
-            )}
+
+              {questions.map((widget) => (
+                <Grid item key={widget.id} xs={12}>
+                  <Widget key={widget.id} widget={widget} />
+                  <Divider style={{ marginTop: 20 }} />
+                </Grid>
+              ))}
+
+              {inward_edges && outward_edges && (
+                <>
+                  <Grid item xs={6}>
+                    <BackButton inwardEdges={inward_edges} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <NextButton outwardEdges={outward_edges} />
+                  </Grid>
+                </>
+              )}
+            </Grid>
+
           </Paper>
         </Grid>
         {notQuestions.length > 0 && (
