@@ -41,6 +41,7 @@ const UploadFileQuestionWidget = ({
   uploadFile,
   makeAnswerEmpty,
 
+  viewMode,
   disabled,
   last_submitted_answer,
   required,
@@ -112,25 +113,27 @@ const UploadFileQuestionWidget = ({
         </Grid>
 
         <Grid item container xs={12} sm={6} spacing={1} justifyContent="center" alignItems="center">
-          <Grid item>
-            <Button
-              component="label"
-              htmlFor={'raised-button-file-' + widgetId}
-              disabled={isButtonDisabled || disabled}
-              variant="contained"
-              color="primary"
-              startIcon={<CloudUploadIcon />}>
-              {t('uploadFile')}
-            </Button>
-            <input
-              value={file?.value}
-              accept="application/pdf,image/*,.zip,.rar"
-              style={{ display: 'none' }}
-              id={'raised-button-file-' + widgetId}
-              type="file"
-              onChange={handleFileChange}
-            />
-          </Grid>
+          {!viewMode &&
+            <Grid item>
+              <Button
+                component="label"
+                htmlFor={'raised-button-file-' + widgetId}
+                disabled={isButtonDisabled || disabled}
+                variant="contained"
+                color="primary"
+                startIcon={<CloudUploadIcon />}>
+                {t('uploadFile')}
+              </Button>
+              <input
+                value={file?.value}
+                accept="application/pdf,image/*,.zip,.rar"
+                style={{ display: 'none' }}
+                id={'raised-button-file-' + widgetId}
+                type="file"
+                onChange={handleFileChange}
+              />
+            </Grid>
+          }
 
           {file?.name && file?.link && (
             <Grid item justifyContent="center" alignItems="center">

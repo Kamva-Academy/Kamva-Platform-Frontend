@@ -25,6 +25,7 @@ const BigAnswerQuestionWidget = ({
   sendBigAnswer,
 
   disabled,
+  viewMode,
   last_submitted_answer,
   id: widgetId,
   text: problemText,
@@ -72,12 +73,25 @@ const BigAnswerQuestionWidget = ({
         }}
         content={problemText}
       />
-      <TinyEditorComponent
-        id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
-        content={recentAnswer}
-        onChange={disabled ? () => { } : handleTextChange}
-      />
-      {!pushAnswer &&
+
+      {viewMode ?
+        <TinyPreview
+          frameProps={{
+            frameBorder: '0',
+            scrolling: 'no',
+            width: '100%',
+          }}
+          content={recentAnswer}
+        />
+        :
+        <TinyEditorComponent
+          id={`edit-big-answer-${Math.floor(Math.random() * 1000)}`}
+          content={recentAnswer}
+          onChange={disabled ? () => { } : handleTextChange}
+        />
+      }
+
+      {!pushAnswer && !viewMode &&
         <Button
           fullWidth
           variant="contained"

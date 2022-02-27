@@ -28,6 +28,7 @@ const SmallAnswerQuestionWidget = ({
   sendSmallAnswer,
   pushAnswer,
 
+  viewMode,
   required,
   disabled,
   last_submitted_answer,
@@ -81,14 +82,14 @@ const SmallAnswerQuestionWidget = ({
         <Grid container spacing={1}>
           <Grid item xs>
             <TextField
-              disabled={disabled}
+              disabled={disabled || viewMode}
               fullWidth
               placeholder='پاسخ خودت رو اینجا بنویس...'
               value={recentAnswer}
               onChange={handleTextFieldChange}
             />
           </Grid>
-          {!pushAnswer &&
+          {!pushAnswer && !viewMode &&
             <Grid item container alignItems='stretch' xs={12} sm={3}>
               <Button
                 fullWidth
