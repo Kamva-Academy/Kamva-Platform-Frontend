@@ -12,6 +12,7 @@ import {
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import Widget from '../Widget';
 
 import {
   getAnswersForReviewAction
@@ -70,6 +71,20 @@ function Index({
         <Divider />
       </DialogTitle>
       <DialogContent>
+        <Grid container spacing={2}>
+          {answers?.map((widget) => (
+            <>
+              <Grid item key={widget.id} xs={12}>
+                <Widget
+                  disabled={isFetching}
+                  widget={widget}
+                  viewMode={true}
+                />
+                <Divider style={{ marginTop: 20 }} />
+              </Grid>
+            </>
+          ))}
+        </Grid>
 
       </DialogContent>
 
