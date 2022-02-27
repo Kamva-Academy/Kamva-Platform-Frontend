@@ -6,6 +6,7 @@ import DashboardButton from './components/DashboardButton';
 import JitsiButton from './components/JitsiButton';
 import JitsiMicButton from './components/JitsiMicButton';
 import MentorButton from './components/MentorButton';
+import ReviewAnswersButton from './components/ReviewAnswersButton';
 import TeamAvatar from './components/UsersAvatar';
 import WhiteboardButton from './components/WhiteboardButton';
 
@@ -20,7 +21,10 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     }
   }, [workshop?.name])
 
+
+
   const { eventId } = useParams();
+  const reviewAnswers = <ReviewAnswersButton />
   const jitsiButton = <JitsiButton />;
   // todo: return to its event, not all events!
   const backToEventButton = <DashboardButton name={'بازگشت به رویداد'} to={`/event/${eventId}/`} />;
@@ -34,7 +38,12 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const desktopRightItems = [];
   const mobileLeftItems = [];
   const mobileRightItems = [];
-  const mobileMenuListItems = [backToEventButton];
+  const mobileMenuListItems = [];
+
+  if (workshop?.first_state?.is_exam) {
+    desktopLeftItems.push(reviewAnswers);
+    mobileMenuListItems.push(reviewAnswers);
+  }
 
   if (isMentor) {
     if (workshop?.fsm_p_type == 'Individual') {
@@ -61,6 +70,9 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
       desktopLeftItems.push(backToEventButton)
     }
   }
+
+
+  mobileMenuListItems.push(backToEventButton);
 
   return {
     desktopLeftItems,

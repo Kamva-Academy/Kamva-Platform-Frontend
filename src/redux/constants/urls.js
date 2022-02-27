@@ -32,6 +32,10 @@ export const getWorkshopsUrl = ({ eventId, pageNumber }) => {
   return url;
 }
 export const getRegistrableWorkshopsUrl = 'fsm/fsm/?registrable=true';
+export const reviewAnswersUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/review/`;
+
+
+
 
 export const getAllEventsInfoUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ eventId }) => `fsm/event/${eventId}/`;

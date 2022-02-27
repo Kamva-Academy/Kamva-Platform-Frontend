@@ -5,6 +5,7 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   getOneWorkshopUrl,
   getRegistrableWorkshopsUrl,
+  reviewAnswersUrl,
 } from '../constants/urls';
 
 export const getOneWorkshopAction = createAsyncThunkApi(
@@ -17,6 +18,12 @@ export const getRegistrableWorkshopsAction = createAsyncThunkApi(
   'workshop/getRegistrableWorkshopsAction',
   Apis.GET,
   getRegistrableWorkshopsUrl
+);
+
+export const getAnswersForReviewAction = createAsyncThunkApi(
+  'workshop/reviewAnswerAction',
+  Apis.GET,
+  reviewAnswersUrl
 );
 
 const initialState = {
@@ -52,6 +59,12 @@ const IndexSlice = createSlice({
     },
     [getOneWorkshopAction.rejected.toString()]: isNotFetching,
 
+    [getAnswersForReviewAction.pending.toString()]: isFetching,
+    [getAnswersForReviewAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.answers = response;
+      state.isFetching = false;
+    },
+    [getAnswersForReviewAction.rejected.toString()]: isNotFetching,
   },
 });
 
