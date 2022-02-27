@@ -140,9 +140,10 @@ const UploadFileQuestionWidget = ({
               <Button
                 size="small"
                 startIcon={
-                  <IconButton size="small" onClick={clearFile}>
-                    <ClearIcon className={classes.clearIcon} />
-                  </IconButton>
+                  viewMode ? '' :
+                    <IconButton size="small" onClick={clearFile}>
+                      <ClearIcon className={classes.clearIcon} />
+                    </IconButton>
                 }
                 variant='outlined'
                 className={classes.lastUploadButton}
