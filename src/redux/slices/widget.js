@@ -15,7 +15,6 @@ export const sendWidgetAnswerAction = createAsyncThunkApi(
     defaultNotification: {
       success: 'پاسخ شما با موفقیت ثبت شد.',
       error: 'مشکلی در ثبت پاسخ وجود داشت.',
-      showHttpError: true,
     },
   }
 );
@@ -34,7 +33,6 @@ export const sendFileAction = createAsyncThunkApi(
     defaultNotification: {
       success: 'پاسخ شما با موفقیت ثبت شد.',
       error: 'مشکلی در ثبت پاسخ وجود داشت.',
-      showHttpError: true,
     },
   }
 );
