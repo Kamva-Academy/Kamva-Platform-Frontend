@@ -40,7 +40,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const mobileRightItems = [];
   const mobileMenuListItems = [];
 
-  if (workshop?.first_state?.is_exam) {
+  if (workshop?.first_state?.is_exam && !isMentor) {
     desktopLeftItems.push(reviewAnswers);
     mobileMenuListItems.push(reviewAnswers);
   }
