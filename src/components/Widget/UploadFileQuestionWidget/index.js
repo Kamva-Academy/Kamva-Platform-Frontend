@@ -86,7 +86,7 @@ const UploadFileQuestionWidget = ({
       } else {
         e.target.value = '';
         addNotification({
-          message: 'حداکثر حجم فایل ارسالی،  ۲۰ مگابایت است.',
+          message: 'حداکثر حجم فایل ارسالی، ۲۰ مگابایت است.',
           type: 'error',
         });
       }
@@ -132,6 +132,14 @@ const UploadFileQuestionWidget = ({
                 type="file"
                 onChange={handleFileChange}
               />
+            </Grid>
+          }
+
+          {viewMode && !file?.link &&
+            <Grid item justifyContent="center" alignItems="center">
+              <Typography>
+                {'شما فایلی را ارسال نکرده‌اید.'}
+              </Typography>
             </Grid>
           }
 
