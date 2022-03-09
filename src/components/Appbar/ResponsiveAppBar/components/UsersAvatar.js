@@ -52,7 +52,7 @@ const UsersAvatar = () => {
         onClose={handleClose}
       >
         <MenuItem>
-          {`تیم ${myTeam?.name}`}
+          {`تیم ${myTeam?.name ? myTeam?.name : '؟'}`}
         </MenuItem>
 
         {myTeam?.members?.map((member) =>
@@ -73,11 +73,11 @@ const UsersAvatar = () => {
                   ),
                   border: '0.1px solid lightgray',
                 }}>
-                {`${member.first_name[0]}`}
+                {`${member.first_name ? member.first_name[0] : '؟'}`}
               </Avatar>
             </Badge>
             <Box ml={1}>
-              {`${member?.first_name} ${member?.last_name}`}
+              {`${member.first_name ? member.first_name : 'بی‌نام'} ${member.last_name ? member.last_name : 'بی‌نام‌زاده'}`}
             </Box>
           </MenuItem>
 
