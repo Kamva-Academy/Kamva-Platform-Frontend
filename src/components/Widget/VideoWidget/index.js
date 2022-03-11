@@ -5,6 +5,7 @@ const useStyles = makeStyles(() => ({
   videoWidget: {
     width: '100%',
     borderRadius: 10,
+    maxHeight: 500,
   },
 }));
 
