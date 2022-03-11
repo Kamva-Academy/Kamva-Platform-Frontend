@@ -1,14 +1,12 @@
 import {
   Avatar,
   Badge,
-  Tooltip,
+  Box,
   Menu,
   MenuItem,
-  Typography,
-  Box,
+  Tooltip,
 } from '@material-ui/core';
-import { MapTwoTone, OfflineBolt } from '@material-ui/icons';
-import { AvatarGroup } from '@material-ui/lab';
+import { OfflineBolt } from '@material-ui/icons';
 import React, { useContext } from 'react';
 
 import { StatePageContext } from '../../../../containers/Workshop';
@@ -28,7 +26,7 @@ const UsersAvatar = () => {
     setAnchorEl(null);
   };
 
-  console.log(myTeam)
+  console.log(myTeam?.name)
 
   return (
     <>
@@ -41,7 +39,7 @@ const UsersAvatar = () => {
             backgroundColor: stringToColor(`تیم ${myTeam?.name}`),
             border: '0.1px solid lightgray',
           }}>
-          {myTeam?.name[0]}
+          {myTeam?.name.trim()[0]}
         </Avatar>
       </Tooltip>
 
