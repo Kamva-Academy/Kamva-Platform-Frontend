@@ -135,7 +135,8 @@ const UploadFileQuestionWidget = ({
             </Grid>
           }
 
-          {viewMode && !file?.link &&
+          {
+            viewMode && !file?.link &&
             <Grid item justifyContent="center" alignItems="center">
               <Typography>
                 {'شما فایلی را ارسال نکرده‌اید.'}

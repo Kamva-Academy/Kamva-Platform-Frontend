@@ -37,9 +37,13 @@ const errorHandler = async (
         break;
       }
       try {
-        const response = await Apis.POST(refreshTokenUrl, { refresh: state?.account?.refresh });
-        dispatch({ type: 'account/refreshToken', payload: { access: response.access, refresh: response.refresh } });
-        return rejectWithValue();
+        dispatch({ type: 'account/logout' });
+        return rejectWithValue({
+          message: 'نشست شما به پایان رسیده. لطفاً دوباره وارد سامانه شوید.',
+        });
+        // const response = await Apis.POST(refreshTokenUrl, { refresh: state?.account?.refresh });
+        // dispatch({ type: 'account/refreshToken', payload: { access: response.access, refresh: response.refresh } });
+        // return rejectWithValue();
       }
       catch (error) {
         dispatch({ type: 'account/logout' });
