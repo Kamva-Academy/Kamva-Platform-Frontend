@@ -72,7 +72,6 @@ const Event = ({
   const [EventButtonObj, setEventButtonObj] = useState(<EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} disabled={!event?.is_active} />);
 
   useEffect(() => {
-
     if (event?.user_registration_status == 'NotStarted') {
       setEventButtonObj(<EventButton text={'ثبت‌نام شروع نشده'} disabled />);
     }
@@ -86,8 +85,6 @@ const Event = ({
       setEventButtonObj(<EventButton to={`/event/${event?.id}/`} text={'ورود'} />);
     }
   }, [event?.user_registration_status, event?.is_user_participating]);
-
-  console.log(event)
 
   return (
     <Card className={classes.paper}>

@@ -96,7 +96,8 @@ const Payment = ({
     history.push(`/event/${eventId}/`);
   }
 
-  if (event?.user_registration_status && !['Pending', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
+
+  if (event?.user_registration_status && !['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
     history.push('/events/');
   }
 
