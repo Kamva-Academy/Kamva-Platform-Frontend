@@ -45,8 +45,6 @@ export const WorkshopCard = ({
   const { eventId } = useParams();
   const [openPassword, setOpenPassword] = useState(false);
 
-  console.log(workshop)
-
   return (
     <Card className={classes.card} elevation={3}>
       <CardActionArea disabled>
