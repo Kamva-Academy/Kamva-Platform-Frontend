@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
   },
   media: {
-    height: 140,
+    minHeight: 300,
   },
   header: {
     padding: theme.spacing(0.3, 1, 0),
@@ -45,8 +45,10 @@ export const WorkshopCard = ({
   const { eventId } = useParams();
   const [openPassword, setOpenPassword] = useState(false);
 
+  console.log(workshop)
+
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} elevation={3}>
       <CardActionArea disabled>
         {isLoading ? (
           <>
@@ -67,7 +69,7 @@ export const WorkshopCard = ({
             {workshop.cover_page && (
               <CardMedia
                 className={classes.media}
-                image={baseURL + workshop.cover_page}
+                image={workshop.cover_page}
                 title={workshop.name}
               />
             )}

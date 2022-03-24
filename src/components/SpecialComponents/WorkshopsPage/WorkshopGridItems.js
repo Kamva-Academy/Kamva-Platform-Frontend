@@ -6,14 +6,14 @@ import WorkshopCard from '../../Cards/WorkshopCard';
 export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
   if (isLoading)
     return [...Array(3)].map((e, i) => (
-      <Grid item key={i} xs={12} sm={6} md={4}>
+      <Grid item key={i} xs={12} sm={6} lg={4}>
         <WorkshopCard isLoading={true} />
       </Grid>
     ));
 
   if (workshops.length > 0) {
     return workshops.map((workshop) => (
-      <Grid item key={workshop.id} xs={12} sm={6} md={4}>
+      <Grid item key={workshop.id} xs={12} sm={6} lg={4}>
         <WorkshopCard eventId={eventId} workshop={workshop} />
       </Grid>
     ));
