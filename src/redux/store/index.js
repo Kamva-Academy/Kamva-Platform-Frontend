@@ -23,7 +23,7 @@ reduxStore.subscribe(() => {
       Intl: state.Intl,
     })
   );
-  updateToken({ token: state.account.token });
+  updateToken(state.account.token);
 });
 
 export default reduxStore;
