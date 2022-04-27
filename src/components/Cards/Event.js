@@ -69,7 +69,7 @@ const Event = ({
 }) => {
   const classes = useStyles();
   const t = useTranslate();
-  const [EventButtonObj, setEventButtonObj] = useState(<EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} disabled={!event?.is_active} />);
+  const [EventButtonObj, setEventButtonObj] = useState(<EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} />);
 
   useEffect(() => {
     if (event?.user_registration_status == 'NotStarted') {
