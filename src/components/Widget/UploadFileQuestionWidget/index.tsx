@@ -11,13 +11,9 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import {
-  uploadFileAction,
-} from '../../../redux/slices/events';
+import { uploadFileAction } from '../../../redux/slices/events';
 import { addNotificationAction } from '../../../redux/slices/notifications';
-import {
-  makeAnswerEmptyAction,
-} from '../../../redux/slices/widget';
+import { makeAnswerEmptyAction } from '../../../redux/slices/widget';
 
 const useStyles = makeStyles((theme) => ({
   lastUploadButton: {
@@ -49,23 +45,33 @@ const UploadFileQuestionWidget = ({
   text = 'محل آپلود فایل',
 }) => {
   const t = useTranslate();
-  const [file, setFile] = useState({ link: '', name: '', value: '' });
+  const [file, setFile] = useState({ link: '', name: '' });
   const [isButtonDisabled, setButtonDisable] = useState(false);
   const classes = useStyles({ haveFile: file });
 
   useEffect(() => {
     if (last_submitted_answer) {
       setFile({
-        link: `https://backend.rastaiha.ir${last_submitted_answer?.answer_file}`,
-        name: 'آخرین فایل ارسالی'
-      })
+        link: `https://backend.rastaiha.ir${last_submitted_answer.answer_file}`,
+        name: 'آخرین فایل ارسالی',
+      });
     }
-  }, [])
+  }, []);
 
   const handleFileChange = async (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
-      if (e.target.files[0].size <= 21e6) {
+      if (e.target.files[0].size <= 10e6) {
+        const validMeme = ['.pdf', '.zip', '.rar', '.png', '.jpg', '.jpeg'];
+        const fileName: string = e.target.files[0].name;
+        if (!validMeme.find((meme) => fileName.toLowerCase().endsWith(meme))) {
+          e.target.value = '';
+          addNotification({
+            message: 'فرمت فایل مجاز نیست.',
+            type: 'error',
+          });
+          return;
+        }
         setButtonDisable(true);
         setTimeout(() => {
           setButtonDisable(false);
@@ -76,11 +82,11 @@ const UploadFileQuestionWidget = ({
           name: e.target.files[0].name,
         }).then((action) => {
           setFile({
-            link: action.payload?.response?.answer_file,
-            name: action?.meta?.arg?.answerFile?.name,
+            link: action.payload.response.answer_file,
+            name: action.meta.arg.answerFile.name,
           });
           if (pushAnswer) {
-            pushAnswer('upload_file_answer', action.payload?.response?.id);
+            pushAnswer('upload_file_answer', action.payload.response.id);
           }
         });
       } else {
@@ -95,7 +101,7 @@ const UploadFileQuestionWidget = ({
 
   const clearFile = (e) => {
     e.preventDefault();
-    setFile({ link: '', name: '', value: '' });
+    setFile({ link: '', name: '' });
     makeAnswerEmpty({ widgetId });
     if (pushAnswer) {
       pushAnswer('upload_file_answer', '');
@@ -104,7 +110,12 @@ const UploadFileQuestionWidget = ({
 
   return (
     <Grid container>
-      <Grid item container justifyContent="center" alignItems="center" spacing={1}>
+      <Grid
+        item
+        container
+        justifyContent="center"
+        alignItems="center"
+        spacing={1}>
         <Grid item xs={12} sm={6}>
           <Typography>
             {text}
@@ -112,8 +123,15 @@ const UploadFileQuestionWidget = ({
           </Typography>
         </Grid>
 
-        <Grid item container xs={12} sm={6} spacing={1} justifyContent="center" alignItems="center">
-          {!viewMode &&
+        <Grid
+          item
+          container
+          xs={12}
+          sm={6}
+          spacing={1}
+          justifyContent="center"
+          alignItems="center">
+          {!viewMode && (
             <Grid item>
               <Button
                 component="label"
@@ -125,7 +143,6 @@ const UploadFileQuestionWidget = ({
                 {t('uploadFile')}
               </Button>
               <input
-                value={file?.value}
                 accept="application/pdf,image/*,.zip,.rar"
                 style={{ display: 'none' }}
                 id={'raised-button-file-' + widgetId}
@@ -133,34 +150,36 @@ const UploadFileQuestionWidget = ({
                 onChange={handleFileChange}
               />
             </Grid>
-          }
+          )}
 
-          {
-            viewMode && !file?.link &&
+          {viewMode && !file.link && (
             <Grid item justifyContent="center" alignItems="center">
-              <Typography>
-                {'شما فایلی را ارسال نکرده‌اید.'}
-              </Typography>
+              <Typography>{'شما فایلی را ارسال نکرده‌اید.'}</Typography>
             </Grid>
-          }
+          )}
 
-          {file?.name && file?.link && (
+          {file.name && file.link && (
             <Grid item justifyContent="center" alignItems="center">
               <Button
                 size="small"
                 startIcon={
-                  viewMode ? '' :
+                  viewMode ? (
+                    ''
+                  ) : (
                     <IconButton size="small" onClick={clearFile}>
                       <ClearIcon className={classes.clearIcon} />
                     </IconButton>
+                  )
                 }
-                variant='outlined'
+                variant="outlined"
                 className={classes.lastUploadButton}
                 href={file.link}
                 component="a"
                 download
                 target="_blank">
-                {file.name.length <= 20 ? file.name : file.name.substring(0, 20) + '...'}
+                {file.name.length <= 20
+                  ? file.name
+                  : file.name.substring(0, 20) + '...'}
               </Button>
             </Grid>
           )}
@@ -170,14 +189,10 @@ const UploadFileQuestionWidget = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
-export default connect(
-  mapStateToProps,
-  {
-    uploadFile: uploadFileAction,
-    addNotification: addNotificationAction,
-    makeAnswerEmpty: makeAnswerEmptyAction,
-  }
-)(UploadFileQuestionWidget);
+export default connect(mapStateToProps, {
+  uploadFile: uploadFileAction,
+  addNotification: addNotificationAction,
+  makeAnswerEmpty: makeAnswerEmptyAction,
+})(UploadFileQuestionWidget);
