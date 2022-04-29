@@ -61,7 +61,7 @@ const UploadFileQuestionWidget = ({
   const handleFileChange = async (e) => {
     e.preventDefault();
     if (e.target.files[0]) {
-      if (e.target.files[0].size <= 10e6) {
+      if (e.target.files[0].size <= 11e6) {
         const validMeme = ['.pdf', '.zip', '.rar', '.png', '.jpg', '.jpeg'];
         const fileName: string = e.target.files[0].name;
         if (!validMeme.find((meme) => fileName.toLowerCase().endsWith(meme))) {
@@ -92,7 +92,7 @@ const UploadFileQuestionWidget = ({
       } else {
         e.target.value = '';
         addNotification({
-          message: 'حداکثر حجم فایل ارسالی، ۲۰ مگابایت است.',
+          message: 'حداکثر حجم فایل ارسالی، ۱۰ مگابایت است.',
           type: 'error',
         });
       }
