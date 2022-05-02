@@ -104,8 +104,11 @@ export const WorkshopCard = ({
               fullWidth
               variant="contained"
               color="primary"
-              component={Link}
-              to={`/event/${eventId}/workshop/${workshop.id}/`}>
+              onClick={
+                workshop.has_lock
+                  ? () => setOpenPassword(true)
+                  : () => enterWorkshop({ fsmId: workshop.id, eventId })
+              }>
               بزن بریم!
             </Button>
           ) : (

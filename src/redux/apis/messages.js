@@ -91,7 +91,7 @@ export const persianMessages = { //todo: handle english
   '4088': 'no one in this team has entered this fsm',
   '4089': 'فقط سرگروه می‌تواند تیم را حرکت دهد.',
   '4104': 'اکنون زمان ارسال پاسخ نیست.',
-
+  '4108': 'شما امتیاز لازم جهت ورود را ندارید.',
 
   '5000': 'ارسال پیامک با خطا روبه‌رو شد.',
   '5001': 'zarinpal request failed, contact with support',
