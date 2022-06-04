@@ -125,7 +125,7 @@ const InputFields = ({
       </Grid>
 
       <Grid item container justifyContent="center" alignItems="stretch" spacing={1}>
-        <Grid item xs={8} sm={9}>
+        <Grid item xs={8} sm={8}>
           <TextField
             variant="outlined"
             fullWidth
@@ -141,7 +141,7 @@ const InputFields = ({
             type="text"
           />
         </Grid>
-        <Grid item xs={4} sm={3} container>
+        <Grid item xs={4} sm={4} container>
           <Button
             size="small"
             fullWidth
@@ -192,7 +192,8 @@ const InputFields = ({
       <Grid item>
         <Typography align="center">
           {' از قبل حساب داشتی؟ به '}
-          <Link to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
+          <Link style={{ textDecoration: 'none' }}
+            to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
           {' برو.'}
         </Typography>
       </Grid>

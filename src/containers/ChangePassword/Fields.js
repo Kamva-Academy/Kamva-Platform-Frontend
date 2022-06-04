@@ -150,7 +150,7 @@ const InputFields = ({
         justifyContent="space-between"
         alignItems="stretch"
         spacing={1}>
-        <Grid item xs={8} sm={9}>
+        <Grid item xs={8} sm={8}>
           <TextField
             autoComplete="on"
             variant="outlined"
@@ -167,7 +167,7 @@ const InputFields = ({
             type="text"
           />
         </Grid>
-        <Grid item xs={4} sm={3} container>
+        <Grid item xs={4} sm={4} container>
           <Button
             fullWidth
             variant="contained"
@@ -193,7 +193,7 @@ const InputFields = ({
       <Grid item>
         <Typography align="center">
           {'از '}
-          <Link to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
+          <Link style={{ textDecoration: 'none' }} to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
           {' می‌توانی وارد حسابت شوی.'}
         </Typography>
       </Grid>
