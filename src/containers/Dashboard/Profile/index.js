@@ -18,6 +18,7 @@ import {
   updateUserAccountAction,
 } from '../../../redux/slices/account';
 import Layout from '../../Layout';
+import AcademicProfile from './AcademicProfile';
 import PersonalProfile from './PersonalProfile'
 import StudentProfile from './StudentProfile';
 
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const tabs = [
+let tabs = [
   {
     name: 'personal',
     label: 'مشخصات فردی',
@@ -54,11 +55,18 @@ const tabs = [
     icon: '',
     component: StudentProfile,
   },
+  {
+    name: 'academic',
+    label: 'مشخصات دانشجویی',
+    icon: '',
+    component: AcademicProfile,
+  },
 ];
 
 const SECTIONS = {
   personal: 0,
   student: 1,
+  academic: 2,
 }
 
 
@@ -67,13 +75,17 @@ const SECTIONS = {
 const Index = ({
   event,
 }) => {
-  const { eventId, section } = useParams();
   const history = useHistory();
-  const [tabNumber, setTabNumber] = useState(0);
-
-  const classes = useStyles();
-
+  const { eventId, section } = useParams();
   const TabComponent = tabs[SECTIONS[section]].component;
+
+  if (event?.audience_type == 'Student') {
+    tabs = [tabs[0], tabs[1]];
+  } else if (event?.audience_type == 'Academic') {
+    tabs = [tabs[0], tabs[2]];
+  } else if (event?.audience_type == 'All') {
+    tabs = [tabs[0]];
+  }
 
   return (
     <Layout>
@@ -108,7 +120,7 @@ const Index = ({
                   <Typography variant='h3' color='error'>
                     {'تکمیل موارد ستاره‌دار در هر دو قسمت «مشخصات فردی» و «مشخصات دانشجویی» الزامی است.'}
                   </Typography>
-                ) : (
+                ) : event?.audience_type == 'All' && (
                   <Typography variant='h3' color='error'>
                     {'تکمیل موارد ستاره‌دار را الزامی است.'}
                   </Typography>
@@ -121,7 +133,6 @@ const Index = ({
               </Grid>
             </>
           }
-
         </Grid>
         <Grid container item xs={12} sm={9}>
           <TabComponent />
@@ -146,5 +157,3 @@ export default connect(mapStateToProps, {
   updateStudentShip: updateStudentShipAction,
   getInstitutes: getInstitutesAction,
 })(Index);
-
-// todo: cast english digits to persian
