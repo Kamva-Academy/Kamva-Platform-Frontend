@@ -48,18 +48,22 @@ let tabs = [
     label: 'مشخصات فردی',
     icon: '',
     component: PersonalProfile,
+    disabled: false,
   },
   {
     name: 'student',
     label: 'مشخصات دانش‌آموزی',
     icon: '',
     component: StudentProfile,
+    disabled: false,
+
   },
   {
     name: 'academic',
     label: 'مشخصات دانشجویی',
     icon: '',
     component: AcademicProfile,
+    disabled: true,
   },
 ];
 
@@ -103,7 +107,7 @@ const Index = ({
               {
                 tabs.map((tab, index) => {
                   return (
-                    <Tab key={index} label={tab.label} />
+                    <Tab disabled={tab.disabled} key={index} label={tab.label} />
                   )
                 })
               }
