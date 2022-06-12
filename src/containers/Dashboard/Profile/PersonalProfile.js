@@ -261,7 +261,7 @@ function Index({
           <Grid item xs={12}>
             <FormControl required>
               <FormLabel
-                error={!userProfile?.gender && !newProfile.gender}>جنیست</FormLabel>
+                error={!userProfile?.gender && !newProfile.gender}>جنسیت</FormLabel>
               <RadioGroup
                 name="gender"
                 row
