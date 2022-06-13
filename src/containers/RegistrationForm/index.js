@@ -73,6 +73,8 @@ const RegistrationForm = ({
     });
   };
 
+  // DeadlineMissed
+
   const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
     const temporaryAnswer = [...answers];
     let doesFind = false;
@@ -141,28 +143,34 @@ const RegistrationForm = ({
               </Grid>
             ))}
             <Grid item xs={12}>
-              {event?.user_registration_status == 'NotPermitted' ? (
+              {event?.user_registration_status == 'DeadlineMissed' ?
                 <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
+                  {'مهلت ثبت‌نام در رویداد پایان یافته است.'}
                 </Typography>
-              ) : (
-                !checkPermission(registrationForm?.audience_type, userProfile) ? (
-                  <Typography variant='h4' color='error' align="center" gutterBottom>
-                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
-                    <Link to={`/event/${eventId}/profile/personal/`}>{'اینجا'}</Link>
-                    {' تکمیل کنید.'}
-                  </Typography>
-                ) : (
-                  (event?.user_registration_status == 'GradeNotAvailable' ||
-                    event?.user_registration_status == 'StudentshipDataIncomplete') &&
-                  <Typography variant='h4' color='error' align="center" gutterBottom>
-                    {'لطفاً از '}
-                    <Link to={`/event/${eventId}/profile/student/`}>{'اینجا'}</Link>
-                    {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
-                  </Typography>
-                ))}
+                : (
+                  event?.user_registration_status == 'NotPermitted' ? (
+                    <Typography variant='h4' color='error' align="center" gutterBottom>
+                      {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
+                    </Typography>
+                  ) : (
+                    !checkPermission(registrationForm?.audience_type, userProfile) ? (
+                      <Typography variant='h4' color='error' align="center" gutterBottom>
+                        {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
+                        <Link to={`/event/${eventId}/profile/personal/`}>{'اینجا'}</Link>
+                        {' تکمیل کنید.'}
+                      </Typography>
+                    ) : (
+                      (event?.user_registration_status == 'GradeNotAvailable' ||
+                        event?.user_registration_status == 'StudentshipDataIncomplete') &&
+                      <Typography variant='h4' color='error' align="center" gutterBottom>
+                        {'لطفاً از '}
+                        <Link to={`/event/${eventId}/profile/student/`}>{'اینجا'}</Link>
+                        {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
+                      </Typography>
+                    )))}
               <Button
-                disabled={event?.user_registration_status == 'NotPermitted' ||
+                disabled={event?.user_registration_status == 'DeadlineMissed' ||
+                  event?.user_registration_status == 'NotPermitted' ||
                   event?.user_registration_status == 'GradeNotAvailable' ||
                   event?.user_registration_status == 'StudentshipDataIncomplete' ||
                   !checkPermission(registrationForm?.audience_type, userProfile)}

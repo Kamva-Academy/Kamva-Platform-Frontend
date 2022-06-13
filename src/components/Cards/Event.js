@@ -57,7 +57,6 @@ const EventButton = ({ to, text, ...props }) => (
     color="secondary"
     {...props}
     component={Link}
-    target="_blank"
     to={to}
   >
     {text}
