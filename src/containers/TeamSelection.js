@@ -176,8 +176,8 @@ const TeamSelection = ({
         alignItems="flex-start"
         spacing={4}>
         <Grid item xs={12}>
-          <Typography align="center" className={classes.title}>
-            {'تیم‌کشی'}
+          <Typography align="center" variant='h1'>
+            {'تیم'}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>
@@ -187,14 +187,6 @@ const TeamSelection = ({
             justifyContent="center"
             alignItems="flex-end"
             spacing={2}>
-            <Grid item xs={12}>
-              <Typography fullWidth align="center" variant="h2">
-                {'تیم شما'}
-              </Typography>
-            </Grid>
-            <Grid xs={12}>
-              <Divider variant="middle" />
-            </Grid>
             {!team && !receipt?.team && (
               <>
                 <Grid item xs={12}>
@@ -300,7 +292,7 @@ const TeamSelection = ({
             </Grid>
             <Grid item container justifyContent="flex-end" xs={2}>
               {isHead && (
-                <Tooltip title={'دعوت کاربر دیگری به گروه'} arrow>
+                <Tooltip title={'دعوت کاربر دیگری به تیم'} arrow>
                   <IconButton
                     size="small"
                     onClick={

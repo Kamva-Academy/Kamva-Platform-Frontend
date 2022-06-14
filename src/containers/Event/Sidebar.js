@@ -87,13 +87,13 @@ function Workshops({
             </Grid>
             <Grid item xs={12}>
               <Button
-                disabled
-                // disabled={event?.event_type == 'Individual'}
+                // disabled
+                disabled={event?.event_type == 'Individual'}
                 variant="outlined"
                 fullWidth
                 component={Link}
                 to={`/event/${event?.id}/team_selection/`}>
-                {'تیم‌کشی'}
+                {'تیم'}
               </Button>
             </Grid>
             <Grid item xs={12}>
