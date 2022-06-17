@@ -120,6 +120,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
                     value={data.username}
                     name="username"
                     label="نام کاربری"
+                    helperText='نام کاربری، شماره تلفن یا شماره شناسنامه‌ی شماست.'
                     inputProps={{ className: 'ltr-input' }}
                   />
                 </Grid>
