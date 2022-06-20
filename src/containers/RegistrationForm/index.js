@@ -61,7 +61,7 @@ const RegistrationForm = ({
   }, [event?.registration_form]);
 
 
-  if (['Pending', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
+  if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
     history.push(`/event/${eventId}/status/`);
   }
 
