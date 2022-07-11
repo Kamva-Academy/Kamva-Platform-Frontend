@@ -5,21 +5,7 @@ import { Link } from 'react-router-dom';
 
 import appendPreviousParams from '../utils/AppendPreviousParams';
 
-const useStyles = makeStyles(() => ({
-  fullHeight: {
-    minHeight: '100vh',
-  },
-
-  aboutUs: {
-    position: 'fixed',
-    bottom: 20,
-    left: 20,
-  },
-}));
-
 const Index = () => {
-  const classes = useStyles();
-
   useEffect(() => {
     document.title = 'کاموا';
   }, [])
@@ -30,7 +16,9 @@ const Index = () => {
         container
         justifyContent="center"
         alignItems="center"
-        className={classes.fullHeight}>
+        sx={{
+          minHeight: '100vh',
+        }}>
         <Grid
           direction="column"
           item
@@ -62,7 +50,11 @@ const Index = () => {
           </Grid>
         </Grid>
         <Button size="large" variant="contained" color="primary"
-          className={classes.aboutUs} component={Link} to={appendPreviousParams("/about_us")}>
+          sx={{
+            position: 'fixed',
+            bottom: 20,
+            left: 20,
+          }} component={Link} to={appendPreviousParams("/about_us")}>
           درباره‌ی کاموا
         </Button>
       </Grid>

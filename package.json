@@ -37,6 +37,8 @@
     "react-scripts": "^4.0.3",
     "redux": "^4.1.1",
     "redux-undo": "^1.0.1",
+    "stylis": "^4.1.1",
+    "stylis-plugin-rtl": "^2.1.1",
     "tinymce": "^5.9.1"
   },
   "scripts": {
