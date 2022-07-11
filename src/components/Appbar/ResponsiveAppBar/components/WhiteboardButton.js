@@ -1,16 +1,11 @@
-import {
-  Dialog,
-  IconButton,
-  makeStyles,
-  Paper,
-  Tooltip,
-  withWidth,
-} from '@material-ui/core';
-import { Brush as BrushIcon } from '@material-ui/icons';
+import { Dialog, IconButton, Paper, Tooltip } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Brush as BrushIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 
 import CustomDraggable from '../../../CustomDraggable';
 import Whiteboard from '../../../Whiteboard';
+import useWidth from '../../../../utils/UseWidth';
 
 const useStyle = makeStyles(() => ({
   dragArea: {
@@ -21,11 +16,12 @@ const useStyle = makeStyles(() => ({
   },
 }));
 
-function WhiteboardButton({ width: themeWidth }) {
+function WhiteboardButton() {
   const [open, setOpen] = useState(false);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const themeWidth = useWidth();
 
   const classes = useStyle();
 
@@ -42,36 +38,33 @@ function WhiteboardButton({ width: themeWidth }) {
 
   const isDraggable = themeWidth != 'xs' && !isFullScreen;
 
-  return (
-    <>
-      <Tooltip title='تخته' arrow>
-        <IconButton size={themeWidth == 'xs' ? 'small' : 'medium'} onClick={() => setOpen(!open)}>
-          <BrushIcon />
-        </IconButton>
-      </Tooltip>
-      <Dialog
-        maxWidth="lg"
-        open={open}
-        onClose={() => setOpen(false)}
-        fullScreen={!isDraggable}
-        hideBackdrop
-        disableEnforceFocus
-        style={{ pointerEvents: isDraggable ? 'none' : 'auto' }}
-        disableBackdropClick
-        PaperComponent={isDraggable ? CustomDraggable : Paper}>
-        {isDraggable && <div className={classes.dragArea}></div>}
-        <div className="not-draggable">
-          <Whiteboard
-            width={isDraggable ? 1000 : width}
-            height={isDraggable ? 500 : height}
-            handleClose={() => setOpen(false)}
-            isFullScreen={isFullScreen}
-            setIsFullScreen={setIsFullScreen}
-          />
-        </div>
-      </Dialog>
-    </>
-  );
+  return <>
+    <Tooltip title='تخته' arrow>
+      <IconButton size={themeWidth == 'xs' ? 'small' : 'medium'} onClick={() => setOpen(!open)}>
+        <BrushIcon />
+      </IconButton>
+    </Tooltip>
+    <Dialog
+      maxWidth="lg"
+      open={open}
+      onClose={() => setOpen(false)}
+      fullScreen={!isDraggable}
+      hideBackdrop
+      disableEnforceFocus
+      style={{ pointerEvents: isDraggable ? 'none' : 'auto' }}
+      PaperComponent={isDraggable ? CustomDraggable : Paper}>
+      {isDraggable && <div className={classes.dragArea}></div>}
+      <div className="not-draggable">
+        <Whiteboard
+          width={isDraggable ? 1000 : width}
+          height={isDraggable ? 500 : height}
+          handleClose={() => setOpen(false)}
+          isFullScreen={isFullScreen}
+          setIsFullScreen={setIsFullScreen}
+        />
+      </div>
+    </Dialog>
+  </>;
 }
 
-export default withWidth()(WhiteboardButton);
+export default WhiteboardButton;

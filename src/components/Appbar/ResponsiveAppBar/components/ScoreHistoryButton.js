@@ -1,4 +1,4 @@
-import { Button, SvgIcon } from '@material-ui/core';
+import { Button, SvgIcon } from '@mui/material';
 import React, { useState } from 'react';
 
 import ScoreHistoryDialog from '../../../Dialog/ScoreHistoryDialog/ScoreHistoryDialog';

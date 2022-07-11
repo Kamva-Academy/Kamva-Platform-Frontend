@@ -1,9 +1,9 @@
-import { IconButton } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
+import { IconButton } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import {
   Stop as StopIcon,
   StopOutlined as StopOutlinedIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import {
   bindHover,
   bindMenu,
@@ -36,7 +36,7 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
 
   return (
     <React.Fragment>
-      <IconButton variant="contained" {...bindHover(popupState)}>
+      <IconButton variant="contained" {...bindHover(popupState)} size="large">
         <StopOutlinedIcon />
       </IconButton>
       <Menu

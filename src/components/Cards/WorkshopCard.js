@@ -6,11 +6,11 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
-import { Lock, LockOpen } from '@material-ui/icons';
-import { Skeleton } from '@material-ui/lab';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Lock, LockOpen } from '@mui/icons-material';
+import { Skeleton } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -53,7 +53,7 @@ export const WorkshopCard = ({
             <Skeleton
               width='100%'
               animation="wave"
-              variant="rect"
+              variant="rectangular"
               className={classes.media}
             />
           </>

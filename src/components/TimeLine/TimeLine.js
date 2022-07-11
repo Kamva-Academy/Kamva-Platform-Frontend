@@ -1,19 +1,19 @@
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import CreateIcon from '@material-ui/icons/Create';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
-import SlideshowIcon from '@material-ui/icons/Slideshow';
-import StarHalfIcon from '@material-ui/icons/StarHalf';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import Paper from '@mui/material/Paper';
+import makeStyles from '@mui/styles/makeStyles';
+import Typography from '@mui/material/Typography';
+import CreateIcon from '@mui/icons-material/Create';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
+import StarHalfIcon from '@mui/icons-material/StarHalf';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import Timeline from '@mui/lab/Timeline';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import React from 'react';
 
 const useStyles = makeStyles(() => ({

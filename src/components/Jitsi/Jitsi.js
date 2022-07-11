@@ -1,11 +1,12 @@
-import { IconButton, makeStyles, withWidth } from '@material-ui/core';
+import { IconButton } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Cancel as CancelIcon,
   Refresh as RefreshIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-
+import useWidth from '../../utils/UseWidth';
 import { StatePageContext } from '../../containers/Workshop';
 import * as jitsiFuncs from './connection/jitsi';
 
@@ -28,15 +29,16 @@ const useStyles = makeStyles((theme) => ({
   jitsi: {
     width: '100%',
     height: 300,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: '100vh',
     },
   },
 }));
 
-function Jitsi({ handleClose, width, displayName = 'User' }) {
+function Jitsi({ handleClose, displayName = 'User' }) {
   const classes = useStyles();
   const jitsiElement = useRef();
+  const width = useWidth();
 
   const { teamId } = useContext(StatePageContext);
 
@@ -84,4 +86,4 @@ const mapStatesToProps = (state) => ({
     : state.account.userAccount?.first_name + ' ' + state.account.userAccount?.last_name,
 });
 
-export default withWidth()(connect(mapStatesToProps)(Jitsi));
+export default connect(mapStatesToProps)(Jitsi);

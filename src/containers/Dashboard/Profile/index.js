@@ -1,11 +1,5 @@
-import {
-  Button,
-  Grid,
-  makeStyles,
-  Tab,
-  Tabs,
-  Typography,
-} from '@material-ui/core';
+import { Button, Grid, Tab, Tabs, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';

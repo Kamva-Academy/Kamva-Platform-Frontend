@@ -5,12 +5,12 @@ import {
   Grid,
   Hidden,
   IconButton,
-  makeStyles,
   TextField,
   Typography,
-} from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
-import { Close as CloseIcon } from '@material-ui/icons';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { green } from '@mui/material/colors';
+import { Close as CloseIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -92,7 +92,8 @@ function AuthDialog({
               <IconButton
                 aria-label="close"
                 onClick={handleClose}
-                className={classes.closeIcon}>
+                className={classes.closeIcon}
+                size="large">
                 <CloseIcon />
               </IconButton>
             </Grid>
@@ -152,7 +153,7 @@ function AuthDialog({
             </Button>
           </Grid>
         </Grid>
-        <Hidden xsDown>
+        <Hidden smDown>
           <Grid item sm={5} className={classes.image}></Grid>
         </Hidden>
       </Grid>

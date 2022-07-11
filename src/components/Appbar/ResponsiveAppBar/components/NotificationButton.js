@@ -1,18 +1,9 @@
-import {
-  Badge,
-  Grid,
-  IconButton,
-  makeStyles,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popover,
-  Typography,
-} from '@material-ui/core';
+import { Badge, Grid, IconButton, MenuItem, MenuList, Paper, Popover, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   AccountCircle as AccountCircleIcon,
   Notifications as NotificationsIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -60,69 +51,67 @@ const NotificationButton = ({ notifications = [] }) => {
 
   const open = Boolean(anchorEl);
 
-  return (
-    <>
-      <IconButton onClick={handlePopoverOpen}>
-        <Badge badgeContent={1} className={classes.badge}>
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
-      <Popover
-        open={open}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-        className={classes.popover}
-        anchorEl={anchorEl}
-        onClose={handlePopoverClose}
-        disableRestoreFocus
-        marginThreshold={30}>
-        <Paper className={classes.notificationList}>
-          <MenuList>
-            {notifications
-              .sort((a, b) => b.time - a.time)
-              .map((notification) => (
-                <MenuItem
-                  key={notification.id}
-                  className={clsx(
-                    classes.notification,
-                    notification.seen && classes.seen
-                  )}>
-                  <Grid container justifyContent="flex-start" spacing={1}>
-                    <Grid item>
-                      <div style={{ textAlign: 'center' }}>
-                        <div>
-                          <AccountCircleIcon />
-                        </div>
-                        <Typography component="small" variant="body2">
-                          {t('support')}
-                        </Typography>
+  return <>
+    <IconButton onClick={handlePopoverOpen} size="large">
+      <Badge badgeContent={1} className={classes.badge}>
+        <NotificationsIcon />
+      </Badge>
+    </IconButton>
+    <Popover
+      open={open}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+      className={classes.popover}
+      anchorEl={anchorEl}
+      onClose={handlePopoverClose}
+      disableRestoreFocus
+      marginThreshold={30}>
+      <Paper className={classes.notificationList}>
+        <MenuList>
+          {notifications
+            .sort((a, b) => b.time - a.time)
+            .map((notification) => (
+              <MenuItem
+                key={notification.id}
+                className={clsx(
+                  classes.notification,
+                  notification.seen && classes.seen
+                )}>
+                <Grid container justifyContent="flex-start" spacing={1}>
+                  <Grid item>
+                    <div style={{ textAlign: 'center' }}>
+                      <div>
+                        <AccountCircleIcon />
                       </div>
-                    </Grid>
-                    <Grid item>
                       <Typography component="small" variant="body2">
-                        {dateFormatter({
-                          date: notification.time,
-                          format: 'hh:mm:ss',
-                        })}
+                        {t('support')}
                       </Typography>
-                      <Typography component="p" variant="subtitle2">
-                        {notification.message}
-                      </Typography>
-                    </Grid>
+                    </div>
                   </Grid>
-                </MenuItem>
-              ))}
-          </MenuList>
-        </Paper>
-      </Popover>
-    </>
-  );
+                  <Grid item>
+                    <Typography component="small" variant="body2">
+                      {dateFormatter({
+                        date: notification.time,
+                        format: 'hh:mm:ss',
+                      })}
+                    </Typography>
+                    <Typography component="p" variant="subtitle2">
+                      {notification.message}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </MenuItem>
+            ))}
+        </MenuList>
+      </Paper>
+    </Popover>
+  </>;
 };
 
 export default NotificationButton;

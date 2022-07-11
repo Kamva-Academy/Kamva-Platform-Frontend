@@ -1,4 +1,5 @@
-import { Avatar, makeStyles, Tooltip } from '@material-ui/core';
+import { Avatar, Tooltip } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { connect } from 'react-redux';
 

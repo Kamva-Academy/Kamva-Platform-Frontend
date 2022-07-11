@@ -1,5 +1,5 @@
-import { Button } from '@material-ui/core';
-import Grow from '@material-ui/core/Grow';
+import { Button } from '@mui/material';
+import Grow from '@mui/material/Grow';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { connect } from 'react-redux';

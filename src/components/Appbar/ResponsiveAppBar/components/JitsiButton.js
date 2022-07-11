@@ -1,12 +1,13 @@
-import { IconButton, Tooltip, withWidth } from '@material-ui/core';
-import { VideoCall as VideoCallIcon } from '@material-ui/icons';
-import ForumIcon from '@material-ui/icons/Forum';
+import { IconButton, Tooltip } from '@mui/material';
+import { VideoCall as VideoCallIcon } from '@mui/icons-material';
+import ForumIcon from '@mui/icons-material/Forum';
 import React, { useEffect, useState } from 'react';
-
+import useWidth from '../../../../utils/UseWidth';
 import DraggableJitsi from '../../../Jitsi/DraggableJitsi';
 
-const JitsiButton = ({ width }) => {
+const JitsiButton = () => {
   const [open, setOpen] = useState(false);
+  const width = useWidth();
 
   return (
     <>
@@ -20,4 +21,4 @@ const JitsiButton = ({ width }) => {
   );
 }
 
-export default withWidth()(JitsiButton);
+export default JitsiButton;

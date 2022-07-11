@@ -6,9 +6,9 @@ import {
   DialogTitle,
   Divider,
   Grid,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';

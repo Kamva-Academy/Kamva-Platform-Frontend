@@ -5,7 +5,7 @@ import {
   DialogContent,
   TextField,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import React from 'react';
 
 function Index({ inviteSomeone, handleClose, invitee, teamId, open }) {

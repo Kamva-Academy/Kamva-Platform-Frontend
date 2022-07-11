@@ -1,12 +1,5 @@
-import {
-  Button,
-  Container,
-  Grid,
-  makeStyles,
-  Paper,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';

@@ -6,7 +6,7 @@ import {
   DialogContent,
   Grid,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import React from 'react';
 
 function AreYouSure({ open, handleClose, callBackFunction }) {

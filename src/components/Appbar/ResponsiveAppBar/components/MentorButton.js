@@ -1,10 +1,12 @@
-import { Button, makeStyles, withWidth } from '@material-ui/core';
-import React, { useContext, useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { StatePageContext } from '../../../../containers/Workshop';
 import { requestMentorAction } from '../../../../redux/slices/currentState';
+import useWidth from '../../../../utils/UseWidth';
 
 const useStyles = makeStyles(() => ({
   mentorButton: {
@@ -12,11 +14,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function MentorButton({ callMentor, isMentor, disabled = false, width }) {
+function MentorButton({ callMentor }) {
   const classes = useStyles();
   const t = useTranslate();
   const { playerId, teamId, fsmId } = useContext(StatePageContext);
   const [isEnable, setEnable] = useState(true);
+  const width = useWidth();
 
   return (
     <Button
@@ -42,6 +45,6 @@ const mapStatesToProps = (state) => ({
   isMentor: state.account.userAccount?.is_mentor,
 });
 
-export default withWidth()(connect(mapStatesToProps, { callMentor: requestMentorAction })(
+export default connect(mapStatesToProps, { callMentor: requestMentorAction })(
   MentorButton
-));
+);

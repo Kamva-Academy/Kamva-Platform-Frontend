@@ -1,12 +1,7 @@
-import {
-  Button,
-  Grid,
-  IconButton,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
-import { CloudUpload as CloudUploadIcon } from '@material-ui/icons';
-import ClearIcon from '@material-ui/icons/Clear';
+import { Button, Grid, IconButton, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { CloudUpload as CloudUploadIcon } from '@mui/icons-material';
+import ClearIcon from '@mui/icons-material/Clear';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';

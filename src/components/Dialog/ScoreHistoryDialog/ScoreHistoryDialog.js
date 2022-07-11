@@ -1,14 +1,14 @@
 import {
   AppBar,
   Dialog,
-  makeStyles,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 

@@ -1,4 +1,5 @@
-import { IconButton, makeStyles, Tooltip } from '@material-ui/core';
+import { IconButton, Tooltip } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +17,11 @@ export default function LogoButton({ size, image, name, eventId }) {
   const classes = useStyles({ size });
   return (
     <Tooltip title={name} arrow>
-      <IconButton component={Link} className={classes.logoButton} to={`/event/${eventId}/`}>
+      <IconButton
+        component={Link}
+        className={classes.logoButton}
+        to={`/event/${eventId}/`}
+        size="large">
         <img
           src={image}
           alt=''

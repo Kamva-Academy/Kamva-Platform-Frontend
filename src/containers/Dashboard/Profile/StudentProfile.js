@@ -6,13 +6,13 @@ import {
   Grid,
   IconButton,
   InputLabel,
-  makeStyles,
   MenuItem,
   Select,
   Tooltip,
   Typography,
-} from '@material-ui/core';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 

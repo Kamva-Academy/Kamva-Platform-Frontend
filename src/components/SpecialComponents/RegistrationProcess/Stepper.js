@@ -1,9 +1,5 @@
-import {
-  makeStyles,
-  Step,
-  StepLabel,
-  Stepper,
-} from '@material-ui/core';
+import { Step, StepLabel, Stepper } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
@@ -25,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   eventImage: {
     borderTopLeftRadius: '5px',
     borderBottomLeftRadius: '5px',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       borderBottomLeftRadius: '0px',
       borderTopRightRadius: '5px',
     },

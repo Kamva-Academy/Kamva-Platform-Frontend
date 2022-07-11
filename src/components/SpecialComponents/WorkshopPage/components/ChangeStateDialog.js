@@ -4,7 +4,7 @@ import {
   List,
   ListItem,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 

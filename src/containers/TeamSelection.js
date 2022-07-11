@@ -3,7 +3,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -14,10 +13,11 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from '@material-ui/core';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ClearIcon from '@material-ui/icons/Clear';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ClearIcon from '@mui/icons-material/Clear';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';

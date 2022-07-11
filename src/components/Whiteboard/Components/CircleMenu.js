@@ -1,9 +1,9 @@
-import { IconButton } from '@material-ui/core';
-import MenuItem from '@material-ui/core/MenuItem';
+import { IconButton } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
 import {
   FiberManualRecord as FiberManualRecordIcon,
   FiberManualRecordOutlined as FiberManualRecordOutlinedIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import {
   bindHover,
   bindMenu,
@@ -36,7 +36,7 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
 
   return (
     <React.Fragment>
-      <IconButton variant="contained" {...bindHover(popupState)}>
+      <IconButton variant="contained" {...bindHover(popupState)} size="large">
         <FiberManualRecordOutlinedIcon />
       </IconButton>
       <Menu

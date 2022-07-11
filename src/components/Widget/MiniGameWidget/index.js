@@ -1,4 +1,5 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Button } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useRef, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 

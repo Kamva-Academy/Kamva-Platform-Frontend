@@ -1,10 +1,5 @@
-import {
-  Grid,
-  Hidden,
-  IconButton,
-  makeStyles,
-  SvgIcon,
-} from '@material-ui/core';
+import { Grid, Hidden, IconButton, SvgIcon } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Clear,
   Delete as DeleteIcon,
@@ -16,7 +11,7 @@ import {
   Save as SaveIcon,
   TextFields as TextFieldsIcon,
   Undo as UndoIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -76,21 +71,22 @@ function WhiteboardNavbar({
       justifyContent="space-between"
       className={classes.whiteboardNavbar}>
       <Grid item>
-        <IconButton onClick={handleClose}>
+        <IconButton onClick={handleClose} size="large">
           <Clear />
         </IconButton>
-        <Hidden smDown>
-          <IconButton onClick={() => setIsFullScreen(!isFullScreen)}>
+        <Hidden mdDown>
+          <IconButton onClick={() => setIsFullScreen(!isFullScreen)} size="large">
             {isFullScreen ? <FullscreenExit /> : <Fullscreen />}
           </IconButton>
         </Hidden>
         <IconButton
           onClick={() => {
             downloadFromURL(getDataURL(), 'stage.png');
-          }}>
+          }}
+          size="large">
           <SaveIcon />
         </IconButton>
-        <IconButton onClick={() => setOpenRemoveNodes(true)}>
+        <IconButton onClick={() => setOpenRemoveNodes(true)} size="large">
           <DeleteIcon />
         </IconButton>
         <RemoveAllNodesDialog
@@ -105,16 +101,17 @@ function WhiteboardNavbar({
           onClick={() => {
             changeMode({ mode: DrawingModes.DELETE });
             removeSelectedNodes({ uuid: teamId });
-          }}>
+          }}
+          size="large">
           <SvgIcon>
             <path d="M 23.425781 6.695312 L 18.863281 2.132812 C 18.113281 1.40625 16.921875 1.40625 16.171875 2.132812 L 6.648438 11.652344 L 13.90625 18.90625 L 23.425781 9.386719 C 23.789062 9.027344 23.996094 8.535156 24 8.023438 C 23.996094 7.523438 23.789062 7.042969 23.425781 6.695312 Z M 23.425781 6.695312 " />
             <path d="M 17.710938 21.507812 L 11.367188 21.507812 L 13.269531 19.570312 L 6.015625 12.289062 L 3.171875 15.128906 C 2.445312 15.886719 2.445312 17.089844 3.171875 17.847656 L 6.800781 21.507812 L 0.453125 21.507812 C 0.203125 21.507812 0 21.710938 0 21.960938 C 0 22.210938 0.203125 22.414062 0.453125 22.414062 L 17.710938 22.414062 C 17.964844 22.414062 18.167969 22.210938 18.167969 21.960938 C 18.167969 21.710938 17.964844 21.507812 17.710938 21.507812 Z M 17.710938 21.507812 " />
           </SvgIcon>
         </IconButton>
-        <IconButton onClick={redo}>
+        <IconButton onClick={redo} size="large">
           <RedoIcon />
         </IconButton>
-        <IconButton onClick={undo}>
+        <IconButton onClick={undo} size="large">
           <UndoIcon />
         </IconButton>
         <IconButton
@@ -122,7 +119,8 @@ function WhiteboardNavbar({
           onClick={() => {
             deselectNodes();
             changeMode({ mode: DrawingModes.PAINTING });
-          }}>
+          }}
+          size="large">
           <GestureIcon />
         </IconButton>
         <CircleMenu />
@@ -131,12 +129,14 @@ function WhiteboardNavbar({
           onClick={() => {
             changeMode({ mode: DrawingModes.MOVE });
             addNewTextNode({ uuid: teamId });
-          }}>
+          }}
+          size="large">
           <TextFieldsIcon />
         </IconButton>
         <IconButton
           color={drawingMode === DrawingModes.MOVE ? 'primary' : 'default'}
-          onClick={() => changeMode({ mode: DrawingModes.MOVE })}>
+          onClick={() => changeMode({ mode: DrawingModes.MOVE })}
+          size="large">
           <PanToolIcon />
         </IconButton>
       </Grid>

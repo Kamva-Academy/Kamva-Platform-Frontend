@@ -1,8 +1,9 @@
-import { makeStyles, Paper, withWidth } from '@material-ui/core';
+import { Paper } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
 import Draggable from 'react-draggable';
-
+import useWidth from '../../utils/UseWidth';
 import Jitsi from './Jitsi';
 
 const useStyle = makeStyles((theme) => ({
@@ -12,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
     bottom: 10,
     width: 500,
     zIndex: 200,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       left: 0,
       bottom: 0,
       width: '100%',
@@ -27,8 +28,9 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 
-function DraggableJitsi({ open, handleClose, width }) {
+function DraggableJitsi({ open, handleClose }) {
   const classes = useStyle();
+  const width = useWidth();
 
   return (
     <div className={clsx(classes.root, !open && classes.hidden)}>
@@ -44,4 +46,4 @@ function DraggableJitsi({ open, handleClose, width }) {
   );
 }
 
-export default withWidth()(DraggableJitsi);
+export default DraggableJitsi;

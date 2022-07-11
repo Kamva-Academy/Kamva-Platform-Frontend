@@ -1,9 +1,6 @@
-import {
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
-import Pagination from '@material-ui/lab/Pagination';
+import { Grid, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';

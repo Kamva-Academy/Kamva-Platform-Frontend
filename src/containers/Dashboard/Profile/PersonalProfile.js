@@ -6,14 +6,14 @@ import {
   FormLabel,
   Grid,
   InputLabel,
-  makeStyles,
   MenuItem,
   Radio,
   RadioGroup,
   Select,
   TextField,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';

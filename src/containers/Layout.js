@@ -1,4 +1,5 @@
-import { Container, makeStyles } from '@material-ui/core';
+import { Container } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router';

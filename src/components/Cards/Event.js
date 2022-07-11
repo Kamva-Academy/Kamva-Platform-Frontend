@@ -1,6 +1,6 @@
-import { Button, Card, Chip, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import { Button, Card, Chip, Grid, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     height: '100%',
     justifyContent: 'space-between',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       justifyContent: 'center',
     },
   },
   content: {
     padding: theme.spacing(2),
     paddingLeft: theme.spacing(0),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(2),
     },
   },

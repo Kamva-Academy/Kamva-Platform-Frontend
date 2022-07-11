@@ -1,11 +1,5 @@
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Grid,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Button, ButtonGroup, Container, Grid, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 

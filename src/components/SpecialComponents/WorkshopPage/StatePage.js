@@ -1,5 +1,6 @@
-import { Divider, Fab, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
-import { Help as HelpIcon } from '@material-ui/icons';
+import { Divider, Fab, Grid, Paper, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { Help as HelpIcon } from '@mui/icons-material';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';

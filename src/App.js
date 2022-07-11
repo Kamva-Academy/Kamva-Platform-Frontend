@@ -1,8 +1,8 @@
 import './Theme/Styles/App.css';
 
-import { CssBaseline, LinearProgress } from '@material-ui/core';
-import { StylesProvider } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import { CssBaseline, LinearProgress } from '@mui/material';
+import StylesProvider from '@mui/styles/StylesProvider';
+import { ThemeProvider } from '@mui/styles';
 import { SnackbarProvider } from 'notistack';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -58,29 +58,25 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
   return (
     <IntlProvider translations={translations}>
       {dir === 'rtl' ? (
-        <>
-          <ThemeProvider theme={RTLMuiTheme}>
-            <StylesProvider jss={jss}>
-              <SnackbarProvider>
-                <Loading />
-                <Notifier />
-                <CssBaseline />
-                <Root />
-              </SnackbarProvider>
-            </StylesProvider>
-          </ThemeProvider>
-        </>
-      ) : (
-        <>
-          <ThemeProvider theme={MuiTheme}>
+        <ThemeProvider theme={RTLMuiTheme}>
+          <StylesProvider jss={jss}>
             <SnackbarProvider>
               <Loading />
               <Notifier />
               <CssBaseline />
               <Root />
             </SnackbarProvider>
-          </ThemeProvider>
-        </>
+          </StylesProvider>
+        </ThemeProvider>
+      ) : (
+        <ThemeProvider theme={MuiTheme}>
+          <SnackbarProvider>
+            <Loading />
+            <Notifier />
+            <CssBaseline />
+            <Root />
+          </SnackbarProvider>
+        </ThemeProvider>
       )}
     </IntlProvider>
   );

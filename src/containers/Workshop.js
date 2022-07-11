@@ -1,6 +1,7 @@
-import { Fab, makeStyles, Toolbar } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
-import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@material-ui/icons';
+import { Fab, Toolbar } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import Container from '@mui/material/Container';
+import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 60,
     color: '#555',
     marginBottom: 20,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: 40,
     },
   },

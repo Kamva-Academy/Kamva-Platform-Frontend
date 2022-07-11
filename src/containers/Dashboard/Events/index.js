@@ -1,9 +1,5 @@
-import {
-  Divider,
-  Grid,
-  makeStyles,
-  Typography
-} from '@material-ui/core';
+import { Divider, Grid, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
@@ -70,7 +66,7 @@ const Events = ({
 
   return (
     <Layout>
-      <Grid container spacing={4} justify='center'>
+      <Grid container spacing={4} justifyContent='center'>
         <Grid item xs={12}>
           <Typography variant="h1" align='center' component="h2">
             {'رویدادها'}
@@ -84,7 +80,7 @@ const Events = ({
         </Grid>
         <Grid item container spacing={2} xs={12}>
           {activeEvents.map((event, index) => (
-            <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
+            <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
               <EventCard {...event} />
             </Grid>
           ))}
@@ -97,7 +93,7 @@ const Events = ({
         </Grid>
         <Grid item container spacing={2} xs={12}>
           {inactiveEvents.map((event, index) => (
-            <Grid key={index} container item xs={12} sm={6} md={4} justify='center' alignItems='flex-start' >
+            <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
               <EventCard {...event} />
             </Grid>
           ))}

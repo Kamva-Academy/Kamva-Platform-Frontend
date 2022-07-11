@@ -1,11 +1,13 @@
-import { IconButton, Tooltip, withWidth } from '@material-ui/core';
-import { Mic as MicIcon, MicOff as MicOffIcon } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
+import { IconButton, Tooltip } from '@mui/material';
+import { Mic as MicIcon, MicOff as MicOffIcon } from '@mui/icons-material';
+import React, { useState } from 'react';
+import useWidth from '../../../../utils/UseWidth';
 
 import * as jitsiFuncs from '../../../Jitsi/connection/jitsi';
 
-const JitsiMicButton = ({ width }) => {
+const JitsiMicButton = () => {
   const [isMute, setIsMute] = useState(true);
+  const width = useWidth();
 
   const toggleAudio = () => {
     if (isMute) {
@@ -28,4 +30,4 @@ const JitsiMicButton = ({ width }) => {
 }
 
 
-export default withWidth()(JitsiMicButton);
+export default JitsiMicButton;

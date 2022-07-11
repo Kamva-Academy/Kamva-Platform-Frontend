@@ -1,11 +1,5 @@
-import {
-  Button,
-  Dialog,
-  Grid,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
+import { Button, Dialog, Grid, Paper, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
