@@ -10,6 +10,7 @@ import {
   Select,
   Tooltip,
   Typography,
+  TextField,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -25,24 +26,6 @@ import {
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
-
-const useStyles = makeStyles((theme) => ({
-  profileImage: {
-    maxHeight: '100px',
-    borderRadius: '5px',
-  },
-  logo: {
-    height: 100,
-  },
-  formControl: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
-}));
 
 const GRADES = [
   { value: 1, name: 'اول' },
@@ -81,7 +64,6 @@ function Index({
   institutes,
   newlyAddedInstitute,
 }) {
-  const classes = useStyles();
   const [newStudentship, setNewStudentship] = useState();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
 

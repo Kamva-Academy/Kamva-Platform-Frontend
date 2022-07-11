@@ -1,4 +1,11 @@
-import { Button, Container, Grid, Paper, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
@@ -8,20 +15,6 @@ import { loginAction } from '../redux/slices/account';
 import { addNotificationAction } from '../redux/slices/notifications';
 import appendPreviousParams from '../utils/AppendPreviousParams';
 import { toEnglishNumber } from '../utils/translateNumber';
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-  },
-}));
 
 type LoginPagePropsType = {
   isFetching: boolean;
@@ -36,8 +29,6 @@ const LoginPage: FC<LoginPagePropsType> = ({
   addNotification,
   token,
 }) => {
-  const classes = useStyles();
-
   const [data, setData] = useState({
     password: '',
     username: '',
@@ -79,12 +70,18 @@ const LoginPage: FC<LoginPagePropsType> = ({
   };
 
   return (
-    <Container className={classes.container}>
+    <Container
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
       <Grid container item xs={12} sm={8} md={4} spacing={2}>
         <Grid style={{ height: 64, width: '100%' }}></Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Grid item container>
+          <Paper sx={{ p: 2 }}>
+            <Grid container>
               <Grid
                 container
                 item
@@ -113,7 +110,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
                     value={data.username}
                     name="username"
                     label="نام کاربری"
-                    helperText='نام کاربری، شماره تلفن یا شماره شناسنامه‌ی شماست.'
+                    helperText="نام کاربری، شماره تلفن یا شماره شناسنامه‌ی شماست."
                     inputProps={{ className: 'ltr-input' }}
                   />
                 </Grid>

@@ -17,11 +17,10 @@ import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
-import JalaliUtils from "@date-io/jalaali";
-import {
-  DatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import AdapterJalali from '@date-io/date-fns-jalali';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 import moment from "moment";
 import jMoment from "moment-jalaali";
 
@@ -33,28 +32,7 @@ import {
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
-
-
 jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
-
-
-const useStyles = makeStyles((theme) => ({
-  profileImage: {
-    maxHeight: '100px',
-    borderRadius: '5px',
-  },
-  logo: {
-    height: 100,
-  },
-  formControl: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
-}));
 
 function Index({
   updateUserAccount,
@@ -65,9 +43,9 @@ function Index({
   userProfile,
   institutes,
 }) {
-  const classes = useStyles();
   const [newProfile, setNewProfile] = useState({});
   const [birthDate, setBirthDate] = useState();
+
 
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
@@ -75,6 +53,8 @@ function Index({
 
   useEffect(() => {
     if (userProfile?.birth_date) {
+      console.log(userProfile.birth_date)
+
       setBirthDate(moment(userProfile.birth_date));
     }
   }, [userProfile])
@@ -123,6 +103,8 @@ function Index({
     return <></>;
   }
 
+  console.log(moment(birthDate))
+
   return (
     <>
       <Grid container item spacing={2}>
@@ -134,7 +116,10 @@ function Index({
           <Grid item>
             <img
               alt=""
-              className={classes.profileImage}
+              style={{
+                maxHeight: '100px',
+                borderRadius: '5px',
+              }}
               src={
                 (newProfile?.profile_picture &&
                   URL.createObjectURL(newProfile?.profile_picture)) ||
@@ -231,19 +216,18 @@ function Index({
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <MuiPickersUtilsProvider utils={JalaliUtils} locale="fa">
+            {/* <LocalizationProvider dateAdapter={AdapterMoment}> */}
+            <LocalizationProvider dateAdapter={AdapterJalali}>
               <DatePicker
-                error={!birthDate}
-                required
-                label='تاریخ تولد'
-                fullWidth
-                okLabel="تأیید"
-                cancelLabel="لغو"
-                labelFunc={date => (date ? date.format("jYYYY/jMM/jDD") : "")}
+                openTo='year'
+                views={['year', 'month', 'day']}
+                mask="____/__/__"
                 value={birthDate}
-                onChange={setBirthDate}
+                onChange={(date) => setBirthDate(moment(date))}
+                renderInput={(params) => <TextField {...params} />}
               />
-            </MuiPickersUtilsProvider>
+              {/* </LocalizationProvider> */}
+            </LocalizationProvider>
           </Grid>
 
           <Grid item xs={12} sm={6}>
@@ -287,12 +271,11 @@ function Index({
 
           <Grid item container xs={12} sm={6}>
             <FormControl
+              fullWidth
               required
-              error={!userProfile?.province && !newProfile?.province}
-              className={classes.formControl}>
+              error={!userProfile?.province && !newProfile?.province}>
               <InputLabel>استان</InputLabel>
               <Select
-                className={classes.dropDown}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={newProfile?.province || userProfile?.province}
@@ -311,11 +294,10 @@ function Index({
           <Grid item container xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.city && !newProfile?.city}
-              className={classes.formControl}>
+              fullWidth
+              error={!userProfile?.city && !newProfile?.city}>
               <InputLabel>شهر</InputLabel>
               <Select
-                className={classes.dropDown}
                 disabled={!newProfile?.province && !userProfile?.city}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
