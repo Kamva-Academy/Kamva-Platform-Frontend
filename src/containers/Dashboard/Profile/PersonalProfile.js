@@ -16,7 +16,7 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
+const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 import AdapterJalali from '@date-io/date-fns-jalali';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';

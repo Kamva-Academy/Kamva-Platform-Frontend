@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PROFILE_PICTURE = process.env.PUBLIC_URL + '/profile.png';
+const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 const TeamSelection = ({
   getMyInvitations,

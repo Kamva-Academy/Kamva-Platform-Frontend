@@ -15,7 +15,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { baseURL } from '../../axios';
 import { enterWorkshopAction } from '../../redux/slices/currentState';
 import PasswordDialog from '../SpecialComponents/WorkshopsPage/PasswordDialog';
 

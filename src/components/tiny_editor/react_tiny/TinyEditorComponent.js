@@ -1,5 +1,5 @@
 import 'tinymce/tinymce';
-import '../../../Theme/Styles/Tiny.css'
+import './Tiny.css'
 
 import { Editor } from '@tinymce/tinymce-react';
 import React from 'react';

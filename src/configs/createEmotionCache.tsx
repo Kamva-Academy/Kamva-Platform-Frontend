@@ -1,8 +1,7 @@
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
-
-type directionType = 'rtl' | 'ltr';
+import { directionType } from '../types/global';
 
 const createEmotionCache = (direction: directionType) => {
   if (direction === 'rtl') {

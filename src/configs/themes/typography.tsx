@@ -1,4 +1,6 @@
-const typography = {
+import { TypographyOptions } from '@mui/material/styles/createTypography';
+
+const typography: TypographyOptions = {
   fontFamily: "iranyekan",
   h1: {
     fontWeight: 900,

@@ -1,21 +1,20 @@
-import './Theme/Styles/App.css';
+import './configs/styles/App.css';
 
+import React, { useEffect } from 'react';
 import { CssBaseline, LinearProgress } from '@mui/material';
 import { ThemeProvider } from '@mui/styles';
 import { SnackbarProvider } from 'notistack';
 import { CacheProvider } from "@emotion/react";
-import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
 import { useHistory } from 'react-router';
 import createEmotionCache from './configs/createEmotionCache'
+import selectTheme from './configs/themes';
 
 import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
-import Root from './root';
-import MuiTheme from './Theme/MuiThemes/MuiTheme';
-import RTLMuiTheme from './Theme/MuiThemes/RTLMuiTheme';
+import Root from './routes';
 import translations from './translations';
 
 
@@ -57,29 +56,16 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
 
   return (
     <IntlProvider translations={translations}>
-      {dir === 'rtl' ? (
-        <CacheProvider value={createEmotionCache('rtl')}>
-          <ThemeProvider theme={RTLMuiTheme}>
-            <SnackbarProvider>
-              <Loading />
-              <Notifier />
-              <CssBaseline />
-              <Root />
-            </SnackbarProvider>
-          </ThemeProvider>
-        </CacheProvider>
-      ) : (
-        <CacheProvider value={createEmotionCache('ltr')}>
-          <ThemeProvider theme={MuiTheme}>
-            <SnackbarProvider>
-              <Loading />
-              <Notifier />
-              <CssBaseline />
-              <Root />
-            </SnackbarProvider>
-          </ThemeProvider>
-        </CacheProvider>
-      )}
+      <CacheProvider value={createEmotionCache(dir)}>
+        <ThemeProvider theme={selectTheme(dir)}>
+          <SnackbarProvider>
+            <Loading />
+            <Notifier />
+            <CssBaseline />
+            <Root />
+          </SnackbarProvider>
+        </ThemeProvider>
+      </CacheProvider>
     </IntlProvider>
   );
 };
