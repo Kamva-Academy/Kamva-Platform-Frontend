@@ -1,0 +1,28 @@
+@font-face {
+  font-family: iranyekan;
+  src: url("./iranyekanweblight.woff") format("woff"), url("./iranyekanweblight.woff2") format("woff2");
+  font-weight: 100 900;
+}
+
+body,
+body.iranyekan *,
+body.iranyekan .ui.form input:not([type]),
+body.iranyekan .ui.form input[type="number"],
+body.iranyekan .ui.form input,
+body.iranyekan .ui.text,
+body.iranyekan *,
+body.iranyekan,
+body.iranyekan .ui.modal *,
+body.iranyekan .ui,
+body.iranyekan .ui *,
+body.iranyekan .ui.input > input,
+body.iranyekan .ui.card *,
+body.iranyekan .ui.card .content .header,
+body.iranyekan .ui .item *,
+body.iranyekan .ui .item .content .header,
+body.iranyekan .tox .tox-button {
+  font-family: iranyekan;
+  -moz-font-feature-settings: "ss02";
+  -webkit-font-feature-settings: "ss02";
+  font-feature-settings: "ss02";
+}

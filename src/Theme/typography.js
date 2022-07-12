@@ -1,4 +1,5 @@
 const typography = {
+  fontFamily: "iranyekan",
   h1: {
     fontWeight: 900,
     fontSize: '33px',
