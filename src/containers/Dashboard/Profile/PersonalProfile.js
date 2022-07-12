@@ -22,7 +22,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import moment from "moment";
-import jMoment from "moment-jalaali";
 
 import {
   getInstitutesAction,
@@ -32,7 +31,6 @@ import {
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
-jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 
 function Index({
   updateUserAccount,
@@ -216,7 +214,6 @@ function Index({
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            {/* <LocalizationProvider dateAdapter={AdapterMoment}> */}
             <LocalizationProvider dateAdapter={AdapterJalali}>
               <DatePicker
                 openTo='year'
@@ -226,7 +223,6 @@ function Index({
                 onChange={(date) => setBirthDate(moment(date))}
                 renderInput={(params) => <TextField {...params} />}
               />
-              {/* </LocalizationProvider> */}
             </LocalizationProvider>
           </Grid>
 
