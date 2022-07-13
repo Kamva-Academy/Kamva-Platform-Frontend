@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   logo: ({ size }) => ({
@@ -14,13 +14,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function LogoButton({ size, image, name, eventId }) {
+  const navigate = useNavigate();
   const classes = useStyles({ size });
   return (
     <Tooltip title={name} arrow>
       <IconButton
-        component={Link}
+        onClick={() => navigate(`/event/${eventId}/`)}
         className={classes.logoButton}
-        to={`/event/${eventId}/`}
         size="large">
         <img
           src={image}

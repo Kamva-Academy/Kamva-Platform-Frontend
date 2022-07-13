@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Routes, useNavigate } from 'react-router-dom';
+import { Routes, useNavigate, useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
 import AppBar from '../components/Appbar/ResponsiveAppBar';
@@ -36,6 +36,7 @@ const Layout = ({
   userAccount,
   ...props
 }) => {
+  const { eventId } = useParams();
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -65,10 +66,10 @@ const Layout = ({
   return (
     <>
       <div className={classes.background} />
-      <Routes>
-        <Route path={'/event/:eventId/'} render={() => <AppBar mode='EVENT' position="relative" />} />
-        <Route path={'/'} render={() => <AppBar mode={appbarMode} position="relative" />} />
-      </Routes>
+      {eventId ? <AppBar mode='EVENT' position="relative" />
+        :
+        <AppBar mode={appbarMode} position="relative" />
+      }
       <Container maxWidth='lg' className={classes.container}>{props.children}</Container>
     </>
   );

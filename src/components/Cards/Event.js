@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { toPersianNumber } from '../../utils/translateNumber';
 
@@ -49,23 +49,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EventButton = ({ to, text, ...props }) => (
-  <Button
-    size="small"
-    variant="outlined"
-    fullWidth
-    color="secondary"
-    {...props}
-    component={Link}
-    to={to}
-  >
-    {text}
-  </Button>
-)
+const EventButton = ({ to, text, ...props }) => {
+  const navigate = useNavigate();
+  return (
+    <Button
+      size="small"
+      variant="outlined"
+      fullWidth
+      color="secondary"
+      {...props}
+      onClick={() => navigate(to)}
+    >
+      {text}
+    </Button>)
+}
 
 const Event = ({
   ...event
 }) => {
+
   const classes = useStyles();
   const t = useTranslate();
   const [EventButtonObj, setEventButtonObj] = useState(<EventButton to={`/event/${event?.id}/registration_form/`} text={t('register')} />);

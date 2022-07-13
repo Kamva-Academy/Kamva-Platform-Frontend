@@ -46,9 +46,9 @@ export const StatePageContext = React.createContext();
 const Workshop = ({
   workshopState,
   needUpdateState,
-  fsmId,
+  workshopId,
   stateId,
-  playerId,
+  studentPlayerId,
   teamId,
   isMentor,
 
@@ -59,6 +59,9 @@ const Workshop = ({
   mentorGetCurrentState,
   addNotification,
 }) => {
+  let { fsmId, playerId } = useParams();
+  fsmId ||= workshopId;
+  playerId ||= studentPlayerId;
   const { eventId } = useParams();
   const classes = useStyles();
 
@@ -152,11 +155,9 @@ const mapStateToProps = (state, ownProps) => ({
   workshopState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
   isMentor: state.account.userAccount.is_mentor,
-  fsmId: ownProps.match.params.fsmId || state.currentState.workshopId,
-  stateId: ownProps.match.params.stateId,
-  playerId: state.account.userAccount.is_mentor
-    ? ownProps.match.params.playerId
-    : state.currentState.playerId,
+  workshopId: state.currentState.workshopId,
+  // stateId: ownProps.match?.params?.stateId,
+  studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
 });
 

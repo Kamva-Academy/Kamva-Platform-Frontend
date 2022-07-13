@@ -13,16 +13,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 import AdapterJalali from '@date-io/date-fns-jalali';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
 import moment from "moment";
-
 import {
   getInstitutesAction,
   getUserProfileAction,
@@ -31,6 +27,8 @@ import {
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
+
+const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 function Index({
   updateUserAccount,

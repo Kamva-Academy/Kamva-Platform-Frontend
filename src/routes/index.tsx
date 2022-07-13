@@ -29,6 +29,7 @@ const Root = () => {
       <Route path="/reset_password" element={<ChangePassword />} />
       <Route path="/create_account" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
+      <Route path="/" element={<Landing />} />
 
       <Route path="/" element={<PrivateRoute />}>
         <Route
@@ -61,7 +62,6 @@ const Root = () => {
         <Route path="/event/:eventId/" element={<Event />} />
       </Route>
 
-      <Route path="/" element={<Landing />} />
       <Route path="*" element={<Landing />} />
     </Routes>
   );

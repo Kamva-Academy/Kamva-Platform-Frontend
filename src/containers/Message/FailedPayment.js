@@ -1,7 +1,7 @@
 import { Button, Container, Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   fullHeight: {
@@ -10,6 +10,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Index = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
 
   return (
@@ -39,8 +40,7 @@ const Index = () => {
             </Grid>
             {/* <Grid item>
               <Button
-                component={Link}
-                to="/events"
+                onClick={() => navigate('/events')}
                 variant="contained"
                 color="primary">
                 بازگشت

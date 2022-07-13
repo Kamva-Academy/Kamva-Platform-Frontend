@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -32,6 +32,7 @@ function Workshops({
   registrationForm,
   event,
 }) {
+  const navigate = useNavigate();
   const classes = useStyles();
   const { eventId } = useParams();
   const [amount, setAmount] = React.useState('');
@@ -85,8 +86,7 @@ function Workshops({
                 disabled={event?.event_type == 'Individual'}
                 variant="outlined"
                 fullWidth
-                component={Link}
-                to={`/event/${event?.id}/team_selection/`}>
+                onClick={() => navigate(`/event/${event?.id}/team_selection/`)}>
                 {'تیم'}
               </Button>
             </Grid>

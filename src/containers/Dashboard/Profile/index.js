@@ -2,8 +2,7 @@ import { Button, Grid, Tab, Tabs, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   getInstitutesAction,
@@ -125,7 +124,7 @@ const Index = ({
                 ))}
               </Grid>
               <Grid item>
-                <Button component={Link} to={`/event/${eventId}/`} fullWidth variant='outlined'>
+                <Button onClick={() => navigate(`/event/${eventId}/`)} fullWidth variant='outlined'>
                   {'بازگشت به رویداد'}
                 </Button>
               </Grid>

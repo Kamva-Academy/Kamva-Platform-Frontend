@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
 import {
@@ -12,24 +12,14 @@ import {
 import Layout from '../Layout';
 import Sidebar from './Sidebar';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    paddingTop: 120,
-  },
-  grid: {
-    marginTop: 40,
-  },
-}));
-
 function Workshops({
-  eventId,
   workshops,
   eventWorkshopsCount,
   event,
   isLoading,
   getEventWorkshops,
 }) {
-  const classes = useStyles();
+  const { eventId } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -40,6 +30,8 @@ function Workshops({
   useEffect(() => {
     getEventWorkshops({ eventId, pageNumber });
   }, [pageNumber]);
+
+  console.log(event)
 
   // todo: handle in a better way
   if (event?.is_user_participating == undefined) {
@@ -84,7 +76,6 @@ function Workshops({
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  eventId: ownProps.match.params.eventId,
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
   event: state.events.event,

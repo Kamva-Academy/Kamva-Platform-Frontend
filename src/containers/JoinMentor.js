@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { setMentorTokenAction } from '../redux/slices/account';
 
-const JoinMentor = ({ playerId, token, setMentorToken }) => {
+const JoinMentor = ({ setMentorToken }) => {
+  const { playerId, token } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,8 +16,6 @@ const JoinMentor = ({ playerId, token, setMentorToken }) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  playerId: ownProps.match.params.playerId,
-  token: ownProps.match.params.token,
 });
 
 export default connect(mapStateToProps, {

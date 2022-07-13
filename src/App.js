@@ -21,13 +21,13 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (redirectTo !== null) {
-      history(redirectTo);
+      navigate(redirectTo);
       if (forceRedirect) {
         navigate(redirectTo);
         navigate('/loading/');
         navigate(-1);
       } else {
-        navigate.push(redirectTo);
+        navigate(redirectTo);
       }
       initRedirect();
     }

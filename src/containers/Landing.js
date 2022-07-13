@@ -1,11 +1,12 @@
 import { Button, ButtonGroup, Container, Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import appendPreviousParams from '../utils/AppendPreviousParams';
 
 const Index = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     document.title = 'کاموا';
   }, [])
@@ -40,10 +41,10 @@ const Index = () => {
           </Grid>
           <Grid item>
             <ButtonGroup size="large" variant="contained" color="primary">
-              <Button component={Link} to={appendPreviousParams("/login")}>
+              <Button onClick={() => navigate(appendPreviousParams("/login"))}>
                 ورود
               </Button>
-              <Button component={Link} to={appendPreviousParams("/create_account")}>
+              <Button onClick={() => navigate(appendPreviousParams("/create_account"))}>
                 ثبت‌نام
               </Button>
             </ButtonGroup>
@@ -54,7 +55,7 @@ const Index = () => {
             position: 'fixed',
             bottom: 20,
             left: 20,
-          }} component={Link} to={appendPreviousParams("/about_us")}>
+          }} onClick={() => navigate(appendPreviousParams("/about_us"))}>
           درباره‌ی کاموا
         </Button>
       </Grid>

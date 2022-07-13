@@ -1,7 +1,7 @@
 import { Button, Icon, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   iconImage: {
@@ -11,12 +11,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function DashboardButton({ name, iconImage, to }) {
+  const navigate = useNavigate();
   const classes = useStyles();
   return (
     <Button
       variant="outlined"
-      component={Link}
-      to={to}
+      onClick={() => navigate(to)}
       startIcon={
         iconImage ? (
           <Icon>
