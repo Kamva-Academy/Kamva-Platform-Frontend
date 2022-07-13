@@ -2,7 +2,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import {
   getOneEventInfoAction,
@@ -38,7 +38,6 @@ const RegistrationForm = ({
   event,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
   const { eventId } = useParams();
 
   useEffect(() => {

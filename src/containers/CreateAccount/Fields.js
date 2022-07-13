@@ -1,7 +1,7 @@
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import {
   createAccountAction,
@@ -18,6 +18,7 @@ const InputFields = ({
   addNotification,
   token,
 }) => {
+  const navigate = useNavigate();
   const [buttonText, setButtonText] = useState('دریافت کد');
   const [data, setData] = useState({
     phoneNumber: '',
@@ -30,9 +31,9 @@ const InputFields = ({
   const eventId = urlParams.get('private_event_enter');
   if (token) {
     if (eventId) {
-      return <Redirect to={`/event/${eventId}/`} />;
+      navigate(`/event/${eventId}/`);
     } else {
-      return <Redirect to="/events/" />;
+      navigate('/events/');
     }
   }
 

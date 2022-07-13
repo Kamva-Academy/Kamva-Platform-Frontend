@@ -9,7 +9,7 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { loginAction } from '../redux/slices/account';
 import { addNotificationAction } from '../redux/slices/notifications';
@@ -29,6 +29,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
   addNotification,
   token,
 }) => {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     password: '',
     username: '',
@@ -39,9 +40,9 @@ const LoginPage: FC<LoginPagePropsType> = ({
 
   if (token) {
     if (eventId) {
-      return <Redirect to={`/event/${eventId}/`} />;
+      navigate(`/event/${eventId}/`);
     } else {
-      return <Redirect to="/events/" />;
+      navigate('/events/');
     }
   }
 

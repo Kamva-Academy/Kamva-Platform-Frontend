@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { StatePageContext } from '../../../../containers/Workshop';
 import {
@@ -23,7 +23,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
     : outwardEdges.filter((edge) => edge.is_visible);
   // const edges = outwardEdges;
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const changeState = (edge) => {
     if (isMentor) {
@@ -42,7 +42,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
 
   const handleClick = () => {
     if (edges.length === 0) {
-      history.push('/events/');
+      navigate('/events/');
     }
     if (edges.length === 1) {
       changeState(edges[0]);

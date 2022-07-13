@@ -1,7 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { useHistory } from 'react-router';
-import { useLocation } from "react-router-dom";
-
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {

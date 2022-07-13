@@ -2,7 +2,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import AreYouSure from '../../components/Dialog/AreYouSure';
 import Stepper from '../../components/SpecialComponents/RegistrationProcess/Stepper';
@@ -44,7 +44,7 @@ const RegistrationForm = ({
   isFetching,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { eventId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
   const [answers, setAnswers] = useState([]);
@@ -57,7 +57,7 @@ const RegistrationForm = ({
 
 
   if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
-    history.push(`/event/${eventId}/status/`);
+    navigate(`/event/${eventId}/status/`);
   }
 
   const doRegister = () => {

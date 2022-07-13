@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { setMentorTokenAction } from '../redux/slices/account';
 
 const JoinMentor = ({ playerId, token, setMentorToken }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMentorToken({ token });
-    history.push(`/watch/${playerId}/`);
+    navigate(`/watch/${playerId}/`);
   }, []);
   return <div></div>;
 };

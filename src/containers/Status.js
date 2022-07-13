@@ -2,7 +2,7 @@ import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Stepper from '../components/SpecialComponents/RegistrationProcess/Stepper';
 import {
@@ -41,7 +41,7 @@ const Payment = ({
   event,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { eventId } = useParams();
   const [discountCode, setDiscountCode] = useState();
   const [price, setPrice] = useState(0);
@@ -87,12 +87,12 @@ const Payment = ({
   };
 
   if (event?.is_user_participating) {
-    history.push(`/event/${eventId}/`);
+    navigate(`/event/${eventId}/`);
   }
 
 
   if (event?.user_registration_status && !['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
-    history.push('/events/');
+    navigate('/events/');
   }
 
   let step = 1;

@@ -7,10 +7,9 @@ import { SnackbarProvider } from 'notistack';
 import { CacheProvider } from "@emotion/react";
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import createEmotionCache from './configs/createEmotionCache'
 import selectTheme from './configs/themes';
-
 import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
@@ -19,20 +18,20 @@ import translations from './translations';
 
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     if (redirectTo !== null) {
-      history.push(redirectTo);
+      history(redirectTo);
       if (forceRedirect) {
-        history.push(redirectTo);
-        history.push('/loading/');
-        history.goBack();
+        navigate(redirectTo);
+        navigate('/loading/');
+        navigate(-1);
       } else {
-        history.push(redirectTo);
+        navigate.push(redirectTo);
       }
       initRedirect();
     }
-  }, [redirectTo, forceRedirect, initRedirect, history]);
+  }, [redirectTo, forceRedirect, initRedirect, navigate]);
 
   useEffect(() => {
     initParseServer();
@@ -57,6 +56,7 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
   return (
     <IntlProvider translations={translations}>
       <CacheProvider value={createEmotionCache(dir)}>
+        {/* todo: fix theme */}
         <ThemeProvider theme={selectTheme(dir)}>
           <SnackbarProvider>
             <Loading />

@@ -1,6 +1,6 @@
 export const Workshop = {
   colors: {
-    primary: '#2185d0',
+    primary: '#c3d4e0',
     primaryLight: '#5E60CE',
     primaryDark: '#7400B8',
     secondary: '#1361A4',

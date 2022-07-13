@@ -2,8 +2,8 @@ import { Container } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Routes, useNavigate } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import AppBar from '../components/Appbar/ResponsiveAppBar';
 import { getUserProfileAction } from '../redux/slices/account';
@@ -37,7 +37,7 @@ const Layout = ({
   ...props
 }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   if (
@@ -54,7 +54,7 @@ const Layout = ({
   //         'پیش از هر چیز، لطفاً موارد الزامی در پروفایل رو تکمیل کن! موارد الزامی با ستاره مشخص شده‌اند.',
   //       type: 'error',
   //     });
-  //     history.push('/profile/');
+  //     navigate('/profile/');
   //   }
   // }, [userProfile]);
 
@@ -65,10 +65,10 @@ const Layout = ({
   return (
     <>
       <div className={classes.background} />
-      <Switch>
+      <Routes>
         <Route path={'/event/:eventId/'} render={() => <AppBar mode='EVENT' position="relative" />} />
         <Route path={'/'} render={() => <AppBar mode={appbarMode} position="relative" />} />
-      </Switch>
+      </Routes>
       <Container maxWidth='lg' className={classes.container}>{props.children}</Container>
     </>
   );

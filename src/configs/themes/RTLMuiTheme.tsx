@@ -5,7 +5,7 @@ import theme from './theme';
 import typography from './typography';
 
 const RTLMuiTheme = createTheme({
-  direction: 'rtl',
+  // direction: 'rtl',
   ...theme(Workshop),
   typography
 });

@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
 import {
@@ -30,11 +30,11 @@ function Workshops({
   getEventWorkshops,
 }) {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
 
   if (event?.is_user_participating != undefined && !event?.is_user_participating) {
-    history.push(`/event/${eventId}/registration_form/`);
+    navigate(`/event/${eventId}/registration_form/`);
   }
 
   useEffect(() => {

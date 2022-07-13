@@ -2,7 +2,7 @@ import { Button, Grid, Tab, Tabs, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Link, useParams } from 'react-router-dom';
 
 import {
@@ -73,7 +73,7 @@ const SECTIONS = {
 const Index = ({
   event,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { eventId, section } = useParams();
   const TabComponent = tabs[SECTIONS[section]].component;
 
@@ -97,7 +97,7 @@ const Index = ({
               orientation="vertical"
               variant="scrollable"
               value={SECTIONS[section]}
-              onChange={(event, newValue) => history.push(eventId ? `/event/${eventId}/profile/${tabs[newValue].name}` : `/profile/${tabs[newValue].name}`)}>
+              onChange={(event, newValue) => navigate(eventId ? `/event/${eventId}/profile/${tabs[newValue].name}` : `/profile/${tabs[newValue].name}`)}>
               {
                 tabs.map((tab, index) => {
                   return (

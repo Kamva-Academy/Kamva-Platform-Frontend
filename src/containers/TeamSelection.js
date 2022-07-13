@@ -20,7 +20,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ClearIcon from '@mui/icons-material/Clear';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import AreYouSure from '../components/Dialog/AreYouSure';
 import MakeInvitation from '../components/Dialog/MakeInvitation';
@@ -111,7 +111,7 @@ const TeamSelection = ({
   receipt,
 }) => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { eventId } = useParams();
   const [isCreateInvitationDialogOpen, changeCreateInvitationDialogStatus] =
     React.useState(false);
@@ -143,7 +143,7 @@ const TeamSelection = ({
   }, [receipt]);
 
   if (event?.user_registration_status == 'NotRegistered') {
-    history.push(`/event/${eventId}/registration_form/`);
+    navigate(`/event/${eventId}/registration_form/`);
   }
 
   useEffect(() => {

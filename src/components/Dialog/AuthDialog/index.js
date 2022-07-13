@@ -14,8 +14,7 @@ import { Close as CloseIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { loginAction } from '../../../redux/slices/account';
 import { addNotificationAction } from '../../../redux/slices/notifications';
@@ -56,11 +55,11 @@ function AuthDialog({
   const classes = useStyles();
   const t = useTranslate();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (open && isLoggedIn) {
-      history.push('/events/');
+      navigate('/events/');
     }
   }, [isLoggedIn, open]);
 
