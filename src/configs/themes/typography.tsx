@@ -3,14 +3,14 @@ import { TypographyOptions } from '@mui/material/styles/createTypography';
 const typography: TypographyOptions = {
   fontFamily: "iranyekan",
   h1: {
-    fontWeight: 900,
-    fontSize: '33px',
-    lineHeight: '40px',
+    fontWeight: 1000,
+    fontSize: '56px',
+    lineHeight: '60px',
   },
   h2: {
     fontWeight: 800,
-    fontSize: '26px',
-    lineHeight: '32px',
+    fontSize: '32px',
+    lineHeight: '36px',
   },
   h3: {
     fontWeight: 500,

@@ -2,7 +2,7 @@ import './configs/styles/App.css';
 
 import React, { useEffect } from 'react';
 import { CssBaseline, LinearProgress } from '@mui/material';
-import { ThemeProvider } from '@mui/styles';
+import { ThemeProvider } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 import { CacheProvider } from "@emotion/react";
 import { connect } from 'react-redux';
@@ -56,8 +56,7 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
   return (
     <IntlProvider translations={translations}>
       <CacheProvider value={createEmotionCache(dir)}>
-        {/* todo: fix theme */}
-        <ThemeProvider theme={selectTheme(dir)}>
+s        <ThemeProvider theme={selectTheme(dir)}>
           <SnackbarProvider>
             <Loading />
             <Notifier />

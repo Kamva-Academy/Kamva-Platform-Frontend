@@ -1,6 +1,6 @@
 export const Workshop = {
   colors: {
-    primary: '#c3d4e0',
+    primary: '#0088aa',
     primaryLight: '#5E60CE',
     primaryDark: '#7400B8',
     secondary: '#1361A4',
@@ -18,24 +18,3 @@ export const Workshop = {
     cyan: '#27dcf3',
   },
 };
-
-export const ZeroJourneyer = {
-  colors: {
-    primary: '#603f49',
-    primaryLight: '#966f7b',
-    primaryDark: '#542a36',
-    secondary: '#0D5A6B',
-    inheritDefault1: '#fefefe',
-    inheritDefault2: '#f8f9ff',
-    second: '#070919',
-    indigo: '#7420ff',
-    purple: '#793de6',
-    pink: '#fc26a4',
-    red: '#eb1748',
-    orange: '#f4772e',
-    yellow: '#ffc926',
-    green: '#42a922',
-    teal: '#18e1a5',
-    cyan: '#27dcf3',
-  },
-}
