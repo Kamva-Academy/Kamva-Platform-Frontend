@@ -31,8 +31,6 @@ function Workshops({
     getEventWorkshops({ eventId, pageNumber });
   }, [pageNumber]);
 
-  console.log(event)
-
   // todo: handle in a better way
   if (event?.is_user_participating == undefined) {
     return (<Layout></Layout>)

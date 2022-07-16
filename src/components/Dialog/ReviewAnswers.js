@@ -60,8 +60,6 @@ function Index({
     }
   }, [open])
 
-  console.log(answers)
-
   return (
     <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <DialogTitle>

@@ -49,8 +49,6 @@ function Index({
 
   useEffect(() => {
     if (userProfile?.birth_date) {
-      console.log(userProfile.birth_date)
-
       setBirthDate(moment(userProfile.birth_date));
     }
   }, [userProfile])
@@ -98,8 +96,6 @@ function Index({
   if (!userProfile) {
     return <></>;
   }
-
-  console.log(moment(birthDate))
 
   return (
     <>

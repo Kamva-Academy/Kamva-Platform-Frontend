@@ -26,8 +26,6 @@ const UsersAvatar = () => {
     setAnchorEl(null);
   };
 
-  console.log(myTeam?.name)
-
   return <>
     <Tooltip
       onClick={handleClick}
