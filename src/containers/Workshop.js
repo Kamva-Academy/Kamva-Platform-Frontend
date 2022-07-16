@@ -2,7 +2,7 @@ import { Fab, Toolbar } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import Container from '@mui/material/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -64,6 +64,7 @@ const Workshop = ({
   playerId ||= studentPlayerId;
   const { eventId } = useParams();
   const classes = useStyles();
+  const subscriberRef = useRef(null);
 
   useEffect(() => {
     if (fsmId) {
@@ -119,16 +120,20 @@ const Workshop = ({
     }
   }, [parseTeamState]);
 
-  useEffect(async () => {
-    if (teamId) {
-      const subscription = await getChangeTeamStateSubscription({
+  useEffect(() => {
+    const subscribe = async (teamId) => {
+      const subscriber = await getChangeTeamStateSubscription({
         uuid: teamId,
       });
-      subscription.on('create', onUpdateStateFromParse);
-      subscription.on('update', onUpdateStateFromParse);
-      return () => {
-        subscription.unsubscribe();
-      };
+      subscriber.on('create', onUpdateStateFromParse);
+      subscriber.on('update', onUpdateStateFromParse);
+      subscriberRef.current = subscriber;
+    }
+    if (teamId) {
+      subscribe(teamId);
+    }
+    return () => {
+      subscriberRef.current?.unsubscribe();
     }
   }, [teamId]);
 
