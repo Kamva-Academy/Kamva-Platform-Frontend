@@ -10,7 +10,7 @@ import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
 import JoinMentor from '../containers/JoinMentor';
 import Landing from '../containers/Landing';
-import Login from '../containers/Login';
+import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
 import RegistrationForm from '../containers/RegistrationForm';

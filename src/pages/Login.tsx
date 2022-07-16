@@ -6,11 +6,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { loginAction } from '../redux/slices/account';
 import { addNotificationAction } from '../redux/slices/notifications';
 import appendPreviousParams from '../utils/AppendPreviousParams';
@@ -38,13 +36,16 @@ const LoginPage: FC<LoginPagePropsType> = ({
   const urlParams = new URLSearchParams(window.location.search);
   const eventId = urlParams.get('private_event_enter');
 
-  if (token) {
-    if (eventId) {
-      navigate(`/event/${eventId}/`);
-    } else {
-      navigate('/events/');
+  useEffect(() => {
+    if (token) {
+      if (eventId) {
+        navigate(`/event/${eventId}/`);
+      } else {
+        navigate('/events/');
+      }
     }
-  }
+  }, [eventId, navigate, token])
+
 
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);

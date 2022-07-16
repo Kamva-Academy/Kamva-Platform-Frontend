@@ -1,8 +1,7 @@
 import { Button, Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-
 import {
   createAccountAction,
   getVerificationCodeAction,
@@ -29,13 +28,16 @@ const InputFields = ({
 
   const urlParams = new URLSearchParams(window.location.search);
   const eventId = urlParams.get('private_event_enter');
-  if (token) {
-    if (eventId) {
-      navigate(`/event/${eventId}/`);
-    } else {
-      navigate('/events/');
+
+  useEffect(() => {
+    if (token) {
+      if (eventId) {
+        navigate(`/event/${eventId}/`);
+      } else {
+        navigate('/events/');
+      }
     }
-  }
+  }, [eventId, navigate, token])
 
   const putData = (event) => {
     setData({
