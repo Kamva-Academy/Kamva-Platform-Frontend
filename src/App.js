@@ -56,7 +56,7 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
   return (
     <IntlProvider translations={translations}>
       <CacheProvider value={createEmotionCache(dir)}>
-s        <ThemeProvider theme={selectTheme(dir)}>
+        <ThemeProvider theme={selectTheme(dir)}>
           <SnackbarProvider>
             <Loading />
             <Notifier />
