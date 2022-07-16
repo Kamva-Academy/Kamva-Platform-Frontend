@@ -77,7 +77,7 @@ function Workshops({
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
               <Typography variant="h5">
-                {`به رویداد ${event?.name || ''} خوش آمدید!`}
+                {`به ${event?.name || ''} خوش آمدید!`}
               </Typography>
             </Grid>
             <Grid item xs={12}>
