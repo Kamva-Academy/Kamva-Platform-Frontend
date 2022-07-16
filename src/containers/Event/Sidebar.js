@@ -59,7 +59,7 @@ function Workshops({
   const doGetCertificate = () => {
     getCertificate({ registrationReceiptId: event?.registration_receipt }).then(
       (action) => {
-        if (action.meta.requestStatus == 'fulfilled') {
+        if (action.meta.requestStatus === 'fulfilled') {
           window.open(action.payload.response.certificate, '_blank');
         }
       }
