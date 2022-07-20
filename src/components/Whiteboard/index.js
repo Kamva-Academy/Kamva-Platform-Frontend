@@ -1,5 +1,5 @@
 import makeStyles from '@mui/styles/makeStyles';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { StatePageContext } from '../../containers/Workshop';
@@ -45,24 +45,28 @@ function Whiteboard({
   getWhiteboardNodes,
 }) {
   const classes = useStyles();
-
+  const subscriberRef = useRef(null);
   const [stage, setStage] = useState();
 
   const { teamId } = useContext(StatePageContext);
 
-  useEffect(async () => {
-    if (teamId) {
+  useEffect(() => {
+    const subscribe = async (teamId) => {
       getWhiteboardNodes({ uuid: teamId });
-      const subscription = await getWhiteboardActionSubscription({
+      const subscriber = await getWhiteboardActionSubscription({
         uuid: teamId,
       });
-      subscription.on('create', (whiteboardAction) =>
+      subscriber.on('create', (whiteboardAction) =>
         offlineUpdateWhiteboard(whiteboardAction.get('action'))
       );
-      return () => {
-        subscription.unsubscribe();
-      };
+      subscriberRef.current = subscriber;
     }
+    if (teamId) {
+      subscribe(teamId);
+    }
+    return () => {
+      subscriberRef.current?.unsubscribe();
+    };
   }, [teamId]);
 
   return (
