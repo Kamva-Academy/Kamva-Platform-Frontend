@@ -309,7 +309,7 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12}>
           <TextField
             fullWidth
-            helperText='جوایز و یادگاری‌ها به این آدرس پست می‌شوند.'
+            helperText='جوایز و یادگاری‌ها به این آدرس ارسال می‌شوند.'
             value={profile?.address}
             name="address"
             multiline

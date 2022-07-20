@@ -1,5 +1,4 @@
 import { Container } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Routes, useNavigate, useParams } from 'react-router-dom';
@@ -8,25 +7,6 @@ import { Route, Switch } from 'react-router-dom';
 import AppBar from '../components/Appbar/ResponsiveAppBar';
 import { getUserProfileAction } from '../redux/slices/account';
 import { addNotificationAction } from '../redux/slices/notifications';
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: 'flex',
-    marginTop: theme.spacing(4),
-    justifyContent: 'center',
-    marginRight: 'auto !important',
-    marginLeft: 'auto !important',
-  },
-  background: {
-    height: '100vh',
-    width: '100%',
-    position: 'fixed',
-    top: '0',
-    left: '0',
-    backgroundColor: '#EBECED',
-    zIndex: '-10000',
-  },
-}));
 
 const Layout = ({
   appbarMode = 'STUDENT_DASHBOARD',
@@ -37,7 +17,6 @@ const Layout = ({
   ...props
 }) => {
   const { eventId } = useParams();
-  const classes = useStyles();
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -65,12 +44,25 @@ const Layout = ({
 
   return (
     <>
-      <div className={classes.background} />
+      <div
+        style={{
+          width: '100%',
+          position: 'fixed',
+          top: '0',
+          left: '0',
+          backgroundColor: '#EBECED',
+        }} />
       {eventId ? <AppBar mode='EVENT' position="relative" />
-        :
-        <AppBar mode={appbarMode} position="relative" />
+        : <AppBar mode={appbarMode} position="relative" />
       }
-      <Container maxWidth='lg' className={classes.container}>{props.children}</Container>
+      <Container maxWidth='lg'
+        sx={{
+          display: 'flex',
+          marginTop: 4,
+          justifyContent: 'center',
+          marginRight: 'auto !important',
+          marginLeft: 'auto !important',
+        }}>{props.children}</Container>
     </>
   );
 };

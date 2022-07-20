@@ -1,5 +1,4 @@
-import { Button, Grid, Paper, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Box, Button, Grid, Paper, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -14,14 +13,6 @@ import {
 } from '../../redux/slices/events';
 import Layout from '../Layout';
 import Info from './Info';
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontSize: 40,
-    fontWeight: 600,
-    textShadow: '1px 1px #dbd9d9',
-  },
-}));
 
 const ANSWER_TYPES = {
   SmallAnswerProblem: 'SmallAnswer',
@@ -43,7 +34,6 @@ const RegistrationForm = ({
   submitRegistrationForm,
   isFetching,
 }) => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { eventId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
@@ -100,87 +90,67 @@ const RegistrationForm = ({
 
   return (
     <Layout>
-      <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
-
-        <Grid item xs={12}>
-          <Info />
-        </Grid>
-
-        <Grid item xs={12}>
-          <Stepper />
-        </Grid>
-
-        <Grid item xs={12}>
-          <Typography align="center" className={classes.title}>
-            {'فرم ثبت‌نام'}
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Grid
-            style={{ padding: '20px' }}
-            component={Paper}
-            container
-            justifyContent="center"
-            alignItems="center"
-            spacing={2}
-          >
-            {registrationForm?.widgets?.map((widget) => (
-              <Grid item key={widget.id} xs={12}>
-                <Widget
-                  disabled={isFetching}
-                  pushAnswer={pushAnswer(
-                    widget?.id,
-                    ANSWER_TYPES[widget?.widget_type]
-                  )}
-                  widget={widget}
-                />
-              </Grid>
-            ))}
-            <Grid item xs={12}>
-              {event?.user_registration_status == 'DeadlineMissed' ?
+      <Stack spacing={3}>
+        <Info />
+        <Stepper />
+        <Stack
+          component={Paper}
+          sx={{ padding: 2 }}
+          spacing={2}
+        >
+          {registrationForm?.widgets?.map((widget) => (
+            <Box key={widget.id}>
+              <Widget
+                disabled={isFetching}
+                pushAnswer={pushAnswer(
+                  widget?.id,
+                  ANSWER_TYPES[widget?.widget_type]
+                )}
+                widget={widget}
+              />
+            </Box>
+          ))}
+          {event?.user_registration_status == 'DeadlineMissed' ?
+            <Typography variant='h4' color='error' align="center" gutterBottom>
+              {'مهلت ثبت‌نام در رویداد پایان یافته است.'}
+            </Typography>
+            : (
+              event?.user_registration_status == 'NotPermitted' ? (
                 <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'مهلت ثبت‌نام در رویداد پایان یافته است.'}
+                  {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
                 </Typography>
-                : (
-                  event?.user_registration_status == 'NotPermitted' ? (
-                    <Typography variant='h4' color='error' align="center" gutterBottom>
-                      {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
-                    </Typography>
-                  ) : (
-                    !checkPermission(registrationForm?.audience_type, userProfile) ? (
-                      <Typography variant='h4' color='error' align="center" gutterBottom>
-                        {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
-                        <Link to={`/event/${eventId}/profile/personal/`}>{'اینجا'}</Link>
-                        {' تکمیل کنید.'}
-                      </Typography>
-                    ) : (
-                      (event?.user_registration_status == 'GradeNotAvailable' ||
-                        event?.user_registration_status == 'StudentshipDataIncomplete') &&
-                      <Typography variant='h4' color='error' align="center" gutterBottom>
-                        {'لطفاً از '}
-                        <Link to={`/event/${eventId}/profile/student/`}>{'اینجا'}</Link>
-                        {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
-                      </Typography>
-                    )))}
-              <Button
-                disabled={event?.user_registration_status == 'DeadlineMissed' ||
-                  event?.user_registration_status == 'NotPermitted' ||
-                  event?.user_registration_status == 'GradeNotAvailable' ||
-                  event?.user_registration_status == 'StudentshipDataIncomplete' ||
-                  !checkPermission(registrationForm?.audience_type, userProfile)}
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setDialogStatus(true);
-                }}>
-                {'ثبت'}
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+              ) : (
+                !checkPermission(registrationForm?.audience_type, userProfile) ? (
+                  <Typography variant='h4' color='error' align="center" gutterBottom>
+                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
+                    <Link to={`/event/${eventId}/profile/personal/`}>{'اینجا'}</Link>
+                    {' تکمیل کنید.'}
+                  </Typography>
+                ) : (
+                  (event?.user_registration_status == 'GradeNotAvailable' ||
+                    event?.user_registration_status == 'StudentshipDataIncomplete') &&
+                  <Typography variant='h4' color='error' align="center" gutterBottom>
+                    {'لطفاً از '}
+                    <Link to={`/event/${eventId}/profile/student/`}>{'اینجا'}</Link>
+                    {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
+                  </Typography>
+                )))}
+          <Button
+            disabled={event?.user_registration_status == 'DeadlineMissed' ||
+              event?.user_registration_status == 'NotPermitted' ||
+              event?.user_registration_status == 'GradeNotAvailable' ||
+              event?.user_registration_status == 'StudentshipDataIncomplete' ||
+              !checkPermission(registrationForm?.audience_type, userProfile)}
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              setDialogStatus(true);
+            }}>
+            {'ثبت'}
+          </Button>
+        </Stack>
+      </Stack>
       <AreYouSure
         open={isDialogOpen}
         handleClose={() => {
