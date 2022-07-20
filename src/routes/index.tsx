@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import AboutUs from '../containers/AboutUs';
 import ChangePassword from '../containers/ChangePassword';
-import CreateAccount from '../containers/CreateAccount';
+import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../containers/Dashboard/Events';
 import Profile from '../containers/Dashboard/Profile';
