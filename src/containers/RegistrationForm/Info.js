@@ -1,9 +1,8 @@
-import { Button, Grid, Paper, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Stack, Button, Grid, Paper, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-
+import useWidth from '../../utils/UseWidth';
 import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
@@ -11,87 +10,64 @@ import {
 } from '../../redux/slices/events';
 import { toPersianNumber } from '../../utils/translateNumber';
 
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: '100%',
-    height: '100%',
-  },
-  noPadding: {
-    padding: '0px !important',
-  },
-  eventImage: {
-    borderTopLeftRadius: '5px',
-    borderBottomLeftRadius: '5px',
-    [theme.breakpoints.down('sm')]: {
-      borderBottomLeftRadius: '0px',
-      borderTopRightRadius: '5px',
-    },
-    width: '100%',
-    objectFit: 'cover',
-  },
-}));
-
-
 const RegistrationForm = ({
   getOneEventInfo,
   event,
 }) => {
-  const classes = useStyles();
   const { eventId } = useParams();
+  const width = useWidth();
 
   useEffect(() => {
     getOneEventInfo({ eventId });
   }, []);
 
   return (
-    <Grid
-      className={classes.noPadding}
+    <Stack
+      direction={{ xs: 'column', sm: 'row' }}
+      sx={{
+        padding: '0px !important',
+      }}
       component={Paper}
-      container
+      alignItems='center'
       justifyContent="space-between"
-      alignItems="center"
       spacing={2}>
-      <Grid
-        className={classes.noPadding}
-        item
-        container
-        justifyContent="center"
-        alignItems="center"
-        xs={12}
-        sm={5}>
-        <img
-          src={event?.cover_page}
-          alt=""
-          className={classes.eventImage}
-        />
-      </Grid>
-      <Grid item container direction="column" xs={12} sm={7} spacing={1}>
-        <Grid item>
-          {event?.name && (
-            <Typography gutterBottom align="center" variant="h1">{event?.name}</Typography>
-          )}
-        </Grid>
-        <Grid item>
-          <Typography align="center">{event?.description}</Typography>
-        </Grid>
-        <Grid item>
-          {event?.event_type == 'Team' && (
-            <Typography align="center">{`شرکت در این رویداد در قالب تیم‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
-          )}
-          {event?.event_type == 'Individual' && (
-            <Typography align="center">{'شرکت در این رویداد به صورت فردی است.'}</Typography>
-          )}
-        </Grid>
-        <Grid item>
-          {event?.merchandise?.price > 0 ? (
-            <Typography align="center">{`هزینه‌ی ثبت‌نام برای هر نفر ${toPersianNumber(event?.merchandise?.price)} تومان است.`}</Typography>
-          ) : (
-            <Typography align="center">{'هزینه‌ی ثبت‌نام رایگان است!'}</Typography>
-          )}
-        </Grid>
-      </Grid>
-    </Grid>
+
+      <img
+
+        src={event?.cover_page}
+        alt=""
+        style={width == 'xs' ? {
+          borderTopLeftRadius: 5,
+          borderTopRightRadius: 5,
+          width: '100%',
+          objectFit: 'cover',
+        } : {
+          borderTopRightRadius: 5,
+          borderBottomRightRadius: 5,
+          maxWidth: '40%',
+          objectFit: 'cover',
+        }}
+      />
+
+      <Stack spacing={2}>
+        {event?.name && (
+          <Typography gutterBottom align="center" variant="h1">{event?.name}</Typography>
+        )}
+        <Typography align="center">{event?.description}</Typography>
+        {event?.event_type == 'Team' && (
+          <Typography align="center">{`شرکت در این رویداد در قالب تیم‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
+        )}
+        {event?.event_type == 'Individual' && (
+          <Typography align="center">{'شرکت در این رویداد به صورت فردی است.'}</Typography>
+        )}
+        {event?.merchandise?.price > 0 ? (
+          <Typography align="center">{`هزینه‌ی ثبت‌نام برای هر نفر ${toPersianNumber(event?.merchandise?.price)} تومان است.`}</Typography>
+        ) : (
+          <Typography align="center">{'هزینه‌ی ثبت‌نام رایگان است!'}</Typography>
+        )}
+        <div />
+      </Stack>
+    </Stack>
 
   );
 };

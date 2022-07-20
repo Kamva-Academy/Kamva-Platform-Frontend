@@ -30,7 +30,7 @@ import { toEnglishNumber } from '../../../utils/translateNumber';
 import { PersonalProfile } from '../../../types/profile';
 import { Moment } from 'jalali-moment';
 
-const PROFILE_PICTURE = process.env.PUBLIC_URL + '/ss/profile.png';
+const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 type PersonalProfilePropsType = {
   updateUserAccount: any;
@@ -64,8 +64,6 @@ const Index: FC<PersonalProfilePropsType> = ({
       setProfile(userProfile);
     }
   }, [userProfile, userProfile?.profile_picture])
-
-  console.log(userProfile);
 
   const isJustDigits = (number) => {
     var regex = new RegExp(`\\d{${number.length}}`);
@@ -201,20 +199,10 @@ const Index: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             disabled={true}
+            value={profile?.phone_number}
             name="phone_number"
             inputProps={{ className: 'ltr-input' }}
             label="شماره موبایل"
-          />
-        </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            value={profile?.email}
-            name="email"
-            onChange={handleProfileChange}
-            inputProps={{ className: 'ltr-input' }}
-            label="ایمیل"
           />
         </Grid>
 
@@ -233,6 +221,17 @@ const Index: FC<PersonalProfilePropsType> = ({
               />
             </LocalizationProvider>
           </FormControl>
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            value={profile?.email}
+            name="email"
+            onChange={handleProfileChange}
+            inputProps={{ className: 'ltr-input' }}
+            label="ایمیل"
+          />
         </Grid>
 
         <Grid item xs={12}>
@@ -310,7 +309,7 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12}>
           <TextField
             fullWidth
-            helperText='جوایز و یادگاری‌ها به این آدرس پست می‌شوند.'
+            helperText='جوایز و یادگاری‌ها به این آدرس ارسال می‌شوند.'
             value={profile?.address}
             name="address"
             multiline
