@@ -91,7 +91,6 @@ function Drawing({
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
     <div
       className="drawing"
       style={{
