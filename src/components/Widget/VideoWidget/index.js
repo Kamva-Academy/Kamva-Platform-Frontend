@@ -11,7 +11,6 @@ const useStyles = makeStyles(() => ({
 
 const VideoWidget = ({ link = '' }) => {
   const classes = useStyles();
-  // eslint-disable-next-line jsx-a11y/media-has-caption
   return <video controls src={link} className={classes.videoWidget} />;
 };
 
