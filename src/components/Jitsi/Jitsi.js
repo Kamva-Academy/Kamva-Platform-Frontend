@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import useWidth from '../../utils/UseWidth';
 import { StatePageContext } from '../../containers/Workshop';
 import * as jitsiFuncs from './connection/jitsi';
+import { JitsiMeeting } from '@jitsi/react-sdk'
 
 const useStyles = makeStyles((theme) => ({
   draggableArea: {
@@ -42,26 +43,26 @@ function Jitsi({ handleClose, displayName = 'User' }) {
 
   const { teamId } = useContext(StatePageContext);
 
-  const refresh = useCallback(() => {
-    if (teamId) {
-      jitsiFuncs.destroy();
-      jitsiFuncs.initJitsi({
-        roomName: 'ra_' + teamId,
-        parentNode: jitsiElement.current,
-        height: width === 'xs' ? '100%' : '300px',
-        userInfo: {
-          displayName,
-        },
-      });
-    }
-  }, [width, displayName, teamId]);
+  // const refresh = useCallback(() => {
+  //   if (teamId) {
+  //     jitsiFuncs.destroy();
+  //     jitsiFuncs.initJitsi({
+  //       roomName: 'ra_' + teamId,
+  //       parentNode: jitsiElement.current,
+  //       height: width === 'xs' ? '100%' : '300px',
+  //       userInfo: {
+  //         displayName,
+  //       },
+  //     });
+  //   }
+  // }, [width, displayName, teamId]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      refresh();
-    }, 100);
-    return jitsiFuncs.destroy;
-  }, [refresh]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     refresh();
+  //   }, 100);
+  //   return jitsiFuncs.destroy;
+  // }, [refresh]);
 
   return (
     <>
@@ -69,13 +70,66 @@ function Jitsi({ handleClose, displayName = 'User' }) {
         <IconButton size="small" onClick={handleClose}>
           <CancelIcon color="error" />
         </IconButton>
-        <div className={classes.rightItems}>
+        {/* <div className={classes.rightItems}>
           <IconButton size="small" onClick={refresh}>
             <RefreshIcon />
           </IconButton>
-        </div>
+        </div> */}
       </div>
-      <div className={classes.jitsi} ref={jitsiElement}></div>
+      <div className={classes.jitsi} ref={jitsiElement}>
+        <JitsiMeeting
+          // domain={YOUR_DOMAIN}
+          roomName={'ra_' + teamId}
+          configOverwrite={{
+            disableModeratorIndicator: true,
+            startScreenSharing: true,
+            enableEmailInStats: false,
+            disableDeepLinking: true,
+            prejoinPageEnabled: false,
+            startAudioOnly: false,
+            startWithAudioMuted: true,
+            startWithVideoMuted: true,
+          }}
+          interfaceConfigOverwrite={{
+            DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+            SHOW_CHROME_EXTENSION_BANNER: false,
+            RECENT_LIST_ENABLED: false,
+            VIDEO_QUALITY_LABEL_DISABLED: true,
+            CONNECTION_INDICATOR_DISABLED: true,
+            TOOLBAR_ALWAYS_VISIBLE: false,
+            DEFAULT_BACKGROUND: '#eaeaea',
+            LANG_DETECTION: true,
+            HIDE_INVITE_MORE_HEADER: true,
+            DISPLAY_WELCOME_PAGE_CONTENT: false,
+            GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
+            SHOW_JITSI_WATERMARK: false,
+            APP_NAME: 'Kamva Meet',
+            NATIVE_APP_NAME: 'Kamva Meet',
+            MOBILE_APP_PROMO: false,
+            PROVIDER_NAME: 'Kamva',
+            TOOLBAR_BUTTONS: [
+              'microphone',
+              'camera',
+              // 'closedcaptions',
+              'desktop',
+              'fullscreen',
+              // 'fodeviceselection',
+              'chat',
+              // 'etherpad',
+              // 'videoquality',
+              // 'tileview',
+            ],
+          }}
+          userInfo={{
+            displayName,
+          }}
+          onApiReady={(externalApi) => {
+            // here you can attach custom event listeners to the Jitsi Meet External API
+            // you can also store it locally to execute commands
+          }}
+          getIFrameRef={(iframeRef) => { iframeRef.style.height = width === 'xs' ? '100%' : '300px' }}
+        />
+      </div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import { Paper, Box } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 import React from 'react';
@@ -8,8 +8,9 @@ import Jitsi from './Jitsi';
 
 const useStyle = makeStyles((theme) => ({
   root: {
+    borderRadius: 5,
     position: 'fixed',
-    left: 10,
+    right: 10,
     bottom: 10,
     width: 500,
     zIndex: 200,
@@ -33,7 +34,7 @@ function DraggableJitsi({ open, handleClose }) {
   const width = useWidth();
 
   return (
-    <div className={clsx(classes.root, !open && classes.hidden)}>
+    <Box className={clsx(classes.root, !open && classes.hidden)}>
       <Draggable
         handle={
           width === 'xs' ? '#sadfkjasdklfkjasdf' : '#jitsi-draggable-area'
@@ -42,7 +43,7 @@ function DraggableJitsi({ open, handleClose }) {
           <Jitsi handleClose={handleClose} />
         </Paper>
       </Draggable>
-    </div>
+    </Box>
   );
 }
 

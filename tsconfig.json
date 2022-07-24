@@ -23,6 +23,6 @@
     "strictNullChecks": false,
   },
   "include": [
-    "src"
+    "src", "types/font.d.ts"
   ]
 }
