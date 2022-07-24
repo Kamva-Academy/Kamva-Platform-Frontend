@@ -64,6 +64,12 @@ function Jitsi({ handleClose, displayName = 'User' }) {
   //   return jitsiFuncs.destroy;
   // }, [refresh]);
 
+  if (!teamId) {
+    return <>bad :(</>
+  }
+
+  // https://community.jitsi.org/t/reducing-resource-usage-to-improve-performance-both-client-side-and-server-side/39891
+
   return (
     <>
       <div id="jitsi-draggable-area" className={classes.draggableArea}>
@@ -81,7 +87,9 @@ function Jitsi({ handleClose, displayName = 'User' }) {
           // domain={YOUR_DOMAIN}
           roomName={'ra_' + teamId}
           configOverwrite={{
+            defaultLanguage: 'fa',
             disableModeratorIndicator: true,
+            disableAudioLevels: true,
             startScreenSharing: true,
             enableEmailInStats: false,
             disableDeepLinking: true,
@@ -89,8 +97,17 @@ function Jitsi({ handleClose, displayName = 'User' }) {
             startAudioOnly: false,
             startWithAudioMuted: true,
             startWithVideoMuted: true,
+            disablePolls: false,
+            disableSelfViewSettings: false  
           }}
           interfaceConfigOverwrite={{
+            // BRAND_WATERMARK_LINK:'https://rastaiha.ir',
+
+            SET_FILMSTRIP_ENABLED: false,
+            DISABLE_FOCUS_INDICATOR: true,
+            DISABLE_DOMINANT_SPEAKER_INDICATOR: true,
+            DISABLE_VIDEO_BACKGROUND: true,
+
             DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
             SHOW_CHROME_EXTENSION_BANNER: false,
             RECENT_LIST_ENABLED: false,
@@ -98,7 +115,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
             CONNECTION_INDICATOR_DISABLED: true,
             TOOLBAR_ALWAYS_VISIBLE: false,
             DEFAULT_BACKGROUND: '#eaeaea',
-            LANG_DETECTION: true,
+            LANG_DETECTION: false,
             HIDE_INVITE_MORE_HEADER: true,
             DISPLAY_WELCOME_PAGE_CONTENT: false,
             GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
