@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
   },
   divider: {
-    margin: theme.spacing(1, 0),
+    margin: 1,
   },
   clearIcon: {
     fontSize: 12,
