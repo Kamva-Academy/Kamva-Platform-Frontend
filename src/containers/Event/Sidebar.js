@@ -39,7 +39,7 @@ function Workshops({
 
   useEffect(() => {
     getOneEventInfo({ eventId });
-  }, [getOneEventInfo]);
+  }, []);
 
   const handleAmountChange = (event) => {
     const box = document.getElementById('customAmount');

@@ -3,8 +3,8 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useNavigate } from 'react-router-dom';
-
 import { toPersianNumber } from '../../utils/translateNumber';
+import { EventType } from '../../types/event';
 
 const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to, text, disabled = false }) => {
   const navigate = useNavigate();
@@ -21,8 +21,12 @@ const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to
     </Button>)
 }
 
-const Event = ({
-  ...event
+type EventCardPropsType = {
+  event: EventType;
+}
+
+const EventCard: FC<EventCardPropsType> = ({
+  event
 }) => {
   const t = useTranslate();
   const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/event/${event.id}/registration_form/`} text={t('register')} /> : null);
@@ -119,4 +123,4 @@ const Event = ({
   );
 };
 
-export default Event;
+export default EventCard;

@@ -50,7 +50,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
     if (eventId) {
       getOneEventInfo({ eventId });
     }
-  }, [])
+  }, [eventId])
 
   const {
     desktopLeftItems,

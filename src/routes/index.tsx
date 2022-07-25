@@ -5,7 +5,7 @@ import AboutUs from '../containers/AboutUs';
 import ChangePassword from '../containers/ChangePassword';
 import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
-import Events from '../containers/Dashboard/Events';
+import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
 import JoinMentor from '../containers/JoinMentor';

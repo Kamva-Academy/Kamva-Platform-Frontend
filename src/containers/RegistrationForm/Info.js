@@ -18,8 +18,10 @@ const RegistrationForm = ({
   const width = useWidth();
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
-  }, []);
+    if (eventId) {
+      getOneEventInfo({ eventId });
+    }
+  }, [eventId]);
 
   return (
     <Stack

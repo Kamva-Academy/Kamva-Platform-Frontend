@@ -3,15 +3,16 @@ import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import EventCard from '../../../components/Cards/Event';
-import WorkshopCard from '../../../components/Cards/WorkshopCard';
+import EventCard from '../components/Cards/Event';
+import WorkshopCard from '../components/Cards/WorkshopCard';
 import {
   getAllEventsInfoAction,
-} from '../../../redux/slices/events';
+} from '../redux/slices/events';
 import {
   getRegistrableWorkshopsAction,
-} from '../../../redux/slices/workshop';
-import Layout from '../../Layout';
+} from '../redux/slices/workshop';
+import Layout from '../containers/Layout';
+import { EventType } from '../types/event';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     height: `calc(100vh - ${80}px)`,
     display: 'flex',
     justifyContent: 'center',
-    paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    paddingTop: 2,
+    paddingBottom: 2,
   },
   logo: {
     maxHeight: '80vh',
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     height: '100%',
-    padding: theme.spacing(2),
+    padding: 2,
   },
   title: {
     fontSize: 40,
@@ -57,12 +58,12 @@ const Events = ({
   const classes = useStyles();
 
   useEffect(() => {
-    getAllEventsInfo({});
-    getRegistrableWorkshops({});
-  }, [getAllEventsInfo]);
+    getAllEventsInfo();
+    getRegistrableWorkshops();
+  }, []);
 
-  const activeEvents = events.filter((event) => event?.is_active ? true : false)
-  const inactiveEvents = events.filter((event) => !event?.is_active ? true : false)
+  const activeEvents: EventType[] = events.filter((event) => event?.is_active)
+  const inactiveEvents: EventType[] = events.filter((event) => !event?.is_active)
 
   return (
     <Layout>
@@ -81,7 +82,7 @@ const Events = ({
         <Grid item container spacing={2} xs={12}>
           {activeEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-              <EventCard {...event} />
+              <EventCard event={event} />
             </Grid>
           ))}
         </Grid>
@@ -94,7 +95,7 @@ const Events = ({
         <Grid item container spacing={2} xs={12}>
           {inactiveEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-              <EventCard {...event} />
+              <EventCard event={event} />
             </Grid>
           ))}
         </Grid>
