@@ -64,10 +64,6 @@ function Jitsi({ handleClose, displayName = 'User' }) {
   //   return jitsiFuncs.destroy;
   // }, [refresh]);
 
-  if (!teamId) {
-    return <>bad :(</>
-  }
-
   // https://community.jitsi.org/t/reducing-resource-usage-to-improve-performance-both-client-side-and-server-side/39891
 
   return (
@@ -84,8 +80,8 @@ function Jitsi({ handleClose, displayName = 'User' }) {
       </div>
       <div className={classes.jitsi} ref={jitsiElement}>
         <JitsiMeeting
-          // domain={YOUR_DOMAIN}
           roomName={'ra_' + teamId}
+          // https://github.com/jitsi/jitsi-meet/blob/master/config.js
           configOverwrite={{
             defaultLanguage: 'fa',
             disableModeratorIndicator: true,
@@ -97,9 +93,10 @@ function Jitsi({ handleClose, displayName = 'User' }) {
             startAudioOnly: false,
             startWithAudioMuted: true,
             startWithVideoMuted: true,
-            disablePolls: false,
-            disableSelfViewSettings: false  
+            disablePolls: true,
+            disableSelfViewSettings: false
           }}
+
           interfaceConfigOverwrite={{
             // BRAND_WATERMARK_LINK:'https://rastaiha.ir',
 
