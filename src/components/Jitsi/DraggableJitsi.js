@@ -18,7 +18,7 @@ function DraggableJitsi({ open, handleClose }) {
           zIndex: 200,
           [theme.breakpoints.down('sm')]: {
             left: 0,
-            bottom: 0,
+            top: 0,
             width: '100%',
             height: '100%',
           },

@@ -49,6 +49,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
           cursor: 'move',
           paddingX: 1,
           paddingY: 0.5,
+          height: 50,
         }}>
         <Tooltip title='راهنما' arrow leaveDelay={0}>
           <IconButton size='small' >
@@ -63,7 +64,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
       </Stack>
       <Box sx={{
         width: '100%',
-        height: width === 'xs' ? '100vh' : 300,
+        height: width === 'xs' ? 'calc(100vh - 50px)' : 300,
       }}>
         {teamId ?
           <JitsiMeeting
