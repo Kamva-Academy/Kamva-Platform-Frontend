@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom'
 import UserAvatar from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
 import JitsiButton from './components/JitsiButton';
-import JitsiMicButton from './components/JitsiMicButton';
 import MentorButton from './components/MentorButton';
 import ReviewAnswersButton from './components/ReviewAnswersButton';
 import TeamAvatar from './components/UsersAvatar';
@@ -28,7 +27,6 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const jitsiButton = <JitsiButton />;
   // todo: return to its event, not all events!
   const backToEventButton = <DashboardButton name={'بازگشت به رویداد'} to={`/event/${eventId}/`} />;
-  const jitsiMicButton = <JitsiMicButton />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;
@@ -51,9 +49,9 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     } else {
       desktopRightItems.push(teamAvatar);
     }
-    desktopLeftItems.push([jitsiMicButton, jitsiButton]);
+    desktopLeftItems.push([jitsiButton]);
     desktopRightItems.push([whiteboardButton,]);
-    mobileLeftItems.push([jitsiMicButton, jitsiButton]);
+    mobileLeftItems.push([jitsiButton]);
     mobileRightItems.push([whiteboardButton,]);
   } else {
     if (workshop?.fsm_p_type == 'Individual') {
@@ -63,9 +61,9 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     }
     if (workshop?.fsm_learning_type == 'Supervised') {
       desktopLeftItems.push([whiteboardButton, mentorButton]);
-      desktopRightItems.push([jitsiMicButton, jitsiButton, backToEventButton]);
+      desktopRightItems.push([jitsiButton, backToEventButton]);
       mobileLeftItems.push([whiteboardButton, mentorButton]);
-      mobileRightItems.push([jitsiMicButton, jitsiButton]);
+      mobileRightItems.push([jitsiButton]);
     } else {
       desktopLeftItems.push(backToEventButton)
     }
