@@ -102,10 +102,11 @@ const configOverwrite = {
   startAudioOnly: false,
 
 
-  // disableModeratorIndicator: true,
-  // startScreenSharing: true,
-  // enableEmailInStats: false,
-  // disableDeepLinking: true,
+  // ???
+  disableModeratorIndicator: true,
+  startScreenSharing: true,
+  enableEmailInStats: false,
+  disableDeepLinking: true,
   prejoinPageEnabled: false,
 }
 
