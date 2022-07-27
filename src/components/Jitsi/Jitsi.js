@@ -34,39 +34,44 @@ function Jitsi({ handleClose, displayName = 'User' }) {
           borderTopRightRadius: width === 'xs' ? 0 : 5,
           height: 40,
         }}>
-        <Tooltip title='راهنما' arrow leaveDelay={0}>
+        {/* <Tooltip title='راهنما' arrow leaveDelay={0}>
           <IconButton size='small' >
             <HelpIcon sx={{ color: 'white' }} />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip title='بستن' arrow>
           <IconButton size='small' onClick={handleClose}>
             <CancelIcon sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
       </Stack>
-      <Box sx={{
-        width: '100%',
-        height: width === 'xs' ? 'calc(100vh - 40px)' : 300,
-      }}>
-        {teamId ?
-          <JitsiMeeting
-            roomName={'ra_' + teamId}
-            configOverwrite={configOverwrite}
-            interfaceConfigOverwrite={interfaceConfigOverwrite}
-            userInfo={{
-              displayName,
-            }}
-            spinner={MySpinner}
-            getIFrameRef={(iframeRef) => {
-              iframeRef.style.height = '100%';
-              iframeRef.style.width = '100%';
-            }}
-          />
-          :
-          <MySpinner />
-        }
-      </Box>
+      <Stack
+        justifyContent='center'
+        sx={{ height: width === 'xs' ? '75vh' : 300 }}>
+        <Box
+          sx={{
+            width: '100%',
+            height: width === 'xs' ? '75vh' : 300,
+          }}>
+          {teamId ?
+            <JitsiMeeting
+              roomName={'ra_' + teamId}
+              configOverwrite={configOverwrite}
+              interfaceConfigOverwrite={interfaceConfigOverwrite}
+              userInfo={{
+                displayName,
+              }}
+              spinner={MySpinner}
+              getIFrameRef={(iframeRef) => {
+                iframeRef.style.height = '100%';
+                iframeRef.style.width = '100%';
+              }}
+            />
+            :
+            <MySpinner />
+          }
+        </Box>
+      </Stack>
     </>
   );
 }
