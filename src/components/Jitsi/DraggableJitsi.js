@@ -23,13 +23,13 @@ function DraggableJitsi({ open, handleClose }) {
             height: '100%',
           },
         })}>
-        <Draggable axis='x'>
+        <Draggable onStart={width === 'xs' && (() => false)} axis='x'>
           <Paper sx={{ boxShadow: '0px 1px 5px' }}>
             <Jitsi handleClose={handleClose} />
           </Paper>
         </Draggable>
       </Box>
-    </Fade>
+    </Fade >
   );
 }
 

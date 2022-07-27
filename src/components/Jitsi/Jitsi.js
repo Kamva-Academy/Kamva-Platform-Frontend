@@ -34,8 +34,6 @@ const MySpinner = () => (
 )
 
 function Jitsi({ handleClose, displayName = 'User' }) {
-  const classes = useStyles();
-  const jitsiElement = useRef();
   const width = useWidth();
   const { teamId } = useContext(StatePageContext);
 
@@ -45,11 +43,12 @@ function Jitsi({ handleClose, displayName = 'User' }) {
         direction='row'
         justifyContent='flex-end'
         sx={{
-          background: '#666',
+          background: '#c4c4c4',
           cursor: 'move',
           paddingX: 1,
-          paddingY: 0.5,
-          height: 50,
+          borderTopLeftRadius: width === 'xs' ? 0 : 5,
+          borderTopRightRadius: width === 'xs' ? 0 : 5,
+          height: 40,
         }}>
         <Tooltip title='راهنما' arrow leaveDelay={0}>
           <IconButton size='small' >
@@ -64,7 +63,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
       </Stack>
       <Box sx={{
         width: '100%',
-        height: width === 'xs' ? 'calc(100vh - 50px)' : 300,
+        height: width === 'xs' ? 'calc(100vh - 40px)' : 300,
       }}>
         {teamId ?
           <JitsiMeeting

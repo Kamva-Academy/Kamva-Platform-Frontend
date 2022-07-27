@@ -8,7 +8,7 @@ type JitsiButtonPropsType = {
 }
 
 const JitsiButton: FC<JitsiButtonPropsType> = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const width = useWidth();
 
   return (
@@ -18,7 +18,7 @@ const JitsiButton: FC<JitsiButtonPropsType> = () => {
           <ForumIcon />
         </IconButton>
       </Tooltip>
-      <DraggableJitsi open={open} handleClose={() => setOpen(false)} />
+      <DraggableJitsi open={open} handleClose={() => setOpen(!open)} />
     </>
   );
 }
