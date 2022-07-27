@@ -87,11 +87,20 @@ const configOverwrite = {
     hideJoinRoomButton: false,
   },
 
+  p2p: {
+    // Enables peer to peer mode. When enabled the system will try to
+    // establish a direct connection when there are exactly 2 participants
+    // in the room. If that succeeds the conference will stop sending data
+    // through the JVB and use the peer to peer connection instead. When a
+    // 3rd participant joins the conference will be moved back to the JVB
+    // connection.
+    enabled: false,
+  },
+
   conferenceInfo: {
     // hide raised hands count
     alwaysVisible: []
   },
-
   hideConferenceSubject: true,
   hideConferenceTimer: true,
   disableReactions: true,
@@ -99,10 +108,10 @@ const configOverwrite = {
   disablePolls: true,
   startWithAudioMuted: true,
   startWithVideoMuted: true,
-  startAudioOnly: false,
 
 
   // ???
+  startAudioOnly: false,
   disableModeratorIndicator: true,
   startScreenSharing: true,
   enableEmailInStats: false,
