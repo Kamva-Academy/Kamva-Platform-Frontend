@@ -87,6 +87,11 @@ const configOverwrite = {
     hideJoinRoomButton: false,
   },
 
+  testing: {
+    disableE2EE: false,
+    p2pTestMode: false,
+  },
+
   p2p: {
     // Enables peer to peer mode. When enabled the system will try to
     // establish a direct connection when there are exactly 2 participants

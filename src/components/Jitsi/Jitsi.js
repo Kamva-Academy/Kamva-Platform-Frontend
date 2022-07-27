@@ -55,7 +55,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
           }}>
           {teamId ?
             <JitsiMeeting
-              roomName={'ra_' + teamId}
+              roomName={teamId}
               configOverwrite={configOverwrite}
               interfaceConfigOverwrite={interfaceConfigOverwrite}
               userInfo={{
