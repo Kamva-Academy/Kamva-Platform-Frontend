@@ -1,31 +1,15 @@
-import { Box, IconButton, Paper, Stack, Tooltip } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Box, IconButton, Button, Paper, Stack, Tooltip } from '@mui/material';
 import {
   Cancel as CancelIcon,
   Help as HelpIcon
 } from '@mui/icons-material';
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import useWidth from '../../utils/UseWidth';
 import { StatePageContext } from '../../containers/Workshop';
 import { JitsiMeeting } from '@jitsi/react-sdk'
 import { interfaceConfigOverwrite, configOverwrite } from './Config';
 import CircularProgress from '@mui/material/CircularProgress';
-
-
-const useStyles = makeStyles((theme) => ({
-  draggableArea: {
-
-  },
-  rightItems: {
-    marginLeft: 'auto',
-    '& .MuiSvgIcon-root': {
-      color: 'white',
-    },
-  },
-  jitsi: {
-  },
-}));
 
 const MySpinner = () => (
   <Stack sx={{ height: '100%', width: '100%', backgroundColor: 'white' }} alignItems='center' justifyContent='center'>

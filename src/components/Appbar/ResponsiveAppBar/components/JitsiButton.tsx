@@ -11,6 +11,8 @@ const JitsiButton: FC<JitsiButtonPropsType> = () => {
   const [open, setOpen] = useState(false);
   const width = useWidth();
 
+
+
   return (
     <>
       <Tooltip arrow title='اتاق گفتگو'>
