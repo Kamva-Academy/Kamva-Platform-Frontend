@@ -47,11 +47,11 @@ function Jitsi({ handleClose, displayName = 'User' }) {
       </Stack>
       <Stack
         justifyContent='center'
-        sx={{ height: width === 'xs' ? '75vh' : 300 }}>
+        sx={{ height: width === 'xs' ? '100vh' : 300 }}>
         <Box
           sx={{
             width: '100%',
-            height: width === 'xs' ? '75vh' : 300,
+            height: width === 'xs' ? '70vh' : 300,
           }}>
           {teamId ?
             <JitsiMeeting
