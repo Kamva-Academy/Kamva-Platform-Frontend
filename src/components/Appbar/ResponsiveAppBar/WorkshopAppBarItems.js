@@ -25,7 +25,6 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const { eventId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
   const jitsiButton = <JitsiButton />;
-  // todo: return to its event, not all events!
   const backToEventButton = <DashboardButton name={'بازگشت به رویداد'} to={`/event/${eventId}/`} />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;

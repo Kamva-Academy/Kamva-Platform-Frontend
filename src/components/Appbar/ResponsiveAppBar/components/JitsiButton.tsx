@@ -1,12 +1,14 @@
 import { IconButton, Tooltip } from '@mui/material';
-import { VideoCall as VideoCallIcon } from '@mui/icons-material';
 import ForumIcon from '@mui/icons-material/Forum';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import useWidth from '../../../../utils/UseWidth';
 import DraggableJitsi from '../../../Jitsi/DraggableJitsi';
 
-const JitsiButton = () => {
-  const [open, setOpen] = useState(false);
+type JitsiButtonPropsType = {
+}
+
+const JitsiButton: FC<JitsiButtonPropsType> = () => {
+  const [open, setOpen] = useState(true);
   const width = useWidth();
 
   return (
