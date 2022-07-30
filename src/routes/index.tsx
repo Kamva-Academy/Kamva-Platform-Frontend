@@ -6,6 +6,7 @@ import ChangePassword from '../containers/ChangePassword';
 import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
+import Articles from '../pages/Articles';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
 import JoinMentor from '../containers/JoinMentor';
@@ -44,6 +45,8 @@ const Root = () => {
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
+
+        <Route path="/articles/" element={<Articles />} />
 
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
         <Route path="/watch/:playerId/" element={<Workshop />} />
