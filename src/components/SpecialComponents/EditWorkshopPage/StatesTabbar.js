@@ -1,12 +1,12 @@
 import { Button, Grid } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import { makeStyles } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import CreateStateDialog from './components/CreateStateDialog';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(() => ({
   root: {

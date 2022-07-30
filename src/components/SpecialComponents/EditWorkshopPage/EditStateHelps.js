@@ -1,10 +1,11 @@
-import { Button, Grid, makeStyles, Paper, Typography } from '@mui/material';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { createHelpAction } from '../../../redux/slices/widget2';
 import Widget, { MODES } from '../../Widget';

@@ -5,7 +5,6 @@ import {
   Container,
   Grid,
   Hidden,
-  makeStyles,
   Paper,
 } from '@mui/material';
 import ClassIcon from '@mui/icons-material/Class';
@@ -16,6 +15,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
+import makeStyles from '@mui/styles/makeStyles';
 
 import {
   getEventTeamsAction,
@@ -41,7 +41,6 @@ const Event = ({
   getEventTeams,
   getOneEventInfo,
   getOneWorkshopsInfo,
-
   workshop,
   event,
 }) => {
@@ -75,8 +74,12 @@ const Event = ({
   }, []);
 
   useEffect(() => {
+    console.log('effect ran')
+    console.log(workshop)
     if (workshop?.fsm_learning_type == 'Supervised') {
+      console.log('supervised')
       if (workshop?.fsm_p_type == 'Team' && !tabs.some(tab => tab.label == 'درخواست‌های تیمی')) {
+        console.log('team...')
         setTabs([
           ...tabs,
           {

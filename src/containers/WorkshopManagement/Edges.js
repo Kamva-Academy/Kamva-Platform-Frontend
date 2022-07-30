@@ -6,7 +6,6 @@ import {
   Grid,
   IconButton,
   InputLabel,
-  makeStyles,
   MenuItem,
   Select,
   Table,
@@ -21,6 +20,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import makeStyles from '@mui/styles/makeStyles';
 
 import {
   addNotificationAction,

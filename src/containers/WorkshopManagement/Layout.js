@@ -1,7 +1,8 @@
-import { Button, Container, Grid, makeStyles, Paper } from '@mui/material';
+import { Button, Container, Grid, Paper } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import makeStyles from '@mui/styles/makeStyles';
 
 import AppBar from '../../components/Appbar/ResponsiveAppBar';
 

@@ -1,11 +1,11 @@
 import {
   Grid,
-  makeStyles,
   Paper,
 } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import makeStyles from '@mui/styles/makeStyles';
 
 import EditState from '../../components/SpecialComponents/EditWorkshopPage/EditState';
 import StatesTabbar from '../../components/SpecialComponents/EditWorkshopPage/StatesTabbar';

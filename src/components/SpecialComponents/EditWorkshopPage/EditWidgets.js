@@ -4,7 +4,6 @@ import {
   Divider,
   Grid,
   IconButton,
-  makeStyles,
   Paper,
   TextField,
   Tooltip,
@@ -17,6 +16,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router';
+import makeStyles from '@mui/styles/makeStyles';
 
 import {
   removeStateAction,

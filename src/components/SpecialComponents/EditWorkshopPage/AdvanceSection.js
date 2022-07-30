@@ -1,7 +1,8 @@
-import { Button, Grid, makeStyles, Paper, Typography } from '@mui/material';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Delete as DeleteIcon } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
+import makeStyles from '@mui/styles/makeStyles';
 
 import DeleteStateDialog from './components/DeleteStateDialog';
 

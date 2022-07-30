@@ -1,13 +1,13 @@
 import {
   Grid,
   IconButton,
-  makeStyles,
   Tooltip,
   Typography,
 } from '@mui/material';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   absolute: {

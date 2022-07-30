@@ -6,12 +6,12 @@ import {
   CardActions,
   CardContent,
   Grid,
-  makeStyles,
   Typography,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
 import React from 'react';
 import { connect } from 'react-redux';
+import makeStyles from '@mui/styles/makeStyles';
 
 import {
   deleteRequestMentorAction,
