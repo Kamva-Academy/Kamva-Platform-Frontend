@@ -18,6 +18,8 @@ import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
 import PrivateRoute from './PrivateRoute';
+import WorkshopManagement from '../containers/WorkshopManagement';
+import { WorkSharp } from '@mui/icons-material';
 
 const Root = () => {
   return (
@@ -45,6 +47,7 @@ const Root = () => {
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
 
+        <Route path="/event/:eventId/workshop/:fsmId/manage/" element={<WorkshopManagement />} />
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
         <Route path="/watch/:playerId/" element={<Workshop />} />
         <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
@@ -59,7 +62,8 @@ const Root = () => {
           path="/event/:eventId/team_selection/"
           element={<TeamSelection />}
         />
-        <Route path="/event/:eventId/" element={<Event />} />
+        <Route path="/event/:eventId/" element={<Workshop />} />
+        
       </Route>
 
       <Route path="*" element={<Landing />} />
