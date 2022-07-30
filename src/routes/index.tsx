@@ -19,7 +19,6 @@ import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
 import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../containers/WorkshopManagement';
-import { WorkSharp } from '@mui/icons-material';
 
 const Root = () => {
   return (
@@ -62,7 +61,7 @@ const Root = () => {
           path="/event/:eventId/team_selection/"
           element={<TeamSelection />}
         />
-        <Route path="/event/:eventId/" element={<Workshop />} />
+        <Route path="/event/:eventId/" element={<Event />} />
         
       </Route>
 
