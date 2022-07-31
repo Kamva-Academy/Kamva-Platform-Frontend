@@ -24,7 +24,7 @@ import makeStyles from '@mui/styles/makeStyles';
 
 import {
   addNotificationAction,
-} from '../../redux/slices/notifications2';
+} from '../../redux/slices/notifications';
 import {
   addEdgeAction,
   getAllWorkshopEdgesAction,
