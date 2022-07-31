@@ -43,7 +43,7 @@ import {
   createWidgetAction,
   deleteWidgetAction,
   updateWidgetAction,
-} from './widget2';
+} from './widget';
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
   'events/getEventWorkshopsAction',

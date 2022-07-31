@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { createHelpAction } from '../../../redux/slices/widget2';
+import { createHelpAction } from '../../../redux/slices/widget';
 import Widget, { MODES } from '../../Widget';
 import CreateWidgetDialog from './components/CreateWidgetDialog';
 
