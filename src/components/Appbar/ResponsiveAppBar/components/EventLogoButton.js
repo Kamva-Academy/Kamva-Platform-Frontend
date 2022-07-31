@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   }),
 }));
 
-export default function LogoButton({ size, image, name, eventId }) {
+export default function LogoButton({ size, image, name='کاموا', eventId }) {
   const navigate = useNavigate();
   const classes = useStyles({ size });
   return (

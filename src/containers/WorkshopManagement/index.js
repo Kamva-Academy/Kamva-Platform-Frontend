@@ -115,7 +115,7 @@ const Event = ({
                 <Button
                   key={index}
                   onClick={() => setTabIndex(index)}
-                  variant={tabIndex == index && 'contained'}
+                  variant={tabIndex == index ? 'contained' : 'text' }
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>
