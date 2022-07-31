@@ -268,6 +268,7 @@ const initialState = {
   isFetching: false,
   getWorkshopsLoading: false,
   workshops: [],
+  workshopsCount: 0,
   events: [],
   registeredEvents: {},
   uploadedFile: { link: '', name: '', value: '' },
@@ -277,7 +278,6 @@ const initialState = {
   widgets: [],
   allEventTeams: [],
   requestTeams: {},
-  allEventWorkshops: [],
   myWorkshops: [],
 };
 
@@ -410,10 +410,7 @@ export const getRequestMentorAction = createAsyncThunk(
   'requestMentor/getAll',
   async (arg, { rejectWithValue }) => {
     try {
-      console.log("1111")
       const requests = await getRequests();
-      console.log("222")
-
       const requestTeams = {};
       requests.forEach((request) => {
         const teamId = request.get('teamId');
@@ -471,7 +468,7 @@ const eventSlice = createSlice({
     [getEventWorkshopsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.getWorkshopsLoading = false;
       state.workshops = response.results;
-      state.eventWorkshopsCount = response.count;
+      state.workshopsCount = response.count;
     },
     [getEventWorkshopsAction.rejected.toString()]: (state) => {
       state.getWorkshopsLoading = false;
@@ -675,14 +672,6 @@ const eventSlice = createSlice({
       state.isFetching = false;
     },
     [getEventTeamsAction.rejected.toString()]: isNotFetching,
-
-    [getEventWorkshopsAction.pending.toString()]: isFetching,
-    [getEventWorkshopsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.allEventWorkshops = response?.results;
-      state.workshopsCount = response.count;
-      state.isFetching = false;
-    },
-    [getEventWorkshopsAction.rejected.toString()]: isNotFetching,
 
     [createWorkshopAction.pending.toString()]: isFetching,
     [createWorkshopAction.fulfilled.toString()]: (state, { payload: { response } }) => {
