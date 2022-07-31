@@ -1,14 +1,12 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 
 export const closeNotificationAction = createAction('closeNotificationAction');
-export const removeNotificationAction = createAction(
-  'removeNotificationAction'
-);
+export const removeNotificationAction = createAction('removeNotificationAction');
 export const addNotificationAction = createAction('addNotificationAction');
 
 export const notificationReducer = createReducer([], (builder) => {
   builder
-    .addCase(
+    .addCase<any, any>(
       closeNotificationAction,
       (state, { payload: { key, dismissAll } }) => {
         state.map((notification) =>
@@ -18,10 +16,10 @@ export const notificationReducer = createReducer([], (builder) => {
         );
       }
     )
-    .addCase(removeNotificationAction, (state, { payload: { key } }) => {
+    .addCase<any, any>(removeNotificationAction, (state, { payload: { key } }) => {
       return state.filter((notification) => notification.key !== key);
     })
-    .addCase(addNotificationAction, (state, action) => {
+    .addCase<any, any>(addNotificationAction, (state, action) => {
       const message = action?.payload?.message;
       const variant = action?.payload?.variant || action?.payload?.type;
 

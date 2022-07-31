@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import makeStyles from '@mui/styles/makeStyles';
 
@@ -17,6 +17,7 @@ import {
   deleteRequestMentorAction,
   getPlayerFromTeamAction,
 } from '../../redux/slices/events';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -31,21 +32,30 @@ const TeamInfo = ({
   name,
   members,
   teamId,
-  fsmId,
   token,
   playerId,
   deleteRequestMentor,
   getPlayerFromTeam,
 }) => {
   const classes = useStyles();
+  const navigate = useNavigate()
+  const { eventId, fsmId } = useParams();
+  const [click, setClick] = useState(false);
 
   const redirect = () => {
+    setClick(true);
     if (!playerId) {
       getPlayerFromTeam({ teamId, id: fsmId, token });
-    } else {
-      window.open(`https://kamva.academy/join/${playerId}/${token}/`);
     }
   };
+
+
+  useEffect(() => {
+    if (playerId && click) {
+      setClick(false);
+      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId}`);
+    }
+  }, [playerId, click])
 
   return (
     <Card className={classes.root}>
@@ -98,7 +108,8 @@ const TeamInfo = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+  playerId: ownProps.playerId || state.events.playerId,
   token: state.account.token,
 });
 

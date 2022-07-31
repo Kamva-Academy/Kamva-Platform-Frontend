@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -52,16 +52,21 @@ const Workshop = ({
   stateId,
   studentPlayerId,
   teamId,
-  isMentor,
   myTeam,
   getOneWorkshop,
   enterWorkshop,
   mentorGetCurrentState,
   addNotification,
 }) => {
-  let { fsmId, playerId } = useParams();
-  fsmId ||= workshopId;
-  playerId ||= studentPlayerId;
+  const { fsmId } = useParams();
+  const search = useLocation().search;
+  let playerId = new URLSearchParams(search).get('playerId');
+  let isMentor = false;
+  if (playerId) {
+    isMentor = true;
+  } else {
+    playerId = studentPlayerId;
+  }
   const { eventId } = useParams();
   const { classes } = useStyles();
   const subscriberRef = useRef(null);
@@ -82,7 +87,7 @@ const Workshop = ({
     if (!isMentor) {
       enterWorkshop({ eventId, fsmId });
     }
-  }, [fsmId, playerId, isMentor]);
+  }, [fsmId, isMentor]);
 
   const getCurrentStateIfNeed = () => {
     if (needUpdateState) {
@@ -159,7 +164,6 @@ const mapStateToProps = (state, ownProps) => ({
 
   workshopState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
-  isMentor: state.account.userAccount.is_mentor,
   workshopId: state.currentState.workshopId,
   // stateId: ownProps.match?.params?.stateId,
   studentPlayerId: state.currentState.playerId,
