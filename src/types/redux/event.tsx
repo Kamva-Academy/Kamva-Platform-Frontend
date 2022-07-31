@@ -53,7 +53,7 @@ export type InitialState = {
   discountedPrice: Number,
   team: Team,
   certificateLink: String,
-  playerId: Number,
+  playerId: Object,
 };
 
 type Workshop = any

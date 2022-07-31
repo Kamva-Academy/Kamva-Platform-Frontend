@@ -34,6 +34,7 @@ const TeamInfo = ({
   teamId,
   token,
   playerId,
+  statePlayerId,
   deleteRequestMentor,
   getPlayerFromTeam,
 }) => {
@@ -49,11 +50,10 @@ const TeamInfo = ({
     }
   };
 
-
   useEffect(() => {
-    if (playerId && click) {
+    if ((playerId || statePlayerId) && click) {
       setClick(false);
-      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId}`);
+      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || statePlayerId}`);
     }
   }, [playerId, click])
 
@@ -109,7 +109,7 @@ const TeamInfo = ({
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  playerId: ownProps.playerId || state.events.playerId,
+  statePlayerId: state.events.playerId[ownProps.teamId],
   token: state.account.token,
 });
 

@@ -67,7 +67,7 @@ const initialState: InitialState = {
   discountedPrice: 0,
   team: null,
   certificateLink: '',
-  playerId: null,
+  playerId: {},
 };
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
@@ -647,7 +647,7 @@ const eventSlice = createSlice({
 
     // mentor slices
     [getPlayerFromTeamAction.fulfilled.toString()]: (state, { payload, meta }) => {
-      state.playerId = payload.response.id;
+      state.playerId[meta.arg.teamId] = payload.response.id;
       // window.open(
       //   `https://kamva.academy/join/${payload?.response?.id}/${meta?.arg?.token}/`
       // );
