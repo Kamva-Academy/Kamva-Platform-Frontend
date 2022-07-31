@@ -1,5 +1,5 @@
 import { Fab, Toolbar } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from 'tss-react/mui';
 import Container from '@mui/material/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
@@ -21,25 +21,27 @@ import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
 
-const useStyles = makeStyles((theme) => ({
-  centerItems: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 'calc(100vh - 64px)',
-  },
-  title: {
-    fontSize: 60,
-    color: '#555',
-    marginBottom: 20,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 40,
+const useStyles = makeStyles()((theme) => {
+  return {
+    centerItems: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 'calc(100vh - 64px)',
     },
-  },
-  body: {
-    background: '#F7F9FC',
-  },
-}));
+    title: {
+      fontSize: 60,
+      color: '#555',
+      marginBottom: 20,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: 40,
+      },
+    },
+    body: {
+      background: '#F7F9FC',
+    },
+  }
+});
 
 export const StatePageContext = React.createContext();
 
@@ -51,9 +53,7 @@ const Workshop = ({
   studentPlayerId,
   teamId,
   isMentor,
-
   myTeam,
-
   getOneWorkshop,
   enterWorkshop,
   mentorGetCurrentState,
@@ -63,7 +63,7 @@ const Workshop = ({
   fsmId ||= workshopId;
   playerId ||= studentPlayerId;
   const { eventId } = useParams();
-  const classes = useStyles();
+  const { classes } = useStyles();
   const subscriberRef = useRef(null);
 
   useEffect(() => {

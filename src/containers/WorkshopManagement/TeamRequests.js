@@ -9,7 +9,7 @@ import {
   createRequestMentorAction,
   getRequestMentorAction,
   removeRequestMentorAction,
-} from '../../redux/slices/events2';
+} from '../../redux/slices/events';
 
 function Teams({
   requestTeams,

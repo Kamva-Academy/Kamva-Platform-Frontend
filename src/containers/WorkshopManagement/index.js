@@ -15,12 +15,12 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useHistory } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
-import makeStyles from '@mui/styles/makeStyles';
+import { makeStyles } from 'tss-react/mui';
 
 import {
   getEventTeamsAction,
   getOneEventInfoAction,
-} from '../../redux/slices/events2';
+} from '../../redux/slices/events';
 import {
   getOneWorkshopsInfoAction,
 } from '../../redux/slices/workshop2';
@@ -31,11 +31,13 @@ import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles()((theme) => {
+  return{
   rightBox: {
     padding: theme.spacing(2),
   },
-}));
+}
+});
 
 const Event = ({
   getEventTeams,
@@ -44,7 +46,7 @@ const Event = ({
   workshop,
   event,
 }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const t = useTranslate();
   const { fsmId, eventId } = useParams();
   const [tabIndex, setTabIndex] = useState(0);

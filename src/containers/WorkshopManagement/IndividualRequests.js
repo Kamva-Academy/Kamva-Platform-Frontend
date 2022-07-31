@@ -18,7 +18,7 @@ import {
   deleteRequestMentorAction,
   getRequestMentorAction,
   removeRequestMentorAction,
-} from '../../redux/slices/events2';
+} from '../../redux/slices/events';
 import {
   getFSMPlayersAction,
 } from '../../redux/slices/workshop2';

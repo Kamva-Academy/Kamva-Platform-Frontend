@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { Apis } from '../apis';
-import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk2';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   addMentorToWorkshopUrl,
   edgeUrl,
@@ -11,7 +11,7 @@ import {
   stateCRUDUrl,
   teamCRUDUrl,
   workshopCRUDUrl,
-} from '../constants/urls2';
+} from '../constants/urls';
 import {
   createWidgetAction,
   deleteWidgetAction,

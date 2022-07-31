@@ -16,7 +16,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import {
   deleteRequestMentorAction,
   getPlayerFromTeamAction,
-} from '../../redux/slices/events2';
+} from '../../redux/slices/events';
 
 const useStyles = makeStyles({
   root: {

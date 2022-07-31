@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { Apis } from '../apis';
-import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk2';
+import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   articlesUrl,
   getProblemsUrl,
@@ -14,7 +14,7 @@ import {
   widgetCRUDUrl,
   workshopCRUDUrl,
   workshopTeamsUrl,
-} from '../constants/urls2';
+} from '../constants/urls';
 
 const initialState = {
   workshops: [],
