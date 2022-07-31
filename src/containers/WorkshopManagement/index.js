@@ -77,7 +77,6 @@ const Event = ({
 
   useEffect(() => {
     if (workshop?.fsm_learning_type == 'Supervised') {
-      console.log('supervised')
       if (workshop?.fsm_p_type == 'Team' && !tabs.some(tab => tab.label == 'درخواست‌های تیمی')) {
         setTabs([
           ...tabs,
