@@ -69,7 +69,6 @@ const Event = ({
   ])
 
   const TabComponent = tabs[tabIndex].component;
-
   useEffect(() => {
     getOneEventInfo({ eventId });
     getOneWorkshopsInfo({ fsmId });
@@ -98,7 +97,7 @@ const Event = ({
       }
     }
   }, [workshop])
-
+  
   useEffect(() => {
     if (event?.registration_form) {
       getEventTeams({ registrationFormId: event?.registration_form });

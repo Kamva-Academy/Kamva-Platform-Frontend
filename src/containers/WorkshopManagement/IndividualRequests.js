@@ -142,7 +142,7 @@ function Teams({
 const mapStateToProps = (state) => ({
   token: state.account.token,
   players: state.workshop.players,
-  requests: state.events.requestTeams || {},
+  requests: state.events.teamsRequests || {},
 });
 
 export default connect(

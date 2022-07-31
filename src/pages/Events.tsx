@@ -12,7 +12,7 @@ import {
   getRegistrableWorkshopsAction,
 } from '../redux/slices/workshop';
 import Layout from '../containers/Layout';
-import { EventType } from '../types/event';
+import { EventType } from '../types/redux/event';
 
 const useStyles = makeStyles((theme) => ({
   container: {

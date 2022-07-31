@@ -28,13 +28,11 @@ import {
   addTeamsViaCSVUrl,
   addUserToTeamUrl,
   allRegistrationReceiptsUrl,
-  createTeamUrl,
   eventInfoUrl,
   getMentoredFsmsUrl,
   getPlayerFromTeamUrl,
   getTeamsUrl,
   makeTeamHeadUrl,
-  oneRegistrationReceiptUrl,
   registrationFormCRUDUrl,
   validateRegistrationReceiptUrl,
   workshopCRUDUrl,
@@ -44,7 +42,32 @@ import {
   deleteWidgetAction,
   updateWidgetAction,
 } from './widget';
-import {getRequests} from '../../parse/mentor'
+import { getRequests, deleteRequest } from '../../parse/mentor'
+import { InitialState } from '../../types/redux/event'
+
+const initialState: InitialState = {
+  isFetching: false,
+  getWorkshopsLoading: false,
+  workshops: [],
+  workshopsCount: 0,
+  events: [],
+  event: null,
+  registeredEvents: [],
+  uploadedFile: { link: '', name: '', id: '' },
+  myInvitations: [],
+  teamInvitations: [],
+  allRegistrationReceipts: [],
+  registrationReceipt: null,
+  widgets: [],
+  allEventTeams: [],
+  teamsRequests: [],
+  myWorkshops: [],
+  registrationForm: {},
+  merchandise: {},
+  discountedPrice: 0,
+  team: null,
+  certificateLink: '',
+};
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
   'events/getEventWorkshopsAction',
@@ -263,24 +286,6 @@ export const getCertificateAction = createAsyncThunkApi(
   }
 );
 
-
-const initialState = {
-  isFetching: false,
-  getWorkshopsLoading: false,
-  workshops: [],
-  workshopsCount: 0,
-  events: [],
-  registeredEvents: {},
-  uploadedFile: { link: '', name: '', value: '' },
-  myInvitations: [],
-  teamInvitations: [],
-  allRegistrationReceipts: [],
-  widgets: [],
-  allEventTeams: [],
-  requestTeams: {},
-  myWorkshops: [],
-};
-
 // mentor events:
 export const getRegistrationFormAction = createAsyncThunkApi(
   'events/getRegistrationFormAction',
@@ -411,14 +416,14 @@ export const getRequestMentorAction = createAsyncThunk(
   async (arg, { rejectWithValue }) => {
     try {
       const requests = await getRequests();
-      const requestTeams = {};
+      const teamsRequests = {};
       requests.forEach((request) => {
         const teamId = request.get('teamId');
         const playerId = request.get('playerId');
         const fsmId = request.get('fsmId');
-        requestTeams[teamId + '.' + fsmId] = playerId;
+        teamsRequests[teamId + '.' + fsmId] = playerId;
       });
-      return { requestTeams };
+      return { teamsRequests };
     } catch (err) {
       return rejectWithValue({
         message: 'مشکلی در دریافت درخواست‌‌های همیار وجود داشت.',
@@ -427,7 +432,7 @@ export const getRequestMentorAction = createAsyncThunk(
   }
 );
 
-export const deleteRequestMentorAction = createAsyncThunk(
+export const deleteRequestMentorAction = createAsyncThunk<any, { teamId: string, fsmId: string }>(
   'requestMentor/delete',
   async ({ teamId, fsmId }, { rejectWithValue }) => {
     try {
@@ -455,10 +460,10 @@ const eventSlice = createSlice({
   initialState,
   reducers: {
     createRequestMentor: (state, { payload: { playerId, teamId, fsmId } }) => {
-      state.requestTeams[teamId + '.' + fsmId] = playerId;
+      state.teamsRequests[teamId + '.' + fsmId] = playerId;
     },
     removeRequestMentor: (state, { payload: { teamId, fsmId } }) => {
-      delete state.requestTeams[teamId + '.' + fsmId];
+      delete state.teamsRequests[teamId + '.' + fsmId];
     },
   },
   extraReducers: {
@@ -541,7 +546,7 @@ const eventSlice = createSlice({
       state.isFetching = false;
     },
     [uploadFileAction.rejected.toString()]: (state) => {
-      state.uploadedFile = '';
+      state.uploadedFile = null;
       state.isFetching = false;
     },
 
@@ -646,12 +651,12 @@ const eventSlice = createSlice({
       );
     },
 
-    [getRequestMentorAction.fulfilled.toString()]: (state, { payload: { requestTeams } }) => {
-      state.requestTeams = requestTeams;
+    [getRequestMentorAction.fulfilled.toString()]: (state, { payload: { teamsRequests } }) => {
+      state.teamsRequests = teamsRequests;
     },
 
     [deleteRequestMentorAction.fulfilled.toString()]: (state, { meta: { arg } }) => {
-      delete state.requestTeams[arg.teamId + '.' + arg.fsmId];
+      delete state.teamsRequests[arg.teamId + '.' + arg.fsmId];
     },
 
     [getAllRegistrationReceiptsAction.pending.toString()]: isFetching,
@@ -675,7 +680,7 @@ const eventSlice = createSlice({
 
     [createWorkshopAction.pending.toString()]: isFetching,
     [createWorkshopAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.allEventWorkshops = [...state.allEventWorkshops, response];
+      state.workshops = [...state.workshops, response];
       state.isFetching = false;
     },
     [createWorkshopAction.rejected.toString()]: isNotFetching,

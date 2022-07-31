@@ -12,7 +12,7 @@ import {
 } from '../../redux/slices/events';
 
 function Teams({
-  requestTeams,
+  teamsRequests,
   allEventTeams,
   getRequestMentor,
   createRequestMentor,
@@ -48,10 +48,10 @@ function Teams({
   }, []);
 
   const reqTeams = allEventTeams.filter(
-    (team) => requestTeams[team.id + '.' + fsmId]
+    (team) => teamsRequests[team.id + '.' + fsmId]
   );
   const nonReqTeams = allEventTeams.filter(
-    (team) => !requestTeams[team.id + '.' + fsmId]
+    (team) => !teamsRequests[team.id + '.' + fsmId]
   );
 
   return (
@@ -64,7 +64,7 @@ function Teams({
               teamId={team.id}
               fsmId={fsmId}
               playerId={
-                requestTeams[team.id + '.' + fsmId]
+                teamsRequests[team.id + '.' + fsmId]
               }
             />
           </Grid>
@@ -85,7 +85,7 @@ function Teams({
 
 const mapStateToProps = (state) => ({
   allEventTeams: state.events.allEventTeams,
-  requestTeams: state.events.requestTeams || {},
+  teamsRequests: state.events.teamsRequests || {},
 });
 
 export default connect(mapStateToProps, {

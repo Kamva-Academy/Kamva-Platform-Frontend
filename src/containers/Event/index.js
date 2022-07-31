@@ -74,7 +74,6 @@ function Workshops({
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
   return({
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
