@@ -12,7 +12,7 @@ import StatesTabbar from '../../components/SpecialComponents/EditWorkshopPage/St
 import {
   getAllWorkshopStatesInfoAction,
   getOneStateAction,
-} from '../../redux/slices/workshop2';
+} from '../../redux/slices/workshop';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {

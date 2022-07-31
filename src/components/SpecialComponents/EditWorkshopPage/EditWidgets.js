@@ -21,7 +21,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import {
   removeStateAction,
   updateStateAction,
-} from '../../../redux/slices/workshop2';
+} from '../../../redux/slices/workshop';
 import AreYouSure from '../../Dialog/AreYouSure';
 import Widget, { MODES } from '../../Widget';
 import CreateWidgetDialog from './components/CreateWidgetDialog';

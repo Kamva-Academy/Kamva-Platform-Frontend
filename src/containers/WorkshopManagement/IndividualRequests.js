@@ -21,7 +21,7 @@ import {
 } from '../../redux/slices/events';
 import {
   getFSMPlayersAction,
-} from '../../redux/slices/workshop2';
+} from '../../redux/slices/workshop';
 
 function Teams({
   getFSMPlayers,

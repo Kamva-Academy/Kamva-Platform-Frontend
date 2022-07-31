@@ -31,7 +31,7 @@ import {
   getAllWorkshopStatesInfoAction,
   removeEdgeAction,
   updateEdgeAction,
-} from '../../redux/slices/workshop2';
+} from '../../redux/slices/workshop';
 import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
 
 const useStyles = makeStyles((theme) => ({

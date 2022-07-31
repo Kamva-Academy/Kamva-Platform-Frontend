@@ -23,7 +23,7 @@ import {
 } from '../../redux/slices/events';
 import {
   getOneWorkshopsInfoAction,
-} from '../../redux/slices/workshop2';
+} from '../../redux/slices/workshop';
 import Layout from '../Layout';
 import Design from './Design';
 import Edges from './Edges';

@@ -11,7 +11,7 @@ import { useParams } from 'react-router';
 
 import {
   addStateAction,
-} from '../../../../redux/slices/workshop2';
+} from '../../../../redux/slices/workshop';
 
 function CreateStateDialog({
   addState,
