@@ -44,6 +44,7 @@ import {
   deleteWidgetAction,
   updateWidgetAction,
 } from './widget';
+import {getRequests} from '../../parse/mentor'
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
   'events/getEventWorkshopsAction',
@@ -305,14 +306,6 @@ export const addTeamsViaCSVAction = createAsyncThunkApi(
   }
 );
 
-/* slices are different
-export const createTeamAction = createAsyncThunkApi(
-  'events/createTeamAction',
-  Apis.POST,
-  createTeamUrl
-);
-*/
-
 export const addUserToTeamAction = createAsyncThunkApi(
   'events/addUserToTeamAction',
   Apis.POST,
@@ -347,15 +340,6 @@ export const getAllRegistrationReceiptsAction = createAsyncThunkApi(
   Apis.GET,
   allRegistrationReceiptsUrl
 );
-
-
-/* body is different...
-export const getOneRegistrationReceiptAction = createAsyncThunkApi(
-  'events/getOneRegistrationReceiptAction',
-  Apis.GET,
-  oneRegistrationReceiptUrl
-);
-*/
 
 export const validateRegistrationReceiptAction = createAsyncThunkApi(
   'events/validateRegistrationReceiptAction',
@@ -426,7 +410,10 @@ export const getRequestMentorAction = createAsyncThunk(
   'requestMentor/getAll',
   async (arg, { rejectWithValue }) => {
     try {
+      console.log("1111")
       const requests = await getRequests();
+      console.log("222")
+
       const requestTeams = {};
       requests.forEach((request) => {
         const teamId = request.get('teamId');
@@ -633,10 +620,10 @@ const eventSlice = createSlice({
     [createTeamAction.pending.toString()]: isFetching,
     [createTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
+      state.allEventTeams = [response, ...state.allEventTeams];
       state.team = response;
     },
     [createTeamAction.rejected.toString()]: isNotFetching,
-
 
     [deleteTeamAction.pending.toString()]: isFetching,
     [deleteTeamAction.fulfilled.toString()]: (state, action) => {
@@ -717,16 +704,6 @@ const eventSlice = createSlice({
       state.isFetching = false;
     },
     [makeTeamHeadAction.rejected.toString()]: isNotFetching,
-
-    /*
-    [createTeamAction.pending.toString()]: isFetching,
-    [createTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.allEventTeams = [response, ...state.allEventTeams];
-      state.isFetching = false;
-    },
-    [createTeamAction.rejected.toString()]: isNotFetching,
-    */
-
 
     [addUserToTeamAction.pending.toString()]: isFetching,
     [addUserToTeamAction.fulfilled.toString()]: (state, action) => {

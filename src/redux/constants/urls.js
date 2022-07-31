@@ -34,9 +34,6 @@ export const getWorkshopsUrl = ({ eventId, pageNumber }) => {
 export const getRegistrableWorkshopsUrl = 'fsm/fsm/?registrable=true';
 export const reviewAnswersUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/review/`;
 
-
-
-
 export const getAllEventsInfoUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ eventId }) => `fsm/event/${eventId}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
@@ -60,8 +57,6 @@ export const TeamCRUDUrl = ({ teamId }) =>
 
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
-
-export const articlesUrl = 'fsm/article/';
 
 export const statesUrl = 'fsm/state/';
 
@@ -114,8 +109,6 @@ export const getSubmissionsUrl = 'fsm/getsubmissions/';
 
 export const markSubmissionUrl = 'fsm/marksubmission/';
 
-
-
 // for mentors
 
 // auth:
@@ -158,14 +151,11 @@ export const statesCRUDUrl = ({ stateId }) => stateId ? `fsm/state/${stateId}/` 
 // fsm:
 export const eventInfoUrl = ({ pageNumber, eventId }) => eventId ? `fsm/event/${eventId}/` : `fsm/event/?page=${pageNumber}`;
 export const allRegistrationReceiptsUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/receipts/`;
-export const oneRegistrationReceiptUrl = ({ registrationReceiptId }) => `fsm/receipts/${registrationReceiptId}/`;
 export const validateRegistrationReceiptUrl = ({ registrationReceiptId }) => `/fsm/receipts/${registrationReceiptId}/validate/`;
 export const getPlayerFromTeamUrl = ({ id }) => `/fsm/fsm/${id}/get_player_from_team/`;
 
 // articles
-/* different links
-export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/articles/${articleId}` : `fsm/articles/?page=${pageNumber}`;
-*/
+
 export const participantGetCurrentStateUrl = 'fsm/getcurrentstate/';
 
 export const sendAnswerUrl = 'fsm/sendanswer/';

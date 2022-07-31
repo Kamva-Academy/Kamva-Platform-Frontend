@@ -1,10 +1,10 @@
 import { Grid, Tab, Tabs } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 
 import TeamWorkshopInfoCard from '../../components/Cards/TeamWorkshopInfo';
-import { getRequestSubscription } from '../../parse/mentor2';
+import { getRequestSubscription } from '../../parse/mentor';
 import {
   createRequestMentorAction,
   getRequestMentorAction,
@@ -19,27 +19,31 @@ function Teams({
   removeRequestMentor,
 }) {
   const { fsmId } = useParams();
+  const subscriptionRef = useRef(null);
 
-  useEffect(async () => {
-    getRequestMentor();
-    const subscription = await getRequestSubscription();
-    subscription.on('create', (requestMentor) => {
-      const playerId = requestMentor.get('playerId');
-      const teamId = requestMentor.get('teamId');
-      const fsmId = requestMentor.get('fsmId');
-      createRequestMentor({ playerId, teamId, fsmId });
-    });
-    subscription.on('delete', (requestMentor) => {
-      const teamId = requestMentor.get('teamId');
-      const fsmId = requestMentor.get('fsmId');
-      removeRequestMentor({
-        teamId,
-        fsmId,
+  useEffect(() => {
+    const subscribe = async () => {
+      await getRequestMentor();
+      const subscription = await getRequestSubscription();
+      subscription.on('create', (requestMentor) => {
+        const playerId = requestMentor.get('playerId');
+        const teamId = requestMentor.get('teamId');
+        const fsmId = requestMentor.get('fsmId');
+        createRequestMentor({ playerId, teamId, fsmId });
       });
-    });
-
+      subscription.on('delete', (requestMentor) => {
+        const teamId = requestMentor.get('teamId');
+        const fsmId = requestMentor.get('fsmId');
+        removeRequestMentor({
+          teamId,
+          fsmId,
+        });
+      });
+      subscriptionRef.current = subscription;
+    }
+    subscribe()
     return () => {
-      subscription.unsubscribe();
+      subscriptionRef.current?.unsubscribe();
     };
   }, []);
 

@@ -5,7 +5,6 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   makeAnswerEmptyUrl,
   sendWidgetAnswerUrl,
-  articlesUrl,
   getProblemsUrl,
   getSubmissionsUrl,
   getUnreadNotificationsUrl,
