@@ -647,7 +647,9 @@ const eventSlice = createSlice({
 
     // mentor slices
     [getPlayerFromTeamAction.fulfilled.toString()]: (state, { payload, meta }) => {
-      state.playerId[meta.arg.teamId] = payload.response.id;
+      const newPlayerId = {...state.playerId};
+      newPlayerId[meta.arg.teamId] = payload.response.id;
+      state.playerId = newPlayerId;
       // window.open(
       //   `https://kamva.academy/join/${payload?.response?.id}/${meta?.arg?.token}/`
       // );

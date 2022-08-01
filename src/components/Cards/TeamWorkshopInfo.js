@@ -34,7 +34,7 @@ const TeamInfo = ({
   teamId,
   token,
   playerId,
-  statePlayerId,
+  playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
 }) => {
@@ -49,13 +49,12 @@ const TeamInfo = ({
       getPlayerFromTeam({ teamId, id: fsmId, token });
     }
   };
-
   useEffect(() => {
-    if ((playerId || statePlayerId) && click) {
+    if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || statePlayerId}`);
+      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`);
     }
-  }, [playerId, click])
+  }, [playerId, click, playerIdFromRedux])
 
   return (
     <Card className={classes.root}>
@@ -87,6 +86,7 @@ const TeamInfo = ({
                 color="primary"
                 fullWidth
                 onClick={() => {
+                  console.log('i was clicked in pasokh be darkhast')
                   deleteRequestMentor({ teamId, fsmId });
                   redirect();
                 }}>
@@ -94,7 +94,7 @@ const TeamInfo = ({
               </Button>
             ) : (
               <Button
-                variant="outlined"
+              variant="outlined"
                 color="primary"
                 fullWidth
                 onClick={redirect}>
@@ -109,7 +109,7 @@ const TeamInfo = ({
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  statePlayerId: state.events.playerId[ownProps.teamId],
+  playerIdFromRedux: state.events.playerId[ownProps.teamId],
   token: state.account.token,
 });
 
