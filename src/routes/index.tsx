@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import AboutUs from '../containers/AboutUs';
-import ChangePassword from '../containers/ChangePassword';
+import ResetPassword from '../pages/ResetPassword';
 import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
@@ -26,7 +26,7 @@ const Root = () => {
 
       <Route path="/about_us" element={<AboutUs />} />
 
-      <Route path="/reset_password" element={<ChangePassword />} />
+      <Route path="/reset_password" element={<ResetPassword />} />
       <Route path="/create_account" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
       <Route path="/" element={<Landing />} />
