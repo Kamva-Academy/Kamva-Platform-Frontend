@@ -2,7 +2,18 @@ type AudienceTypeType = "All" | "Student" | "Academic";
 
 type EventTypeType = "Team" | "Individual";
 
-import {Workshop, Event, Invitation, RegistrationReceipt, Widget, Team, Request, RegistrationForm, Merchandise, UploadedFile} from '../models'
+import {
+  Workshop, 
+  Event, 
+  Invitation, 
+  RegistrationReceipt, 
+  Widget, 
+  Team, 
+  Request, 
+  RegistrationForm,
+  Merchandise, 
+  UploadedFile
+} from '../models'
 
 export type EventType = {
   accessible_after_closure: boolean;

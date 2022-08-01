@@ -20,8 +20,9 @@ import {
   deleteWidgetAction,
   updateWidgetAction,
 } from './widget';
+import { InitialState } from '../../types/redux/workshop';
 
-const initialState = {
+const initialState: InitialState = {
   currentState: {
     widgets: [],
   },
@@ -32,6 +33,10 @@ const initialState = {
   requestedTeams: [],
   getWorkshopsLoading: false,
   registrableWorkshops: [],
+  workshop: null,
+  answers: [],
+  allWorkshops: [],
+  players: null,
 };
 
 export const getOneWorkshopAction = createAsyncThunkApi(
@@ -185,6 +190,7 @@ export const removeEdgeAction = createAsyncThunkApi(
 const IndexSlice = createSlice({
   name: 'workshop',
   initialState,
+  reducers: {},
   extraReducers: {
 
     [getRegistrableWorkshopsAction.pending.toString()]: isFetching,
