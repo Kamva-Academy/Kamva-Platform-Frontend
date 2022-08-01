@@ -13,19 +13,21 @@ import {
   statesCRUDUrl,
   visitWorkshopPlayerUrl,
   widgetCRUDUrl,
-  workshopCRUDUrl,
   workshopTeamsUrl,
 } from '../constants/urls';
 
-const initialState = {
+import { InitialState } from '../../types/redux/widget';
+
+const initialState: InitialState = {
   isFetching: false,
   workshops: [],
   articles: [],
-  teams: {},
+  teams: [],
   notifications: [],
   problems: [],
   submissions: [],
   submissionsIsLoading: false,
+  widget: null,
 }
 
 const isFetching = (state) => {
@@ -36,7 +38,7 @@ const isNotFetching = (state) => {
   state.isFetching = false;
 };
 
-export const sendWidgetAnswerAction = createAsyncThunkApi(
+const sendWidgetAnswerAction = createAsyncThunkApi(
   'widget/sendWidgetAnswerAction',
   Apis.POST,
   sendWidgetAnswerUrl,
@@ -389,6 +391,7 @@ export const createHelpAction = createAsyncThunkApi(
 const widgetSlice = createSlice({
   name: 'currentState',
   initialState: initialState,
+  reducers:{},
   extraReducers: {
     [sendWidgetAnswerAction.pending.toString()]: isFetching,
     [sendWidgetAnswerAction.fulfilled.toString()]: isNotFetching,
@@ -397,7 +400,6 @@ const widgetSlice = createSlice({
     [sendFileAction.pending.toString()]: isFetching,
     [sendFileAction.fulfilled.toString()]: isNotFetching,
     [sendFileAction.rejected.toString()]: isNotFetching,
-    makeAnswerEmptyAction,
 
     [getWorkshopTeamsAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.teams = {
@@ -446,7 +448,5 @@ const widgetSlice = createSlice({
 
   },
 });
-
-export const { initCurrentState: initCurrentStateAction } = widgetSlice.actions;
 
 export const { reducer: widgetReducer } = widgetSlice;

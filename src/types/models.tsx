@@ -1,0 +1,15 @@
+export type Workshop = any
+export type Event = any
+export type Invitation = any
+export type RegistrationReceipt = any
+export type Widget = any
+export type Team = any
+export type Request = any
+export type RegistrationForm = any
+export type Merchandise = any
+export type Article = any
+export type Notification = any
+export type Problem = any
+export type Submission = any
+export type SubmissionIsLoading = boolean
+export type UploadedFile = {link: string, name: string, id: string}

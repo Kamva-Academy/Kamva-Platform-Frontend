@@ -1,8 +1,16 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AsyncThunk, createAsyncThunk } from '@reduxjs/toolkit';
 
 import errorHandler from './errorHandler';
 
-export const createAsyncThunkApi = (typePrefix, api, url, options) =>
+type CreateAsyncThunkApiType =
+  (
+    typePrefix: string,
+    api: any,
+    url: any,
+    option?: any,
+  ) => AsyncThunk<any, any, {}>
+
+export const createAsyncThunkApi: CreateAsyncThunkApiType = (typePrefix, api, url, options) =>
   createAsyncThunk(typePrefix, async (arg, { rejectWithValue, dispatch, getState }) => {
     try {
       const body = options?.bodyCreator?.(arg) || arg;
@@ -18,10 +26,10 @@ export const createAsyncThunkApi = (typePrefix, api, url, options) =>
         response,
         ...(options?.defaultNotification?.success
           ? { message: options.defaultNotification.success }
-          : {}),
+          : {})
       };
     } catch (error) {
-      if (getState().Intl.locale == 'fa') {
+      if ((getState() as any).Intl.locale == 'fa') {
         return errorHandler(
           getState(),
           error,

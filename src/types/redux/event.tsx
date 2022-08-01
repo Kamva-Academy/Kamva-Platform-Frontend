@@ -2,6 +2,8 @@ type AudienceTypeType = "All" | "Student" | "Academic";
 
 type EventTypeType = "Team" | "Individual";
 
+import {Workshop, Event, Invitation, RegistrationReceipt, Widget, Team, Request, RegistrationForm, Merchandise, UploadedFile} from '../models'
+
 export type EventType = {
   accessible_after_closure: boolean;
   audience_type: AudienceTypeType;
@@ -56,13 +58,3 @@ export type InitialState = {
   playerId: Object,
 };
 
-type Workshop = any
-type Event = any
-type Invitation = any
-type RegistrationReceipt = any
-type Widget = any
-type Team = any
-type Request = any
-type RegistrationForm = any
-type Merchandise = any
-type UploadedFile = {link: string, name: string, id: string}
