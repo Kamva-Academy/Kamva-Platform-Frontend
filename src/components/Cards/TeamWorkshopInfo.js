@@ -86,7 +86,6 @@ const TeamInfo = ({
                 color="primary"
                 fullWidth
                 onClick={() => {
-                  console.log('i was clicked in pasokh be darkhast')
                   deleteRequestMentor({ teamId, fsmId });
                   redirect();
                 }}>

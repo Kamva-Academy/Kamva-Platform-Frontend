@@ -11,13 +11,23 @@ import {
   removeRequestMentorAction,
 } from '../../redux/slices/events';
 
-function Teams({
-  teamsRequests,
-  allEventTeams,
-  getRequestMentor,
-  createRequestMentor,
-  removeRequestMentor,
-}) {
+import { Team } from "../../types/models"
+
+type TeamPropsType = {
+  teamsRequests: string[],
+  eventTeams: Team[],
+  getRequestMentor: Function,
+  createRequestMentor: Function,
+  removeRequestMentor: Function,
+} 
+
+const Teams = ({
+  teamsRequests = [],
+  eventTeams = [],
+  getRequestMentor = undefined,
+  createRequestMentor = undefined,
+  removeRequestMentor = undefined,
+}: TeamPropsType) => {
   const { fsmId } = useParams();
   const subscriptionRef = useRef(null);
 
@@ -47,10 +57,10 @@ function Teams({
     };
   }, []);
 
-  const reqTeams = allEventTeams.filter(
+  const reqTeams = eventTeams.filter(
     (team) => teamsRequests[team.id + '.' + fsmId]
   );
-  const nonReqTeams = allEventTeams.filter(
+  const nonReqTeams = eventTeams.filter(
     (team) => !teamsRequests[team.id + '.' + fsmId]
   );
 
@@ -83,10 +93,12 @@ function Teams({
   );
 }
 
-const mapStateToProps = (state) => ({
-  allEventTeams: state.events.allEventTeams,
+const mapStateToProps = (state) => {
+  console.log(state.events)
+  return {
+  eventTeams: state.events.allEventTeams,
   teamsRequests: state.events.teamsRequests || {},
-});
+}};
 
 export default connect(mapStateToProps, {
   getRequestMentor: getRequestMentorAction,
