@@ -1,4 +1,4 @@
-import { Grid, Tab, Tabs } from '@mui/material';
+import { Grid, Tab, Tabs, Paper } from '@mui/material';
 import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
@@ -19,7 +19,7 @@ type TeamPropsType = {
   getRequestMentor: Function,
   createRequestMentor: Function,
   removeRequestMentor: Function,
-} 
+}
 
 const Teams = ({
   teamsRequests = [],
@@ -66,9 +66,21 @@ const Teams = ({
 
   return (
     <>
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={2}
+        alignItems='stretch'
+        justifyContent="center"
+        sx={(theme) => ({
+          height: '100%',
+          justifyContent: 'space-between',
+          [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+            marginRight: "0px",
+          },
+        })}
+      >
         {reqTeams?.map((team) => (
-          <Grid item xs={12} sm={6} md={4} key={team.id}>
+          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'
+          >
             <TeamWorkshopInfoCard
               {...team}
               teamId={team.id}
@@ -80,7 +92,7 @@ const Teams = ({
           </Grid>
         ))}
         {nonReqTeams?.map((team) => (
-          <Grid item xs={12} sm={6} md={4} key={team.id}>
+          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
             <TeamWorkshopInfoCard
               {...team}
               teamId={team.id}
@@ -96,9 +108,10 @@ const Teams = ({
 const mapStateToProps = (state) => {
   console.log(state.events)
   return {
-  eventTeams: state.events.allEventTeams,
-  teamsRequests: state.events.teamsRequests || {},
-}};
+    eventTeams: state.events.allEventTeams,
+    teamsRequests: state.events.teamsRequests || {},
+  }
+};
 
 export default connect(mapStateToProps, {
   getRequestMentor: getRequestMentorAction,
