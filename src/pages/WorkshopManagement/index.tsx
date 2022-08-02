@@ -114,12 +114,12 @@ const EventComponent: FC<EventPropsType> = ({
       <Grid container spacing={2} direction="row" justifyContent="center">
         <Grid container item sm={3} xs={12} direction="column" justifyContent="flex-start">
           <Grid item>
-            <ButtonGroup orientation="vertical" color="primary" fullWidth>
+            <ButtonGroup variant="outlined" orientation="vertical" color="primary" fullWidth>
               {tabs.map((tab, index) => (
                 <Button
                   key={index}
                   onClick={() => setTabIndex(index)}
-                  variant={tabIndex == index ? 'contained' : 'text' }
+                  variant={tabIndex == index ? 'contained' : 'outlined' }
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>

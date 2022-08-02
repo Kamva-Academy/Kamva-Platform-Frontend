@@ -61,3 +61,12 @@ input.rtl-placeholder::placeholder,
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
+
+@keyframes bellRing {
+  0%  { }
+  20%   { transform: rotate(15deg);  }
+  40%  { transform: rotate(-30deg); }
+  60%  { transform: rotate(15deg); }
+  80%  { transform: scale(2); }
+  100%  { transform: scale(1); }
+}
