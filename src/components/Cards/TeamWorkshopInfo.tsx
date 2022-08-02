@@ -31,7 +31,7 @@ type TeamInfoPropsType = {
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 300,
+   
   },
   icon: {
     textAlign: 'center',
@@ -67,8 +67,9 @@ const TeamInfo = ({
   }, [playerId, click, playerIdFromRedux])
 
   return (
-    <Card className={classes.root}
+    <Card
       sx={{
+        maxWidth: 300,
         height: '100%',
         width: '100%',
         padding: '0px !important',
@@ -112,7 +113,6 @@ const TeamInfo = ({
           <Grid item
             sx={(theme) => ({
               justifyContent: 'end',
-              marginBottom: "4px"
             })}
           >
             {playerId ? (

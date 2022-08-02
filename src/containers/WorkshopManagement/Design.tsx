@@ -13,6 +13,7 @@ import {
   getAllWorkshopStatesInfoAction,
   getOneStateAction,
 } from '../../redux/slices/workshop';
+import { State } from '../../types/models';
 
 const useStyles = makeStyles((theme) => ({
   tabbar: {
@@ -20,19 +21,25 @@ const useStyles = makeStyles((theme) => ({
   },
 
   workshopTabsPaper: {
-    padding: theme.spacing(1),
+    padding: 1,
     background: '#F7F9FC',
     height: '100%',
   },
 }));
 
+type EditWorkshopPropsType = {
+  getAllWorkshopStatesInfo: Function,
+  getOneState: Function,
+  currentState: State,
+  allStates: State[],
+}
+
 const EditWorkshop = ({
   getAllWorkshopStatesInfo,
   getOneState,
-
-  currentState,
-  allStates,
-}) => {
+  currentState = null,
+  allStates = [],
+}: EditWorkshopPropsType) => {
   const classes = useStyles();
   const { fsmId } = useParams();
   const [tab, setTab] = React.useState(0);
@@ -54,7 +61,8 @@ const EditWorkshop = ({
           <StatesTabbar
             value={tab}
             setValue={setTab}
-            tabs={allStates.map((state) => state.name)}
+            tabs={allStates.map((state) => state.name)} 
+            fsmId={fsmId}
           />
         </Paper>
         <EditState state={currentState} />
@@ -63,7 +71,7 @@ const EditWorkshop = ({
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: State) => ({
   allStates: state.workshop.allStates,
   currentState: state.workshop.currentState,
 });
