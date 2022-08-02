@@ -39,8 +39,7 @@
     "redux-undo": "^1.0.1",
     "stylis": "^4.1.1",
     "stylis-plugin-rtl": "^2.1.1",
-    "tinymce": "^6.1.0",
-    "tss-react": "^3.7.1"
+    "tinymce": "^6.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
