@@ -1,7 +1,5 @@
 import {
   Grid,
-  IconButton,
-  Tooltip,
   Typography,
 } from '@mui/material';
 import React from 'react';
@@ -12,7 +10,7 @@ import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles((theme) => ({
   absolute: {
     position: 'absolute',
-    right: theme.spacing(2),
+    right: 2,
     zIndex: 5,
   },
 }));
@@ -29,7 +27,7 @@ function Index({
         container item
         spacing={2}
         alignItems="center"
-        justify="center"
+        justifyContent="center"
         direction="row">
         <Grid item xs={12}>
           <Typography variant='h1' align='center'>{workshop?.name}</Typography>
