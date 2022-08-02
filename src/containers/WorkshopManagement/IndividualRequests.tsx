@@ -8,7 +8,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -22,18 +22,29 @@ import {
 import {
   getFSMPlayersAction,
 } from '../../redux/slices/workshop';
+import { Request, Player, Token } from '../../types/models'
 
-function Teams({
+type InfoPropsType = {
+  getFSMPlayers: Function,
+  getRequestMentor: Function,
+  deleteRequestMentor: Function,
+  token: Token,
+  requests: Request,
+  players: Player,
+  createRequestMentor: Function,
+  removeRequestMentor: Function,
+}
+
+const Teams: FC<InfoPropsType> = ({
   getFSMPlayers,
   getRequestMentor,
   deleteRequestMentor,
-
   token,
   requests,
   players,
   createRequestMentor,
   removeRequestMentor,
-}) {
+}) => {
   const { fsmId } = useParams();
   const subscriptionRef = useRef(null);
 
@@ -82,7 +93,7 @@ function Teams({
 
   return (
     <>
-      <Grid container spacing={1} alignItems="center" justify="center">
+      <Grid container spacing={1} alignItems="center" justifyContent="center">
         <TableContainer>
           <Table>
             <TableHead>

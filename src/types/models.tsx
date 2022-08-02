@@ -16,4 +16,5 @@ export type State = any
 export type Answer = any
 export type WorkshopEdge = any
 export type Player = any
+export type Token = any
 export type UploadedFile = {link: string, name: string, id: string}
