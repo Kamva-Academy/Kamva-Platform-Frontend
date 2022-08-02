@@ -224,19 +224,19 @@ const Payment = ({
 };
 
 const mapStateToProps = (state) => ({
-  events: state.events.events || [],
   event: state.events.event,
-  receipt: state.events.receipt,
-  registrationForm: state.events.registrationForm,
   discountedPrice: state.events.discountedPrice,
 });
 
-export default connect(mapStateToProps, {
-  getOneRegistrationForm: getOneRegistrationFormAction,
-  getOneEventInfo: getOneEventInfoAction,
-  purchaseEvent: purchaseEventAction,
-  submitRegistrationForm: submitRegistrationFormAction,
-  addNotification: addNotificationAction,
-  applyDiscountCode: applyDiscountCodeAction,
-  getOneRegistrationReceipt: getOneRegistrationReceiptAction,
-})(Payment);
+export default connect(
+  mapStateToProps,
+  {
+    getOneRegistrationForm: getOneRegistrationFormAction,
+    getOneEventInfo: getOneEventInfoAction,
+    purchaseEvent: purchaseEventAction,
+    submitRegistrationForm: submitRegistrationFormAction,
+    addNotification: addNotificationAction,
+    applyDiscountCode: applyDiscountCodeAction,
+    getOneRegistrationReceipt: getOneRegistrationReceiptAction,
+  }
+)(Payment);

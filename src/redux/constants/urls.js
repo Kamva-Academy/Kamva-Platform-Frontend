@@ -58,6 +58,8 @@ export const TeamCRUDUrl = ({ teamId }) =>
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
 
+export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/articles/${articleId}` : `fsm/articles/?page=${pageNumber}`;
+
 export const statesUrl = 'fsm/state/';
 
 export const helpUrl = 'fsm/help/';
@@ -96,6 +98,7 @@ export const paymentRequestUrl = 'auth/pay/';
 // widget
 export const sendWidgetAnswerUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/submit_answer/`;
 export const makeAnswerEmptyUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/make_empty/`;
+
 
 //event
 export const getCertificateUrl = ({ registrationReceiptId }) => `/fsm/receipts/${registrationReceiptId}/get_certificate/`;

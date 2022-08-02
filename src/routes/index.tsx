@@ -2,13 +2,12 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import AboutUs from '../containers/AboutUs';
-import ChangePassword from '../containers/ChangePassword';
+import ResetPassword from '../pages/ResetPassword';
 import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
-import JoinMentor from '../containers/JoinMentor';
 import Landing from '../containers/Landing';
 import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
@@ -17,6 +16,7 @@ import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
+import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../pages/WorkshopManagement';
 
@@ -27,7 +27,7 @@ const Root = () => {
 
       <Route path="/about_us" element={<AboutUs />} />
 
-      <Route path="/reset_password" element={<ChangePassword />} />
+      <Route path="/reset_password" element={<ResetPassword />} />
       <Route path="/create_account" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
       <Route path="/" element={<Landing />} />
@@ -47,6 +47,8 @@ const Root = () => {
         <Route path="/events/" element={<Events />} />
 
         <Route path="/event/:eventId/workshop/:fsmId/manage/" element={<WorkshopManagement />} />
+        <Route path="/articles/" element={<Articles />} />
+
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
 
         <Route path="/event/:eventId/profile/:section/" element={<Profile />} />
