@@ -8,7 +8,7 @@ import AppBar from '../../components/Appbar/ResponsiveAppBar';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(4),
+    padding: 4,
     display: 'flex',
     justifyContent: 'center',
     maxWidth: '900px !important',
@@ -23,7 +23,7 @@ const Layout = ({
   const classes = useStyles();
   return (
     <>
-      <AppBar mode='MENTOR_DASHBOARD' position='relative' />
+      <AppBar mode='MENTOR_DASHBOARD' position='relative' showBackOnScroll={false} hideOnScroll={false} />
       <Container className={classes.container} >
         {props.children}
       </Container>
