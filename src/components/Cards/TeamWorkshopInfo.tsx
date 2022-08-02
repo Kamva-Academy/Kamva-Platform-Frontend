@@ -8,9 +8,8 @@ import {
   Typography,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import makeStyles from '@mui/styles/makeStyles';
 
 import {
   deleteRequestMentorAction,
@@ -18,7 +17,7 @@ import {
 } from '../../redux/slices/events';
 import { useNavigate, useParams } from 'react-router-dom';
 
-type TeamInfoPropsType = {
+type TeamWorkshopInfoPropsType = {
   name: string,
   members: any[],
   teamId: number,
@@ -29,16 +28,7 @@ type TeamInfoPropsType = {
   getPlayerFromTeam: Function,
 }
 
-const useStyles = makeStyles({
-  root: {
-   
-  },
-  icon: {
-    textAlign: 'center',
-  },
-});
-
-const TeamInfo = ({
+const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   name,
   members,
   teamId,
@@ -47,8 +37,7 @@ const TeamInfo = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-}: TeamInfoPropsType) => {
-  const classes = useStyles();
+}) => {
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
@@ -150,4 +139,4 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(mapStateToProps, {
   deleteRequestMentor: deleteRequestMentorAction,
   getPlayerFromTeam: getPlayerFromTeamAction,
-})(TeamInfo);
+})(TeamWorkshopInfo);
