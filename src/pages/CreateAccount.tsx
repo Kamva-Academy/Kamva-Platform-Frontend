@@ -126,25 +126,38 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
         paddingTop: 4,
         paddingBottom: 4,
       }}>
-      <Grid
-        container item
-        justifyContent='center'
-        alignItems='center'
-        xs={12} sm={8} md={4}>
-        <Grid item xs={12}>
-          <Paper sx={{ padding: 2 }}>
-            <Grid item container>
-              <Grid
-                container
-                item
-                direction='column'
-                justifyContent='center'
-                spacing={2}>
-                <Grid item>
-                  <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
-                </Grid>
+      <Grid xs={12} sm={8} md={4}>
+        <Paper sx={{ padding: 2 }}>
+          <Grid item container>
+            <Grid
+              container
+              item
+              direction='column'
+              justifyContent='center'
+              spacing={2}>
+              <Grid item>
+                <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
+              </Grid>
 
-                <Grid item>
+              <Grid item>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  onChange={(e) => {
+                    if (isJustDigits(e.target.value)) {
+                      putData(e);
+                    }
+                  }}
+                  value={data.phoneNumber}
+                  name="phoneNumber"
+                  label="شماره تلفن همراه"
+                  inputProps={{ className: 'ltr-input' }}
+                  type="tel"
+                />
+              </Grid>
+
+              <Grid item container justifyContent="center" alignItems="stretch" spacing={1}>
+                <Grid item xs={8} sm={8}>
                   <TextField
                     variant="outlined"
                     fullWidth
@@ -153,91 +166,72 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
                         putData(e);
                       }
                     }}
-                    value={data.phoneNumber}
-                    name="phoneNumber"
-                    label="شماره تلفن همراه"
+                    value={data.code}
+                    name="code"
+                    label="کد تایید پیامک‌شده"
                     inputProps={{ className: 'ltr-input' }}
-                    type="tel"
+                    type="text"
                   />
                 </Grid>
-
-                <Grid item container justifyContent="center" alignItems="stretch" spacing={1}>
-                  <Grid item xs={8} sm={8}>
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      onChange={(e) => {
-                        if (isJustDigits(e.target.value)) {
-                          putData(e);
-                        }
-                      }}
-                      value={data.code}
-                      name="code"
-                      label="کد تایید پیامک‌شده"
-                      inputProps={{ className: 'ltr-input' }}
-                      type="text"
-                    />
-                  </Grid>
-                  <Grid item xs={4} sm={4} container>
-                    <Button
-                      size="small"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={doGetVerificationCode}
-                      disabled={buttonText !== 'دریافت کد'}>
-                      {buttonText}
-                    </Button>
-                  </Grid>
-                </Grid>
-
-                <Grid item>
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    onChange={putData}
-                    label="گذرواژه"
-                    name="password"
-                    inputProps={{ className: 'ltr-input' }}
-                    type="password"
-                  />
-                </Grid>
-
-                <Grid item>
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    onChange={putData}
-                    label="تکرار گذرواژه"
-                    type="password"
-                    inputProps={{ className: 'ltr-input' }}
-                    name="confirmationPassword"
-                  />
-                </Grid>
-
-                <Grid container item direction="row" justifyContent="center">
+                <Grid item xs={4} sm={4} container>
                   <Button
-                    onClick={doRegistration}
+                    size="small"
+                    fullWidth
                     variant="contained"
                     color="primary"
-                    disabled={isFetching}
-                    fullWidth>
-                    ثبت
+                    onClick={doGetVerificationCode}
+                    disabled={buttonText !== 'دریافت کد'}>
+                    {buttonText}
                   </Button>
                 </Grid>
+              </Grid>
 
-                <Grid item>
-                  <Typography align="center">
-                    {' از قبل حساب داشتی؟ به '}
-                    <Link style={{ textDecoration: 'none' }}
-                      to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
-                    {' برو.'}
-                  </Typography>
-                </Grid>
+              <Grid item>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  onChange={putData}
+                  label="گذرواژه"
+                  name="password"
+                  inputProps={{ className: 'ltr-input' }}
+                  type="password"
+                />
+              </Grid>
+
+              <Grid item>
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  onChange={putData}
+                  label="تکرار گذرواژه"
+                  type="password"
+                  inputProps={{ className: 'ltr-input' }}
+                  name="confirmationPassword"
+                />
+              </Grid>
+
+              <Grid container item direction="row" justifyContent="center">
+                <Button
+                  onClick={doRegistration}
+                  variant="contained"
+                  color="primary"
+                  disabled={isFetching}
+                  fullWidth>
+                  ثبت
+                </Button>
+              </Grid>
+
+              <Grid item>
+                <Typography align="center">
+                  {' از قبل حساب داشتی؟ به '}
+                  <Link style={{ textDecoration: 'none' }}
+                    to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
+                  {' برو.'}
+                </Typography>
               </Grid>
             </Grid>
-          </Paper>
-        </Grid>
+          </Grid>
+        </Paper>
       </Grid>
     </Container>
   )
