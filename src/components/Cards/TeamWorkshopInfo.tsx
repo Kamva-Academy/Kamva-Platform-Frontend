@@ -22,7 +22,7 @@ import {
 } from '../../redux/slices/events';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Mentor } from '../../types/models';
-import {stringToColor} from '../../utils/stringToColor'
+import { stringToColor } from '../../utils/stringToColor'
 
 type TeamWorkshopInfoPropsType = {
   name: string,
@@ -36,21 +36,7 @@ type TeamWorkshopInfoPropsType = {
   mentorsInRoom: Mentor[],
 }
 
-<<<<<<< HEAD
-const useStyles = makeStyles({
-  root: {
-   
-  },
-  icon: {
-    textAlign: 'center',
-  },
-});
-
-
-const TeamInfo = ({
-=======
 const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
->>>>>>> 84d873931f6b3a531d1089ef09640a1e00f28c2a
   name,
   members,
   teamId,
@@ -59,13 +45,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-<<<<<<< HEAD
-  mentorsInRoom = [{id: 0, name: "Iman Aliour"}, {id: 1, name: "Alireza Hashemi"}, {id: 2, name: "Erfan Moeini"}, {id: 3, name: "Sadegh Salimi"}],
-}: TeamInfoPropsType) => {
-  const classes = useStyles();
-=======
+  mentorsInRoom = [{ id: 0, name: "Iman Aliour" }, { id: 1, name: "Alireza Hashemi" }, { id: 2, name: "Erfan Moeini" }, { id: 3, name: "Sadegh Salimi" }],
 }) => {
->>>>>>> 84d873931f6b3a531d1089ef09640a1e00f28c2a
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
@@ -107,37 +88,37 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     >
 
       <Stack
-              direction="row"
-              sx = {{
-                padding: "10px",
-                background: '#eee',
-                height: "40px",
-                display: 'flex',
-                justifyContent: "space-between",
-                alignItems: 'center'
-              }}       
+        direction="row"
+        sx={{
+          padding: "10px",
+          background: '#eee',
+          height: "40px",
+          display: 'flex',
+          justifyContent: "space-between",
+          alignItems: 'center'
+        }}
       >
-          {playerId ? <NotificationsActive sx={{animation: "bellRing 1.4s infinite", width: "40px"}} color="primary" /> : <Box/>}
-          { mentorsInRoom.length > 0 &&
-                  <AvatarGroup 
-                    max={3}
-                    sx={{
-                      justifySelf: 'center',
-                      '& .MuiAvatar-root': { width: 26, height: 26, fontSize: 12, backgroundColor: "#0088aa" },
-                    }}
-                  >
-                    {mentorsInRoom.map((mentor: Mentor) =>
-                      <Tooltip key={mentor.id} title={mentor.name} arrow>
-                        <Avatar  
-                          sx={{
-                            backgroundColor:`${stringToColor(mentor.name)} !important`,
-                          }}
-                          alt={mentor.name} 
-                          src={mentor.profilePicturePath || '/margbarmuimargbarmui'} />
-                      </Tooltip>
-                      )}
-                  </AvatarGroup>    
-              } 
+        {playerId ? <NotificationsActive sx={{ animation: "bellRing 1.4s infinite", width: "40px" }} color="primary" /> : <Box />}
+        {mentorsInRoom.length > 0 &&
+          <AvatarGroup
+            max={3}
+            sx={{
+              justifySelf: 'center',
+              '& .MuiAvatar-root': { width: 26, height: 26, fontSize: 12, backgroundColor: "#0088aa" },
+            }}
+          >
+            {mentorsInRoom.map((mentor: Mentor) =>
+              <Tooltip key={mentor.id} title={mentor.name} arrow>
+                <Avatar
+                  sx={{
+                    backgroundColor: `${stringToColor(mentor.name)} !important`,
+                  }}
+                  alt={mentor.name}
+                  src={mentor.profilePicturePath || '/margbarmuimargbarmui'} />
+              </Tooltip>
+            )}
+          </AvatarGroup>
+        }
       </Stack>
       <CardActionArea disabled>
         <CardContent>

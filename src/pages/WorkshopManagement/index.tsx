@@ -110,11 +110,7 @@ const EventComponent: FC<EventPropsType> = ({
                 <Button
                   key={index}
                   onClick={() => setTabIndex(index)}
-<<<<<<< HEAD
                   variant={tabIndex == index ? 'contained' : 'outlined' }
-=======
-                  variant={tabIndex == index ? 'contained' : 'text'}
->>>>>>> 84d873931f6b3a531d1089ef09640a1e00f28c2a
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>
