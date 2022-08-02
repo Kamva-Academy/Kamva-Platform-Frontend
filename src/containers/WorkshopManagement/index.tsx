@@ -2,20 +2,16 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Container,
   Grid,
-  Hidden,
   Paper,
 } from '@mui/material';
-import ClassIcon from '@mui/icons-material/Class';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import GroupIcon from '@mui/icons-material/Group';
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, useEffect, useState } from 'react';
+import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { useHistory } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
+import('../../types/models')
 
 import {
   getEventTeamsAction,
@@ -30,6 +26,7 @@ import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
+import {Workshop, Event} from '../../types/models';
 
 const useStyles = makeStyles()((theme) => {
   return{
@@ -39,7 +36,15 @@ const useStyles = makeStyles()((theme) => {
 }
 });
 
-const Event = ({
+type EventPropsType = {
+  getEventTeams: Function,
+  getOneEventInfo: Function,
+  getOneWorkshopsInfo: Function,
+  workshop: Workshop,
+  event: Event,
+}
+
+const Event: FC<EventPropsType> = ({
   getEventTeams,
   getOneEventInfo,
   getOneWorkshopsInfo,
@@ -50,7 +55,7 @@ const Event = ({
   const t = useTranslate();
   const { fsmId, eventId } = useParams();
   const [tabIndex, setTabIndex] = useState(0);
-  const [tabs, setTabs] = useState([
+  const [tabs, setTabs] = useState<{label: string; icon: string; component: ConnectedComponent<any,any> | FC<any>; props?: any}[]>([
     {
       label: 'اطلاعات کلی',
       icon: '',
@@ -106,8 +111,8 @@ const Event = ({
 
   return (
     <Layout>
-      <Grid container spacing={2} direction="row" justify="center">
-        <Grid container item sm={3} xs={12} direction="column" justify="flex-start">
+      <Grid container spacing={2} direction="row" justifyContent="center">
+        <Grid container item sm={3} xs={12} direction="column" justifyContent="flex-start">
           <Grid item>
             <ButtonGroup orientation="vertical" color="primary" fullWidth>
               {tabs.map((tab, index) => (

@@ -2,10 +2,11 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import makeStyles from '@mui/styles/makeStyles';
+import { Workshop } from '../../types/models';
 
 const useStyles = makeStyles((theme) => ({
   absolute: {
@@ -15,9 +16,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Index({
+type InfoPropsType = {
+  workshop: Workshop;
+}
+
+const Info: FC<InfoPropsType> = ({
   workshop,
-}) {
+}) => {
   const classes = useStyles();
   const t = useTranslate();
 
@@ -48,4 +53,4 @@ export default connect(
   mapStateToProps,
   {
   }
-)(Index);
+)(Info);

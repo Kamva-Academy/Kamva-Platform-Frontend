@@ -1,5 +1,5 @@
 import { Grid, Tab, Tabs, Paper } from '@mui/material';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -21,13 +21,13 @@ type TeamPropsType = {
   removeRequestMentor: Function,
 }
 
-const Teams = ({
+const Teams: FC<TeamPropsType> = ({
   teamsRequests = [],
   eventTeams = [],
   getRequestMentor = undefined,
   createRequestMentor = undefined,
   removeRequestMentor = undefined,
-}: TeamPropsType) => {
+}) => {
   const { fsmId } = useParams();
   const subscriptionRef = useRef(null);
 
