@@ -17,7 +17,7 @@ import {
   TextField,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import makeStyles from '@mui/styles/makeStyles';
@@ -25,6 +25,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import {
   addNotificationAction,
 } from '../../redux/slices/notifications';
+
 import {
   addEdgeAction,
   getAllWorkshopEdgesAction,
@@ -33,26 +34,37 @@ import {
   updateEdgeAction,
 } from '../../redux/slices/workshop';
 import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
+import { WorkshopEdge, State } from '../../types/models'
 
 const useStyles = makeStyles((theme) => ({
   absolute: {
     position: 'absolute',
-    right: theme.spacing(2),
+    right: 2,
     zIndex: 5,
   },
 }));
 
-function Index({
+type IndexPropsType = {
+  addNotification: Function,
+  getAllWorkshopEdges: Function,
+  getAllWorkshopStatesInfo: Function,
+  addEdge: Function,
+  updateEdge: Function,
+  removeEdge: Function,
+  allWorkshopEdges: WorkshopEdge[],
+  allStates: State[],
+}
+
+const Index: FC<IndexPropsType> = ({
   addNotification,
   getAllWorkshopEdges,
   getAllWorkshopStatesInfo,
   addEdge,
   updateEdge,
   removeEdge,
-
   allWorkshopEdges,
   allStates,
-}) {
+}) => {
   const [stateName, setStateName] = useState();
   const [newEdge, setNewEdge] = useState({
     tail: '',
@@ -72,7 +84,7 @@ function Index({
 
   return (
     <>
-      <Grid container spacing={1} alignItems="center" justify="center">
+      <Grid container spacing={1} alignItems="center" justifyContent="center">
         <TableContainer>
           <Table>
             <TableHead>
