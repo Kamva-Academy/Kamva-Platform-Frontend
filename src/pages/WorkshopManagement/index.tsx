@@ -10,7 +10,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useParams } from 'react-router-dom';
-import { makeStyles } from 'tss-react/mui';
 import('../../types/models')
 
 import {
@@ -26,15 +25,8 @@ import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
-import {Workshop, Event} from '../../types/models';
+import { Workshop, Event } from '../../types/models';
 
-const useStyles = makeStyles()((theme) => {
-  return{
-  rightBox: {
-    padding: theme.spacing(2),
-  },
-}
-});
 
 type EventPropsType = {
   getEventTeams: Function,
@@ -51,11 +43,10 @@ const EventComponent: FC<EventPropsType> = ({
   workshop,
   event,
 }) => {
-  const { classes } = useStyles();
   const t = useTranslate();
   const { fsmId, eventId } = useParams();
   const [tabIndex, setTabIndex] = useState(0);
-  const [tabs, setTabs] = useState<{label: string; icon: string; component: ConnectedComponent<any,any> | FC<any>; props?: any}[]>([
+  const [tabs, setTabs] = useState<{ label: string; icon: string; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
       label: 'اطلاعات کلی',
       icon: '',
@@ -102,7 +93,7 @@ const EventComponent: FC<EventPropsType> = ({
       }
     }
   }, [workshop])
-  
+
   useEffect(() => {
     if (event?.registration_form) {
       getEventTeams({ registrationFormId: event?.registration_form });
@@ -119,7 +110,11 @@ const EventComponent: FC<EventPropsType> = ({
                 <Button
                   key={index}
                   onClick={() => setTabIndex(index)}
+<<<<<<< HEAD
                   variant={tabIndex == index ? 'contained' : 'outlined' }
+=======
+                  variant={tabIndex == index ? 'contained' : 'text'}
+>>>>>>> 84d873931f6b3a531d1089ef09640a1e00f28c2a
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>
@@ -141,7 +136,7 @@ const EventComponent: FC<EventPropsType> = ({
           </Box>
         </Grid>
         <Grid item sm={9} xs={12}>
-          <Paper elevation={3} className={classes.rightBox}>
+          <Paper elevation={3} sx={{ padding: 2 }}>
             <TabComponent {...tabs[tabIndex].props} />
           </Paper>
         </Grid>

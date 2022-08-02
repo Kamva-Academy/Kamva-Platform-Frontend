@@ -13,9 +13,8 @@ import {
   Typography,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import makeStyles from '@mui/styles/makeStyles';
 
 import {
   deleteRequestMentorAction,
@@ -25,7 +24,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Mentor } from '../../types/models';
 import {stringToColor} from '../../utils/stringToColor'
 
-type TeamInfoPropsType = {
+type TeamWorkshopInfoPropsType = {
   name: string,
   members: any[],
   teamId: number,
@@ -37,6 +36,7 @@ type TeamInfoPropsType = {
   mentorsInRoom: Mentor[],
 }
 
+<<<<<<< HEAD
 const useStyles = makeStyles({
   root: {
    
@@ -48,6 +48,9 @@ const useStyles = makeStyles({
 
 
 const TeamInfo = ({
+=======
+const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
+>>>>>>> 84d873931f6b3a531d1089ef09640a1e00f28c2a
   name,
   members,
   teamId,
@@ -56,9 +59,13 @@ const TeamInfo = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
+<<<<<<< HEAD
   mentorsInRoom = [{id: 0, name: "Iman Aliour"}, {id: 1, name: "Alireza Hashemi"}, {id: 2, name: "Erfan Moeini"}, {id: 3, name: "Sadegh Salimi"}],
 }: TeamInfoPropsType) => {
   const classes = useStyles();
+=======
+}) => {
+>>>>>>> 84d873931f6b3a531d1089ef09640a1e00f28c2a
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
@@ -193,4 +200,4 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(mapStateToProps, {
   deleteRequestMentor: deleteRequestMentorAction,
   getPlayerFromTeam: getPlayerFromTeamAction,
-})(TeamInfo);
+})(TeamWorkshopInfo);

@@ -1,5 +1,4 @@
 import { Fab, Toolbar } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import Container from '@mui/material/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
@@ -20,28 +19,6 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
-
-const useStyles = makeStyles()((theme) => {
-  return {
-    centerItems: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: 'calc(100vh - 64px)',
-    },
-    title: {
-      fontSize: 60,
-      color: '#555',
-      marginBottom: 20,
-      [theme.breakpoints.down('sm')]: {
-        fontSize: 40,
-      },
-    },
-    body: {
-      background: '#F7F9FC',
-    },
-  }
-});
 
 export const StatePageContext = React.createContext();
 
@@ -68,7 +45,6 @@ const Workshop = ({
     playerId = studentPlayerId;
   }
   const { eventId } = useParams();
-  const { classes } = useStyles();
   const subscriberRef = useRef(null);
 
   useEffect(() => {
@@ -145,7 +121,10 @@ const Workshop = ({
   return (
     <StatePageContext.Provider
       value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam }}>
-      <Container component="main" className={classes.body}>
+      <Container component="main"
+        sx={{
+          background: '#F7F9FC',
+        }}>
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
