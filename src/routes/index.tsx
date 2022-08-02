@@ -18,7 +18,7 @@ import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
 import PrivateRoute from './PrivateRoute';
-import WorkshopManagement from '../containers/WorkshopManagement';
+import WorkshopManagement from '../pages/WorkshopManagement';
 
 const Root = () => {
   return (
