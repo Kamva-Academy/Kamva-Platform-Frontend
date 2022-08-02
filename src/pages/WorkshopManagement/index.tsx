@@ -44,7 +44,7 @@ type EventPropsType = {
   event: Event,
 }
 
-const Event: FC<EventPropsType> = ({
+const EventComponent: FC<EventPropsType> = ({
   getEventTeams,
   getOneEventInfo,
   getOneWorkshopsInfo,
@@ -162,4 +162,4 @@ export default connect(
     getOneEventInfo: getOneEventInfoAction,
     getOneWorkshopsInfo: getOneWorkshopsInfoAction,
   }
-)(Event);
+)(EventComponent);
