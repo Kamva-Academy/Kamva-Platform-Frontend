@@ -17,6 +17,7 @@ import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
+import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 
 const Root = () => {
@@ -44,6 +45,8 @@ const Root = () => {
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
+
+        <Route path="/articles/" element={<Articles />} />
 
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
         <Route path="/watch/:playerId/" element={<Workshop />} />
