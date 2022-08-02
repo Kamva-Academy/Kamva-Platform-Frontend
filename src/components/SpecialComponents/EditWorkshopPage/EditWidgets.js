@@ -23,7 +23,7 @@ import {
   updateStateAction,
 } from '../../../redux/slices/workshop';
 import AreYouSure from '../../Dialog/AreYouSure';
-import Widget, { MODES } from '../../Widget';
+import Widget, { MODES } from '../../Widget2';
 import CreateWidgetDialog from './components/CreateWidgetDialog';
 
 const useStyles = makeStyles((theme) => ({

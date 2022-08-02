@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import WIDGET_TYPES from '../../../Widget/WidgetTypes';
+import WIDGET_TYPES from '../../../Widget2/WidgetTypes';
 
 export default function CreateWidgetDialog({ open, handleClose, stateId }) {
   const [type, setType] = useState('');
