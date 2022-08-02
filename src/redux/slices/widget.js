@@ -5,6 +5,7 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   makeAnswerEmptyUrl,
   sendWidgetAnswerUrl,
+  widgetCRUDUrl
 } from '../constants/urls';
 
 export const sendWidgetAnswerAction = createAsyncThunkApi(
@@ -15,6 +16,45 @@ export const sendWidgetAnswerAction = createAsyncThunkApi(
     defaultNotification: {
       success: 'پاسخ شما با موفقیت ثبت شد.',
       error: 'مشکلی در ثبت پاسخ وجود داشت.',
+    },
+  }
+);
+
+export const updateWidgetAction = createAsyncThunkApi(
+  'widget/updateWidgetAction',
+  Apis.PATCH,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت به‌روز شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
+    },
+  }
+);
+
+export const createWidgetAction = createAsyncThunkApi(
+  'widget/widget/create',
+  Apis.POST,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت اضافه شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
+    },
+  }
+);
+
+export const deleteWidgetAction = createAsyncThunkApi(
+  'widget/widgets/delete',
+  Apis.DELETE,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت حذف شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
     },
   }
 );
