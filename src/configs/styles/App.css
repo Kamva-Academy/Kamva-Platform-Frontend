@@ -64,9 +64,12 @@ input.rtl-placeholder::placeholder,
 
 @keyframes bellRing {
   0%  { }
-  20%   { transform: rotate(15deg);  }
-  40%  { transform: rotate(-30deg); }
-  60%  { transform: rotate(15deg); }
+  10%   { transform: rotate(10deg);  }
+  20%  { transform: rotate(-20deg); }
+  30%  { transform: rotate(20deg); }
+  40%   { transform: rotate(-20deg);  }
+  50%  { transform: rotate(20deg); }
+  60%  { transform: rotate(-10deg); }
   80%  { transform: scale(2); }
   100%  { transform: scale(1); }
 }
