@@ -27,7 +27,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
 import moment from 'moment-jalaali';
-moment.loadPersian({usePersianDigits: true})
+moment.loadPersian({ usePersianDigits: true })
 
 type TeamWorkshopInfoPropsType = {
   name: string,
@@ -61,6 +61,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
 
+  {/* this function redirects mentor to a teams page, this team could have requested mentor or not, if so, we use the
+available playerId field, otherwise we fetch one team members Id and use it to access their page */}
   const redirect = () => {
     setClick(true);
     if (!playerId) {
@@ -75,7 +77,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   }, [playerId, click, playerIdFromRedux])
 
   return (
-    <Card
+    
+    <Card /* main team card coomponent*/
       sx={{
         maxWidth: 300,
         marginTop: '0px',
@@ -98,8 +101,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       }}
     >
 
-      <Box>
-        <Stack
+      <Box> {/* this box is used to glue team header and members and name together so that when we use the attribute space-between stretch happends between level/time widget and members */}
+        <Stack /* this stack holds the header of each teams card */
           direction="row"
           sx={{
             padding: "10px",
@@ -142,7 +145,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
           }
         </Stack>
 
-        <CardActionArea disabled>
+        <CardActionArea disabled> {/* this action holds each cards name and members */}
           <CardContent sx={{ paddingBottom: '0px' }}>
             <Typography gutterBottom variant="h3">
               {name}
@@ -173,7 +176,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       </Box>
 
 
-      <CardActions sx={{ paddingTop: '0px' }}>
+      <CardActions sx={{ paddingTop: '0px' }}> {/* this action hols the redirect button and also the time and level widgets*/}
         <Grid container direction="column" spacing={1}>
           <Grid item
             sx={(theme) => ({
@@ -181,11 +184,17 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
             })}
           >
             <Divider sx={{ margin: '15px auto 15px auto' }}></Divider>
-            {startProblemTimeMoment && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}>
+            {startProblemTimeMoment && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
               <Box>
-                {`گام: ${teamLevel}`}
+                {teamLevel ? `گام: ${teamLevel}` : 'تیم هنوز وارد هیچ گامی نشده است'}
               </Box>
-              <TimeChip startTime={startProblemTimeMoment}/>
+              <Tooltip title={'زمان حضور تیم در این گام'} arrow>
+                <span>
+                  <Button disabled>
+                    <TimeChip startTime={startProblemTimeMoment} />
+                  </Button>
+                </span>
+              </Tooltip>
             </Stack>}
             {playerId ? (
               <Button
@@ -219,10 +228,12 @@ type TimeChipPropsType = {
   startTime: moment.Moment
 }
 
+/* the time chip is the chip that has the timer in it that shows how long the team has been on current problem
+we use the useEffect to initiate the timeInterval and later on we return the destructor to control the 'out'sideEffects*/
 const TimeChip: FC<TimeChipPropsType> = (props) => {
   const [elapsedTime, setElapsedTime] = useState(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss'))
   useEffect(() => {
-    const changeInterval = setInterval(() => {setElapsedTime(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss'))}, 1000)
+    const changeInterval = setInterval(() => { setElapsedTime(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss')) }, 1000)
     return (
       () => clearInterval(changeInterval)
     )
@@ -233,7 +244,7 @@ const TimeChip: FC<TimeChipPropsType> = (props) => {
       icon={<AccessTimeIcon />}
       label={elapsedTime}
       size="small"
-      sx={{ fontSize: 'inherit', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
+      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
     />
   )
 }
