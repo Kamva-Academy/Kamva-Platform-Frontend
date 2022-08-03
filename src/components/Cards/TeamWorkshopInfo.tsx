@@ -50,9 +50,9 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-  mentorsInRoom = [{ id: 1, name: "Alireza Hashemi" }, { id: 2, name: "Erfan Moeini" }, { id: 3, name: "Sadegh Salimi" }, { id: 0, name: "Iman Aliour" }],
+  mentorsInRoom = [],
   timeSpentOnProblem = '۲ دقیقه',
-  teamLevel = 'مرحله ۴',
+  teamLevel = 'مرحلهsdfsadf asdf asdf asd fasd f ۴',
 }) => {
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
@@ -108,7 +108,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
           }}
         >
           {playerId ? <NotificationsActive sx={{ animation: "bellRing 1.4s infinite", width: "40px" }} color="primary" /> : <Box />}
-          {mentorsInRoom.length > 0 &&
+          {mentorsInRoom.length > 0 ?
             <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>
               <Typography sx={{ fontSize: "8px", margin: '10px' }}>
                 {`همیاران: `}
@@ -132,39 +132,53 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
                 )}
               </AvatarGroup>
             </Stack>
+            :
+            <Typography align='right' sx={{ ":dir": 'rtl', fontSize: "8px", margin: '10px' }}>
+              {`همیاری بالای سر این تیم نیست`}
+            </Typography>
           }
         </Stack>
 
         <CardActionArea disabled>
-          <CardContent sx={{paddingBottom: '0px'}}>
+          <CardContent sx={{ paddingBottom: '0px' }}>
             <Typography gutterBottom variant="h3">
               {name}
             </Typography>
             <Grid container direction="row" justifyContent="start">
-              <ul>
+              {members.length > 0 ? <ul>
                 {members.map((member) => (
-                  (member?.first_name || member?.last_name) && <li key={member.id}>
-                    <Typography>
-                      {`${member?.first_name} ${member?.last_name}`}
-                    </Typography>
-                  </li>
+                  (member?.first_name || member?.last_name) ?
+                    <li key={member.id}>
+                      <Typography>
+                        {`${member?.first_name} ${member?.last_name}`}
+                      </Typography>
+                    </li>
+                    :
+                    <li key={member.id}>
+                      <Typography>
+                        {'بی‌نام'}
+                      </Typography>
+                    </li>
                 ))}
               </ul>
+                : <Typography>
+                  {'این تیم هیچ عضوی ندارد.'}
+                </Typography>}
             </Grid>
           </CardContent>
         </CardActionArea>
       </Box>
 
 
-      <CardActions sx={{paddingTop: '0px'}}>
+      <CardActions sx={{ paddingTop: '0px' }}>
         <Grid container direction="column" spacing={1}>
           <Grid item
             sx={(theme) => ({
               justifyContent: 'end',
             })}
           >
-            <Divider sx={{margin: '15px auto 15px auto'}}></Divider>
-            {timeSpentOnProblem && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '8px', padding: '10px', paddingTop: '0', alignItems: 'center' }}>
+            <Divider sx={{ margin: '15px auto 15px auto' }}></Divider>
+            {timeSpentOnProblem && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}>
               <Box>
                 {teamLevel}
               </Box>
@@ -173,7 +187,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
                 icon={<AccessTimeIcon />}
                 label={timeSpentOnProblem}
                 size="small"
-                sx={{ fontSize: 'inherit' }}
+                sx={{ fontSize: 'inherit', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
               />
             </Stack>}
             {playerId ? (
