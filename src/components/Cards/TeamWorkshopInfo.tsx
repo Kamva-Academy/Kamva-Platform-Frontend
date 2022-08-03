@@ -8,6 +8,7 @@ import {
   CardActions,
   CardContent,
   Chip,
+  Divider,
   Grid,
   Stack,
   Tooltip,
@@ -74,6 +75,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     <Card
       sx={{
         maxWidth: 300,
+        marginTop: '0px',
         height: '100%',
         width: '100%',
         padding: '0px !important',
@@ -93,66 +95,76 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       }}
     >
 
-      <Stack
-        direction="row"
-        sx={{
-          padding: "10px",
-          background: '#eee',
-          height: "40px",
-          display: 'flex',
-          justifyContent: "space-between",
-          alignItems: 'center'
-        }}
-      >
-        {playerId ? <NotificationsActive sx={{ animation: "bellRing 1.4s infinite", width: "40px" }} color="primary" /> : <Box />}
-        {mentorsInRoom.length > 0 &&
-          <AvatarGroup
-            max={3}
-            sx={{
-              justifySelf: 'center',
-              '& .MuiAvatar-root': { width: 26, height: 26, fontSize: 12, backgroundColor: "#0088aa" },
-            }}
-          >
-            {mentorsInRoom.map((mentor: Mentor) =>
-              <Tooltip key={mentor.id} title={mentor.name} arrow>
-                <Avatar
-                  sx={{
-                    backgroundColor: `${stringToColor(mentor.name)} !important`,
-                  }}
-                  alt={mentor.name}
-                  src={mentor.profilePicturePath || '/margbarmuimargbarmui'} />
-              </Tooltip>
-            )}
-          </AvatarGroup>
-        }
-      </Stack>
-      <CardActionArea disabled>
-        <CardContent>
-          <Typography gutterBottom variant="h3" align="center">
-            {name}
-          </Typography>
-          <Grid container direction="row" justifyContent="center">
-            <ol>
-              {members.map((member) => (
-                <li key={member.id}>
-                  <Typography>
-                    {`${member?.first_name} ${member?.last_name}`}
-                  </Typography>
-                </li>
-              ))}
-            </ol>
-          </Grid>
-        </CardContent>
-      </CardActionArea>
+      <Box>
+        <Stack
+          direction="row"
+          sx={{
+            padding: "10px",
+            background: '#eee',
+            height: "40px",
+            display: 'flex',
+            justifyContent: "space-between",
+            alignItems: 'center'
+          }}
+        >
+          {playerId ? <NotificationsActive sx={{ animation: "bellRing 1.4s infinite", width: "40px" }} color="primary" /> : <Box />}
+          {mentorsInRoom.length > 0 &&
+            <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>
+              <Typography sx={{ fontSize: "8px", margin: '10px' }}>
+                {`همیاران: `}
+              </Typography>
+              <AvatarGroup
+                max={3}
+                sx={{
+                  justifySelf: 'center',
+                  '& .MuiAvatar-root': { width: 26, height: 26, fontSize: 12, backgroundColor: "#0088aa" },
+                }}
+              >
+                {mentorsInRoom.map((mentor: Mentor) =>
+                  <Tooltip key={mentor.id} title={mentor.name} arrow>
+                    <Avatar
+                      sx={{
+                        backgroundColor: `${stringToColor(mentor.name)} !important`,
+                      }}
+                      alt={mentor.name}
+                      src={mentor.profilePicturePath || '/margbarmuimargbarmui'} />
+                  </Tooltip>
+                )}
+              </AvatarGroup>
+            </Stack>
+          }
+        </Stack>
 
-      <CardActions>
+        <CardActionArea disabled>
+          <CardContent sx={{paddingBottom: '0px'}}>
+            <Typography gutterBottom variant="h3">
+              {name}
+            </Typography>
+            <Grid container direction="row" justifyContent="start">
+              <ul>
+                {members.map((member) => (
+                  (member?.first_name || member?.last_name) && <li key={member.id}>
+                    <Typography>
+                      {`${member?.first_name} ${member?.last_name}`}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
+            </Grid>
+          </CardContent>
+        </CardActionArea>
+      </Box>
+
+
+      <CardActions sx={{paddingTop: '0px'}}>
         <Grid container direction="column" spacing={1}>
           <Grid item
             sx={(theme) => ({
               justifyContent: 'end',
             })}
           >
-            <Stack direction={'row'} sx={{justifyContent: "space-between", fontSize: '8px', padding: '10px', alignItems: 'center'}}>
+            <Divider sx={{margin: '15px auto 15px auto'}}></Divider>
+            {timeSpentOnProblem && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '8px', padding: '10px', paddingTop: '0', alignItems: 'center' }}>
               <Box>
                 {teamLevel}
               </Box>
@@ -161,9 +173,9 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
                 icon={<AccessTimeIcon />}
                 label={timeSpentOnProblem}
                 size="small"
-                sx={{fontSize: 'inherit'}}
+                sx={{ fontSize: 'inherit' }}
               />
-            </Stack>
+            </Stack>}
             {playerId ? (
               <Button
                 variant="contained"
@@ -181,7 +193,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
                 color="primary"
                 fullWidth
                 onClick={redirect}>
-                مشاهده
+                سرزدن به تیم
               </Button>
             )}
           </Grid>
