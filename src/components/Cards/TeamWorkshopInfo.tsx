@@ -23,9 +23,11 @@ import {
   deleteRequestMentorAction,
   getPlayerFromTeamAction,
 } from '../../redux/slices/events';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom'
 import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
+import moment from 'moment-jalaali';
+moment.loadPersian({usePersianDigits: true})
 
 type TeamWorkshopInfoPropsType = {
   name: string,
@@ -37,7 +39,7 @@ type TeamWorkshopInfoPropsType = {
   deleteRequestMentor: Function,
   getPlayerFromTeam: Function,
   mentorsInRoom: Mentor[],
-  timeSpentOnProblem: String,
+  startProblemTime: string,
   teamLevel: String
 }
 
@@ -50,10 +52,11 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-  mentorsInRoom = [],
-  timeSpentOnProblem = '۲ دقیقه',
-  teamLevel = 'مرحلهsdfsadf asdf asdf asd fasd f ۴',
+  mentorsInRoom = [{ name: 'iman alipour', id: 0 }, { name: 'alireza hashemi', id: 1 }, { name: 'x y', id: 2 }, { name: 'z p', id: 3 }],
+  startProblemTime = "2022-08-03T12:39:30+04:30",
+  teamLevel = 'مرحله sdfsadf asdf asdf asd fasd f ۴',
 }) => {
+  const startProblemTimeMoment: moment.Moment = moment(startProblemTime)
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
@@ -178,17 +181,11 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
             })}
           >
             <Divider sx={{ margin: '15px auto 15px auto' }}></Divider>
-            {timeSpentOnProblem && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}>
+            {startProblemTimeMoment && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}>
               <Box>
-                {teamLevel}
+                {`گام: ${teamLevel}`}
               </Box>
-              <Chip
-                variant="outlined"
-                icon={<AccessTimeIcon />}
-                label={timeSpentOnProblem}
-                size="small"
-                sx={{ fontSize: 'inherit', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
-              />
+              <TimeChip startTime={startProblemTimeMoment}/>
             </Stack>}
             {playerId ? (
               <Button
@@ -216,6 +213,30 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     </Card>
   );
 };
+
+
+type TimeChipPropsType = {
+  startTime: moment.Moment
+}
+
+const TimeChip: FC<TimeChipPropsType> = (props) => {
+  const [elapsedTime, setElapsedTime] = useState(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss'))
+  useEffect(() => {
+    const changeInterval = setInterval(() => {setElapsedTime(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss'))}, 1000)
+    return (
+      () => clearInterval(changeInterval)
+    )
+  }, []);
+  return (
+    <Chip
+      variant="outlined"
+      icon={<AccessTimeIcon />}
+      label={elapsedTime}
+      size="small"
+      sx={{ fontSize: 'inherit', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
+    />
+  )
+}
 
 const mapStateToProps = (state, ownProps) => ({
   playerIdFromRedux: state.events.playerId[ownProps.teamId],
