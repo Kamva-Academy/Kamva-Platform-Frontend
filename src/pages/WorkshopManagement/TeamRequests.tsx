@@ -105,13 +105,11 @@ const Teams: FC<TeamPropsType> = ({
   );
 }
 
-const mapStateToProps = (state) => {
-  console.log(state.events)
-  return {
+const mapStateToProps = (state) =>
+  ({
     eventTeams: state.events.allEventTeams,
     teamsRequests: state.events.teamsRequests || {},
-  }
-};
+  });
 
 export default connect(mapStateToProps, {
   getRequestMentor: getRequestMentorAction,

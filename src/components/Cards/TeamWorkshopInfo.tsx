@@ -7,6 +7,7 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
+  Chip,
   Grid,
   Stack,
   Tooltip,
@@ -15,6 +16,7 @@ import {
 import { NotificationsActive } from '@mui/icons-material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
 
 import {
   deleteRequestMentorAction,
@@ -34,6 +36,8 @@ type TeamWorkshopInfoPropsType = {
   deleteRequestMentor: Function,
   getPlayerFromTeam: Function,
   mentorsInRoom: Mentor[],
+  timeSpentOnProblem: String,
+  teamLevel: String
 }
 
 const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
@@ -45,7 +49,9 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-  mentorsInRoom = [{ id: 0, name: "Iman Aliour" }, { id: 1, name: "Alireza Hashemi" }, { id: 2, name: "Erfan Moeini" }, { id: 3, name: "Sadegh Salimi" }],
+  mentorsInRoom = [{ id: 1, name: "Alireza Hashemi" }, { id: 2, name: "Erfan Moeini" }, { id: 3, name: "Sadegh Salimi" }, { id: 0, name: "Iman Aliour" }],
+  timeSpentOnProblem = '۲ دقیقه',
+  teamLevel = 'مرحله ۴',
 }) => {
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
@@ -146,6 +152,18 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
               justifyContent: 'end',
             })}
           >
+            <Stack direction={'row'} sx={{justifyContent: "space-between", fontSize: '8px', padding: '10px', alignItems: 'center'}}>
+              <Box>
+                {teamLevel}
+              </Box>
+              <Chip
+                variant="outlined"
+                icon={<AccessTimeIcon />}
+                label={timeSpentOnProblem}
+                size="small"
+                sx={{fontSize: 'inherit'}}
+              />
+            </Stack>
             {playerId ? (
               <Button
                 variant="contained"
