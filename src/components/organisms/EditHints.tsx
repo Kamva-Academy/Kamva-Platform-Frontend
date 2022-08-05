@@ -39,7 +39,7 @@ const EditHints: FC<EditHintsPropsType> = ({
   return (
     <>
       <Typography variant="h2" gutterBottom>
-        {t('help')}
+        {'راهنمایی‌ها'}
       </Typography>
       <Divider />
       <Stack>

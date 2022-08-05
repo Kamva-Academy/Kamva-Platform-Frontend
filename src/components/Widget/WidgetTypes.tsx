@@ -1,4 +1,3 @@
-import { WidgetType } from '../../types/Widget';
 import BigAnswerQuestionWidget, {
   BigAnswerQuestionEditWidget,
 } from './BigAnswerQuestionWidget';

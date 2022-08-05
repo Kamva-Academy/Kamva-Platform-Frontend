@@ -51,11 +51,9 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
     return <></>
   }
 
-  if (!currentState) return <></>
+  const widgets = currentState?.widgets;
+  const hints = currentState?.hints;
 
-  const widgets = currentState.widgets;
-  const hints = currentState.hints;
-  
   return (
     <Stack spacing={2}>
       <StatesTabbar
@@ -64,8 +62,12 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
         tabs={allStates.map((state) => state.name)}
         fsmId={fsmId}
       />
-      <EditWidgets {...currentState} />
-      <EditHints hints={hints} stateId={currentState.id} />
+      {currentState &&
+        <>
+          <EditWidgets {...currentState} />
+          <EditHints hints={hints} stateId={currentState.id} />
+        </>
+      }
     </Stack>
   );
 };

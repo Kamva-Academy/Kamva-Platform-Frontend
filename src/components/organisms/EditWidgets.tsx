@@ -65,7 +65,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
     <>
       <Stack spacing={2}>
         {stateId &&
-          <Stack direction='row'>
+          <Stack direction='row' alignItems='flex-start' justifyContent='space-between'>
             {isEditingStateName &&
               <TextField
                 onChange={(e) => setNewName(e.target.value)}
@@ -77,36 +77,36 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
                 {name}
               </Typography>
             }
-
-            {isEditingStateName &&
-              <Tooltip title='ذخیره' arrow>
-                <IconButton size='small'
-                  onClick={() => {
-                    updateState({ stateId, name: newName, fsm: fsmId });
-                    setIsEditingStateName(false);
-                  }
-                  }>
-                  <SaveIcon />
+            <Box>
+              {isEditingStateName &&
+                <Tooltip title='ذخیره' arrow>
+                  <IconButton size='small'
+                    onClick={() => {
+                      updateState({ stateId, name: newName, fsm: fsmId });
+                      setIsEditingStateName(false);
+                    }
+                    }>
+                    <SaveIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+              {!isEditingStateName &&
+                <Tooltip title='ویرایش نام گام' arrow>
+                  <IconButton size='small' onClick={() => setIsEditingStateName(true)}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              }
+              <Tooltip title='حذف گام' arrow>
+                <IconButton size='small' onClick={() => setOpenDeleteWidgetDialog(true)}>
+                  <DeleteIcon />
                 </IconButton>
               </Tooltip>
-            }
-            {!isEditingStateName &&
-              <Tooltip title='ویرایش نام' arrow>
-                <IconButton size='small' onClick={() => setIsEditingStateName(true)}>
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
-            }
-
-            <Tooltip title='حذف گام' arrow>
-              <IconButton size='small' onClick={() => setOpenDeleteWidgetDialog(true)}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
+            </Box>
           </Stack>
         }
         <Typography variant='h2' gutterBottom>
-          {'مسئله'}
+          {'مسئله‌ها'}
         </Typography>
         <Divider />
         {
@@ -136,7 +136,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
           </Button>
         }
         <Typography variant='h2' gutterBottom>
-          {'محتوا'}
+          {'محتواها'}
         </Typography>
         <Divider />
         {
