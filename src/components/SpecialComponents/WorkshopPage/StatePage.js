@@ -106,7 +106,7 @@ function StatePage({ state = {} }) {
             <Paper className={classes.paper}>
               {notQuestions.map((widget) => (
                 <div className={classes.mainItem} key={widget.id}>
-                  <Widget widget={widget} />
+                  <Widget coveredWithPaper={false} widget={widget} />
                 </div>
               ))}
             </Paper>

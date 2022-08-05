@@ -3,6 +3,7 @@
     "Appbar",
     "Jitsi",
     "Kamva",
-    "reduxjs"
+    "reduxjs",
+    "Tabbar"
   ],
 }

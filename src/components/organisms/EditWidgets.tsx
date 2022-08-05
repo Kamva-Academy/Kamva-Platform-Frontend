@@ -77,7 +77,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
                 {name}
               </Typography>
             }
-            <Box>
+            <Stack direction='row'>
               {isEditingStateName &&
                 <Tooltip title='ذخیره' arrow>
                   <IconButton size='small'
@@ -102,7 +102,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
-            </Box>
+            </Stack>
           </Stack>
         }
         <Typography variant='h2' gutterBottom>

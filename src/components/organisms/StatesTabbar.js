@@ -1,4 +1,4 @@
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Box } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -6,32 +6,21 @@ import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import CreateStateDialog from './dialogs/CreateStateDialog';
-import makeStyles from '@mui/styles/makeStyles';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    background: 'white',
-  },
-  appbar: {
-    background: 'white',
-  },
-  fullHeight: {
-    height: '100%',
-  },
-}));
 
 export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
-  const classes = useStyles();
   const t = useTranslate();
 
   const [openCreateStateDialog, setOpenCreateStateDialog] = useState(false);
 
   return (
     <>
-      <div className={classes.root}>
-        <AppBar position="static" color="default" className={classes.appbar}>
+      <Box sx={{
+        flexGrow: 1,
+        width: '100%',
+        background: 'white',
+      }}>
+        <AppBar position="static" color="default" sx={{ background: 'white', borderTopRightRadius: 5, borderTopLeftRadius: 5 }}>
           <Grid container>
             <Grid item xs={9} sm={10}>
               <Tabs
@@ -50,7 +39,13 @@ export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
               <Button
                 size="small"
                 fullWidth
-                className={classes.fullHeight}
+                sx={{
+                  height: '100%',
+                  borderTopRightRadius: 5,
+                  borderBottomLeftRadius: 0,
+                  borderBottomRightRadius: 0,
+                  borderTopLeftRadius: 0,
+                }}
                 color="primary"
                 onClick={() => setOpenCreateStateDialog(true)}
                 variant="contained">
@@ -59,7 +54,7 @@ export default function StatesTabbar({ value, setValue, tabs = [], fsmId }) {
             </Grid>
           </Grid>
         </AppBar>
-      </div>
+      </Box>
       <CreateStateDialog
         open={openCreateStateDialog}
         handleClose={() => setOpenCreateStateDialog(false)}

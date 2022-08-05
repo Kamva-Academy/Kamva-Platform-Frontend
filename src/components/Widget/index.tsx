@@ -36,18 +36,25 @@ type WidgetPropsType = {
   widget: any;
   mode: WidgetModes;
   stateId: number;
+  coveredWithPaper?: boolean;
 }
 
-const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, ...props }) => {
+const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true, ...props }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
+  const Cover = coveredWithPaper
+    ?
+    (props) =>
+      <Paper elevation={2}
+        sx={{ padding: 1 }}>{props.children}</Paper>
+    :
+    (props) => <>{props.children}</>
+
   return (
-    <Paper
-      elevation={2}
-      sx={{ padding: 1 }}>
+    <Cover>
       {mode === WidgetModes.Edit &&
         <Stack>
           <Stack direction='row' alignItems='center' justifyContent='space-between'>
@@ -85,7 +92,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
         </Stack>
       }
       <WidgetComponent  {...widget} mode={mode} />
-    </Paper>
+    </Cover>
   );
 };
 
