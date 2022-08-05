@@ -1,3 +1,4 @@
+import { WidgetType } from '../../types/Widget';
 import BigAnswerQuestionWidget, {
   BigAnswerQuestionEditWidget,
 } from './BigAnswerQuestionWidget';
@@ -18,49 +19,49 @@ import VideoWidget, { VideoEditWidget } from './VideoWidget';
 const WIDGET_TYPES = {
   SmallAnswerProblem: {
     WidgetComponent: SmallAnswerQuestionWidget,
-    WidgetEditDialog: SmallAnswerQuestionEditWidget,
+    EditWidgetDialog: SmallAnswerQuestionEditWidget,
     label: 'سوال کوتاه پاسخ',
     backendType: 'SmallAnswerProblem',
   },
   BigAnswerProblem: {
     WidgetComponent: BigAnswerQuestionWidget,
-    WidgetEditDialog: BigAnswerQuestionEditWidget,
+    EditWidgetDialog: BigAnswerQuestionEditWidget,
     label: 'سوال بلند پاسخ',
     backendType: 'BigAnswerProblem',
   },
   // MultiChoiceProblem: {
   //   WidgetComponent: MultiChoiceQuestionWidget,
-  //   WidgetEditDialog: MultiChoiceQuestionEditWidget,
+  //   EditWidgetDialog: MultiChoiceQuestionEditWidget,
   //   label: 'سوال چند گزینه‌ای',
   //   backendType: 'MultiChoiceProblem',
   // },
   UploadFileProblem: {
     WidgetComponent: UploadFileQuestionWidget,
-    WidgetEditDialog: UploadFileQuestionEditWidget,
+    EditWidgetDialog: UploadFileQuestionEditWidget,
     label: 'سوال ارسال فایل',
     backendType: 'UploadFileProblem',
   },
   Description: {
     WidgetComponent: TextWidget,
-    WidgetEditDialog: TextEditWidget,
+    EditWidgetDialog: TextEditWidget,
     label: 'متن',
     backendType: 'Description',
   },
   Image: {
     WidgetComponent: ImageWidget,
-    WidgetEditDialog: ImageEditWidget,
+    EditWidgetDialog: ImageEditWidget,
     label: 'عکس',
     backendType: 'Image',
   },
   Video: {
     WidgetComponent: VideoWidget,
-    WidgetEditDialog: VideoEditWidget,
+    EditWidgetDialog: VideoEditWidget,
     label: 'فیلم',
     backendType: 'Video',
   },
   Game: {
     WidgetComponent: MiniGameWidget,
-    WidgetEditDialog: MiniGameEditWidget,
+    EditWidgetDialog: MiniGameEditWidget,
     label: 'بازی',
     backendType: 'Game',
   },

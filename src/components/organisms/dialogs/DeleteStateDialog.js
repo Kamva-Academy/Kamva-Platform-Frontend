@@ -8,40 +8,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { deleteWidgetAction } from '../../../redux/slices/widget';
+import { deleteStateAction } from '../../../redux/slices/widget';
 
-function DeleteWidgetDialog({
-  handleClose,
-  deleteWidget,
-
-  open,
-  widgetId
-}) {
+function DeleteStateDialog({ open, handleClose, deleteState, stateId }) {
   const t = useTranslate();
+
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{t('removeWidget')}</DialogTitle>
+      <DialogTitle>{t('removeState')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>{t('wantRemoveWidget')}</DialogContentText>
+        <DialogContentText>{t('wantDeleteState')}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary" variant="outlined">
-          {'لغو'}
+          لغو
         </Button>
         <Button
           onClick={() => {
-            deleteWidget({ widgetId });
+            deleteState({ id: stateId });
             handleClose();
           }}
           color="primary"
           variant="contained">
-          {'حذف'}
+          حذف
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
 
-export default connect(null, { deleteWidget: deleteWidgetAction })(
-  DeleteWidgetDialog
+export default connect(null, { deleteState: deleteStateAction })(
+  DeleteStateDialog
 );

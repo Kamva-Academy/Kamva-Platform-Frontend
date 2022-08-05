@@ -2,11 +2,13 @@ import { AsyncThunk, createAsyncThunk } from '@reduxjs/toolkit';
 
 import errorHandler from './errorHandler';
 
+type a = {}
+
 type CreateAsyncThunkApiType =
   (
     typePrefix: string,
     api: any,
-    url: any,
+    url: Function | string,
     option?: any,
   ) => AsyncThunk<any, any, {}>
 

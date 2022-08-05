@@ -1,82 +1,81 @@
 import {
   Grid,
   Paper,
+  Stack,
 } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
-import makeStyles from '@mui/styles/makeStyles';
 
-import EditState from '../../components/SpecialComponents/EditWorkshopPage/EditState';
-import StatesTabbar from '../../components/SpecialComponents/EditWorkshopPage/StatesTabbar';
+import StatesTabbar from '../../components/organisms/StatesTabbar';
 import {
   getAllWorkshopStatesInfoAction,
-  getOneStateAction,
 } from '../../redux/slices/workshop';
+import {
+  getOneStateAction,
+} from '../../redux/slices/Paper';
 import { State } from '../../types/models';
+import { Box, Divider } from '@mui/material';
+import EditHints from '../../components/organisms/EditHints';
+import EditWidgets from '../../components/organisms/EditWidgets';
 
-const useStyles = makeStyles((theme) => ({
-  tabbar: {
-    overflow: 'hidden',
-  },
 
-  workshopTabsPaper: {
-    padding: 1,
-    background: '#F7F9FC',
-    height: '100%',
-  },
-}));
-
-type EditWorkshopPropsType = {
-  getAllWorkshopStatesInfo: Function,
-  getOneState: Function,
-  currentState: State,
-  allStates: State[],
+type DesignWorkshopPropsType = {
+  getAllWorkshopStatesInfo: Function;
+  getOneState: Function;
+  papers: {};
+  allStates: State[];
 }
 
-const EditWorkshop = ({
+const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
   getAllWorkshopStatesInfo,
   getOneState,
-  currentState = null,
   allStates = [],
-}: EditWorkshopPropsType) => {
-  const classes = useStyles();
+  papers,
+}) => {
   const { fsmId } = useParams();
   const [tab, setTab] = React.useState(0);
+  const currentState = papers[allStates[tab]?.id];
 
   useEffect(() => {
     getAllWorkshopStatesInfo({ fsmId });
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (allStates[tab]) {
       getOneState({ stateId: allStates[tab].id });
     }
-  }, [allStates, tab])
+  }, [allStates, tab]);
 
+  if (!allStates[tab]?.id) {
+    return <></>
+  }
+
+  if (!currentState) return <></>
+
+  const widgets = currentState.widgets;
+  const hints = currentState.hints;
+  
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <Paper className={classes.tabbar}>
-          <StatesTabbar
-            value={tab}
-            setValue={setTab}
-            tabs={allStates.map((state) => state.name)} 
-            fsmId={fsmId}
-          />
-        </Paper>
-        <EditState state={currentState} />
-      </Grid>
-    </Grid>
+    <Stack spacing={2}>
+      <StatesTabbar
+        value={tab}
+        setValue={setTab}
+        tabs={allStates.map((state) => state.name)}
+        fsmId={fsmId}
+      />
+      <EditWidgets {...currentState} />
+      <EditHints hints={hints} stateId={currentState.id} />
+    </Stack>
   );
 };
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state, ownProps) => ({
   allStates: state.workshop.allStates,
-  currentState: state.workshop.currentState,
+  papers: state.paper.papers,
 });
 
 export default connect(mapStateToProps, {
   getOneState: getOneStateAction,
   getAllWorkshopStatesInfo: getAllWorkshopStatesInfoAction,
-})(EditWorkshop);
+})(DesignWorkshop);

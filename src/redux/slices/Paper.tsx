@@ -2,30 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
-  makeAnswerEmptyUrl,
-  sendWidgetAnswerUrl,
-  getProblemsUrl,
-  getUnreadNotificationsUrl,
   hintUrl,
-  markSubmissionUrl,
-  statesCRUDUrl,
-  visitWorkshopPlayerUrl,
+  stateCRUDUrl,
   widgetCRUDUrl,
-  workshopTeamsUrl,
 } from '../constants/urls';
 
-import { InitialStateType } from '../../types/redux/widget';
+import { InitialStateType } from '../../types/redux/Paper';
 
 const initialState: InitialStateType = {
-  hints: {},
+  papers: {},
   isFetching: false,
-  workshops: [],
-  articles: [],
-  teams: [],
-  notifications: [],
-  problems: [],
-  submissions: [],
-  widgets: {},
 }
 
 const isFetching = (state) => {
@@ -36,111 +22,10 @@ const isNotFetching = (state) => {
   state.isFetching = false;
 };
 
-const sendWidgetAnswerAction = createAsyncThunkApi(
-  'widget/sendWidgetAnswerAction',
-  Apis.POST,
-  sendWidgetAnswerUrl,
-  {
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت ثبت شد.',
-      error: 'مشکلی در ثبت پاسخ وجود داشت.',
-    },
-  }
-);
-
-export const sendFileAction = createAsyncThunkApi(
-  'widget/sendFileAction',
-  Apis.POST,
-  sendWidgetAnswerUrl,
-  {
-    bodyCreator: ({ playerId, problemId, answerFile }) => ({
-      player: playerId,
-      problem: problemId,
-      problem_type: 'ProblemUploadFileAnswer',
-      answer_file: answerFile,
-    }),
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت ثبت شد.',
-      error: 'مشکلی در ثبت پاسخ وجود داشت.',
-    },
-  }
-);
-
-export const sendBigAnswerAction = ({ widgetId, text }) =>
-  sendWidgetAnswerAction({
-    widgetId,
-    text,
-    answer_type: 'BigAnswer',
-  });
-
-export const sendSmallAnswerAction = ({ widgetId, text }) =>
-  sendWidgetAnswerAction({
-    widgetId,
-    text,
-    answer_type: 'SmallAnswer',
-  });
-
-export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
-  sendWidgetAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemMultiChoice',
-    answer: {
-      text: answer,
-      answer_type: 'MultiChoiceAnswer',
-    },
-  });
-
-
-export const makeAnswerEmptyAction = createAsyncThunkApi(
-  'widget/sendWidgetAnswerAction',
+export const getOneStateAction = createAsyncThunkApi(
+  'workshop/getOneStateAction',
   Apis.GET,
-  makeAnswerEmptyUrl,
-  {
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت حذف شد.',
-      error: 'مشکلی در حذف‌کردن پاسخ وجود داشت.',
-    },
-  }
-);
-
-// for mentors
-export { initialState as mentorInitialState };
-
-export const getUnreadNotificationsAction = createAsyncThunkApi(
-  'workshops/getNotifications',
-  Apis.GET,
-  getUnreadNotificationsUrl
-);
-
-export const getProblemsAction = createAsyncThunkApi(
-  'workshops/getProblems',
-  Apis.GET,
-  getProblemsUrl
-);
-
-
-export const markSubmissionAction = createAsyncThunkApi(
-  'workshops/markSubmission',
-  Apis.POST,
-  markSubmissionUrl,
-  {
-    bodyCreator: ({ submissionId, score, description }) => ({
-      submission_id: submissionId,
-      score,
-      description,
-    }),
-    defaultNotification: {
-      success: 'نمره با موفقیت ثبت شد!',
-    },
-  }
-);
-
-
-export const getStateAction = createAsyncThunkApi(
-  'widget/getOne',
-  Apis.GET,
-  statesCRUDUrl,
+  stateCRUDUrl
 );
 
 export const updateWidgetAction = createAsyncThunkApi(
@@ -164,6 +49,19 @@ export const createWidgetAction = createAsyncThunkApi(
     bodyCreator: (widget) => ({ ...widget }),
     defaultNotification: {
       success: 'ویجت با موفقیت اضافه شد.',
+      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
+    },
+  }
+);
+
+export const deleteWidgetAction = createAsyncThunkApi(
+  'widget/widgets/delete',
+  Apis.DELETE,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت حذف شد.',
       error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
     },
   }
@@ -319,33 +217,6 @@ export const updateMultiChoicesQuestionWidgetAction = ({ paper, text, choices, w
     widgetId,
   });
 
-export const deleteStateAction = createAsyncThunkApi(
-  'widget/delete',
-  Apis.DELETE,
-  statesCRUDUrl,
-);
-
-
-export const getWorkshopTeamsAction = createAsyncThunkApi(
-  'workshops/teams/getAll',
-  Apis.POST,
-  workshopTeamsUrl,
-  {
-    bodyCreator: ({ fsmId }) => ({ fsm: fsmId }),
-  }
-);
-
-export const visitWorkshopPlayerAction = createAsyncThunkApi(
-  'workshops/teams/visitWorkshopPlayer',
-  Apis.POST,
-  visitWorkshopPlayerUrl,
-  {
-    bodyCreator: ({ workshopPlayerId }) => ({
-      player_workshop: workshopPlayerId,
-    }),
-  }
-);
-
 export const createHintAction = createAsyncThunkApi(
   'widget/hints/create',
   Apis.POST,
@@ -355,58 +226,81 @@ export const createHintAction = createAsyncThunkApi(
   }
 );
 
+export const deleteHintAction = createAsyncThunkApi(
+  'widget/hints/delete',
+  Apis.DELETE,
+  hintUrl,
+);
 
-const widgetSlice = createSlice({
-  name: 'widgetSlice',
+const PaperSlice = createSlice({
+  name: 'PaperState',
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    [sendWidgetAnswerAction.pending.toString()]: isFetching,
-    [sendWidgetAnswerAction.fulfilled.toString()]: isNotFetching,
-    [sendWidgetAnswerAction.rejected.toString()]: isNotFetching,
-
-    [sendFileAction.pending.toString()]: isFetching,
-    [sendFileAction.fulfilled.toString()]: isNotFetching,
-    [sendFileAction.rejected.toString()]: isNotFetching,
-
-    [getWorkshopTeamsAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.teams = {
-        ...state.teams,
-        [arg.fsmId]: { teams: response, lastUpdate: Date.now() },
-      };
+    [getOneStateAction.pending.toString()]: isFetching,
+    [getOneStateAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+      state.papers[arg.stateId] = response;
+      response.hints.forEach((hint) => {
+        state.papers[hint.id] = hint;
+      })
+      state.isFetching = false;
     },
-
-    [getUnreadNotificationsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.notifications = response.unread_list.map(
-        (unread) => +unread.actor_object_id
-      );
-    },
-
-    [visitWorkshopPlayerAction.fulfilled.toString()]: (state, { meta: { arg } }) => {
-      state.notifications = state.notifications.filter(
-        (notification) => notification !== arg.workshopPlayerId
-      );
-    },
-
-    [getProblemsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.problems = response;
-    },
+    [getOneStateAction.rejected.toString()]: isNotFetching,
 
     [createWidgetAction.pending.toString()]: isFetching,
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.widgets[arg.paper] = [...(state.widgets[arg.paper] || []), response];
+      state.papers[arg.paper] ||= {};
+      state.papers[arg.paper].widgets = [...(state.papers[arg.paper].widgets || []), response];
       state.isFetching = false;
     },
     [createWidgetAction.rejected.toString()]: isNotFetching,
 
+    [deleteWidgetAction.pending.toString()]: isFetching,
+    [deleteWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+      const newWidgets = state.papers[arg.stateId].widgets;
+      for (let i = 0; i < newWidgets.length; i++) {
+        if (newWidgets[i].id === arg.widgetId) {
+          newWidgets.splice(i, 1);
+          break;
+        }
+      }
+      state.papers[arg.stateId].widgets = newWidgets;
+      state.isFetching = false;
+    },
+    [deleteWidgetAction.rejected.toString()]: isNotFetching,
+
+
+    [updateWidgetAction.pending.toString()]: isFetching,
+    [updateWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+      state.papers[arg.paper] ||= {};
+      const newWidgets = [...(state.papers[arg.paper].widgets || [])];
+      for (let i = 0; i < newWidgets.length; i++) {
+        if (newWidgets[i].id === arg.widgetId) {
+          newWidgets[i] = response;
+        }
+      }
+      state.papers[arg.paper].widgets = newWidgets;
+      state.isFetching = false;
+    },
+    [updateWidgetAction.rejected.toString()]: isNotFetching,
+
     [createHintAction.pending.toString()]: isFetching,
     [createHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.hints[arg.stateId] = response;
+      state.papers[arg.stateId] ||= {};
+      state.papers[arg.stateId].hints = [...(state.papers[arg.stateId].hints || []), response];
+      state.papers[response.id] = response;
       state.isFetching = false;
     },
     [createHintAction.rejected.toString()]: isNotFetching,
 
+    [deleteHintAction.pending.toString()]: isFetching,
+    [deleteHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+      delete state.papers[arg.hintId];
+      state.isFetching = false;
+    },
+    [deleteHintAction.rejected.toString()]: isNotFetching,
+
   },
 });
 
-export const { reducer: widgetReducer } = widgetSlice;
+export const { reducer: paperReducer } = PaperSlice;

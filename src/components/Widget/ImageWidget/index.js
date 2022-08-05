@@ -1,6 +1,10 @@
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 
+import ImageEditWidget from './edit';
+
+export { ImageEditWidget };
+
 const useStyles = makeStyles(() => ({
   imageWidget: {
     width: '100%',

@@ -77,7 +77,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   }, [playerId, click, playerIdFromRedux])
 
   return (
-    
+
     <Card /* main team card coomponent*/
       sx={{
         maxWidth: 300,
@@ -190,7 +190,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
               </Box>
               <Tooltip title={'زمان حضور تیم در این گام'} arrow>
                 <span>
-                  <Button disabled>
+                  <Button disabled sx={{ padding: 0 }}>
                     <TimeChip startTime={startProblemTimeMoment} />
                   </Button>
                 </span>

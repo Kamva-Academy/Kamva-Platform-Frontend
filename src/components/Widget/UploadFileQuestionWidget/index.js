@@ -13,7 +13,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { addNotificationAction } from '../../../redux/slices/notifications';
 import UploadFileQuestionEditWidget from './edit';
 export { UploadFileQuestionEditWidget };
-import { MODES } from '..';
+import { WidgetModes } from '..';
 
 const useStyles = makeStyles((theme) => ({
   uploadButton: {
@@ -96,7 +96,7 @@ const UploadFileQuestionWidget = ({
           <Typography>{text}</Typography>
         </Grid>
         <Grid item container xs={12} sm={6} direction='column' alignItems='center'>
-          {mode === MODES.WRITE &&
+          {mode === WidgetModes.Edit &&
             <Grid item>
               <Button
                 component="label"
@@ -136,7 +136,7 @@ const UploadFileQuestionWidget = ({
                   {file?.name}
                 </Button>
               </Grid>
-              {mode === MODES.WRITE &&
+              {mode === WidgetModes.Edit &&
                 <Grid item>
                   <IconButton size='small' onClick={clearFile}>
                     <ClearIcon />

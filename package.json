@@ -31,7 +31,6 @@
     "react-draggable": "^4.4.4",
     "react-konva": "^18.2.1",
     "react-lazyload": "^3.2.0",
-    "react-material-ui-carousel": "^3.4.2",
     "react-redux": "^8.0.2",
     "react-redux-multilingual": "^2.0.4",
     "react-router-dom": "^6.3.0",

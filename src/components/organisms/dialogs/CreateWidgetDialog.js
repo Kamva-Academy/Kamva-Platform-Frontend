@@ -12,16 +12,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import WIDGET_TYPES from '../../../Widget2/WidgetTypes';
+import WIDGET_TYPES from '../../Widget/WidgetTypes';
 
-export default function CreateWidgetDialog({ open, handleClose, stateId }) {
+export default function CreateWidgetDialog({ open, handleClose, stateId, showContent = true, showQuestions = false }) {
   const [type, setType] = useState('');
   const t = useTranslate();
 
   if (type) {
-    const { WidgetEditDialog } = WIDGET_TYPES[type];
+    const { EditWidgetDialog } = WIDGET_TYPES[type];
     return (
-      <WidgetEditDialog
+      <EditWidgetDialog
         stateId={stateId}
         open={open}
         handleClose={() => {
@@ -42,11 +42,13 @@ export default function CreateWidgetDialog({ open, handleClose, stateId }) {
             onChange={(e) => setType(e.target.value)}
             name='fsmId'
             label={t('widgetType')}>
-            {Object.keys(WIDGET_TYPES).map((option, index) => (
-              <MenuItem key={index} value={option}>
-                {WIDGET_TYPES[option].label}
-              </MenuItem>
-            ))}
+            {Object.keys(WIDGET_TYPES)
+              .filter((option, index) => (!option.includes('Problem') && showContent) || (option.includes('Problem') && showQuestions))
+              .map((option, index) => (
+                <MenuItem key={index} value={option}>
+                  {WIDGET_TYPES[option].label}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl >
       </DialogContent>

@@ -5,7 +5,7 @@ import Tabs from '@mui/material/Tabs';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import CreateStateDialog from './components/CreateStateDialog';
+import CreateStateDialog from './dialogs/CreateStateDialog';
 import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles(() => ({

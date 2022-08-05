@@ -4,11 +4,12 @@ import clsx from 'clsx';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  sendMultiChoiceAnswerAction,
-} from '../../../redux/slices/widget';
+// import { sendMultiChoiceAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
-import { MODES } from '..';
+import { WidgetModes } from '..';
+import MultiChoiceQuestionEditWidget from './edit';
+
+export { MultiChoiceQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
   choice: {
@@ -58,7 +59,7 @@ const MultiChoiceQuestionWidget = ({
             key={index}
             fullWidth
             variant="contained"
-            disabled={mode !== MODES.VIEW}
+            disabled={mode !== WidgetModes.View}
             className={clsx(
               classes.choice,
               +index === +last_submit?.text && classes.selected,
@@ -79,5 +80,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  sendMultiChoiceAnswer: sendMultiChoiceAnswerAction,
 })(MultiChoiceQuestionWidget);

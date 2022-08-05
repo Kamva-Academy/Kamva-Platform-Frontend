@@ -1,23 +1,16 @@
-import { makeStyles } from '@mui/styles';
 import { Grid, Typography } from '@mui/material';
-
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
 import ArticleCard from '../components/Cards/ArticleCard';
 import { getAllArticlesAction } from '../redux/slices/article';
 import Layout from '../containers/Layout';
-
-const useStyles = makeStyles((theme) => ({
-}));
 
 const Articles = ({
   getAllArticles,
   articles,
   articlesCount,
 }) => {
-  const classes = useStyles();
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {

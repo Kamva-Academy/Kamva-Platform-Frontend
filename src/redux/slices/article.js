@@ -7,8 +7,6 @@ import {
 } from '../constants/urls';
 import {
   createWidgetAction,
-  deleteWidgetAction,
-  updateWidgetAction,
 } from './widget';
 
 const initialState = {
@@ -18,7 +16,6 @@ const initialState = {
   notifications: [],
   problems: [],
   submissions: [],
-  submissionsIsLoading: false,
 };
 
 export { initialState as mentorInitialState };
@@ -70,7 +67,6 @@ const mentorSlice = createSlice({
       state.articlesCount = response.count;
     },
 
-
     [getArticleAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.article = response;
       state.widgets = response.widgets;
@@ -79,24 +75,6 @@ const mentorSlice = createSlice({
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.widgets = [...state.widgets, response];
       state.isFetching = false;
-    },
-    [deleteWidgetAction.fulfilled.toString()]: (state, action) => {
-      const newWidgets = [...state.widgets];
-      for (let i = 0; i < newWidgets.length; i++) {
-        if (newWidgets[i].id === action.meta.arg.widgetId) {
-          newWidgets.splice(i, 1);
-        }
-      }
-      state.widgets = newWidgets;
-    },
-    [updateWidgetAction.fulfilled.toString()]: (state, action) => {
-      const newWidgets = [...state.widgets];
-      for (let i = 0; i < newWidgets.length; i++) {
-        if (newWidgets[i].id === action.meta.arg.widgetId) {
-          newWidgets[i] = action.payload.response;
-        }
-      }
-      state.widgets = newWidgets;
     },
 
   },

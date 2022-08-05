@@ -62,7 +62,7 @@ export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/artic
 
 export const statesUrl = 'fsm/state/';
 
-export const helpUrl = 'fsm/help/';
+export const hintUrl = ({ hintId }) => hintId ? `fsm/hint/${hintId}/` : 'fsm/hint/';
 
 export const widgetUrl = 'fsm/widget/';
 
@@ -107,8 +107,6 @@ export const applyDiscountUrl = 'auth/verify-discount/';
 export const getScoresUrl = 'fsm/getscores/';
 
 export const getProblemsUrl = 'fsm/getproblems/';
-
-export const getSubmissionsUrl = 'fsm/getsubmissions/';
 
 export const markSubmissionUrl = 'fsm/marksubmission/';
 

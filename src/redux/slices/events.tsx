@@ -39,8 +39,6 @@ import {
 } from '../constants/urls';
 import {
   createWidgetAction,
-  deleteWidgetAction,
-  updateWidgetAction,
 } from './widget';
 import { getRequests, deleteRequest } from '../../parse/mentor'
 import { InitialState } from '../../types/redux/event'
@@ -743,25 +741,6 @@ const eventSlice = createSlice({
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.widgets = [...state.widgets, response];
     },
-    [deleteWidgetAction.fulfilled.toString()]: (state, action) => {
-      const newWidgets = [...state.widgets];
-      for (let i = 0; i < newWidgets.length; i++) {
-        if (newWidgets[i].id === action.meta.arg.widgetId) {
-          newWidgets.splice(i, 1);
-        }
-      }
-      state.widgets = newWidgets;
-    },
-    [updateWidgetAction.fulfilled.toString()]: (state, action) => {
-      const newWidgets = [...state.widgets];
-      for (let i = 0; i < newWidgets.length; i++) {
-        if (newWidgets[i].id === action.meta.arg.widgetId) {
-          newWidgets[i] = action.payload.response;
-        }
-      }
-      state.widgets = newWidgets;
-    },
-
   },
 });
 

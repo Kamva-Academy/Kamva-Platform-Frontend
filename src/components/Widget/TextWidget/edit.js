@@ -29,7 +29,6 @@ function TextEditWidget({
   const t = useTranslate();
   const [text, setText] = useState(oldText);
 
-
   const handleClick = () => {
     if (widgetId) {
       updateTextWidget({
@@ -56,7 +55,7 @@ function TextEditWidget({
       <DialogContent>
         <DialogContentText>متن مورد نظر خود را وارد کنید.</DialogContentText>
         <TinyEditorComponent
-          id={`edit-question-${Math.floor(Math.random() * 1000)}`}
+          // id={`edit-question-${Math.floor(Math.random() * 1000)}`}
           content={text}
           onChange={(text) => setText(text)}
         />

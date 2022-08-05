@@ -18,8 +18,6 @@ import {
   createMiniGameWidgetAction,
   updateMiniGameWidgetAction,
 } from '../../../redux/slices/widget';
-import MINI_GAMES from './list';
-
 
 function MiniGameEditWidget({
   open,
@@ -52,10 +50,10 @@ function MiniGameEditWidget({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{t('game')}</DialogTitle>
+      <DialogTitle>{t('لینک')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          {'لطفاً لینک بازی مورد نظر خود را قرار دهید. '}
+          {'لطفاً لینک مورد نظر خود را قرار دهید. '}
         </DialogContentText>
         <TextField
           autoFocus

@@ -1,5 +1,5 @@
-import { Grid, Tab, Tabs, Paper } from '@mui/material';
-import React, { useEffect, useState, useRef, FC } from 'react';
+import { Grid } from '@mui/material';
+import React, { useEffect, useRef, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 

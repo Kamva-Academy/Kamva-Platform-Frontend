@@ -17,8 +17,6 @@ import {
 } from '../constants/urls';
 import {
   createWidgetAction,
-  deleteWidgetAction,
-  updateWidgetAction,
 } from './widget';
 import { InitialState } from '../../types/redux/workshop';
 
@@ -99,12 +97,6 @@ export const addMentorToWorkshopAction = createAsyncThunkApi(
       success: 'همیار با موفقیت اضافه شد.',
     },
   }
-);
-
-export const getOneStateAction = createAsyncThunkApi(
-  'workshop/getOneStateAction',
-  Apis.GET,
-  stateCRUDUrl
 );
 
 export const getAllWorkshopStatesInfoAction = createAsyncThunkApi(
@@ -232,13 +224,6 @@ const IndexSlice = createSlice({
     },
     [getOneWorkshopsInfoAction.rejected.toString()]: isNotFetching,
 
-    [getOneStateAction.pending.toString()]: isFetching,
-    [getOneStateAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.currentState = response;
-      state.isFetching = false;
-    },
-    [getOneStateAction.rejected.toString()]: isNotFetching,
-
     [getAllWorkshopStatesInfoAction.pending.toString()]: isFetching,
     [getAllWorkshopStatesInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.allStates = response;
@@ -289,35 +274,6 @@ const IndexSlice = createSlice({
       state.isFetching = false;
     },
     [createWidgetAction.rejected.toString()]: isNotFetching,
-
-
-    [deleteWidgetAction.pending.toString()]: isFetching,
-    [deleteWidgetAction.fulfilled.toString()]: (state, action) => {
-      const newCurrentState = [...state.currentState.widgets];
-      for (let i = 0; i < newCurrentState.length; i++) {
-        if (newCurrentState[i].id === action.meta.arg.widgetId) {
-          newCurrentState.splice(i, 1);
-        }
-      }
-      state.currentState.widgets = newCurrentState;
-      state.isFetching = false;
-    },
-    [deleteWidgetAction.rejected.toString()]: isNotFetching,
-
-
-    [updateWidgetAction.pending.toString()]: isFetching,
-    [updateWidgetAction.fulfilled.toString()]: (state, action) => {
-      const newCurrentState = [...state.currentState?.widgets];
-      for (let i = 0; i < newCurrentState.length; i++) {
-        if (newCurrentState[i].id === action.meta.arg.widgetId) {
-          newCurrentState[i] = action.payload.response;
-        }
-      }
-      state.currentState.widgets = newCurrentState;
-      state.isFetching = false;
-    },
-    [updateWidgetAction.rejected.toString()]: isNotFetching,
-
 
     [getAllWorkshopEdgesAction.pending.toString()]: isFetching,
     [getAllWorkshopEdgesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
