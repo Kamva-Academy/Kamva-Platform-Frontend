@@ -124,6 +124,7 @@ const Workshop = ({
       <Container component="main"
         sx={{
           background: '#F7F9FC',
+          height: '100%'
         }}>
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />

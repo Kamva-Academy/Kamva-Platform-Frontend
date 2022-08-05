@@ -1,4 +1,4 @@
-import { Divider, Fab, Grid, Paper, Typography } from '@mui/material';
+import { Divider, Fab, Grid, Paper, Typography, Box } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { Help as HelpIcon } from '@mui/icons-material';
 import clsx from 'clsx';
@@ -28,14 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
   actionPaper: {
     padding: theme.spacing(2, 1),
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-  helpFab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    left: theme.spacing(2),
   },
 }));
 
@@ -119,9 +111,9 @@ function StatePage({ state = {} }) {
           <Fab
             size="small"
             variant="extended"
-            className={classes.helpFab}
+            sx={{ position: 'fixed', left: 20, bottom: 20 }}
             onClick={() => setOpenHelpDialog(true)}>
-            <HelpIcon className={classes.extendedIcon} />
+            <HelpIcon sx={{ marginRight: 1 }} />
             <Typography>{t('help')}</Typography>
           </Fab>
           <HelpDialog
