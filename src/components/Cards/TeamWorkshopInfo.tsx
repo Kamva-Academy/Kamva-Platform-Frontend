@@ -40,7 +40,7 @@ type TeamWorkshopInfoPropsType = {
   getPlayerFromTeam: Function,
   mentorsInRoom: Mentor[],
   startProblemTime: string,
-  teamLevel: String
+  teamStage: String
 }
 
 const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
@@ -54,7 +54,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   getPlayerFromTeam,
   mentorsInRoom = [{ name: 'iman alipour', id: 0 }, { name: 'alireza hashemi', id: 1 }, { name: 'x y', id: 2 }, { name: 'z p', id: 3 }],
   startProblemTime = "2022-08-03T12:39:30+04:30",
-  teamLevel = 'مرحله sdfsadf asdf asdf asd fasd f ۴',
+  teamStage = 'مرحله sdfsadf asdf asdf asd fasd f ۴',
 }) => {
   const startProblemTimeMoment: moment.Moment = moment(startProblemTime)
   const navigate = useNavigate()
@@ -186,7 +186,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
             <Divider sx={{ margin: '15px auto 15px auto' }}></Divider>
             {startProblemTimeMoment && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
               <Box>
-                {teamLevel ? `گام: ${teamLevel}` : 'تیم هنوز وارد هیچ گامی نشده است'}
+                {teamStage ? `گام: ${teamStage}` : 'تیم هنوز وارد هیچ گامی نشده است'}
               </Box>
               <Tooltip title={'زمان حضور تیم در این گام'} arrow>
                 <span>
@@ -244,7 +244,7 @@ const TimeChip: FC<TimeChipPropsType> = (props) => {
       icon={<AccessTimeIcon />}
       label={elapsedTime}
       size="small"
-      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
+      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end', width: '80px', padding: '1px 2px', justifyContent: 'space-between'}}
     />
   )
 }
