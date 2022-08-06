@@ -62,10 +62,8 @@ const Events = ({
     getRegistrableWorkshops();
   }, []);
 
-  const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active)
-  const inactiveEvents: EventType[] = events.filter((event: EventType) => !event?.is_active)
-  activeEvents.sort((event1, event2) => event2.id - event1.id)
-  inactiveEvents.sort((event1, event2) => event2.id - event1.id)
+  const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
+  const inactiveEvents: EventType[] = events.filter((event: EventType) => !event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
 
   return (
     <Layout>
