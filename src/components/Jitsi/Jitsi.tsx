@@ -47,19 +47,21 @@ function Jitsi({ handleClose, displayName = 'User' }) {
       </Stack>
       <Stack
         justifyContent='center'
-        sx={{ height: width === 'xs' ? '100vh' : 300 }}>
+        sx={{ height: width === 'xs' ? '100vh' : 350 }}>
         <Box
           sx={{
             width: '100%',
-            height: width === 'xs' ? '70vh' : 300,
+            height: width === 'xs' ? '70vh' : 350,
           }}>
-          {teamId ?
+          <iframe src="https://gharar.ir/r/e1c57ae0" allow="autoplay *; camera *; microphone *;" height='100%' width='100%' />
+          {/* {teamId ?
             <JitsiMeeting
               roomName={teamId}
               configOverwrite={configOverwrite}
               interfaceConfigOverwrite={interfaceConfigOverwrite}
               userInfo={{
                 displayName,
+                email: "",
               }}
               spinner={MySpinner}
               getIFrameRef={(iframeRef) => {
@@ -69,7 +71,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
             />
             :
             <MySpinner />
-          }
+          } */}
         </Box>
       </Stack>
     </>

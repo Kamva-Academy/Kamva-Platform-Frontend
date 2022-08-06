@@ -34,6 +34,8 @@ const Workshop = ({
   enterWorkshop,
   mentorGetCurrentState,
   addNotification,
+  // todo:
+  teamRoom,
 }) => {
   const { fsmId } = useParams();
   const search = useLocation().search;
@@ -120,7 +122,7 @@ const Workshop = ({
 
   return (
     <StatePageContext.Provider
-      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam }}>
+      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam, teamRoom }}>
       <Container component="main"
         sx={{
           background: '#F7F9FC',

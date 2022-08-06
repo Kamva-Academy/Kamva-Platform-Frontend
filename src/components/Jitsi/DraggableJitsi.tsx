@@ -19,7 +19,7 @@ const DraggableJitsi: FC<DraggableJitsiPropsType> = ({ open, handleClose }) => {
           position: 'fixed',
           left: 10,
           bottom: 10,
-          width: 500,
+          width: 600,
           zIndex: 200,
           [theme.breakpoints.down('sm')]: {
             left: 0,
