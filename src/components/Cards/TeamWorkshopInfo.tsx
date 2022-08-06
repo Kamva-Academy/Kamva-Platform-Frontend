@@ -244,7 +244,7 @@ const TimeChip: FC<TimeChipPropsType> = (props) => {
       icon={<AccessTimeIcon />}
       label={elapsedTime}
       size="small"
-      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
+      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end', width: '90px', padding: '1px 2px'}}
     />
   )
 }
