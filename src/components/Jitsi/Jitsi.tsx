@@ -1,9 +1,10 @@
 import { Box, IconButton, Button, Paper, Stack, Tooltip } from '@mui/material';
 import {
   Cancel as CancelIcon,
-  Help as HelpIcon
+  Help as HelpIcon,
+  Refresh as RefreshIcon,
 } from '@mui/icons-material';
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { connect } from 'react-redux';
 import useWidth from '../../utils/UseWidth';
 import { StatePageContext } from '../../containers/Workshop';
@@ -19,7 +20,10 @@ const MySpinner = () => (
 
 function Jitsi({ handleClose, displayName = 'User' }) {
   const width = useWidth();
-  const { teamId } = useContext(StatePageContext);
+  const iframeRef = useRef(null);
+  let { teamId, teamRoom } = useContext(StatePageContext);
+
+  teamRoom = 'https://gharar.ir/r/e1c57ae0';
 
   return (
     <>
@@ -44,6 +48,12 @@ function Jitsi({ handleClose, displayName = 'User' }) {
             <CancelIcon sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
+        <Tooltip title='بستن' arrow>
+          <IconButton size='small' onClick={handleClose}>
+            <RefreshIcon sx={{ color: 'white' }} />
+          </IconButton>
+        </Tooltip>
+
       </Stack>
       <Stack
         justifyContent='center'
@@ -51,27 +61,33 @@ function Jitsi({ handleClose, displayName = 'User' }) {
         <Box
           sx={{
             width: '100%',
-            height: width === 'xs' ? '70vh' : 350,
+            height: width === 'xs' ? '100vh' : 350,
           }}>
-          <iframe src="https://gharar.ir/r/e1c57ae0" allow="autoplay *; camera *; microphone *;" height='100%' width='100%' />
-          {/* {teamId ?
-            <JitsiMeeting
-              roomName={teamId}
-              configOverwrite={configOverwrite}
-              interfaceConfigOverwrite={interfaceConfigOverwrite}
-              userInfo={{
-                displayName,
-                email: "",
-              }}
-              spinner={MySpinner}
-              getIFrameRef={(iframeRef) => {
-                iframeRef.style.height = '100%';
-                iframeRef.style.width = '100%';
-              }}
-            />
-            :
-            <MySpinner />
-          } */}
+          {teamRoom
+            ? <iframe
+              ref={iframeRef}
+              src={teamRoom}
+              allow="camera *; microphone *; fullscreen *; display-capture *;"
+              allowFullScreen
+              height='100%' width='100%'
+              style={{ border: 'none' }} />
+            : teamId
+              ? <JitsiMeeting
+                roomName={teamId}
+                configOverwrite={configOverwrite}
+                interfaceConfigOverwrite={interfaceConfigOverwrite}
+                userInfo={{
+                  displayName,
+                  email: "",
+                }}
+                spinner={MySpinner}
+                getIFrameRef={(iframeRef) => {
+                  iframeRef.style.height = '100%';
+                  iframeRef.style.width = '100%';
+                }}
+              />
+              : <MySpinner />
+          }
         </Box>
       </Stack>
     </>

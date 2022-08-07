@@ -33,7 +33,7 @@ const DraggableJitsi: FC<DraggableJitsiPropsType> = ({ open, handleClose }) => {
             <Jitsi handleClose={handleClose} />
           </Paper>
           :
-          <Draggable axis='x'>
+          <Draggable>
             <Paper sx={{ boxShadow: '0px 1px 5px' }}>
               <Jitsi handleClose={handleClose} />
             </Paper>
