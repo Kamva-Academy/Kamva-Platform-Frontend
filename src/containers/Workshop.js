@@ -12,6 +12,7 @@ import { getChangeTeamStateSubscription } from '../parse/team';
 import {
   enterWorkshopAction,
   mentorGetCurrentStateAction,
+  changeOpenChatRoomAction,
 } from '../redux/slices/currentState';
 import {
   addNotificationAction,
@@ -20,6 +21,7 @@ import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
 
+import DraggableJitsi from '../components/Jitsi/DraggableJitsi';
 export const StatePageContext = React.createContext();
 
 const Workshop = ({
@@ -36,6 +38,8 @@ const Workshop = ({
   addNotification,
   // todo:
   teamRoom,
+  openChatRoom,
+  changeOpenChatRoom,
 }) => {
   const { fsmId } = useParams();
   const search = useLocation().search;
@@ -128,6 +132,7 @@ const Workshop = ({
           background: '#F7F9FC',
           height: '100%'
         }}>
+
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
@@ -137,11 +142,14 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
+      <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
     </StatePageContext.Provider>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  openChatRoom: state.currentState.openChatRoom,
+  teamRoom: state.currentState.teamRoom,
   myTeam: state.currentState.myTeam,
 
   workshopState: state.currentState.state,
@@ -157,4 +165,5 @@ export default connect(mapStateToProps, {
   enterWorkshop: enterWorkshopAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
+  changeOpenChatRoom: changeOpenChatRoomAction,
 })(Workshop);

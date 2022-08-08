@@ -158,6 +158,7 @@ const isNotFetching = (state) => {
 const currentStateSlice = createSlice({
   name: 'currentState',
   initialState: {
+    openChatRoom: false,
     isFetching: false,
     state: {
       widgets: [],
@@ -165,6 +166,11 @@ const currentStateSlice = createSlice({
     },
     scores: [],
     totalScore: 0,
+  },
+  reducers: {
+    changeOpenChatRoom: (state, actions) => {
+      state.openChatRoom = !state.openChatRoom;
+    },
   },
   extraReducers: {
     [goForwardAction.pending.toString()]: isFetching,
@@ -198,7 +204,7 @@ const currentStateSlice = createSlice({
   },
 });
 
-export const { initCurrentState: initCurrentStateAction } =
+export const { changeOpenChatRoom: changeOpenChatRoomAction } =
   currentStateSlice.actions;
 
 export const { reducer: currentStateReducer } = currentStateSlice;

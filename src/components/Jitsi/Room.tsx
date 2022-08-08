@@ -26,11 +26,9 @@ function Jitsi({ handleClose, displayName = 'User' }) {
 
   teamRoom = 'https://gharar.ir/r/e1c57ae0';
 
-
   const handleReload = () => {
-
+    // todo
   }
-
 
   return (
     <>
@@ -39,10 +37,10 @@ function Jitsi({ handleClose, displayName = 'User' }) {
         justifyContent='flex-end'
         sx={{
           background: '#c4c4c4',
-          cursor: 'move',
+          cursor: width === 'xs' ? 'inherit' : 'move',
           paddingX: 1,
-          borderTopLeftRadius: width === 'xs' ? 0 : 5,
-          borderTopRightRadius: width === 'xs' ? 0 : 5,
+          borderTopLeftRadius: width === 'xs' ? 0 : 6,
+          borderTopRightRadius: width === 'xs' ? 0 : 6,
           height: 40,
         }}>
         {/* <Tooltip title='راهنما' arrow leaveDelay={0}>
@@ -51,7 +49,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
           </IconButton>
         </Tooltip> */}
         <Tooltip title='تازه‌سازی' arrow>
-          <IconButton size='small' onClick={handleReload}>
+          <IconButton disabled size='small' onClick={handleReload}>
             <RefreshIcon sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip>
@@ -65,7 +63,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
       <Box
         sx={{
           width: '100%',
-          height: width === 'xs' ? '100%' : 350,
+          height: width === 'xs' ? '100%' : 350 - 40,
         }}>
         {teamRoom
           ? <iframe
