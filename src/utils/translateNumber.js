@@ -1,11 +1,51 @@
 import getLocale from './getLocale';
 
-const p2e = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
-const e2p = s => s.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
+export const p2e = s => s.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+export const e2p = s => s.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
 
-export const toPersianNumber = (string) => string.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+export const toPersianNumber = (num) => {
+  const persian = {
+    0: '۰',
+    1: '۱',
+    2: '۲',
+    3: '۳',
+    4: '۴',
+    5: '۵',
+    6: '۶',
+    7: '۷',
+    8: '۸',
+    9: '۹',
+  };
+  num = num?.toString();
+  let len = num?.length;
+  let converted = '';
+  for (let i = 0; i < len; i++) {
+    converted += persian[num[i]] || num[i];
+  }
+  return converted;
+};
 
-export const toEnglishNumber = (string) => string.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
+export const toEnglishNumber = (num) => {
+  const english = {
+    '۰': '0',
+    '۱': '1',
+    '۲': '2',
+    '۳': '3',
+    '۴': '4',
+    '۵': '5',
+    '۶': '6',
+    '۷': '7',
+    '۸': '8',
+    '۹': '9',
+  };
+  num = num?.toString();
+  let len = num?.length;
+  let converted = '';
+  for (let i = 0; i < len; i++) {
+    converted += english[num[i]] || num[i];
+  }
+  return converted;
+};
 
 export function tLocalNum(num) {
   return translateNumber({ num });

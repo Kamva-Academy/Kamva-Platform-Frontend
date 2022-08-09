@@ -27,7 +27,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
 import { getTeamStateSubscription, getTeamState } from '../../parse/team';
-import { toPersianNumber } from '../../utils/translateNumber';
+import { e2p } from '../../utils/translateNumber';
 
 var moment = require( 'moment' );
 
@@ -269,9 +269,9 @@ we use the useEffect to initiate the timeInterval and later on we return the des
 const TimeChip: FC<TimeChipPropsType> = (props) => {
 
   // TODO: fix toff where diff showed 3:30:30 more time
-  const [elapsedTime, setElapsedTime] = useState(toPersianNumber(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss')))
+  const [elapsedTime, setElapsedTime] = useState(e2p(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss')))
   useEffect(() => {
-    const changeInterval = setInterval(() => { setElapsedTime(toPersianNumber(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss'))) }, 1000)
+    const changeInterval = setInterval(() => { setElapsedTime(e2p(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss'))) }, 1000)
     return (
       () => clearInterval(changeInterval)
     )
