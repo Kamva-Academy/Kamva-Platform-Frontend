@@ -1,4 +1,4 @@
-import { updateToken } from '../../utils/axios';
+import { updateToken } from '../../configs/axios';
 import createStore from './createStore';
 
 const persistedState = localStorage.getItem('rastaState')

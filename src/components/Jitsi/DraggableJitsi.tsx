@@ -1,8 +1,8 @@
 import { Paper, Box, Fade } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import Draggable from 'react-draggable';
 import useWidth from '../../utils/UseWidth';
-import Jitsi from './Jitsi';
+import Room from './Room';
 
 type DraggableJitsiPropsType = {
   open: boolean;
@@ -15,30 +15,21 @@ const DraggableJitsi: FC<DraggableJitsiPropsType> = ({ open, handleClose }) => {
   return (
     <Fade in={open}>
       <Box
-        sx={(theme) => ({
+        sx={{
           position: 'fixed',
-          left: 10,
-          bottom: 10,
-          width: 500,
-          zIndex: 200,
-          [theme.breakpoints.down('sm')]: {
-            left: 0,
-            top: 0,
-            width: '100%',
-            height: '100%',
-          },
-        })}>
-        {width === 'xs' ?
-          <Paper sx={{ boxShadow: '0px 1px 5px' }}>
-            <Jitsi handleClose={handleClose} />
+          left: width === 'xs' ? 0 : 10,
+          bottom: width === 'xs' ? 'auto' : 10,
+          top: width === 'xs' ? 0 : 'auto',
+          height: width === 'xs' ? '80vh' : 350,
+          width: width === 'xs' ? '100%' : 600,
+          zIndex: 1500,
+        }}
+      >
+        <Draggable disabled={width === 'xs'} position={width === 'xs' && { x: 0, y: 0 }}>
+          <Paper sx={{ boxShadow: '0px 0px 6px', width: '100%', height: '100%' }}>
+            <Room handleClose={handleClose} />
           </Paper>
-          :
-          <Draggable axis='x'>
-            <Paper sx={{ boxShadow: '0px 1px 5px' }}>
-              <Jitsi handleClose={handleClose} />
-            </Paper>
-          </Draggable>
-        }
+        </Draggable>
       </Box>
     </Fade >
   );
