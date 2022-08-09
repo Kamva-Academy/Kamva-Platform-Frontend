@@ -15,7 +15,7 @@ import {
   Typography,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 
@@ -26,8 +26,10 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
-import moment from 'moment-jalaali';
-moment.loadPersian({ usePersianDigits: true })
+import { getTeamStateSubscription, getTeamState } from '../../parse/team';
+import { toPersianNumber } from '../../utils/translateNumber';
+
+var moment = require( 'moment' );
 
 type TeamWorkshopInfoPropsType = {
   name: string,
@@ -53,13 +55,44 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   deleteRequestMentor,
   getPlayerFromTeam,
   mentorsInRoom = [{ name: 'iman alipour', id: 0 }, { name: 'alireza hashemi', id: 1 }, { name: 'x y', id: 2 }, { name: 'z p', id: 3 }],
-  startProblemTime = "2022-08-03T12:39:30+04:30",
-  teamStage = 'مرحله sdfsadf asdf asdf asd fasd f ۴',
 }) => {
-  const startProblemTimeMoment: moment.Moment = moment(startProblemTime)
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
+  const subscriberRef = useRef(null);
+  const [teamEnterTimeToStage, setTeamEnterTimeToStage] = useState('')
+  const [currnetStageName, setCurrnetStageName] = useState('')
+
+  useEffect(() => {
+    const subscribe = async () => {
+      const state = await getTeamState(teamId);
+      if(!state)  return;
+      setCurrnetStageName(state.get('currnetStageName'))
+      setTeamEnterTimeToStage(state.get('teamEnterTimeToStage'))
+      const subscriber = await getTeamStateSubscription();
+      subscriber.on('create', (newState) => {
+        if (newState.get('uuid') === teamId){
+          const currnetStageNameTmp = newState.get('currnetStageName');
+          const teamEnterTimeToStageTmp = moment()
+          setCurrnetStageName(currnetStageNameTmp)
+          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+        }
+      });
+      subscriber.on('update', (newState) => {
+        if (newState.get('uuid') === teamId){
+          const currnetStageNameTmp = newState.get('currnetStageName');
+          const teamEnterTimeToStageTmp = moment()
+          setCurrnetStageName(currnetStageNameTmp)
+          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+        }
+      });
+      subscriberRef.current = subscriber;
+    }
+    subscribe()
+    return () => {
+      subscriberRef.current?.unsubscribe();
+    };
+  }, []);
 
   {/* this function redirects mentor to a teams page, this team could have requested mentor or not, if so, we use the
 available playerId field, otherwise we fetch one team members Id and use it to access their page */}
@@ -69,6 +102,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
       getPlayerFromTeam({ teamId, id: fsmId, token });
     }
   };
+
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
@@ -183,19 +217,21 @@ available playerId field, otherwise we fetch one team members Id and use it to a
               justifyContent: 'end',
             })}
           >
-            <Divider sx={{ margin: '15px auto 15px auto' }}></Divider>
-            {startProblemTimeMoment && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
-              <Box>
-                {teamStage ? `گام: ${teamStage}` : 'تیم هنوز وارد هیچ گامی نشده است'}
-              </Box>
-              <Tooltip title={'زمان حضور تیم در این گام'} arrow>
-                <span>
-                  <Button disabled sx={{ padding: 0 }}>
-                    <TimeChip startTime={startProblemTimeMoment} />
-                  </Button>
-                </span>
-              </Tooltip>
-            </Stack>}
+            {teamEnterTimeToStage && <>
+              <Divider sx={{ margin: '15px auto 15px auto', width: '80%' }}></Divider>
+              <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
+                <Box>
+                  {currnetStageName ? `گام: ${currnetStageName}` : 'تیم هنوز وارد هیچ گامی نشده است'}
+                </Box>
+                <Tooltip title={'زمان حضور تیم در این گام'} arrow>
+                  <span>
+                    <Button disabled sx={{ padding: 0 }}>
+                      <TimeChip startTime={teamEnterTimeToStage} />
+                    </Button>
+                  </span>
+                </Tooltip>
+              </Stack>
+            </>}
             {playerId ? (
               <Button
                 variant="contained"
@@ -225,26 +261,28 @@ available playerId field, otherwise we fetch one team members Id and use it to a
 
 
 type TimeChipPropsType = {
-  startTime: moment.Moment
+  startTime: string
 }
 
 /* the time chip is the chip that has the timer in it that shows how long the team has been on current problem
 we use the useEffect to initiate the timeInterval and later on we return the destructor to control the 'out'sideEffects*/
 const TimeChip: FC<TimeChipPropsType> = (props) => {
-  const [elapsedTime, setElapsedTime] = useState(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss'))
+
+  // TODO: fix toff where diff showed 3:30:30 more time
+  const [elapsedTime, setElapsedTime] = useState(toPersianNumber(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss')))
   useEffect(() => {
-    const changeInterval = setInterval(() => { setElapsedTime(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss')) }, 1000)
+    const changeInterval = setInterval(() => { setElapsedTime(toPersianNumber(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss'))) }, 1000)
     return (
       () => clearInterval(changeInterval)
     )
-  }, []);
+  }, [props.startTime]);
   return (
     <Chip
       variant="outlined"
       icon={<AccessTimeIcon />}
       label={elapsedTime}
       size="small"
-      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end', width: '80px', padding: '1px 2px', justifyContent: 'space-between'}}
+      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end', width: '80px', padding: '1px 2px', justifyContent: 'space-between' }}
     />
   )
 }

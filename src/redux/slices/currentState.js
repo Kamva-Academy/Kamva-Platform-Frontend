@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 import { requestMentor } from '../../parse/mentor';
 import { changeTeamState } from '../../parse/team';
@@ -20,6 +21,8 @@ const changeTeamStateBroadcastAction = createAsyncThunk(
     await changeTeamState({
       stateId: current_state.id.toString(),
       uuid: teamId,
+      currnetStageName: current_state.name,
+      teamEnterTimeToStage: moment().format('HH:mm:ss')
     });
   }
 );

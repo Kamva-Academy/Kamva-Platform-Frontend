@@ -66,6 +66,7 @@ const initialState: InitialState = {
   team: null,
   certificateLink: '',
   playerId: {},
+  teamCurrentState: null,
 };
 
 export const getEventWorkshopsAction = createAsyncThunkApi(
@@ -464,6 +465,12 @@ const eventSlice = createSlice({
     removeRequestMentor: (state, { payload: { teamId, fsmId } }) => {
       delete state.teamsRequests[teamId + '.' + fsmId];
     },
+    createNewTeamState: (state, { payload: { uuid, stateId, currnetStageName, teamEnterTimeToStage } }) => {
+      state.teamCurrentState = { uuid, stateId, currnetStageName, teamEnterTimeToStage };
+    },
+    updateNewTeamState: (state, { payload: { uuid, stateId, currnetStageName, teamEnterTimeToStage } }) => {
+      state.teamCurrentState = { uuid, stateId, currnetStageName, teamEnterTimeToStage };
+    },
   },
   extraReducers: {
     [getEventWorkshopsAction.pending.toString()]: (state) => {
@@ -645,7 +652,7 @@ const eventSlice = createSlice({
 
     // mentor slices
     [getPlayerFromTeamAction.fulfilled.toString()]: (state, { payload, meta }) => {
-      const newPlayerId = {...state.playerId};
+      const newPlayerId = { ...state.playerId };
       newPlayerId[meta.arg.teamId] = payload.response.id;
       state.playerId = newPlayerId;
       // window.open(
