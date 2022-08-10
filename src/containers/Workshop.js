@@ -20,8 +20,12 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
+import { changeMentorInRoomState } from './../parse/mentorsInRoom';
 
 import DraggableJitsi from '../components/Jitsi/DraggableJitsi';
+
+var moment = require( 'moment' );
+
 export const StatePageContext = React.createContext();
 
 const Workshop = ({
@@ -40,6 +44,8 @@ const Workshop = ({
   teamRoom,
   openChatRoom,
   changeOpenChatRoom,
+  personsName,
+  mentorId,
 }) => {
   const { fsmId } = useParams();
   const search = useLocation().search;
@@ -50,8 +56,27 @@ const Workshop = ({
   } else {
     playerId = studentPlayerId;
   }
+  let readyToAddMentor = false
+  if (teamId !== undefined && mentorId !== undefined && personsName !== undefined){
+    readyToAddMentor = true
+  }
   const { eventId } = useParams();
   const subscriberRef = useRef(null);
+  const [mentorAdded, setmentorAdded] = useState(false)
+
+  useEffect(() => {
+    if (!mentorAdded && isMentor && readyToAddMentor) {
+      setmentorAdded(true)
+      changeMentorInRoomState(teamId, mentorId.toString() , personsName, moment().format('HH:mm:ss'))
+    }
+    return (() => {
+      console.log('mentor leaving?')
+      if (isMentor && readyToAddMentor) {
+        console.log('mentor is leaving')
+        changeMentorInRoomState(teamId, mentorId.toString(), personsName, moment().format('HH:mm:ss'))
+      }
+    })
+  }, [isMentor, readyToAddMentor])
 
   useEffect(() => {
     if (fsmId) {
@@ -142,7 +167,7 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+      {/* <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} /> */}
     </StatePageContext.Provider>
   );
 };
@@ -158,6 +183,8 @@ const mapStateToProps = (state, ownProps) => ({
   // stateId: ownProps.match?.params?.stateId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
+  personsName: `${state.account.userAccount.first_name} ${state.account.userAccount.last_name}`,
+  mentorId: state.account.userAccount.academic_studentship.id
 });
 
 export default connect(mapStateToProps, {
