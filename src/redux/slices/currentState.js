@@ -139,9 +139,11 @@ const getNewState = (state, { payload: { response } }) => {
 };
 
 const getPlayer = (state, { payload: { response } }) => {
+  console.log(response)
   state.needUpdateState = false;
   state.workshopId = response.fsm;
   state.playerId = response.id;
+  state.teamRoom = response.team?.chat_room;
   // todo: here I put playerId as teamId
   state.teamId = response.team?.id ? response.team?.id : String(response.id);
   state.state = response.current_state;

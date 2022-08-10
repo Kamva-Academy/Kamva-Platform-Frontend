@@ -21,11 +21,9 @@ import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
 import { changeMentorInRoomState } from './../parse/mentorsInRoom';
-
-import DraggableJitsi from '../components/Jitsi/DraggableJitsi';
-
 var moment = require( 'moment' );
 
+import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
 export const StatePageContext = React.createContext();
 
 const Workshop = ({
@@ -46,11 +44,13 @@ const Workshop = ({
   changeOpenChatRoom,
   personsName,
   mentorId,
+  workshop,
 }) => {
   const { fsmId } = useParams();
   const search = useLocation().search;
   let playerId = new URLSearchParams(search).get('playerId');
   let isMentor = false;
+
   if (playerId) {
     isMentor = true;
   } else {
@@ -167,7 +167,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {/* <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} /> */}
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+        <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+      }
     </StatePageContext.Provider>
   );
 };
@@ -184,7 +186,8 @@ const mapStateToProps = (state, ownProps) => ({
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
   personsName: `${state.account.userAccount.first_name} ${state.account.userAccount.last_name}`,
-  mentorId: state.account.userAccount.academic_studentship.id
+  mentorId: state.account.userAccount.academic_studentship.id,
+  workshop: state.workshop.workshop,
 });
 
 export default connect(mapStateToProps, {

@@ -2,14 +2,14 @@ import { Paper, Box, Fade } from '@mui/material';
 import React, { FC, useState } from 'react';
 import Draggable from 'react-draggable';
 import useWidth from '../../utils/UseWidth';
-import Room from './Room';
+import ChatRoom from './ChatRoom';
 
-type DraggableJitsiPropsType = {
+type DraggableChatRoomPropsType = {
   open: boolean;
   handleClose: () => void;
 };
 
-const DraggableJitsi: FC<DraggableJitsiPropsType> = ({ open, handleClose }) => {
+const DraggableChatRoom: FC<DraggableChatRoomPropsType> = ({ open, handleClose }) => {
   const width = useWidth();
 
   return (
@@ -27,7 +27,7 @@ const DraggableJitsi: FC<DraggableJitsiPropsType> = ({ open, handleClose }) => {
       >
         <Draggable disabled={width === 'xs'} position={width === 'xs' && { x: 0, y: 0 }}>
           <Paper sx={{ boxShadow: '0px 0px 6px', width: '100%', height: '100%' }}>
-            <Room handleClose={handleClose} />
+            <ChatRoom handleClose={handleClose} />
           </Paper>
         </Draggable>
       </Box>
@@ -35,4 +35,4 @@ const DraggableJitsi: FC<DraggableJitsiPropsType> = ({ open, handleClose }) => {
   );
 }
 
-export default DraggableJitsi;
+export default DraggableChatRoom;

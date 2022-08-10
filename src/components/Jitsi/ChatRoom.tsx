@@ -24,8 +24,6 @@ function Jitsi({ handleClose, displayName = 'User' }) {
   const jitsiRef = useRef(null);
   let { teamId, teamRoom } = useContext(StatePageContext);
 
-  teamRoom = 'https://gharar.ir/r/e1c57ae0';
-
   const handleReload = () => {
     // todo
   }
@@ -48,11 +46,11 @@ function Jitsi({ handleClose, displayName = 'User' }) {
             <HelpIcon sx={{ color: 'white' }} />
           </IconButton>
         </Tooltip> */}
-        <Tooltip title='تازه‌سازی' arrow>
+        {/* <Tooltip title='تازه‌سازی' arrow>
           <IconButton disabled size='small' onClick={handleReload}>
             <RefreshIcon sx={{ color: 'white' }} />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip title='بستن' arrow>
           <IconButton size='small' onClick={handleClose}>
             <CancelIcon sx={{ color: 'white' }} />
