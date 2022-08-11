@@ -12,6 +12,11 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useParams } from 'react-router-dom';
 import('../../types/models')
 import ClassIcon from '@mui/icons-material/Class';
+import PersonIcon from '@mui/icons-material/Person';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
+import InfoIcon from '@mui/icons-material/Info';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
 import {
   getEventTeamsAction,
@@ -51,22 +56,22 @@ const EventComponent: FC<EventPropsType> = ({
   const [tabs, setTabs] = useState<{ label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
       label: 'اطلاعات کلی',
-      icon: '',
+      icon: InfoIcon,
       component: Info,
     },
     {
       label: 'طراحی',
-      icon: '',
+      icon: DesignServicesIcon,
       component: Design,
     },
     {
       label: 'یال‌ها',
-      icon: '',
+      icon: TimelineIcon,
       component: Edges,
     },
     {
       label: 'همیارها',
-      icon: ClassIcon,
+      icon: PersonIcon,
       component: Mentors,
     },
   ])
@@ -84,7 +89,7 @@ const EventComponent: FC<EventPropsType> = ({
           ...tabs,
           {
             label: 'درخواست‌های تیمی',
-            icon: '',
+            icon: QuestionAnswerIcon,
             component: TeamRequests,
           },
         ])
@@ -93,7 +98,7 @@ const EventComponent: FC<EventPropsType> = ({
           ...tabs,
           {
             label: 'درخواست‌های فردی',
-            icon: '',
+            icon: QuestionAnswerIcon,
             component: IndividualRequests,
           },
         ])

@@ -3,6 +3,12 @@ import {makeStyles} from '@mui/styles'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import GroupIcon from '@mui/icons-material/Group';
 import ClassIcon from '@mui/icons-material/Class';
+import DiscountIcon from '@mui/icons-material/Discount';
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import InfoIcon from '@mui/icons-material/Info';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -26,22 +32,22 @@ const useStyles = makeStyles((theme) => ({
 const tabs = [
   {
     label: 'اطلاعات کلی',
-    icon: '',
+    icon: InfoIcon,
     component: Info,
   },
   {
     label: 'فرم ثبت‌نام',
-    icon: '',
+    icon: HistoryEduIcon,
     component: RegistrationForm,
   },
   {
     label: 'رسیدهای ثبت‌نام',
-    icon: '',
+    icon: ConfirmationNumberIcon,
     component: RegistrationReceipts,
   },
   {
     label: 'کد تخفیف',
-    icon: '',
+    icon: DiscountIcon,
     component: DiscountCode,
   },
   {
