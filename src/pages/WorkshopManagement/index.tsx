@@ -11,6 +11,7 @@ import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useParams } from 'react-router-dom';
 import('../../types/models')
+import ClassIcon from '@mui/icons-material/Class';
 
 import {
   getEventTeamsAction,
@@ -26,6 +27,7 @@ import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
 import { Workshop, Event } from '../../types/models';
+import Workshops from './Workshops';
 
 
 type EventPropsType = {
@@ -46,7 +48,7 @@ const EventComponent: FC<EventPropsType> = ({
   const t = useTranslate();
   const { fsmId, eventId } = useParams();
   const [tabIndex, setTabIndex] = useState(0);
-  const [tabs, setTabs] = useState<{ label: string; icon: string; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
+  const [tabs, setTabs] = useState<{ label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
       label: 'اطلاعات کلی',
       icon: '',
@@ -61,6 +63,11 @@ const EventComponent: FC<EventPropsType> = ({
       label: 'یال‌ها',
       icon: '',
       component: Edges,
+    },
+    {
+      label: 'کارگاه‌ها',
+      icon: ClassIcon,
+      component: Workshops,
     },
   ])
 
@@ -110,7 +117,7 @@ const EventComponent: FC<EventPropsType> = ({
                 <Button
                   key={index}
                   onClick={() => setTabIndex(index)}
-                  variant={tabIndex == index ? 'contained' : 'outlined' }
+                  variant={tabIndex == index ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>
