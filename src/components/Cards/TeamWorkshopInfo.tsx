@@ -64,34 +64,10 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const mentorsInRoomSubscriberRef = useRef(null);
   const [teamEnterTimeToStage, setTeamEnterTimeToStage] = useState('')
   const [currnetStageName, setCurrnetStageName] = useState('')
-  const [mentorsInRoom, setMentorsInRoom] = useState([])
-
-  useEffect(() => {
-    const subscribe = async () => {
-      setMentorsInRoom(await getMentorsInRoom(teamId))
-      const subscriber = await getMentorsInRoomSubscription( teamId );
-      subscriber.on('create', async (newState) => {
-        console.log('create happened')
-        if (newState.get('uuid') === teamId){
-          setMentorsInRoom(await getMentorsInRoom(teamId))
-        }
-      });
-      subscriber.on('update', async (newState) => {
-        console.log('update happened')
-        if (newState.get('uuid') === teamId){
-          setMentorsInRoom(await getMentorsInRoom(teamId))
-        }
-      });
-      mentorsInRoomSubscriberRef.current = subscriber;
-    }
-    subscribe()
-    return () => {
-      mentorsInRoomSubscriberRef.current?.unsubscribe();
-    };
-  }, []);
+  const [mentorsInRoom, setMentorsInRoom] = useState([]);
   
   useEffect(() => {
-    const subscribe = async () => {
+    const subscribeOnStateChange = async () => {
       const state = await getTeamState(teamId);
       if(!state)  return;
       setCurrnetStageName(state.get('currnetStageName'))
@@ -115,9 +91,32 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       });
       subscriberRef.current = subscriber;
     }
-    subscribe()
+    subscribeOnStateChange()
+
+    const subscribeOnMentorArrival = async () => {
+      const mentorsInRoom = await getMentorsInRoom(teamId);
+      setMentorsInRoom(mentorsInRoom);
+      const subscriber = await getMentorsInRoomSubscription(teamId);
+      subscriber.on('create', async (newState) => {
+        // console.log('create happened');
+        // console.log(newState);
+        if (newState.get('uuid') === teamId){
+          setMentorsInRoom(await getMentorsInRoom(teamId));
+        }
+      });
+      subscriber.on('update', async (newState) => {
+        // console.log('update happened')
+        // console.log(newState)
+        if (newState.get('uuid') === teamId){
+          setMentorsInRoom(await getMentorsInRoom(teamId))
+        }
+      });
+      mentorsInRoomSubscriberRef.current = subscriber;
+    }
+    subscribeOnMentorArrival();
     return () => {
       subscriberRef.current?.unsubscribe();
+      mentorsInRoomSubscriberRef.current?.unsubscribe();
     };
   }, []);
 

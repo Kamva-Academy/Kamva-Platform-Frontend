@@ -20,10 +20,10 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
-import { changeMentorInRoomState } from './../parse/mentorsInRoom';
+import { addMentorToRoom, setMentorsDepartureTime } from './../parse/mentorsInRoom';
 import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
 
-var moment = require( 'moment' );
+var moment = require('moment');
 
 export const StatePageContext = React.createContext();
 
@@ -58,7 +58,7 @@ const Workshop = ({
     playerId = studentPlayerId;
   }
   let readyToAddMentor = false
-  if (teamId !== undefined && mentorId !== undefined && personsName !== undefined){
+  if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
     readyToAddMentor = true
   }
   const { eventId } = useParams();
@@ -68,16 +68,39 @@ const Workshop = ({
   useEffect(() => {
     if (!mentorAdded && isMentor && readyToAddMentor) {
       setmentorAdded(true)
-      changeMentorInRoomState(teamId, mentorId.toString() , personsName, moment().format('HH:mm:ss'))
+      addMentorToRoom(teamId, mentorId.toString(), personsName, moment().format('HH:mm:ss'))
     }
-    return (() => {
-      console.log('mentor leaving?')
-      if (isMentor && readyToAddMentor) {
-        console.log('mentor is leaving')
-        changeMentorInRoomState(teamId, mentorId.toString(), personsName, moment().format('HH:mm:ss'))
-      }
-    })
   }, [isMentor, readyToAddMentor])
+
+  const onMentorDeparture = async () => {
+    if (mentorAdded && isMentor && readyToAddMentor) {
+      console.log('quit')
+      await setMentorsDepartureTime(teamId, mentorId.toString())
+    }
+  }
+
+  useEffect(() => {
+    window.onbeforeunload = async () => {
+      await onMentorDeparture();
+    };
+
+    const handler = async (event) => {
+      // event.preventDefault()
+      // event.returnValue = ''
+      await onMentorDeparture();
+    };
+
+    window.addEventListener('unload', handler);
+
+    return async () => {
+      await onMentorDeparture();
+      document.removeEventListener('unload', handler);
+    };
+  }, []);
+
+
+
+
 
   useEffect(() => {
     if (fsmId) {

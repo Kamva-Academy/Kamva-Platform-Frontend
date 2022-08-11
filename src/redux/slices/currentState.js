@@ -139,7 +139,6 @@ const getNewState = (state, { payload: { response } }) => {
 };
 
 const getPlayer = (state, { payload: { response } }) => {
-  console.log(response)
   state.needUpdateState = false;
   state.workshopId = response.fsm;
   state.playerId = response.id;

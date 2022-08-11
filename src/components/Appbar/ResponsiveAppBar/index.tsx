@@ -64,7 +64,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
 
   useEffect(() => {
-    //console.log(rightItems) //keys are null :D kudos!
+    //console.log(rightItems) //keys are null :D
     //console.log(leftItems)
   }, [])
 
