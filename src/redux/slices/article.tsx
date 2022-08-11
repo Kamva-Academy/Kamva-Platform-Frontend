@@ -9,13 +9,18 @@ import {
   createWidgetAction,
 } from './widget';
 
-const initialState = {
+import { ArticlesInitialStateType } from '../../types/redux/article'
+
+const initialState: ArticlesInitialStateType = {
+  isFetching: false,
   widgets: [],
   articles: [],
   teams: {},
   notifications: [],
   problems: [],
   submissions: [],
+  articlesCount: 0,
+  article: null,
 };
 
 export { initialState as mentorInitialState };
@@ -37,14 +42,6 @@ export const createArticleAction = createAsyncThunkApi(
   Apis.POST,
   articlesUrl
 );
-
-
-
-
-
-
-
-
 
 
 

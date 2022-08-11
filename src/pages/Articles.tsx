@@ -1,12 +1,14 @@
 import { Grid, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import ArticleCard from '../components/Cards/ArticleCard';
 import { getAllArticlesAction } from '../redux/slices/article';
 import Layout from '../containers/Layout';
 
-const Articles = ({
+import { ArticleType } from '../types/redux/article';
+
+const Articles: FC<{ getAllArticles: any; articles: ArticleType[]; articlesCount: any }>  = ({
   getAllArticles,
   articles,
   articlesCount,
@@ -19,7 +21,7 @@ const Articles = ({
 
   return (
     <Layout>
-      <Grid container spacing={4} justify='center'>
+      <Grid container spacing={4} justifyContent='center'>
         <Grid item xs={12}>
           <Typography variant="h1" align='center'>
             {'مقاله‌ها'}
