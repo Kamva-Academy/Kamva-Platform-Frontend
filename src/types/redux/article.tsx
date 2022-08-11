@@ -8,7 +8,7 @@ import {
 } from '../models'
 
 export type ArticleType = {
-    id: any;
+    id: number;
     name?: string;
     description?: string;
     cover_page?: string;

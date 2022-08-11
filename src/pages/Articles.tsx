@@ -8,7 +8,7 @@ import Layout from '../containers/Layout';
 
 import { ArticleType } from '../types/redux/article';
 
-const Articles: FC<{ getAllArticles: any; articles: ArticleType[]; articlesCount: any }>  = ({
+const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articlesCount: number }>  = ({
   getAllArticles,
   articles,
   articlesCount,
