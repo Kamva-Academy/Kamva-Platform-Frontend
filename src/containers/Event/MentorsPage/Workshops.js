@@ -1,7 +1,6 @@
 import {
   Button,
   Grid,
-  TextField,
   Typography,
 } from '@mui/material';
 import { Pagination } from '@mui/material';
@@ -19,9 +18,7 @@ import {
 import { addMentorToWorkshopAction } from '../../../redux/slices/events';
 
 function Index({
-  addMentorToWorkshop,
   getEventWorkshops,
-
   workshopsCount,
   allEventWorkshops,
 }) {
@@ -56,9 +53,20 @@ function Index({
           </Grid>
         </Grid>
 
-        <Grid item container xs={12} justify="flex-start" spacing={2}>
+        <Grid container spacing={2}
+          alignItems='stretch'
+          margin='10px 5px'
+          justifyContent="center"
+          sx={(theme) => ({
+            height: '100%',
+            justifyContent: 'start',
+            [theme.breakpoints.down('sm')]: {
+              justifyContent: 'center',
+              marginRight: "0px",
+            },
+          })}>
           {allEventWorkshops?.map((workshop) => (
-            <Grid item xs={12} sm={6} md={4} key={workshop.id}>
+            <Grid container item xs={12} sm={6} md={4} key={workshop.id} alignItems='center' justifyContent='center'>
               <WorkshopCard {...workshop} />
             </Grid>
           ))}
@@ -87,7 +95,7 @@ function Index({
 }
 const mapStateToProps = (state) => ({
   workshopsCount: state.events.workshopsCount,
-  allEventWorkshops: state.events.allEventWorkshops,
+  allEventWorkshops: state.events.workshops,
 });
 
 export default connect(mapStateToProps, {

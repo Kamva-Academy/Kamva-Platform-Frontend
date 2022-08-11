@@ -9,7 +9,7 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import React from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useParams } from 'react-router-dom';
@@ -39,7 +39,29 @@ const WorkshopCard = ({
   const { eventId } = useParams();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root}
+      sx={{
+        maxWidth: 300,
+        marginTop: '0px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        height: '100%',
+        width: '100%',
+        padding: '0px !important',
+        backgroundColor: 'rgb(255, 255, 255, 0.94)',
+        fontSize: '1rem',
+        textDecoration: 'none',
+        overflow: 'hidden',
+        boxShadow: '0 0 1px 0rem rgba(0, 0, 0, 0.5)',
+        transition: 'transform 0.1s ease-in-out',
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+        '&:hover': {
+          transform: 'translateY(-0.1rem) scale(1.01)',
+          boxShadow: '0 0.5em 1rem -1rem rgba(2, 2, 2, 2.5)',
+        },
+      }}>
       <CardActionArea disabled>
         {cover_page &&
           <CardMedia
