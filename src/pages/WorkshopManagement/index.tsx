@@ -27,7 +27,7 @@ import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
 import { Workshop, Event } from '../../types/models';
-import Workshops from './Workshops';
+import Mentors from './Mentors';
 
 
 type EventPropsType = {
@@ -65,9 +65,9 @@ const EventComponent: FC<EventPropsType> = ({
       component: Edges,
     },
     {
-      label: 'کارگاه‌ها',
+      label: 'همیارها',
       icon: ClassIcon,
-      component: Workshops,
+      component: Mentors,
     },
   ])
 
