@@ -5,6 +5,8 @@ import {
   accountCRUDUrl,
   changePasswordUrl,
   institutesUrl,
+  discountCRUDUrl,
+  merchandiseDiscountCodeUrl,
   loginUrl,
   profileCRUDUrl,
   studentshipCRUDUrl,
@@ -131,6 +133,46 @@ export const getUserProfileAction = createAsyncThunkApi(
 );
 
 
+// actions for mentors:
+
+export const getUserStudentshipAction = createAsyncThunkApi(
+  'account/getUserStudentshipAction',
+  Apis.GET,
+  studentshipCRUDUrl,
+);
+
+export const createDiscountCodeAction = createAsyncThunkApi(
+  'account/createDiscountCodeAction',
+  Apis.POST,
+  discountCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'کد تخفیف با موفقیت ایجاد شد.',
+    },
+  }
+);
+
+export const deleteDiscountCodeAction = createAsyncThunkApi(
+  'account/deleteDiscountCodeAction',
+  Apis.DELETE,
+  discountCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'کد تخفیف با موفقیت حذف شد.',
+    },
+  }
+);
+
+export const getAllMerchandiseDiscountCodesAction = createAsyncThunkApi(
+  'account/getAllMerchandiseDiscountCodesAction',
+  Apis.GET,
+  merchandiseDiscountCodeUrl,
+);
+
+
+// end of actions for mentors
+
+
 
 const isFetching = (state) => {
   state.isFetching = true;
@@ -145,7 +187,8 @@ const initialState = {
   isFetching: false,
   token: '',
   refresh: '',
-  user: {}
+  user: {},
+  discountCodes: [],
 };
 
 
@@ -228,6 +271,38 @@ const accountSlice = createSlice({
     [updateStudentShipAction.pending.toString()]: isFetching,
     [updateStudentShipAction.fulfilled.toString()]: isNotFetching,
     [updateStudentShipAction.rejected.toString()]: isNotFetching,
+
+    // for mentors
+
+    [createDiscountCodeAction.pending.toString()]: isFetching,
+    [createDiscountCodeAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.discountCodes = [...state.discountCodes, response]
+      state.isFetching = false;
+    },
+    [createDiscountCodeAction.rejected.toString()]: isNotFetching,
+
+
+    [deleteDiscountCodeAction.pending.toString()]: isFetching,
+    [deleteDiscountCodeAction.fulfilled.toString()]: (state, action) => {
+      const discountCodeId = action?.meta?.arg?.discountCodeId;
+      const newDiscountCodes = [...state.discountCodes]
+      for (let i = 0; i < newDiscountCodes.length; i++) {
+        if (newDiscountCodes[i].id == discountCodeId) {
+          newDiscountCodes.splice(i, 1);
+          break;
+        }
+      }
+      state.discountCodes = newDiscountCodes;
+      state.isFetching = false;
+    },
+    [deleteDiscountCodeAction.rejected.toString()]: isNotFetching,
+
+    [getAllMerchandiseDiscountCodesAction.pending.toString()]: isFetching,
+    [getAllMerchandiseDiscountCodesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.discountCodes = response;
+      state.isFetching = false;
+    },
+    [getAllMerchandiseDiscountCodesAction.rejected.toString()]: isNotFetching,
   },
 });
 
