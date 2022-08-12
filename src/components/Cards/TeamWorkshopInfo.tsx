@@ -28,7 +28,7 @@ import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
 import { getTeamStateSubscription, getTeamState } from '../../parse/team';
 import { e2p } from '../../utils/translateNumber';
-import {getMentorsInRoom,
+import {anounceMentorDeparture, getMentorsInRoom,
         getMentorsInRoomSubscription}
         from '../../parse/mentorsInRoom';
 var moment = require( 'moment' );
@@ -65,6 +65,53 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const [teamEnterTimeToStage, setTeamEnterTimeToStage] = useState('')
   const [currnetStageName, setCurrnetStageName] = useState('')
   const [mentorsInRoom, setMentorsInRoom] = useState([]);
+
+  useEffect(() => {
+    const subscribeOnMentorArrival = async () => {
+      let mentorsInRoom = await getMentorsInRoom(teamId);
+      await checkForOfflineMentors()
+      mentorsInRoom = await getMentorsInRoom(teamId)
+      setMentorsInRoom(mentorsInRoom);
+      const subscriber = await getMentorsInRoomSubscription(teamId);
+      subscriber.on('create', async (newState) => {
+        if (newState.get('uuid') === teamId){
+          setMentorsInRoom(await getMentorsInRoom(teamId));
+        }
+      });
+      subscriber.on('update', async (newState) => {
+        if (newState.get('uuid') === teamId){
+          setMentorsInRoom(await getMentorsInRoom(teamId))
+        }
+      });
+      mentorsInRoomSubscriberRef.current = subscriber;
+    }
+    subscribeOnMentorArrival();
+
+    return (() => {
+      mentorsInRoomSubscriberRef.current?.unsubscribe();
+    })
+  }, [])
+
+  const checkForOfflineMentors = async () => {
+    for (let i = 0; i < mentorsInRoom.length; i++){
+      if (moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds() > 20000){
+        await anounceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
+      }
+    }
+  }
+
+  useEffect(() => {
+    let updateInterval
+    if (mentorsInRoom.length > 0) {
+      updateInterval = setInterval(() => { checkForOfflineMentors(); }, 10000)
+    }
+
+    return (() => {
+      if (updateInterval){
+        clearInterval(updateInterval)
+      }
+    })
+  }, [mentorsInRoom])
   
   useEffect(() => {
     const subscribeOnStateChange = async () => {
@@ -93,30 +140,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     }
     subscribeOnStateChange()
 
-    const subscribeOnMentorArrival = async () => {
-      const mentorsInRoom = await getMentorsInRoom(teamId);
-      setMentorsInRoom(mentorsInRoom);
-      const subscriber = await getMentorsInRoomSubscription(teamId);
-      subscriber.on('create', async (newState) => {
-        // console.log('create happened');
-        // console.log(newState);
-        if (newState.get('uuid') === teamId){
-          setMentorsInRoom(await getMentorsInRoom(teamId));
-        }
-      });
-      subscriber.on('update', async (newState) => {
-        // console.log('update happened')
-        // console.log(newState)
-        if (newState.get('uuid') === teamId){
-          setMentorsInRoom(await getMentorsInRoom(teamId))
-        }
-      });
-      mentorsInRoomSubscriberRef.current = subscriber;
-    }
-    subscribeOnMentorArrival();
     return () => {
       subscriberRef.current?.unsubscribe();
-      mentorsInRoomSubscriberRef.current?.unsubscribe();
     };
   }, []);
 

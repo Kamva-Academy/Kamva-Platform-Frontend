@@ -20,7 +20,7 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
-import { addMentorToRoom, setMentorsDepartureTime } from './../parse/mentorsInRoom';
+import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
 import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
 
 var moment = require('moment');
@@ -66,41 +66,22 @@ const Workshop = ({
   const [mentorAdded, setmentorAdded] = useState(false)
 
   useEffect(() => {
+    let updateInterval
     if (!mentorAdded && isMentor && readyToAddMentor) {
+      addMentorToRoom(teamId, mentorId.toString(), personsName)
       setmentorAdded(true)
-      addMentorToRoom(teamId, mentorId.toString(), personsName, moment().format('HH:mm:ss'))
+      updateMentorTime(teamId, mentorId.toString())
+      updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
     }
+    
+    return (
+      () => {
+        if (updateInterval){
+          clearInterval(updateInterval)
+        }
+      }
+    )
   }, [isMentor, readyToAddMentor])
-
-  const onMentorDeparture = async () => {
-    if (mentorAdded && isMentor && readyToAddMentor) {
-      console.log('quit')
-      await setMentorsDepartureTime(teamId, mentorId.toString())
-    }
-  }
-
-  useEffect(() => {
-    window.onbeforeunload = async () => {
-      await onMentorDeparture();
-    };
-
-    const handler = async (event) => {
-      // event.preventDefault()
-      // event.returnValue = ''
-      await onMentorDeparture();
-    };
-
-    window.addEventListener('unload', handler);
-
-    return async () => {
-      await onMentorDeparture();
-      document.removeEventListener('unload', handler);
-    };
-  }, []);
-
-
-
-
 
   useEffect(() => {
     if (fsmId) {
@@ -191,9 +172,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
         <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      } */}
+      }
     </StatePageContext.Provider>
   );
 };

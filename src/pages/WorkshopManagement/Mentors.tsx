@@ -66,7 +66,7 @@ const Index: FC<IndexProps> = ({
           </Grid>
         </Grid>
 
-        <Grid item container xs spacing={1} justifyContent="space-between">
+        <Grid item container xs spacing={1} justifyContent="space-evenly">
           <Grid item xs={12} sm={4}>
             <TextField
               value={properties.username}
