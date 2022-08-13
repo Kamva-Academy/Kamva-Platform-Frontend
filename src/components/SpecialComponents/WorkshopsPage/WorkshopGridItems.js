@@ -12,7 +12,8 @@ export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
     ));
 
   if (workshops.length > 0) {
-    return workshops.map((workshop) => (
+    let tmpArr = [...workshops].sort((workshop1, workshop2) => workshop2.id - workshop1.id)
+    return tmpArr.map((workshop) => (
       <Grid item key={workshop.id} xs={12} sm={6} lg={4}>
         <WorkshopCard eventId={eventId} workshop={workshop} />
       </Grid>

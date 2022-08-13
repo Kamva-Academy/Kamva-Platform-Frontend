@@ -14,7 +14,7 @@ import Sidebar from './Sidebar';
 
 function Workshops({
   workshops,
-  eventWorkshopsCount,
+  workshopsCount,
   event,
   isLoading,
   getEventWorkshops,
@@ -61,7 +61,7 @@ function Workshops({
                 variant="outlined"
                 color="primary"
                 shape='rounded'
-                count={Math.ceil(eventWorkshopsCount / 12)}
+                count={Math.ceil(workshopsCount / 12)}
                 page={pageNumber}
                 onChange={(e, value) => setPageNumber(value)}
               />
@@ -77,7 +77,7 @@ const mapStateToProps = (state, ownProps) => ({
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
   event: state.events.event,
-  eventWorkshopsCount: state.events.eventWorkshopsCount,
+  workshopsCount: state.events.workshopsCount,
 });
 
 export default connect(mapStateToProps, {

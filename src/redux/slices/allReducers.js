@@ -10,8 +10,11 @@ import { translatorReducer } from './translator';
 import { whiteboardReducer } from './whiteboard';
 import { widgetReducer } from './widget';
 import { workshopReducer } from './workshop';
+import { articleReducer } from './article';
+import { paperReducer } from './Paper';
 
 const allReducers = combineReducers({
+  paper: paperReducer,
   account: accountReducer,
   currentState: currentStateReducer,
   notifications: notificationReducer,
@@ -21,6 +24,7 @@ const allReducers = combineReducers({
   landing: landingReducer,
   events: eventsReducer,
   workshop: workshopReducer,
+  article: articleReducer,
   Intl: translatorReducer,
 });
 

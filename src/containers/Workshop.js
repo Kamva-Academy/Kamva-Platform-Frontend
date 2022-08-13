@@ -1,10 +1,9 @@
 import { Fab, Toolbar } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import Container from '@mui/material/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import ScrollTop from '../components/ScrollToTop/ScrollToTop';
@@ -13,6 +12,7 @@ import { getChangeTeamStateSubscription } from '../parse/team';
 import {
   enterWorkshopAction,
   mentorGetCurrentStateAction,
+  changeOpenChatRoomAction,
 } from '../redux/slices/currentState';
 import {
   addNotificationAction,
@@ -20,26 +20,10 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
+import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
+import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
 
-const useStyles = makeStyles((theme) => ({
-  centerItems: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 'calc(100vh - 64px)',
-  },
-  title: {
-    fontSize: 60,
-    color: '#555',
-    marginBottom: 20,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 40,
-    },
-  },
-  body: {
-    background: '#F7F9FC',
-  },
-}));
+var moment = require('moment');
 
 export const StatePageContext = React.createContext();
 
@@ -50,21 +34,54 @@ const Workshop = ({
   stateId,
   studentPlayerId,
   teamId,
-  isMentor,
-
   myTeam,
-
   getOneWorkshop,
   enterWorkshop,
   mentorGetCurrentState,
   addNotification,
+  // todo:
+  teamRoom,
+  openChatRoom,
+  changeOpenChatRoom,
+  personsName,
+  mentorId,
+  workshop,
 }) => {
-  let { fsmId, playerId } = useParams();
-  fsmId ||= workshopId;
-  playerId ||= studentPlayerId;
+  const { fsmId } = useParams();
+  const search = useLocation().search;
+  let playerId = new URLSearchParams(search).get('playerId');
+  let isMentor = false;
+
+  if (playerId) {
+    isMentor = true;
+  } else {
+    playerId = studentPlayerId;
+  }
+  let readyToAddMentor = false
+  if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
+    readyToAddMentor = true
+  }
   const { eventId } = useParams();
-  const classes = useStyles();
   const subscriberRef = useRef(null);
+  const [mentorAdded, setmentorAdded] = useState(false)
+
+  useEffect(() => {
+    let updateInterval
+    if (!mentorAdded && isMentor && readyToAddMentor) {
+      addMentorToRoom(teamId, mentorId.toString(), personsName)
+      setmentorAdded(true)
+      updateMentorTime(teamId, mentorId.toString())
+      updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
+    }
+    
+    return (
+      () => {
+        if (updateInterval){
+          clearInterval(updateInterval)
+        }
+      }
+    )
+  }, [isMentor, readyToAddMentor])
 
   useEffect(() => {
     if (fsmId) {
@@ -82,7 +99,7 @@ const Workshop = ({
     if (!isMentor) {
       enterWorkshop({ eventId, fsmId });
     }
-  }, [fsmId, playerId, isMentor]);
+  }, [fsmId, isMentor]);
 
   const getCurrentStateIfNeed = () => {
     if (needUpdateState) {
@@ -139,8 +156,13 @@ const Workshop = ({
 
   return (
     <StatePageContext.Provider
-      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam }}>
-      <Container component="main" className={classes.body}>
+      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam, teamRoom }}>
+      <Container component="main"
+        sx={{
+          background: '#F7F9FC',
+          height: '100%'
+        }}>
+
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
@@ -150,20 +172,27 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+        <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+      }
     </StatePageContext.Provider>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  openChatRoom: state.currentState.openChatRoom,
+  teamRoom: state.currentState.teamRoom,
   myTeam: state.currentState.myTeam,
 
   workshopState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
-  isMentor: state.account.userAccount.is_mentor,
   workshopId: state.currentState.workshopId,
   // stateId: ownProps.match?.params?.stateId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
+  personsName: `${state.account.userAccount.first_name} ${state.account.userAccount.last_name}`,
+  mentorId: state.account.userAccount.academic_studentship.id,
+  workshop: state.workshop.workshop,
 });
 
 export default connect(mapStateToProps, {
@@ -171,4 +200,5 @@ export default connect(mapStateToProps, {
   enterWorkshop: enterWorkshopAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
+  changeOpenChatRoom: changeOpenChatRoomAction,
 })(Workshop);

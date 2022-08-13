@@ -1,64 +1,68 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import {
-  addNotificationAction,
-} from '../../../redux/slices/notifications'
-import {
-  sendSmallAnswerAction,
-} from '../../../redux/slices/widget';
+// import { sendSmallAnswerAction } from '../../../redux/slices/currentState';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import { WidgetModes } from '..';
+import SmallAnswerQuestionEditWidget from './edit';
+
+export { SmallAnswerQuestionEditWidget };
 
 const useStyles = makeStyles((theme) => ({
+  success: {
+    '& input:valid + fieldset': {
+      borderColor: 'green',
+      borderWidth: 2,
+    },
+    '& input:invalid + fieldset': {
+      borderColor: 'red',
+      borderWidth: 2,
+    },
+    '& input:valid:focus + fieldset': {
+      borderLeftWidth: 6,
+      padding: '4px !important', // override inline-style
+    },
+  },
+  showAnswer: {
+    padding: theme.spacing(1),
+    background: '#eee',
+  },
 }));
 
-
 const SmallAnswerQuestionWidget = ({
-  addNotification,
   sendSmallAnswer,
   pushAnswer,
 
-  viewMode,
-  required,
-  disabled,
-  last_submitted_answer,
-  id: widgetId,
-  text: problemText,
+  id,
+  mode,
+  text = '',
+  answer,
+  ...props
 }) => {
   const t = useTranslate();
   const classes = useStyles();
-  const [recentAnswer, setRecentAnswer] = useState();
+  const [value, setValue] = useState(text);
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
   useEffect(() => {
-    if (last_submitted_answer) {
-      setRecentAnswer(last_submitted_answer?.text);
-    }
-  }, [last_submitted_answer])
+
+  }, [])
+
 
   const handleTextFieldChange = (e) => {
-    if (pushAnswer) {
-      pushAnswer('text', e.target.value);
-    }
-    setRecentAnswer(e.target.value);
+    pushAnswer('text', e.target.value);
+    setValue(value);
   }
 
   const handleButtonClick = () => {
-    if (!recentAnswer) {
-      addNotification({
-        message: 'لظفاً پاسخی وارد کنید.',
-        type: 'error',
-      });
-      return;
-    }
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);
     }, 20000);
-    sendSmallAnswer({ widgetId, text: recentAnswer });
+    // sendSmallAnswer({ problemId: id, answer: value });
   }
 
   return (
@@ -69,45 +73,62 @@ const SmallAnswerQuestionWidget = ({
           scrolling: 'no',
           width: '100%',
         }}
-        content={required ? problemText + '<span style="color: #ff0000;">*</span>' : problemText}
+        content={text}
       />
-      <Box mt={1}>
-        <Grid container spacing={1}>
-          <Grid item xs>
-            <TextField
-              disabled={disabled || viewMode}
-              fullWidth
-              placeholder='پاسخ خودت رو اینجا بنویس...'
-              value={recentAnswer}
-              onChange={handleTextFieldChange}
-            />
-          </Grid>
-          {!pushAnswer && !viewMode &&
-            <Grid item container alignItems='stretch' xs={12} sm={3}>
-              <Button
+      <Grid container alignItems="center" spacing={1}>
+        {mode === WidgetModes.Edit &&
+          <>
+            <Grid item xs={12} sm={9} md={10}>
+              <TextField
                 fullWidth
-                disabled={isButtonDisabled}
-                variant="contained"
-                color="primary"
-                onClick={handleButtonClick}>
-                {isButtonDisabled ? 'صبر کنید!' : t('submit')}
-              </Button>
+                variant='outlined'
+                value={value}
+                onChange={handleTextFieldChange}
+                size="small"
+                error={
+                  answer?.text &&
+                  text &&
+                  text !== answer?.text
+                }
+                className={
+                  answer?.text &&
+                  text &&
+                  text === answer?.text &&
+                  classes.success
+                }
+              />
             </Grid>
-          }
-        </Grid>
-      </Box>
-
+            {!pushAnswer &&
+              <Grid item xs={12} sm={3} md={2}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  disabled={mode === WidgetModes.Edit || isButtonDisabled}
+                  onClick={handleButtonClick}>
+                  {t('submit')}
+                </Button>
+              </Grid>
+            }
+          </>
+        }
+        {answer?.text && (
+          <Grid item xs={12}>
+            <Typography variant="body2">
+              {t('answer') + ': ' + answer.text}
+            </Typography>
+          </Grid>
+        )}
+      </Grid>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
+  playerId: state.currentState.player?.id,
+  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    addNotification: addNotificationAction,
-    sendSmallAnswer: sendSmallAnswerAction,
-  }
-)(SmallAnswerQuestionWidget);
+export default connect(mapStateToProps, {
+})(SmallAnswerQuestionWidget);

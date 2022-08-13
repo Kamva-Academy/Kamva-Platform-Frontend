@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 
 import UserAvatar from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
-import JitsiButton from './components/JitsiButton';
+import ChatRoomButton from './components/ChatRoomButton';
 import MentorButton from './components/MentorButton';
 import ReviewAnswersButton from './components/ReviewAnswersButton';
 import TeamAvatar from './components/UsersAvatar';
@@ -24,7 +24,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
 
   const { eventId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
-  const jitsiButton = <JitsiButton />;
+  const chatRoomButton = <ChatRoomButton />;
   const backToEventButton = <DashboardButton name={'بازگشت به رویداد'} to={`/event/${eventId}/`} />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
@@ -48,9 +48,9 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     } else {
       desktopRightItems.push(teamAvatar);
     }
-    desktopLeftItems.push([jitsiButton]);
+    desktopLeftItems.push([chatRoomButton]);
     desktopRightItems.push([whiteboardButton,]);
-    mobileLeftItems.push([jitsiButton]);
+    mobileLeftItems.push([chatRoomButton]);
     mobileRightItems.push([whiteboardButton,]);
   } else {
     if (workshop?.fsm_p_type == 'Individual') {
@@ -60,9 +60,9 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     }
     if (workshop?.fsm_learning_type == 'Supervised') {
       desktopLeftItems.push([whiteboardButton, mentorButton]);
-      desktopRightItems.push([jitsiButton, backToEventButton]);
+      desktopRightItems.push([chatRoomButton, backToEventButton]);
       mobileLeftItems.push([whiteboardButton, mentorButton]);
-      mobileRightItems.push([jitsiButton]);
+      mobileRightItems.push([chatRoomButton]);
     } else {
       desktopLeftItems.push(backToEventButton)
     }

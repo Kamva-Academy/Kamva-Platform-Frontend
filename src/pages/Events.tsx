@@ -12,7 +12,7 @@ import {
   getRegistrableWorkshopsAction,
 } from '../redux/slices/workshop';
 import Layout from '../containers/Layout';
-import { EventType } from '../types/event';
+import { EventType } from '../types/redux/event';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -62,8 +62,8 @@ const Events = ({
     getRegistrableWorkshops();
   }, []);
 
-  const activeEvents: EventType[] = events.filter((event) => event?.is_active)
-  const inactiveEvents: EventType[] = events.filter((event) => !event?.is_active)
+  const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
+  const inactiveEvents: EventType[] = events.filter((event: EventType) => !event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
 
   return (
     <Layout>
@@ -83,6 +83,7 @@ const Events = ({
           {activeEvents.map((event, index) => (
             <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
               <EventCard event={event} />
+              
             </Grid>
           ))}
         </Grid>

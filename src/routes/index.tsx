@@ -8,7 +8,7 @@ import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
-import JoinMentor from '../containers/JoinMentor';
+import EventMentorPage from '../containers/Event/MentorsPage';
 import Landing from '../containers/Landing';
 import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
@@ -17,7 +17,10 @@ import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
 import TeamSelection from '../containers/TeamSelection';
 import Workshop from '../containers/Workshop';
+import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
+import WorkshopManagement from '../pages/WorkshopManagement';
+import JoinMentor from '../containers/JoinMentor';
 
 const Root = () => {
   return (
@@ -45,9 +48,10 @@ const Root = () => {
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
 
+        <Route path="/event/:eventId/workshop/:fsmId/manage/" element={<WorkshopManagement />} />
+        <Route path="/articles/" element={<Articles />} />
+
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
-        <Route path="/watch/:playerId/" element={<Workshop />} />
-        <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
 
         <Route path="/event/:eventId/profile/:section/" element={<Profile />} />
         <Route
@@ -60,6 +64,10 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
+        <Route path="/event-mentor/:eventId/" element={<EventMentorPage />} />
+        
+        <Route path="/watch/:playerId/" element={<Workshop />} />
+        <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
       </Route>
 
       <Route path="*" element={<Landing />} />

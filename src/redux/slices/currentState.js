@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 
 import { requestMentor } from '../../parse/mentor';
 import { changeTeamState } from '../../parse/team';
@@ -20,6 +21,8 @@ const changeTeamStateBroadcastAction = createAsyncThunk(
     await changeTeamState({
       stateId: current_state.id.toString(),
       uuid: teamId,
+      currnetStageName: current_state.name,
+      teamEnterTimeToStage: moment().format('HH:mm:ss')
     });
   }
 );
@@ -139,6 +142,7 @@ const getPlayer = (state, { payload: { response } }) => {
   state.needUpdateState = false;
   state.workshopId = response.fsm;
   state.playerId = response.id;
+  state.teamRoom = response.team?.chat_room;
   // todo: here I put playerId as teamId
   state.teamId = response.team?.id ? response.team?.id : String(response.id);
   state.state = response.current_state;
@@ -158,6 +162,7 @@ const isNotFetching = (state) => {
 const currentStateSlice = createSlice({
   name: 'currentState',
   initialState: {
+    openChatRoom: false,
     isFetching: false,
     state: {
       widgets: [],
@@ -165,6 +170,11 @@ const currentStateSlice = createSlice({
     },
     scores: [],
     totalScore: 0,
+  },
+  reducers: {
+    changeOpenChatRoom: (state, actions) => {
+      state.openChatRoom = !state.openChatRoom;
+    },
   },
   extraReducers: {
     [goForwardAction.pending.toString()]: isFetching,
@@ -198,7 +208,7 @@ const currentStateSlice = createSlice({
   },
 });
 
-export const { initCurrentState: initCurrentStateAction } =
+export const { changeOpenChatRoom: changeOpenChatRoomAction } =
   currentStateSlice.actions;
 
 export const { reducer: currentStateReducer } = currentStateSlice;

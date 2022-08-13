@@ -23,10 +23,10 @@ function HelpDialog({ open, handleClose, helps }) {
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
       <Paper className={classes.paper} key={help.id}>
-        <Typography>{t('helpNumber') + (index + 1)}</Typography>
+        <Typography>{t('helpNumber') + " " + (index + 1)}</Typography>
         <div className={classes.widgets}>
           {help.widgets.map((widget) => (
-            <Widget key={widget.id} widget={widget} />
+            <Widget key={widget.id} coveredWithPaper={false} widget={widget} />
           ))}
         </div>
         <Grid container justifyContent="space-between">

@@ -24,3 +24,6 @@ yarn-error.log*
 
 .eslintcache
 react-app-env.d.ts
+
+yarn.lock
+/.vscode

@@ -5,18 +5,12 @@ import { connect } from 'react-redux';
 
 import { stringToColor } from '../../../../utils/stringToColor';
 
-const useStyles = makeStyles(() => ({
-  avatar: {},
-}));
-
 function AvatarComponent({ name = 'بی‌نام' }) {
-  const classes = useStyles();
   return (
     <Tooltip title={name} arrow>
       <Avatar
         style={{ backgroundColor: stringToColor(name) }}
-        alt="logo"
-        className={classes.avatar}>
+        alt="logo">
         {name[0]}
       </Avatar>
     </Tooltip>
