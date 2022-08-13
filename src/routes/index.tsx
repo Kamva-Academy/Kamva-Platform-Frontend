@@ -8,6 +8,7 @@ import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
+import EventMentorPage from '../containers/Event/MentorsPage';
 import Landing from '../containers/Landing';
 import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
@@ -62,6 +63,7 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
+        <Route path="/event-mentor/:eventId/" element={<EventMentorPage />} />
         
       </Route>
 

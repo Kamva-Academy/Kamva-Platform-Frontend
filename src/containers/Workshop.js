@@ -20,8 +20,11 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
-
+import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
 import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
+
+var moment = require('moment');
+
 export const StatePageContext = React.createContext();
 
 const Workshop = ({
@@ -40,6 +43,8 @@ const Workshop = ({
   teamRoom,
   openChatRoom,
   changeOpenChatRoom,
+  personsName,
+  mentorId,
   workshop,
 }) => {
   const { fsmId } = useParams();
@@ -52,8 +57,31 @@ const Workshop = ({
   } else {
     playerId = studentPlayerId;
   }
+  let readyToAddMentor = false
+  if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
+    readyToAddMentor = true
+  }
   const { eventId } = useParams();
   const subscriberRef = useRef(null);
+  const [mentorAdded, setmentorAdded] = useState(false)
+
+  useEffect(() => {
+    let updateInterval
+    if (!mentorAdded && isMentor && readyToAddMentor) {
+      addMentorToRoom(teamId, mentorId.toString(), personsName)
+      setmentorAdded(true)
+      updateMentorTime(teamId, mentorId.toString())
+      updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
+    }
+    
+    return (
+      () => {
+        if (updateInterval){
+          clearInterval(updateInterval)
+        }
+      }
+    )
+  }, [isMentor, readyToAddMentor])
 
   useEffect(() => {
     if (fsmId) {
@@ -162,6 +190,8 @@ const mapStateToProps = (state, ownProps) => ({
   // stateId: ownProps.match?.params?.stateId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
+  personsName: `${state.account.userAccount.first_name} ${state.account.userAccount.last_name}`,
+  mentorId: state.account.userAccount.academic_studentship.id,
   workshop: state.workshop.workshop,
 });
 
