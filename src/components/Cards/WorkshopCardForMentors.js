@@ -99,7 +99,7 @@ const WorkshopCard = ({
         <Button
           variant="contained" fullWidth color="primary"
           component={Link} to={`/event/${eventId}/workshop/${id}/manage`}>
-          {'ورود'}
+          {'ویرایش کارگاه'}
         </Button>
       </CardActions>
     </Card>

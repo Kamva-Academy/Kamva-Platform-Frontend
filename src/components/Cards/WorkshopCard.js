@@ -7,11 +7,16 @@ import {
   CardHeader,
   CardMedia,
   Typography,
+  Stack,
+  Box,
+  IconButton,
+  Tooltip
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { Lock, LockOpen } from '@mui/icons-material';
+import ModeEditTwoToneIcon from '@mui/icons-material/ModeEditTwoTone';
 import { Skeleton } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
@@ -46,7 +51,7 @@ export const WorkshopCard = ({
 
   return (
     <Card className={classes.card} elevation={3}>
-      <CardActionArea disabled>
+      <Box sx={{ alignItems: 'center' }}>
         {isLoading ? (
           <>
             <Skeleton
@@ -58,11 +63,37 @@ export const WorkshopCard = ({
           </>
         ) : (
           <>
-            <CardHeader
-              avatar={workshop?.has_lock ? <Lock /> : <LockOpen />}
-              className={classes.header}
-              title={workshop?.fsm_p_type == 'Team' ? 'تیمی' : 'فردی'}
-            />
+            <Stack /* this stack holds the header of each teams card */
+              direction="row"
+              sx={{
+                padding: "10px",
+                background: '#eee',
+                height: "40px",
+                display: 'flex',
+                justifyContent: "space-between",
+                alignItems: 'center'
+              }}
+            >
+              <Stack direction='row' alignSelf='center' marginTop='7px'>
+                <Box marginLeft='5px' marginRight='5px'>{workshop?.has_lock ? <Lock /> : <LockOpen />}</Box>
+                <Typography>{workshop?.fsm_p_type == 'Team' ? 'تیمی' : 'فردی'}</Typography>
+              </Stack>
+              <Box>
+                {
+                  workshop.is_mentor ?
+                    <Tooltip title='ویرایش کارگاه' arrow>
+                      <span>
+                        <IconButton component={Link} to={`/event/${eventId}/workshop/${workshop?.id}/manage`} >
+                          <ModeEditTwoToneIcon />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
+                    :
+                    <Box></Box>
+                }
+              </Box>
+            </Stack>
+
             {workshop.cover_page && (
               <CardMedia
                 className={classes.media}
@@ -94,7 +125,7 @@ export const WorkshopCard = ({
             </>
           )}
         </CardContent>
-      </CardActionArea>
+      </Box>
       <CardActions>
         {!isLoading && workshop?.is_active &&
           (workshop?.player !== 'NotStarted' ? (
