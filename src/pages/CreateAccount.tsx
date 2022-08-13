@@ -123,11 +123,16 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 4,
-        paddingBottom: 4,
       }}>
-      <Grid xs={12} sm={8} md={4}>
-        <Paper sx={{ padding: 2 }}>
+      <Grid xs={12} sm={8} md={4}
+        container
+        justifyContent='center'
+        alignItems='center'>
+        <Paper sx={{
+          padding: 2,
+          height: '100%',
+          width: '100%',
+        }}>
           <Grid item container>
             <Grid
               container

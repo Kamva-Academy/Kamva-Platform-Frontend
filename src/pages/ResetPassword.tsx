@@ -106,58 +106,78 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
   };
 
   return (
-    <>
-      <Stack
+    <Container
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <Grid
+        container
         justifyContent='center'
         alignItems='center'
-        sx={{
-          minHeight: '100vh',
-          paddingY: 4,
-          paddingX: 2,
-        }}>
-        <Grid
-          container
-          justifyContent='center'
-          alignItems='center'
-          xs={12} sm={8} md={4}>
-          <Paper
-            sx={{
-              padding: 2,
-              height: '100%',
-              width: '100%',
-            }}>
+        xs={12} sm={8} md={4}>
+        <Paper
+          sx={{
+            padding: 2,
+            height: '100%',
+            width: '100%',
+          }}>
+          <Stack
+            justifyContent='center'
+            spacing={2}>
+
+            <Typography gutterBottom variant='h2' align='center'>
+              {'بازنشانی رمز عبور'}
+            </Typography>
+
+            <TextField
+              autoComplete="on"
+              variant="outlined"
+              fullWidth
+              onChange={putData}
+              label="رمز عبور جدید"
+              name="password"
+              inputProps={{ className: 'ltr-input' }}
+              type="password"
+            />
+
+            <TextField
+              autoComplete="on"
+              variant="outlined"
+              fullWidth
+              onChange={putData}
+              label="تکرار رمز عبور جدید"
+              type="password"
+              inputProps={{ className: 'ltr-input' }}
+              name="confirmationPassword"
+            />
+
+
+
+            <TextField
+              autoComplete="on"
+              variant="outlined"
+              fullWidth
+              onChange={(e) => {
+                if (isJustDigits(e.target.value)) {
+                  putData(e);
+                }
+              }}
+              value={data.phoneNumber}
+              name="phoneNumber"
+              inputProps={{ className: 'ltr-input' }}
+              label="شماره تلفن همراه"
+              type="tel"
+            />
+
+
             <Stack
-              justifyContent='center'
-              spacing={2}>
-
-              <Typography gutterBottom variant='h2' align='center'>
-                {'بازنشانی رمز عبور'}
-              </Typography>
-
-              <TextField
-                autoComplete="on"
-                variant="outlined"
-                fullWidth
-                onChange={putData}
-                label="رمز عبور جدید"
-                name="password"
-                inputProps={{ className: 'ltr-input' }}
-                type="password"
-              />
-
-              <TextField
-                autoComplete="on"
-                variant="outlined"
-                fullWidth
-                onChange={putData}
-                label="تکرار رمز عبور جدید"
-                type="password"
-                inputProps={{ className: 'ltr-input' }}
-                name="confirmationPassword"
-              />
-
-
-
+              direction='row'
+              alignItems='stretch'
+              justifyContent='space-between'
+              spacing={1}>
               <TextField
                 autoComplete="on"
                 variant="outlined"
@@ -167,67 +187,44 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
                     putData(e);
                   }
                 }}
-                value={data.phoneNumber}
-                name="phoneNumber"
+                value={data.code}
+                name="code"
                 inputProps={{ className: 'ltr-input' }}
-                label="شماره تلفن همراه"
-                type="tel"
+                label="کد پیامک‌شده"
+                type="text"
               />
-
-
-              <Stack
-                direction='row'
-                alignItems='stretch'
-                justifyContent='space-between'
-                spacing={1}>
-                <TextField
-                  autoComplete="on"
-                  variant="outlined"
-                  fullWidth
-                  onChange={(e) => {
-                    if (isJustDigits(e.target.value)) {
-                      putData(e);
-                    }
-                  }}
-                  value={data.code}
-                  name="code"
-                  inputProps={{ className: 'ltr-input' }}
-                  label="کد پیامک‌شده"
-                  type="text"
-                />
-                <Button
-                  sx={(theme) => ({
-                    width: '40%',
-                    whiteSpace: 'nowrap',
-                  })}
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={doGetVerificationCode}
-                  disabled={buttonText !== 'دریافت کد'}>
-                  {buttonText}
-                </Button>
-              </Stack>
-
               <Button
-                onClick={doChangePassword}
+                sx={(theme) => ({
+                  width: '40%',
+                  whiteSpace: 'nowrap',
+                })}
+                fullWidth
                 variant="contained"
                 color="primary"
-                disabled={isFetching}
-                fullWidth>
-                تغییر
+                onClick={doGetVerificationCode}
+                disabled={buttonText !== 'دریافت کد'}>
+                {buttonText}
               </Button>
-
-              <Typography align="center">
-                {'از '}
-                <Link style={{ textDecoration: 'none' }} to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
-                {' می‌توانی وارد حسابت شوی.'}
-              </Typography>
             </Stack>
-          </Paper>
-        </Grid>
-      </Stack>
-    </>
+
+            <Button
+              onClick={doChangePassword}
+              variant="contained"
+              color="primary"
+              disabled={isFetching}
+              fullWidth>
+              تغییر
+            </Button>
+
+            <Typography align="center">
+              {'از '}
+              <Link style={{ textDecoration: 'none' }} to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
+              {' می‌توانی وارد حسابت شوی.'}
+            </Typography>
+          </Stack>
+        </Paper>
+      </Grid>
+    </Container>
   )
 }
 
