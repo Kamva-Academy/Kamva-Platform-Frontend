@@ -12,6 +12,7 @@ import { getChangeTeamStateSubscription } from '../parse/team';
 import {
   enterWorkshopAction,
   mentorGetCurrentStateAction,
+  changeOpenChatRoomAction,
 } from '../redux/slices/currentState';
 import {
   addNotificationAction,
@@ -19,6 +20,10 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
+import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
+import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
+
+var moment = require('moment');
 
 export const StatePageContext = React.createContext();
 
@@ -34,18 +39,49 @@ const Workshop = ({
   enterWorkshop,
   mentorGetCurrentState,
   addNotification,
+  // todo:
+  teamRoom,
+  openChatRoom,
+  changeOpenChatRoom,
+  personsName,
+  mentorId,
+  workshop,
 }) => {
   const { fsmId } = useParams();
   const search = useLocation().search;
   let playerId = new URLSearchParams(search).get('playerId');
   let isMentor = false;
+
   if (playerId) {
     isMentor = true;
   } else {
     playerId = studentPlayerId;
   }
+  let readyToAddMentor = false
+  if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
+    readyToAddMentor = true
+  }
   const { eventId } = useParams();
   const subscriberRef = useRef(null);
+  const [mentorAdded, setmentorAdded] = useState(false)
+
+  useEffect(() => {
+    let updateInterval
+    if (!mentorAdded && isMentor && readyToAddMentor) {
+      addMentorToRoom(teamId, mentorId.toString(), personsName)
+      setmentorAdded(true)
+      updateMentorTime(teamId, mentorId.toString())
+      updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
+    }
+    
+    return (
+      () => {
+        if (updateInterval){
+          clearInterval(updateInterval)
+        }
+      }
+    )
+  }, [isMentor, readyToAddMentor])
 
   useEffect(() => {
     if (fsmId) {
@@ -120,11 +156,13 @@ const Workshop = ({
 
   return (
     <StatePageContext.Provider
-      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam }}>
+      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam, teamRoom }}>
       <Container component="main"
         sx={{
           background: '#F7F9FC',
+          height: '100%'
         }}>
+
         <ResponsiveAppBar mode="WORKSHOP" />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
@@ -134,11 +172,16 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+        <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+      }
     </StatePageContext.Provider>
   );
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  openChatRoom: state.currentState.openChatRoom,
+  teamRoom: state.currentState.teamRoom,
   myTeam: state.currentState.myTeam,
 
   workshopState: state.currentState.state,
@@ -147,6 +190,9 @@ const mapStateToProps = (state, ownProps) => ({
   // stateId: ownProps.match?.params?.stateId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
+  personsName: `${state.account.userAccount.first_name} ${state.account.userAccount.last_name}`,
+  mentorId: state.account.userAccount.academic_studentship.id,
+  workshop: state.workshop.workshop,
 });
 
 export default connect(mapStateToProps, {
@@ -154,4 +200,5 @@ export default connect(mapStateToProps, {
   enterWorkshop: enterWorkshopAction,
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
+  changeOpenChatRoom: changeOpenChatRoomAction,
 })(Workshop);

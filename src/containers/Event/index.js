@@ -73,14 +73,12 @@ function Workshops({
   );
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return({
+const mapStateToProps = (state, ownProps) => ({
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
   event: state.events.event,
   workshopsCount: state.events.workshopsCount,
-})
-};
+});
 
 export default connect(mapStateToProps, {
   getEventWorkshops: getEventWorkshopsAction,

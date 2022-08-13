@@ -5,6 +5,13 @@ import React, { FC, useState } from 'react';
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 
+export const MODES = {
+  WRITE: 'WRITE',
+  VIEW: 'VIEW',
+  EDIT: 'EDIT',
+  CORRECTION: 'CORRECTION',
+};
+
 export enum WidgetModes {
   View,
   Edit,

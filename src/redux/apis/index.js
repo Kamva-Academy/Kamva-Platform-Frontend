@@ -1,4 +1,4 @@
-import baseAxios from '../../utils/axios';
+import baseAxios from '../../configs/axios';
 import jsonToFormData from '../../utils/jsonToFromDate';
 
 const putApi = async (url, body) => (await baseAxios.put(url, body)).data;

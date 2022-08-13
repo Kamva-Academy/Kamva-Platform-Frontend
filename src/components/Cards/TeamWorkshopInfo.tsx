@@ -15,7 +15,7 @@ import {
   Typography,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 
@@ -26,8 +26,12 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
-import moment from 'moment-jalaali';
-moment.loadPersian({ usePersianDigits: true })
+import { getTeamStateSubscription, getTeamState } from '../../parse/team';
+import { e2p } from '../../utils/translateNumber';
+import {anounceMentorDeparture, getMentorsInRoom,
+        getMentorsInRoomSubscription}
+        from '../../parse/mentorsInRoom';
+var moment = require( 'moment' );
 
 type TeamWorkshopInfoPropsType = {
   name: string,
@@ -40,7 +44,7 @@ type TeamWorkshopInfoPropsType = {
   getPlayerFromTeam: Function,
   mentorsInRoom: Mentor[],
   startProblemTime: string,
-  teamLevel: String
+  teamStage: String
 }
 
 const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
@@ -52,14 +56,94 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-  mentorsInRoom = [{ name: 'iman alipour', id: 0 }, { name: 'alireza hashemi', id: 1 }, { name: 'x y', id: 2 }, { name: 'z p', id: 3 }],
-  startProblemTime = "2022-08-03T12:39:30+04:30",
-  teamLevel = 'مرحله sdfsadf asdf asdf asd fasd f ۴',
 }) => {
-  const startProblemTimeMoment: moment.Moment = moment(startProblemTime)
   const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
+  const subscriberRef = useRef(null);
+  const mentorsInRoomSubscriberRef = useRef(null);
+  const [teamEnterTimeToStage, setTeamEnterTimeToStage] = useState('')
+  const [currnetStageName, setCurrnetStageName] = useState('')
+  const [mentorsInRoom, setMentorsInRoom] = useState([]);
+
+  useEffect(() => {
+    const subscribeOnMentorArrival = async () => {
+      let mentorsInRoom = await getMentorsInRoom(teamId);
+      await checkForOfflineMentors()
+      mentorsInRoom = await getMentorsInRoom(teamId)
+      setMentorsInRoom(mentorsInRoom);
+      const subscriber = await getMentorsInRoomSubscription(teamId);
+      subscriber.on('create', async (newState) => {
+        if (newState.get('uuid') === teamId){
+          setMentorsInRoom(await getMentorsInRoom(teamId));
+        }
+      });
+      subscriber.on('update', async (newState) => {
+        if (newState.get('uuid') === teamId){
+          setMentorsInRoom(await getMentorsInRoom(teamId))
+        }
+      });
+      mentorsInRoomSubscriberRef.current = subscriber;
+    }
+    subscribeOnMentorArrival();
+
+    return (() => {
+      mentorsInRoomSubscriberRef.current?.unsubscribe();
+    })
+  }, [])
+
+  const checkForOfflineMentors = async () => {
+    for (let i = 0; i < mentorsInRoom.length; i++){
+      if (moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds() > 20000){
+        await anounceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
+      }
+    }
+  }
+
+  useEffect(() => {
+    let updateInterval
+    if (mentorsInRoom.length > 0) {
+      updateInterval = setInterval(() => { checkForOfflineMentors(); }, 10000)
+    }
+
+    return (() => {
+      if (updateInterval){
+        clearInterval(updateInterval)
+      }
+    })
+  }, [mentorsInRoom])
+  
+  useEffect(() => {
+    const subscribeOnStateChange = async () => {
+      const state = await getTeamState(teamId);
+      if(!state)  return;
+      setCurrnetStageName(state.get('currnetStageName'))
+      setTeamEnterTimeToStage(state.get('teamEnterTimeToStage'))
+      const subscriber = await getTeamStateSubscription();
+      subscriber.on('create', (newState) => {
+        if (newState.get('uuid') === teamId){
+          const currnetStageNameTmp = newState.get('currnetStageName');
+          const teamEnterTimeToStageTmp = moment()
+          setCurrnetStageName(currnetStageNameTmp)
+          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+        }
+      });
+      subscriber.on('update', (newState) => {
+        if (newState.get('uuid') === teamId){
+          const currnetStageNameTmp = newState.get('currnetStageName');
+          const teamEnterTimeToStageTmp = moment()
+          setCurrnetStageName(currnetStageNameTmp)
+          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+        }
+      });
+      subscriberRef.current = subscriber;
+    }
+    subscribeOnStateChange()
+
+    return () => {
+      subscriberRef.current?.unsubscribe();
+    };
+  }, []);
 
   {/* this function redirects mentor to a teams page, this team could have requested mentor or not, if so, we use the
 available playerId field, otherwise we fetch one team members Id and use it to access their page */}
@@ -69,6 +153,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
       getPlayerFromTeam({ teamId, id: fsmId, token });
     }
   };
+
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
@@ -126,15 +211,16 @@ available playerId field, otherwise we fetch one team members Id and use it to a
                   '& .MuiAvatar-root': { width: 26, height: 26, fontSize: 12, backgroundColor: "#0088aa" },
                 }}
               >
-                {mentorsInRoom.map((mentor: Mentor) =>
-                  <Tooltip key={mentor.id} title={mentor.name} arrow>
+                {mentorsInRoom.map((mentor: any) =>{
+                  return <Tooltip key={mentor.get('MentorId')} title={mentor.get('MentorName')} arrow>
                     <Avatar
                       sx={{
-                        backgroundColor: `${stringToColor(mentor.name)} !important`,
+                        backgroundColor: `${stringToColor(mentor.get('MentorName'))} !important`,
                       }}
-                      alt={mentor.name}
-                      src={mentor.profilePicturePath || '/margbarmuimargbarmui'} />
+                      alt={mentor.get('MentorName')}
+                      src={mentor.get('MentorProfilePictureSrc') || '/margbarmuimargbarmui'} />
                   </Tooltip>
+                }
                 )}
               </AvatarGroup>
             </Stack>
@@ -183,19 +269,22 @@ available playerId field, otherwise we fetch one team members Id and use it to a
               justifyContent: 'end',
             })}
           >
-            <Divider sx={{ margin: '15px auto 15px auto' }}></Divider>
-            {startProblemTimeMoment && <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
-              <Box>
-                {teamLevel ? `گام: ${teamLevel}` : 'تیم هنوز وارد هیچ گامی نشده است'}
-              </Box>
-              <Tooltip title={'زمان حضور تیم در این گام'} arrow>
-                <span>
-                  <Button disabled sx={{ padding: 0 }}>
-                    <TimeChip startTime={startProblemTimeMoment} />
-                  </Button>
-                </span>
-              </Tooltip>
-            </Stack>}
+            <>
+              <Divider sx={{ margin: '15px auto 15px auto', width: '80%' }}></Divider>
+              <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
+                <Box>
+                  {currnetStageName ? `گام: ${currnetStageName}` : 'تیم هنوز وارد کارگاه نشده است.'}
+                </Box>
+                {teamEnterTimeToStage && <Tooltip title={'زمان حضور تیم در این گام'} arrow>
+                  <span>
+                    <Button disabled sx={{ padding: 0 }}>
+                      <TimeChip startTime={teamEnterTimeToStage} />
+                    </Button>
+                  </span>
+                </Tooltip>}
+              </Stack>
+            </>
+            
             {playerId ? (
               <Button
                 variant="contained"
@@ -225,34 +314,36 @@ available playerId field, otherwise we fetch one team members Id and use it to a
 
 
 type TimeChipPropsType = {
-  startTime: moment.Moment
+  startTime: string
 }
 
 /* the time chip is the chip that has the timer in it that shows how long the team has been on current problem
 we use the useEffect to initiate the timeInterval and later on we return the destructor to control the 'out'sideEffects*/
 const TimeChip: FC<TimeChipPropsType> = (props) => {
-  const [elapsedTime, setElapsedTime] = useState(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss'))
+
+  // TODO: fix toff where diff showed 3:30:30 more time
+  const [elapsedTime, setElapsedTime] = useState(e2p(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss')))
   useEffect(() => {
-    const changeInterval = setInterval(() => { setElapsedTime(moment.utc(moment.duration(moment().diff(props.startTime)).asMilliseconds()).format('hh:mm:ss')) }, 1000)
+    const changeInterval = setInterval(() => { setElapsedTime(e2p(moment.utc(moment.duration(moment().diff(moment(props.startTime, 'HH:mm:ss'))).asMilliseconds()).format('HH:mm:ss'))) }, 1000)
     return (
       () => clearInterval(changeInterval)
     )
-  }, []);
+  }, [props.startTime]);
   return (
     <Chip
       variant="outlined"
       icon={<AccessTimeIcon />}
       label={elapsedTime}
       size="small"
-      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end' }}
+      sx={{ fontSize: '10px', marginLeft: '10px', alignSelf: 'center', justifySelf: 'end', width: '80px', padding: '1px 2px', justifyContent: 'space-between' }}
     />
   )
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  playerIdFromRedux: state.events.playerId[ownProps.teamId],
-  token: state.account.token,
-});
+    playerIdFromRedux: state.events.playerId[ownProps.teamId],
+    token: state.account.token,
+  });
 
 export default connect(mapStateToProps, {
   deleteRequestMentor: deleteRequestMentorAction,

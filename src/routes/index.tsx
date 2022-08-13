@@ -8,6 +8,7 @@ import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/Event';
+import EventMentorPage from '../containers/Event/MentorsPage';
 import Landing from '../containers/Landing';
 import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
@@ -19,6 +20,7 @@ import Workshop from '../containers/Workshop';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../pages/WorkshopManagement';
+import JoinMentor from '../containers/JoinMentor';
 
 const Root = () => {
   return (
@@ -62,7 +64,10 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
+        <Route path="/event-mentor/:eventId/" element={<EventMentorPage />} />
         
+        <Route path="/watch/:playerId/" element={<Workshop />} />
+        <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
       </Route>
 
       <Route path="*" element={<Landing />} />
