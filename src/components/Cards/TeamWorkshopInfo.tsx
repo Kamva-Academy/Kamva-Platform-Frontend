@@ -28,7 +28,7 @@ import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
 import { getTeamStateSubscription, getTeamState } from '../../parse/team';
 import { e2p } from '../../utils/translateNumber';
-import {anounceMentorDeparture, getMentorsInRoom,
+import {announceMentorDeparture, getMentorsInRoom,
         getMentorsInRoomSubscription}
         from '../../parse/mentorsInRoom';
 var moment = require( 'moment' );
@@ -62,8 +62,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const [click, setClick] = useState(false);
   const subscriberRef = useRef(null);
   const mentorsInRoomSubscriberRef = useRef(null);
-  const [teamEnterTimeToStage, setTeamEnterTimeToStage] = useState('')
-  const [currnetStageName, setCurrnetStageName] = useState('')
+  const [teamEnterTimeToState, setteamEnterTimeToState] = useState('')
+  const [currentStateName, setCurrnetStageName] = useState('')
   const [mentorsInRoom, setMentorsInRoom] = useState([]);
 
   useEffect(() => {
@@ -95,7 +95,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const checkForOfflineMentors = async () => {
     for (let i = 0; i < mentorsInRoom.length; i++){
       if (moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds() > 20000){
-        await anounceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
+        await announceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
       }
     }
   }
@@ -117,23 +117,23 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     const subscribeOnStateChange = async () => {
       const state = await getTeamState(teamId);
       if(!state)  return;
-      setCurrnetStageName(state.get('currnetStageName'))
-      setTeamEnterTimeToStage(state.get('teamEnterTimeToStage'))
+      setCurrnetStageName(state.get('currentStateName'))
+      setteamEnterTimeToState(state.get('teamEnterTimeToState'))
       const subscriber = await getTeamStateSubscription();
       subscriber.on('create', (newState) => {
         if (newState.get('uuid') === teamId){
-          const currnetStageNameTmp = newState.get('currnetStageName');
-          const teamEnterTimeToStageTmp = moment()
+          const currnetStageNameTmp = newState.get('currentStateName');
+          const teamEnterTimeToStateTmp = moment()
           setCurrnetStageName(currnetStageNameTmp)
-          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+          setteamEnterTimeToState(teamEnterTimeToStateTmp)
         }
       });
       subscriber.on('update', (newState) => {
         if (newState.get('uuid') === teamId){
-          const currnetStageNameTmp = newState.get('currnetStageName');
-          const teamEnterTimeToStageTmp = moment()
+          const currnetStageNameTmp = newState.get('currentStateName');
+          const teamEnterTimeToStateTmp = moment()
           setCurrnetStageName(currnetStageNameTmp)
-          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+          setteamEnterTimeToState(teamEnterTimeToStateTmp)
         }
       });
       subscriberRef.current = subscriber;
@@ -273,12 +273,12 @@ available playerId field, otherwise we fetch one team members Id and use it to a
               <Divider sx={{ margin: '15px auto 15px auto', width: '80%' }}></Divider>
               <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
                 <Box>
-                  {currnetStageName ? `گام: ${currnetStageName}` : 'تیم هنوز وارد کارگاه نشده است.'}
+                  {currentStateName ? `گام: ${currentStateName}` : 'تیم هنوز وارد کارگاه نشده است.'}
                 </Box>
-                {teamEnterTimeToStage && <Tooltip title={'زمان حضور تیم در این گام'} arrow>
+                {teamEnterTimeToState && <Tooltip title={'زمان حضور تیم در این گام'} arrow>
                   <span>
                     <Button disabled sx={{ padding: 0 }}>
-                      <TimeChip startTime={teamEnterTimeToStage} />
+                      <TimeChip startTime={teamEnterTimeToState} />
                     </Button>
                   </span>
                 </Tooltip>}

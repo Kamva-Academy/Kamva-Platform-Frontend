@@ -9,22 +9,22 @@ export const getTeamState = async (uuid) => {
   return result;
 };
 
-export const createTeamState = async (uuid, stateId, currnetStageName, teamEnterTimeToStage) => {
-  return await new TeamState().save({ uuid, stateId, currnetStageName, teamEnterTimeToStage });
+export const createTeamState = async (uuid, stateId, currentStateName, teamEnterTimeToState) => {
+  return await new TeamState().save({ uuid, stateId, currentStateName, teamEnterTimeToState });
 };
 
-export const changeTeamState = async ({ uuid, stateId, currnetStageName, teamEnterTimeToStage }) => {
+export const changeTeamState = async ({ uuid, stateId, currentStateName, teamEnterTimeToState }) => {
   if (!uuid) {
     // todo: fix for supervised workshops
     return;
   }
   const teamState = await getTeamState(uuid);
   if (!teamState) {
-    await createTeamState(uuid, stateId, currnetStageName, teamEnterTimeToStage);
+    await createTeamState(uuid, stateId, currentStateName, teamEnterTimeToState);
 
   } else {
-    teamState.set('currnetStageName', currnetStageName)
-    teamState.set('teamEnterTimeToStage', teamEnterTimeToStage)
+    teamState.set('currentStateName', currentStateName)
+    teamState.set('teamEnterTimeToState', teamEnterTimeToState)
     await teamState.save({ stateId });
   }
 };
@@ -36,7 +36,7 @@ export const getTeamStateSubscription = async () => {
 
 /*
 this function is for here :D
-export const changeTeamState = async ({ stateId, uuid, currnetStageName, teamEnterTimeToStage }) => {
+export const changeTeamState = async ({ stateId, uuid, currentStateName, teamEnterTimeToState }) => {
   if (!uuid) {
     // todo: fix for supervised workshops
     return;
@@ -44,8 +44,8 @@ export const changeTeamState = async ({ stateId, uuid, currnetStageName, teamEnt
   await Parse.Cloud.run('changeTeamState', {
     stateId,
     uuid,
-    currnetStageName, 
-    teamEnterTimeToStage
+    currentStateName, 
+    teamEnterTimeToState
   });
 };
 
@@ -67,22 +67,22 @@ const getTeamState = async (uuid) => {
   return result;
 };
 
-const createTeamState = async (uuid, stateId, currnetStageName, teamEnterTimeToStage) => {
-  return await new TeamState().save({ uuid, stateId, currnetStageName, teamEnterTimeToStage }, { useMasterKey: true });
+const createTeamState = async (uuid, stateId, currentStateName, teamEnterTimeToState) => {
+  return await new TeamState().save({ uuid, stateId, currentStateName, teamEnterTimeToState }, { useMasterKey: true });
 };
 
-export const changeTeamState = async ({ uuid, stateId, currnetStageName, teamEnterTimeToStage }) => {
+export const changeTeamState = async ({ uuid, stateId, currentStateName, teamEnterTimeToState }) => {
   if (!uuid) {
     // todo: fix for supervised workshops
     return;
   }
   const teamState = await getTeamState(uuid);
   if (!teamState) {
-    await createTeamState(uuid, stateId, currnetStageName, teamEnterTimeToStage);
+    await createTeamState(uuid, stateId, currentStateName, teamEnterTimeToState);
 
   } else {
-    teamState.set('currnetStageName', currnetStageName)
-    teamState.set('teamEnterTimeToStage', teamEnterTimeToStage)
+    teamState.set('currentStateName', currentStateName)
+    teamState.set('teamEnterTimeToState', teamEnterTimeToState)
     await teamState.save({ stateId }, { useMasterKey: true });
   }
 };

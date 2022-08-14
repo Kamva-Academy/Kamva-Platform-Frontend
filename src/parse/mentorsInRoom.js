@@ -40,15 +40,13 @@ export const updateMentorTime = async (uuid, mentorId) => {
     await mentor.save();
 }
 
-export const anounceMentorDeparture = async (uuid, mentorId) => {
+export const announceMentorDeparture = async (uuid, mentorId) => {
     if (!uuid || !mentorId) {return}
     const mentor = await getMentorInRoom(uuid, mentorId);
     if (!mentor) {return}
     mentor.set('MentorLeftRoom', true)
     await mentor.save();
 }
-
-
 
 export const getMentorsInRoomSubscription = async (uuid) => {
     const query = new Parse.Query('MentorsInRoom');
