@@ -15,12 +15,9 @@ import {
   teamCRUDUrl,
   workshopCRUDUrl,
 } from '../constants/urls';
-import {
-  createWidgetAction,
-} from './widget';
-import { InitialState } from '../../types/redux/workshop';
+import { InitialStateType } from '../../types/redux/workshop';
 
-const initialState: InitialState = {
+const initialState: InitialStateType = {
   currentState: {
     widgets: [],
   },
@@ -263,17 +260,6 @@ const IndexSlice = createSlice({
       }, 1000)
     },
     [removeStateAction.rejected.toString()]: isNotFetching,
-
-
-    [createWidgetAction.pending.toString()]: isFetching,
-    [createWidgetAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
-      state.currentState.widgets = [...state.currentState.widgets, response];
-      state.isFetching = false;
-    },
-    [createWidgetAction.rejected.toString()]: isNotFetching,
 
     [getAllWorkshopEdgesAction.pending.toString()]: isFetching,
     [getAllWorkshopEdgesAction.fulfilled.toString()]: (state, { payload: { response } }) => {

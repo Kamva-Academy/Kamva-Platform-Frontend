@@ -9,7 +9,7 @@ import {
 } 
 from '../models'
 
-export type InitialState = {
+export type InitialStateType = {
     currentState: CurrentState,
     isFetching: boolean,
     allStates: State[],
