@@ -53,12 +53,11 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
   const Cover = coveredWithPaper
-    ?
-    (props) =>
-      <Paper elevation={2}
-        sx={{ padding: 1 }}>{props.children}</Paper>
-    :
-    (props) => <>{props.children}</>
+    ? (props) =>
+      <Paper elevation={2} sx={{ padding: 1 }}>
+        {props.children}
+      </Paper>
+    : (props) => props.children
 
   return (
     <Cover>

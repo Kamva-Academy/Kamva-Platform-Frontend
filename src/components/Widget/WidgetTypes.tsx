@@ -10,9 +10,9 @@ import SmallAnswerQuestionWidget, {
   SmallAnswerQuestionEditWidget,
 } from './SmallAnswerQuestionWidget';
 import TextWidget, { TextEditWidget } from './TextWidget';
-import UploadFileQuestionWidget, {
-  UploadFileQuestionEditWidget,
-} from './UploadFileQuestionWidget';
+import UploadFileProblemWidget, {
+  UploadFileProblemEditWidget,
+} from './UploadFileProblemWidget';
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 const WIDGET_TYPES = {
@@ -35,8 +35,8 @@ const WIDGET_TYPES = {
   //   backendType: 'MultiChoiceProblem',
   // },
   UploadFileProblem: {
-    WidgetComponent: UploadFileQuestionWidget,
-    EditWidgetDialog: UploadFileQuestionEditWidget,
+    WidgetComponent: UploadFileProblemWidget,
+    EditWidgetDialog: UploadFileProblemEditWidget,
     label: 'سوال ارسال فایل',
     backendType: 'UploadFileProblem',
   },

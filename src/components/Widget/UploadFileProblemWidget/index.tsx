@@ -5,49 +5,33 @@ import {
   DescriptionOutlined as DescriptionOutlinedIcon,
 } from '@mui/icons-material';
 import ClearIcon from '@mui/icons-material/Clear';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-
-// import { uploadFileAction } from '../../../redux/slices/events';
-import { addNotificationAction } from '../../../redux/slices/notifications';
-import UploadFileQuestionEditWidget from './edit';
-export { UploadFileQuestionEditWidget };
+import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from '..';
 
-const useStyles = makeStyles((theme) => ({
-  uploadButton: {
-    marginLeft: 'auto',
-    whiteSpace: 'nowrap',
-  },
-  small: {
-    fontSize: 10,
-  },
-  lastUploadButton: {
-    color: '#334499',
-    '& .MuiButton-endIcon': {
-      marginLeft: 2,
-    },
-  },
-  divider: {
-    margin: theme.spacing(1, 0),
-  },
-}));
+type UploadFileProblemWidgetPropsType = {
+  pushAnswer: any;
+  id: number;
+  text: string;
+  answer_file: any;
+  uploadFile: any;
+  isFetching: boolean;
+  mode: WidgetModes;
+}
 
-const UploadFileQuestionWidget = ({
+const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
   pushAnswer,
-  addNotification,
   id,
   text = 'محل آپلود فایل:',
   answer_file,
   uploadFile,
   isFetching,
   mode,
-  ...props
 }) => {
   const t = useTranslate();
-  const classes = useStyles({ haveFile: answer_file });
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     if (answer_file) {
@@ -58,8 +42,9 @@ const UploadFileQuestionWidget = ({
     }
   }, [answer_file])
 
-  const handleFileChange = async (e) => {
+  const changeFile = (e) => {
     e.preventDefault();
+    console.log(e);
     if (e.target.files[0]) {
       if (e.target.files[0].size <= 8e6) {
         uploadFile({
@@ -83,7 +68,7 @@ const UploadFileQuestionWidget = ({
   };
 
   const clearFile = () => {
-    setFile();
+    setFile(null);
     if (pushAnswer) {
       pushAnswer('upload_file_answer', '');
     }
@@ -96,7 +81,7 @@ const UploadFileQuestionWidget = ({
           <Typography>{text}</Typography>
         </Grid>
         <Grid item container xs={12} sm={6} direction='column' alignItems='center'>
-          {mode === WidgetModes.Edit &&
+          {mode === WidgetModes.View &&
             <Grid item>
               <Button
                 component="label"
@@ -106,7 +91,10 @@ const UploadFileQuestionWidget = ({
                 color="primary"
                 size="small"
                 startIcon={<CloudUploadIcon />}
-                className={classes.uploadButton}>
+                sx={{
+                  marginLeft: 'auto',
+                  whiteSpace: 'nowrap',
+                }}>
                 {t('uploadFile')}
               </Button>
               <input
@@ -114,7 +102,7 @@ const UploadFileQuestionWidget = ({
                 style={{ display: 'none' }}
                 id={'raised-button-file' + id}
                 type="file"
-                onChange={handleFileChange}
+                onChange={changeFile}
               />
             </Grid>
           }
@@ -129,7 +117,12 @@ const UploadFileQuestionWidget = ({
                 <Button
                   size="small"
                   endIcon={<DescriptionOutlinedIcon />}
-                  className={classes.lastUploadButton}
+                  sx={{
+                    color: '#334499',
+                    '& .MuiButton-endIcon': {
+                      marginLeft: 2,
+                    }
+                  }}
                   href={file?.link}
                   component="a"
                   target="_blank">
@@ -146,17 +139,16 @@ const UploadFileQuestionWidget = ({
             </Grid>
           }
         </Grid>
-      </Grid >
-    </Grid >
+      </Grid>
+    </Grid>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   playerId: state.currentState.player?.id,
-  pushAnswer: ownProps.pushAnswer, //todo: redundant?!
   isFetching: state.events.isFetching,
 });
 
-export default connect(mapStateToProps, {
-  addNotification: addNotificationAction,
-})(UploadFileQuestionWidget);
+export default connect(mapStateToProps)(UploadFileProblemWidget);
+
+export { UploadFileProblemEditWidget };

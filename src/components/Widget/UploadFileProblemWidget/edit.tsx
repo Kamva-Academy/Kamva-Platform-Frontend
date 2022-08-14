@@ -7,39 +7,48 @@ import {
   DialogTitle,
   TextField,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-
 import {
   createUploadFileWidgetAction,
   updateUploadFileWidgetAction,
 } from '../../../redux/slices/widget';
 
-function UploadFileQuestionEditWidget({
+type UploadFileProblemEditWidgetPropsType = {
+  updateUploadFileWidget: any;
+  createUploadFileWidget: any;
+  handleClose: any;
+  open: boolean;
+  text: string;
+  stateId: number;
+  id: number;
+}
+
+const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   updateUploadFileWidget,
   createUploadFileWidget,
   handleClose,
 
   open,
-  text: oldText,
+  text: previousText,
   stateId,
   id: widgetId,
-}) {
+}) => {
   const t = useTranslate();
-  const [text, setText] = useState(oldText);
+  const [newText, setNewText] = useState(previousText);
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     if (widgetId) {
       updateUploadFileWidget({
         paper: stateId,
-        text,
+        text: newText,
         widgetId,
       })
     } else {
       createUploadFileWidget({
         paper: stateId,
-        text: text
+        text: newText
       });
     }
     handleClose();
@@ -47,22 +56,22 @@ function UploadFileQuestionEditWidget({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{t('file')}</DialogTitle>
+      <DialogTitle>{'ویرایش ویجت آپلود فایل'}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          متن درخواستی را که برای ارسال فایل دارید، در قسمت پایین وارد کنید.
+        <DialogContentText sx={{ marginBottom: 2 }}>
+          متن درخواستی را که برای ارسال فایل دارید، در قسمت زیر وارد کنید.
         </DialogContentText>
         <TextField
           autoFocus
           fullWidth
           label="متن درخواست"
-          value={text}
+          value={newText}
           placeholder="مثال: لطفا فایل جواب را ارسال کنید."
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => setNewText(e.target.value)}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} color="primary" variant="contained">
+        <Button onClick={handleSubmit} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
@@ -70,7 +79,10 @@ function UploadFileQuestionEditWidget({
   );
 }
 
-export default connect(null, {
-  createUploadFileWidget: createUploadFileWidgetAction,
-  updateUploadFileWidget: updateUploadFileWidgetAction,
-})(UploadFileQuestionEditWidget);
+export default connect(
+  null,
+  {
+    createUploadFileWidget: createUploadFileWidgetAction,
+    updateUploadFileWidget: updateUploadFileWidgetAction,
+  }
+)(UploadFileProblemEditWidget);

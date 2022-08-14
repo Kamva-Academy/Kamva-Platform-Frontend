@@ -104,9 +104,6 @@ export const makeAnswerEmptyAction = createAsyncThunkApi(
   }
 );
 
-// for mentors
-export { initialState as mentorInitialState };
-
 export const getUnreadNotificationsAction = createAsyncThunkApi(
   'workshops/getNotifications',
   Apis.GET,
@@ -118,7 +115,6 @@ export const getProblemsAction = createAsyncThunkApi(
   Apis.GET,
   getProblemsUrl
 );
-
 
 export const markSubmissionAction = createAsyncThunkApi(
   'workshops/markSubmission',
@@ -135,7 +131,6 @@ export const markSubmissionAction = createAsyncThunkApi(
     },
   }
 );
-
 
 export const getStateAction = createAsyncThunkApi(
   'widget/getOne',
