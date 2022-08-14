@@ -533,10 +533,7 @@ const eventSlice = createSlice({
     [purchaseEventAction.rejected.toString()]: isNotFetching,
 
     [applyDiscountCodeAction.pending.toString()]: isFetching,
-    [applyDiscountCodeAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [applyDiscountCodeAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.discountedPrice = response.new_price;
     },
@@ -557,30 +554,21 @@ const eventSlice = createSlice({
     },
 
     [getTeamAction.pending.toString()]: isFetching,
-    [getTeamAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.team = response;
     },
     [getTeamAction.rejected.toString()]: isNotFetching,
 
     [getTeamInvitationsAction.pending.toString()]: isFetching,
-    [getTeamInvitationsAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getTeamInvitationsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.teamInvitations = response;
     },
     [getTeamInvitationsAction.rejected.toString()]: isNotFetching,
 
     [inviteSomeoneAction.pending.toString()]: isFetching,
-    [inviteSomeoneAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [inviteSomeoneAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.teamInvitations = [response, ...state.teamInvitations];
     },

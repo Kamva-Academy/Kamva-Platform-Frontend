@@ -87,7 +87,7 @@ function Workshops({
                 variant="outlined"
                 fullWidth
                 onClick={() => navigate(`/event/${event?.id}/team_selection/`)}>
-                {'تیم'}
+                {'تیم‌کشی'}
               </Button>
             </Grid>
             <Grid item xs={12}>

@@ -31,7 +31,7 @@ import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
-import { Workshop, Event } from '../../types/models';
+import { Workshop, EventType } from '../../types/models';
 import Mentors from './Mentors';
 
 
@@ -40,7 +40,7 @@ type EventPropsType = {
   getOneEventInfo: Function,
   getOneWorkshopsInfo: Function,
   workshop: Workshop,
-  event: Event,
+  event: EventType,
 }
 
 const EventComponent: FC<EventPropsType> = ({

@@ -6,9 +6,17 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 
-function Index({ inviteSomeone, handleClose, invitee, teamId, open }) {
+type MakeInvitationDialogPropsType = {
+  inviteSomeone: any;
+  handleClose: any;
+  invitee?: string;
+  teamId: string;
+  open: boolean;
+}
+
+const MakeInvitationDialog: FC<MakeInvitationDialogPropsType> = ({ inviteSomeone, handleClose, invitee, teamId, open }) => {
   const [phoneNumber, setPhoneNumber] = React.useState('');
 
   const sendInvitation = () => {
@@ -57,4 +65,4 @@ function Index({ inviteSomeone, handleClose, invitee, teamId, open }) {
   );
 }
 
-export default Index;
+export default MakeInvitationDialog;

@@ -15,7 +15,7 @@ import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
 import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
-import TeamSelection from '../containers/TeamSelection';
+import TeamSelection from '../pages/TeamSelection';
 import Workshop from '../containers/Workshop';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
