@@ -51,8 +51,6 @@ const RegistrationForm = ({
     navigate(`/event/${eventId}/status/`);
   }
 
-  console.log(answers)
-
   const submit = () => {
     submitRegistrationForm({
       id: event?.registration_form,
@@ -65,7 +63,6 @@ const RegistrationForm = ({
 
   const collectAnswers = (problemId, widgetType) => (fieldName, answer) => {
     setAnswers((answers) => {
-      console.log(answers)
       const temporaryAnswers = [...answers];
       let isFound = false;
       for (let i = 0; i < temporaryAnswers.length; i++) {

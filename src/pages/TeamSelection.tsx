@@ -138,10 +138,6 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
     });
   };
 
-  console.log("!!!!!!!!!!!!!!!");
-
-  console.log(isFetching)
-
   return (
     <Layout>
       <Grid

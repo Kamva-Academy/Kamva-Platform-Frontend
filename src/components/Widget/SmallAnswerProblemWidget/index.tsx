@@ -30,7 +30,6 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
   const changeText = (e) => {
-    console.log(e.target.value);
     if (mode === WidgetModes.InAnswerSheet) {
       collectAnswers('text', e.target.value);
     }
