@@ -8,7 +8,8 @@ import {
   Request, 
   RegistrationForm,
   Merchandise, 
-  UploadedFile
+  UploadedFile,
+  Mentor
 } from '../models'
 
 export type InitialState = {

@@ -36,6 +36,7 @@ import {
   registrationFormCRUDUrl,
   validateRegistrationReceiptUrl,
   workshopCRUDUrl,
+  getAllWorkshopMentors,
 } from '../constants/urls';
 import {
   createWidgetAction,

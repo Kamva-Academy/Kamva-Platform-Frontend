@@ -13,18 +13,24 @@ import {
   getEventWorkshopsAction,
 } from '../../redux/slices/events';
 import { addMentorToWorkshopAction } from '../../redux/slices/events';
+import { getAllWorkshopMentorsAction } from '../../redux/slices/workshop';
+import { Mentor } from '../../types/models';
 import { toEnglishNumber } from '../../utils/translateNumber';
 
 type IndexProps= {
   addMentorToWorkshop: Function,
   getEventWorkshops: Function,
+  getAllWorkshopMentors: Function,
   fsmId: number,
+  workshopMentors: Mentor[],
 }
 
 const Index: FC<IndexProps> = ({
   addMentorToWorkshop,
   getEventWorkshops,
+  getAllWorkshopMentors,
   fsmId,
+  workshopMentors = []
 }) => {
   const { eventId } = useParams();
   const [pageNumber, setPageNumber] = useState(1);
@@ -32,6 +38,12 @@ const Index: FC<IndexProps> = ({
     username: '',
     fsmId: fsmId,
   });
+  
+  useEffect(() => {
+    getAllWorkshopMentors({fsmId})
+  }, [fsmId])
+
+  useEffect(() => console.log(workshopMentors), [workshopMentors])
 
   useEffect(() => {
     getEventWorkshops({ eventId, pageNumber });
@@ -97,9 +109,11 @@ const Index: FC<IndexProps> = ({
 }
 const mapStateToProps = (state) => ({
   fsmId: state.workshop.workshop.id,
+  workshopMentors: state.workshop.allWorkshopMentors,
 });
 
 export default connect(mapStateToProps, {
   addMentorToWorkshop: addMentorToWorkshopAction,
   getEventWorkshops: getEventWorkshopsAction,
+  getAllWorkshopMentors: getAllWorkshopMentorsAction,
 })(Index);
