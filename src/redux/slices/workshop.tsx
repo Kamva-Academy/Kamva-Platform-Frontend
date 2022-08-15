@@ -14,6 +14,7 @@ import {
   stateCRUDUrl,
   teamCRUDUrl,
   workshopCRUDUrl,
+  getAllWorkshopMentors,
 } from '../constants/urls';
 import { InitialStateType } from '../../types/redux/workshop';
 
@@ -32,6 +33,7 @@ const initialState: InitialStateType = {
   answers: [],
   allWorkshops: [],
   players: null,
+  allWorkshopMentors: [],
 };
 
 export const getOneWorkshopAction = createAsyncThunkApi(
@@ -174,6 +176,12 @@ export const removeEdgeAction = createAsyncThunkApi(
       success: 'یال با موفقیت حذف شد.',
     },
   }
+);
+
+export const getAllWorkshopMentorsAction = createAsyncThunkApi(
+  'account/getAllWorkshopMentorsAction',
+  Apis.GET,
+  getAllWorkshopMentors
 );
 
 const IndexSlice = createSlice({
@@ -319,6 +327,13 @@ const IndexSlice = createSlice({
       state.isFetching = false;
     },
     [getFSMPlayersAction.rejected.toString()]: isNotFetching,
+
+    [getAllWorkshopMentorsAction.pending.toString()]: isFetching,
+    [getAllWorkshopMentorsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.allWorkshopMentors = response;
+      state.isFetching = false;
+    },
+    [getAllWorkshopMentorsAction.rejected.toString()]: isNotFetching,
   },
 });
 

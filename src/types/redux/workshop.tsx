@@ -5,7 +5,8 @@ import {
     Workshop,
     Widget,
     Answer,
-    Player
+    Player,
+    Mentor
 } 
 from '../models'
 
@@ -22,6 +23,7 @@ export type InitialStateType = {
     answers: Answer[],
     allWorkshops: Workshop[],
     players: Player,
+    allWorkshopMentors: Mentor[],
   };
 
 type CurrentState = {
