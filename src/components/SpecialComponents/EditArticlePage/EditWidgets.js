@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget, { MODES } from '../../Widget';
-import CreateWidgetDialog from '../EditWorkshopPage/components/CreateWidgetDialog';
+import CreateWidgetDialog from '../../organisms/dialogs/CreateWidgetDialog';
 
 const useStyles = makeStyles((theme) => ({
   workshopContent: {
