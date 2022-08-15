@@ -190,8 +190,8 @@ const mapStateToProps = (state, ownProps) => ({
   // stateId: ownProps.match?.params?.stateId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
-  personsName: `${state.account.userAccount.first_name} ${state.account.userAccount.last_name}`,
-  mentorId: state.account.userAccount.academic_studentship.id,
+  personsName: `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`,
+  mentorId: state.account.userAccount?.academic_studentship?.id,
   workshop: state.workshop.workshop,
 });
 

@@ -1,6 +1,6 @@
-import BigAnswerQuestionWidget, {
+import BigAnswerProblemWidget, {
   BigAnswerQuestionEditWidget,
-} from './BigAnswerQuestionWidget';
+} from './BigAnswerProblemWidget';
 import ImageWidget, { ImageEditWidget } from './ImageWidget';
 import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
 import MultiChoiceQuestionWidget, {
@@ -19,13 +19,13 @@ const WIDGET_TYPES = {
   SmallAnswerProblem: {
     WidgetComponent: SmallAnswerProblemWidget,
     EditWidgetDialog: SmallAnswerProblemEditWidget,
-    label: 'سوال کوتاه پاسخ',
+    label: 'سوال کوتاه‌پاسخ',
     backendType: 'SmallAnswerProblem',
   },
   BigAnswerProblem: {
-    WidgetComponent: BigAnswerQuestionWidget,
+    WidgetComponent: BigAnswerProblemWidget,
     EditWidgetDialog: BigAnswerQuestionEditWidget,
-    label: 'سوال بلند پاسخ',
+    label: 'سوال تشریحی',
     backendType: 'BigAnswerProblem',
   },
   // MultiChoiceProblem: {
@@ -37,7 +37,7 @@ const WIDGET_TYPES = {
   UploadFileProblem: {
     WidgetComponent: UploadFileProblemWidget,
     EditWidgetDialog: UploadFileProblemEditWidget,
-    label: 'سوال ارسال فایل',
+    label: 'ارسال فایل',
     backendType: 'UploadFileProblem',
   },
   Description: {

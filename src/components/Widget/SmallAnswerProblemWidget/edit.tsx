@@ -6,7 +6,9 @@ import {
   DialogContentText,
   DialogTitle,
   Grid,
+  Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -59,34 +61,27 @@ function SmallAnswerProblemEditWidget({
       disableEnforceFocus>
       <DialogTitle>{t('shortAnswerQuestion')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          {t('writeQuestionAndAnswer')}
-        </DialogContentText>
-        <Grid container direction='column' spacing={1}>
-          <label>{t('question')}</label>
-          <Grid item>
-            <TinyEditorComponent
-              content={text}
-              onChange={(text) => setText(text)}
-            />
-          </Grid>
-          <Grid item>
-            <TextField
-              variant='outlined'
-              fullWidth
-              label={t('answer')}
-              value={solution}
-              onChange={(e) => setSolution(e.target.value)}
-            />
-          </Grid>
-        </Grid>
+        <Stack spacing={1}>
+          <label>{'صورت سوال'}</label>
+          <TinyEditorComponent
+            content={text}
+            onChange={(text) => setText(text)}
+          />
+          <TextField
+            variant='outlined'
+            fullWidth
+            label={t('answer')}
+            value={solution}
+            onChange={(e) => setSolution(e.target.value)}
+          />
+        </Stack>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleSubmit} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
-    </Dialog>
+    </Dialog >
   );
 }
 

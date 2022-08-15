@@ -95,12 +95,12 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     <Stack alignItems='center' justifyContent='space-between' direction='row' spacing={1}>
       <Typography>{text}</Typography>
       <Stack justifyContent='flex-end' spacing={1}>
-        {mode !== WidgetModes.Review &&
+        {mode === WidgetModes.View &&
           <>
             <Button
               component="label"
               htmlFor={'raised-button-file' + widgetId}
-              disabled={isFetching || mode === WidgetModes.Edit}
+              disabled={isFetching}
               variant="contained"
               color="primary"
               size="small"
@@ -117,7 +117,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
             />
           </>
         }
-        {file?.link
+        {mode !== WidgetModes.Edit && file?.link
           ? <Button
             size="small"
             variant='outlined'

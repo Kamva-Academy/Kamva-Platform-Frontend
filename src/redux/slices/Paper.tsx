@@ -32,7 +32,7 @@ export const uploadFileAnswerAction = createAsyncThunkApi(
   }
 );
 
-const sendWidgetAnswerAction = createAsyncThunkApi(
+const _sendWidgetAnswerAction = createAsyncThunkApi(
   'widget/sendWidgetAnswerAction',
   Apis.POST,
   sendWidgetAnswerUrl,
@@ -45,21 +45,21 @@ const sendWidgetAnswerAction = createAsyncThunkApi(
 );
 
 export const sendBigAnswerAction = ({ widgetId, text }) =>
-  sendWidgetAnswerAction({
+  _sendWidgetAnswerAction({
     widgetId,
     text,
     answer_type: 'BigAnswer',
   });
 
 export const sendSmallAnswerAction = ({ widgetId, text }) =>
-  sendWidgetAnswerAction({
+  _sendWidgetAnswerAction({
     widgetId,
     text,
     answer_type: 'SmallAnswer',
   });
 
 export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
-  sendWidgetAnswerAction({
+  _sendWidgetAnswerAction({
     player: playerId,
     problem: problemId,
     problem_type: 'ProblemMultiChoice',

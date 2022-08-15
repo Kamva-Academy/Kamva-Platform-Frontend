@@ -60,23 +60,27 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
         justifyContent='center'
         alignItems="stretch"
         spacing={1}>
-        <TextField
-          fullWidth
-          variant='outlined'
-          value={newAnswer}
-          disabled={mode === WidgetModes.Edit}
-          onChange={handleTextFieldChange}
-          size="small"
-        />
-        {!isInAnswerSheet &&
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ whiteSpace: 'nowrap' }}
-            disabled={disableSubmitButton || mode === WidgetModes.Edit}
-            onClick={submit}>
-            {t('submit')}
-          </Button>
+        {mode !== WidgetModes.Edit &&
+          <>
+            < TextField
+              fullWidth
+              variant='outlined'
+              value={newAnswer}
+              placeholder={'لطفاً پاسخ خود را وارد کنید.'}
+              onChange={handleTextFieldChange}
+              size="small"
+            />
+            {!isInAnswerSheet &&
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ whiteSpace: 'nowrap' }}
+                disabled={disableSubmitButton}
+                onClick={submit}>
+                {t('submit')}
+              </Button>
+            }
+          </>
         }
       </Stack>
     </>
