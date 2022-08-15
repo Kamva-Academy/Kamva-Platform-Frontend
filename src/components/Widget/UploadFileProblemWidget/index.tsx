@@ -14,7 +14,7 @@ import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from '..';
 
 type UploadFileProblemWidgetPropsType = {
-  pushAnswer: any;
+  collectAnswers: any;
   uploadFileAnswer: any;
   makeAnswerEmpty: any;
   id: number;
@@ -25,7 +25,7 @@ type UploadFileProblemWidgetPropsType = {
 }
 
 const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
-  pushAnswer,
+  collectAnswers,
   uploadFileAnswer,
   makeAnswerEmpty,
   id: widgetId,
@@ -47,13 +47,9 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     }
   }, [last_submitted_answer])
 
-  console.log(widgetId)
-
   const changeFile = (e) => {
-    const file = e.target.files[0];
     e.preventDefault();
-    console.log(e);
-    console.log(file);
+    const file = e.target.files[0];
     if (file) {
       if (file.size <= 8e6) {
         uploadFileAnswer({
@@ -66,7 +62,9 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
               link: response.payload?.response?.answer_file,
               name: file.name,
             });
-            pushAnswer('upload_file_answer', response.payload?.response?.id);
+            if (mode === WidgetModes.InAnswerSheet) {
+              collectAnswers('upload_file_answer', response.payload?.response?.id);
+            }
           } else {
             e.target.value = null;
           }
@@ -84,8 +82,8 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     makeAnswerEmpty({ widgetId }).then((response) => {
       if (response.type?.endsWith('fulfilled')) {
         setFile(null);
-        if (pushAnswer) {
-          pushAnswer('upload_file_answer', null);
+        if (mode === WidgetModes.InAnswerSheet) {
+          collectAnswers('upload_file_answer', null);
         }
       }
     });
@@ -95,7 +93,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     <Stack alignItems='center' justifyContent='space-between' direction='row' spacing={1}>
       <Typography>{text}</Typography>
       <Stack justifyContent='flex-end' spacing={1}>
-        {mode === WidgetModes.View &&
+        {(mode === WidgetModes.View || mode === WidgetModes.InAnswerSheet) &&
           <>
             <Button
               component="label"

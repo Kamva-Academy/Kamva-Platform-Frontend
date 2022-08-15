@@ -9,31 +9,31 @@ import SmallAnswerProblemEditWidget from './edit';
 
 type SmallAnswerProblemWidgetPropsType = {
   sendSmallAnswer: any;
-  pushAnswer: any;
+  collectAnswers: any;
   id: number;
   mode: WidgetModes;
   text: string;
   answer: any;
   last_submitted_answer: any;
-  isInAnswerSheet: boolean;
 }
 
 const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   sendSmallAnswer,
-  pushAnswer,
-
-  id,
+  collectAnswers,
+  id: paperId,
   mode,
   text: problemText,
   last_submitted_answer,
-  isInAnswerSheet,
 }) => {
   const t = useTranslate();
   const [newAnswer, setNewAnswer] = useState<string>(last_submitted_answer?.text);
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
-  const handleTextFieldChange = (e) => {
-    if (isInAnswerSheet) pushAnswer('text', e.target.value);
+  const changeText = (e) => {
+    console.log(e.target.value);
+    if (mode === WidgetModes.InAnswerSheet) {
+      collectAnswers('text', e.target.value);
+    }
     setNewAnswer(e.target.value);
   }
 
@@ -42,7 +42,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
     setTimeout(() => {
       setDisableSubmitButton(false);
     }, 20000);
-    sendSmallAnswer({ widgetId: id, text: newAnswer });
+    sendSmallAnswer({ widgetId: paperId, text: newAnswer });
   }
 
   return (
@@ -62,15 +62,15 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
         spacing={1}>
         {mode !== WidgetModes.Edit &&
           <>
-            < TextField
+            <TextField
               fullWidth
               variant='outlined'
               value={newAnswer}
               placeholder={'لطفاً پاسخ خود را وارد کنید.'}
-              onChange={handleTextFieldChange}
+              onChange={changeText}
               size="small"
             />
-            {!isInAnswerSheet &&
+            {mode !== WidgetModes.InAnswerSheet &&
               <Button
                 variant="contained"
                 color="primary"

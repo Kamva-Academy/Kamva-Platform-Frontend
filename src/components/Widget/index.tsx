@@ -16,6 +16,7 @@ export enum WidgetModes {
   View,
   Edit,
   Review,
+  InAnswerSheet,
 };
 
 enum WidgetTypes {
@@ -98,7 +99,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
           />
         </Stack>
       }
-      <WidgetComponent {...widget} mode={mode} />
+      <WidgetComponent {...widget} mode={mode} {...props} />
     </Cover>
   );
 };

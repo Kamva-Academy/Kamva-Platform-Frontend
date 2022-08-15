@@ -13,8 +13,7 @@ export { BigAnswerProblemEditWidget as BigAnswerQuestionEditWidget };
 
 type BigAnswerProblemWidgetPropsType = {
   sendBigAnswer: any;
-  pushAnswer: any;
-  isInAnswerSheet: boolean;
+  collectAnswers: any;
   id: number;
   text: string;
   mode: WidgetModes;
@@ -23,11 +22,10 @@ type BigAnswerProblemWidgetPropsType = {
 
 const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
   sendBigAnswer,
-  pushAnswer,
+  collectAnswers,
   id,
   text,
   mode,
-  isInAnswerSheet,
   last_submitted_answer,
   ...props
 }) => {
@@ -35,10 +33,14 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
   const [answer, setAnswer] = useState<string>(last_submitted_answer?.text);
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
+  const onChange = (val) => {
+    if (mode === WidgetModes.InAnswerSheet) {
+      collectAnswers('text', val);
+    };
+    setAnswer(val);
+  }
+
   const submitAnswer = (e) => {
-    if (isInAnswerSheet) {
-      pushAnswer('text', answer);
-    }
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);
@@ -56,22 +58,23 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
         }}
         content={text}
       />
+      {mode !== WidgetModes.Edit &&
+        <TinyEditorComponent
+          content={answer}
+          onChange={(val: string) => onChange(val)}
+        />
+      }
       {mode === WidgetModes.View &&
-        <>
-          <TinyEditorComponent
-            content={answer}
-            onChange={(val: string) => setAnswer(val)}
-          />
-          <Button
-            disabled={isButtonDisabled}
-            fullWidth
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={submitAnswer}>
-            {t('submitAnswer')}
-          </Button>
-        </>
+
+        <Button
+          disabled={isButtonDisabled}
+          fullWidth
+          variant="contained"
+          color="primary"
+          size="small"
+          onClick={submitAnswer}>
+          {t('submitAnswer')}
+        </Button>
       }
       {mode === WidgetModes.Review &&
         <TinyPreview
