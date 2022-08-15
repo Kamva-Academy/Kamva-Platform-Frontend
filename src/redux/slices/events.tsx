@@ -370,6 +370,7 @@ export const addMentorToWorkshopAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'همیار با موفقیت اضافه شد.',
+      error: 'شما دسترسی لازم برای این عملیات را ندارید.'
     },
   }
 );
