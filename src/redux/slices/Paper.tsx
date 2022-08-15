@@ -3,30 +3,112 @@ import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   hintUrl,
+  uploadFileUrl,
   stateCRUDUrl,
   widgetCRUDUrl,
+  markSubmissionUrl,
+  sendWidgetAnswerUrl,
+  makeAnswerEmptyUrl,
 } from '../constants/urls';
-
 import { InitialStateType } from '../../types/redux/Paper';
 
-const initialState: InitialStateType = {
-  papers: {},
-  isFetching: false,
-}
+//////////////// SEND ANSWER ////////////////
 
-const isFetching = (state) => {
-  state.isFetching = true;
-};
+export const uploadFileAnswerAction = createAsyncThunkApi(
+  'widget/uploadFileAnswerAction',
+  Apis.POST_FORM_DATA,
+  uploadFileUrl,
+  {
+    bodyCreator: ({ problemId, fileName, answerFile }) => ({
+      problem: problemId,
+      answer_file: answerFile,
+      file_name: fileName,
+      is_final_answer: true,
+    }),
+    defaultNotification: {
+      success: 'پاسخ شما با موفقیت ثبت شد.',
+      error: 'مشکلی در ثبت پاسخ وجود داشت.',
+    },
+  }
+);
 
-const isNotFetching = (state) => {
-  state.isFetching = false;
-};
+const sendWidgetAnswerAction = createAsyncThunkApi(
+  'widget/sendWidgetAnswerAction',
+  Apis.POST,
+  sendWidgetAnswerUrl,
+  {
+    defaultNotification: {
+      success: 'پاسخ شما با موفقیت ثبت شد.',
+      error: 'مشکلی در ثبت پاسخ وجود داشت.',
+    },
+  }
+);
+
+export const sendBigAnswerAction = ({ widgetId, text }) =>
+  sendWidgetAnswerAction({
+    widgetId,
+    text,
+    answer_type: 'BigAnswer',
+  });
+
+export const sendSmallAnswerAction = ({ widgetId, text }) =>
+  sendWidgetAnswerAction({
+    widgetId,
+    text,
+    answer_type: 'SmallAnswer',
+  });
+
+export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
+  sendWidgetAnswerAction({
+    player: playerId,
+    problem: problemId,
+    problem_type: 'ProblemMultiChoice',
+    answer: {
+      text: answer,
+      answer_type: 'MultiChoiceAnswer',
+    },
+  });
+
+
+export const makeAnswerEmptyAction = createAsyncThunkApi(
+  'widget/sendWidgetAnswerAction',
+  Apis.GET,
+  makeAnswerEmptyUrl,
+  {
+    defaultNotification: {
+      success: 'پاسخ شما با موفقیت حذف شد.',
+      error: 'مشکلی در حذف‌کردن پاسخ وجود داشت.',
+    },
+  }
+);
+
+
+//////////////// متفرقه ////////////////
+
+export const markSubmissionAction = createAsyncThunkApi(
+  'workshops/markSubmission',
+  Apis.POST,
+  markSubmissionUrl,
+  {
+    bodyCreator: ({ submissionId, score, description }) => ({
+      submission_id: submissionId,
+      score,
+      description,
+    }),
+    defaultNotification: {
+      success: 'نمره با موفقیت ثبت شد!',
+    },
+  }
+);
 
 export const getOneStateAction = createAsyncThunkApi(
   'workshop/getOneStateAction',
   Apis.GET,
   stateCRUDUrl
 );
+
+
+//////////////// CREATE, UPDATE & DELETE WIDGETS ////////////////
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
@@ -142,7 +224,7 @@ export const updateUploadFileWidgetAction = ({ paper, text, widgetId }) =>
     widgetId,
   });
 
-export const createSmallAnswerQuestionWidgetAction = ({ paper, text, solution }) =>
+export const createSmallAnswerProblemWidgetAction = ({ paper, text, solution }) =>
   solution
     ? createWidgetAction({
       paper,
@@ -159,7 +241,7 @@ export const createSmallAnswerQuestionWidgetAction = ({ paper, text, solution })
       text,
     })
 
-export const updateSmallAnswerQuestionWidgetAction = ({ paper, text, widgetId }) =>
+export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId }) =>
   updateWidgetAction({
     paper,
     widget_type: 'SmallAnswerProblem',
@@ -217,6 +299,8 @@ export const updateMultiChoicesQuestionWidgetAction = ({ paper, text, choices, w
     widgetId,
   });
 
+//////////////// HINT ////////////////
+
 export const createHintAction = createAsyncThunkApi(
   'widget/hints/create',
   Apis.POST,
@@ -231,6 +315,21 @@ export const deleteHintAction = createAsyncThunkApi(
   Apis.DELETE,
   hintUrl,
 );
+
+//////////////// UTILITIES ////////////////
+
+const initialState: InitialStateType = {
+  papers: {},
+  isFetching: false,
+}
+
+const isFetching = (state) => {
+  state.isFetching = true;
+};
+
+const isNotFetching = (state) => {
+  state.isFetching = false;
+};
 
 const PaperSlice = createSlice({
   name: 'PaperState',
@@ -299,6 +398,20 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
     [deleteHintAction.rejected.toString()]: isNotFetching,
+
+    [uploadFileAnswerAction.pending.toString()]: isFetching,
+    [uploadFileAnswerAction.fulfilled.toString()]: (state, action) => {
+      // state.uploadedFile = {
+      //   link: action.payload?.response?.answer_file,
+      //   id: action.payload?.response?.id,
+      //   name: action?.meta?.arg?.answerFile?.name,
+      // };
+      state.isFetching = false;
+    },
+    [uploadFileAnswerAction.rejected.toString()]: (state) => {
+      // state.uploadedFile = null;
+      state.isFetching = false;
+    },
 
   },
 });

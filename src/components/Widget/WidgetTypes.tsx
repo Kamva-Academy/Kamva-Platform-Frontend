@@ -6,9 +6,9 @@ import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
 import MultiChoiceQuestionWidget, {
   MultiChoiceQuestionEditWidget,
 } from './MultiChoiceQuestionWidget';
-import SmallAnswerQuestionWidget, {
-  SmallAnswerQuestionEditWidget,
-} from './SmallAnswerQuestionWidget';
+import SmallAnswerProblemWidget, {
+  SmallAnswerProblemEditWidget,
+} from './SmallAnswerProblemWidget';
 import TextWidget, { TextEditWidget } from './TextWidget';
 import UploadFileProblemWidget, {
   UploadFileProblemEditWidget,
@@ -17,8 +17,8 @@ import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 const WIDGET_TYPES = {
   SmallAnswerProblem: {
-    WidgetComponent: SmallAnswerQuestionWidget,
-    EditWidgetDialog: SmallAnswerQuestionEditWidget,
+    WidgetComponent: SmallAnswerProblemWidget,
+    EditWidgetDialog: SmallAnswerProblemEditWidget,
     label: 'سوال کوتاه پاسخ',
     backendType: 'SmallAnswerProblem',
   },

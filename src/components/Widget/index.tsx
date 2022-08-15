@@ -15,6 +15,7 @@ export const MODES = {
 export enum WidgetModes {
   View,
   Edit,
+  Review,
 };
 
 enum WidgetTypes {
@@ -97,7 +98,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
           />
         </Stack>
       }
-      <WidgetComponent  {...widget} mode={mode} />
+      <WidgetComponent {...widget} mode={mode} />
     </Cover>
   );
 };

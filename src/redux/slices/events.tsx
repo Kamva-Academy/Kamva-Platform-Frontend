@@ -144,19 +144,6 @@ export const getOneRegistrationReceiptAction = createAsyncThunkApi(
   registrationReceiptUrl
 );
 
-export const uploadFileAction = createAsyncThunkApi(
-  'events/uploadFileAction',
-  Apis.POST_FORM_DATA,
-  uploadFileUrl,
-  {
-    bodyCreator: ({ answerFile, widgetId, name }) => ({
-      answer_file: answerFile,
-      problem: widgetId,
-      file_name: name,
-      is_final_answer: true,
-    }),
-  }
-);
 
 export const getTeamAction = createAsyncThunkApi(
   'events/getTeamAction',
@@ -538,20 +525,6 @@ const eventSlice = createSlice({
       state.discountedPrice = response.new_price;
     },
     [applyDiscountCodeAction.rejected.toString()]: isNotFetching,
-
-    [uploadFileAction.pending.toString()]: isFetching,
-    [uploadFileAction.fulfilled.toString()]: (state, action) => {
-      state.uploadedFile = {
-        link: action.payload?.response?.answer_file,
-        id: action.payload?.response?.id,
-        name: action?.meta?.arg?.answerFile?.name,
-      };
-      state.isFetching = false;
-    },
-    [uploadFileAction.rejected.toString()]: (state) => {
-      state.uploadedFile = null;
-      state.isFetching = false;
-    },
 
     [getTeamAction.pending.toString()]: isFetching,
     [getTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
