@@ -71,8 +71,10 @@ const Index: FC<IndexProps> = ({
     });
   };
 
-  const addMentor = () => {
-    addMentorToWorkshop(properties);
+  const addMentor = async () => {
+    await addMentorToWorkshop(properties);
+    setProperties(prevProps => ({...prevProps, username: ''}))
+    getAllWorkshopMentors({ fsmId })
   };
 
   return (
@@ -139,8 +141,9 @@ const Index: FC<IndexProps> = ({
                 <TableCell align='center'>
                   <Tooltip title='حذف همیار' arrow>
                     <IconButton size='small'
-                      onClick={() => {
-                        removeMentorFromWorkshop({ fsmId, mentor })
+                      onClick={async () => {
+                        await removeMentorFromWorkshop({ fsmId, mentor })
+                        getAllWorkshopMentors({ fsmId })
                       }}>
                       <ClearIcon />
                     </IconButton>
