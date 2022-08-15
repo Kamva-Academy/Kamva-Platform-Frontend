@@ -1,4 +1,4 @@
-import { Button, Stack, TextField } from '@mui/material';
+import { Button, Stack, TextField, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -26,14 +26,14 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   last_submitted_answer,
 }) => {
   const t = useTranslate();
-  const [newAnswer, setNewAnswer] = useState<string>(last_submitted_answer?.text);
+  const [answer, setAnswer] = useState<string>(last_submitted_answer?.text);
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
   const changeText = (e) => {
     if (mode === WidgetModes.InAnswerSheet) {
       collectAnswers('text', e.target.value);
     }
-    setNewAnswer(e.target.value);
+    setAnswer(e.target.value);
   }
 
   const submit = () => {
@@ -41,11 +41,13 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
     setTimeout(() => {
       setDisableSubmitButton(false);
     }, 20000);
-    sendSmallAnswer({ widgetId: paperId, text: newAnswer });
+    sendSmallAnswer({ widgetId: paperId, text: answer });
   }
 
+  console.log(answer)
+
   return (
-    <>
+    <Stack spacing={1}>
       <TinyPreview
         frameProps={{
           frameBorder: '0',
@@ -56,20 +58,20 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
       />
       <Stack
         direction='row'
-        justifyContent='center'
+        justifyContent='flex-start'
         alignItems="stretch"
         spacing={1}>
-        {mode !== WidgetModes.Edit &&
+        {(mode === WidgetModes.View || mode === WidgetModes.InAnswerSheet) &&
           <>
             <TextField
               fullWidth
               variant='outlined'
-              value={newAnswer}
+              value={answer}
               placeholder={'لطفاً پاسخ خود را وارد کنید.'}
               onChange={changeText}
               size="small"
             />
-            {mode !== WidgetModes.InAnswerSheet &&
+            {mode === WidgetModes.View &&
               <Button
                 variant="contained"
                 color="primary"
@@ -81,8 +83,18 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
             }
           </>
         }
+        {mode === WidgetModes.Review &&
+          <>
+            {answer ?
+              <Typography>{answer}</Typography> :
+              <Typography color='red' variant='caption'>
+                {'پاسخی برای این سوال ثبت نشده است.'}
+              </Typography>
+            }
+          </>
+        }
       </Stack>
-    </>
+    </Stack>
   );
 };
 

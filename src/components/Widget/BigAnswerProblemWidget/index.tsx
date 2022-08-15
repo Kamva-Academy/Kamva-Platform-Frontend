@@ -1,8 +1,7 @@
-import { Button, Grid, Paper, Stack } from '@mui/material';
+import { Button, Grid, Paper, Stack, Typography } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 import { WidgetModes } from '..';
@@ -58,14 +57,13 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
         }}
         content={text}
       />
-      {mode !== WidgetModes.Edit &&
+      {(mode === WidgetModes.View || mode === WidgetModes.InAnswerSheet) &&
         <TinyEditorComponent
           content={answer}
           onChange={(val: string) => onChange(val)}
         />
       }
       {mode === WidgetModes.View &&
-
         <Button
           disabled={isButtonDisabled}
           fullWidth
@@ -77,14 +75,21 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
         </Button>
       }
       {mode === WidgetModes.Review &&
-        <TinyPreview
-          frameProps={{
-            frameBorder: '0',
-            scrolling: 'no',
-            width: '100%',
-          }}
-          content={answer}
-        />
+        <>
+          {answer ?
+            <TinyPreview
+              frameProps={{
+                frameBorder: '0',
+                scrolling: 'no',
+                width: '100%',
+              }}
+              content={answer}
+            /> :
+            <Typography color='red' variant='caption'>
+              {'پاسخی برای این سوال ثبت نشده است.'}
+            </Typography>
+          }
+        </>
       }
     </Stack>
   );

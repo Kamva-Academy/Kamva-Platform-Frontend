@@ -113,31 +113,32 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
               type="file"
               onChange={changeFile}
             />
+            {file?.link &&
+              <Button
+                size="small"
+                variant='outlined'
+                sx={{
+                  whiteSpace: 'nowrap',
+                }}
+                endIcon={
+                  <IconButton size='small' onClick={clearFile}>
+                    <ClearIcon sx={{ fontSize: 14 }} />
+                  </IconButton>
+                }
+                href={file?.link}
+                component="a"
+                target="_blank">
+                {file?.name}
+              </Button>
+            }
           </>
         }
-        {mode !== WidgetModes.Edit && file?.link
-          ? <Button
-            size="small"
-            variant='outlined'
-            sx={{
-              whiteSpace: 'nowrap',
-            }}
-            endIcon={
-              <IconButton size='small' onClick={clearFile}>
-                <ClearIcon sx={{ fontSize: 14 }} />
-              </IconButton>
-            }
-            href={file?.link}
-            component="a"
-            target="_blank">
-            {file?.name}
-          </Button>
-          : mode === WidgetModes.Review &&
-          <Typography color='red' variant='caption'>
-            {'پاسخی برای این سوال ثبت نشده است.'}
-          </Typography>
-        }
       </Stack>
+      {mode === WidgetModes.Review && !file?.link &&
+        <Typography color='red' variant='caption'>
+          {'پاسخی برای این سوال ثبت نشده است.'}
+        </Typography>
+      }
     </Stack>
   );
 };

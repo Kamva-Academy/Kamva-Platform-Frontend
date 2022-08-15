@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import AreYouSure from '../components/Dialog/AreYouSure';
-import MakeInvitation from '../components/Dialog/MakeInvitation';
+import MakeInvitation from '../components/organisms/dialogs/MakeInvitation';
 import {
   createTeamAction,
   deleteInvitationAction,
