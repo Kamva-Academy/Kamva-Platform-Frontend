@@ -1,26 +1,42 @@
 import {
   Button,
+  Checkbox,
+  Divider,
+  FormControl,
   Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { Pagination } from '@mui/material';
 import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import ClearIcon from '@mui/icons-material/Clear';
 
 import {
   getEventWorkshopsAction,
 } from '../../redux/slices/events';
 import { addMentorToWorkshopAction } from '../../redux/slices/events';
-import { getAllWorkshopMentorsAction } from '../../redux/slices/workshop';
+import { getAllWorkshopMentorsAction, removeMentorFromWorkshopAction } from '../../redux/slices/workshop';
 import { Mentor } from '../../types/models';
 import { toEnglishNumber } from '../../utils/translateNumber';
 
-type IndexProps= {
+type IndexProps = {
   addMentorToWorkshop: Function,
   getEventWorkshops: Function,
   getAllWorkshopMentors: Function,
+  removeMentorFromWorkshop: Function,
   fsmId: number,
   workshopMentors: Mentor[],
 }
@@ -29,6 +45,7 @@ const Index: FC<IndexProps> = ({
   addMentorToWorkshop,
   getEventWorkshops,
   getAllWorkshopMentors,
+  removeMentorFromWorkshop,
   fsmId,
   workshopMentors = []
 }) => {
@@ -38,12 +55,10 @@ const Index: FC<IndexProps> = ({
     username: '',
     fsmId: fsmId,
   });
-  
-  useEffect(() => {
-    getAllWorkshopMentors({fsmId})
-  }, [fsmId])
 
-  useEffect(() => console.log(workshopMentors), [workshopMentors])
+  useEffect(() => {
+    getAllWorkshopMentors({ fsmId })
+  }, [fsmId])
 
   useEffect(() => {
     getEventWorkshops({ eventId, pageNumber });
@@ -104,6 +119,50 @@ const Index: FC<IndexProps> = ({
         </Grid>
 
       </Grid>
+
+      <Divider sx={{margin: '30px auto', width: '90%'}}></Divider>
+
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align='center' sx={{fontSize: '10px'}}>عملیات</TableCell>
+              <TableCell align='center' sx={{fontSize: '10px'}}>نام</TableCell>
+              <TableCell align='center' sx={{fontSize: '10px'}}>نام خانوادگی</TableCell>
+              <TableCell align='center' sx={{fontSize: '10px'}}>شماره تماس</TableCell>
+              <TableCell align='center' sx={{fontSize: '10px'}}>ایمیل</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {workshopMentors?.map((mentor, index) =>
+              <TableRow key={index}>
+                <TableCell align='center'>
+                  <Tooltip title='حذف همیار' arrow>
+                    <IconButton size='small'
+                      onClick={() => {
+                        removeMentorFromWorkshop({ fsmId, mentor })
+                      }}>
+                      <ClearIcon />
+                    </IconButton>
+                  </Tooltip>
+                </TableCell>
+                <TableCell align='center' sx={{fontSize: '10px'}}>
+                  {mentor.first_name || '-'}
+                </TableCell>
+                <TableCell align='center' sx={{fontSize: '10px'}}>
+                  {mentor.last_name || '-'}
+                </TableCell>
+                <TableCell align='center' sx={{fontSize: '10px'}}>
+                  {mentor.phone_number || '-'}
+                </TableCell>
+                <TableCell align='center' sx={{fontSize: '10px'}}>
+                  {mentor.email || '-'}
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
@@ -116,4 +175,5 @@ export default connect(mapStateToProps, {
   addMentorToWorkshop: addMentorToWorkshopAction,
   getEventWorkshops: getEventWorkshopsAction,
   getAllWorkshopMentors: getAllWorkshopMentorsAction,
+  removeMentorFromWorkshop: removeMentorFromWorkshopAction,
 })(Index);

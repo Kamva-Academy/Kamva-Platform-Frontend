@@ -15,6 +15,7 @@ import {
   teamCRUDUrl,
   workshopCRUDUrl,
   getAllWorkshopMentors,
+  removeMentorURL,
 } from '../constants/urls';
 import { InitialStateType } from '../../types/redux/workshop';
 
@@ -182,6 +183,21 @@ export const getAllWorkshopMentorsAction = createAsyncThunkApi(
   'account/getAllWorkshopMentorsAction',
   Apis.GET,
   getAllWorkshopMentors
+);
+
+export const removeMentorFromWorkshopAction = createAsyncThunkApi(
+  'events/removeMentorFromWorkshopAction',
+  Apis.POST,
+  removeMentorURL,
+  {
+    bodyCreator: ({ mentor }) => ({
+      ...mentor
+    }),
+    defaultNotification: {
+      success: 'همیار با موفقیت از کارگاه حذف شد',
+      error: 'اشکالی در حذف همیار از کارگاه رخداد.'
+    },
+  }
 );
 
 const IndexSlice = createSlice({
