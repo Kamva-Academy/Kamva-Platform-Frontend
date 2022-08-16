@@ -58,8 +58,7 @@ export const respondInvitationUrl = ({ invitationId }) =>
 export const TeamCRUDUrl = ({ teamId }) =>
   teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
 
-export const createTeamAndJoinActionUrl = ({ teamId }) => `fsm/team/${teamId}/create_team_and_join/`
-
+export const createTeamAndJoinActionUrl = 'fsm/team/create_team_and_join/';
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
 
