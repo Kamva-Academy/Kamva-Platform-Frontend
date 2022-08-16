@@ -5,7 +5,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 import React, { useState, FC } from 'react';
 import { connect } from 'react-redux';
@@ -56,19 +58,20 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{'ویرایش ویجت آپلود فایل'}</DialogTitle>
+      <DialogTitle>{'ارسال فایل'}</DialogTitle>
       <DialogContent>
-        <DialogContentText sx={{ marginBottom: 2 }}>
-          متن درخواستی را که برای ارسال فایل دارید، در قسمت زیر وارد کنید.
-        </DialogContentText>
-        <TextField
-          autoFocus
-          fullWidth
-          label="متن درخواست"
-          value={newText}
-          placeholder="مثال: لطفا فایل جواب را ارسال کنید."
-          onChange={(e) => setNewText(e.target.value)}
-        />
+        <Stack spacing={1}>
+          <Typography>
+            متن درخواستی را که برای ارسال فایل دارید، در قسمت زیر وارد کنید.
+          </Typography>
+          <TextField
+            autoFocus
+            fullWidth
+            value={newText}
+            placeholder="مثال: لطفا فایل جواب را ارسال کنید."
+            onChange={(e) => setNewText(e.target.value)}
+          />
+        </Stack>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleSubmit} color="primary" variant="contained">

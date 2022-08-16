@@ -7,8 +7,8 @@ import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
 import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
-import Event from '../containers/Event';
-import EventMentorPage from '../containers/Event/MentorsPage';
+import Event from '../containers/event';
+import ManageEvent from '../containers/event/manage';
 import Landing from '../containers/Landing';
 import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
@@ -64,7 +64,7 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
-        <Route path="/event-mentor/:eventId/" element={<EventMentorPage />} />
+        <Route path="/event/:eventId/manage/" element={<ManageEvent />} />
         
         <Route path="/watch/:playerId/" element={<Workshop />} />
         <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
@@ -74,4 +74,5 @@ const Root = () => {
     </Routes>
   );
 };
+
 export default Root;

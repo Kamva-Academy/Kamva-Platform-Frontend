@@ -8,50 +8,29 @@ import {
   Grid,
   Typography,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Widget from '../Widget';
-
+import Widget from '../../Widget';
+import { WidgetModes } from '../../Widget';
 import {
   getAnswersForReviewAction
-} from '../../redux/slices/workshop';
+} from '../../../redux/slices/workshop';
+import { Answer } from '../../../types/models';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    overflow: 'hidden',
-    padding: theme.spacing(2),
-  },
-  padding: {
-    padding: theme.spacing(2),
-  },
-  profileImage: {
-    maxHeight: '100px',
-    borderRadius: '5px',
-  },
-  logo: {
-    height: 100,
-  },
-  formControl: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
-}));
+type ReviewAnswersPropsType = {
+  open: boolean;
+  handleClose: any;
+  getAnswersForReview: any;
+  answers: Answer[];
+}
 
-function Index({
+const ReviewAnswers: FC<ReviewAnswersPropsType> = ({
   open,
   handleClose,
   getAnswersForReview,
-
-  isFetching,
   answers,
-}) {
-  const classes = useStyles();
+}) => {
   const { fsmId } = useParams();
 
   useEffect(() => {
@@ -71,19 +50,17 @@ function Index({
       <DialogContent>
         <Grid container spacing={2}>
           {answers?.map((widget) => (
-            <>
-              <Grid item key={widget.id} xs={12}>
-                <Widget
-                  disabled={isFetching}
-                  widget={widget}
-                  viewMode={true}
-                />
-                <Divider style={{ marginTop: 20 }} />
-              </Grid>
-            </>
+            <Grid item key={widget.id} xs={12}>
+              <Widget
+                coveredWithPaper={false}
+                stateId={widget.paper}
+                mode={WidgetModes.Review}
+                widget={widget}
+              />
+              <Divider style={{ marginTop: 20 }} />
+            </Grid>
           ))}
         </Grid>
-
       </DialogContent>
 
       <DialogActions>
@@ -102,6 +79,8 @@ const mapStateToProps = (state) => ({
   answers: state.workshop.answers,
 });
 
-export default connect(mapStateToProps, {
-  getAnswersForReview: getAnswersForReviewAction,
-})(Index);
+export default connect(mapStateToProps,
+  {
+    getAnswersForReview: getAnswersForReviewAction,
+  }
+)(ReviewAnswers);

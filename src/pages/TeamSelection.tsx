@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import AreYouSure from '../components/Dialog/AreYouSure';
-import MakeInvitation from '../components/Dialog/MakeInvitation';
+import MakeInvitation from '../components/organisms/dialogs/MakeInvitation';
 import {
   createTeamAction,
   deleteInvitationAction,
@@ -137,10 +137,6 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
       registration_form: event?.registration_form,
     });
   };
-
-  console.log("!!!!!!!!!!!!!!!");
-
-  console.log(isFetching)
 
   return (
     <Layout>

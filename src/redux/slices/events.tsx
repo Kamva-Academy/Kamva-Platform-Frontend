@@ -269,7 +269,7 @@ export const getCertificateAction = createAsyncThunkApi(
   getCertificateUrl,
   {
     defaultNotification: {
-      error: 'مشکلی در دریافت گواهی حضور وجود داشت. .',
+      error: 'مشکلی در دریافت گواهی حضور وجود داشت.',
     },
   }
 );
