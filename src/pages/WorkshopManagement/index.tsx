@@ -84,27 +84,27 @@ const EventComponent: FC<EventPropsType> = ({
 
   useEffect(() => {
     if (workshop?.fsm_learning_type == 'Supervised') {
-      if (workshop?.fsm_p_type == 'Team' && !tabs.some(tab => tab.label == 'درخواست‌های تیمی')) {
+      if (workshop?.fsm_p_type == 'Team') {
         setTabs([
           ...tabs,
           {
-            label: 'درخواست‌های تیمی',
+            label: 'درخواست‌ها',
             icon: QuestionAnswerIcon,
             component: TeamRequests,
           },
         ])
-      } else if (workshop?.fsm_p_type == 'Individual' && !tabs.some(tab => tab.label == 'درخواست‌های فردی')) {
+      } else if (workshop?.fsm_p_type == 'Individual') {
         setTabs([
           ...tabs,
           {
-            label: 'درخواست‌های فردی',
+            label: 'درخواست‌ها',
             icon: QuestionAnswerIcon,
             component: IndividualRequests,
           },
         ])
       }
     }
-  }, [workshop])
+  }, [workshop?.fsm_p_type])
 
   useEffect(() => {
     if (event?.registration_form) {
