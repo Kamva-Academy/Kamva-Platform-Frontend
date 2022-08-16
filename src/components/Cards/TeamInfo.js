@@ -8,9 +8,10 @@ import {
   FormControlLabel,
   Grid,
   Typography,
+  Box
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -40,27 +41,52 @@ const TeamInfo = ({
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} 
+    sx={{
+      maxWidth: 300,
+      marginTop: '0px',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      height: '100%',
+      width: '100%',
+      padding: '0px !important',
+      backgroundColor: 'rgb(255, 255, 255, 0.94)',
+      fontSize: '1rem',
+      textDecoration: 'none',
+      overflow: 'hidden',
+      boxShadow: '0 0 1px 0rem rgba(0, 0, 0, 0.5)',
+      transition: 'transform 0.1s ease-in-out',
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexDirection: 'column',
+      '&:hover': {
+        transform: 'translateY(-0.1rem) scale(1.01)',
+        boxShadow: '0 0.5em 1rem -1rem rgba(2, 2, 2, 2.5)',
+      },}}
+
+    >
       <CardContent>
         {playerId && <NotificationsActive color="primary" />}
         <Typography gutterBottom variant="h3" align="center">
           {name}
         </Typography>
-        <Grid container item xs={12} justify='flex-start'>
+        <Grid container spacing={1}>
           {members.map((member) => (
-            <FormControlLabel
-              key={member.id}
-              control={
-                <Checkbox
-                  checked={team_head == member.id}
-                  onClick={() => {
-                    makeTeamHead({ receipt: member.id, teamId })
-                  }}
-                  color="primary" />
-              }
-              label={`${member?.first_name} ${member?.last_name}`}
-              labelPlacement="end"
-            />
+            <Grid container item key={member.id} alignItems='start' justifyContent='start'>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={team_head == member.id}
+                    onClick={() => {
+                      makeTeamHead({ receipt: member.id, teamId })
+                    }}
+                    color="primary" />
+                }
+                label={`${member?.first_name} ${member?.last_name}`}
+                labelPlacement="end"
+              />
+            </Grid>
+
           ))}
         </Grid>
       </CardContent>

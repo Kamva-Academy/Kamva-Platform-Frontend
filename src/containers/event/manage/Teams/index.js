@@ -6,7 +6,9 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography
+  Typography,
+  Divider,
+  Box
 } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -44,7 +46,7 @@ function Teams({
 
   return (
     <>
-      <Grid container spacing={2} alignItems="center">
+      <Grid container spacing={2} alignItems="center" marginBottom='30px'>
         <Grid item xs={12}>
           <Typography variant='h4'>
             {'ساخت تیم'}
@@ -73,7 +75,15 @@ function Teams({
           </Grid>
         </Grid>
 
+        <Box width='100%' height='30px'></Box>
+        <Divider width='100%'></Divider>
+        <Box width='100%' height='10px'></Box>
+
         <AddTeamsViaCSV />
+
+        <Box width='100%' height='30px'></Box>
+        <Divider width='100%'></Divider>
+        <Box width='100%' height='10px'></Box>
 
         <Grid item xs={12}>
           <Typography variant='h4'>
@@ -116,20 +126,37 @@ function Teams({
           </Grid>
         </Grid>
 
+        <Box width='100%' height='30px'></Box>
+        <Divider width='100%'></Divider>
+        <Box width='100%' height='10px'></Box>
+
         <Grid item xs={12}>
           <Typography variant='h4'>
             {'تیم‌ها'}
           </Typography>
         </Grid>
-        {allEventTeams?.map((team) => (
-          <Grid item xs={12} sm={6} md={4} key={team.id}>
-            <TeamInfoCard
-              {...team}
-              teamId={team.id}
-              fsmId={fsmId}
-            />
-          </Grid>
-        ))}
+        <Grid container spacing={2}
+        alignItems='stretch'
+        justifyContent="center"
+        sx={(theme) => ({
+          height: '100%',
+          justifyContent: 'start',
+          [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+            marginRight: "0px",
+          },
+        })}
+      >
+          {allEventTeams?.map((team) => (
+            <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
+              <TeamInfoCard
+                {...team}
+                teamId={team.id}
+                fsmId={fsmId}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
     </>
   );
