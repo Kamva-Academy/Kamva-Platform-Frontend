@@ -1,13 +1,8 @@
 import {
   Button,
-  Checkbox,
   Divider,
-  FormControl,
   Grid,
   IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
   Table,
   TableBody,
   TableCell,
@@ -18,12 +13,10 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Pagination } from '@mui/material';
 import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
-
 import {
   getEventWorkshopsAction,
 } from '../../redux/slices/events';
@@ -32,7 +25,7 @@ import { getAllWorkshopMentorsAction, removeMentorFromWorkshopAction } from '../
 import { Mentor } from '../../types/models';
 import { toEnglishNumber } from '../../utils/translateNumber';
 
-type IndexProps = {
+type MentorsPropsType = {
   addMentorToWorkshop: Function,
   getEventWorkshops: Function,
   getAllWorkshopMentors: Function,
@@ -41,7 +34,7 @@ type IndexProps = {
   workshopMentors: Mentor[],
 }
 
-const Index: FC<IndexProps> = ({
+const Mentors: FC<MentorsPropsType> = ({
   addMentorToWorkshop,
   getEventWorkshops,
   getAllWorkshopMentors,
@@ -73,7 +66,7 @@ const Index: FC<IndexProps> = ({
 
   const addMentor = async () => {
     await addMentorToWorkshop(properties);
-    setProperties(prevProps => ({...prevProps, username: ''}))
+    setProperties(prevProps => ({ ...prevProps, username: '' }))
     getAllWorkshopMentors({ fsmId })
   };
 
@@ -96,19 +89,19 @@ const Index: FC<IndexProps> = ({
         </Grid>
 
         <Grid item container xs spacing={1} justifyContent="space-evenly">
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <TextField
               value={properties.username}
               size="small"
               fullWidth
               variant="outlined"
-              label="شماره تلفن"
+              label="نام کاربری"
               name="username"
               inputProps={{ className: 'ltr-input' }}
               onChange={putData}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <Button
               disabled={!properties.username || !properties.fsmId}
               fullWidth
@@ -122,22 +115,38 @@ const Index: FC<IndexProps> = ({
 
       </Grid>
 
-      <Divider sx={{margin: '30px auto', width: '90%'}}></Divider>
+      <Divider sx={{ margin: '30px auto' }}></Divider>
 
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align='center' sx={{fontSize: '10px'}}>عملیات</TableCell>
-              <TableCell align='center' sx={{fontSize: '10px'}}>نام</TableCell>
-              <TableCell align='center' sx={{fontSize: '10px'}}>نام خانوادگی</TableCell>
-              <TableCell align='center' sx={{fontSize: '10px'}}>شماره تماس</TableCell>
-              <TableCell align='center' sx={{fontSize: '10px'}}>ایمیل</TableCell>
+              <TableCell align='center'>ردیف</TableCell>
+              <TableCell align='center'>نام</TableCell>
+              <TableCell align='center'>نام خانوادگی</TableCell>
+              <TableCell align='center'>شماره تماس</TableCell>
+              <TableCell align='center'>ایمیل</TableCell>
+              <TableCell align='center'>عملیات</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {workshopMentors?.map((mentor, index) =>
+            {workshopMentors.map((mentor, index) =>
               <TableRow key={index}>
+                <TableCell align='center'>
+                  {index + 1}
+                </TableCell>
+                <TableCell align='center'>
+                  {mentor.first_name || '-'}
+                </TableCell>
+                <TableCell align='center'>
+                  {mentor.last_name || '-'}
+                </TableCell>
+                <TableCell align='center'>
+                  {mentor.phone_number || '-'}
+                </TableCell>
+                <TableCell align='center'>
+                  {mentor.email || '-'}
+                </TableCell>
                 <TableCell align='center'>
                   <Tooltip title='حذف همیار' arrow>
                     <IconButton size='small'
@@ -149,18 +158,6 @@ const Index: FC<IndexProps> = ({
                     </IconButton>
                   </Tooltip>
                 </TableCell>
-                <TableCell align='center' sx={{fontSize: '10px'}}>
-                  {mentor.first_name || '-'}
-                </TableCell>
-                <TableCell align='center' sx={{fontSize: '10px'}}>
-                  {mentor.last_name || '-'}
-                </TableCell>
-                <TableCell align='center' sx={{fontSize: '10px'}}>
-                  {mentor.phone_number || '-'}
-                </TableCell>
-                <TableCell align='center' sx={{fontSize: '10px'}}>
-                  {mentor.email || '-'}
-                </TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -169,6 +166,7 @@ const Index: FC<IndexProps> = ({
     </>
   );
 }
+
 const mapStateToProps = (state) => ({
   fsmId: state.workshop.workshop.id,
   workshopMentors: state.workshop.allWorkshopMentors,
@@ -179,4 +177,4 @@ export default connect(mapStateToProps, {
   getEventWorkshops: getEventWorkshopsAction,
   getAllWorkshopMentors: getAllWorkshopMentorsAction,
   removeMentorFromWorkshop: removeMentorFromWorkshopAction,
-})(Index);
+})(Mentors);
