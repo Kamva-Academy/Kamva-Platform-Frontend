@@ -27,7 +27,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import AreYouSure from '../components/Dialog/AreYouSure';
 import MakeInvitation from '../components/organisms/dialogs/MakeInvitation';
 import {
-  createTeamAction,
+  createTeamAndJoinAction,
   deleteInvitationAction,
   deleteTeamAction,
   getMyInvitationsAction,
@@ -55,7 +55,7 @@ type TeamSelectionPropsType = {
   getTeamInvitations: any;
   getOneRegistrationReceipt: any;
   inviteSomeone: any;
-  createTeam: any;
+  createTeamAndJoin: any;
 
   event: EventType;
   team: Team;
@@ -76,7 +76,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   getTeamInvitations,
   getOneRegistrationReceipt,
   inviteSomeone,
-  createTeam,
+  createTeamAndJoin,
 
   event,
   team,
@@ -98,14 +98,16 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   }, []);
 
   useEffect(() => {
-    if (event) {
+    if (event?.registration_receipt) {
       getOneRegistrationReceipt({ id: event.registration_receipt });
+    }
+    if (event?.id) {
       getMyInvitations({ registrationReceiptId: event.id });
     }
   }, [event]);
 
   useEffect(() => {
-    if (registrationReceipt) {
+    if (registrationReceipt?.team) {
       const teamId = registrationReceipt.team;
       getTeam({ teamId });
       getTeamInvitations({ teamId });
@@ -132,7 +134,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
       });
       return;
     }
-    createTeam({
+    createTeamAndJoin({
       name: newTeamName,
       registration_form: event?.registration_form,
     });
@@ -150,14 +152,14 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
             {'تیم‌کشی'}
           </Typography>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} sm={4}>
           <Grid
             container
             justifyContent="center"
             alignItems="flex-end">
             <Paper sx={{ position: 'relative', padding: 1, width: '100%' }}>
               <Stack spacing={2}>
-                {registrationReceipt && !registrationReceipt?.team ? (
+                {registrationReceipt && !registrationReceipt?.team && !team && (
                   <>
                     <Typography variant="caption">
                       {
@@ -185,7 +187,8 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                       </Button>
                     </Stack>
                   </>
-                ) : team ? (
+                )}
+                {team &&
                   <>
                     <Typography align="center" variant="h2" gutterBottom>
                       {`تیم «${team.name}»`}
@@ -223,19 +226,20 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                       );
                     })}
                   </>
-                ) :
+                }
+                {!registrationReceipt && !team &&
                   <Stack alignItems='center' justifyContent='center' spacing={2}>
                     <Skeleton width='80%' height={60} animation="wave" />
                     <Stack >
-                      <Skeleton variant='circular' width={150} height={150} />
+                      <Skeleton variant='rectangular' width={150} height={150} />
                       <Skeleton animation="wave" width='100%' />
                     </Stack>
                     <Stack>
-                      <Skeleton variant='circular' width={150} height={150} />
+                      <Skeleton variant='rectangular' width={150} height={150} />
                       <Skeleton animation="wave" width='100%' />
                     </Stack>
                     <Stack>
-                      <Skeleton variant='circular' width={150} height={150} />
+                      <Skeleton variant='rectangular' width={150} height={150} />
                       <Skeleton animation="wave" width='100%' />
                     </Stack>
                   </Stack>
@@ -244,7 +248,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
             </Paper>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} sm={8}>
           <Paper>
             <Stack sx={{ position: 'relative', paddingTop: 1 }}>
               <Typography align="center" variant="h2" gutterBottom>
@@ -408,7 +412,7 @@ export default connect(
     deleteTeam: deleteTeamAction,
     respondInvitation: respondInvitationAction,
     deleteInvitation: deleteInvitationAction,
-    createTeam: createTeamAction,
+    createTeamAndJoin: createTeamAndJoinAction,
     inviteSomeone: inviteSomeoneAction,
     getTeamInvitations: getTeamInvitationsAction,
     getOneEventInfo: getOneEventInfoAction,

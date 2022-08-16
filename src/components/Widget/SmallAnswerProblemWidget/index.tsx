@@ -44,8 +44,6 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
     sendSmallAnswer({ widgetId: paperId, text: answer });
   }
 
-  console.log(answer)
-
   return (
     <Stack spacing={1}>
       <TinyPreview
