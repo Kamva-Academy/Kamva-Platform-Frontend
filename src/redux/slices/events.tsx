@@ -225,18 +225,6 @@ export const createTeamAndJoinAction = createAsyncThunkApi(
   }
 );
 
-export const createTeamAndJoinAction = createAsyncThunkApi(
-  'events/createTeamAndJoinAction',
-  Apis.POST,
-  createTeamAndJoinActionUrl,
-  {
-    defaultNotification: {
-      success: 'تیم با موفقیت ساخته شد.',
-      error: 'مشکلی وجود داشت.',
-    },
-  }
-);
-
 export const updateTeamChatRoomLinkAction = createAsyncThunkApi(
   'events/updateTeamChatRoomLinkAction',
   Apis.PATCH,
