@@ -43,7 +43,7 @@ export const registrationReceiptUrl = ({ id }) => `fsm/receipts/${id}/`;
 export const uploadFileUrl = 'fsm/upload_answer/';
 export const getTeamUrl = ({ teamId }) => `fsm/team/${teamId}/`;
 export const getTeamInvitationsUrl = ({ teamId }) =>
-  `/fsm/team/${teamId}/get_invitations/`;
+  `/fsm/team/${teamId}/get_team_invitations/`;
 
 export const getMyInvitationsUrl = ({ registrationReceiptId }) =>
   `fsm/registration/${registrationReceiptId}/my_invitations/`;
