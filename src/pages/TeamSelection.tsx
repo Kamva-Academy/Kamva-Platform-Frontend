@@ -140,6 +140,14 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
     });
   };
 
+  const submitDeleteTeam = (teamId) => {
+    deleteTeam({ teamId }).then((response) => {
+      if (response.type?.endsWith('fulfilled')) {
+        window.location.reload();
+      }
+    })
+  }
+
   return (
     <Layout>
       <Grid
@@ -231,14 +239,6 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                   <Stack alignItems='center' justifyContent='center' spacing={2}>
                     <Skeleton width='80%' height={60} animation="wave" />
                     <Stack >
-                      <Skeleton variant='rectangular' width={150} height={150} />
-                      <Skeleton animation="wave" width='100%' />
-                    </Stack>
-                    <Stack>
-                      <Skeleton variant='rectangular' width={150} height={150} />
-                      <Skeleton animation="wave" width='100%' />
-                    </Stack>
-                    <Stack>
                       <Skeleton variant='rectangular' width={150} height={150} />
                       <Skeleton animation="wave" width='100%' />
                     </Stack>
@@ -377,7 +377,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
         handleClose={() =>
           changeDeleteTeamDialogStatus(!isDeleteTeamDialogOpen)
         }
-        callBackFunction={() => deleteTeam({ teamId: team.id })}
+        callBackFunction={() => submitDeleteTeam(team.id)}
       />
       <AreYouSure
         open={respondingInvitationId}

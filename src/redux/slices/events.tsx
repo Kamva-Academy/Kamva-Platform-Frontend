@@ -200,7 +200,7 @@ export const respondInvitationAction = createAsyncThunkApi(
     },
   }
 );
- 
+
 
 export const createTeamAction = createAsyncThunkApi(
   'events/createTeamAction',
@@ -637,9 +637,9 @@ const eventSlice = createSlice({
       state.isFetching = false;
     },
     [updateTeamChatRoomLinkAction.rejected.toString()]: isNotFetching,
-    
+
     [deleteTeamAction.pending.toString()]: isFetching,
-    [deleteTeamAction.fulfilled.toString()]: (state, {meta: { arg: {teamId}}}) => {
+    [deleteTeamAction.fulfilled.toString()]: (state, { meta: { arg: { teamId } } }) => {
       state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)
       state.isFetching = false;
     },
