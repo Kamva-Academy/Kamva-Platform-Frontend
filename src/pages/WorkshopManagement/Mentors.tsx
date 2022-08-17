@@ -151,7 +151,7 @@ const Mentors: FC<MentorsPropsType> = ({
                   <Tooltip title='حذف همیار' arrow>
                     <IconButton size='small'
                       onClick={async () => {
-                        await removeMentorFromWorkshop({ fsmId, mentor })
+                        await removeMentorFromWorkshop({ fsmId, mentor: {username: mentor.phone_number} })
                         getAllWorkshopMentors({ fsmId })
                       }}>
                       <ClearIcon />
