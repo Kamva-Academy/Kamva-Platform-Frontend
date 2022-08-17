@@ -37,7 +37,6 @@ function Teams({
   const [selectedTeamId, setSelectedTeamId] = useState('');
 
   const doCreateTeam = () => {
-    console.log({name: newTeamName, registration_form: event?.registration_form})
     createTeam({ name: newTeamName, registration_form: event?.registration_form })
   }
 

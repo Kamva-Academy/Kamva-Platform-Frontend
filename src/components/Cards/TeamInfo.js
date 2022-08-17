@@ -51,7 +51,6 @@ const TeamInfo = ({
 
   function updateTeamLink() {
     if (!linkIsNotValid){
-      console.log('command: update, teamId: ', teamId, ', new link: ', teamLink)
     }
   }
 

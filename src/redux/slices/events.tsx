@@ -617,11 +617,9 @@ const eventSlice = createSlice({
     [createTeamAction.rejected.toString()]: isNotFetching,
 
     [deleteTeamAction.pending.toString()]: isFetching,
-    [deleteTeamAction.fulfilled.toString()]: (state, action) => {
+    [deleteTeamAction.fulfilled.toString()]: (state, {meta: { arg: {teamId}}}) => {
+      state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)
       state.isFetching = false;
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
     },
     [deleteTeamAction.rejected.toString()]: isNotFetching,
 
