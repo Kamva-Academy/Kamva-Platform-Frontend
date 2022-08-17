@@ -121,7 +121,7 @@ const TeamInfo = ({
               sx={{marginBottom: '30px', width: '100%', direction: 'rtl'}}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
-              <Button onClick={() => updateTeamLink()}>{'بروزرسانی لینک'}</Button>
+              <Button onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
               <Button onClick={() => {deleteTeam({teamId: teamId})}}>{'حذف'}</Button>
             </ButtonGroup>
           </Grid>
