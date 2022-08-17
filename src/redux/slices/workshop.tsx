@@ -14,6 +14,8 @@ import {
   stateCRUDUrl,
   teamCRUDUrl,
   workshopCRUDUrl,
+  getAllWorkshopMentors,
+  removeMentorURL,
 } from '../constants/urls';
 import { InitialStateType } from '../../types/redux/workshop';
 
@@ -32,6 +34,7 @@ const initialState: InitialStateType = {
   answers: [],
   allWorkshops: [],
   players: null,
+  allWorkshopMentors: [],
 };
 
 export const getOneWorkshopAction = createAsyncThunkApi(
@@ -172,6 +175,27 @@ export const removeEdgeAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'یال با موفقیت حذف شد.',
+    },
+  }
+);
+
+export const getAllWorkshopMentorsAction = createAsyncThunkApi(
+  'account/getAllWorkshopMentorsAction',
+  Apis.GET,
+  getAllWorkshopMentors
+);
+
+export const removeMentorFromWorkshopAction = createAsyncThunkApi(
+  'events/removeMentorFromWorkshopAction',
+  Apis.POST,
+  removeMentorURL,
+  {
+    bodyCreator: ({ mentor }) => ({
+      ...mentor
+    }),
+    defaultNotification: {
+      success: 'همیار با موفقیت از کارگاه حذف شد',
+      error: 'اشکالی در حذف همیار از کارگاه رخداد.'
     },
   }
 );
@@ -319,6 +343,13 @@ const IndexSlice = createSlice({
       state.isFetching = false;
     },
     [getFSMPlayersAction.rejected.toString()]: isNotFetching,
+
+    [getAllWorkshopMentorsAction.pending.toString()]: isFetching,
+    [getAllWorkshopMentorsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.allWorkshopMentors = response;
+      state.isFetching = false;
+    },
+    [getAllWorkshopMentorsAction.rejected.toString()]: isNotFetching,
   },
 });
 

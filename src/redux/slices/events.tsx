@@ -36,6 +36,8 @@ import {
   registrationFormCRUDUrl,
   validateRegistrationReceiptUrl,
   workshopCRUDUrl,
+  getAllWorkshopMentors,
+  createTeamAndJoinActionUrl,
 } from '../constants/urls';
 import {
   createWidgetAction,
@@ -211,6 +213,19 @@ export const createTeamAction = createAsyncThunkApi(
   }
 );
 
+export const createTeamAndJoinAction = createAsyncThunkApi(
+  'events/createTeamAndJoinAction',
+  Apis.POST,
+  createTeamAndJoinActionUrl,
+  {
+    defaultNotification: {
+      success: 'تیم با موفقیت ساخته شد.',
+      error: 'مشکلی وجود داشت.',
+    },
+  }
+);
+
+
 export const deleteTeamAction = createAsyncThunkApi(
   'events/deleteTeamAction',
   Apis.DELETE,
@@ -369,6 +384,7 @@ export const addMentorToWorkshopAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'همیار با موفقیت اضافه شد.',
+      error: 'شما دسترسی لازم برای این عملیات را ندارید.'
     },
   }
 );
@@ -586,11 +602,17 @@ const eventSlice = createSlice({
     },
     [respondInvitationAction.rejected.toString()]: isNotFetching,
 
+    [createTeamAndJoinAction.pending.toString()]: isFetching,
+    [createTeamAndJoinAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.isFetching = false;
+      state.team = response;
+    },
+    [createTeamAndJoinAction.rejected.toString()]: isNotFetching,
+
     [createTeamAction.pending.toString()]: isFetching,
     [createTeamAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.isFetching = false;
       state.allEventTeams = [response, ...state.allEventTeams];
-      state.team = response;
     },
     [createTeamAction.rejected.toString()]: isNotFetching,
 
