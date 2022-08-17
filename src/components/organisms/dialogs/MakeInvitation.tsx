@@ -21,8 +21,12 @@ const MakeInvitationDialog: FC<MakeInvitationDialogPropsType> = ({ inviteSomeone
 
   const sendInvitation = () => {
     if (!phoneNumber) return;
-    inviteSomeone({ teamId, invitee, username: phoneNumber });
-    handleClose();
+    inviteSomeone({ teamId, invitee, username: phoneNumber }).then((response) => {
+      if (response.type?.endsWith('fulfilled')) {
+        handleClose();
+      }
+    });
+    ;
   };
 
   const isJustDigits = (number) => {
@@ -42,6 +46,7 @@ const MakeInvitationDialog: FC<MakeInvitationDialogPropsType> = ({ inviteSomeone
         </Typography>
         <TextField
           fullWidth
+          placeholder='مثال: 09123456789'
           variant="outlined"
           value={phoneNumber}
           onChange={(e) => {

@@ -71,7 +71,7 @@ const Teams: FC<TeamPropsType> = ({
         justifyContent="center"
         sx={(theme) => ({
           height: '100%',
-          justifyContent: 'space-between',
+          justifyContent: 'start',
           [theme.breakpoints.down('sm')]: {
             justifyContent: 'center',
             marginRight: "0px",

@@ -18,12 +18,10 @@ import {
   Skeleton,
 } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ClearIcon from '@mui/icons-material/Clear';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import AreYouSure from '../components/Dialog/AreYouSure';
 import MakeInvitation from '../components/organisms/dialogs/MakeInvitation';
 import {
@@ -36,18 +34,23 @@ import {
   getTeamAction,
   getTeamInvitationsAction,
   inviteSomeoneAction,
-  respondInvitationAction,
 } from '../redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
 import Layout from '../containers/Layout';
 import { Team, EventType } from '../types/models';
+import RespondInvitation from '../components/molecules/RespondInvitation';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
+
+const invitationStatusTranslation = {
+  Rejected: 'رد',
+  Waiting: 'منتظر',
+  Accepted: 'قبول',
+}
 
 type TeamSelectionPropsType = {
   getMyInvitations: any;
   deleteTeam: any;
-  respondInvitation: any;
   deleteInvitation: any;
   addNotification: any;
   getOneEventInfo: any;
@@ -68,7 +71,6 @@ type TeamSelectionPropsType = {
 const TeamSelection: FC<TeamSelectionPropsType> = ({
   getMyInvitations,
   deleteTeam,
-  respondInvitation,
   deleteInvitation,
   addNotification,
   getOneEventInfo,
@@ -89,9 +91,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   const { eventId } = useParams();
   const [isCreateInvitationDialogOpen, changeCreateInvitationDialogStatus] = useState(false);
   const [isDeleteTeamDialogOpen, changeDeleteTeamDialogStatus] = useState(false);
-  const [respondingInvitationId, setRespondingInvitationId] = useState('');
   const [newTeamName, setNewTeamName] = useState('');
-  const [isHead, setHeadStatus] = useState(false);
 
   useEffect(() => {
     getOneEventInfo({ eventId });
@@ -118,15 +118,9 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
     navigate(`/event/${eventId}/registration_form/`);
   }
 
-  useEffect(() => {
-    if (registrationReceipt?.id && registrationReceipt?.id === team?.team_head) {
-      setHeadStatus(true);
-    } else {
-      setHeadStatus(false);
-    }
-  }, [registrationReceipt, team]);
+  const isHead = registrationReceipt?.id === team?.team_head
 
-  const doCreateTeam = () => {
+  const submitCreateTeam = () => {
     if (!newTeamName) {
       addNotification({
         message: 'لطفاً نام تیم را وارد کنید.',
@@ -139,6 +133,16 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
       registration_form: event?.registration_form,
     });
   };
+
+  const submitDeleteTeam = (teamId) => {
+    deleteTeam({ teamId }).then((response) => {
+      if (response.type?.endsWith('fulfilled')) {
+        window.location.reload();
+      }
+    })
+  }
+
+  teamInvitations = teamInvitations.slice().sort((team1, team2) => team2.id - team1.id);
 
   return (
     <Layout>
@@ -182,7 +186,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                         fullWidth
                         variant="contained"
                         color="primary"
-                        onClick={doCreateTeam}>
+                        onClick={submitCreateTeam}>
                         {'ایجاد'}
                       </Button>
                     </Stack>
@@ -193,7 +197,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                     <Typography align="center" variant="h2" gutterBottom>
                       {`تیم «${team.name}»`}
                     </Typography>
-                    {(
+                    {isHead && (
                       <Box sx={{ position: 'absolute', right: 0, top: 0, marginTop: '0px !important' }}>
                         <Tooltip title="حذف تیم" arrow>
                           <IconButton
@@ -234,14 +238,6 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                       <Skeleton variant='rectangular' width={150} height={150} />
                       <Skeleton animation="wave" width='100%' />
                     </Stack>
-                    <Stack>
-                      <Skeleton variant='rectangular' width={150} height={150} />
-                      <Skeleton animation="wave" width='100%' />
-                    </Stack>
-                    <Stack>
-                      <Skeleton variant='rectangular' width={150} height={150} />
-                      <Skeleton animation="wave" width='100%' />
-                    </Stack>
                   </Stack>
                 }
               </Stack>
@@ -277,27 +273,33 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                   <TableHead>
                     <TableRow>
                       <TableCell align="center">فرد دعوت‌شده</TableCell>
-                      <TableCell align="center">لغو دعوت</TableCell>
+                      <TableCell align="center">وضعیت</TableCell>
+                      <TableCell align="center">عملیات</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {teamInvitations?.map((invitation, index) => (
+                    {isHead && teamInvitations?.map((invitation, index) => (
                       <TableRow key={index}>
                         <TableCell align="center">
-                          {`${invitation?.first_name} ${invitation.last_name}`}
+                          {`${invitation.first_name || "بی‌نام"} ${invitation.last_name || "بی‌نام‌زاده"}`}
                         </TableCell>
                         <TableCell align="center">
-                          <Tooltip title="پس‌گرفتن دعوت‌نامه" arrow>
-                            <IconButton
-                              size="small"
-                              onClick={() => {
-                                deleteInvitation({
-                                  invitationId: invitation?.id,
-                                });
-                              }}>
-                              <ClearIcon />
-                            </IconButton>
-                          </Tooltip>
+                          {invitationStatusTranslation[invitation.status]}
+                        </TableCell>
+                        <TableCell align="center">
+                          {invitation.status === 'Waiting' &&
+                            <Tooltip title="پس‌گرفتن دعوت‌نامه" arrow>
+                              <IconButton
+                                size="small"
+                                onClick={() => {
+                                  deleteInvitation({
+                                    invitationId: invitation?.id,
+                                  });
+                                }}>
+                                <ClearIcon />
+                              </IconButton>
+                            </Tooltip>
+                          }
                         </TableCell>
                       </TableRow>
                     ))}
@@ -330,32 +332,13 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                           {invitation.team_name}
                         </TableCell>
                         <TableCell align="center">
-                          {`${invitation.head_first_name} ${invitation.head_last_name}`}
+                          {`${invitation?.head_first_name} ${invitation?.head_last_name}`}
                         </TableCell>
                         <TableCell align="center">
-                          {invitation.head_phone_number}
+                          {invitation?.head_phone_number}
                         </TableCell>
                         <TableCell align="center">
-                          {invitation.has_accepted && (
-                            <IconButton size="small" disabled={team}>
-                              <CheckCircleIcon style={{ color: '#00d130' }} />
-                            </IconButton>
-                          )}
-                          {!invitation.has_accepted && (
-                            <Tooltip arrow title={'پذیرفتن درخواست'}>
-                              <IconButton
-                                size="small"
-                                onClick={() => {
-                                  setRespondingInvitationId(invitation?.id);
-                                }}>
-                                <CheckCircleIcon
-                                  color={
-                                    team === invitation.team ? 'secondary' : null
-                                  }
-                                />
-                              </IconButton>
-                            </Tooltip>
-                          )}
+                          <RespondInvitation invitationId={invitation?.id} />
                         </TableCell>
                       </TableRow>
                     ))}
@@ -377,17 +360,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
         handleClose={() =>
           changeDeleteTeamDialogStatus(!isDeleteTeamDialogOpen)
         }
-        callBackFunction={() => deleteTeam({ teamId: team.id })}
-      />
-      <AreYouSure
-        open={respondingInvitationId}
-        handleClose={() => setRespondingInvitationId('')}
-        callBackFunction={() =>
-          respondInvitation({
-            invitationId: respondingInvitationId,
-            has_accepted: 'true',
-          })
-        }
+        callBackFunction={() => submitDeleteTeam(team.id)}
       />
     </Layout>
   );
@@ -410,7 +383,6 @@ export default connect(
   {
     getMyInvitations: getMyInvitationsAction,
     deleteTeam: deleteTeamAction,
-    respondInvitation: respondInvitationAction,
     deleteInvitation: deleteInvitationAction,
     createTeamAndJoin: createTeamAndJoinAction,
     inviteSomeone: inviteSomeoneAction,

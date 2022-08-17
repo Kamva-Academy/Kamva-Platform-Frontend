@@ -201,6 +201,7 @@ export const respondInvitationAction = createAsyncThunkApi(
   }
 );
 
+
 export const createTeamAction = createAsyncThunkApi(
   'events/createTeamAction',
   Apis.POST,
@@ -208,7 +209,7 @@ export const createTeamAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'تیم با موفقیت ساخته شد.',
-      error: 'مشکلی وجود داشت. .',
+      error: 'مشکلی وجود داشت.',
     },
   }
 );
@@ -225,6 +226,18 @@ export const createTeamAndJoinAction = createAsyncThunkApi(
   }
 );
 
+export const updateTeamChatRoomLinkAction = createAsyncThunkApi(
+  'events/updateTeamChatRoomLinkAction',
+  Apis.PATCH,
+  TeamCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'اتاق گفت‌وگوی تیم با موفقیت تغییر کرد.',
+      error: 'مشکلی وجود داشت.',
+    },
+  }
+);
+
 
 export const deleteTeamAction = createAsyncThunkApi(
   'events/deleteTeamAction',
@@ -233,7 +246,7 @@ export const deleteTeamAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'تیم با موفقیت حذف شد.',
-      error: 'مشکلی وجود داشت. .',
+      error: 'مشکلی وجود داشت.',
     },
   }
 );
@@ -616,12 +629,19 @@ const eventSlice = createSlice({
     },
     [createTeamAction.rejected.toString()]: isNotFetching,
 
-    [deleteTeamAction.pending.toString()]: isFetching,
-    [deleteTeamAction.fulfilled.toString()]: (state, action) => {
+    [updateTeamChatRoomLinkAction.pending.toString()]: isFetching,
+    [updateTeamChatRoomLinkAction.fulfilled.toString()]: (state, action) => {
+      console.log(action)
+      console.log('here?')
+      //state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)
       state.isFetching = false;
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+    },
+    [updateTeamChatRoomLinkAction.rejected.toString()]: isNotFetching,
+
+    [deleteTeamAction.pending.toString()]: isFetching,
+    [deleteTeamAction.fulfilled.toString()]: (state, { meta: { arg: { teamId } } }) => {
+      state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)
+      state.isFetching = false;
     },
     [deleteTeamAction.rejected.toString()]: isNotFetching,
 
