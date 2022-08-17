@@ -237,6 +237,18 @@ export const createTeamAndJoinAction = createAsyncThunkApi(
   }
 );
 
+export const updateTeamChatRoomLinkAction = createAsyncThunkApi(
+  'events/updateTeamChatRoomLinkAction',
+  Apis.PATCH,
+  TeamCRUDUrl,
+  {
+    defaultNotification: {
+      success: 'اتاق گفت‌وگوی تیم با موفقیت تغییر کرد.',
+      error: 'مشکلی وجود داشت.',
+    },
+  }
+);
+
 
 export const deleteTeamAction = createAsyncThunkApi(
   'events/deleteTeamAction',
@@ -628,6 +640,15 @@ const eventSlice = createSlice({
     },
     [createTeamAction.rejected.toString()]: isNotFetching,
 
+    [updateTeamChatRoomLinkAction.pending.toString()]: isFetching,
+    [updateTeamChatRoomLinkAction.fulfilled.toString()]: (state, action) => {
+      console.log(action)
+      console.log('here?')
+      //state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)
+      state.isFetching = false;
+    },
+    [updateTeamChatRoomLinkAction.rejected.toString()]: isNotFetching,
+    
     [deleteTeamAction.pending.toString()]: isFetching,
     [deleteTeamAction.fulfilled.toString()]: (state, {meta: { arg: {teamId}}}) => {
       state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)

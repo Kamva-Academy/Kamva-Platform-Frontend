@@ -20,6 +20,7 @@ import validateURL from '../../utils/validators/urlValidator'
 import {
   makeTeamHeadAction,
   deleteTeamAction,
+  updateTeamChatRoomLinkAction,
 } from '../../redux/slices/events';
 
 
@@ -40,6 +41,7 @@ const TeamInfo = ({
   playerId,
   makeTeamHead,
   deleteTeam,
+  updateTeamChatRoomLink
 }) => {
   const classes = useStyles();
   const [teamLink, setTeamLink] = useState('')
@@ -51,6 +53,7 @@ const TeamInfo = ({
 
   function updateTeamLink() {
     if (!linkIsNotValid){
+      updateTeamChatRoomLink({teamId, team: {chat_room: teamLink}})
     }
   }
 
@@ -121,7 +124,7 @@ const TeamInfo = ({
               sx={{marginBottom: '30px', width: '100%', direction: 'rtl'}}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
-              <Button onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
+              <Button disabled={linkIsNotValid} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
               <Button onClick={() => {deleteTeam({teamId: teamId})}}>{'حذف'}</Button>
             </ButtonGroup>
           </Grid>
@@ -137,5 +140,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   makeTeamHead: makeTeamHeadAction,
-  deleteTeam: deleteTeamAction
+  deleteTeam: deleteTeamAction,
+  updateTeamChatRoomLink: updateTeamChatRoomLinkAction
 })(TeamInfo);
