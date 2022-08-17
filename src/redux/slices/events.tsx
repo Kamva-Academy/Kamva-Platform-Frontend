@@ -206,7 +206,7 @@ export const createTeamAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'تیم با موفقیت ساخته شد.',
-      error: 'مشکلی وجود داشت. .',
+      error: 'مشکلی وجود داشت.',
     },
   }
 );
@@ -218,7 +218,7 @@ export const deleteTeamAction = createAsyncThunkApi(
   {
     defaultNotification: {
       success: 'تیم با موفقیت حذف شد.',
-      error: 'مشکلی وجود داشت. .',
+      error: 'مشکلی وجود داشت.',
     },
   }
 );

@@ -18,6 +18,7 @@ import validateURL from '../../utils/validators/urlValidator'
 
 import {
   makeTeamHeadAction,
+  deleteTeamAction,
 } from '../../redux/slices/events';
 
 
@@ -37,6 +38,7 @@ const TeamInfo = ({
   teamId,
   playerId,
   makeTeamHead,
+  deleteTeam,
 }) => {
   const classes = useStyles();
   const [teamLink, setTeamLink] = useState('')
@@ -45,6 +47,12 @@ const TeamInfo = ({
   useEffect(() => {
     setLinkIsNotValid(!validateURL(teamLink))
   }, [teamLink])
+
+  function updateTeamLink() {
+    if (!linkIsNotValid){
+      console.log('command: update, teamId: ', teamId, ', new link: ', teamLink)
+    }
+  }
 
   return (
     <Card className={classes.root}
@@ -112,9 +120,9 @@ const TeamInfo = ({
               onChange={(e) => setTeamLink(e.target.value)}
               sx={{marginBottom: '30px', width: '100%', direction: 'rtl'}}
             />
-            <ButtonGroup sx={{ height: '40px' }} disabled variant="outlined" color="primary" fullWidth>
-              <Button>{'بروزرسانی لینک'}</Button>
-              <Button>{'حذف'}</Button>
+            <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
+              <Button onClick={() => updateTeamLink()}>{'بروزرسانی لینک'}</Button>
+              <Button onClick={() => {deleteTeam({teamId: teamId})}}>{'حذف'}</Button>
             </ButtonGroup>
           </Grid>
         </Grid>
@@ -129,4 +137,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   makeTeamHead: makeTeamHeadAction,
+  deleteTeam: deleteTeamAction
 })(TeamInfo);
