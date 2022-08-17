@@ -200,6 +200,7 @@ export const respondInvitationAction = createAsyncThunkApi(
     },
   }
 );
+ 
 
 export const createTeamAction = createAsyncThunkApi(
   'events/createTeamAction',
