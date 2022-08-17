@@ -46,7 +46,7 @@ function Teams({
 
   return (
     <>
-      <Grid container spacing={2} alignItems="center" marginBottom='30px'>
+      <Grid container spacing={2} margin='-8px' marginBottom='30px'>
         <Grid item xs={12}>
           <Typography variant='h4'>
             {'ساخت تیم'}
