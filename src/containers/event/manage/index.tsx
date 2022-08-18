@@ -15,7 +15,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useParams } from 'react-router-dom';
 import {getEventTeamsAction, getOneEventInfoAction} from '../../../redux/slices/events';
 
-import LayoutForMentors from '../../LayoutForMentors';
+import Layout from '../../Layout';
 import DiscountCode from './DiscountCode';
 import Info from './Info';
 import RegistrationForm from './RegistrationForm';
@@ -91,7 +91,7 @@ const Event: FC<EventType> = ({
   const TabComponent = tabs[tabIndex].component;
 
   return (
-    <LayoutForMentors>
+    <Layout>
       <Grid container spacing={2} direction="row" justifyContent="center">
         <Grid
           container
@@ -133,7 +133,7 @@ const Event: FC<EventType> = ({
           </Paper>
         </Grid>
       </Grid>
-    </LayoutForMentors>
+    </Layout>
   );
 };
 
