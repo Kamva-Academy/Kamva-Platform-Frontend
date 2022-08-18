@@ -65,7 +65,7 @@ export const persianMessages = { //todo: handle english
   '4062': 'user\'s document is not verified yet',
   '4063': 'no invitee data is given',
   '4064': 'no team is given',
-  '4065': 'کاربری با این مشخصات وجود ندارد.',
+  '4065': 'شرکت‌کننده‌ای از این رویداد با این مشخصات وجود ندارد.',
   '4066': 'you can\'t create discount code for a merchandise you don\'t own',
   '4067': 'neither username nor user_id is given',
   '4068': 'only admin can export data',
