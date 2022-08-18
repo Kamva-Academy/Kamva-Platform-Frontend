@@ -92,12 +92,22 @@ function Workshops({
             </Grid>
             <Grid item xs={12}>
               <Button
+                variant="outlined"
+                fullWidth
+                onClick={() => navigate(`/event/${event?.id}/manage/`)}>
+                {'مدیریت رویداد'}
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
                 disabled={!event?.has_certificate || !event?.certificates_ready}
                 onClick={doGetCertificate}
                 variant="outlined"
                 fullWidth>
                 {'گواهی حضور'}
               </Button>
+            </Grid>
+            <Grid item xs={12}>
             </Grid>
           </Grid>
         </Paper>
@@ -152,10 +162,12 @@ function Workshops({
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
   event: state.events.event,
   registrationForm: state.events.registrationForm,
-});
+}};
 
 export default connect(mapStateToProps, {
   getCertificate: getCertificateAction,
