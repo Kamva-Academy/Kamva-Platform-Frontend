@@ -111,8 +111,8 @@ const TeamInfo = ({
         <Grid container direction="column" spacing={1}>
           <Grid item>
             <TextField
-              error={!linkIsValid && teamLink != '' && teamLink != null}
-              helperText={!linkIsValid && teamLink != '' && teamLink != null && ".ورودی وارد شده لینک معتبری نیست"}
+              error={!linkIsValid && (teamLink == '' || teamLink != null)}
+              helperText={(!linkIsValid && (teamLink == '' || teamLink != null)) && ".ورودی وارد شده لینک معتبری نیست"}
               id="standard-multiline-static"
               label="لینک تیم"
               multiline
