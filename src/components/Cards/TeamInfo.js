@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles'
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import validateURL from '../../utils/validators/urlValidator'
 
@@ -54,7 +54,7 @@ const TeamInfo = ({
   }, [teamLink])
 
   useEffect(() => {
-    setDisplayError(linkIsNotValid && teamLink !== '' && teamLink != chatRoom )
+    setDisplayError(linkIsNotValid && teamLink !== '' && teamLink != chatRoom)
   }, [teamLink, linkIsNotValid])
 
   useEffect(() => {
@@ -63,8 +63,8 @@ const TeamInfo = ({
   }, [])
 
   function updateTeamLink() {
-    if (!linkIsNotValid){
-      updateTeamChatRoomLink({teamId, team: {chat_room: teamLink}})
+    if (!linkIsNotValid) {
+      updateTeamChatRoomLink({ teamId, chat_room: teamLink })
     }
   }
 
@@ -123,8 +123,8 @@ const TeamInfo = ({
         <Grid container direction="column" spacing={1}>
           <Grid item>
             <TextField
-              error= {displayError}
-              helperText= {displayError && ".ورودی وارد شده لینک معتبری نیست"}
+              error={displayError}
+              helperText={displayError && ".ورودی وارد شده لینک معتبری نیست"}
               id="standard-multiline-static"
               label="لینک تیم"
               multiline
@@ -133,11 +133,11 @@ const TeamInfo = ({
               variant="outlined"
               value={teamLink || ''}
               onChange={(e) => setTeamLink(e.target.value)}
-              sx={{marginBottom: '30px', width: '100%', direction: 'rtl'}}
+              sx={{ marginBottom: '30px', width: '100%', direction: 'rtl' }}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
               <Button disabled={linkIsNotValid} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
-              <Button onClick={() => {deleteTeam({teamId: teamId})}}>{'حذف'}</Button>
+              <Button onClick={() => { deleteTeam({ teamId: teamId }) }}>{'حذف'}</Button>
             </ButtonGroup>
           </Grid>
         </Grid>
