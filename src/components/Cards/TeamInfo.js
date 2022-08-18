@@ -45,26 +45,15 @@ const TeamInfo = ({
   chatRoom,
 }) => {
   const classes = useStyles();
-  const [teamLink, setTeamLink] = useState('')
-  const [linkIsNotValid, setLinkIsNotValid] = useState(false)
-  const [displayError, setDisplayError] = useState(false)
+  const [teamLink, setTeamLink] = useState(chatRoom)
+  const [linkIsValid, setlinkIsValid] = useState(false)
 
   useEffect(() => {
-    setLinkIsNotValid(!validateURL(teamLink))
+    setlinkIsValid(validateURL(teamLink))
   }, [teamLink])
 
-  useEffect(() => {
-    setDisplayError(linkIsNotValid && teamLink !== '' && teamLink != chatRoom)
-  }, [teamLink, linkIsNotValid])
-
-  useEffect(() => {
-    setTeamLink(chatRoom)
-  }, [])
-
   function updateTeamLink() {
-    if (!linkIsNotValid) {
-      updateTeamChatRoomLink({ teamId, chat_room: teamLink })
-    }
+    updateTeamChatRoomLink({ teamId, chat_room: teamLink })
   }
 
   return (
@@ -122,8 +111,8 @@ const TeamInfo = ({
         <Grid container direction="column" spacing={1}>
           <Grid item>
             <TextField
-              error={displayError}
-              helperText={displayError && ".ورودی وارد شده لینک معتبری نیست"}
+              error={!linkIsValid && teamLink != ''}
+              helperText={!linkIsValid && teamLink != '' && ".ورودی وارد شده لینک معتبری نیست"}
               id="standard-multiline-static"
               label="لینک تیم"
               multiline
@@ -135,7 +124,7 @@ const TeamInfo = ({
               sx={{ marginBottom: '30px', width: '100%', direction: 'rtl' }}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
-              <Button disabled={linkIsNotValid} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
+              <Button disabled={!linkIsValid || teamLink === '' || teamLink === chatRoom} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
               <Button onClick={() => { deleteTeam({ teamId: teamId }) }}>{'حذف'}</Button>
             </ButtonGroup>
           </Grid>

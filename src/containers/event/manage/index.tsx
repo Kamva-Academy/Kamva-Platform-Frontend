@@ -120,7 +120,7 @@ const Event: FC<EventType> = ({
                 variant='outlined'
                 color="primary"
                 component={Link}
-                to="/events/"
+                to={`/event/${event?.id}`}
                 startIcon={<ExitToAppIcon />}>
                 {t('back')}
               </Button>

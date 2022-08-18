@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Paper, Typography } from '@mui/material';
+import { Button, Container, Grid, Paper, Typography, Divider, Box, Stack } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -74,42 +74,35 @@ function Workshops({
     <>
       <Grid item>
         <Paper className={classes.paper}>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12}>
-              <Typography variant="h5">
-                {`به ${event?.name || ''} خوش آمدید!`}
-              </Typography>
-            </Grid>
-            <Grid item xs={12}>
+          <Stack spacing={2} alignItems="center">
+            <Typography variant="h5">
+              {`به ${event?.name || ''} خوش آمدید!`}
+            </Typography>
+            <Button
+              // disabled
+              disabled={event?.event_type == 'Individual'}
+              variant="outlined"
+              fullWidth
+              onClick={() => navigate(`/event/${event?.id}/team_selection/`)}>
+              {'تیم‌کشی'}
+            </Button>
+            <Button
+              disabled={!event?.has_certificate || !event?.certificates_ready}
+              onClick={doGetCertificate}
+              variant="outlined"
+              fullWidth>
+              {'گواهی حضور'}
+            </Button>
+            {event.is_manager && <>
+              <Divider width='100%'></Divider>
               <Button
-                // disabled
-                disabled={event?.event_type == 'Individual'}
-                variant="outlined"
-                fullWidth
-                onClick={() => navigate(`/event/${event?.id}/team_selection/`)}>
-                {'تیم‌کشی'}
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                variant="outlined"
+                variant="contained"
                 fullWidth
                 onClick={() => navigate(`/event/${event?.id}/manage/`)}>
                 {'مدیریت رویداد'}
               </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                disabled={!event?.has_certificate || !event?.certificates_ready}
-                onClick={doGetCertificate}
-                variant="outlined"
-                fullWidth>
-                {'گواهی حضور'}
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-            </Grid>
-          </Grid>
+            </>}
+          </Stack>
         </Paper>
       </Grid>
       {/* <Grid item>
@@ -162,12 +155,10 @@ function Workshops({
   );
 }
 
-const mapStateToProps = (state) => {
-  //console.log(state) // for event manager
-  return {
+const mapStateToProps = (state) => ({
   event: state.events.event,
   registrationForm: state.events.registrationForm,
-}};
+});
 
 export default connect(mapStateToProps, {
   getCertificate: getCertificateAction,
