@@ -41,15 +41,26 @@ const TeamInfo = ({
   playerId,
   makeTeamHead,
   deleteTeam,
-  updateTeamChatRoomLink
+  updateTeamChatRoomLink,
+  chatRoom,
 }) => {
   const classes = useStyles();
   const [teamLink, setTeamLink] = useState('')
   const [linkIsNotValid, setLinkIsNotValid] = useState(false)
+  const [displayError, setDisplayError] = useState(false)
 
   useEffect(() => {
     setLinkIsNotValid(!validateURL(teamLink))
   }, [teamLink])
+
+  useEffect(() => {
+    setDisplayError(linkIsNotValid && teamLink !== '' && teamLink != chatRoom )
+  }, [teamLink, linkIsNotValid])
+
+  useEffect(() => {
+    console.log(chatRoom)
+    setTeamLink(chatRoom)
+  }, [])
 
   function updateTeamLink() {
     if (!linkIsNotValid){
@@ -112,14 +123,15 @@ const TeamInfo = ({
         <Grid container direction="column" spacing={1}>
           <Grid item>
             <TextField
-              error= {linkIsNotValid && true}
-              helperText= {linkIsNotValid && "ورودی وارد شده لینک معتبری نیست"}
+              error= {displayError}
+              helperText= {displayError && ".ورودی وارد شده لینک معتبری نیست"}
               id="standard-multiline-static"
               label="لینک تیم"
               multiline
               rows={3}
               placeholder="somelink.somedomain"
               variant="outlined"
+              value={teamLink || ''}
               onChange={(e) => setTeamLink(e.target.value)}
               sx={{marginBottom: '30px', width: '100%', direction: 'rtl'}}
             />
