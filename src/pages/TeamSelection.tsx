@@ -101,8 +101,8 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
     if (event?.registration_receipt) {
       getOneRegistrationReceipt({ id: event.registration_receipt });
     }
-    if (event?.id) {
-      getMyInvitations({ registrationReceiptId: event.id });
+    if (event?.registration_form) {
+      getMyInvitations({ registrationFormId: event.registration_form });
     }
   }, [event]);
 

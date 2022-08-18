@@ -45,8 +45,8 @@ export const getTeamUrl = ({ teamId }) => `fsm/team/${teamId}/`;
 export const getTeamInvitationsUrl = ({ teamId }) =>
   `/fsm/team/${teamId}/get_team_invitations/`;
 
-export const getMyInvitationsUrl = ({ registrationReceiptId }) =>
-  `fsm/registration/${registrationReceiptId}/my_invitations/`;
+export const getMyInvitationsUrl = ({ registrationFormId }) =>
+  `fsm/registration/${registrationFormId}/my_invitations/`;
 
 export const inviteSomeoneUrl = ({ teamId }) =>
   `fsm/team/${teamId}/invite_member/`;
