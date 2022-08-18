@@ -58,7 +58,6 @@ const TeamInfo = ({
   }, [teamLink, linkIsNotValid])
 
   useEffect(() => {
-    console.log(chatRoom)
     setTeamLink(chatRoom)
   }, [])
 

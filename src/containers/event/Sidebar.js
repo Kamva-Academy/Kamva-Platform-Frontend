@@ -163,7 +163,7 @@ function Workshops({
 }
 
 const mapStateToProps = (state) => {
-  console.log(state) // for event manager
+  //console.log(state) // for event manager
   return {
   event: state.events.event,
   registrationForm: state.events.registrationForm,
