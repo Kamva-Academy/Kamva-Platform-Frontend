@@ -3,7 +3,12 @@ import Parse from 'parse';
 const TeamState = Parse.Object.extend('TeamState');
 
 export const createTeamState = async (uuid, stateId, currentStateName, teamEnterTimeToState) => {
-  return await new TeamState().save({ uuid, stateId, currentStateName, teamEnterTimeToState });
+  await Parse.Cloud.run('createTeamState', {
+    stateId,
+    uuid,
+    currentStateName, 
+    teamEnterTimeToState
+  });
 };
 
 export const changeTeamState = async ({ stateId, uuid, currentStateName, teamEnterTimeToState }) => {
