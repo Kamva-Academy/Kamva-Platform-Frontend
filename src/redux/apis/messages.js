@@ -92,10 +92,13 @@ export const persianMessages = { //todo: handle english
   '4089': 'فقط سرگروه می‌تواند تیم را حرکت دهد.',
   '4104': 'اکنون زمان ارسال پاسخ نیست.',
   '4108': 'شما امتیاز لازم جهت ورود را ندارید.',
+  '4110': 'لطفاً صبر کنید تا کاربر مورد نظر، درخواست قبلیتان را پاسخ دهد.',
 
   '5000': 'ارسال پیامک با خطا روبه‌رو شد.',
   '5001': 'zarinpal request failed, contact with support',
   '5002': 'given registration form is illegal, a form must either associate with an event or a fsm',
   '5003': 'given merchandise is illegal, a merch must be either for an event or a fsm',
-  '5004': 'each event/fsm must have a registration form, given one doesn\'t'
+  '5004': 'each event/fsm must have a registration form, given one doesn\'t',
+
+  '4059': 'ظرفیت تیم پر است.',
 }

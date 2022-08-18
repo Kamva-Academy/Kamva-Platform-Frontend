@@ -36,6 +36,8 @@ const isNotFetching = (state) => {
   state.isFetching = false;
 };
 
+/////////////////////////// SEND ANSWER ///////////////////////////
+
 const sendWidgetAnswerAction = createAsyncThunkApi(
   'widget/sendWidgetAnswerAction',
   Apis.POST,
@@ -104,8 +106,8 @@ export const makeAnswerEmptyAction = createAsyncThunkApi(
   }
 );
 
-// for mentors
-export { initialState as mentorInitialState };
+/////////////////////////// متفرقه ///////////////////////////
+
 
 export const getUnreadNotificationsAction = createAsyncThunkApi(
   'workshops/getNotifications',
@@ -118,7 +120,6 @@ export const getProblemsAction = createAsyncThunkApi(
   Apis.GET,
   getProblemsUrl
 );
-
 
 export const markSubmissionAction = createAsyncThunkApi(
   'workshops/markSubmission',
@@ -136,12 +137,7 @@ export const markSubmissionAction = createAsyncThunkApi(
   }
 );
 
-
-export const getStateAction = createAsyncThunkApi(
-  'widget/getOne',
-  Apis.GET,
-  statesCRUDUrl,
-);
+/////////////////////////// CREATE AND UPDATE WIDGETS ///////////////////////////
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
@@ -398,13 +394,6 @@ const widgetSlice = createSlice({
       state.isFetching = false;
     },
     [createWidgetAction.rejected.toString()]: isNotFetching,
-
-    [createHintAction.pending.toString()]: isFetching,
-    [createHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.hints[arg.stateId] = response;
-      state.isFetching = false;
-    },
-    [createHintAction.rejected.toString()]: isNotFetching,
 
   },
 });

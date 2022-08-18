@@ -15,6 +15,8 @@ export const MODES = {
 export enum WidgetModes {
   View,
   Edit,
+  Review,
+  InAnswerSheet,
 };
 
 enum WidgetTypes {
@@ -53,12 +55,11 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
   const Cover = coveredWithPaper
-    ?
-    (props) =>
-      <Paper elevation={2}
-        sx={{ padding: 1 }}>{props.children}</Paper>
-    :
-    (props) => <>{props.children}</>
+    ? (props) =>
+      <Paper elevation={2} sx={{ padding: 1 }}>
+        {props.children}
+      </Paper>
+    : (props) => props.children
 
   return (
     <Cover>
@@ -98,7 +99,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
           />
         </Stack>
       }
-      <WidgetComponent  {...widget} mode={mode} />
+      <WidgetComponent {...widget} mode={mode} {...props} />
     </Cover>
   );
 };

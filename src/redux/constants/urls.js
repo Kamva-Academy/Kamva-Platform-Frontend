@@ -43,18 +43,22 @@ export const registrationReceiptUrl = ({ id }) => `fsm/receipts/${id}/`;
 export const uploadFileUrl = 'fsm/upload_answer/';
 export const getTeamUrl = ({ teamId }) => `fsm/team/${teamId}/`;
 export const getTeamInvitationsUrl = ({ teamId }) =>
-  `/fsm/team/${teamId}/get_invitations/`;
+  `/fsm/team/${teamId}/get_team_invitations/`;
+
 export const getMyInvitationsUrl = ({ registrationReceiptId }) =>
   `fsm/registration/${registrationReceiptId}/my_invitations/`;
+
 export const inviteSomeoneUrl = ({ teamId }) =>
   `fsm/team/${teamId}/invite_member/`;
 export const deleteInvitationUrl = ({ invitationId }) =>
   `fsm/invitations/${invitationId}/`;
 export const respondInvitationUrl = ({ invitationId }) =>
   `fsm/invitations/${invitationId}/respond/`;
+
 export const TeamCRUDUrl = ({ teamId }) =>
   teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
 
+export const createTeamAndJoinActionUrl = 'fsm/team/create_team_and_join/';
 
 export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
 
@@ -140,6 +144,8 @@ export const getFSMPlayersUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/players/`;
 export const workshopCRUDUrl = ({ fsmId }) => fsmId ? `/fsm/fsm/${fsmId}/` : '/fsm/fsm/';
 export const getAllWorkshopStatesInfoUrl = ({ fsmId }) => `/fsm/fsm/${fsmId}/get_states/`;
 export const getAllWorkshopEdges = ({ fsmId }) => `/fsm/fsm/${fsmId}/get_edges/`;
+export const getAllWorkshopMentors = ({ fsmId }) => `/fsm/fsm/${fsmId}/get_mentors/`;
+export const removeMentorURL = ({ fsmId }) => `/fsm/fsm/${fsmId}/remove_mentor/`;
 
 // state:
 export const stateCRUDUrl = ({ stateId }) => stateId ? `/fsm/state/${stateId}/` : '/fsm/state/';

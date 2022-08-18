@@ -1,31 +1,31 @@
-import BigAnswerQuestionWidget, {
+import BigAnswerProblemWidget, {
   BigAnswerQuestionEditWidget,
-} from './BigAnswerQuestionWidget';
+} from './BigAnswerProblemWidget';
 import ImageWidget, { ImageEditWidget } from './ImageWidget';
 import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
 import MultiChoiceQuestionWidget, {
   MultiChoiceQuestionEditWidget,
 } from './MultiChoiceQuestionWidget';
-import SmallAnswerQuestionWidget, {
-  SmallAnswerQuestionEditWidget,
-} from './SmallAnswerQuestionWidget';
+import SmallAnswerProblemWidget, {
+  SmallAnswerProblemEditWidget,
+} from './SmallAnswerProblemWidget';
 import TextWidget, { TextEditWidget } from './TextWidget';
-import UploadFileQuestionWidget, {
-  UploadFileQuestionEditWidget,
-} from './UploadFileQuestionWidget';
+import UploadFileProblemWidget, {
+  UploadFileProblemEditWidget,
+} from './UploadFileProblemWidget';
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 const WIDGET_TYPES = {
   SmallAnswerProblem: {
-    WidgetComponent: SmallAnswerQuestionWidget,
-    EditWidgetDialog: SmallAnswerQuestionEditWidget,
-    label: 'سوال کوتاه پاسخ',
+    WidgetComponent: SmallAnswerProblemWidget,
+    EditWidgetDialog: SmallAnswerProblemEditWidget,
+    label: 'سوال کوتاه‌پاسخ',
     backendType: 'SmallAnswerProblem',
   },
   BigAnswerProblem: {
-    WidgetComponent: BigAnswerQuestionWidget,
+    WidgetComponent: BigAnswerProblemWidget,
     EditWidgetDialog: BigAnswerQuestionEditWidget,
-    label: 'سوال بلند پاسخ',
+    label: 'سوال تشریحی',
     backendType: 'BigAnswerProblem',
   },
   // MultiChoiceProblem: {
@@ -35,9 +35,9 @@ const WIDGET_TYPES = {
   //   backendType: 'MultiChoiceProblem',
   // },
   UploadFileProblem: {
-    WidgetComponent: UploadFileQuestionWidget,
-    EditWidgetDialog: UploadFileQuestionEditWidget,
-    label: 'سوال ارسال فایل',
+    WidgetComponent: UploadFileProblemWidget,
+    EditWidgetDialog: UploadFileProblemEditWidget,
+    label: 'ارسال فایل',
     backendType: 'UploadFileProblem',
   },
   Description: {
