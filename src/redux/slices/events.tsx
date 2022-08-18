@@ -630,10 +630,8 @@ const eventSlice = createSlice({
     [createTeamAction.rejected.toString()]: isNotFetching,
 
     [updateTeamChatRoomLinkAction.pending.toString()]: isFetching,
-    [updateTeamChatRoomLinkAction.fulfilled.toString()]: (state, action) => {
-      console.log(action)
-      console.log('here?')
-      //state.allEventTeams = [...state.allEventTeams].filter(team => team.id != teamId)
+    [updateTeamChatRoomLinkAction.fulfilled.toString()]: (state, { meta: { arg: { teamId } }, payload: {response: returnedTeam}}) => {
+      state.allEventTeams = [...state.allEventTeams].map(team => team.id !== teamId ? team : {...returnedTeam})
       state.isFetching = false;
     },
     [updateTeamChatRoomLinkAction.rejected.toString()]: isNotFetching,
