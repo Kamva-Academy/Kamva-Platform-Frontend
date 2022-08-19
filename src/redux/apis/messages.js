@@ -78,7 +78,7 @@ export const persianMessages = { //todo: handle english
   '4075': 'you are not this fsm\'s mentor, only mentors can add or edit states, edges & widgets ',
   '4076': 'tail & head of an edge must be from same fsms',
   '4077': 'fsm can\'t have registration form when its event has registration form too',
-  '4078': 'user has no team, it\'s unavailable to enter team based fsms without team',
+  '4078': 'برای ورود به کارگاه‌های تیمی، باید ابتدا تیم تشکیل دهید.',
   '4079': 'no valid registration found for given fsm / event',
   '4080': 'invalid key',
   '4081': 'player history not found',
