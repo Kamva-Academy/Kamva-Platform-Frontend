@@ -110,33 +110,34 @@ const TeamInfo = ({
           ))
             :
             <Typography marginLeft='10px' marginTop='20px'>این تیم هیچ عضوی ندارد.</Typography>}
-          <Box width='100%' height='10px'></Box>
-          <Divider width='100%'></Divider>
-          <Box width='100%' height='10px'></Box>
-          <TextField
-            error={!linkIsValid && !(teamLink == '' || teamLink == null)}
-            helperText={(!linkIsValid && !(teamLink == '' || teamLink == null)) && ".ورودی وارد شده لینک معتبری نیست"}
-            id="standard-multiline-static"
-            label="لینک تیم"
-            multiline
-            rows={3}
-            placeholder="somelink.somedomain"
-            variant="outlined"
-            value={teamLink || ''}
-            onChange={(e) => setTeamLink(e.target.value)}
-            sx={{ marginTop: '20px', width: '100%', direction: 'rtl' }}
-          />
         </Stack>
       </CardContent>
-      <CardActions>
-        <Grid container direction="column" spacing={1}>
-          <Grid item>
-            <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
-              <Button disabled={!linkIsValid || teamLink === '' || teamLink === chatRoom || disableRequest} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
-              <Button onClick={() => { deleteTeam({ teamId: teamId }) }}>{'حذف'}</Button>
-            </ButtonGroup>
-          </Grid>
-        </Grid>
+      <CardActions sx={{alignItems: 'center'}}>
+        <Stack alignItems='center' width='100%' margin='0 auto' direction="column" spacing={1}>
+          <Box margin='0 auto' width='100%'>
+            <Box width='100%' height='10px'></Box>
+            <Divider width='100%'></Divider>
+            <Box width='100%' height='10px'></Box>
+            <TextField
+              error={!linkIsValid && !(teamLink == '' || teamLink == null)}
+              helperText={(!linkIsValid && !(teamLink == '' || teamLink == null)) ? ".ورودی وارد شده لینک معتبری نیست" : ' '}
+              id="standard-multiline-static"
+              label="لینک تیم"
+              multiline
+              rows={3}
+              placeholder="somelink.somedomain"
+              variant="outlined"
+              value={teamLink || ''}
+              onChange={(e) => setTeamLink(e.target.value)}
+              sx={{ marginBottom: '10px', marginTop: '10px', width: '100%', direction: 'rtl' }}
+            />
+          </Box>
+
+          <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
+            <Button disabled={!linkIsValid || teamLink === '' || teamLink === chatRoom || disableRequest} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
+            <Button onClick={() => { deleteTeam({ teamId: teamId }) }}>{'حذف'}</Button>
+          </ButtonGroup>
+        </Stack>
       </CardActions>
     </Card >
   );
