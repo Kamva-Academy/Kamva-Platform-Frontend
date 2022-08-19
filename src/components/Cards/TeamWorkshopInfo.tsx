@@ -69,8 +69,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
 
   useEffect(() => {
     const subscribeOnMentorArrival = async () => {
-      await checkForOfflineMentors()
       const mentorsInRoom = await getMentorsInRoom(teamId)
+      await checkForOfflineMentors();
       setMentorsInRoom(mentorsInRoom);
       const subscriber = await getMentorsInRoomSubscription(teamId);
       subscriber.on('create', async (newState) => {
@@ -157,7 +157,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`);
+      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`, '_blank');
     }
   }, [playerId, click, playerIdFromRedux])
 

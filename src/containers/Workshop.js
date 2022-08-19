@@ -70,10 +70,10 @@ const Workshop = ({
       updateMentorTime(teamId, mentorId.toString())
       updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
     }
-    
+
     return (
       () => {
-        if (updateInterval){
+        if (updateInterval) {
           clearInterval(updateInterval)
         }
       }
