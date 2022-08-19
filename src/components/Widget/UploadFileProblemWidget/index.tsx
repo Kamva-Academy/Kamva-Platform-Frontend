@@ -12,6 +12,7 @@ import {
 } from '../../../redux/slices/Paper';
 import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from '..';
+import { baseURL } from '../../../configs/axios'
 
 type UploadFileProblemWidgetPropsType = {
   collectAnswers: any;
@@ -89,6 +90,8 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     });
   }
 
+  console.log(file?.link)
+
   return (
     <Stack alignItems='center' justifyContent='space-between' direction='row' spacing={1}>
       <Typography>{text}</Typography>
@@ -125,7 +128,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
                     <ClearIcon sx={{ fontSize: 14 }} />
                   </IconButton>
                 }
-                href={file?.link}
+                href={baseURL + file?.link}
                 component="a"
                 target="_blank">
                 {file?.name}
