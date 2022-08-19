@@ -62,23 +62,23 @@ const Workshop = ({
   const subscriberRef = useRef(null);
   const [mentorAdded, setMentorAdded] = useState(false)
 
-  useEffect(() => {
-    let updateInterval
-    if (!mentorAdded && isMentor && readyToAddMentor) {
-      addMentorToRoom(teamId, mentorId.toString(), personsName)
-      setMentorAdded(true)
-      updateMentorTime(teamId, mentorId.toString())
-      updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
-    }
+  // useEffect(() => {
+  //   let updateInterval
+  //   if (!mentorAdded && isMentor && readyToAddMentor) {
+  //     addMentorToRoom(teamId, mentorId.toString(), personsName)
+  //     setMentorAdded(true)
+  //     updateMentorTime(teamId, mentorId.toString())
+  //     updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
+  //   }
     
-    return (
-      () => {
-        if (updateInterval){
-          clearInterval(updateInterval)
-        }
-      }
-    )
-  }, [isMentor, readyToAddMentor])
+  //   return (
+  //     () => {
+  //       if (updateInterval){
+  //         clearInterval(updateInterval)
+  //       }
+  //     }
+  //   )
+  // }, [isMentor, readyToAddMentor])
 
   useEffect(() => {
     if (fsmId) {
