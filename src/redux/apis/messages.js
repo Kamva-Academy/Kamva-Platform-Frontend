@@ -88,7 +88,7 @@ export const persianMessages = { //todo: handle english
   '4085': 'edge / fsm is locked',
   '4086': 'invalid move',
   '4087': 'unable to move on a hidden edge, only mentors can move you on hidden edges, contact them!',
-  '4088': 'no one in this team has entered this fsm',
+  '4088': 'هنوز هیچ یک از اعضای تیم وارد کارگاه نشده است.',
   '4089': 'فقط سرگروه می‌تواند تیم را حرکت دهد.',
   '4104': 'اکنون زمان ارسال پاسخ نیست.',
   '4108': 'شما امتیاز لازم جهت ورود را ندارید.',
