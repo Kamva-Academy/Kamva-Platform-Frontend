@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import ScrollTop from '../components/ScrollToTop/ScrollToTop';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
 import {
@@ -22,8 +21,6 @@ import {
 } from '../redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
 import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
-
-var moment = require('moment');
 
 export const StatePageContext = React.createContext();
 
@@ -63,13 +60,13 @@ const Workshop = ({
   }
   const { eventId } = useParams();
   const subscriberRef = useRef(null);
-  const [mentorAdded, setmentorAdded] = useState(false)
+  const [mentorAdded, setMentorAdded] = useState(false)
 
   useEffect(() => {
     let updateInterval
     if (!mentorAdded && isMentor && readyToAddMentor) {
       addMentorToRoom(teamId, mentorId.toString(), personsName)
-      setmentorAdded(true)
+      setMentorAdded(true)
       updateMentorTime(teamId, mentorId.toString())
       updateInterval = setInterval(() => { updateMentorTime(teamId, mentorId.toString()) }, 10000)
     }
