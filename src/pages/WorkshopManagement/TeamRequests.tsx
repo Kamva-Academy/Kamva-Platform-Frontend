@@ -59,10 +59,10 @@ const Teams: FC<TeamPropsType> = ({
 
   const reqTeams = eventTeams.filter(
     (team) => teamsRequests[team.id + '.' + fsmId]
-  );
+  ).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
   const nonReqTeams = eventTeams.filter(
     (team) => !teamsRequests[team.id + '.' + fsmId]
-  );
+  ).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
 
   return (
     <>
