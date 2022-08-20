@@ -20,7 +20,7 @@ import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
-import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom'
+import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
 
 export const StatePageContext = React.createContext();
 
