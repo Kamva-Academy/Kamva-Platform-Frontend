@@ -93,8 +93,8 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   }, [])
 
   const checkForOfflineMentors = async () => {
-    for (let i = 0; i < mentorsInRoom.length; i++){
-      if (Math.abs(moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds()) > 20000){
+    for (let i = 0; i < mentorsInRoom.length; i++) {
+      if (Math.abs(moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds()) > 20000) {
         await announceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
       }
     }
@@ -157,7 +157,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`, '_blank');
+      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}&teamId=${id}`, '_blank');
     }
   }, [playerId, click, playerIdFromRedux])
 
