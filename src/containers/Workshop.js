@@ -20,7 +20,7 @@ import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
-import DraggableJitsi from '../components/Jitsi/DraggableChatRoom';
+import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
 
 export const StatePageContext = React.createContext();
 
@@ -170,9 +170,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
-        <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      } */}
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+        <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+      }
     </StatePageContext.Provider>
   );
 };
