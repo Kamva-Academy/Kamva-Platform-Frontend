@@ -135,7 +135,6 @@ const TeamInfo = ({
                 onChange={(e) => setTeamLink(e.target.value)}
                 sx={{ marginBottom: '10px', marginTop: '10px', width: '100%', direction: 'rtl' }}
               />
-              {/* https://gharar.ir/r/47c39ca3 */}
               <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
                 <Button disabled={!linkIsValid || teamLink === '' || teamLink === chatRoom || disableRequest} onClick={updateTeamLink}>{'به‌روز‌رسانی'}</Button>
                 <Button onClick={() => setDeleteDialogId(true)}>{'حذف'}</Button>
