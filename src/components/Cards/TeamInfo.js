@@ -13,9 +13,10 @@ import {
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles'
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import validateURL from '../../utils/validators/urlValidator'
+import AreYouSure from '../../components/Dialog/AreYouSure'
 
 import {
   makeTeamHeadAction,
@@ -46,14 +47,15 @@ const TeamInfo = ({
   const classes = useStyles();
   const [teamLink, setTeamLink] = useState('')
   const [linkIsNotValid, setLinkIsNotValid] = useState(false)
+  const [deleteDialogId, setDeleteDialogId] = useState(false)
 
   useEffect(() => {
     setLinkIsNotValid(!validateURL(teamLink))
   }, [teamLink])
 
   function updateTeamLink() {
-    if (!linkIsNotValid){
-      updateTeamChatRoomLink({teamId, team: {chat_room: teamLink}})
+    if (!linkIsNotValid) {
+      updateTeamChatRoomLink({ teamId, team: { chat_room: teamLink } })
     }
   }
 
@@ -112,8 +114,8 @@ const TeamInfo = ({
         <Grid container direction="column" spacing={1}>
           <Grid item>
             <TextField
-              error= {linkIsNotValid && true}
-              helperText= {linkIsNotValid && "ورودی وارد شده لینک معتبری نیست"}
+              error={linkIsNotValid && true}
+              helperText={linkIsNotValid && "ورودی وارد شده لینک معتبری نیست"}
               id="standard-multiline-static"
               label="لینک تیم"
               multiline
@@ -121,11 +123,16 @@ const TeamInfo = ({
               placeholder="somelink.somedomain"
               variant="outlined"
               onChange={(e) => setTeamLink(e.target.value)}
-              sx={{marginBottom: '50px', width: '100%', direction: 'rtl'}}
+              sx={{ marginBottom: '50px', width: '100%', direction: 'rtl' }}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
-              <Button disabled={linkIsNotValid} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
-              <Button onClick={() => {deleteTeam({teamId: teamId})}}>{'حذف'}</Button>
+              <Button disabled={linkIsNotValid} onClick={() => updateTeamLink() }>{'بروزرسانی'}</Button>
+              <AreYouSure
+                open={!!deleteDialogId}
+                handleClose={() => setDeleteDialogId(false)}
+                callBackFunction={() => deleteTeam({ teamId: teamId })}
+              />
+              <Button onClick={() => setDeleteDialogId(true) }>{'حذف'}</Button>
             </ButtonGroup>
           </Grid>
         </Grid>
