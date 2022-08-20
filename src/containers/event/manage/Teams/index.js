@@ -154,6 +154,7 @@ function Teams({
                 {...team}
                 teamId={team.id}
                 fsmId={fsmId}
+                chatRoom={team.chat_room}
               />
             </Grid>
           ))}

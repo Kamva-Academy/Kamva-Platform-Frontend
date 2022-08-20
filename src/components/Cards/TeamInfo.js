@@ -9,7 +9,9 @@ import {
   Grid,
   Typography,
   TextField,
-  Box
+  Box,
+  Divider,
+  Stack
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles'
@@ -42,21 +44,23 @@ const TeamInfo = ({
   playerId,
   makeTeamHead,
   deleteTeam,
-  updateTeamChatRoomLink
+  updateTeamChatRoomLink,
+  chatRoom,
 }) => {
   const classes = useStyles();
-  const [teamLink, setTeamLink] = useState('')
-  const [linkIsNotValid, setLinkIsNotValid] = useState(false)
+  const [teamLink, setTeamLink] = useState(chatRoom)
+  const [linkIsValid, setlinkIsValid] = useState(false)
+  const [disableRequest, setDisableRequest] = useState(false)
   const [deleteDialogId, setDeleteDialogId] = useState(false)
 
   useEffect(() => {
-    setLinkIsNotValid(!validateURL(teamLink))
+    setlinkIsValid(validateURL(teamLink))
   }, [teamLink])
 
-  function updateTeamLink() {
-    if (!linkIsNotValid) {
-      updateTeamChatRoomLink({ teamId, team: { chat_room: teamLink } })
-    }
+  async function updateTeamLink() {
+    setDisableRequest(true)
+    await updateTeamChatRoomLink({ teamId, chat_room: teamLink })
+    setDisableRequest(false)
   }
 
   return (
@@ -88,7 +92,7 @@ const TeamInfo = ({
         <Typography gutterBottom variant="h3" align="center">
           {name}
         </Typography>
-        <Grid container spacing={1}>
+        <Stack spacing={1}>
           {members.length > 0 ? members.map((member) => (
             <Grid container item key={member.id} alignItems='start' justifyContent='start'>
               <FormControlLabel
@@ -108,34 +112,38 @@ const TeamInfo = ({
           ))
             :
             <Typography marginLeft='10px' marginTop='20px'>این تیم هیچ عضوی ندارد.</Typography>}
-        </Grid>
+        </Stack>
       </CardContent>
-      <CardActions>
-        <Grid container direction="column" spacing={1}>
-          <Grid item>
+      <CardActions sx={{ alignItems: 'center' }}>
+        <Stack alignItems='center' width='100%' margin='0 auto' direction="column" spacing={1}>
+          <Box margin='0 auto' width='100%'>
+            <Box width='100%' height='10px'></Box>
+            <Divider width='100%'></Divider>
+            <Box width='100%' height='10px'></Box>
             <TextField
-              error={linkIsNotValid && true}
-              helperText={linkIsNotValid && "ورودی وارد شده لینک معتبری نیست"}
+              error={!linkIsValid && !(teamLink == '' || teamLink == null)}
+              helperText={(!linkIsValid && !(teamLink == '' || teamLink == null)) ? ".ورودی وارد شده لینک معتبری نیست" : ' '}
               id="standard-multiline-static"
               label="لینک تیم"
               multiline
               rows={3}
               placeholder="somelink.somedomain"
               variant="outlined"
+              value={teamLink || ''}
               onChange={(e) => setTeamLink(e.target.value)}
-              sx={{ marginBottom: '50px', width: '100%', direction: 'rtl' }}
+              sx={{ marginBottom: '10px', marginTop: '10px', width: '100%', direction: 'rtl' }}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
-              <Button disabled={linkIsNotValid} onClick={() => updateTeamLink() }>{'بروزرسانی'}</Button>
+              <Button disabled={linkIsNotValid} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
               <AreYouSure
                 open={!!deleteDialogId}
                 handleClose={() => setDeleteDialogId(false)}
                 callBackFunction={() => deleteTeam({ teamId: teamId })}
               />
-              <Button onClick={() => setDeleteDialogId(true) }>{'حذف'}</Button>
+              <Button onClick={() => setDeleteDialogId(true)}>{'حذف'}</Button>
             </ButtonGroup>
-          </Grid>
-        </Grid>
+          </Box>
+        </Stack>
       </CardActions>
     </Card >
   );

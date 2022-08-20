@@ -2,7 +2,7 @@ import { Divider, Fab, Grid, Paper, Typography, Box } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { Help as HelpIcon } from '@mui/icons-material';
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget from '../../Widget';
@@ -47,9 +47,25 @@ function StatePage({ state = {} }) {
   const questions = widgets.filter((widget) =>
     widget.widget_type.includes('Problem')
   );
+
+  const questionWidgets = useMemo(() =>
+    questions.map((widget) => (
+      <Grid item key={widget.id} xs={12}>
+        <Widget key={widget.id} widget={widget} />
+        <Divider style={{ marginTop: 20 }} />
+      </Grid>
+    )), [questions]);
+
   const notQuestions = widgets.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
+
+  const notQuestionWidgets = useMemo(() =>
+    notQuestions.map((widget) => (
+      <div className={classes.mainItem} key={widget.id}>
+        <Widget coveredWithPaper={false} widget={widget} />
+      </div>
+    )), [notQuestions]);
 
   return (
     <>
@@ -72,12 +88,7 @@ function StatePage({ state = {} }) {
                 <Divider />
               </Grid>
 
-              {questions.map((widget) => (
-                <Grid item key={widget.id} xs={12}>
-                  <Widget key={widget.id} widget={widget} />
-                  <Divider style={{ marginTop: 20 }} />
-                </Grid>
-              ))}
+              {questionWidgets}
 
               {inward_edges && outward_edges && (
                 <>
@@ -96,11 +107,7 @@ function StatePage({ state = {} }) {
         {notQuestions.length > 0 && (
           <Grid item xs={12} md={8} lg={8}>
             <Paper className={classes.paper}>
-              {notQuestions.map((widget) => (
-                <div className={classes.mainItem} key={widget.id}>
-                  <Widget coveredWithPaper={false} widget={widget} />
-                </div>
-              ))}
+              {notQuestionWidgets}
             </Paper>
           </Grid>
         )}

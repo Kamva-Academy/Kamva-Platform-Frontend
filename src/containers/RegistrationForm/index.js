@@ -46,10 +46,15 @@ const RegistrationForm = ({
     }
   }, [event?.registration_form]);
 
+  if (event?.is_user_participating) {
+    navigate(`/event/${eventId}/`);
+  }
 
   if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
     navigate(`/event/${eventId}/status/`);
   }
+
+  // todo: DeadlineMissed
 
   const submit = () => {
     submitRegistrationForm({
@@ -58,8 +63,6 @@ const RegistrationForm = ({
       eventId,
     });
   };
-
-  // todo: DeadlineMissed
 
   const collectAnswers = (problemId, widgetType) => (fieldName, answer) => {
     setAnswers((answers) => {
@@ -194,7 +197,6 @@ const checkPermission = (audienceType, userProfile = {}) => {
   if (!first_name || !last_name || !national_code || !birth_date || !gender || !province || !city) {
     return false;
   }
-
 
   if (audienceType == 'Student') {
     const { grade, school } = userProfile?.school_studentship;
