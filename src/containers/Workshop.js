@@ -21,8 +21,11 @@ import {
 } from '../redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
 import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
+<<<<<<< HEAD
 
 var moment = require('moment');
+=======
+>>>>>>> 0213ce0 (fix typo mistakes)
 
 export const StatePageContext = React.createContext();
 
