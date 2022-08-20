@@ -78,6 +78,7 @@ const Teams: FC<TeamPropsType> = ({
 
   const reqTeams = teams.filter(
     (team) => teamsRequests[team.id + '.' + fsmId]
+<<<<<<< HEAD
   ).sort((a, b) => {
     if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)){
       return parseInt(a.name) - parseInt(b.name)
@@ -93,6 +94,12 @@ const Teams: FC<TeamPropsType> = ({
     }
     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
   });
+=======
+  ).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+  const nonReqTeams = eventTeams.filter(
+    (team) => !teamsRequests[team.id + '.' + fsmId]
+  ).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+>>>>>>> d8e1205 (add sort teams feature for event manager and event mentors :))
 
   return (
     <>

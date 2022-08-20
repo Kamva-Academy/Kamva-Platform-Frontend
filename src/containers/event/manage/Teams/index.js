@@ -136,6 +136,7 @@ function Teams({
           </Typography>
         </Grid>
         <Grid container spacing={2}
+<<<<<<< HEAD
           alignItems='stretch'
           justifyContent="center"
           sx={(theme) => ({
@@ -154,6 +155,21 @@ function Teams({
             }
             return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
           }).map((team) => (
+=======
+        alignItems='stretch'
+        justifyContent="center"
+        sx={(theme) => ({
+          height: '100%',
+          marginTop: '4px',
+          justifyContent: 'start',
+          [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+            marginRight: "0px",
+          },
+        })}
+      >
+          {allEventTeams?.slice().sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((team) => (
+>>>>>>> d8e1205 (add sort teams feature for event manager and event mentors :))
             <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
               <TeamInfoCard
                 {...team}
