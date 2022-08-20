@@ -121,7 +121,7 @@ const TeamInfo = ({
               placeholder="somelink.somedomain"
               variant="outlined"
               onChange={(e) => setTeamLink(e.target.value)}
-              sx={{marginBottom: '30px', width: '100%', direction: 'rtl'}}
+              sx={{marginBottom: '50px', width: '100%', direction: 'rtl'}}
             />
             <ButtonGroup sx={{ height: '40px' }} variant="outlined" color="primary" fullWidth>
               <Button disabled={linkIsNotValid} onClick={() => updateTeamLink()}>{'بروزرسانی'}</Button>
