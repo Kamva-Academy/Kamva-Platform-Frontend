@@ -5,11 +5,11 @@ import useWidth from '../../../../utils/UseWidth';
 import { connect } from 'react-redux';
 import { changeOpenChatRoomAction } from '../../../../redux/slices/currentState'
 
-type JitsiButtonPropsType = {
+type ChatRoomButtonPropsType = {
   changeOpenChatRoom: any;
 }
 
-const JitsiButton: FC<JitsiButtonPropsType> = ({
+const ChatRoomButton: FC<ChatRoomButtonPropsType> = ({
   changeOpenChatRoom,
 }) => {
   const width = useWidth();
@@ -23,4 +23,4 @@ const JitsiButton: FC<JitsiButtonPropsType> = ({
   );
 }
 
-export default connect(null, { changeOpenChatRoom: changeOpenChatRoomAction })(JitsiButton);
+export default connect(null, { changeOpenChatRoom: changeOpenChatRoomAction })(ChatRoomButton);
