@@ -63,11 +63,6 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
 
-  useEffect(() => {
-    //console.log(rightItems) //keys are null :D
-    //console.log(leftItems)
-  }, [])
-
   return (
     <>
       <HideOnScroll disable={!hideOnScroll}>

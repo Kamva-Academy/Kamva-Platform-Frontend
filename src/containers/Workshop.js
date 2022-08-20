@@ -30,7 +30,6 @@ const Workshop = ({
   workshopId,
   stateId,
   studentPlayerId,
-  teamId,
   myTeam,
   getOneWorkshop,
   enterWorkshop,
@@ -43,10 +42,12 @@ const Workshop = ({
   personsName,
   mentorId,
   workshop,
+  teamId,
 }) => {
   const { fsmId } = useParams();
   const search = useLocation().search;
   let playerId = new URLSearchParams(search).get('playerId');
+  teamId = new URLSearchParams(search).get('teamId') || teamId
   let isMentor = false;
 
   if (playerId) {
@@ -169,9 +170,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
         <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      }
+      } */}
     </StatePageContext.Provider>
   );
 };
@@ -188,7 +189,7 @@ const mapStateToProps = (state, ownProps) => ({
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
   personsName: `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`,
-  mentorId: state.account.userAccount?.academic_studentship?.id,
+  mentorId: state.account.userAccount?.id,
   workshop: state.workshop.workshop,
 });
 
