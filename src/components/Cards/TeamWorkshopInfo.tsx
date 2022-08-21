@@ -77,30 +77,30 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
 
   useEffect(() => setShowStarAnimation(false), [])
 
-  // useEffect(() => {
-  //   const subscribeOnMentorArrival = async () => {
-  //     const mentorsInRoom = await getMentorsInRoom(teamId)
-  //     await checkForOfflineMentors();
-  //     setMentorsInRoom(mentorsInRoom);
-  //     const subscriber = await getMentorsInRoomSubscription(teamId);
-  //     subscriber.on('create', async (newState) => {
-  //       if (newState.get('uuid') === teamId) {
-  //         setMentorsInRoom(await getMentorsInRoom(teamId));
-  //       }
-  //     });
-  //     subscriber.on('update', async (newState) => {
-  //       if (newState.get('uuid') === teamId) {
-  //         setMentorsInRoom(await getMentorsInRoom(teamId))
-  //       }
-  //     });
-  //     mentorsInRoomSubscriberRef.current = subscriber;
-  //   }
-  //   subscribeOnMentorArrival();
+  useEffect(() => {
+    const subscribeOnMentorArrival = async () => {
+      const mentorsInRoom = await getMentorsInRoom(teamId)
+      await checkForOfflineMentors();
+      setMentorsInRoom(mentorsInRoom);
+      const subscriber = await getMentorsInRoomSubscription(teamId);
+      subscriber.on('create', async (newState) => {
+        if (newState.get('uuid') === teamId) {
+          setMentorsInRoom(await getMentorsInRoom(teamId));
+        }
+      });
+      subscriber.on('update', async (newState) => {
+        if (newState.get('uuid') === teamId) {
+          setMentorsInRoom(await getMentorsInRoom(teamId))
+        }
+      });
+      mentorsInRoomSubscriberRef.current = subscriber;
+    }
+    subscribeOnMentorArrival();
 
-  //   return (() => {
-  //     mentorsInRoomSubscriberRef.current?.unsubscribe();
-  //   })
-  // }, [])
+    return (() => {
+      mentorsInRoomSubscriberRef.current?.unsubscribe();
+    })
+  }, [])
 
   const checkForOfflineMentors = async () => {
     for (let i = 0; i < mentorsInRoom.length; i++) {
@@ -123,37 +123,37 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     })
   }, [mentorsInRoom])
 
-  // useEffect(() => {
-  //   const subscribeOnStateChange = async () => {
-  //     const state = await getTeamState(teamId);
-  //     if (!state) return;
-  //     setCurrentStateName(state.get('currentStateName'))
-  //     setTeamEnterTimeToState(state.get('teamEnterTimeToState'))
-  //     const subscriber = await getTeamStateSubscription();
-  //     subscriber.on('create', (newState) => {
-  //       if (newState.get('uuid') === teamId) {
-  //         const currentStageNameTmp = newState.get('currentStateName');
-  //         const teamEnterTimeToStateTmp = moment()
-  //         setCurrentStateName(currentStageNameTmp)
-  //         setTeamEnterTimeToState(teamEnterTimeToStateTmp)
-  //       }
-  //     });
-  //     subscriber.on('update', (newState) => {
-  //       if (newState.get('uuid') === teamId) {
-  //         const currentStageNameTmp = newState.get('currentStateName');
-  //         const teamEnterTimeToStateTmp = moment()
-  //         setCurrentStateName(currentStageNameTmp)
-  //         setTeamEnterTimeToState(teamEnterTimeToStateTmp)
-  //       }
-  //     });
-  //     subscriberRef.current = subscriber;
-  //   }
-  //   subscribeOnStateChange()
+  useEffect(() => {
+    const subscribeOnStateChange = async () => {
+      const state = await getTeamState(teamId);
+      if (!state) return;
+      setCurrentStateName(state.get('currentStateName'))
+      setTeamEnterTimeToState(state.get('teamEnterTimeToState'))
+      const subscriber = await getTeamStateSubscription();
+      subscriber.on('create', (newState) => {
+        if (newState.get('uuid') === teamId) {
+          const currentStageNameTmp = newState.get('currentStateName');
+          const teamEnterTimeToStateTmp = moment()
+          setCurrentStateName(currentStageNameTmp)
+          setTeamEnterTimeToState(teamEnterTimeToStateTmp)
+        }
+      });
+      subscriber.on('update', (newState) => {
+        if (newState.get('uuid') === teamId) {
+          const currentStageNameTmp = newState.get('currentStateName');
+          const teamEnterTimeToStateTmp = moment()
+          setCurrentStateName(currentStageNameTmp)
+          setTeamEnterTimeToState(teamEnterTimeToStateTmp)
+        }
+      });
+      subscriberRef.current = subscriber;
+    }
+    subscribeOnStateChange()
 
-  //   return () => {
-  //     subscriberRef.current?.unsubscribe();
-  //   };
-  // }, []);
+    return () => {
+      subscriberRef.current?.unsubscribe();
+    };
+  }, []);
 
   {/* this function redirects mentor to a teams page, this team could have requested mentor or not, if so, we use the
 available playerId field, otherwise we fetch one team members Id and use it to access their page */}
