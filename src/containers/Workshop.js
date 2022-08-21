@@ -51,16 +51,12 @@ const Workshop = ({
   let playerId = new URLSearchParams(search).get('playerId');
   teamId = new URLSearchParams(search).get('teamId') || teamId
   let isMentor = false;
-
-  useEffect(() => {
-    initParseServer();
-  }, []);
-
   if (playerId) {
     isMentor = true;
   } else {
     playerId = studentPlayerId;
   }
+
   let readyToAddMentor = false
   if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
     readyToAddMentor = true
@@ -68,6 +64,10 @@ const Workshop = ({
   const { eventId } = useParams();
   const subscriberRef = useRef(null);
   const [mentorAdded, setMentorAdded] = useState(false)
+
+  useEffect(() => {
+    initParseServer();
+  }, []);
 
   useEffect(() => {
     let updateInterval
@@ -115,9 +115,9 @@ const Workshop = ({
     }
   };
 
-  useEffect(getCurrentStateIfNeed, [needUpdateState, getCurrentStateIfNeed]);
+  useEffect(getCurrentStateIfNeed, [needUpdateState]);
 
-  const [parseTeamState, setParseTeamState] = useState('');
+  const [parseTeamState, setParseTeamState] = useState(null);
 
   const onUpdateStateFromParse = (teamState) =>
     setParseTeamState(teamState.get('stateId'));
@@ -128,7 +128,7 @@ const Workshop = ({
       if (isMentor) {
         addNotification({
           type: 'info',
-          message: 'یکی از بچه‌ها مکان تیم رو جا‌به‌جا کرد!',
+          message: 'یکی از دانش‌آموزان مکان تیم رو جا‌به‌جا کرد!',
         });
         mentorGetCurrentState({ id: playerId });
       } else {
@@ -144,7 +144,7 @@ const Workshop = ({
   useEffect(() => {
     const subscribe = async (teamId) => {
       const teamState = await getTeamState(teamId)
-      if (!teamState){
+      if (!teamState) {
         await createTeamState(teamId, workshopState.id.toString(), workshopState.name, moment().format('HH:mm:ss'))
       }
       const subscriber = await getChangeTeamStateSubscription({
