@@ -4,7 +4,7 @@ import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
-
+import { initParseServer } from '../parse/init';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
 import { getChangeTeamStateSubscription } from '../parse/team';
@@ -49,6 +49,10 @@ const Workshop = ({
   let playerId = new URLSearchParams(search).get('playerId');
   teamId = new URLSearchParams(search).get('teamId') || teamId
   let isMentor = false;
+
+  useEffect(() => {
+    initParseServer();
+  }, []);
 
   if (playerId) {
     isMentor = true;
