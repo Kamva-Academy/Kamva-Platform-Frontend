@@ -167,7 +167,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}&teamId=${teamId}`, '_blank');
+      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`);
     }
   }, [playerId, click, playerIdFromRedux])
 
