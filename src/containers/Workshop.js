@@ -170,9 +170,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
-        <DraggableJitsi open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      } */}
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+        <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+      }
     </StatePageContext.Provider>
   );
 };
