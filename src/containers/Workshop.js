@@ -7,7 +7,7 @@ import { useParams, useLocation } from 'react-router-dom';
 
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
 import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
-import { getChangeTeamStateSubscription } from '../parse/team';
+import { createTeamState, getChangeTeamStateSubscription, getTeamState } from '../parse/team';
 import {
   enterWorkshopAction,
   mentorGetCurrentStateAction,
@@ -21,6 +21,8 @@ import {
 } from '../redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
 import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
+
+var moment = require('moment');
 
 export const StatePageContext = React.createContext();
 
@@ -137,6 +139,10 @@ const Workshop = ({
 
   useEffect(() => {
     const subscribe = async (teamId) => {
+      const teamState = await getTeamState(teamId)
+      if (!teamState){
+        await createTeamState(teamId, workshopState.id.toString(), workshopState.name, moment().format('HH:mm:ss'))
+      }
       const subscriber = await getChangeTeamStateSubscription({
         uuid: teamId,
       });
