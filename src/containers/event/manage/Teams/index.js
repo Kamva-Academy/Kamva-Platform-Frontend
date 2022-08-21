@@ -148,7 +148,7 @@ function Teams({
           },
         })}
       >
-          {allEventTeams?.map((team) => (
+          {allEventTeams?.slice().sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)).map((team) => (
             <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
               <TeamInfoCard
                 {...team}
