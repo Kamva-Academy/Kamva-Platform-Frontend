@@ -13,11 +13,15 @@ import {
   Stack,
   Tooltip,
   Typography,
+  SvgIcon,
+  IconButton,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
 import React, { FC, useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 import {
   deleteRequestMentorAction,
@@ -45,7 +49,9 @@ type TeamWorkshopInfoPropsType = {
   getPlayerFromTeam: Function,
   mentorsInRoom: Mentor[],
   startProblemTime: string,
-  teamStage: String
+  teamStage: String,
+  isStarred: Boolean,
+  toggleStar: Function
 }
 
 const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
@@ -57,8 +63,9 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
+  isStarred,
+  toggleStar,
 }) => {
-  const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
   const subscriberRef = useRef(null);
@@ -66,6 +73,10 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const [teamEnterTimeToState, setTeamEnterTimeToState] = useState('')
   const [currentStateName, setCurrentStateName] = useState('')
   const [mentorsInRoom, setMentorsInRoom] = useState([]);
+  const [showStarAnimation, setShowStarAnimation] = useState(false)
+
+
+  useEffect(() => setShowStarAnimation(false), [])
 
   useEffect(() => {
     const subscribeOnMentorArrival = async () => {
@@ -86,7 +97,6 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       mentorsInRoomSubscriberRef.current = subscriber;
     }
     subscribeOnMentorArrival();
-
     return (() => {
       mentorsInRoomSubscriberRef.current?.unsubscribe();
     })
@@ -159,7 +169,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`);
+      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}&teamId=${teamId}`, '_blank');
     }
   }, [playerId, click, playerIdFromRedux])
 
@@ -200,7 +210,11 @@ available playerId field, otherwise we fetch one team members Id and use it to a
             alignItems: 'center'
           }}
         >
-          {playerId ? <NotificationsActive sx={{ animation: "bellRing 1.4s infinite", width: "40px" }} color="primary" /> : <Box />}
+          {playerId ?
+              <NotificationsActive sx={{ animation: "bellRing 1.4s infinite"}} color="primary" /> 
+              :
+              <SvgIcon sx={{color: 'gold', ...((showStarAnimation && isStarred) && {animation: "starred 0.9s 1"})}} onClick={() => {setShowStarAnimation(true);toggleStar(teamId);}} component={isStarred ? StarIcon : StarBorderIcon}/>
+          }
           {mentorsInRoom?.length > 0 ?
             <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>
               <Typography sx={{ fontSize: "8px", margin: '10px' }}>
@@ -235,7 +249,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
 
         <CardActionArea disabled> {/* this action holds each cards name and members */}
           <CardContent sx={{ paddingBottom: '0px' }}>
-            <Typography gutterBottom variant="h3">
+            <Typography marginLeft='5px' gutterBottom variant="h3">
               {name}
             </Typography>
             <Grid container direction="row" justifyContent="start">
