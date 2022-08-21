@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Add as AddIcon, Save as SaveIcon, Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-import React, { useEffect, useState, FC } from 'react';
+import React, { useEffect, useState, FC, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router';
@@ -57,9 +57,31 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
     widget.widget_type.includes('Problem')
   );
 
-  const notQuestions = widgets?.filter(
+  const questionWidgets = useMemo(
+    () => questions.map((widget) => (
+      <Box key={widget.index}>
+        <Widget
+          stateId={stateId}
+          widget={widget}
+          mode={WidgetModes.Edit}
+        />
+      </Box>
+    )), [questions])
+
+  const nonQuestions = widgets?.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
+
+  const nonQuestionWidgets = useMemo(() =>
+    nonQuestions.map((widget) => (
+      <Box key={widget.id}>
+        <Widget
+          stateId={stateId}
+          widget={widget}
+          mode={WidgetModes.Edit}
+        />
+      </Box>
+    )), [nonQuestions])
 
   return (
     <>
@@ -109,17 +131,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
           {'مسئله‌ها'}
         </Typography>
         <Divider />
-        {
-          questions.map((widget) => (
-            <Box key={widget.index}>
-              <Widget
-                stateId={stateId}
-                widget={widget}
-                mode={WidgetModes.Edit}
-              />
-            </Box>
-          ))
-        }
+        {questionWidgets}
         {
           questions?.length === 0 &&
           <Box m={2}>
@@ -139,19 +151,9 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
           {'محتواها'}
         </Typography>
         <Divider />
+        {nonQuestionWidgets}
         {
-          notQuestions.map((widget) => (
-            <Box key={widget.id}>
-              <Widget
-                stateId={stateId}
-                widget={widget}
-                mode={WidgetModes.Edit}
-              />
-            </Box>
-          ))
-        }
-        {
-          notQuestions?.length === 0 &&
+          nonQuestions?.length === 0 &&
           <Box m={2}>
             <Typography variant='h4' align="center">{'محتوایی در این گام وجود ندارد!'}</Typography>
           </Box>
