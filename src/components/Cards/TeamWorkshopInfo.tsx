@@ -73,6 +73,9 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const [teamEnterTimeToState, setTeamEnterTimeToState] = useState('')
   const [currentStateName, setCurrentStateName] = useState('')
   const [mentorsInRoom, setMentorsInRoom] = useState([]);
+  const [showStarAnimation, setShowStarAnimation] = useState(false)
+
+  useEffect(() => setShowStarAnimation(false), [])
 
   useEffect(() => {
     const subscribeOnMentorArrival = async () => {

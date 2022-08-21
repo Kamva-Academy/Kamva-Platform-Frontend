@@ -94,41 +94,24 @@ const Teams: FC<TeamPropsType> = ({
 
   return (
     <>
-      <Grid container spacing={2}
-        alignItems='stretch'
-        justifyContent="center"
-        sx={(theme) => ({
-          height: '100%',
-          justifyContent: 'start',
-          [theme.breakpoints.down('sm')]: {
-            justifyContent: 'center',
-            marginRight: "0px",
-          },
-        })}
-      >
-        {reqTeams?.map((team) => (
-          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'
-          >
-            <TeamWorkshopInfoCard
-              {...team}
-              teamId={team.id}
-              fsmId={fsmId}
-              playerId={
-                teamsRequests[team.id + '.' + fsmId]
-              }
-            />
-          </Grid>
-        ))}
-        {nonReqTeams?.map((team) => (
-          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
-            <TeamWorkshopInfoCard
-              {...team}
-              teamId={team.id}
-              fsmId={fsmId}
-            />
-          </Grid>
-        ))}
-      </Grid>
+            <Box sx={{ width: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label="همه تیم‌ها" {...a11yProps(0)} />
+            <Tab label="تیم‌های نشان شده" {...a11yProps(1)} />
+            <Tab label="درخواست‌ها" {...a11yProps(2)} />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={nonReqTeams} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={[]} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+        </TabPanel>
+      </Box>
     </>
   );
 }
