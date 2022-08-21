@@ -22,6 +22,8 @@ import {
 import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
 import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
 
+var moment = require('moment');
+
 export const StatePageContext = React.createContext();
 
 const Workshop = ({
@@ -178,9 +180,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
         <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      }
+      } */}
     </StatePageContext.Provider>
   );
 };
