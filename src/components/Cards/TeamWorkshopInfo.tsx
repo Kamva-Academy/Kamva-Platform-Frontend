@@ -75,6 +75,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const [mentorsInRoom, setMentorsInRoom] = useState([]);
   const [showStarAnimation, setShowStarAnimation] = useState(false)
 
+
   useEffect(() => setShowStarAnimation(false), [])
 
   useEffect(() => {
@@ -96,7 +97,6 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       mentorsInRoomSubscriberRef.current = subscriber;
     }
     subscribeOnMentorArrival();
-
     return (() => {
       mentorsInRoomSubscriberRef.current?.unsubscribe();
     })
@@ -126,7 +126,9 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   useEffect(() => {
     const subscribeOnStateChange = async () => {
       const state = await getTeamState(teamId);
-      if (!state) return;
+      if (!state) {
+        return
+      };
       setCurrentStateName(state.get('currentStateName'))
       setTeamEnterTimeToState(state.get('teamEnterTimeToState'))
       const subscriber = await getTeamStateSubscription();

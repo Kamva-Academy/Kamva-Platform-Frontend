@@ -8,7 +8,7 @@ export const getMentorsInRoom = async (uuid) => {
     const query = new Parse.Query('MentorsInRoom');
     query.equalTo('uuid', uuid);
     query.equalTo('MentorLeftRoom', false)
-    const result = await query.find({ success: function (list) { } },)
+    const result = await query.find()
     return result;
 };
 
@@ -21,22 +21,22 @@ export const getMentorInRoom = async (uuid, mentorId) => {
     return result;
 };
 
-export const addMentorToRoom = async (uuid, mentorId, mentorName, mentorArrivalTime, mentorLastUpdated) => {
+export const addMentorToRoom = async (uuid, mentorId, mentorName) => {
     if (!uuid) {
         // todo: fix for supervised workshops
         return;
     }
     const mentor = await getMentorInRoom(uuid, mentorId);
     if (!mentor){
-        return await new MentorsInRoomState().save({ 'uuid': uuid, 'MentorId': mentorId, 'MentorName': mentorName, 'MentorArrivalTime': mentorArrivalTime, 'MentorLastUpdated': mentorLastUpdated });
+        return await new MentorsInRoomState().save({ 'uuid': uuid, 'MentorId': mentorId, 'MentorName': mentorName, 'MentorArrivalTime': moment().format('HH:mm:ss'), 'MentorLastUpdated': moment().format('HH:mm:ss') });
     }
 };
 
-export const updateMentorTime = async (uuid, mentorId, mentorLastUpdated) => {
+export const updateMentorTime = async (uuid, mentorId) => {
     if (!uuid || !mentorId) {return}
     const mentor = await getMentorInRoom(uuid, mentorId);
     if (!mentor) {return}
-    mentor.set('MentorLastUpdated', mentorLastUpdated)
+    mentor.set('MentorLastUpdated', moment().format('HH:mm:ss'))
     await mentor.save();
 }
 
