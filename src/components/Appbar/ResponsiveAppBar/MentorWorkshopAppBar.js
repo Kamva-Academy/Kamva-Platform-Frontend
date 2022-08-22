@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 
 import UserAvatar from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
 import ChatRoomButton from './components/ChatRoomButton';
-import MentorButton from './components/MentorButton';
 import ReviewAnswersButton from './components/ReviewAnswersButton';
 import TeamAvatar from './components/UsersAvatar';
 import WhiteboardButton from './components/WhiteboardButton';
+import { announceMentorDeparture } from '../../../parse/mentorsInRoom';
 
-const WorkshopAppBarItems = ({ workshop, isMentor }) => {
+const WorkshopAppBarItems = ({ workshop, isMentor, mentorId }) => {
 
   useEffect(() => {
     if (workshop?.name) {
@@ -20,14 +20,12 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     }
   }, [workshop?.name])
 
-
-
-  const { eventId } = useParams();
-  const reviewAnswers = <ReviewAnswersButton />
+  const { eventId, fsmId } = useParams();
+  const search = useLocation().search;
+  let teamId = new URLSearchParams(search).get('teamId');
   const chatRoomButton = <ChatRoomButton />;
-  const backToEventButton = <DashboardButton name={'بازگشت به رویداد'} to={`/event/${eventId}/`} />;
+  const backToEventButton = <DashboardButton onClick={() => { announceMentorDeparture(teamId, mentorId) }} name={'بازگشت به عقب'} to={`/event/${eventId}/workshop/${fsmId}/manage`} />;
   const whiteboardButton = <WhiteboardButton />;
-  const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;
   const userAvatar = <UserAvatar />;
 
@@ -37,28 +35,20 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const mobileRightItems = [];
   const mobileMenuListItems = [];
 
-  if (workshop?.first_state?.is_exam) {
-    desktopLeftItems.push(reviewAnswers);
-    mobileMenuListItems.push(reviewAnswers);
-  }
-
   if (workshop?.fsm_p_type == 'Individual') {
     desktopRightItems.push(userAvatar);
   } else {
     desktopRightItems.push(teamAvatar);
   }
-  if (workshop?.fsm_learning_type == 'Supervised') {
-    desktopLeftItems.push([whiteboardButton, mentorButton]);
-    desktopRightItems.push([chatRoomButton, backToEventButton]);
-    mobileLeftItems.push([whiteboardButton, mentorButton]);
-    mobileRightItems.push([chatRoomButton]);
-  } else {
-    desktopLeftItems.push(backToEventButton)
-  }
+  desktopRightItems.push([chatRoomButton]);
+  desktopLeftItems.push([whiteboardButton,]);
+  desktopLeftItems.push([backToEventButton]);
 
 
+  mobileRightItems.push([chatRoomButton]);
+  mobileRightItems.push([whiteboardButton,]);
 
-  mobileMenuListItems.push(backToEventButton);
+  mobileLeftItems.push(backToEventButton);
 
   return {
     desktopLeftItems,

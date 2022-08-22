@@ -68,7 +68,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
 }) => {
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
-  const subscriberRef = useRef(null);
+  const stateChangeSubscriberRef = useRef(null);
   const mentorsInRoomSubscriberRef = useRef(null);
   const [teamEnterTimeToState, setTeamEnterTimeToState] = useState('')
   const [currentStateName, setCurrentStateName] = useState('')
@@ -113,7 +113,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   useEffect(() => {
     let updateInterval
     if (mentorsInRoom?.length > 0) {
-      updateInterval = setInterval(() => { checkForOfflineMentors(); }, 10000)
+      updateInterval = setInterval(checkForOfflineMentors, 10000)
     }
 
     return (() => {
@@ -148,12 +148,12 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
           setTeamEnterTimeToState(teamEnterTimeToStateTmp)
         }
       });
-      subscriberRef.current = subscriber;
+      stateChangeSubscriberRef.current = subscriber;
     }
     subscribeOnStateChange()
 
     return () => {
-      subscriberRef.current?.unsubscribe();
+      stateChangeSubscriberRef.current?.unsubscribe();
     };
   }, []);
 
@@ -174,7 +174,6 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   }, [playerId, click, playerIdFromRedux])
 
   return (
-
     <Card /* main team card coomponent*/
       sx={{
         maxWidth: 300,
@@ -213,7 +212,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
           {playerId ?
               <NotificationsActive sx={{ animation: "bellRing 1.4s infinite"}} color="primary" /> 
               :
-              <SvgIcon sx={{color: 'gold', ...((showStarAnimation && isStarred) && {animation: "starred 0.9s 1"})}} onClick={() => {setShowStarAnimation(true);toggleStar(teamId);}} component={isStarred ? StarIcon : StarBorderIcon}/>
+              <SvgIcon sx={{...(isStarred ? {color: 'gold'} : {color: '#fea91a'}), ...((showStarAnimation && isStarred) && {animation: "starred 0.9s 1"})}} onClick={() => {setShowStarAnimation(true);toggleStar(teamId);}} component={isStarred ? StarIcon : StarBorderIcon}/>
           }
           {mentorsInRoom?.length > 0 ?
             <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>

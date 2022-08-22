@@ -60,7 +60,7 @@ const initialState: InitialState = {
   registrationReceipt: null,
   widgets: [],
   allEventTeams: [],
-  teamsRequests: [],
+  teamsRequests: null,
   myWorkshops: [],
   registrationForm: {},
   merchandise: {},
