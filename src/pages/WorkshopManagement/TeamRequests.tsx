@@ -97,8 +97,7 @@ const Teams: FC<TeamPropsType> = ({
   />}));
 
   const nonReqTeams = teams.filter(
-    (team) => !teamsRequests[team.id + '.' + fsmId]
-  ).sort((a, b) => {
+    (team) => !teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
     if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)){
       return parseInt(a.name) - parseInt(b.name)
     }
