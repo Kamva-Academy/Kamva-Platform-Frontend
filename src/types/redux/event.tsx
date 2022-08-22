@@ -27,7 +27,7 @@ export type InitialState = {
   registrationReceipt: RegistrationReceipt,
   widgets: Widget,
   allEventTeams: Team[],
-  teamsRequests: Request[],
+  teamsRequests: object,
   myWorkshops: Workshop[],
   registrationForm: RegistrationForm,
   merchandise: Merchandise,
