@@ -93,7 +93,7 @@ const Teams: FC<TeamPropsType> = ({
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="همه تیم‌ها" {...a11yProps(0)} />
             <Tab label="تیم‌های نشان شده" {...a11yProps(1)} />
-            <Tab label="تیم‌های نشان نشده" {...a11yProps(2)} />
+            <Tab label="درخواست‌ها" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -103,7 +103,7 @@ const Teams: FC<TeamPropsType> = ({
           <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <TeamsTab reqTeams={reqTeams.filter(team => !team.isStarred)} nonReqTeams={nonReqTeams.filter(team => !team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={[]} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
         </TabPanel>
       </Box>
     </>

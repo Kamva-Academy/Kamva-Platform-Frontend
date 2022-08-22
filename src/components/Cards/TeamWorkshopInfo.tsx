@@ -211,7 +211,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
           {playerId ?
               <NotificationsActive sx={{ animation: "bellRing 1.4s infinite"}} color="primary" /> 
               :
-              <SvgIcon sx={{color: 'gold', ...((showStarAnimation && isStarred) && {animation: "starred 0.9s 1"})}} onClick={() => {setShowStarAnimation(true);toggleStar(teamId);}} component={isStarred ? StarIcon : StarBorderIcon}/>
+              <SvgIcon sx={{...(isStarred ? {color: 'gold'} : {color: '#fea91a'}), ...((showStarAnimation && isStarred) && {animation: "starred 0.9s 1"})}} onClick={() => {setShowStarAnimation(true);toggleStar(teamId);}} component={isStarred ? StarIcon : StarBorderIcon}/>
           }
           {mentorsInRoom?.length > 0 ?
             <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>
