@@ -2,6 +2,7 @@ import { Tab, Box, Tabs, Typography, Grid } from '@mui/material';
 import React, { useEffect, useRef, FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import TeamWorkshopInfoCard from '../../components/Cards/TeamWorkshopInfo';
 
 import { getRequestSubscription } from '../../parse/mentor';
 import {
@@ -23,7 +24,7 @@ const Teams: FC<TeamPropsType> = ({
   const { fsmId } = useParams();
   const subscriptionRef = useRef(null);
   const [starredTeams, setStarredTeams] = useState([])
-  const [teams, setTeams] = useState([...eventTeams])
+  const [teams, setTeams] = useState(eventTeams)
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -73,24 +74,36 @@ const Teams: FC<TeamPropsType> = ({
 
   useEffect(() => {
     localStorage.setItem('starredTeams', JSON.stringify(starredTeams))
-    setTeams([...eventTeams].map(team => starredTeams.indexOf(team.id) === -1 ? { ...team, isStarred: false } : { ...team, isStarred: true }))
+    setTeams(eventTeams.map(team => starredTeams.indexOf(team.id) === -1 ? {
+      ...team, isStarred: false
+    } : { ...team, isStarred: true }))
   }, [eventTeams, starredTeams])
 
   const reqTeams = teams.filter(
-    (team) => teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
+    (team) => teamsRequests[team.id + '.' + fsmId]
+  ).sort((a, b) => {
+    if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
+      return parseInt(a.name) - parseInt(b.name)
+    }
+    return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+  }).map(team => ({...team, component: <TeamWorkshopInfoCard
+    {...team}
+    teamId={team.id}
+    fsmId={fsmId}
+    playerId={
+      teamsRequests[team.id + '.' + fsmId]
+    }
+    toggleStar={toggleStar}
+  />}));
+
+  const nonReqTeams = teams.filter(
+    (team) => !teamsRequests[team.id + '.' + fsmId]
+  ).sort((a, b) => {
     if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)){
       return parseInt(a.name) - parseInt(b.name)
     }
     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
   });
-
-  const nonReqTeams = teams.filter(
-    (team) => !teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
-    if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)){
-      return parseInt(a.name) - parseInt(b.name)
-    }
-    return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-  })
 
   return (
     <>
@@ -103,13 +116,13 @@ const Teams: FC<TeamPropsType> = ({
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <TeamsTab reqTeams={reqTeams} nonReqTeams={nonReqTeams} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={nonReqTeams} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <TeamsTab reqTeams={reqTeams} nonReqTeams={[]} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={[]}/>
         </TabPanel>
       </Box>
     </>
