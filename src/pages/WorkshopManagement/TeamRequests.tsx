@@ -1,4 +1,4 @@
-import { Tab, Box, Tabs, Typography } from '@mui/material';
+import { Tab, Box, Tabs, Typography, Grid } from '@mui/material';
 import React, { useEffect, useRef, FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
@@ -77,9 +77,7 @@ const Teams: FC<TeamPropsType> = ({
   }, [eventTeams, starredTeams])
 
   const reqTeams = teams.filter(
-    (team) => teamsRequests[team.id + '.' + fsmId]
-<<<<<<< HEAD
-  ).sort((a, b) => {
+    (team) => teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
     if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)){
       return parseInt(a.name) - parseInt(b.name)
     }
@@ -87,40 +85,50 @@ const Teams: FC<TeamPropsType> = ({
   });
 
   const nonReqTeams = teams.filter(
-    (team) => !teamsRequests[team.id + '.' + fsmId]
-  ).sort((a, b) => {
+    (team) => !teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
     if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)){
       return parseInt(a.name) - parseInt(b.name)
     }
     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-  });
-=======
-  ).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-  const nonReqTeams = eventTeams.filter(
-    (team) => !teamsRequests[team.id + '.' + fsmId]
-  ).sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
->>>>>>> d8e1205 (add sort teams feature for event manager and event mentors :))
+  })
 
   return (
     <>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="همه تیم‌ها" {...a11yProps(0)} />
-            <Tab label="تیم‌های نشان شده" {...a11yProps(1)} />
-            <Tab label="درخواست‌ها" {...a11yProps(2)} />
-          </Tabs>
-        </Box>
-        <TabPanel value={value} index={0}>
-          <TeamsTab reqTeams={reqTeams} nonReqTeams={nonReqTeams} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <TeamsTab reqTeams={reqTeams} nonReqTeams={[]} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
-        </TabPanel>
-      </Box>
+      <Grid container spacing={2}
+        alignItems='stretch'
+        justifyContent="center"
+        sx={(theme) => ({
+          height: '100%',
+          justifyContent: 'start',
+          [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+            marginRight: "0px",
+          },
+        })}
+      >
+        {reqTeams?.map((team) => (
+          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'
+          >
+            <TeamWorkshopInfoCard
+              {...team}
+              teamId={team.id}
+              fsmId={fsmId}
+              playerId={
+                teamsRequests[team.id + '.' + fsmId]
+              }
+            />
+          </Grid>
+        ))}
+        {nonReqTeams?.map((team) => (
+          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
+            <TeamWorkshopInfoCard
+              {...team}
+              teamId={team.id}
+              fsmId={fsmId}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </>
   );
 }

@@ -73,9 +73,6 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   const [teamEnterTimeToState, setTeamEnterTimeToState] = useState('')
   const [currentStateName, setCurrentStateName] = useState('')
   const [mentorsInRoom, setMentorsInRoom] = useState([]);
-  const [showStarAnimation, setShowStarAnimation] = useState(false)
-
-  useEffect(() => setShowStarAnimation(false), [])
 
   useEffect(() => {
     const subscribeOnMentorArrival = async () => {
@@ -96,7 +93,6 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       mentorsInRoomSubscriberRef.current = subscriber;
     }
     subscribeOnMentorArrival();
-
     return (() => {
       mentorsInRoomSubscriberRef.current?.unsubscribe();
     })
@@ -169,7 +165,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`);
+      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}&teamId=${teamId}`, '_blank');
     }
   }, [playerId, click, playerIdFromRedux])
 
