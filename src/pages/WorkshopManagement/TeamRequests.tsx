@@ -1,7 +1,8 @@
-import { Tab, Box, Tabs, Typography } from '@mui/material';
-import React, { useEffect, useRef, FC, useState } from 'react';
+import { Tab, Box, Tabs, Typography, Grid } from '@mui/material';
+import React, { useEffect, useRef, FC, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import TeamWorkshopInfoCard from '../../components/Cards/TeamWorkshopInfo';
 
 import { getRequestSubscription } from '../../parse/mentor';
 import {
@@ -14,7 +15,7 @@ import { Team } from "../../types/models";
 import TeamsTab from './TeamsTab';
 
 const Teams: FC<TeamPropsType> = ({
-  teamsRequests = [],
+  teamsRequests,
   eventTeams = [],
   getRequestMentor = undefined,
   createRequestMentor = undefined,
@@ -23,16 +24,7 @@ const Teams: FC<TeamPropsType> = ({
   const { fsmId } = useParams();
   const subscriptionRef = useRef(null);
   const [starredTeams, setStarredTeams] = useState([])
-  const [teams, setTeams] = useState([...eventTeams])
   const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  useEffect(() => {
-    setStarredTeams(JSON.parse(localStorage.getItem('starredTeams')) || [])
-  }, [])
 
   useEffect(() => {
     const subscribe = async () => {
@@ -61,6 +53,21 @@ const Teams: FC<TeamPropsType> = ({
   }, []);
 
 
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    setStarredTeams(JSON.parse(localStorage.getItem('starredTeams')) || [])
+  }, [])
+
+
+
+  const teams = eventTeams.map(team =>
+    starredTeams.indexOf(team.id) === -1
+      ? { ...team, isStarred: false }
+      : { ...team, isStarred: true });
+
 
   const toggleStar = (teamId: String) => {
     if (starredTeams.indexOf(teamId) !== -1) {
@@ -70,22 +77,52 @@ const Teams: FC<TeamPropsType> = ({
     }
   }
 
-
   useEffect(() => {
     localStorage.setItem('starredTeams', JSON.stringify(starredTeams))
-    setTeams([...eventTeams].map(team => starredTeams.indexOf(team.id) === -1 ? { ...team, isStarred: false } : { ...team, isStarred: true }))
+
   }, [eventTeams, starredTeams])
 
-  const reqTeams = teams.filter(
-    (team) => teamsRequests[team.id + '.' + fsmId]
-  ).sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+  if (!teamsRequests){
+    return <></>
+  }
 
+  const reqTeams = 
+      teams.filter(
+        (team) => teamsRequests[team.id + '.' + fsmId]
+      ).sort((a, b) => {
+        if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
+          return parseInt(a.name) - parseInt(b.name)
+        }
+        return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+      }).map(team => ({
+        ...team,
+        component:
+          <TeamWorkshopInfoCard
+            {...team}
+            teamId={team.id}
+            fsmId={fsmId}
+            playerId={teamsRequests[team.id + '.' + fsmId]}
+            toggleStar={toggleStar}
+          />
+      }))
 
-  const nonReqTeams = teams.filter(
-    (team) => !teamsRequests[team.id + '.' + fsmId]
-  ).sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-
-
+  const nonReqTeams = 
+      teams.filter(
+        (team) => !teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
+          if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
+            return parseInt(a.name) - parseInt(b.name)
+          }
+          return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+        }).map(team => ({
+          ...team,
+          component:
+            <TeamWorkshopInfoCard
+              {...team}
+              teamId={team.id}
+              fsmId={fsmId}
+              toggleStar={toggleStar}
+            />
+        }))
   return (
     <>
       <Box sx={{ width: '100%' }}>
@@ -93,17 +130,17 @@ const Teams: FC<TeamPropsType> = ({
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="همه تیم‌ها" {...a11yProps(0)} />
             <Tab label="تیم‌های نشان شده" {...a11yProps(1)} />
-            <Tab label="تیم‌های نشان نشده" {...a11yProps(2)} />
+            <Tab label="درخواست‌ها" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <TeamsTab reqTeams={reqTeams} nonReqTeams={nonReqTeams} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={nonReqTeams} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams.filter(team => team.isStarred)} nonReqTeams={nonReqTeams.filter(team => team.isStarred)} />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <TeamsTab reqTeams={reqTeams.filter(team => !team.isStarred)} nonReqTeams={nonReqTeams.filter(team => !team.isStarred)} fsmId={fsmId} teamsRequests={teamsRequests} toggleStar={toggleStar} />
+          <TeamsTab reqTeams={reqTeams} nonReqTeams={[]} />
         </TabPanel>
       </Box>
     </>
@@ -113,7 +150,7 @@ const Teams: FC<TeamPropsType> = ({
 const mapStateToProps = (state) =>
 ({
   eventTeams: state.events.allEventTeams,
-  teamsRequests: state.events.teamsRequests || {},
+  teamsRequests: state.events.teamsRequests,
 });
 
 export default connect(mapStateToProps, {

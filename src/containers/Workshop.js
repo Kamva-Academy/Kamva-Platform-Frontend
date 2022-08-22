@@ -171,7 +171,7 @@ const Workshop = ({
           height: '100%'
         }}>
 
-        <ResponsiveAppBar mode="WORKSHOP" />
+        <ResponsiveAppBar mode={isMentor ? "MENTOR_WORKSHOP" : "WORKSHOP"} />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
         {/* <ScrollTop>
@@ -180,9 +180,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
         <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      }
+      } */}
     </StatePageContext.Provider>
   );
 };
