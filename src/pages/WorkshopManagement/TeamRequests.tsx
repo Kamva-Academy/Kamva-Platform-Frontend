@@ -103,7 +103,13 @@ const Teams: FC<TeamPropsType> = ({
       return parseInt(a.name) - parseInt(b.name)
     }
     return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-  });
+  }).map(team => ({...team, component: <TeamWorkshopInfoCard
+    {...team}
+    teamId={team.id}
+    fsmId={fsmId}
+
+    toggleStar={toggleStar}
+  />}));
 
   return (
     <>
