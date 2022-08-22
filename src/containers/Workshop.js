@@ -171,7 +171,7 @@ const Workshop = ({
           height: '100%'
         }}>
 
-        <ResponsiveAppBar mode="WORKSHOP" />
+        <ResponsiveAppBar mode={isMentor ? "MENTOR_WORKSHOP" : "WORKSHOP"} />
         <Toolbar id="back-to-top-anchor" />
         <StatePage state={workshopState} />
         {/* <ScrollTop>

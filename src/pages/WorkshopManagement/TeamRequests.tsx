@@ -82,9 +82,11 @@ const Teams: FC<TeamPropsType> = ({
 
   }, [eventTeams, starredTeams])
 
-  const reqTeams = useMemo(() => {
-    if (!teamsRequests) return ([]);
-    return (
+  if (!teamsRequests){
+    return <></>
+  }
+
+  const reqTeams = 
       teams.filter(
         (team) => teamsRequests[team.id + '.' + fsmId]
       ).sort((a, b) => {
@@ -102,12 +104,9 @@ const Teams: FC<TeamPropsType> = ({
             playerId={teamsRequests[team.id + '.' + fsmId]}
             toggleStar={toggleStar}
           />
-      })))
-  }, [teamsRequests])
+      }))
 
-  const nonReqTeams = useMemo(() => {
-    if (!teamsRequests) return ([]);
-    return (
+  const nonReqTeams = 
       teams.filter(
         (team) => !teamsRequests[team.id + '.' + fsmId]).sort((a, b) => {
           if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
@@ -124,9 +123,6 @@ const Teams: FC<TeamPropsType> = ({
               toggleStar={toggleStar}
             />
         }))
-    )
-  }, [teamsRequests])
-
   return (
     <>
       <Box sx={{ width: '100%' }}>
