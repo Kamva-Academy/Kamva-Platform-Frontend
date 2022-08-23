@@ -2,6 +2,7 @@ import {
   Grid,
   Paper,
   Stack,
+  Typography,
 } from '@mui/material';
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -47,10 +48,6 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
     }
   }, [allStates, tab]);
 
-  if (!allStates[tab]?.id) {
-    return <></>
-  }
-
   const widgets = currentState?.widgets;
   const hints = currentState?.hints;
 
@@ -65,11 +62,15 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
         />
       </Box>
       <Stack spacing={2}>
-        {currentState &&
+        {currentState ?
           <>
             <EditWidgets {...currentState} />
             <EditHints hints={hints} stateId={currentState.id} />
           </>
+          :
+          <Typography align="center" variant="h3" gutterBottom>
+            {'گامی وجود ندارد.'}
+          </Typography>
         }
       </Stack>
     </>

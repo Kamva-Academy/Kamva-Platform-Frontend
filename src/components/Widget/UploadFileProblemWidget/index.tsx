@@ -90,8 +90,6 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     });
   }
 
-  console.log(file?.link)
-
   return (
     <Stack alignItems='center' justifyContent='space-between' direction='row' spacing={1}>
       <Typography>{text}</Typography>
