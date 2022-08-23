@@ -67,7 +67,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
         <Stack>
           <Stack direction='row' alignItems='center' justifyContent='space-between'>
             <Typography variant='h3' gutterBottom>
-              {widget.name ? widget.name : 'بی‌نام'}
+              {/* {widget.name ? widget.name : 'بی‌نام'} */}
             </Typography>
             <Box>
               <Tooltip title='ویرایش ویجت' arrow>
