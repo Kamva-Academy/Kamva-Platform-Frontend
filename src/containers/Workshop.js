@@ -180,9 +180,9 @@ const Workshop = ({
           </Fab>
         </ScrollTop> */}
       </Container>
-      {/* {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
         <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      } */}
+      }
     </StatePageContext.Provider>
   );
 };
