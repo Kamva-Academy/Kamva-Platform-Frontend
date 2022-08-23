@@ -51,7 +51,7 @@ function StatePage({ state = {} }) {
   const questionWidgets = useMemo(() =>
     questions.map((widget) => (
       <Grid item key={widget.id} xs={12}>
-        <Widget key={widget.id} widget={widget} />
+        <Widget coveredWithPaper={false} key={widget.id} widget={widget} />
         <Divider style={{ marginTop: 20 }} />
       </Grid>
     )), [questions]);
