@@ -630,8 +630,8 @@ const eventSlice = createSlice({
     [createTeamAction.rejected.toString()]: isNotFetching,
 
     [updateTeamChatRoomLinkAction.pending.toString()]: isFetching,
-    [updateTeamChatRoomLinkAction.fulfilled.toString()]: (state, { meta: { arg: { teamId } }, payload: {response: returnedTeam}}) => {
-      state.allEventTeams = [...state.allEventTeams].map(team => team.id !== teamId ? team : {...returnedTeam})
+    [updateTeamChatRoomLinkAction.fulfilled.toString()]: (state, { meta: { arg: { teamId } }, payload: { response: returnedTeam } }) => {
+      state.allEventTeams = [...state.allEventTeams].map(team => team.id !== teamId ? team : { ...returnedTeam })
       state.isFetching = false;
     },
     [updateTeamChatRoomLinkAction.rejected.toString()]: isNotFetching,
@@ -732,10 +732,7 @@ const eventSlice = createSlice({
 
 
     [addTeamsViaCSVAction.pending.toString()]: isFetching,
-    [addTeamsViaCSVAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      window.location.reload();
-      state.isFetching = false;
-    },
+    [addTeamsViaCSVAction.fulfilled.toString()]: isNotFetching,
     [addTeamsViaCSVAction.rejected.toString()]: isNotFetching,
 
 
