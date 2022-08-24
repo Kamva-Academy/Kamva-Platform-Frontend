@@ -78,29 +78,29 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
 
   useEffect(() => setShowStarAnimation(false), [])
 
-  useEffect(() => {
-    const subscribeOnMentorArrival = async () => {
-      const mentorsInRoom = await getMentorsInRoom(teamId)
-      await checkForOfflineMentors();
-      setMentorsInRoom(mentorsInRoom);
-      const subscriber = await getMentorsInRoomSubscription(teamId);
-      subscriber.on('create', async (newState) => {
-        if (newState.get('uuid') === teamId) {
-          setMentorsInRoom(await getMentorsInRoom(teamId));
-        }
-      });
-      subscriber.on('update', async (newState) => {
-        if (newState.get('uuid') === teamId) {
-          setMentorsInRoom(await getMentorsInRoom(teamId))
-        }
-      });
-      mentorsInRoomSubscriberRef.current = subscriber;
-    }
-    subscribeOnMentorArrival();
-    return (() => {
-      mentorsInRoomSubscriberRef.current?.unsubscribe();
-    })
-  }, [])
+  // useEffect(() => {
+  //   const subscribeOnMentorArrival = async () => {
+  //     const mentorsInRoom = await getMentorsInRoom(teamId)
+  //     await checkForOfflineMentors();
+  //     setMentorsInRoom(mentorsInRoom);
+  //     const subscriber = await getMentorsInRoomSubscription(teamId);
+  //     subscriber.on('create', async (newState) => {
+  //       if (newState.get('uuid') === teamId) {
+  //         setMentorsInRoom(await getMentorsInRoom(teamId));
+  //       }
+  //     });
+  //     subscriber.on('update', async (newState) => {
+  //       if (newState.get('uuid') === teamId) {
+  //         setMentorsInRoom(await getMentorsInRoom(teamId))
+  //       }
+  //     });
+  //     mentorsInRoomSubscriberRef.current = subscriber;
+  //   }
+  //   subscribeOnMentorArrival();
+  //   return (() => {
+  //     mentorsInRoomSubscriberRef.current?.unsubscribe();
+  //   })
+  // }, [])
 
   const checkForOfflineMentors = async () => {
     for (let i = 0; i < mentorsInRoom.length; i++) {
@@ -110,18 +110,18 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     }
   }
 
-  useEffect(() => {
-    let updateInterval
-    if (mentorsInRoom?.length > 0) {
-      updateInterval = setInterval(checkForOfflineMentors, 10000)
-    }
+  // useEffect(() => {
+  //   let updateInterval
+  //   if (mentorsInRoom?.length > 0) {
+  //     updateInterval = setInterval(checkForOfflineMentors, 10000)
+  //   }
 
-    return (() => {
-      if (updateInterval) {
-        clearInterval(updateInterval)
-      }
-    })
-  }, [mentorsInRoom])
+  //   return (() => {
+  //     if (updateInterval) {
+  //       clearInterval(updateInterval)
+  //     }
+  //   })
+  // }, [mentorsInRoom])
 
   useEffect(() => {
     const subscribeOnStateChange = async () => {
@@ -210,9 +210,9 @@ available playerId field, otherwise we fetch one team members Id and use it to a
           }}
         >
           {playerId ?
-              <NotificationsActive sx={{ animation: "bellRing 1.4s infinite"}} color="primary" /> 
-              :
-              <SvgIcon sx={{...(isStarred ? {color: 'gold'} : {color: '#fea91a'}), ...((showStarAnimation && isStarred) && {animation: "starred 0.9s 1"})}} onClick={() => {setShowStarAnimation(true);toggleStar(teamId);}} component={isStarred ? StarIcon : StarBorderIcon}/>
+            <NotificationsActive sx={{ animation: "bellRing 1.4s infinite" }} color="primary" />
+            :
+            <SvgIcon sx={{ ...(isStarred ? { color: 'gold' } : { color: '#fea91a' }), ...((showStarAnimation && isStarred) && { animation: "starred 0.9s 1" }) }} onClick={() => { setShowStarAnimation(true); toggleStar(teamId); }} component={isStarred ? StarIcon : StarBorderIcon} />
           }
           {mentorsInRoom?.length > 0 ?
             <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>
