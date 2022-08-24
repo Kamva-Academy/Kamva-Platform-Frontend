@@ -766,7 +766,6 @@ const eventSlice = createSlice({
     [removeFromTeamAction.pending.toString()]: isFetching,
     [removeFromTeamAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg: { receipt } } }) => {
       const newAllEventTeams = [...state.allEventTeams];
-      console.log(newAllEventTeams)
       for (let i = 0; i < newAllEventTeams.length; i++) {
         const team = newAllEventTeams[i];
         for (let j = 0; j < team.members.length; j++) {
