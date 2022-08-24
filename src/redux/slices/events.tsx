@@ -33,6 +33,7 @@ import {
   getPlayerFromTeamUrl,
   getTeamsUrl,
   makeTeamHeadUrl,
+  removeFromTeamUrl,
   registrationFormCRUDUrl,
   validateRegistrationReceiptUrl,
   workshopCRUDUrl,
@@ -427,6 +428,20 @@ export const makeTeamHeadAction = createAsyncThunkApi(
   }
 );
 
+export const removeFromTeamAction = createAsyncThunkApi(
+  'events/removeFromTeamAction',
+  Apis.POST,
+  removeFromTeamUrl,
+  {
+    bodyCreator: ({ receipt }) => ({
+      receipt,
+    }),
+    defaultNotification: {
+      success: 'کاربر از تیم با موفقیت حذف شد.',
+    },
+  }
+);
+
 export const getRequestMentorAction = createAsyncThunk(
   'requestMentor/getAll',
   async (arg, { rejectWithValue }) => {
@@ -746,6 +761,24 @@ const eventSlice = createSlice({
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.widgets = [...state.widgets, response];
     },
+
+
+    [removeFromTeamAction.pending.toString()]: isFetching,
+    [removeFromTeamAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg: { receipt } } }) => {
+      const newAllEventTeams = [...state.allEventTeams];
+      console.log(newAllEventTeams)
+      for (let i = 0; i < newAllEventTeams.length; i++) {
+        const team = newAllEventTeams[i];
+        for (let j = 0; j < team.members.length; j++) {
+          if (team.members[j].id === receipt) {
+            team.members.splice(j, 1);
+          }
+        }
+      }
+      state.allEventTeams = newAllEventTeams;
+      state.isFetching = false;
+    },
+    [removeFromTeamAction.rejected.toString()]: isNotFetching,
   },
 });
 

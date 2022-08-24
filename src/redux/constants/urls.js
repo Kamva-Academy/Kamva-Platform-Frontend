@@ -127,6 +127,7 @@ export const merchandiseDiscountCodeUrl = ({ merchandiseId }) =>
 // team:
 export const getTeamsUrl = ({ registrationFormId }) => registrationFormId ? `/fsm/team/?registration_form=${registrationFormId}` : '/fsm/team/';
 export const makeTeamHeadUrl = ({ teamId }) => `/fsm/team/${teamId}/make_team_head/`;
+export const removeFromTeamUrl = '/fsm/team/remove_from_team/';
 export const addUserToTeamUrl = ({ teamId }) => `fsm/team/${teamId}/register_and_join/`
 export const createTeamUrl = 'fsm/team/';
 export const addTeamsViaCSVUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/csv_registration/`;

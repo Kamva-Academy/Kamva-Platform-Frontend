@@ -18,13 +18,14 @@ import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import validateURL from '../../utils/validators/urlValidator'
-import AreYouSure from '../../components/Dialog/AreYouSure'
+import AreYouSure from '../Dialog/AreYouSure'
 
 import {
   makeTeamHeadAction,
   deleteTeamAction,
   updateTeamChatRoomLinkAction,
 } from '../../redux/slices/events';
+import TeamMember from '../atoms/TeamMember';
 
 
 const useStyles = makeStyles({
@@ -96,21 +97,13 @@ const TeamInfo = ({
           </Typography>
           <Stack spacing={1}>
             {members.length > 0 ? members.map((member) => (
-              <Grid container item key={member.id} alignItems='start' justifyContent='start'>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={team_head == member.id}
-                      onClick={() => {
-                        makeTeamHead({ receipt: member.id, teamId })
-                      }}
-                      color="primary" />
-                  }
-                  label={`${member?.first_name} ${member?.last_name}` === ' ' ? 'بی‌نام!' : `${member?.first_name} ${member?.last_name}`}
-                  labelPlacement="end"
-                />
-              </Grid>
-
+              <Box key={member.id}>
+                <TeamMember memberId={member.id}
+                  firstName={member.first_name}
+                  lastName={member.last_name}
+                  teamId={teamId}
+                  teamHead={team_head} />
+              </Box>
             ))
               :
               <Typography marginLeft='10px' marginTop='20px'>این تیم هیچ عضوی ندارد.</Typography>}
@@ -120,7 +113,7 @@ const TeamInfo = ({
           <Stack alignItems='center' width='100%' margin='0 auto' direction="column" spacing={1}>
             <Box margin='0 auto' width='100%'>
               <Box width='100%' height='10px'></Box>
-              <Divider width='100%'></Divider>
+              <Divider sx={{ width: '100%' }} />
               <Box width='100%' height='10px'></Box>
               <TextField
                 error={!linkIsValid && !(teamLink == '' || teamLink == null)}
