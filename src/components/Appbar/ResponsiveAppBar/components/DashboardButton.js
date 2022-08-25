@@ -10,13 +10,16 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function DashboardButton({ name, iconImage, to }) {
+export default function DashboardButton({ name, iconImage, to, onClick }) {
   const navigate = useNavigate();
   const classes = useStyles();
   return (
     <Button
       variant="outlined"
-      onClick={() => navigate(to)}
+      onClick={() => {
+        navigate(to);
+        onClick?.();
+      }}
       startIcon={
         iconImage ? (
           <Icon>

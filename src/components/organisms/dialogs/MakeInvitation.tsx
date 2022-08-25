@@ -6,15 +6,27 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 
-function Index({ inviteSomeone, handleClose, invitee, teamId, open }) {
+type MakeInvitationDialogPropsType = {
+  inviteSomeone: any;
+  handleClose: any;
+  invitee?: string;
+  teamId: string;
+  open: boolean;
+}
+
+const MakeInvitationDialog: FC<MakeInvitationDialogPropsType> = ({ inviteSomeone, handleClose, invitee, teamId, open }) => {
   const [phoneNumber, setPhoneNumber] = React.useState('');
 
   const sendInvitation = () => {
     if (!phoneNumber) return;
-    inviteSomeone({ teamId, invitee, username: phoneNumber });
-    handleClose();
+    inviteSomeone({ teamId, invitee, username: phoneNumber }).then((response) => {
+      if (response.type?.endsWith('fulfilled')) {
+        handleClose();
+      }
+    });
+    ;
   };
 
   const isJustDigits = (number) => {
@@ -34,6 +46,7 @@ function Index({ inviteSomeone, handleClose, invitee, teamId, open }) {
         </Typography>
         <TextField
           fullWidth
+          placeholder='مثال: 09123456789'
           variant="outlined"
           value={phoneNumber}
           onChange={(e) => {
@@ -57,4 +70,4 @@ function Index({ inviteSomeone, handleClose, invitee, teamId, open }) {
   );
 }
 
-export default Index;
+export default MakeInvitationDialog;

@@ -5,9 +5,18 @@ import React, { FC, useState } from 'react';
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 
+export const MODES = {
+  WRITE: 'WRITE',
+  VIEW: 'VIEW',
+  EDIT: 'EDIT',
+  CORRECTION: 'CORRECTION',
+};
+
 export enum WidgetModes {
   View,
   Edit,
+  Review,
+  InAnswerSheet,
 };
 
 enum WidgetTypes {
@@ -46,12 +55,11 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
   const Cover = coveredWithPaper
-    ?
-    (props) =>
-      <Paper elevation={2}
-        sx={{ padding: 1 }}>{props.children}</Paper>
-    :
-    (props) => <>{props.children}</>
+    ? (props) =>
+      <Paper elevation={2} sx={{ padding: 1 }}>
+        {props.children}
+      </Paper>
+    : (props) => props.children
 
   return (
     <Cover>
@@ -59,7 +67,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
         <Stack>
           <Stack direction='row' alignItems='center' justifyContent='space-between'>
             <Typography variant='h3' gutterBottom>
-              {widget.name ? widget.name : 'بی‌نام'}
+              {/* {widget.name ? widget.name : 'بی‌نام'} */}
             </Typography>
             <Box>
               <Tooltip title='ویرایش ویجت' arrow>
@@ -91,7 +99,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
           />
         </Stack>
       }
-      <WidgetComponent  {...widget} mode={mode} />
+      <WidgetComponent {...widget} mode={mode} {...props} />
     </Cover>
   );
 };

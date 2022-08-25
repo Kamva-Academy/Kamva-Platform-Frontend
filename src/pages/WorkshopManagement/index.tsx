@@ -11,6 +11,12 @@ import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useParams } from 'react-router-dom';
 import('../../types/models')
+import ClassIcon from '@mui/icons-material/Class';
+import PersonIcon from '@mui/icons-material/Person';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
+import InfoIcon from '@mui/icons-material/Info';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
 import {
   getEventTeamsAction,
@@ -25,7 +31,8 @@ import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
-import { Workshop, Event } from '../../types/models';
+import { Workshop, EventType } from '../../types/models';
+import Mentors from './Mentors';
 
 
 type EventPropsType = {
@@ -33,7 +40,7 @@ type EventPropsType = {
   getOneEventInfo: Function,
   getOneWorkshopsInfo: Function,
   workshop: Workshop,
-  event: Event,
+  event: EventType,
 }
 
 const EventComponent: FC<EventPropsType> = ({
@@ -46,21 +53,26 @@ const EventComponent: FC<EventPropsType> = ({
   const t = useTranslate();
   const { fsmId, eventId } = useParams();
   const [tabIndex, setTabIndex] = useState(0);
-  const [tabs, setTabs] = useState<{ label: string; icon: string; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
+  const [tabs, setTabs] = useState<{ label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
       label: 'اطلاعات کلی',
-      icon: '',
+      icon: InfoIcon,
       component: Info,
     },
     {
       label: 'طراحی',
-      icon: '',
+      icon: DesignServicesIcon,
       component: Design,
     },
     {
       label: 'یال‌ها',
-      icon: '',
+      icon: TimelineIcon,
       component: Edges,
+    },
+    {
+      label: 'همیارها',
+      icon: PersonIcon,
+      component: Mentors,
     },
   ])
 
@@ -72,27 +84,27 @@ const EventComponent: FC<EventPropsType> = ({
 
   useEffect(() => {
     if (workshop?.fsm_learning_type == 'Supervised') {
-      if (workshop?.fsm_p_type == 'Team' && !tabs.some(tab => tab.label == 'درخواست‌های تیمی')) {
+      if (workshop?.fsm_p_type == 'Team') {
         setTabs([
           ...tabs,
           {
-            label: 'درخواست‌های تیمی',
-            icon: '',
+            label: 'درخواست‌ها',
+            icon: QuestionAnswerIcon,
             component: TeamRequests,
           },
         ])
-      } else if (workshop?.fsm_p_type == 'Individual' && !tabs.some(tab => tab.label == 'درخواست‌های فردی')) {
+      } else if (workshop?.fsm_p_type == 'Individual') {
         setTabs([
           ...tabs,
           {
-            label: 'درخواست‌های فردی',
-            icon: '',
+            label: 'درخواست‌ها',
+            icon: QuestionAnswerIcon,
             component: IndividualRequests,
           },
         ])
       }
     }
-  }, [workshop])
+  }, [workshop?.fsm_p_type])
 
   useEffect(() => {
     if (event?.registration_form) {
@@ -110,7 +122,7 @@ const EventComponent: FC<EventPropsType> = ({
                 <Button
                   key={index}
                   onClick={() => setTabIndex(index)}
-                  variant={tabIndex == index ? 'contained' : 'outlined' }
+                  variant={tabIndex == index ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>

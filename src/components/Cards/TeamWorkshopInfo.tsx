@@ -13,11 +13,15 @@ import {
   Stack,
   Tooltip,
   Typography,
+  SvgIcon,
+  IconButton,
 } from '@mui/material';
 import { NotificationsActive } from '@mui/icons-material';
 import React, { FC, useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 import {
   deleteRequestMentorAction,
@@ -28,8 +32,11 @@ import { Mentor } from '../../types/models';
 import { stringToColor } from '../../utils/stringToColor'
 import { getTeamStateSubscription, getTeamState } from '../../parse/team';
 import { e2p } from '../../utils/translateNumber';
-
-var moment = require( 'moment' );
+import {
+  announceMentorDeparture, getMentorsInRoom,
+  getMentorsInRoomSubscription
+} from '../../parse/mentorsInRoom';
+var moment = require('moment');
 
 type TeamWorkshopInfoPropsType = {
   name: string,
@@ -42,7 +49,9 @@ type TeamWorkshopInfoPropsType = {
   getPlayerFromTeam: Function,
   mentorsInRoom: Mentor[],
   startProblemTime: string,
-  teamStage: String
+  teamStage: String,
+  isStarred: Boolean,
+  toggleStar: Function
 }
 
 const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
@@ -54,43 +63,97 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   playerIdFromRedux,
   deleteRequestMentor,
   getPlayerFromTeam,
-  mentorsInRoom = [{ name: 'iman alipour', id: 0 }, { name: 'alireza hashemi', id: 1 }, { name: 'x y', id: 2 }, { name: 'z p', id: 3 }],
+  isStarred,
+  toggleStar,
 }) => {
-  const navigate = useNavigate()
   const { eventId, fsmId } = useParams();
   const [click, setClick] = useState(false);
-  const subscriberRef = useRef(null);
-  const [teamEnterTimeToStage, setTeamEnterTimeToStage] = useState('')
-  const [currnetStageName, setCurrnetStageName] = useState('')
+  const stateChangeSubscriberRef = useRef(null);
+  const mentorsInRoomSubscriberRef = useRef(null);
+  const [teamEnterTimeToState, setTeamEnterTimeToState] = useState('')
+  const [currentStateName, setCurrentStateName] = useState('')
+  const [mentorsInRoom, setMentorsInRoom] = useState([]);
+  const [showStarAnimation, setShowStarAnimation] = useState(false)
+
+
+  useEffect(() => setShowStarAnimation(false), [])
+
+  // useEffect(() => {
+  //   const subscribeOnMentorArrival = async () => {
+  //     const mentorsInRoom = await getMentorsInRoom(teamId)
+  //     await checkForOfflineMentors();
+  //     setMentorsInRoom(mentorsInRoom);
+  //     const subscriber = await getMentorsInRoomSubscription(teamId);
+  //     subscriber.on('create', async (newState) => {
+  //       if (newState.get('uuid') === teamId) {
+  //         setMentorsInRoom(await getMentorsInRoom(teamId));
+  //       }
+  //     });
+  //     subscriber.on('update', async (newState) => {
+  //       if (newState.get('uuid') === teamId) {
+  //         setMentorsInRoom(await getMentorsInRoom(teamId))
+  //       }
+  //     });
+  //     mentorsInRoomSubscriberRef.current = subscriber;
+  //   }
+  //   subscribeOnMentorArrival();
+  //   return (() => {
+  //     mentorsInRoomSubscriberRef.current?.unsubscribe();
+  //   })
+  // }, [])
+
+  const checkForOfflineMentors = async () => {
+    for (let i = 0; i < mentorsInRoom.length; i++) {
+      if (Math.abs(moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds()) > 20000) {
+        await announceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
+      }
+    }
+  }
+
+  // useEffect(() => {
+  //   let updateInterval
+  //   if (mentorsInRoom?.length > 0) {
+  //     updateInterval = setInterval(checkForOfflineMentors, 10000)
+  //   }
+
+  //   return (() => {
+  //     if (updateInterval) {
+  //       clearInterval(updateInterval)
+  //     }
+  //   })
+  // }, [mentorsInRoom])
 
   useEffect(() => {
-    const subscribe = async () => {
+    const subscribeOnStateChange = async () => {
       const state = await getTeamState(teamId);
-      if(!state)  return;
-      setCurrnetStageName(state.get('currnetStageName'))
-      setTeamEnterTimeToStage(state.get('teamEnterTimeToStage'))
+      if (!state) {
+        return
+      };
+      setCurrentStateName(state.get('currentStateName'))
+      setTeamEnterTimeToState(state.get('teamEnterTimeToState'))
       const subscriber = await getTeamStateSubscription();
       subscriber.on('create', (newState) => {
-        if (newState.get('uuid') === teamId){
-          const currnetStageNameTmp = newState.get('currnetStageName');
-          const teamEnterTimeToStageTmp = moment()
-          setCurrnetStageName(currnetStageNameTmp)
-          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+        if (newState.get('uuid') === teamId) {
+          const currentStageNameTmp = newState.get('currentStateName');
+          const teamEnterTimeToStateTmp = moment()
+          setCurrentStateName(currentStageNameTmp)
+          setTeamEnterTimeToState(teamEnterTimeToStateTmp)
         }
       });
       subscriber.on('update', (newState) => {
-        if (newState.get('uuid') === teamId){
-          const currnetStageNameTmp = newState.get('currnetStageName');
-          const teamEnterTimeToStageTmp = moment()
-          setCurrnetStageName(currnetStageNameTmp)
-          setTeamEnterTimeToStage(teamEnterTimeToStageTmp)
+        if (newState.get('uuid') === teamId) {
+          const currentStageNameTmp = newState.get('currentStateName');
+          const teamEnterTimeToStateTmp = moment()
+          setCurrentStateName(currentStageNameTmp)
+          setTeamEnterTimeToState(teamEnterTimeToStateTmp)
         }
       });
-      subscriberRef.current = subscriber;
+      stateChangeSubscriberRef.current = subscriber;
     }
-    subscribe()
+    subscribeOnStateChange()
+
     return () => {
-      subscriberRef.current?.unsubscribe();
+      stateChangeSubscriberRef.current?.unsubscribe();
     };
   }, []);
 
@@ -106,12 +169,11 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   useEffect(() => {
     if ((playerId || playerIdFromRedux) && click) {
       setClick(false);
-      navigate(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}`);
+      window.open(`/event/${eventId}/workshop/${fsmId}?playerId=${playerId || playerIdFromRedux}&teamId=${teamId}`, '_blank');
     }
   }, [playerId, click, playerIdFromRedux])
 
   return (
-
     <Card /* main team card coomponent*/
       sx={{
         maxWidth: 300,
@@ -147,8 +209,12 @@ available playerId field, otherwise we fetch one team members Id and use it to a
             alignItems: 'center'
           }}
         >
-          {playerId ? <NotificationsActive sx={{ animation: "bellRing 1.4s infinite", width: "40px" }} color="primary" /> : <Box />}
-          {mentorsInRoom.length > 0 ?
+          {playerId ?
+            <NotificationsActive sx={{ animation: "bellRing 1.4s infinite" }} color="primary" />
+            :
+            <SvgIcon sx={{ ...(isStarred ? { color: 'gold' } : { color: '#fea91a' }), ...((showStarAnimation && isStarred) && { animation: "starred 0.9s 1" }) }} onClick={() => { setShowStarAnimation(true); toggleStar(teamId); }} component={isStarred ? StarIcon : StarBorderIcon} />
+          }
+          {mentorsInRoom?.length > 0 ?
             <Stack direction="row" sx={{ justifyContent: 'start', alignItems: "center" }}>
               <Typography sx={{ fontSize: "8px", margin: '10px' }}>
                 {`همیاران: `}
@@ -160,15 +226,16 @@ available playerId field, otherwise we fetch one team members Id and use it to a
                   '& .MuiAvatar-root': { width: 26, height: 26, fontSize: 12, backgroundColor: "#0088aa" },
                 }}
               >
-                {mentorsInRoom.map((mentor: Mentor) =>
-                  <Tooltip key={mentor.id} title={mentor.name} arrow>
+                {mentorsInRoom.map((mentor: any) => {
+                  return <Tooltip key={mentor.get('MentorId')} title={mentor.get('MentorName')} arrow>
                     <Avatar
                       sx={{
-                        backgroundColor: `${stringToColor(mentor.name)} !important`,
+                        backgroundColor: `${stringToColor(mentor.get('MentorName'))} !important`,
                       }}
-                      alt={mentor.name}
-                      src={mentor.profilePicturePath || '/margbarmuimargbarmui'} />
+                      alt={mentor.get('MentorName')}
+                      src={mentor.get('MentorProfilePictureSrc') || '/margbarmuimargbarmui'} />
                   </Tooltip>
+                }
                 )}
               </AvatarGroup>
             </Stack>
@@ -181,7 +248,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
 
         <CardActionArea disabled> {/* this action holds each cards name and members */}
           <CardContent sx={{ paddingBottom: '0px' }}>
-            <Typography gutterBottom variant="h3">
+            <Typography marginLeft='5px' gutterBottom variant="h3">
               {name}
             </Typography>
             <Grid container direction="row" justifyContent="start">
@@ -217,21 +284,22 @@ available playerId field, otherwise we fetch one team members Id and use it to a
               justifyContent: 'end',
             })}
           >
-            {teamEnterTimeToStage && <>
+            <>
               <Divider sx={{ margin: '15px auto 15px auto', width: '80%' }}></Divider>
               <Stack direction={'row'} sx={{ justifyContent: "space-between", fontSize: '10px', padding: '0 0 10px 0', alignItems: 'center' }}> {/* this stack is for time chip and the level team is in */}
                 <Box>
-                  {currnetStageName ? `گام: ${currnetStageName}` : 'تیم هنوز وارد هیچ گامی نشده است'}
+                  {currentStateName ? `گام: ${currentStateName}` : 'تیم هنوز وارد کارگاه نشده است.'}
                 </Box>
-                <Tooltip title={'زمان حضور تیم در این گام'} arrow>
+                {teamEnterTimeToState && <Tooltip title={'زمان حضور تیم در این گام'} arrow>
                   <span>
                     <Button disabled sx={{ padding: 0 }}>
-                      <TimeChip startTime={teamEnterTimeToStage} />
+                      <TimeChip startTime={teamEnterTimeToState} />
                     </Button>
                   </span>
-                </Tooltip>
+                </Tooltip>}
               </Stack>
-            </>}
+            </>
+
             {playerId ? (
               <Button
                 variant="contained"

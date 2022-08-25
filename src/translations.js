@@ -143,7 +143,7 @@ const dictionary = {
       options: 'گزینه‌ها',
       back: 'بازگشت',
       longAnswerQuestion: 'سوال توضیحی',
-      shortAnswerQuestion: 'سوال کوتاه پاسخ',
+      shortAnswerQuestion: 'سوال کوتاه‌پاسخ',
       multipleChoiceQuestions: 'سوال چند گزینه‌ای',
       writeQuestionAndAnswer: 'صورت سوال و پاسخ آن را وارد کنید.',
       wantRemoveWidget: 'آیا مایل به حذف این ویجت هستید؟',

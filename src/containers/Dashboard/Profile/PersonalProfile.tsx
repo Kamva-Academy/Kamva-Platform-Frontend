@@ -198,8 +198,13 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            disabled={true}
+            // disabled={true}
             value={profile?.phone_number}
+            onChange={(e) => {
+              if (isJustDigits(e.target.value)) {
+                handleProfileChange(e);
+              }
+            }}
             name="phone_number"
             inputProps={{ className: 'ltr-input' }}
             label="شماره موبایل"

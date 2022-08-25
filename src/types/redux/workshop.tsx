@@ -5,11 +5,12 @@ import {
     Workshop,
     Widget,
     Answer,
-    Player
+    Player,
+    Mentor
 } 
 from '../models'
 
-export type InitialState = {
+export type InitialStateType = {
     currentState: CurrentState,
     isFetching: boolean,
     allStates: State[],
@@ -22,6 +23,7 @@ export type InitialState = {
     answers: Answer[],
     allWorkshops: Workshop[],
     players: Player,
+    allWorkshopMentors: Mentor[],
   };
 
 type CurrentState = {

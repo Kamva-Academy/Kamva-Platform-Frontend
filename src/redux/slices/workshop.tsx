@@ -14,13 +14,12 @@ import {
   stateCRUDUrl,
   teamCRUDUrl,
   workshopCRUDUrl,
+  getAllWorkshopMentors,
+  removeMentorURL,
 } from '../constants/urls';
-import {
-  createWidgetAction,
-} from './widget';
-import { InitialState } from '../../types/redux/workshop';
+import { InitialStateType } from '../../types/redux/workshop';
 
-const initialState: InitialState = {
+const initialState: InitialStateType = {
   currentState: {
     widgets: [],
   },
@@ -35,6 +34,7 @@ const initialState: InitialState = {
   answers: [],
   allWorkshops: [],
   players: null,
+  allWorkshopMentors: [],
 };
 
 export const getOneWorkshopAction = createAsyncThunkApi(
@@ -179,6 +179,27 @@ export const removeEdgeAction = createAsyncThunkApi(
   }
 );
 
+export const getAllWorkshopMentorsAction = createAsyncThunkApi(
+  'account/getAllWorkshopMentorsAction',
+  Apis.GET,
+  getAllWorkshopMentors
+);
+
+export const removeMentorFromWorkshopAction = createAsyncThunkApi(
+  'events/removeMentorFromWorkshopAction',
+  Apis.POST,
+  removeMentorURL,
+  {
+    bodyCreator: ({ mentor }) => ({
+      ...mentor
+    }),
+    defaultNotification: {
+      success: 'همیار با موفقیت از کارگاه حذف شد',
+      error: 'اشکالی در حذف همیار از کارگاه رخداد.'
+    },
+  }
+);
+
 const IndexSlice = createSlice({
   name: 'workshop',
   initialState,
@@ -264,17 +285,6 @@ const IndexSlice = createSlice({
     },
     [removeStateAction.rejected.toString()]: isNotFetching,
 
-
-    [createWidgetAction.pending.toString()]: isFetching,
-    [createWidgetAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
-      state.currentState.widgets = [...state.currentState.widgets, response];
-      state.isFetching = false;
-    },
-    [createWidgetAction.rejected.toString()]: isNotFetching,
-
     [getAllWorkshopEdgesAction.pending.toString()]: isFetching,
     [getAllWorkshopEdgesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.allWorkshopEdges = response;
@@ -333,6 +343,13 @@ const IndexSlice = createSlice({
       state.isFetching = false;
     },
     [getFSMPlayersAction.rejected.toString()]: isNotFetching,
+
+    [getAllWorkshopMentorsAction.pending.toString()]: isFetching,
+    [getAllWorkshopMentorsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.allWorkshopMentors = response;
+      state.isFetching = false;
+    },
+    [getAllWorkshopMentorsAction.rejected.toString()]: isNotFetching,
   },
 });
 

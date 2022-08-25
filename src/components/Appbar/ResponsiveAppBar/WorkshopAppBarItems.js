@@ -37,36 +37,25 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const mobileRightItems = [];
   const mobileMenuListItems = [];
 
-  if (workshop?.first_state?.is_exam && !isMentor) {
+  if (workshop?.first_state?.is_exam) {
     desktopLeftItems.push(reviewAnswers);
     mobileMenuListItems.push(reviewAnswers);
   }
 
-  if (isMentor) {
-    if (workshop?.fsm_p_type == 'Individual') {
-      desktopRightItems.push(userAvatar);
-    } else {
-      desktopRightItems.push(teamAvatar);
-    }
-    desktopLeftItems.push([chatRoomButton]);
-    desktopRightItems.push([whiteboardButton,]);
-    mobileLeftItems.push([chatRoomButton]);
-    mobileRightItems.push([whiteboardButton,]);
+  if (workshop?.fsm_p_type == 'Individual') {
+    desktopRightItems.push(userAvatar);
   } else {
-    if (workshop?.fsm_p_type == 'Individual') {
-      desktopRightItems.push(userAvatar);
-    } else {
-      desktopRightItems.push(teamAvatar);
-    }
-    if (workshop?.fsm_learning_type == 'Supervised') {
-      desktopLeftItems.push([whiteboardButton, mentorButton]);
-      desktopRightItems.push([chatRoomButton, backToEventButton]);
-      mobileLeftItems.push([whiteboardButton, mentorButton]);
-      mobileRightItems.push([chatRoomButton]);
-    } else {
-      desktopLeftItems.push(backToEventButton)
-    }
+    desktopRightItems.push(teamAvatar);
   }
+  if (workshop?.fsm_learning_type == 'Supervised') {
+    desktopLeftItems.push([whiteboardButton, mentorButton]);
+    desktopRightItems.push([chatRoomButton, backToEventButton]);
+    mobileLeftItems.push([whiteboardButton, mentorButton]);
+    mobileRightItems.push([chatRoomButton]);
+  } else {
+    desktopLeftItems.push(backToEventButton)
+  }
+
 
 
   mobileMenuListItems.push(backToEventButton);
