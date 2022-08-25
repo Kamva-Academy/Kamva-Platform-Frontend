@@ -42,48 +42,48 @@ const EditHints: FC<EditHintsPropsType> = ({
         {'راهنمایی‌ها'}
       </Typography>
       <Divider />
-      <Stack>
+      {newHints.length > 0 ?
         <Grid container alignItems='stretch' spacing={2}>
-          {newHints.length > 0 ?
-            newHints.map((hint, index) => (
-              <Grid item key={index} xs={12} md={6}>
-                <Paper sx={{ padding: 1 }} key={hint.id} elevation={5}>
-                  <Stack spacing={1}>
-                    <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                      <Typography>{t('helpNumber') + " " + (index + 1)}</Typography>
-                      <Box>
-                        <Tooltip title='حذف راهنمایی' arrow>
-                          <IconButton size='small' onClick={() => setDeleteDialogId(hint.id)}>
-                            <DeleteIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </Box>
-                    </Stack>
-                    {hint.widgets.map((widget) => (
-                      <Widget
-                        key={widget.id}
-                        stateId={hint.id}
-                        widget={widget}
-                        mode={WidgetModes.Edit}
-                      />
-                    ))}
-                    <Button
-                      startIcon={<AddIcon />}
-                      variant="contained"
-                      color="primary"
-                      onClick={() => setHintId(hint.id)}>
-                      {t('createWidget')}
-                    </Button>
+          {newHints.map((hint, index) => (
+            <Grid item key={index} xs={12} md={6}>
+              <Paper sx={{ padding: 1 }} key={hint.id} elevation={5}>
+                <Stack spacing={1}>
+                  <Stack direction='row' alignItems='center' justifyContent='space-between'>
+                    <Typography>{t('helpNumber') + " " + (index + 1)}</Typography>
+                    <Box>
+                      <Tooltip title='حذف راهنمایی' arrow>
+                        <IconButton size='small' onClick={() => setDeleteDialogId(hint.id)}>
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </Box>
                   </Stack>
-                </Paper>
-              </Grid>
-            ))
-            :
-            <Box m={2}>
-              <Typography variant='h4' align="center">{'موردی وجود ندارد!'}</Typography>
-            </Box>}
+                  {hint.widgets.map((widget) => (
+                    <Widget
+                      key={widget.id}
+                      stateId={hint.id}
+                      widget={widget}
+                      mode={WidgetModes.Edit}
+                    />
+                  ))}
+                  <Button
+                    startIcon={<AddIcon />}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setHintId(hint.id)}>
+                    {t('createWidget')}
+                  </Button>
+                </Stack>
+              </Paper>
+            </Grid>
+          ))
+          }
         </Grid>
-      </Stack>
+        :
+        <Box mt={2}>
+          <Typography variant='h4' align="center">{'موردی وجود ندارد!'}</Typography>
+        </Box>
+      }
       <Button
         fullWidth
         startIcon={<AddIcon />}

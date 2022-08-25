@@ -29,6 +29,7 @@ type AppbarPropsType = {
   showBackOnScroll: boolean;
   hideOnScroll: boolean;
   position: "fixed" | "absolute" | "sticky" | "static" | "relative";
+  mentorId: string;
 }
 
 const ResponsiveAppBar: FC<AppbarPropsType> = ({
@@ -40,6 +41,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   showBackOnScroll = false,
   hideOnScroll = false,
   position = 'fixed',
+  mentorId,
 }) => {
   const { eventId } = useParams();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -58,7 +60,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = modes[mode]({ workshop, event, isMentor });
+  } = modes[mode]({ workshop, event, isMentor, mentorId });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
@@ -134,6 +136,7 @@ const mapStateToProps = (state) => ({
   isMentor: state.account.userAccount?.is_mentor,
   event: state.events.event,
   workshop: state.workshop.workshop,
+  mentorId: state.account.userAccount?.id,
 })
 
 export default connect(mapStateToProps, {

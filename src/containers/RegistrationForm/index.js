@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Paper, Stack, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import {
 } from '../../redux/slices/events';
 import Layout from '../Layout';
 import Info from './Info';
+import { WidgetModes } from '../../components/Widget';
 
 const ANSWER_TYPES = {
   SmallAnswerProblem: 'SmallAnswer',
@@ -45,12 +46,17 @@ const RegistrationForm = ({
     }
   }, [event?.registration_form]);
 
+  if (event?.is_user_participating) {
+    navigate(`/event/${eventId}/`);
+  }
 
   if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
     navigate(`/event/${eventId}/status/`);
   }
 
-  const doRegister = () => {
+  // todo: DeadlineMissed
+
+  const submit = () => {
     submitRegistrationForm({
       id: event?.registration_form,
       answers,
@@ -58,35 +64,55 @@ const RegistrationForm = ({
     });
   };
 
-  // DeadlineMissed
-
-  const pushAnswer = (problemId, widgetType) => (fieldName, answer) => {
-    const temporaryAnswer = [...answers];
-    let doesFind = false;
-    for (let i = 0; i < temporaryAnswer.length; i++) {
-      // todo: remove answer_type from world :/
-      if (temporaryAnswer[i].answer_type === widgetType && temporaryAnswer[i].problem === problemId) {
-        if (answer) {
-          temporaryAnswer[i] = {
-            ...temporaryAnswer[i],
-            [fieldName]: answer,
-          };
-        } else {
-          temporaryAnswer.splice(i, 1);
+  const collectAnswers = (problemId, widgetType) => (fieldName, answer) => {
+    setAnswers((answers) => {
+      const temporaryAnswers = [...answers];
+      let isFound = false;
+      for (let i = 0; i < temporaryAnswers.length; i++) {
+        if (temporaryAnswers[i].problem === problemId) {
+          if (answer) {
+            temporaryAnswers[i] = {
+              ...temporaryAnswers[i],
+              [fieldName]: answer,
+            };
+          } else {
+            temporaryAnswers.splice(i, 1);
+          }
+          isFound = true;
+          break;
         }
-        doesFind = true;
-        break;
       }
-    }
-    if (!doesFind) {
-      temporaryAnswer.push({
-        [fieldName]: answer,
-        answer_type: widgetType,
-        problem: problemId,
-      });
-    }
-    setAnswers(temporaryAnswer);
+      if (!isFound) {
+        temporaryAnswers.push({
+          [fieldName]: answer,
+          answer_type: widgetType,
+          problem: problemId,
+        });
+      }
+      return temporaryAnswers
+    })
   };
+
+  const widgets = useMemo(() => {
+    if (registrationForm.widgets) {
+      return (
+        registrationForm.widgets.map((widget) => (
+          <Box key={widget.id}>
+            <Widget
+              mode={WidgetModes.InAnswerSheet}
+              disabled={isFetching}
+              collectAnswers={collectAnswers(
+                widget?.id,
+                ANSWER_TYPES[widget?.widget_type]
+              )}
+              widget={widget}
+            />
+          </Box>
+        )))
+    } else {
+      return []
+    }
+  }, [registrationForm.widgets]);
 
   return (
     <Layout>
@@ -98,18 +124,7 @@ const RegistrationForm = ({
           sx={{ padding: 2 }}
           spacing={2}
         >
-          {registrationForm?.widgets?.map((widget) => (
-            <Box key={widget.id}>
-              <Widget
-                disabled={isFetching}
-                pushAnswer={pushAnswer(
-                  widget?.id,
-                  ANSWER_TYPES[widget?.widget_type]
-                )}
-                widget={widget}
-              />
-            </Box>
-          ))}
+          {widgets}
           {event?.user_registration_status == 'DeadlineMissed' ?
             <Typography variant='h4' color='error' align="center" gutterBottom>
               {'مهلت ثبت‌نام در رویداد پایان یافته است.'}
@@ -156,7 +171,7 @@ const RegistrationForm = ({
         handleClose={() => {
           setDialogStatus(!isDialogOpen);
         }}
-        callBackFunction={doRegister}
+        callBackFunction={submit}
       />
     </Layout >
   );
@@ -182,7 +197,6 @@ const checkPermission = (audienceType, userProfile = {}) => {
   if (!first_name || !last_name || !national_code || !birth_date || !gender || !province || !city) {
     return false;
   }
-
 
   if (audienceType == 'Student') {
     const { grade, school } = userProfile?.school_studentship;

@@ -21,8 +21,8 @@ const changeTeamStateBroadcastAction = createAsyncThunk(
     await changeTeamState({
       stateId: current_state.id.toString(),
       uuid: teamId,
-      currnetStageName: current_state.name,
-      teamEnterTimeToStage: moment().format('HH:mm:ss')
+      currentStateName: current_state.name,
+      teamEnterTimeToState: moment().format('HH:mm:ss')
     });
   }
 );
@@ -139,7 +139,6 @@ const getNewState = (state, { payload: { response } }) => {
 };
 
 const getPlayer = (state, { payload: { response } }) => {
-  console.log(response)
   state.needUpdateState = false;
   state.workshopId = response.fsm;
   state.playerId = response.id;

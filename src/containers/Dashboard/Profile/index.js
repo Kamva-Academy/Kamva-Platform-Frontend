@@ -108,7 +108,7 @@ const Index = ({
           </Grid>
           {eventId &&
             <>
-              <Grid item>
+              {/* <Grid item>
                 {event?.audience_type == 'Student' ? (
                   <Typography variant='h3' color='error'>
                     {'تکمیل موارد ستاره‌دار در هر دو قسمت «مشخصات فردی» و «مشخصات دانش‌آموزی» الزامی است.'}
@@ -122,7 +122,7 @@ const Index = ({
                     {'تکمیل موارد ستاره‌دار را الزامی است.'}
                   </Typography>
                 ))}
-              </Grid>
+              </Grid> */}
               <Grid item>
                 <Button onClick={() => navigate(`/event/${eventId}/`)} fullWidth variant='outlined'>
                   {'بازگشت به رویداد'}

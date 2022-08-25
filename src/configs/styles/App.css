@@ -73,3 +73,9 @@ input.rtl-placeholder::placeholder,
   80%  { transform: scale(2); }
   100%  { transform: scale(1); }
 }
+
+@keyframes starred {
+  0%  { }
+  50%  { transform: scale(1.5); }
+  100%  { transform: scale(1); }
+}
