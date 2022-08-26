@@ -82,9 +82,9 @@ const Teams: FC<TeamPropsType> = ({
 
   }, [eventTeams, starredTeams])
 
-  // if (!teamsRequests){
-  //   return <></>
-  // }
+  if (!teamsRequests){
+    return <></>
+  }
 
   const reqTeams = 
       teams.filter(

@@ -174,7 +174,7 @@ available playerId field, otherwise we fetch one team members Id and use it to a
   }, [playerId, click, playerIdFromRedux])
 
   return (
-    <Card /* main team card coomponent*/
+    <Card /* main team card component*/
       sx={{
         maxWidth: 300,
         marginTop: '0px',
