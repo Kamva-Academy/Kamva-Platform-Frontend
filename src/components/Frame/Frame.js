@@ -37,7 +37,19 @@ export default function Frame({
     // todo: fix TOF:
     setTimeout(() => {
       fixHeight();
-    }, 1000)
+    }, 100)
+    for (let i = 1; i <= 7; i++) {
+      setTimeout(() => {
+        fixHeight();
+      }, 300 * i)
+    }
+    setTimeout(() => {
+      fixHeight();
+    }, 5000)
+    setTimeout(() => {
+      fixHeight();
+    }, 10000)
+    // end of TOF
 
   }, [doc, content, fixHeight]);
 
