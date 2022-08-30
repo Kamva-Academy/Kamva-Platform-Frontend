@@ -25,6 +25,7 @@ type TeamMemberPropsType = {
   lastName: string;
   teamId: string;
   teamHead: number;
+  username: string;
 
   makeTeamHead: any;
   removeFromTeam: any;
@@ -36,6 +37,7 @@ const TeamMember: FC<TeamMemberPropsType> = ({
   lastName,
   teamId,
   teamHead,
+  username,
 
   makeTeamHead,
   removeFromTeam,
@@ -67,7 +69,7 @@ const TeamMember: FC<TeamMemberPropsType> = ({
               }}
               color="primary" />
           }
-          label={`${firstName} ${lastName}` === ' ' ? 'بی‌نام!' : `${firstName} ${lastName}`}
+          label={`${firstName} ${lastName}` === ' ' ? 'بی‌نام!' : `${firstName} ${lastName} (${username})`}
           labelPlacement="end"
         />
         <IconButton onClick={handleClick}>

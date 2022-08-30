@@ -29,9 +29,6 @@ import TeamMember from '../atoms/TeamMember';
 
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 400,
-  },
   icon: {
     textAlign: 'center',
   },
@@ -67,7 +64,7 @@ const TeamInfo = ({
 
   return (
     <>
-      <Card className={classes.root}
+      <Card
         sx={{
           maxWidth: 300,
           margin: '0px auto',
@@ -95,13 +92,14 @@ const TeamInfo = ({
           <Typography gutterBottom variant="h3" align="center">
             {name}
           </Typography>
-          <Stack spacing={1}>
+          <Stack spacing={2}>
             {members.length > 0 ? members.map((member) => (
               <Box key={member.id}>
                 <TeamMember memberId={member.id}
                   firstName={member.first_name}
                   lastName={member.last_name}
                   teamId={teamId}
+                  username={member.username}
                   teamHead={team_head} />
               </Box>
             ))
