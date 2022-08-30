@@ -33,7 +33,7 @@ function Teams({
 }) {
   const { fsmId } = useParams();
   const [newTeamName, setNewTeamName] = useState('');
-  const [userPhoneNumber, setUserPhoneNumber] = useState('');
+  const [username, setUserName] = useState(null);
   const [selectedTeamId, setSelectedTeamId] = useState('');
 
   const doCreateTeam = () => {
@@ -41,7 +41,7 @@ function Teams({
   }
 
   const doAddUserToTeam = () => {
-    addUserToTeam({ teamId: selectedTeamId, phone_number: userPhoneNumber })
+    addUserToTeam({ teamId: selectedTeamId, username })
   }
 
   return (
@@ -93,13 +93,13 @@ function Teams({
         <Grid item container xs spacing={1}>
           <Grid item xs={12} sm={4}>
             <TextField
-              value={userPhoneNumber}
+              value={username}
               size="small"
               fullWidth
               variant="outlined"
-              label="شماره تلفن"
+              label="نام کاربری"
               inputProps={{ className: 'ltr-input' }}
-              onChange={(e) => { setUserPhoneNumber(e.target.value) }}
+              onChange={(e) => { setUserName(e.target.value) }}
             />
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -116,7 +116,7 @@ function Teams({
           </Grid>
           <Grid item xs={12} sm={4}>
             <Button
-              disabled={!userPhoneNumber || !selectedTeamId}
+              disabled={!username || !selectedTeamId}
               fullWidth
               variant="contained"
               color="primary"
