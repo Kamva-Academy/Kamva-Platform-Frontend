@@ -25,7 +25,7 @@ import JoinMentor from '../containers/JoinMentor';
 const Root = () => {
   return (
     <Routes>
-      {/* <Route path="/loading/"></Route>
+      <Route path="/loading/"></Route>
 
       <Route path="/about_us" element={<AboutUs />} />
 
@@ -68,7 +68,7 @@ const Root = () => {
         
         <Route path="/watch/:playerId/" element={<Workshop />} />
         <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
-      </Route> */}
+      </Route>
 
       <Route path="*" element={<Landing />} />
     </Routes>

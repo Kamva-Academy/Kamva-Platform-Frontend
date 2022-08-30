@@ -31,15 +31,15 @@ const Index = () => {
           md={6}>
           <Grid item>
             <Typography variant="h1" align="center">
-              آیدی‌کارت من کو؟
+              کاموا
             </Typography>
           </Grid>
           <Grid item>
             <Typography variant="h2" align="center">
-              تا آیدی‌کارتو نگیریم، آروم نمی‌گیگیریم
+              بستر برگزاری رویداد و کارگاه آنلاین
             </Typography>
           </Grid>
-          {/* <Grid item>
+          <Grid item>
             <ButtonGroup size="large" variant="contained" color="primary">
               <Button onClick={() => navigate(appendPreviousParams("/login"))}>
                 ورود
@@ -48,16 +48,16 @@ const Index = () => {
                 ثبت‌نام
               </Button>
             </ButtonGroup>
-          </Grid> */}
+          </Grid>
         </Grid>
-        {/* <Button size="large" variant="contained" color="primary"
+        <Button size="large" variant="contained" color="primary"
           sx={{
             position: 'fixed',
             bottom: 20,
             left: 20,
           }} onClick={() => navigate(appendPreviousParams("/about_us"))}>
           درباره‌ی کاموا
-        </Button> */}
+        </Button>
       </Grid>
     </Container>
   );
