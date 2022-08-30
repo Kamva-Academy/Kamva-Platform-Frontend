@@ -168,7 +168,7 @@ const Workshop = ({
       <Container component="main"
         sx={{
           background: '#F7F9FC',
-          height: '100%'
+          minHeight: '100%'
         }}>
 
         <ResponsiveAppBar mode={isMentor ? "MENTOR_WORKSHOP" : "WORKSHOP"} />
