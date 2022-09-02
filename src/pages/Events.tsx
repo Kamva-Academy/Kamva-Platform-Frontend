@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from '@mui/material';
+import { Divider, Grid, Typography, Skeleton } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ import {
 } from '../redux/slices/workshop';
 import Layout from '../containers/Layout';
 import { EventType } from '../types/models';
+import EventSkeletonCard from '../components/Cards/EventSkeletonCard';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -56,14 +57,50 @@ const Events = ({
   registrableWorkshops,
 }) => {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
     getAllEventsInfo();
     getRegistrableWorkshops();
+
+    // TODO: improve timing for skeleton
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
   const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
   const inactiveEvents: EventType[] = events.filter((event: EventType) => !event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
+
+  const activeEventsElement = (
+    <Grid item container spacing={2} xs={12}>
+      {activeEvents.map((event, index) => (
+        <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
+          <EventCard event={event} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+
+  const inactiveEventsElement = (
+    <Grid item container spacing={2} xs={12}>
+      {inactiveEvents.map((event, index) => (
+        <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
+          <EventCard event={event} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+
+  const skeletonElements = (
+    <Grid item container spacing={2} xs={12}>
+      {[...Array(6)].map((event, index) => (
+        <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
+          <EventSkeletonCard />
+        </Grid>
+      ))}
+    </Grid>
+  )
 
   return (
     <Layout>
@@ -79,27 +116,14 @@ const Events = ({
           </Typography>
           <Divider />
         </Grid>
-        <Grid item container spacing={2} xs={12}>
-          {activeEvents.map((event, index) => (
-            <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-              <EventCard event={event} />
-              
-            </Grid>
-          ))}
-        </Grid>
+        { isLoading ? skeletonElements : activeEventsElement }
         <Grid item xs={12}>
           <Typography variant='h2' gutterBottom>
             {'رویدادهای گذشته'}
           </Typography>
           <Divider />
         </Grid>
-        <Grid item container spacing={2} xs={12}>
-          {inactiveEvents.map((event, index) => (
-            <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-              <EventCard event={event} />
-            </Grid>
-          ))}
-        </Grid>
+        { isLoading ? skeletonElements : inactiveEventsElement }
       </Grid>
     </Layout>
   );
