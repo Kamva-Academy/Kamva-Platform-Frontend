@@ -19,15 +19,16 @@ const DashboardItems = ({ event }) => {
   const logoButton = <EventLogoButton image={event?.cover_page} name={event?.name} eventId={eventId} />;
   const eventButton = <DashboardButton name={event?.name} to={`/event/${eventId}/`} />;
   const profileButton = <DashboardButton name={'پروفایل'} to={`/event/${eventId}/profile/personal/`} />;
+  const eventsButton = <DashboardButton name={'رویدادها'} to={'/events/'} />;
   const logoutButton = <LogoutButton />;
   const Avatar = <AvatarComponent />;
 
   return {
     desktopLeftItems: [logoutButton, Avatar],
-    desktopRightItems: [logoButton, profileButton],
+    desktopRightItems: [logoButton, eventsButton, profileButton],
     mobileLeftItems: [Avatar],
     mobileRightItems: [],
-    mobileMenuListItems: [eventButton, profileButton, logoutButton],
+    mobileMenuListItems: [eventsButton, eventButton, profileButton, logoutButton],
   };
 };
 
