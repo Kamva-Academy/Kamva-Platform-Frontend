@@ -55,18 +55,13 @@ const Events = ({
   getRegistrableWorkshops,
   events,
   registrableWorkshops,
+  isLoading
 }) => {
   const classes = useStyles();
-  const [isLoading, setIsLoading] = React.useState(true);
 
   useEffect(() => {
     getAllEventsInfo();
     getRegistrableWorkshops();
-
-    // TODO: improve timing for skeleton
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
   }, []);
 
   const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
@@ -132,6 +127,7 @@ const Events = ({
 const mapStateToProps = (state) => ({
   events: state.events.events || [],
   registrableWorkshops: state.workshop.registrableWorkshops,
+  isLoading: state.events.isFetching,
 });
 
 export default connect(mapStateToProps, {
