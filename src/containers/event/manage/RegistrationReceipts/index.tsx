@@ -68,7 +68,7 @@ function Index({
                 </TableCell>
                 <TableCell align='center'>
                   <Button
-                    href={'/registration_receipt/' + registrationReceipt?.id}
+                    href={'/registration-receipt/' + registrationReceipt?.id}
                     component="a" target="_blank">
                     {(registrationReceipt?.first_name && registrationReceipt?.last_name) ? `${registrationReceipt?.first_name} ${registrationReceipt?.last_name}` : 'بی‌نام'}
                   </Button>

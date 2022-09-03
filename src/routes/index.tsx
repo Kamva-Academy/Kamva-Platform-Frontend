@@ -5,6 +5,7 @@ import AboutUs from '../containers/AboutUs';
 import ResetPassword from '../pages/ResetPassword';
 import CreateAccount from '../pages/CreateAccount';
 import Dashboard from '../containers/Dashboard';
+import RegistrationReceipt from '../containers/RegistrationReceipt';
 import Events from '../pages/Events';
 import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/event';
@@ -44,6 +45,7 @@ const Root = () => {
           element={<FailedPayment />}
         />
 
+        <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
@@ -65,7 +67,7 @@ const Root = () => {
         />
         <Route path="/event/:eventId/" element={<Event />} />
         <Route path="/event/:eventId/manage/" element={<ManageEvent />} />
-        
+
         <Route path="/watch/:playerId/" element={<Workshop />} />
         <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
       </Route>
