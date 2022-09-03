@@ -22,7 +22,6 @@ import {
   getRequestMentorAction,
   removeRequestMentorAction,
 } from '../../../../redux/slices/events';
-import AddTeamsViaCSV from './AddTeamsViaCSV';
 
 function Teams({
   addUserToTeam,
@@ -74,12 +73,6 @@ function Teams({
             </Button>
           </Grid>
         </Grid>
-
-        <Box width='100%' height='30px'></Box>
-        <Divider width='100%'></Divider>
-        <Box width='100%' height='10px'></Box>
-
-        <AddTeamsViaCSV />
 
         <Box width='100%' height='30px'></Box>
         <Divider width='100%'></Divider>

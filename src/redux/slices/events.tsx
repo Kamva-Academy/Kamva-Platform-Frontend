@@ -14,6 +14,7 @@ import {
   getOneRegistrationFormUrl,
   getTeamInvitationsUrl,
   getTeamUrl,
+  registerOneUserUrl,
   getWorkshopsUrl,
   inviteSomeoneUrl,
   paymentRequestUrl,
@@ -25,7 +26,7 @@ import {
   TeamCRUDUrl,
   uploadFileUrl,
   addMentorToWorkshopUrl,
-  addTeamsViaCSVUrl,
+  registerUsersViaCSVUrl,
   addUserToTeamUrl,
   allRegistrationReceiptsUrl,
   eventInfoUrl,
@@ -315,14 +316,26 @@ export const getRegistrationFormAction = createAsyncThunkApi(
 );
 
 
-export const addTeamsViaCSVAction = createAsyncThunkApi(
-  'events/addTeamsViaCSVAction',
+export const registerUsersViaCSVAction = createAsyncThunkApi(
+  'events/registerUsersViaCSVAction',
   Apis.POST_FORM_DATA,
-  addTeamsViaCSVUrl,
+  registerUsersViaCSVUrl,
   {
     defaultNotification: {
-      success: 'تیم‌ها با موفقیت اضافه شدند.',
-      error: 'اشکالی در اضافه‌کردن تیم‌ها وجود داشت.'
+      success: 'کاربران با موفقیت ثبت‌نام شدند.',
+      error: 'اشکالی در ثبت‌نام کردن کاربران وجود داشت.'
+    },
+  }
+);
+
+export const registerOneUserAction = createAsyncThunkApi(
+  'events/registerOneUserAction',
+  Apis.POST,
+  registerOneUserUrl,
+  {
+    defaultNotification: {
+      success: 'کاربر با موفقیت ثبت‌نام شد.',
+      error: 'اشکالی در ثبت‌نام کاربر وجود داشت.'
     },
   }
 );
@@ -333,8 +346,8 @@ export const addUserToTeamAction = createAsyncThunkApi(
   addUserToTeamUrl,
   {
     defaultNotification: {
-      success: 'عضو با موفقیت به گروه اضافه شد',
-      error: 'اشکالی در اضافه‌کردن عضو به گروه وجود داشت.'
+      success: 'کاربر با موفقیت به گروه اضافه شد',
+      error: 'اشکالی در اضافه‌کردن کاربر به گروه وجود داشت.'
     },
   }
 );
@@ -746,9 +759,9 @@ const eventSlice = createSlice({
     [getOneRegistrationReceiptAction.rejected.toString()]: isNotFetching,
 
 
-    [addTeamsViaCSVAction.pending.toString()]: isFetching,
-    [addTeamsViaCSVAction.fulfilled.toString()]: isNotFetching,
-    [addTeamsViaCSVAction.rejected.toString()]: isNotFetching,
+    [registerUsersViaCSVAction.pending.toString()]: isFetching,
+    [registerUsersViaCSVAction.fulfilled.toString()]: isNotFetching,
+    [registerUsersViaCSVAction.rejected.toString()]: isNotFetching,
 
 
     [getRegistrationFormAction.pending.toString()]: isFetching,

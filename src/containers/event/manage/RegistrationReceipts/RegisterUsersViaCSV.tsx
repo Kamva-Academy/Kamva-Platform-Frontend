@@ -5,28 +5,29 @@ import {
   IconButton,
   Stack,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
 import React, { FC, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  addTeamsViaCSVAction,
+  registerUsersViaCSVAction,
 } from '../../../../redux/slices/events';
 import { EventType } from '../../../../types/models';
 
-type AddTeamsViaCSVPropsType = {
-  addTeamsViaCSV: any;
+type RegisterUsersViaCSVPropsType = {
+  registerUsersViaCSV: any;
   event: EventType;
 }
 
-const AddTeamsViaCSV: FC<AddTeamsViaCSVPropsType> = ({
-  addTeamsViaCSV,
+const RegisterUsersViaCSV: FC<RegisterUsersViaCSVPropsType> = ({
+  registerUsersViaCSV,
   event,
 }) => {
   const [file, setFile] = useState(null);
   const fileRef = useRef(null);
 
   const submit = () => {
-    addTeamsViaCSV({ registrationFormId: event?.registration_form, file })
+    registerUsersViaCSV({ registrationFormId: event?.registration_form, file })
   }
 
   const changeFile = (e) => {
@@ -43,13 +44,16 @@ const AddTeamsViaCSV: FC<AddTeamsViaCSVPropsType> = ({
   }
 
   return (
-    <>
-      <Grid item xs={12}>
-        <Typography variant='h4'>
-          {'افزودن تیم‌ها از طریق فایل csv'}
+    <Stack spacing={1}>
+      <Stack direction='row' spacing={1} alignItems='flex-end'>
+        <Typography variant='h4' component="h2">
+          {'افزودن کاربران از طریق فایل csv'}
         </Typography>
-      </Grid>
-      <Grid item container xs spacing={1}>
+        <Typography>
+          <Link style={{ textDecoration: 'none' }} target="_blank" download to={"/register-users-sample.csv"}>{'(نمونه فایل)'}</Link>
+        </Typography>
+      </Stack>
+      <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
           <Stack direction='row' spacing={1}>
             <Button
@@ -95,7 +99,7 @@ const AddTeamsViaCSV: FC<AddTeamsViaCSVPropsType> = ({
           </Button>
         </Grid>
       </Grid>
-    </>
+    </Stack >
   );
 }
 
@@ -104,5 +108,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  addTeamsViaCSV: addTeamsViaCSVAction,
-})(AddTeamsViaCSV);
+  registerUsersViaCSV: registerUsersViaCSVAction,
+})(RegisterUsersViaCSV);
