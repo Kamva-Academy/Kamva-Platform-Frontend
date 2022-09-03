@@ -11,6 +11,7 @@ import {
 } from '../../redux/slices/events';
 import Layout from '../Layout';
 import Sidebar from './Sidebar';
+import NotFoundPage from '../NotFoundPage';
 
 function Workshops({
   workshops,
@@ -31,7 +32,8 @@ function Workshops({
     getEventWorkshops({ eventId, pageNumber });
   }, [pageNumber]);
 
-  // todo: handle in a better way
+  // todo: handle event not found
+  // todo: handle in a better way  
   if (event?.is_user_participating == undefined) {
     return (<Layout></Layout>)
   }

@@ -10,6 +10,7 @@ import Profile from '../containers/Dashboard/Profile';
 import Event from '../containers/event';
 import ManageEvent from '../containers/event/manage';
 import Landing from '../containers/Landing';
+import NotFoundPage from '../containers/NotFoundPage';
 import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
@@ -70,7 +71,7 @@ const Root = () => {
         <Route path="/join/:playerId/:token/" element={<JoinMentor />} />
       </Route>
 
-      <Route path="*" element={<Landing />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
