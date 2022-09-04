@@ -130,8 +130,8 @@ export const makeTeamHeadUrl = ({ teamId }) => `/fsm/team/${teamId}/make_team_he
 export const removeFromTeamUrl = '/fsm/team/remove_from_team/';
 export const addUserToTeamUrl = ({ teamId }) => `fsm/team/${teamId}/register_and_join/`
 export const createTeamUrl = 'fsm/team/';
-export const registerUsersViaCSVUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/csv_registration/`;
-export const registerOneUserUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/csv_registration/`;
+export const registerUsersViaCSVUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/register_csv/`;
+export const registerOneUserUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/register_individual/`;
 
 // event:
 export const teamCRUDUrl = ({ teamId }) => teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
