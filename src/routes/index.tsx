@@ -17,6 +17,7 @@ import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/Status';
 import TeamSelection from '../pages/TeamSelection';
 import Workshop from '../containers/Workshop';
+import Article from '../pages/Article';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../pages/WorkshopManagement';
@@ -32,6 +33,8 @@ const Root = () => {
       <Route path="/reset_password" element={<ResetPassword />} />
       <Route path="/create_account" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
+      <Route path="/articles/" element={<Articles />} />
+      <Route path="/article/:articleId" element={<Article />} />
       <Route path="/" element={<Landing />} />
 
       <Route path="/" element={<PrivateRoute />}>
@@ -49,7 +52,6 @@ const Root = () => {
         <Route path="/events/" element={<Events />} />
 
         <Route path="/event/:eventId/workshop/:fsmId/manage/" element={<WorkshopManagement />} />
-        <Route path="/articles/" element={<Articles />} />
 
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
 
