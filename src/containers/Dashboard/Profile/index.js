@@ -66,9 +66,6 @@ const SECTIONS = {
   academic: 2,
 }
 
-
-
-
 const Index = ({
   event,
 }) => {
