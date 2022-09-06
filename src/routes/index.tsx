@@ -55,7 +55,9 @@ const Root = () => {
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
 
-        <Route path="/event/:eventId/workshop/:fsmId/manage/" element={<WorkshopManagement />} />
+        <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<WorkshopManagement />} />
+        
+        <Route path="/articles/" element={<Articles />} />
 
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
 
