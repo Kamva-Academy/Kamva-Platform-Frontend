@@ -711,7 +711,7 @@ const eventSlice = createSlice({
 
     [getEventTeamsAction.pending.toString()]: isFetching,
     [getEventTeamsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.allEventTeams = response;
+      state.allEventTeams = response.results;
       state.isFetching = false;
     },
     [getEventTeamsAction.rejected.toString()]: isNotFetching,
