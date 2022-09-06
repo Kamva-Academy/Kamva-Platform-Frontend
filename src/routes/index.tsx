@@ -51,7 +51,6 @@ const Root = () => {
           element={<FailedPayment />}
         />
 
-        <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
@@ -71,8 +70,9 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
-        <Route path="/event/:eventId/manage/" element={<ManageEvent />} />
 
+        <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
+        
         <Route path="/event/:eventId/workshop/:fsmId/correction/:answerId/" element={<Correction />} />
         <Route path="/event/:eventId/workshop/:fsmId/correction/" element={<GoToAnswer />} />
 

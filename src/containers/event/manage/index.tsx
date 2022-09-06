@@ -12,7 +12,7 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   getEventTeamsAction,
   getOneEventInfoAction,
@@ -26,38 +26,53 @@ import RegistrationReceipts from './RegistrationReceipts';
 import Teams from './Teams';
 import Workshops from './Workshops';
 
-const tabs: { label: string, icon: any, component: any }[] = [
+const tabs: { name: string, label: string, icon: any, component: any }[] = [
   {
+    name: 'info',
     label: 'اطلاعات کلی',
     icon: InfoIcon,
     component: Info,
   },
   {
+    name: 'registrationForm',
     label: 'فرم ثبت‌نام',
     icon: HistoryEduIcon,
     component: RegistrationForm,
   },
   {
+    name: 'registrationReceipts',
     label: 'رسیدهای ثبت‌نام',
     icon: ConfirmationNumberIcon,
     component: RegistrationReceipts,
   },
   {
+    name: 'discountCodes',
     label: 'کد تخفیف',
     icon: DiscountIcon,
     component: DiscountCode,
   },
   {
+    name: 'teamManagement',
     label: 'تیم‌ها',
     icon: GroupIcon,
     component: Teams,
   },
   {
+    name: 'allWorkshops',
     label: 'کارگاه‌ها',
     icon: ClassIcon,
     component: Workshops,
   },
 ];
+
+const SECTIONS = {
+  info: 0,
+  registrationForm: 1,
+  registrationReceipts: 2,
+  discountCodes: 3,
+  teamManagement: 4,
+  allWorkshops: 5
+}
 
 type EventType = {
   getOneEventInfo: Function,
@@ -71,8 +86,10 @@ const Event: FC<EventType> = ({
   event
 }) => {
   const t = useTranslate();
-  const { eventId } = useParams();
-  const [tabIndex, setTabIndex] = useState(0);
+  const { eventId, section } = useParams();
+  const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
+  const TabComponent = tabs[SECTIONS[section]].component;
+  const navigate = useNavigate();
 
   useEffect(() => {
     getOneEventInfo({ eventId });
@@ -83,8 +100,6 @@ const Event: FC<EventType> = ({
       getEventTeams({ registrationFormId: event?.registration_form });
     }
   }, [event]);
-
-  const TabComponent = tabs[tabIndex].component;
 
   return (
     <Layout>
@@ -101,7 +116,10 @@ const Event: FC<EventType> = ({
               {tabs.map((tab, index) => (
                 <Button
                   key={index}
-                  onClick={() => setTabIndex(index)}
+                  onClick={() => {
+                    setTabIndex(index)
+                    navigate(`/event/${eventId}/manage/${tabs[index].name}`)
+                  }}
                   variant={tabIndex == index ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
