@@ -10,6 +10,7 @@ const AppbarModes = {
   MENTOR_WORKSHOP: MentorWorkshopAppBar,
   EVENT: EventAppBarItems,
   GENERAL: GeneralPagesAppbarItems,
+  ARTICLE: GeneralPagesAppbarItems,
 };
 
 export default AppbarModes;
