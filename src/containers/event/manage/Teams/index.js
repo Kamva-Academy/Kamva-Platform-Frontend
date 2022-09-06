@@ -10,7 +10,7 @@ import {
   Divider,
   Box
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -34,6 +34,27 @@ function Teams({
   const [newTeamName, setNewTeamName] = useState('');
   const [username, setUserName] = useState(null);
   const [selectedTeamId, setSelectedTeamId] = useState('');
+  const [teamsCards, setTeamsCards] = useState([])
+
+  useMemo(() => {
+    setTeamsCards(
+      allEventTeams?.slice().sort((a, b) => {
+        if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
+          return parseInt(a.name) - parseInt(b.name)
+        }
+        return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+      }).map((team) => (
+        <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
+          <TeamInfoCard
+            {...team}
+            teamId={team.id}
+            fsmId={fsmId}
+            chatRoom={team.chat_room}
+          />
+        </Grid>
+      ))
+    )
+  }, [allEventTeams])
 
   const doCreateTeam = () => {
     createTeam({ name: newTeamName, registration_form: event?.registration_form })
@@ -54,7 +75,7 @@ function Teams({
         <Grid item container xs spacing={1}>
           <Grid item xs={12} sm={6}>
             <TextField
-              value={newTeamName}
+              value={newTeamName || ''}
               size="small"
               fullWidth
               variant="outlined"
@@ -86,7 +107,7 @@ function Teams({
         <Grid item container xs spacing={1}>
           <Grid item xs={12} sm={4}>
             <TextField
-              value={username}
+              value={username || ''}
               size="small"
               fullWidth
               variant="outlined"
@@ -100,7 +121,7 @@ function Teams({
               <InputLabel>تیم</InputLabel>
               <Select defaultValue="" onChange={(e) => setSelectedTeamId(e.target.value)} label="تیم">
                 {allEventTeams?.map((team) => (
-                  <MenuItem key={team.id} value={team.id}>
+                  <MenuItem key={team.id} value={team.id || ''}>
                     {team.name}
                   </MenuItem>
                 ))}
@@ -141,21 +162,7 @@ function Teams({
             },
           })}
         >
-          {allEventTeams?.slice().sort((a, b) => {
-            if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
-              return parseInt(a.name) - parseInt(b.name)
-            }
-            return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-          }).map((team) => (
-            <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
-              <TeamInfoCard
-                {...team}
-                teamId={team.id}
-                fsmId={fsmId}
-                chatRoom={team.chat_room}
-              />
-            </Grid>
-          ))}
+          {teamsCards}
         </Grid>
       </Grid>
     </>
