@@ -13,6 +13,7 @@ import {
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
+import Pagination from '@mui/material/Pagination';
 
 import TeamInfoCard from '../../../../components/Cards/TeamInfo';
 import {
@@ -35,6 +36,7 @@ function Teams({
   const [username, setUserName] = useState(null);
   const [selectedTeamId, setSelectedTeamId] = useState('');
   const [teamsCards, setTeamsCards] = useState([])
+  const [pageNumber, setPageNumber] = useState(1);
 
   useMemo(() => {
     setTeamsCards(
