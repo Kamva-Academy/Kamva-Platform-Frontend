@@ -137,7 +137,13 @@ export const markSubmissionAction = createAsyncThunkApi(
   }
 );
 
-/////////////////////////// CREATE AND UPDATE WIDGETS ///////////////////////////
+/////////////////////////// GET, CREATE AND UPDATE WIDGETS ///////////////////////////
+
+export const getWidgetAction = createAsyncThunkApi(
+  'widget/getWidgetAction',
+  Apis.GET,
+  widgetCRUDUrl,
+);
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
