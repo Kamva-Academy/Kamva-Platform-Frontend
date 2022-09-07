@@ -61,9 +61,7 @@ const Teams: FC<TeamPropsType> = ({
     setStarredTeams(JSON.parse(localStorage.getItem('starredTeams')) || [])
   }, [])
 
-
-
-  const teams = eventTeams.map(team =>
+  const teams = eventTeams?.map(team =>
     starredTeams.indexOf(team.id) === -1
       ? { ...team, isStarred: false }
       : { ...team, isStarred: true });

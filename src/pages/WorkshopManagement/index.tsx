@@ -45,11 +45,11 @@ type EventPropsType = {
 
 
 const SECTIONS = {
-  info: 0,
-  design: 1,
-  allEdges: 2,
-  allMentors: 3,
-  requests: 4,
+  'info': 0,
+  'design': 1,
+  'edges': 2,
+  'mentors': 3,
+  'requests': 4,
 }
 
 const EventComponent: FC<EventPropsType> = ({
@@ -73,13 +73,13 @@ const EventComponent: FC<EventPropsType> = ({
       component: Design,
     },
     {
-      name: 'allEdges',
+      name: 'edges',
       label: 'یال‌ها',
       icon: TimelineIcon,
       component: Edges,
     },
     {
-      name: 'allMentors',
+      name: 'mentors',
       label: 'همیارها',
       icon: PersonIcon,
       component: Mentors,
@@ -116,21 +116,9 @@ const EventComponent: FC<EventPropsType> = ({
   const t = useTranslate();
   const { fsmId, eventId, section } = useParams();
   const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
-  const [TabComponent, setTabComponent] = useState(Info as any)
 
-  useEffect(() => {
-    if (section === 'requests') {
-      if (workshop?.fsm_learning_type == 'Supervised') {
-        if (workshop?.fsm_p_type == 'Team') {
-          setTabComponent(TeamRequests)
-        } else if (workshop?.fsm_p_type == 'Individual') {
-          setTabComponent(IndividualRequests)
-        }
-      }
-    } else {
-      setTabComponent(tabs[SECTIONS[section]].component)
-    }
-  }, [section])
+  const TabComponent = tabs[tabIndex]?.component;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -180,8 +168,8 @@ const EventComponent: FC<EventPropsType> = ({
           </Box>
         </Grid>
         <Grid item sm={9} xs={12}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
-            <TabComponent {...tabs[tabIndex].props} />
+          <Paper elevation={3} sx={{ padding: 2 }} >
+            {TabComponent ? <TabComponent {...tabs[tabIndex]?.props} /> : <></>}
           </Paper>
         </Grid>
       </Grid>
