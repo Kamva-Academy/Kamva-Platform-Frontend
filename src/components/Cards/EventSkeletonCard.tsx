@@ -15,7 +15,7 @@ const EventSkeletonCard: FC = () => {
         },
       })}>
       <Grid sx={{ padding: 0 }} item container justifyContent="center" alignItems="center" xs={12} md={5}>
-        <Skeleton variant="rectangular" width="100%" height={310} />
+        <Skeleton variant="rectangular" width="100%" height={300} />
       </Grid>
 
       <Grid item container xs={12} md={7}
