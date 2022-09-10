@@ -45,7 +45,7 @@ enum AnswerType2WidgetType {
 type WidgetPropsType = {
   widget: any;
   mode: WidgetModes;
-  stateId: number;
+  stateId?: number;
   coveredWithPaper?: boolean;
 }
 

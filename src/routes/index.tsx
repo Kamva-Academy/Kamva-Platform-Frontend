@@ -24,8 +24,8 @@ import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../pages/WorkshopManagement';
 import JoinMentor from '../containers/JoinMentor';
-import GoToAnswer from '../containers/GoToAnswer'
-import Correction from '../containers/Correction';
+import GoToAnswer from '../containers/GoToAnswer';
+import Correction from '../pages/Correction';
 
 const Root = () => {
   return (
@@ -73,8 +73,8 @@ const Root = () => {
         <Route path="/event/:eventId/" element={<Event />} />
         <Route path="/event/:eventId/manage/" element={<ManageEvent />} />
 
-        <Route path="/event/:eventId/correction/:answerId/" element={<Correction />} />
-        <Route path="/event/:eventId/correction/" element={<GoToAnswer />} />
+        <Route path="/event/:eventId/workshop/:fsmId/correction/:answerId/" element={<Correction />} />
+        <Route path="/event/:eventId/workshop/:fsmId/correction/" element={<GoToAnswer />} />
 
         <Route path="/watch/:playerId/" element={<Workshop />} />
         <Route path="/join/:playerId/:token/" element={<JoinMentor />} />

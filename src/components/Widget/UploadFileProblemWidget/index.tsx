@@ -97,48 +97,45 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
       <Stack justifyContent='flex-end' spacing={1}>
         {(mode === WidgetModes.View || mode === WidgetModes.InAnswerSheet) &&
           <>
-            {(mode !== WidgetModes.View &&
-              <>
-                <Button
-                  component="label"
-                  htmlFor={'raised-button-file' + widgetId}
-                  disabled={isFetching}
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  startIcon={<CloudUploadIcon />}
-                  sx={{ whiteSpace: 'nowrap' }}>
-                  {t('uploadFile')}
-                </Button>
-                <input
-                  accept="application/pdf,image/*"
-                  style={{ display: 'none' }}
-                  id={'raised-button-file' + widgetId}
-                  type="file"
-                  onChange={changeFile}
-                />
-              </>)}
-            {file?.link &&
-              <Button
-                size="small"
-                variant='outlined'
-                sx={{
-                  whiteSpace: 'nowrap',
-                }}
-                endIcon={
-                  (mode !== WidgetModes.View &&
-                    <IconButton size='small' onClick={clearFile}>
-                      <ClearIcon sx={{ fontSize: 14 }} />
-                    </IconButton>
-                )}
-                // todo Hashem: href={baseURL + file?.link} or href={file?.link} ? bazi jaha momkeneh fargh koneh.
-                href={file?.link}
-                component="a"
-                target="_blank">
-                {file?.name}
-              </Button>
-            }
+            <Button
+              component="label"
+              htmlFor={'raised-button-file' + widgetId}
+              disabled={isFetching}
+              variant="contained"
+              color="primary"
+              size="small"
+              startIcon={<CloudUploadIcon />}
+              sx={{ whiteSpace: 'nowrap' }}>
+              {t('uploadFile')}
+            </Button>
+            <input
+              accept="application/pdf,image/*"
+              style={{ display: 'none' }}
+              id={'raised-button-file' + widgetId}
+              type="file"
+              onChange={changeFile}
+            />
           </>
+        }
+        {(mode !== WidgetModes.Edit && file?.link) &&
+          <Button
+            size="small"
+            variant='outlined'
+            sx={{
+              whiteSpace: 'nowrap',
+            }}
+            endIcon={
+              (mode !== WidgetModes.Review &&
+                <IconButton size='small' onClick={clearFile}>
+                  <ClearIcon sx={{ fontSize: 14 }} />
+                </IconButton>
+              )}
+            // todo Hashem: href={baseURL + file?.link} or href={file?.link} ? bazi jaha momkeneh fargh koneh.
+            href={file?.link}
+            component="a"
+            target="_blank">
+            {file?.name}
+          </Button>
         }
       </Stack>
       {mode === WidgetModes.Review && !file?.link &&
@@ -152,15 +149,11 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
 
 const mapStateToProps = (state) => ({
   isFetching: state.paper.isFetching,
-  last_submitted_answer: state.scoring.answer,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    uploadFileAnswer: uploadFileAnswerAction,
-    makeAnswerEmpty: makeAnswerEmptyAction,
-  }
-)(UploadFileProblemWidget);
+export default connect(mapStateToProps, {
+  uploadFileAnswer: uploadFileAnswerAction,
+  makeAnswerEmpty: makeAnswerEmptyAction,
+})(UploadFileProblemWidget);
 
 export { UploadFileProblemEditWidget };

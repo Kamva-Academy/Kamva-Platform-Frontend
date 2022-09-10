@@ -72,7 +72,7 @@ function RegistrationReceipt({
           {registrationReceipt?.answers.map((answer, index) => (
             <Grid item key={index}>
               <Paper component={Paper} sx={{ padding: 2 }}>
-                <Widget mode={WidgetModes.View} widget={answer} stateId={-1} />
+                <Widget mode={WidgetModes.View} widget={answer} />
               </Paper>
             </Grid>
           ))}
