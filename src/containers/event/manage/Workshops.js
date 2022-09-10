@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import WorkshopCard from '../../../components/Cards/WorkshopCardForMentors';
 import CreateWorkshopDialog from '../../../components/Dialog/CreateWorkshopDialog';
+import { ITEMS_PER_PAGE_NUMBER } from '../../../configs/Constants';
 
 
 
@@ -78,7 +79,7 @@ function Index({
               variant="outlined"
               color="primary"
               shape='rounded'
-              count={Math.ceil(workshopsCount / 12)}
+              count={Math.ceil(workshopsCount / ITEMS_PER_PAGE_NUMBER)}
               page={pageNumber}
               onChange={(e, value) => setPageNumber(value)}
             />

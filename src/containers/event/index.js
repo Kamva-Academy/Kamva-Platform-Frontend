@@ -12,6 +12,7 @@ import {
 import Layout from '../Layout';
 import Sidebar from './Sidebar';
 import NotFoundPage from '../NotFoundPage';
+import { ITEMS_PER_PAGE_NUMBER } from '../../configs/Constants';
 
 function Workshops({
   workshops,
@@ -63,7 +64,7 @@ function Workshops({
                 variant="outlined"
                 color="primary"
                 shape='rounded'
-                count={Math.ceil(workshopsCount / 12)}
+                count={Math.ceil(workshopsCount / ITEMS_PER_PAGE_NUMBER)}
                 page={pageNumber}
                 onChange={(e, value) => setPageNumber(value)}
               />

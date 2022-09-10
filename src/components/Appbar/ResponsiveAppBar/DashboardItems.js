@@ -16,6 +16,7 @@ const DashboardItems = () => {
 
   const logoButton = <LogoButton />;
   const eventsButton = <DashboardButton name={'رویدادها'} to={'/events/'} />;
+  const articlesButton = <DashboardButton name={'مقاله‌ها'} to={'/articles/'} />;
   const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/workshops/'} />;
   const profileButton = <DashboardButton name={'پروفایل'} to={'/profile/personal/'} />;
   const logoutButton = <LogoutButton />;
@@ -23,10 +24,10 @@ const DashboardItems = () => {
 
   return {
     desktopLeftItems: [profileButton, logoutButton, Avatar],
-    desktopRightItems: [logoButton, eventsButton],
+    desktopRightItems: [logoButton, eventsButton, articlesButton],
     mobileLeftItems: [Avatar],
     mobileRightItems: [],
-    mobileMenuListItems: [eventsButton, profileButton, logoutButton],
+    mobileMenuListItems: [eventsButton, articlesButton, profileButton, logoutButton],
   };
 };
 

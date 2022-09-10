@@ -1,11 +1,8 @@
 import React from 'react';
-
-import appendPreviousParams from '../../../utils/AppendPreviousParams';
 import DashboardButton from './components/DashboardButton';
 
-const Index = () => {
-
-  const backToLanding = <DashboardButton name={'برگشت به صفحه‌ی اصلی'} to={appendPreviousParams(`/`)} />;
+const GeneralPagesAppbarItems = () => {
+  const backToLanding = <DashboardButton name={'بازگشت'} to={-1} />;
 
   const desktopLeftItems = [backToLanding];
   const desktopRightItems = [];
@@ -22,4 +19,4 @@ const Index = () => {
   };
 };
 
-export default Index;
+export default GeneralPagesAppbarItems;

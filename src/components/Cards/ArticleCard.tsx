@@ -57,8 +57,8 @@ import {
             fullWidth
             color="primary"
             component={Link}
-            to={`/edit-article/${id}`}>
-            {t('edit')}
+            to={`/article/${id}`}>
+            {'مشاهده'}
           </Button>
         </CardActions>
       </Card>

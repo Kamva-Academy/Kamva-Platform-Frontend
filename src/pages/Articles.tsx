@@ -7,8 +7,9 @@ import { getAllArticlesAction } from '../redux/slices/article';
 import Layout from '../containers/Layout';
 
 import { ArticleType } from '../types/redux/article';
+import { ITEMS_PER_PAGE_NUMBER } from '../configs/Constants';
 
-const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articlesCount: number }>  = ({
+const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articlesCount: number }> = ({
   getAllArticles,
   articles,
   articlesCount,
@@ -39,7 +40,7 @@ const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articles
             variant="outlined"
             color="primary"
             shape='rounded'
-            count={Math.ceil(articlesCount / 12)}
+            count={Math.ceil(articlesCount / ITEMS_PER_PAGE_NUMBER)}
             page={pageNumber}
             onChange={(e, value) => setPageNumber(value)}
           />
@@ -50,8 +51,8 @@ const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articles
 };
 
 const mapStateToProps = (state) => ({
-    articles: state.article.articles,
-    articlesCount: state.article.articlesCount,
+  articles: state.article.articles,
+  articlesCount: state.article.articlesCount,
 });
 
 export default connect(mapStateToProps, {
