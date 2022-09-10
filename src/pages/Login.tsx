@@ -148,7 +148,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
             <li>
               <Link
                 style={{ textDecoration: 'none' }}
-                to={appendPreviousParams('/reset_password')}>
+                to={appendPreviousParams('/reset-password')}>
                 {'گذروازه‌ام را فراموش کرده‌ام :('}
               </Link>
             </li>
@@ -157,7 +157,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
             <li>
               <Link
                 style={{ textDecoration: 'none' }}
-                to={appendPreviousParams('/create_account')}>
+                to={appendPreviousParams('/create-account')}>
                 {'می‌خواهم یک حساب کاربری جدید بسازم.'}
               </Link>
             </li>

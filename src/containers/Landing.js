@@ -44,7 +44,7 @@ const Index = () => {
               <Button onClick={() => navigate(appendPreviousParams("/login"))}>
                 ورود
               </Button>
-              <Button onClick={() => navigate(appendPreviousParams("/create_account"))}>
+              <Button onClick={() => navigate(appendPreviousParams("/create-account"))}>
                 ثبت‌نام
               </Button>
             </ButtonGroup>
@@ -55,7 +55,7 @@ const Index = () => {
             position: 'fixed',
             bottom: 20,
             left: 20,
-          }} onClick={() => navigate(appendPreviousParams("/about_us"))}>
+          }} onClick={() => navigate(appendPreviousParams("/about-us"))}>
           درباره‌ی کاموا
         </Button>
       </Grid>

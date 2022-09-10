@@ -32,22 +32,22 @@ const Root = () => {
     <Routes>
       <Route path="/loading/"></Route>
 
-      <Route path="/about_us" element={<AboutUs />} />
+      <Route path="/about-us/" element={<AboutUs />} />
 
-      <Route path="/reset_password" element={<ResetPassword />} />
-      <Route path="/create_account" element={<CreateAccount />} />
+      <Route path="/reset-password/" element={<ResetPassword />} />
+      <Route path="/create-account/" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
       <Route path="/articles/" element={<Articles />} />
-      <Route path="/article/:articleId" element={<Article />} />
+      <Route path="/article/:articleId/" element={<Article />} />
       <Route path="/" element={<Landing />} />
 
       <Route path="/" element={<PrivateRoute />}>
         <Route
-          path="/message/payment/success/:paymentId?"
+          path="/message/payment/success/:paymentId?/"
           element={<SuccessfulPayment />}
         />
         <Route
-          path="/message/payment/failure/:paymentId?"
+          path="/message/payment/failure/:paymentId?/"
           element={<FailedPayment />}
         />
 
