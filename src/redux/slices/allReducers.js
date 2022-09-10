@@ -12,6 +12,7 @@ import { widgetReducer } from './widget';
 import { workshopReducer } from './workshop';
 import { articleReducer } from './article';
 import { paperReducer } from './Paper';
+import { scoringReducer } from './scoring';
 
 const allReducers = combineReducers({
   paper: paperReducer,
@@ -26,6 +27,7 @@ const allReducers = combineReducers({
   workshop: workshopReducer,
   article: articleReducer,
   Intl: translatorReducer,
+  scoring: scoringReducer,
 });
 
 export default allReducers;

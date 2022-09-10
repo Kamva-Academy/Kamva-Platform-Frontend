@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router-dom';
 
-import Widget, { MODES } from '../components/Widget';
+import Widget, { WidgetModes } from '../components/Widget';
 import {
     getAnswerAction,
     getScoresAndCommentsAction,
@@ -18,8 +18,8 @@ import {
 } from '../redux/slices/scoring';
 import {
   getWidgetAction,
-} from '../redux/slices/widget';
-import Layout from '../pages/WorkshopManagement/Layout';
+} from '../redux/slices/Paper';
+import Layout from './Layout';
 
 import CorrectionColumn from './CorrectionColumn';
   
@@ -51,7 +51,7 @@ function Index({
     if (answer?.problem) {
       getWidget({ widgetId: answer?.problem })
     }
-  }, [answer?.problem])
+  }, [answer, answer?.problem])
 
   return (
     <Layout>
@@ -61,7 +61,7 @@ function Index({
             {'تصحیح'}
           </Typography>
         </Grid>
-        <Grid item spacing={2} xs={12} md={8}>
+        <Grid item container spacing={2} xs={12} md={8}>
           <Paper component={Paper} className={classes.paper}>
             <Grid container spacing={2}>
               {problem &&
@@ -69,7 +69,7 @@ function Index({
                   <Typography variant="h2" gutterBottom>
                     {'مسئله'}
                   </Typography>
-                  <Widget mode={MODES.VIEW} widget={problem} />
+                  <Widget mode={WidgetModes.View} widget={problem} />
                 </Grid>
               }
               <Grid item xs={12}>
@@ -80,7 +80,7 @@ function Index({
                   <Typography variant="h2" gutterBottom>
                     {'پاسخ'}
                   </Typography>
-                  <Widget mode={MODES.VIEW} widget={answer} />
+                  <Widget mode={WidgetModes.View} widget={answer} />
                 </Grid>
               }
             </Grid>
@@ -95,11 +95,11 @@ function Index({
     </Layout>
   );
 }
-  
+
 const mapStateToProps = (state) => ({
   answer: state.scoring.answer,
   scores: state.scoring.scores,
-  problem: state.widget.widget,
+  problem: state.paper.widget,
 });
 
 export default connect(

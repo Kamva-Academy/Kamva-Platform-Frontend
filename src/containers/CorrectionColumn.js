@@ -19,7 +19,7 @@ import {
 } from '../redux/slices/scoring';
 import {
   getWidgetAction,
-} from '../redux/slices/widget';
+} from '../redux/slices/Paper';
 
 
 const useStyles = makeStyles((theme) => ({
