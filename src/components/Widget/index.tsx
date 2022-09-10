@@ -5,6 +5,7 @@ import React, { FC, useState } from 'react';
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 
+// TODO: remove this old MODES and replace WidgetModes
 export const MODES = {
   WRITE: 'WRITE',
   VIEW: 'VIEW',
