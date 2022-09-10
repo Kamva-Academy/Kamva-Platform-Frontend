@@ -90,30 +90,34 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     });
   }
 
+  // todo: change modes for mentor and student. these modes only is for student
   return (
     <Stack alignItems='center' justifyContent='space-between' direction='row' spacing={1}>
       <Typography>{text}</Typography>
       <Stack justifyContent='flex-end' spacing={1}>
         {(mode === WidgetModes.View || mode === WidgetModes.InAnswerSheet) &&
           <>
-            <Button
-              component="label"
-              htmlFor={'raised-button-file' + widgetId}
-              disabled={isFetching}
-              variant="contained"
-              color="primary"
-              size="small"
-              startIcon={<CloudUploadIcon />}
-              sx={{ whiteSpace: 'nowrap' }}>
-              {t('uploadFile')}
-            </Button>
-            <input
-              accept="application/pdf,image/*"
-              style={{ display: 'none' }}
-              id={'raised-button-file' + widgetId}
-              type="file"
-              onChange={changeFile}
-            />
+            {(mode !== WidgetModes.View &&
+              <>
+                <Button
+                  component="label"
+                  htmlFor={'raised-button-file' + widgetId}
+                  disabled={isFetching}
+                  variant="contained"
+                  color="primary"
+                  size="small"
+                  startIcon={<CloudUploadIcon />}
+                  sx={{ whiteSpace: 'nowrap' }}>
+                  {t('uploadFile')}
+                </Button>
+                <input
+                  accept="application/pdf,image/*"
+                  style={{ display: 'none' }}
+                  id={'raised-button-file' + widgetId}
+                  type="file"
+                  onChange={changeFile}
+                />
+              </>)}
             {file?.link &&
               <Button
                 size="small"
@@ -122,11 +126,13 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
                   whiteSpace: 'nowrap',
                 }}
                 endIcon={
-                  <IconButton size='small' onClick={clearFile}>
-                    <ClearIcon sx={{ fontSize: 14 }} />
-                  </IconButton>
-                }
-                href={baseURL + file?.link}
+                  (mode !== WidgetModes.View &&
+                    <IconButton size='small' onClick={clearFile}>
+                      <ClearIcon sx={{ fontSize: 14 }} />
+                    </IconButton>
+                )}
+                // todo Hashem: href={baseURL + file?.link} or href={file?.link} ? bazi jaha momkeneh fargh koneh.
+                href={file?.link}
                 component="a"
                 target="_blank">
                 {file?.name}
@@ -146,6 +152,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
 
 const mapStateToProps = (state) => ({
   isFetching: state.paper.isFetching,
+  last_submitted_answer: state.scoring.answer,
 });
 
 export default connect(

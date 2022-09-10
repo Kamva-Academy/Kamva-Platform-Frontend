@@ -108,7 +108,13 @@ export const getOneStateAction = createAsyncThunkApi(
 );
 
 
-//////////////// CREATE, UPDATE & DELETE WIDGETS ////////////////
+//////////////// GET, CREATE, UPDATE & DELETE WIDGETS ////////////////
+
+export const getWidgetAction = createAsyncThunkApi(
+  'widget/getWidgetAction',
+  Apis.GET,
+  widgetCRUDUrl,
+);
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
@@ -320,6 +326,7 @@ export const deleteHintAction = createAsyncThunkApi(
 
 const initialState: InitialStateType = {
   papers: {},
+  widget: null,
   isFetching: false,
 }
 
@@ -345,6 +352,13 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
     [getOneStateAction.rejected.toString()]: isNotFetching,
+
+    [getWidgetAction.pending.toString()]: isFetching,
+    [getWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.widget = response;
+      state.isFetching = false;
+    },
+    [getWidgetAction.rejected.toString()]: isNotFetching,
 
     [createWidgetAction.pending.toString()]: isFetching,
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
