@@ -7,7 +7,7 @@ const EventSkeletonCard: FC = () => {
       container
       alignItems='stretch'
       sx={(theme) => ({
-        // todo SADEGH
+        boxShadow: '0px 0px 1px 0px grey',
         height: '100%',
         justifyContent: 'space-between',
         [theme.breakpoints.down('md')]: {
