@@ -10,7 +10,7 @@ import {
   Divider,
   Box
 } from '@mui/material';
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import Pagination from '@mui/material/Pagination';
@@ -35,26 +35,45 @@ function Teams({
   const [newTeamName, setNewTeamName] = useState('');
   const [username, setUserName] = useState(null);
   const [selectedTeamId, setSelectedTeamId] = useState('');
+  const [teams, setTeams] = useState([])
   const [teamsCards, setTeamsCards] = useState([])
-  const [pageNumber, setPageNumber] = useState(1);
+
+  const itemsPerPage = 12;
+  const [page, setPage] = React.useState(1);
+  const [noOfPages, setNoOfPages] = React.useState(
+    Math.ceil(allEventTeams.length / itemsPerPage)
+  );
+
+  useEffect(() => {
+    setTeamsCards(
+      teams
+        .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+        .map((team) => (
+          <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
+            <TeamInfoCard
+              {...team}
+              teamId={team.id}
+              fsmId={fsmId}
+              chatRoom={team.chat_room}
+            />
+          </Grid>
+        ))
+    )
+  }, [page, teams])
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   useMemo(() => {
-    setTeamsCards(
+    setNoOfPages(Math.ceil(allEventTeams.length / itemsPerPage))
+    setTeams(
       allEventTeams?.slice().sort((a, b) => {
         if (!isNaN(parseInt(a.name)) && !isNaN(parseInt(b.name)) && parseInt(b.name) !== parseInt(a.name)) {
           return parseInt(a.name) - parseInt(b.name)
         }
         return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-      }).map((team) => (
-        <Grid container item xs={12} sm={6} md={4} key={team.id} alignItems='center' justifyContent='center'>
-          <TeamInfoCard
-            {...team}
-            teamId={team.id}
-            fsmId={fsmId}
-            chatRoom={team.chat_room}
-          />
-        </Grid>
-      ))
+      })
     )
   }, [allEventTeams])
 
@@ -166,6 +185,22 @@ function Teams({
         >
           {teamsCards}
         </Grid>
+        <Pagination
+          sx={{
+            justifyContent: "center",
+            justifySelf: 'center',
+            margin: '40px auto 0 auto',
+            padding: "10px"
+          }}
+          count={noOfPages}
+          page={page}
+          onChange={handleChange}
+          defaultPage={1}
+          color="primary"
+          size="large"
+          showFirstButton
+          showLastButton
+        />
       </Grid>
     </>
   );
