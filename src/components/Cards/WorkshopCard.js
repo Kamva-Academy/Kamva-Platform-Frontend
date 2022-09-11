@@ -83,7 +83,7 @@ export const WorkshopCard = ({
                   workshop.is_mentor ?
                     <Tooltip title='ورود به بخش همیاران' arrow>
                       <span>
-                        <IconButton component={Link} to={`/event/${eventId}/workshop/${workshop?.id}/manage`} >
+                        <IconButton component={Link} to={`/event/${eventId}/workshop/${workshop?.id}/manage/info`} >
                           <ModeEditTwoToneIcon />
                         </IconButton>
                       </span>

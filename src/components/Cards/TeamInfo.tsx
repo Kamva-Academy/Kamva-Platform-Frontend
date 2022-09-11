@@ -80,10 +80,10 @@ const TeamInfo = ({
           display: 'flex',
           justifyContent: 'space-between',
           flexDirection: 'column',
-          '&:hover': {
-            transform: 'translateY(-0.1rem) scale(1.01)',
-            boxShadow: '0 0.5em 1rem -1rem rgba(2, 2, 2, 2.5)',
-          },
+          // '&:hover': {
+          //   transform: 'translateY(-0.1rem) scale(1.01)',
+          //   boxShadow: '0 0.5em 1rem -1rem rgba(2, 2, 2, 2.5)',
+          // },
         }}
 
       >

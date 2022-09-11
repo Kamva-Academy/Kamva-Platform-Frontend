@@ -9,7 +9,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import React, { FC, useEffect, useState } from 'react';
 import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import('../../types/models')
 import ClassIcon from '@mui/icons-material/Class';
 import PersonIcon from '@mui/icons-material/Person';
@@ -43,6 +43,15 @@ type EventPropsType = {
   event: EventType,
 }
 
+
+const SECTIONS = {
+  'info': 0,
+  'design': 1,
+  'edges': 2,
+  'mentors': 3,
+  'requests': 4,
+}
+
 const EventComponent: FC<EventPropsType> = ({
   getEventTeams,
   getOneEventInfo,
@@ -50,37 +59,32 @@ const EventComponent: FC<EventPropsType> = ({
   workshop,
   event,
 }) => {
-  const t = useTranslate();
-  const { fsmId, eventId } = useParams();
-  const [tabIndex, setTabIndex] = useState(0);
-  const [tabs, setTabs] = useState<{ label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
+  const [tabs, setTabs] = useState<{ name: string, label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
+      name: 'info',
       label: 'اطلاعات کلی',
       icon: InfoIcon,
       component: Info,
     },
     {
+      name: 'design',
       label: 'طراحی',
       icon: DesignServicesIcon,
       component: Design,
     },
     {
+      name: 'edges',
       label: 'یال‌ها',
       icon: TimelineIcon,
       component: Edges,
     },
     {
+      name: 'mentors',
       label: 'همیارها',
       icon: PersonIcon,
       component: Mentors,
-    },
+    }
   ])
-
-  const TabComponent = tabs[tabIndex].component;
-  useEffect(() => {
-    getOneEventInfo({ eventId });
-    getOneWorkshopsInfo({ fsmId });
-  }, []);
 
   useEffect(() => {
     if (workshop?.fsm_learning_type == 'Supervised') {
@@ -88,6 +92,7 @@ const EventComponent: FC<EventPropsType> = ({
         setTabs([
           ...tabs,
           {
+            name: 'requests',
             label: 'درخواست‌ها',
             icon: QuestionAnswerIcon,
             component: TeamRequests,
@@ -97,6 +102,7 @@ const EventComponent: FC<EventPropsType> = ({
         setTabs([
           ...tabs,
           {
+            name: 'requests',
             label: 'درخواست‌ها',
             icon: QuestionAnswerIcon,
             component: IndividualRequests,
@@ -105,6 +111,20 @@ const EventComponent: FC<EventPropsType> = ({
       }
     }
   }, [workshop?.fsm_p_type])
+
+
+  const t = useTranslate();
+  const { fsmId, eventId, section } = useParams();
+  const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
+
+  const TabComponent = tabs[tabIndex]?.component;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getOneEventInfo({ eventId });
+    getOneWorkshopsInfo({ fsmId });
+  }, []);
 
   useEffect(() => {
     if (event?.registration_form) {
@@ -121,7 +141,11 @@ const EventComponent: FC<EventPropsType> = ({
               {tabs.map((tab, index) => (
                 <Button
                   key={index}
-                  onClick={() => setTabIndex(index)}
+                  onClick={() => {
+                    setTabIndex(index)
+                    navigate(`/event/${eventId}/workshop/${fsmId}/manage/${tabs[index].name}`)
+                  }
+                  }
                   variant={tabIndex == index ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
@@ -144,8 +168,8 @@ const EventComponent: FC<EventPropsType> = ({
           </Box>
         </Grid>
         <Grid item sm={9} xs={12}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
-            <TabComponent {...tabs[tabIndex].props} />
+          <Paper elevation={3} sx={{ padding: 2 }} >
+            {TabComponent ? <TabComponent {...tabs[tabIndex]?.props} /> : <></>}
           </Paper>
         </Grid>
       </Grid>

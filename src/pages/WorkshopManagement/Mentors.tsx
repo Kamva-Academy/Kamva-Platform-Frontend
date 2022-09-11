@@ -50,7 +50,9 @@ const Mentors: FC<MentorsPropsType> = ({
   });
 
   useEffect(() => {
-    getAllWorkshopMentors({ fsmId })
+    if(fsmId){
+      getAllWorkshopMentors({ fsmId })
+    }
   }, [fsmId])
 
   useEffect(() => {
@@ -151,6 +153,7 @@ const Mentors: FC<MentorsPropsType> = ({
                   <Tooltip title='حذف همیار' arrow>
                     <IconButton size='small'
                       onClick={async () => {
+                        // TODO: Hashem
                         await removeMentorFromWorkshop({ fsmId, mentor: {username: mentor.phone_number} })
                         getAllWorkshopMentors({ fsmId })
                       }}>
@@ -168,7 +171,7 @@ const Mentors: FC<MentorsPropsType> = ({
 }
 
 const mapStateToProps = (state) => ({
-  fsmId: state.workshop.workshop.id,
+  fsmId: state.workshop.workshop?.id,
   workshopMentors: state.workshop.allWorkshopMentors,
 });
 

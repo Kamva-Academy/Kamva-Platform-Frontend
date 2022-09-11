@@ -158,7 +158,7 @@ export const statesCRUDUrl = ({ stateId }) => stateId ? `fsm/state/${stateId}/` 
 
 // fsm:
 export const eventInfoUrl = ({ pageNumber, eventId }) => eventId ? `fsm/event/${eventId}/` : `fsm/event/?page=${pageNumber}`;
-export const allRegistrationReceiptsUrl = ({ registrationFormId }) => `fsm/registration/${registrationFormId}/receipts/`;
+export const allRegistrationReceiptsUrl = ({ registrationFormId, pageNumber }) => `fsm/registration/${registrationFormId}/receipts/?page=${pageNumber}`;
 export const validateRegistrationReceiptUrl = ({ registrationReceiptId }) => `/fsm/receipts/${registrationReceiptId}/validate/`;
 export const getPlayerFromTeamUrl = ({ id }) => `/fsm/fsm/${id}/get_player_from_team/`;
 
