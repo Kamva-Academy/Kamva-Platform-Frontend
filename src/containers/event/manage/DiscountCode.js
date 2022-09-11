@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -88,7 +88,7 @@ function Index({
             <TextField
               size='small' fullWidth
               variant='outlined'
-              label='شماره تلفن'
+              label='نام کاربری'
               inputProps={{ className: 'ltr-input' }}
               value={username} onChange={(e) => setUsername(toEnglishNumber(e.target.value))} />
           </Grid>
