@@ -89,5 +89,8 @@ const faSer = [
 ];
 
 export function faSeri(i) {
-  return faSer[i] || i - 1 + ' ام';
+  if (i == 0) {
+    return 'نامشخص'
+  }
+  return faSer[i - 1] || i + ' ام';
 }
