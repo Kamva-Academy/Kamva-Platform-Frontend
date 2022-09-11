@@ -11,6 +11,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Pagination,
 } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -32,12 +33,18 @@ function Index({
   allRegistrationReceipts,
   registrationFormId,
 }) {
+  const itemsPerPage = 100;
+  const [page, setPage] = React.useState(1);
 
   useEffect(() => {
-    if (registrationFormId) {
-      getAllRegistrationReceipts({ registrationFormId })
+    if (registrationFormId && page) {
+      getAllRegistrationReceipts({ registrationFormId, pageNumber: page })
     }
-  }, [registrationFormId])
+  }, [registrationFormId, page])
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   return (
     <Stack direction='column' spacing={2}>
@@ -45,6 +52,20 @@ function Index({
       <Divider />
       <RegisterUsersViaCSV />
       <Divider />
+      <Pagination
+          sx={{
+            padding: "10px",
+            justifySelf: 'center',
+          }}
+          count={Math.ceil(allRegistrationReceipts?.count / itemsPerPage) || 1}
+          page={page}
+          onChange={handleChange}
+          defaultPage={1}
+          color="primary"
+          size="large"
+          showFirstButton
+          showLastButton
+        />
       <TableContainer>
         <Table>
           <TableHead>
@@ -58,7 +79,7 @@ function Index({
           </TableHead>
           <TableBody>
 
-            {allRegistrationReceipts?.slice().sort((a, b) => { return a.id > b.id ? -1 : 1 }).map((registrationReceipt, index) =>
+            {allRegistrationReceipts?.results?.slice().sort((a, b) => { return a.id > b.id ? -1 : 1 }).map((registrationReceipt, index) =>
               <TableRow key={index}>
                 <TableCell align='center'>
                   {toPersianNumber(index + 1)}

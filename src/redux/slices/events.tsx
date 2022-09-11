@@ -699,7 +699,7 @@ const eventSlice = createSlice({
 
     [getAllRegistrationReceiptsAction.pending.toString()]: isFetching,
     [getAllRegistrationReceiptsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.allRegistrationReceipts = response.results;
+      state.allRegistrationReceipts = response;
       state.isFetching = false;
     },
     [getAllRegistrationReceiptsAction.rejected.toString()]: isNotFetching,
