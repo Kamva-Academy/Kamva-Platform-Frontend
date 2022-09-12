@@ -34,31 +34,31 @@ const tabs: { name: string, label: string, icon: any, component: any }[] = [
     component: Info,
   },
   {
-    name: 'registrationForm',
+    name: 'registration-form',
     label: 'فرم ثبت‌نام',
     icon: HistoryEduIcon,
     component: RegistrationForm,
   },
   {
-    name: 'registrationReceipts',
+    name: 'registration-receipts',
     label: 'رسیدهای ثبت‌نام',
     icon: ConfirmationNumberIcon,
     component: RegistrationReceipts,
   },
   {
-    name: 'discountCodes',
+    name: 'discount-codes',
     label: 'کد تخفیف',
     icon: DiscountIcon,
     component: DiscountCode,
   },
   {
-    name: 'teamManagement',
+    name: 'teams',
     label: 'تیم‌ها',
     icon: GroupIcon,
     component: Teams,
   },
   {
-    name: 'allWorkshops',
+    name: 'workshops',
     label: 'کارگاه‌ها',
     icon: ClassIcon,
     component: Workshops,
@@ -66,12 +66,12 @@ const tabs: { name: string, label: string, icon: any, component: any }[] = [
 ];
 
 const SECTIONS = {
-  info: 0,
-  registrationForm: 1,
-  registrationReceipts: 2,
-  discountCodes: 3,
-  teamManagement: 4,
-  allWorkshops: 5
+  'info': 0,
+  'registration-form': 1,
+  'registration-receipts': 2,
+  'discount-codes': 3,
+  'teams': 4,
+  'workshops': 5
 }
 
 type EventType = {
