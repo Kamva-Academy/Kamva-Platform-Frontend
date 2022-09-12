@@ -24,7 +24,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor, mentorId }) => {
   const search = useLocation().search;
   let teamId = new URLSearchParams(search).get('teamId');
   const chatRoomButton = <ChatRoomButton />;
-  const backToEventButton = <DashboardButton onClick={() => { announceMentorDeparture(teamId, mentorId) }} name={'بازگشت به عقب'} to={`/event/${eventId}/workshop/${fsmId}/manage`} />;
+  const backToEventButton = <DashboardButton onClick={() => { announceMentorDeparture(teamId, mentorId) }} name={'بازگشت'} to={`/event/${eventId}/workshop/${fsmId}/manage/requests/`} />;
   const whiteboardButton = <WhiteboardButton />;
   const teamAvatar = <TeamAvatar />;
   const userAvatar = <UserAvatar />;
