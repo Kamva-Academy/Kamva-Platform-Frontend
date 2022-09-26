@@ -9,6 +9,7 @@ import {
   markSubmissionUrl,
   sendWidgetAnswerUrl,
   makeAnswerEmptyUrl,
+  makeWidgetFileEmptyUrl,
 } from '../constants/urls';
 import { InitialStateType } from '../../types/redux/Paper';
 
@@ -109,6 +110,17 @@ export const getOneStateAction = createAsyncThunkApi(
 
 
 //////////////// GET, CREATE, UPDATE & DELETE WIDGETS ////////////////
+
+export const makeWidgetFileEmptyAction = createAsyncThunkApi(
+  'widget/makeWidgetFileEmptyAction',
+  Apis.GET,
+  makeWidgetFileEmptyUrl,
+  {
+    defaultNotification: {
+      error: 'مشکلی در حذف فایل وجود داشت.'
+    },
+  }
+);
 
 export const getWidgetAction = createAsyncThunkApi(
   'widget/getWidgetAction',
@@ -427,6 +439,19 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
 
+    [makeWidgetFileEmptyAction.pending.toString()]: isFetching,
+    [makeWidgetFileEmptyAction.fulfilled.toString()]: (state, { meta: { arg } }) => {
+      const newPapers = { ...state.papers }
+      const widgets = newPapers[arg.paperId].widgets;
+      for (let i = 0; i < widgets.length; i++) {
+        if (widgets[i].id == arg.widgetId) {
+          widgets[i].file = null;
+        }
+      }
+      state.papers = newPapers;
+      state.isFetching = false;
+    },
+    [makeWidgetFileEmptyAction.rejected.toString()]: isNotFetching,
   },
 });
 

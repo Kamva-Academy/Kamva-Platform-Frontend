@@ -153,6 +153,7 @@ export const stateCRUDUrl = ({ stateId }) => stateId ? `/fsm/state/${stateId}/` 
 export const edgeUrl = ({ edgeId }) => edgeId ? `/fsm/edge/${edgeId}/` : '/fsm/edge/';
 
 // widget:
+export const makeWidgetFileEmptyUrl = ({ widgetId }) => `fsm/widget/${widgetId}/make_widget_file_empty/`;
 export const widgetCRUDUrl = ({ widgetId }) => widgetId ? `fsm/widget/${widgetId}/` : 'fsm/widget/';
 export const statesCRUDUrl = ({ stateId }) => stateId ? `fsm/state/${stateId}/` : 'fsm/state/';
 

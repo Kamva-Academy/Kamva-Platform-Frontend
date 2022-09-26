@@ -154,7 +154,7 @@ export const updateWidgetAction = createAsyncThunkApi(
 
 export const createWidgetAction = createAsyncThunkApi(
   'widget/widget/create',
-  Apis.POST,
+  Apis.POST_FORM_DATA,
   widgetCRUDUrl,
   {
     bodyCreator: (widget) => ({ ...widget }),
@@ -165,19 +165,16 @@ export const createWidgetAction = createAsyncThunkApi(
   }
 );
 
-export const createVideoWidgetAction = ({ paper, link }) =>
+export const createVideoWidgetAction = (props) =>
   createWidgetAction({
-    paper,
+    ...props,
     widget_type: 'Video',
-    link,
   });
 
-export const updateVideoWidgetAction = ({ paper, link, widgetId }) =>
+export const updateVideoWidgetAction = (props) =>
   updateWidgetAction({
-    paper,
+    ...props,
     widget_type: 'Video',
-    link,
-    widgetId,
   });
 
 export const createMiniGameWidgetAction = ({ paper, link }) =>
@@ -195,19 +192,17 @@ export const updateMiniGameWidgetAction = ({ paper, link, widgetId }) =>
     widgetId,
   });
 
-export const createImageWidgetAction = ({ paper, link }) =>
+export const createImageWidgetAction = (props) =>
   createWidgetAction({
-    paper,
+    ...props,
     widget_type: 'Image',
-    link,
+
   });
 
-export const updateImageWidgetAction = ({ paper, link, widgetId }) =>
+export const updateImageWidgetAction = (props) =>
   updateWidgetAction({
-    paper,
+    ...props,
     widget_type: 'Image',
-    link,
-    widgetId,
   });
 
 export const createTextWidgetAction = ({ paper, text }) =>

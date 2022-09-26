@@ -82,10 +82,7 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   );
 }
 
-export default connect(
-  null,
-  {
-    createUploadFileWidget: createUploadFileWidgetAction,
-    updateUploadFileWidget: updateUploadFileWidgetAction,
-  }
-)(UploadFileProblemEditWidget);
+export default connect(null, {
+  createUploadFileWidget: createUploadFileWidgetAction,
+  updateUploadFileWidget: updateUploadFileWidgetAction,
+})(UploadFileProblemEditWidget);

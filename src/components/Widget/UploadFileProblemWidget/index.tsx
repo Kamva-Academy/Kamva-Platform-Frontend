@@ -90,7 +90,6 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     });
   }
 
-  // todo: change modes for mentor and student. these modes only is for student
   return (
     <Stack alignItems='center' justifyContent='space-between' direction='row' spacing={1}>
       <Typography>{text}</Typography>
