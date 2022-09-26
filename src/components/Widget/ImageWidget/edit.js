@@ -23,11 +23,11 @@ function ImageEditWidget({
   updateImageWidget,
   handleClose,
 
+  stateId,
   open,
   link: oldLink,
   id: widgetId,
   file: previousFile,
-  paper: paperId,
 }) {
   const [link, setLink] = useState(oldLink);
   const [file, setFile] = useState(null);
@@ -35,7 +35,7 @@ function ImageEditWidget({
 
   const handleClick = () => {
     let payload = {
-      paper: paperId,
+      paper: stateId,
     };
     if (file) {
       payload = {
@@ -76,7 +76,7 @@ function ImageEditWidget({
             onChange={(e) => setLink(e.target.value)}
           />
           <Divider>یا</Divider>
-          <UploadFile widgetId={widgetId} paperId={paperId} file={file} setFile={setFile} previousFile={previousFile} />
+          <UploadFile widgetId={widgetId} paperId={stateId} file={file} setFile={setFile} previousFile={previousFile} />
         </Stack>
       </DialogContent>
       <DialogActions>
