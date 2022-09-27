@@ -12,7 +12,7 @@ import {
 } from '../../../redux/slices/Paper';
 import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from '..';
-import { baseURL } from '../../../configs/axios'
+import { baseURL } from '../../../configs/Constants';
 
 type UploadFileProblemWidgetPropsType = {
   collectAnswers: any;

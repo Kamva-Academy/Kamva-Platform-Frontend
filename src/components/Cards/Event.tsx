@@ -1,4 +1,4 @@
-import { Button, Card, Chip, Grid, Typography } from '@mui/material';
+import { Box, Button, Card, Chip, Grid, Stack, Typography } from '@mui/material';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -53,6 +53,7 @@ const EventCard: FC<EventCardPropsType> = ({
     <Card
       sx={{
         height: '100%',
+        width: '100%',
         padding: '0px !important',
         backgroundColor: 'rgb(255, 255, 255, 0.94)',
         fontSize: '1rem',
@@ -83,40 +84,36 @@ const EventCard: FC<EventCardPropsType> = ({
               objectFit: 'cover',
             }} />
         </Grid>
-        <Grid item container xs={12} md={7}
-          direction="column"
-          justifyContent="space-between" spacing={2}
-          sx={(theme) => ({
-            padding: theme.spacing(2),
-            paddingLeft: theme.spacing(2),
-          })}>
-          <Grid item>
+        <Grid xs={12} md={7} item container
+          sx={{
+            padding: 2,
+            paddingLeft: 2,
+          }}>
+          <Stack justifyContent="space-between" spacing={2} sx={{ width: '100%' }}>
             <Typography variant="h3"
               sx={{
                 color: '#4d4a70',
               }}>
               {event.name}
             </Typography>
-          </Grid>
-          <Grid item>
             <Typography variant="body2" color="textSecondary">
               {event.description}
             </Typography>
-          </Grid>
-          <Grid item>
-            <Chip
-              variant="outlined"
-              icon={<PeopleAltIcon />}
-              label={
-                event.event_type === 'Individual'
-                  ? 'انفرادی'
-                  : `${toPersianNumber(event.team_size)} ${t('person')}`
-              }
-            />
-          </Grid>
-          <Grid item>
-            {eventButtonObj}
-          </Grid>
+            <Stack spacing={1}>
+              <Box>
+                <Chip
+                  variant="outlined"
+                  icon={<PeopleAltIcon />}
+                  label={
+                    event.event_type === 'Individual'
+                      ? 'انفرادی'
+                      : `${toPersianNumber(event.team_size)} ${t('person')}`
+                  }
+                />
+              </Box>
+              {eventButtonObj}
+            </Stack>
+          </Stack>
         </Grid>
       </Grid>
     </Card>
