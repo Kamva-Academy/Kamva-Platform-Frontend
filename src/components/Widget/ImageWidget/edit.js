@@ -29,9 +29,9 @@ function ImageEditWidget({
   id: widgetId,
   file: previousFile,
 }) {
+  const t = useTranslate();
   const [link, setLink] = useState(oldLink);
   const [file, setFile] = useState(null);
-  const t = useTranslate();
 
   const handleClick = () => {
     let payload = {
@@ -65,6 +65,8 @@ function ImageEditWidget({
       <DialogTitle>{t('image')}</DialogTitle>
       <DialogContent>
         <Stack spacing={2}>
+          <UploadFile widgetId={widgetId} paperId={stateId} file={file} setFile={setFile} previousFile={previousFile} />
+          <Divider>یا</Divider>
           <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
           <TextField
             autoFocus
@@ -75,8 +77,6 @@ function ImageEditWidget({
             placeholder="http://example.com/example.png"
             onChange={(e) => setLink(e.target.value)}
           />
-          <Divider>یا</Divider>
-          <UploadFile widgetId={widgetId} paperId={stateId} file={file} setFile={setFile} previousFile={previousFile} />
         </Stack>
       </DialogContent>
       <DialogActions>

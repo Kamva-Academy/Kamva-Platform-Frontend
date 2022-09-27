@@ -1,20 +1,13 @@
-import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
-
 import ImageEditWidget from './edit';
-
 export { ImageEditWidget };
 
-const useStyles = makeStyles(() => ({
-  imageWidget: {
-    width: '100%',
-    borderRadius: 10,
-  },
-}));
-
-const ImageWidget = ({ link = '', alt }) => {
-  const classes = useStyles();
-  return <img src={link} className={classes.imageWidget} alt={alt} />;
+const ImageWidget = ({ link, file, alt }) => {
+  return <img src={file || link} alt={alt}
+    style={{
+      width: '100%',
+      borderRadius: 10,
+    }} />;
 };
 
 export default ImageWidget;

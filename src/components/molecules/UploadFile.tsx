@@ -31,7 +31,7 @@ const UploadFile: FC<UploadFilePropsType> = ({
   const submitFile = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    if (file.size <= 8e6) {
+    if (file.size <= 50e6) {
       setFile(file);
     }
   };
@@ -56,7 +56,7 @@ const UploadFile: FC<UploadFilePropsType> = ({
         {'بارگذاری فایل'}
       </Button>
       <input
-        accept="application/pdf,image/*"
+        accept="video/* ,image/*"
         style={{ display: 'none' }}
         id={'upload-widget-file'}
         type="file"
