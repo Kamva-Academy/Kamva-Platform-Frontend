@@ -1,11 +1,11 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
-import {makeStyles} from '@mui/styles'
+import { makeStyles } from '@mui/styles'
 import { Add as AddIcon } from '@mui/icons-material';
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import Widget, { MODES } from '../../Widget';
+import Widget, { WidgetModes } from '../../Widget';
 import CreateWidgetDialog from '../../organisms/dialogs/CreateWidgetDialog';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +55,7 @@ function EditWidgets({ widgets, stateId, stateName }) {
                   key={widget.id}
                   stateId={stateId}
                   widget={widget}
-                  mode={MODES.EDIT}
+                  mode={WidgetModes.Edit}
                 />
               ))}
             </Paper>

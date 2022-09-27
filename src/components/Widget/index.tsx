@@ -1,17 +1,9 @@
 import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip } from '@mui/material';
 import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
-
-// TODO: remove this old MODES and replace WidgetModes
-export const MODES = {
-  WRITE: 'WRITE',
-  VIEW: 'VIEW',
-  EDIT: 'EDIT',
-  CORRECTION: 'CORRECTION',
-};
 
 export enum WidgetModes {
   View,
@@ -49,18 +41,24 @@ type WidgetPropsType = {
   coveredWithPaper?: boolean;
 }
 
-const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true, ...props }) => {
+const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
-  const Cover = coveredWithPaper
-    ? (props) =>
-      <Paper elevation={2} sx={{ padding: 1 }}>
-        {props.children}
-      </Paper>
-    : (props) => props.children
+  const Cover = useMemo(() =>
+    coveredWithPaper
+      ? (props) =>
+        <Paper elevation={2} sx={{ padding: 1 }}>
+          {props.children}
+        </Paper>
+      : (props) => props.children
+    , [widget])
+
+  const widgetMemoizedComponent = useMemo(() =>
+    <WidgetComponent {...widget} mode={mode} />
+    , [widget])
 
   return (
     <Cover>
@@ -100,7 +98,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
           />
         </Stack>
       }
-      <WidgetComponent {...widget} mode={mode} {...props} />
+      {widgetMemoizedComponent}
     </Cover>
   );
 };

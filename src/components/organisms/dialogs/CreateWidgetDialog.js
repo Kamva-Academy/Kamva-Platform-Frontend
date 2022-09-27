@@ -41,6 +41,7 @@ export default function CreateWidgetDialog({ open, handleClose, stateId, showCon
           <Select
             onChange={(e) => setType(e.target.value)}
             name='fsmId'
+            value={type}
             label={t('widgetType')}>
             {Object.keys(WIDGET_TYPES)
               .filter((option, index) => (!option.includes('Problem') && showContent) || (option.includes('Problem') && showQuestions))

@@ -57,31 +57,9 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
     widget.widget_type.includes('Problem')
   );
 
-  const questionWidgets = useMemo(
-    () => questions.map((widget) => (
-      <Box key={widget.index}>
-        <Widget
-          stateId={stateId}
-          widget={widget}
-          mode={WidgetModes.Edit}
-        />
-      </Box>
-    )), [questions])
-
   const nonQuestions = widgets?.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
-
-  const nonQuestionWidgets = useMemo(() =>
-    nonQuestions.map((widget) => (
-      <Box key={widget.id}>
-        <Widget
-          stateId={stateId}
-          widget={widget}
-          mode={WidgetModes.Edit}
-        />
-      </Box>
-    )), [nonQuestions])
 
   return (
     <>
@@ -131,7 +109,17 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
           {'مسئله‌ها'}
         </Typography>
         <Divider />
-        {questionWidgets}
+        {
+          questions.map((widget) => (
+            <Box key={widget.id}>
+              <Widget
+                stateId={stateId}
+                widget={widget}
+                mode={WidgetModes.Edit}
+              />
+            </Box>
+          ))
+        }
         {
           questions?.length === 0 &&
           <Box m={2}>
@@ -151,7 +139,17 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({
           {'محتواها'}
         </Typography>
         <Divider />
-        {nonQuestionWidgets}
+        {
+          nonQuestions.map((widget) => (
+            <Box key={widget.id}>
+              <Widget
+                stateId={stateId}
+                widget={widget}
+                mode={WidgetModes.Edit}
+              />
+            </Box>
+          ))
+        }
         {
           nonQuestions?.length === 0 &&
           <Box m={2}>

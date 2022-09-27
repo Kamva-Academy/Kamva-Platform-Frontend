@@ -19,7 +19,7 @@ import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponen
 type BigAnswerProblemEditWidgetPropsType = {
   handleClose: any;
   createBigAnswerQuestionWidget: any;
-  updateBigAnswerQuestionWidgetAction: any;
+  updateBigAnswerQuestionWidget: any;
 
   open: boolean;
   text: string;
@@ -31,7 +31,7 @@ type BigAnswerProblemEditWidgetPropsType = {
 const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
   handleClose,
   createBigAnswerQuestionWidget,
-  updateBigAnswerQuestionWidgetAction,
+  updateBigAnswerQuestionWidget,
 
   open,
   text: oldText,
@@ -45,7 +45,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
 
   const handleClick = () => {
     if (widgetId) {
-      updateBigAnswerQuestionWidgetAction({
+      updateBigAnswerQuestionWidget({
         widgetId,
         paper: stateId,
         text: text,
