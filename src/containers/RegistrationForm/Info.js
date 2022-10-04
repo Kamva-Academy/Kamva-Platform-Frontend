@@ -27,23 +27,25 @@ const RegistrationForm = ({
     <Stack
       direction={{ xs: 'column', sm: 'row' }}
       sx={{
+        width: '100%',
         padding: '0px !important',
+        display: 'flex',
       }}
       component={Paper}
       alignItems='center'
-      justifyContent="space-between"
-      spacing={2}>
+      justifyContent="space-between">
 
       <img
-
         src={event?.cover_page}
         alt=""
         style={width == 'xs' ? {
+          flex: 0,
           borderTopLeftRadius: 5,
           borderTopRightRadius: 5,
           width: '100%',
           objectFit: 'cover',
         } : {
+          flex: 0,
           borderTopRightRadius: 5,
           borderBottomRightRadius: 5,
           maxWidth: '40%',
@@ -51,7 +53,7 @@ const RegistrationForm = ({
         }}
       />
 
-      <Stack spacing={2}>
+      <Stack spacing={2} sx={{ padding: 2, flex: 1 }}>
         {event?.name && (
           <Typography gutterBottom align="center" variant="h1">{event?.name}</Typography>
         )}
