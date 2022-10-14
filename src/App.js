@@ -8,7 +8,7 @@ import { CacheProvider } from "@emotion/react";
 import { connect } from 'react-redux';
 import { IntlProvider } from 'react-redux-multilingual';
 import { useNavigate } from 'react-router-dom';
-import createEmotionCache from './configs/createEmotionCache'
+import createEmotionCache from './configs/CreateEmotionCache'
 import selectTheme from './configs/themes';
 import Notifier from './components/Notifications/Notifications';
 import { initParseServer } from './parse/init';
