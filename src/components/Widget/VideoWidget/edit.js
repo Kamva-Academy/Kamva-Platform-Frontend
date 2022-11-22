@@ -70,7 +70,6 @@ function VideoEditWidget({
           <Divider>یا</Divider>
           <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
           <TextField
-            autoFocus
             fullWidth
             label="آدرس فیلم"
             value={link}
