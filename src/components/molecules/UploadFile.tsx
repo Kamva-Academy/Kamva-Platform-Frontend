@@ -10,6 +10,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import React, { FC, useState } from 'react';
 import { makeWidgetFileEmptyAction } from '../../redux/slices/Paper';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify'
 
 type UploadFilePropsType = {
   previousFile: string;
@@ -31,9 +32,15 @@ const UploadFile: FC<UploadFilePropsType> = ({
   const submitFile = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    if (file.size <= 50e6) {
-      setFile(file);
+    if (file.name.length > 100) {
+      toast.error('حداکثر طول نام فایل حداکثر ۱۰۰ کاراکتر است.');
+      return;
     }
+    if (file.size >= 50e6) {
+      toast.error('حداکثر حجم فایل ۵۰ مگابایت است.');
+      return;
+    }
+    setFile(file);
   };
 
   const clearFile = (e) => {
