@@ -35,6 +35,7 @@
     "react-redux-multilingual": "^2.0.4",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
+    "react-toastify": "^9.1.1",
     "redux": "^4.1.1",
     "redux-undo": "^1.0.1",
     "stylis": "^4.1.1",

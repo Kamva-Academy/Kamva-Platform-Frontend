@@ -1,5 +1,7 @@
 import './configs/styles/App.css';
+import 'react-toastify/dist/ReactToastify.css';
 
+import { Slide, ToastContainer } from 'react-toastify';
 import React, { useEffect } from 'react';
 import { CssBaseline, LinearProgress } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
@@ -58,6 +60,19 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
       <CacheProvider value={createEmotionCache(dir)}>
         <ThemeProvider theme={selectTheme(dir)}>
           <SnackbarProvider>
+            <ToastContainer
+              rtl
+              position="top-left"
+              autoClose={3000}
+              transition={Slide}
+              newestOnTop
+              hideProgressBar={false}
+              pauseOnHover={false}
+              pauseOnFocusLoss={false}
+              closeOnClick
+              limit={3}
+              draggable={false}
+            />
             <Loading />
             <Notifier />
             <CssBaseline />
@@ -73,7 +88,11 @@ const mapStateToProps = (state) => ({
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
-  loading: state.account.isFetching || state.events.isFetching || state.currentState.isFetching,
+  loading:
+    state.account.isFetching ||
+    state.events.isFetching ||
+    state.currentState.isFetching ||
+    state.paper.isFetching,
 });
 
 export default connect(mapStateToProps, { initRedirect: initRedirectAction })(App);
