@@ -12,7 +12,7 @@ import {
 } from '../../../redux/slices/Paper';
 import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from '..';
-import { baseURL } from '../../../configs/Constants';
+import { BASE_URL } from '../../../configs/Constants';
 
 type UploadFileProblemWidgetPropsType = {
   collectAnswers: any;
@@ -129,7 +129,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
                   <ClearIcon sx={{ fontSize: 14 }} />
                 </IconButton>
               )}
-            // todo Hashem: href={baseURL + file?.link} or href={file?.link} ? bazi jaha momkeneh fargh koneh.
+            // todo Hashem: href={BASE_URL + file?.link} or href={file?.link} ? bazi jaha momkeneh fargh koneh.
             href={file?.link}
             component="a"
             target="_blank">
