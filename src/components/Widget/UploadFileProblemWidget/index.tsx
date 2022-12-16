@@ -40,8 +40,6 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
   const t = useTranslate();
   const [file, setFile] = useState(null);
 
-  console.log(props)
-
   useEffect(() => {
     if (last_submitted_answer) {
       setFile({
