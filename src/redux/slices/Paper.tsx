@@ -20,10 +20,9 @@ export const uploadFileAnswerAction = createAsyncThunkApi(
   Apis.POST_FORM_DATA,
   uploadFileUrl,
   {
-    bodyCreator: ({ problemId, fileName, answerFile }) => ({
+    bodyCreator: ({ problemId, answerFile }) => ({
       problem: problemId,
       answer_file: answerFile,
-      file_name: fileName,
       is_final_answer: true,
     }),
     defaultNotification: {

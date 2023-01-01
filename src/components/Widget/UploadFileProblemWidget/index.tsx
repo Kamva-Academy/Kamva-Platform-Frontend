@@ -38,58 +38,47 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
   ...props
 }) => {
   const t = useTranslate();
-  const [file, setFile] = useState(null);
+  const [fileLink, setFileLink] = useState(null);
 
   useEffect(() => {
     if (last_submitted_answer) {
-      setFile({
-        link: last_submitted_answer.answer_file,
-        name: 'آخرین فایل ارسالی',
-      })
+      setFileLink(last_submitted_answer.answer_file)
     }
   }, [last_submitted_answer])
 
   const changeFile = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    if (file) {
-      if (file.name.length > 100) {
-        toast.error('حداکثر طول نام فایل حداکثر ۱۰۰ کاراکتر است.');
-        e.target.value = null;
-        e.target.reportValidity();
-        return;
-      }
-      if (file.size > 11e6) {
-        toast.error('حجم فایل ارسالی باید کمتر از ۱۰ مگابایت باشد.')
-        e.target.value = null;
-        e.target.reportValidity();
-        return;
-      }
-      uploadFileAnswer({
-        problemId: widgetId,
-        fileName: file.name,
-        answerFile: file,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          setFile({
-            link: response.payload?.response?.answer_file,
-            name: file.name,
-          });
-          if (mode === WidgetModes.InAnswerSheet) {
-            collectAnswers('upload_file_answer', response.payload?.response?.id);
-          }
-        } else {
-          e.target.value = null;
-        }
-      })
+    const selectedFile = e.target.files[0];
+    e.target.value = null;
+    if (!selectedFile) {
+      return;
     }
+    if (selectedFile.name.length > 100) {
+      toast.error('حداکثر طول نام فایل حداکثر ۱۰۰ کاراکتر است.');
+      return;
+    }
+    if (selectedFile.size > 11e6) {
+      toast.error('حجم فایل ارسالی باید کمتر از ۱۰ مگابایت باشد.')
+      return;
+    }
+    uploadFileAnswer({
+      problemId: widgetId,
+      // fileName: file.name,
+      answerFile: selectedFile,
+    }).then((response) => {
+      if (response.type?.endsWith('fulfilled')) {
+        setFileLink(response.payload?.response?.answer_file);
+        if (mode === WidgetModes.InAnswerSheet) {
+          collectAnswers('upload_file_answer', response.payload?.response?.id);
+        }
+      }
+    })
   };
 
   const clearFile = (e) => {
     e.preventDefault();
     makeAnswerEmpty({ widgetId }).then((response) => {
       if (response.type?.endsWith('fulfilled')) {
-        setFile(null);
+        setFileLink(null);
         if (mode === WidgetModes.InAnswerSheet) {
           collectAnswers('upload_file_answer', null);
         }
@@ -123,7 +112,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
             />
           </>
         }
-        {(mode !== WidgetModes.Edit && file?.link) &&
+        {(mode !== WidgetModes.Edit && fileLink?.link) &&
           <Button
             size="small"
             variant='outlined'
@@ -137,14 +126,14 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
                 </IconButton>
               )}
             // todo Hashem: href={BASE_URL + file?.link} or href={file?.link} ? bazi jaha momkeneh fargh koneh.
-            href={file?.link}
+            href={fileLink}
             component="a"
             target="_blank">
             {'آخرین فایل ارسالی'}
           </Button>
         }
       </Stack>
-      {mode === WidgetModes.Review && !file?.link &&
+      {mode === WidgetModes.Review && !fileLink &&
         <Typography color='red' variant='caption'>
           {'پاسخی برای این سوال ثبت نشده است.'}
         </Typography>
