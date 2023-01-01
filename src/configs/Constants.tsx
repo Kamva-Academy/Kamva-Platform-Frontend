@@ -1,5 +1,5 @@
 export const BASE_URL =
-  process.env.NODE_ENV === 'production'
+  process.env.NODE_ENV === 'development'
     ? 'https://backend.kamva.academy'
     : 'https://backend.kamva.academy'
 
