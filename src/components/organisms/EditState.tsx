@@ -57,11 +57,11 @@ const EditState: FC<EditStatePropsType> = ({
     }
   }, [name])
 
-  const questions = widgets?.filter((widget) =>
+  const problems = widgets?.filter((widget) =>
     widget.widget_type.includes('Problem')
   );
 
-  const nonQuestions = widgets?.filter(
+  const contents = widgets?.filter(
     (widget) => !widget.widget_type.includes('Problem')
   );
 
@@ -113,12 +113,12 @@ const EditState: FC<EditStatePropsType> = ({
           {'مسئله‌ها'}
         </Typography>
         <Divider />
-        <EditWidgets widgets={questions} stateId={stateId} mode='problems' />
+        <EditWidgets widgets={problems} stateId={stateId} mode='problems' />
         <Typography variant='h2' gutterBottom>
           {'محتواها'}
         </Typography>
         <Divider />
-        <EditWidgets widgets={nonQuestions} stateId={stateId} mode='contents' />
+        <EditWidgets widgets={contents} stateId={stateId} mode='contents' />
         <EditHints hints={hints} stateId={stateId} />
       </Stack >
       <CreateWidgetDialog
