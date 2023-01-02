@@ -1,5 +1,5 @@
-import { Box, Stack } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Box, Stack, Typography } from '@mui/material';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
@@ -8,8 +8,15 @@ import { WidgetModes } from '../components/Widget';
 import Widget from '../components/Widget';
 import { getArticleAction } from '../redux/slices/article';
 
-const Article = ({ article, getArticle }) => {
+type ArticlePropsType = {
+  papers: any[];
+  getArticle: any;
+}
+
+const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
   const { articleId } = useParams();
+
+  const article = papers[articleId];
 
   useEffect(() => {
     getArticle({ articleId });
@@ -18,6 +25,13 @@ const Article = ({ article, getArticle }) => {
   return (
     <Layout appbarMode='ARTICLE'>
       <Stack spacing={2} maxWidth='sm'>
+        <Typography
+          align="center"
+          component="h1"
+          variant="h3"
+          gutterBottom>
+          {article?.name}
+        </Typography>
         {article?.widgets.map((widget) => (
           <Box key={widget.id}>
             <Widget stateId={article.id} mode={WidgetModes.View} coveredWithPaper={false} widget={widget} />
@@ -29,7 +43,7 @@ const Article = ({ article, getArticle }) => {
 };
 
 const mapStateToProps = (state) => ({
-  article: state.article.article,
+  papers: state.paper.papers,
 });
 
 export default connect(mapStateToProps, {
