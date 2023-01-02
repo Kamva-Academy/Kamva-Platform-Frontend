@@ -1,15 +1,19 @@
 import { Button, ButtonGroup, Container, Grid, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import appendPreviousParams from '../utils/AppendPreviousParams';
 
-const Index = () => {
+const Landing = ({ token }) => {
   const navigate = useNavigate();
   useEffect(() => {
     document.title = 'کاموا';
   }, [])
+
+  useEffect(() => {
+    navigate('/events');
+  }, [token])
 
   return (
     <Container>
@@ -63,4 +67,8 @@ const Index = () => {
   );
 };
 
-export default Index;
+const mapStateToProps = (state) => ({
+  token: state.account.token,
+});
+
+export default connect(mapStateToProps)(Landing);
