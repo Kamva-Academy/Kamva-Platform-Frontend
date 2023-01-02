@@ -763,14 +763,6 @@ const eventSlice = createSlice({
     [registerUsersViaCSVAction.fulfilled.toString()]: isNotFetching,
     [registerUsersViaCSVAction.rejected.toString()]: isNotFetching,
 
-
-    [getRegistrationFormAction.pending.toString()]: isFetching,
-    [getRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.widgets = response.widgets;
-      state.isFetching = false;
-    },
-    [getRegistrationFormAction.rejected.toString()]: isNotFetching,
-
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.widgets = [...state.widgets, response];
     },

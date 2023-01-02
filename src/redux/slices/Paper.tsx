@@ -12,6 +12,8 @@ import {
   makeWidgetFileEmptyUrl,
 } from '../constants/urls';
 import { InitialStateType } from '../../types/redux/Paper';
+import { getArticleAction } from './article';
+import { getRegistrationFormAction } from './events';
 
 //////////////// SEND ANSWER ////////////////
 
@@ -451,6 +453,18 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
     [makeWidgetFileEmptyAction.rejected.toString()]: isNotFetching,
+
+    [getArticleAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.papers[response.id] = response;
+      state.isFetching = false;
+    },
+
+    [getRegistrationFormAction.pending.toString()]: isFetching,
+    [getRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.papers[response.id] = response;
+      state.isFetching = false;
+    },
+    [getRegistrationFormAction.rejected.toString()]: isNotFetching,
   },
 });
 

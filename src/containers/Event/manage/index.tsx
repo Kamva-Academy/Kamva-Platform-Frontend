@@ -143,7 +143,9 @@ const Event: FC<EventType> = ({
         </Grid>
         <Grid item sm={9} xs={12} >
           <Paper elevation={3} sx={{ padding: '10px 20px' }}>
-            <TabComponent registrationFormId={event?.registration_form} />
+            {event?.registration_form &&
+              <TabComponent registrationFormId={event.registration_form} />
+            }
           </Paper>
         </Grid>
       </Grid>

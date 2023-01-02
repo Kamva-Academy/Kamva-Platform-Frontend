@@ -5,9 +5,6 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   articlesUrl,
 } from '../constants/urls';
-import {
-  createWidgetAction,
-} from './widget';
 
 import { ArticlesInitialStateType } from '../../types/redux/article'
 
@@ -63,17 +60,6 @@ const mentorSlice = createSlice({
       state.articles = response.results;
       state.articlesCount = response.count;
     },
-
-    [getArticleAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.article = response;
-      state.widgets = response.widgets;
-    },
-
-    [createWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.widgets = [...state.widgets, response];
-      state.isFetching = false;
-    },
-
   },
 });
 

@@ -147,7 +147,7 @@ export const updateWidgetAction = createAsyncThunkApi(
     bodyCreator: (widget) => ({ ...widget }),
     defaultNotification: {
       success: 'ویجت با موفقیت به‌روز شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
+      error: 'مشکلی در به‌روز‌رسانی ویجت وجود داشت.'
     },
   }
 );
@@ -160,7 +160,7 @@ export const createWidgetAction = createAsyncThunkApi(
     bodyCreator: (widget) => ({ ...widget }),
     defaultNotification: {
       success: 'ویجت با موفقیت اضافه شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
+      error: 'مشکلی در پاک‌کردن ویجت وجود داشت.'
     },
   }
 );

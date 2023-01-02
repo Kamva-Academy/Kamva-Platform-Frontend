@@ -14,7 +14,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import WIDGET_TYPES from '../../Widget/WidgetTypes';
 
-export default function CreateWidgetDialog({ open, handleClose, stateId, showContent = true, showQuestions = false }) {
+export default function CreateWidgetDialog({ open, handleClose, stateId, showContent = true, showProblems = false }) {
   const [type, setType] = useState('');
   const t = useTranslate();
 
@@ -44,7 +44,7 @@ export default function CreateWidgetDialog({ open, handleClose, stateId, showCon
             value={type}
             label={t('widgetType')}>
             {Object.keys(WIDGET_TYPES)
-              .filter((option, index) => (!option.includes('Problem') && showContent) || (option.includes('Problem') && showQuestions))
+              .filter((option, index) => (!option.includes('Problem') && showContent) || (option.includes('Problem') && showProblems))
               .map((option, index) => (
                 <MenuItem key={index} value={option}>
                   {WIDGET_TYPES[option].label}

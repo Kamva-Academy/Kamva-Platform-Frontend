@@ -25,6 +25,7 @@ import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../pages/WorkshopManagement';
 import GoToAnswer from '../containers/GoToAnswer';
 import Correction from '../pages/Correction';
+import EditArticle from '../pages/EditArticle';
 
 const Root = () => {
   return (
@@ -41,6 +42,8 @@ const Root = () => {
       <Route path="/" element={<Landing />} />
 
       <Route path="/" element={<PrivateRoute />}>
+
+        <Route path="/edit-article/:articleId/" element={<EditArticle />} />
         <Route
           path="/message/payment/success/:paymentId?/"
           element={<SuccessfulPayment />}

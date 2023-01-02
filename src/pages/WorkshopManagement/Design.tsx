@@ -1,10 +1,9 @@
 import {
-  Grid,
-  Paper,
   Stack,
   Typography,
+  Box,
 } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 
@@ -16,9 +15,8 @@ import {
   getOneStateAction,
 } from '../../redux/slices/Paper';
 import { State } from '../../types/models';
-import { Box, Divider } from '@mui/material';
 import EditHints from '../../components/organisms/EditHints';
-import EditWidgets from '../../components/organisms/EditWidgets';
+import EditState from '../../components/organisms/EditState';
 
 
 type DesignWorkshopPropsType = {
@@ -35,7 +33,7 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
   papers,
 }) => {
   const { fsmId } = useParams();
-  const [tab, setTab] = React.useState(0);
+  const [tab, setTab] = useState(0);
   const currentState = papers[allStates[tab]?.id];
 
   useEffect(() => {
@@ -61,23 +59,18 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
           fsmId={fsmId}
         />
       </Box>
-      <Stack spacing={2}>
-        {currentState ?
-          <>
-            <EditWidgets {...currentState} />
-            <EditHints hints={hints} stateId={currentState.id} />
-          </>
-          :
-          <Typography align="center" variant="h3" gutterBottom>
-            {'گامی وجود ندارد.'}
-          </Typography>
-        }
-      </Stack>
+      {currentState ?
+        <EditState {...currentState} />
+        :
+        <Typography align="center" variant="h3" gutterBottom>
+          {'گامی وجود ندارد.'}
+        </Typography>
+      }
     </>
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state) => ({
   allStates: state.workshop.allStates,
   papers: state.paper.papers,
 });
