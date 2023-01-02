@@ -20,7 +20,7 @@ const EditArticle = ({
 
 	return (
 		<Layout appbarMode='ARTICLE'>
-			<Stack maxWidth='sm' sx={{ paddingBottom: 2 }}>
+			<Stack spacing={2} maxWidth='md' sx={{ width: '100%', paddingBottom: 2 }}>
 				<Typography
 					align="center"
 					component="h1"

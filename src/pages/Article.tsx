@@ -24,7 +24,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
 
   return (
     <Layout appbarMode='ARTICLE'>
-      <Stack spacing={2} maxWidth='sm'>
+      <Stack spacing={2} maxWidth='md' sx={{ width: '100%', paddingBottom: 2 }}>
         <Typography
           align="center"
           component="h1"
