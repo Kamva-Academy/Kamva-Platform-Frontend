@@ -12,7 +12,9 @@ const Landing = ({ token }) => {
   }, [])
 
   useEffect(() => {
-    navigate('/events');
+    if (token) {
+      navigate('/events');
+    }
   }, [token])
 
   return (
@@ -40,7 +42,7 @@ const Landing = ({ token }) => {
           </Grid>
           <Grid item>
             <Typography variant="h2" align="center">
-              بستر برگزاری رویداد و کارگاه آنلاین
+              پتلفرم برگزاری دوره‌های آنلاین
             </Typography>
           </Grid>
           <Grid item>
