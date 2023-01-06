@@ -3,10 +3,10 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
-import Layout from '../containers/Layout';
 import { WidgetModes } from '../components/Widget';
 import Widget from '../components/Widget';
 import { getArticleAction } from '../redux/slices/article';
+import ArticleLayout from '../components/template/ArticleLayout';
 
 type ArticlePropsType = {
   papers: any[];
@@ -23,7 +23,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
   }, []);
 
   return (
-    <Layout appbarMode='ARTICLE'>
+    <ArticleLayout appbarMode='ARTICLE'>
       <Stack spacing={2} maxWidth='md' sx={{ width: '100%', paddingBottom: 2 }}>
         <Typography
           align="center"
@@ -38,7 +38,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
           </Box>
         ))}
       </Stack>
-    </Layout>
+    </ArticleLayout>
   );
 };
 
