@@ -38,10 +38,11 @@ type WidgetPropsType = {
   widget: any;
   mode: WidgetModes;
   stateId?: number;
+  collectAnswers? : any;
   coveredWithPaper?: boolean;
 }
 
-const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true }) => {
+const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true, collectAnswers }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
@@ -57,7 +58,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
     , [widget])
 
   const widgetMemoizedComponent = useMemo(() =>
-    <WidgetComponent {...widget} mode={mode} />
+    <WidgetComponent {...widget} mode={mode} collectAnswers={collectAnswers}/>
     , [widget])
 
   return (
