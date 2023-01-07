@@ -25,9 +25,11 @@ function Workshops({
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
 
-  if (event?.is_user_participating != undefined && !event?.is_user_participating) {
-    navigate(`/event/${eventId}/registration_form/`);
-  }
+  useEffect(() => {
+    if (event?.is_user_participating != undefined && !event?.is_user_participating) {
+      navigate(`/event/${eventId}/registration_form/`);
+    }
+  }, [event])
 
   useEffect(() => {
     getEventWorkshops({ eventId, pageNumber });

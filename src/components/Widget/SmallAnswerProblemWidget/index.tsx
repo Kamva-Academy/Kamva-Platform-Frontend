@@ -26,7 +26,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   last_submitted_answer,
 }) => {
   const t = useTranslate();
-  const [answer, setAnswer] = useState<string>(last_submitted_answer?.text);
+  const [answer, setAnswer] = useState<string>(last_submitted_answer ? last_submitted_answer.text : '');
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
   const changeText = (e) => {

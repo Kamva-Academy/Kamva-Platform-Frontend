@@ -1,5 +1,4 @@
 import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -17,19 +16,6 @@ import { addNotificationAction } from '../redux/slices/notifications';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from './Layout';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    fontSize: 40,
-    fontWeight: 600,
-    textShadow: '1px 1px #dbd9d9',
-  },
-  subtitle: {
-    fontSize: 25,
-    fontWeight: 400,
-    textShadow: '1px 1px #dbd9d9',
-  },
-}));
-
 const Payment = ({
   getOneEventInfo,
   purchaseEvent,
@@ -40,7 +26,6 @@ const Payment = ({
   discountedPrice,
   event,
 }) => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { eventId } = useParams();
   const [discountCode, setDiscountCode] = useState();
@@ -86,14 +71,14 @@ const Payment = ({
     });
   };
 
-  if (event?.is_user_participating) {
-    navigate(`/event/${eventId}/`);
-  }
-
-
-  if (event?.user_registration_status && !['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
-    navigate('/events/');
-  }
+  useEffect(() => {
+    if (event?.is_user_participating) {
+      navigate(`/event/${eventId}/`);
+    }
+    if (event?.user_registration_status && !['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
+      navigate('/events/');
+    }
+  }, [event])
 
   let step = 1;
   if (event?.user_registration_status == 'Accepted') step++;
@@ -102,7 +87,12 @@ const Payment = ({
     <Layout>
       <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
         <Grid item xs={12}>
-          <Typography align="center" className={classes.title}>
+          <Typography align="center"
+            sx={{
+              fontSize: 40,
+              fontWeight: 600,
+              textShadow: '1px 1px #dbd9d9',
+            }}>
             {'وضعیت ثبت‌نام'}
           </Typography>
         </Grid>
@@ -121,7 +111,7 @@ const Payment = ({
             {event?.user_registration_status == 'Accepted' && (
               <>
                 <Grid item container justifyContent="center" alignItems="center">
-                  <Typography variant='h6' fullWidth align="center">
+                  <Typography variant='h6' align="center">
                     {
                       'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'
                     }
@@ -164,13 +154,16 @@ const Payment = ({
                   alignItems="center"
                   spacing={1}>
                   <Grid item xs={12}>
-                    <Typography fullWidth align="center" gutterBottom>
+                    <Typography align="center" gutterBottom>
                       {'مبلغ قابل پرداخت:'}
                     </Typography>
                     <Typography
-                      fullWidth
                       align="center"
-                      className={classes.subtitle}>
+                      sx={{
+                        fontSize: 25,
+                        fontWeight: 400,
+                        textShadow: '1px 1px #dbd9d9',
+                      }}>
                       {`${toPersianNumber(price)} تومان`}
                     </Typography>
                   </Grid>
@@ -194,7 +187,7 @@ const Payment = ({
                   justifyContent="center"
                   alignItems="center"
                   spacing={1}>
-                  <Typography fullWidth align="center">
+                  <Typography align="center">
                     {
                       'شما فرم‌ثبت‌نام در این رویداد را پر کرده‌اید! منتظر نتیجه‌ی بررسی از جانب ما باشید.'
                     }
@@ -210,7 +203,7 @@ const Payment = ({
                   justifyContent="center"
                   alignItems="center"
                   spacing={1}>
-                  <Typography fullWidth align="center">
+                  <Typography align="center">
                     {'متاسفانه شما برای شرکت در این رویداد پذیرفته‌نشده‌اید :('}
                   </Typography>
                 </Grid>

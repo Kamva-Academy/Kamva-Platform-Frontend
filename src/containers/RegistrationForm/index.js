@@ -46,13 +46,14 @@ const RegistrationForm = ({
     }
   }, [event?.registration_form]);
 
-  if (event?.is_user_participating) {
-    navigate(`/event/${eventId}/`);
-  }
-
-  if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
-    navigate(`/event/${eventId}/status/`);
-  }
+  useEffect(() => {
+    if (event?.is_user_participating) {
+      navigate(`/event/${eventId}/`);
+    }
+    if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
+      navigate(`/event/${eventId}/status/`);
+    }
+  }, [event])
 
   // todo: DeadlineMissed
 
@@ -99,6 +100,7 @@ const RegistrationForm = ({
         registrationForm.widgets.map((widget) => (
           <Box key={widget.id}>
             <Widget
+              coveredWithPaper={false}
               mode={WidgetModes.InAnswerSheet}
               disabled={isFetching}
               collectAnswers={collectAnswers(
