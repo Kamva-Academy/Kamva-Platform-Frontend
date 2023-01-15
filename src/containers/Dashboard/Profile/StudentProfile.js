@@ -70,7 +70,7 @@ function Index({
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
   }, [getUserProfile]);
-
+  
   useEffect(() => {
     if (userProfile?.city) {
       getInstitutes({ cityTitle: Iran.Cities.find(city => userProfile?.city == city.title).title });
@@ -151,16 +151,17 @@ function Index({
                 name="school"
                 value={newStudentship?.school || userProfile?.school_studentship?.school}
                 label="مدرسه">
-                {institutes?.map((school) => (
+                {institutes !== undefined ? [...institutes].sort((a, b) => {
+                  let firstLabel = (a.school_type ? SCHOOL_TYPES[a.school_type] + ' ' : '') + a.name
+                  let secondLabel = (b.school_type ? SCHOOL_TYPES[b.school_type] + ' ' : '') + b.name
+                  return firstLabel < secondLabel ? -1 : 1
+                }).map((school) => (
                   <MenuItem key={school.id} value={school.id}>
                     {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : '') + school.name}
                   </MenuItem>
-                ))}
-                {institutes?.length == 0 &&
-                  <MenuItem disabled>
-                    {'موردی وجود ندارد.'}
-                  </MenuItem>
-                }
+                )) : <MenuItem disabled>
+                {'موردی وجود ندارد.'}
+              </MenuItem>}
               </Select>
             </FormControl>
           </Grid>
