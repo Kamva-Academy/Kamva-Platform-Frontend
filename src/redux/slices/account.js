@@ -18,14 +18,16 @@ export const createAccountAction = createAsyncThunkApi(
   Apis.POST_FORM_DATA,
   accountCRUDUrl,
   {
-    bodyCreator: ({ phoneNumber, password, code }) => ({
+    bodyCreator: ({ phoneNumber, password, code, firstName, lastName }) => ({
       phone_number: phoneNumber,
       password,
       code,
+      first_name: firstName,
+      last_name: lastName,
     }),
     defaultNotification: {
       success: 'حساب شما با موفقیت ایجاد شد.',
-      error: 'ایجاد حساب با مشکل روبه‌رو شد.',
+      error: 'مشکلی در ایجاد حساب وجود داشت.',
     },
   }
 );
