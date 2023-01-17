@@ -1,15 +1,22 @@
-import { Container, Grid, Paper, Typography } from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
+import {
+  Button,
+  TextField,
+  Container,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
 import {
   createAccountAction,
   getVerificationCodeAction,
 } from '../redux/slices/account';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, TextField } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { addNotificationAction } from '../redux/slices/notifications';
 import appendPreviousParams from '../utils/AppendPreviousParams';
-import { toEnglishNumber } from '../utils/translateNumber';
+import isNumber from '../utils/validators/isNumber';
+import isPhoneNumber from '../utils/validators/isPhoneNumber';
 
 type CreateAccountPropsType = {
   isFetching: boolean;
@@ -27,8 +34,10 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
   token,
 }) => {
   const navigate = useNavigate();
-  const [buttonText, setButtonText] = useState('دریافت کد');
+  const [buttonDisable, setButtonDisable] = useState(false);
   const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
     phoneNumber: '',
     password: '',
     confirmationPassword: '',
@@ -48,59 +57,37 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
     }
   }, [eventId, navigate, token])
 
-  const putData = (event) => {
+  const collectData = (event) => {
     setData({
       ...data,
-      [event.target.name]: toEnglishNumber(event.target.value),
+      [event.target.name]: event.target.value,
     });
   };
 
-  const isJustDigits = (number) => {
-    var regex = new RegExp(`\\d{${number.length}}`);
-    if (regex.test(toEnglishNumber(number))) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const isPhoneNumberValid = (phoneNumber) => {
-    var regex = new RegExp('^09\\d{9}$');
-    if (regex.test(phoneNumber)) {
-      return phoneNumber;
-    } else {
-      return;
-    }
-  };
-
-  const doGetVerificationCode = () => {
-    if (!data.phoneNumber) {
+  const handleGettingVerificationCode = () => {
+    if (!isPhoneNumber(data.phoneNumber)) {
       addNotification({
-        message: 'یک شماره تلفن همراه وارد کن!',
+        message: 'شماره تلفن وارد‌شده معتبر نیست',
         type: 'error',
       });
       return;
     }
-    if (!isPhoneNumberValid(data.phoneNumber)) {
-      addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' });
-      return;
-    }
-    setButtonText('۱ دقیقه صبر کن');
+    setButtonDisable(true);
     getVerificationCode({
       phoneNumber: data.phoneNumber,
       codeType: 'verify',
     }).then(() => {
       setTimeout(() => {
-        setButtonText('دریافت کد');
+        setButtonDisable(false);
       }, 60000);
     });
   };
 
-  const doRegistration = () => {
-    const { phoneNumber, password, confirmationPassword } = data;
-    if (!phoneNumber || !password || !confirmationPassword) {
+  const handleCreatingAccount = () => {
+    const { phoneNumber, password, confirmationPassword, firstName, lastName } = data;
+    if (!phoneNumber || !password || !confirmationPassword || !firstName || !lastName) {
       addNotification({
-        message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
+        message: 'همه‌ی موارد خواسته شده را پر کن',
         type: 'error',
       });
       return;
@@ -108,7 +95,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
 
     if (password !== confirmationPassword) {
       addNotification({
-        message: 'رمزهایی که وارد کردی مشابه هم نیستند!',
+        message: 'رمزهای وارد شده مشابه نیستند',
         type: 'error',
       });
       return;
@@ -124,121 +111,105 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Grid xs={12} sm={8} md={4}
-        container
-        justifyContent='center'
-        alignItems='center'>
-        <Paper sx={{
-          padding: 2,
-          height: '100%',
-          width: '100%',
-        }}>
-          <Grid item container>
-            <Grid
-              container
-              item
-              direction='column'
-              justifyContent='center'
-              spacing={2}>
-              <Grid item>
-                <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
-              </Grid>
+      <Stack maxWidth='md' component={Paper} sx={{ padding: 2 }} spacing={1.5}>
 
-              <Grid item>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  onChange={(e) => {
-                    if (isJustDigits(e.target.value)) {
-                      putData(e);
-                    }
-                  }}
-                  value={data.phoneNumber}
-                  name="phoneNumber"
-                  label="شماره تلفن همراه"
-                  inputProps={{ className: 'ltr-input' }}
-                  type="tel"
-                />
-              </Grid>
+        <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
 
-              <Grid item container justifyContent="center" alignItems="stretch" spacing={1}>
-                <Grid item xs={8} sm={8}>
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    onChange={(e) => {
-                      if (isJustDigits(e.target.value)) {
-                        putData(e);
-                      }
-                    }}
-                    value={data.code}
-                    name="code"
-                    label="کد تایید پیامک‌شده"
-                    inputProps={{ className: 'ltr-input' }}
-                    type="text"
-                  />
-                </Grid>
-                <Grid item xs={4} sm={4} container>
-                  <Button
-                    size="small"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    onClick={doGetVerificationCode}
-                    disabled={buttonText !== 'دریافت کد'}>
-                    {buttonText}
-                  </Button>
-                </Grid>
-              </Grid>
+        <TextField
+          variant="outlined"
+          fullWidth
+          onChange={collectData}
+          value={data.firstName}
+          name="firstName"
+          label="نام"
+        />
 
-              <Grid item>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  onChange={putData}
-                  label="گذرواژه"
-                  name="password"
-                  inputProps={{ className: 'ltr-input' }}
-                  type="password"
-                />
-              </Grid>
+        <TextField
+          variant="outlined"
+          fullWidth
+          onChange={collectData}
+          value={data.lastName}
+          name="lastName"
+          label="نام خانوادگی"
+        />
 
-              <Grid item>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  onChange={putData}
-                  label="تکرار گذرواژه"
-                  type="password"
-                  inputProps={{ className: 'ltr-input' }}
-                  name="confirmationPassword"
-                />
-              </Grid>
+        <TextField
+          variant="outlined"
+          fullWidth
+          onChange={(e) => {
+            if (isNumber(e.target.value)) {
+              collectData(e);
+            }
+          }}
+          value={data.phoneNumber}
+          name="phoneNumber"
+          label="شماره تلفن همراه"
+          inputProps={{ className: 'ltr-input' }}
+          type="tel"
+        />
 
-              <Grid container item direction="row" justifyContent="center">
-                <Button
-                  onClick={doRegistration}
-                  variant="contained"
-                  color="primary"
-                  disabled={isFetching}
-                  fullWidth>
-                  ثبت
-                </Button>
-              </Grid>
+        <Stack direction='row' spacing={1}>
+          <TextField
+            variant="outlined"
+            fullWidth
+            onChange={(e) => {
+              if (isNumber(e.target.value)) {
+                collectData(e);
+              }
+            }}
+            value={data.code}
+            name="code"
+            label="کد تایید پیامک‌شده"
+            inputProps={{ className: 'ltr-input' }}
+            type="text"
+          />
+          <Button
+            size="small"
+            variant="contained"
+            color="primary"
+            sx={{ width: '120px' }}
+            onClick={handleGettingVerificationCode}
+            disabled={buttonDisable}>
+            {buttonDisable ? '۱ دقیقه صبر کن' : 'دریافت کد'}
+          </Button>
+        </Stack>
 
-              <Grid item>
-                <Typography align="center">
-                  {' از قبل حساب داشتی؟ به '}
-                  <Link style={{ textDecoration: 'none' }}
-                    to={appendPreviousParams("/login")}>{'این‌جا'}</Link>
-                  {' برو.'}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
-    </Container>
+        <TextField
+          variant="outlined"
+          fullWidth
+          onChange={collectData}
+          label="گذرواژه"
+          name="password"
+          inputProps={{ className: 'ltr-input' }}
+          type="password"
+        />
+
+        <TextField
+          variant="outlined"
+          fullWidth
+          onChange={collectData}
+          label="تکرار گذرواژه"
+          type="password"
+          inputProps={{ className: 'ltr-input' }}
+          name="confirmationPassword"
+        />
+
+        <Button
+          onClick={handleCreatingAccount}
+          variant="contained"
+          color="primary"
+          disabled={isFetching}
+          fullWidth>
+          ثبت
+        </Button>
+
+        <Typography align="center">
+          <Link style={{ textDecoration: 'none' }} to={appendPreviousParams("/login")}>
+            {'از قبل حساب کاربری داشتم...'}
+          </Link>
+        </Typography>
+      </Stack>
+    </Container >
   )
 }
 
