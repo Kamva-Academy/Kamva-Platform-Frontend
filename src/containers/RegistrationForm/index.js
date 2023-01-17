@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, Stack, Typography } from '@mui/material';
+import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -118,7 +118,7 @@ const RegistrationForm = ({
 
   return (
     <Layout>
-      <Stack spacing={3}>
+      <Stack sx={{ width: '100%' }} spacing={3}>
         <Info />
         <Stepper />
         <Stack
@@ -196,13 +196,11 @@ export default connect(mapStateToProps, {
 
 const checkPermission = (audienceType, userProfile = {}) => {
   const { first_name, last_name, national_code, birth_date, gender, province, city } = userProfile;
-  if (!first_name || !last_name || !national_code || !birth_date || !gender || !province || !city) {
-    return false;
-  }
+  const checkPrimaryFields = !first_name || !last_name || !national_code || !birth_date || !gender || !province || !city;
 
   if (audienceType == 'Student') {
     const { grade, school } = userProfile?.school_studentship;
-    if (!grade || !school) {
+    if (checkPrimaryFields || !grade || !school) {
       return false;
     }
   }

@@ -111,7 +111,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Stack maxWidth='md' component={Paper} sx={{ padding: 2 }} spacing={1.5}>
+      <Stack width={400} component={Paper} sx={{ padding: 2 }} spacing={1.5}>
 
         <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
 
@@ -167,7 +167,10 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
             size="small"
             variant="contained"
             color="primary"
-            sx={{ width: '120px' }}
+            sx={{
+              width: '40%',
+              whiteSpace: 'nowrap',
+            }}
             onClick={handleGettingVerificationCode}
             disabled={buttonDisable}>
             {buttonDisable ? '۱ دقیقه صبر کن' : 'دریافت کد'}
@@ -202,7 +205,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           fullWidth>
           ثبت
         </Button>
-
+        
         <Typography align="center">
           <Link style={{ textDecoration: 'none' }} to={appendPreviousParams("/login")}>
             {'از قبل حساب کاربری داشتم...'}
