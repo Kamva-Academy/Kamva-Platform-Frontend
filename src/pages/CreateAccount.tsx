@@ -205,7 +205,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           fullWidth>
           ثبت
         </Button>
-        
+
         <Typography align="center">
           <Link style={{ textDecoration: 'none' }} to={appendPreviousParams("/login")}>
             {'از قبل حساب کاربری داشتم...'}
