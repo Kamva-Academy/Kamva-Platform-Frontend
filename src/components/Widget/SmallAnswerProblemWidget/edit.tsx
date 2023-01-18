@@ -3,12 +3,9 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  Grid,
   Stack,
   TextField,
-  Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -26,13 +23,13 @@ function SmallAnswerProblemEditWidget({
 
   open,
   text: oldText,
-  solution: oldSolution,
+  answer: oldAnswer,
   stateId,
   id: widgetId,
 }) {
   const t = useTranslate();
   const [text, setText] = useState(oldText);
-  const [solution, setSolution] = useState(oldSolution?.text);
+  const [answer, setAnswer] = useState(oldAnswer?.text || '');
 
   const handleSubmit = () => {
     if (widgetId) {
@@ -40,12 +37,13 @@ function SmallAnswerProblemEditWidget({
         widgetId,
         paper: stateId,
         text: text,
+        answer,
       })
     } else {
       createSmallAnswerProblemWidget({
         paper: stateId,
         text: text,
-        solution,
+        answer,
       });
     }
     handleClose();
@@ -71,8 +69,8 @@ function SmallAnswerProblemEditWidget({
             variant='outlined'
             fullWidth
             label={t('answer')}
-            value={solution}
-            onChange={(e) => setSolution(e.target.value)}
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
           />
         </Stack>
       </DialogContent>
@@ -85,10 +83,7 @@ function SmallAnswerProblemEditWidget({
   );
 }
 
-export default connect(
-  null,
-  {
-    createSmallAnswerProblemWidget: createSmallAnswerProblemWidgetAction,
-    updateSmallAnswerProblemWidget: updateSmallAnswerProblemWidgetAction,
-  }
-)(SmallAnswerProblemEditWidget);
+export default connect(null, {
+  createSmallAnswerProblemWidget: createSmallAnswerProblemWidgetAction,
+  updateSmallAnswerProblemWidget: updateSmallAnswerProblemWidgetAction,
+})(SmallAnswerProblemEditWidget);
