@@ -243,12 +243,13 @@ export const updateUploadFileWidgetAction = ({ paper, text, widgetId }) =>
     widgetId,
   });
 
-export const createSmallAnswerProblemWidgetAction = ({ paper, text, answer }) =>
+export const createSmallAnswerProblemWidgetAction = ({ paper, text, answer, solution }) =>
   answer
     ? createWidgetAction({
       paper,
       widget_type: 'SmallAnswerProblem',
       text,
+      solution,
       answer: {
         text: answer,
         answer_type: 'SmallAnswer',
@@ -258,15 +259,17 @@ export const createSmallAnswerProblemWidgetAction = ({ paper, text, answer }) =>
       paper,
       widget_type: 'SmallAnswerProblem',
       text,
+      solution,
     })
 
-export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId, answer }) =>
+export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId, answer, solution }) =>
   answer
     ? updateWidgetAction({
       paper,
       widget_type: 'SmallAnswerProblem',
       text,
       widgetId,
+      solution,
       answer: {
         text: answer,
         answer_type: 'SmallAnswer',
@@ -277,6 +280,7 @@ export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId, an
       widget_type: 'SmallAnswerProblem',
       text,
       widgetId,
+      solution,
     })
 
 export const createBigAnswerQuestionWidgetAction = ({ paper, text, solution }) =>

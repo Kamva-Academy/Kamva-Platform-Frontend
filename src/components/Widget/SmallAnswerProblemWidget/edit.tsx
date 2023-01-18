@@ -23,13 +23,15 @@ function SmallAnswerProblemEditWidget({
 
   open,
   text: oldText,
+  solution: oldSolution,
   answer: oldAnswer,
   stateId,
   id: widgetId,
 }) {
   const t = useTranslate();
-  const [text, setText] = useState(oldText);
-  const [answer, setAnswer] = useState(oldAnswer?.text || '');
+  const [text, setText] = useState<string>(oldText);
+  const [answer, setAnswer] = useState<string>(oldAnswer?.text || '');
+  const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleSubmit = () => {
     if (widgetId) {
@@ -38,15 +40,24 @@ function SmallAnswerProblemEditWidget({
         paper: stateId,
         text: text,
         answer,
-      })
+        solution,
+      }).then((response) => {
+        if (response.type?.endsWith('fulfilled')) {
+          handleClose();
+        }
+      });
     } else {
       createSmallAnswerProblemWidget({
         paper: stateId,
         text: text,
         answer,
+        solution,
+      }).then((response) => {
+        if (response.type?.endsWith('fulfilled')) {
+          handleClose();
+        }
       });
     }
-    handleClose();
   };
 
   return (
@@ -65,12 +76,17 @@ function SmallAnswerProblemEditWidget({
             content={text}
             onChange={(text) => setText(text)}
           />
+          <label>{t('answer')}</label>
           <TextField
             variant='outlined'
             fullWidth
-            label={t('answer')}
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
+          />
+          <label>{'راه‌حل'}</label>
+          <TinyEditorComponent
+            content={solution}
+            onChange={(val: string) => setSolution(val)}
           />
         </Stack>
       </DialogContent>
