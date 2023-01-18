@@ -7,6 +7,7 @@ const useStyles = makeStyles(() => ({
   logo: ({ size }) => ({
     borderRadius: '50%',
     height: size === 'large' ? 70 : 50,
+    width: size === 'large' ? 70 : 50,
   }),
   logoButton: ({ size }) => ({
     padding: size === 'large' ? 5 : 0,
