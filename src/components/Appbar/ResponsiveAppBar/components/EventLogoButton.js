@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   logo: ({ size }) => ({
+    objectFit: 'cover',
     borderRadius: '50%',
     height: size === 'large' ? 70 : 50,
     width: size === 'large' ? 70 : 50,
@@ -14,7 +15,7 @@ const useStyles = makeStyles(() => ({
   }),
 }));
 
-export default function LogoButton({ size, image, name='کاموا', eventId }) {
+export default function LogoButton({ size, image, name = 'کاموا', eventId }) {
   const navigate = useNavigate();
   const classes = useStyles({ size });
   return (
