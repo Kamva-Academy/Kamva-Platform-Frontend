@@ -15,7 +15,7 @@ import {
 
 export const createAccountAction = createAsyncThunkApi(
   'account/createAccountAction',
-  Apis.POST_FORM_DATA,
+  Apis.POST,
   accountCRUDUrl,
   {
     bodyCreator: ({ phoneNumber, password, code, firstName, lastName }) => ({
@@ -83,7 +83,7 @@ export const changePasswordAction = createAsyncThunkApi(
 
 export const updateStudentShipAction = createAsyncThunkApi(
   'account/updateStudentShipAction',
-  Apis.PATCH,
+  Apis.PATCH_FORM_DATA,
   studentshipCRUDUrl,
   {
     defaultNotification: {
@@ -118,7 +118,7 @@ export const getUserAccountAction = createAsyncThunkApi(
 
 export const updateUserAccountAction = createAsyncThunkApi(
   'account/updateUserAccountAction',
-  Apis.PATCH,
+  Apis.PATCH_FORM_DATA,
   accountCRUDUrl,
   {
     defaultNotification: {
