@@ -39,6 +39,9 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   }
 
   const submit = () => {
+    if (!answer) {
+      return;
+    }
     if (mainAnswer && answer === mainAnswer.text) {
       toast.success('آفرین! جوابت درست بود')
     }
