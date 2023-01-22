@@ -11,7 +11,6 @@ import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import('../../types/models')
-import ClassIcon from '@mui/icons-material/Class';
 import PersonIcon from '@mui/icons-material/Person';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
@@ -34,7 +33,6 @@ import TeamRequests from './TeamRequests';
 import { Workshop, EventType } from '../../types/models';
 import Mentors from './Mentors';
 
-
 type EventPropsType = {
   getEventTeams: Function,
   getOneEventInfo: Function,
@@ -42,7 +40,6 @@ type EventPropsType = {
   workshop: Workshop,
   event: EventType,
 }
-
 
 const SECTIONS = {
   'info': 0,
@@ -59,6 +56,10 @@ const EventComponent: FC<EventPropsType> = ({
   workshop,
   event,
 }) => {
+  const t = useTranslate();
+  const navigate = useNavigate();
+  const { fsmId, eventId, section } = useParams();
+  const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
   const [tabs, setTabs] = useState<{ name: string, label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
       name: 'info',
@@ -87,8 +88,8 @@ const EventComponent: FC<EventPropsType> = ({
   ])
 
   useEffect(() => {
-    if (workshop?.fsm_learning_type == 'Supervised') {
-      if (workshop?.fsm_p_type == 'Team') {
+    if (workshop && workshop.id == fsmId && workshop.fsm_learning_type == 'Supervised') {
+      if (workshop.fsm_p_type == 'Team') {
         setTabs([
           ...tabs,
           {
@@ -98,7 +99,7 @@ const EventComponent: FC<EventPropsType> = ({
             component: TeamRequests,
           },
         ])
-      } else if (workshop?.fsm_p_type == 'Individual') {
+      } else if (workshop.fsm_p_type == 'Individual') {
         setTabs([
           ...tabs,
           {
@@ -110,16 +111,8 @@ const EventComponent: FC<EventPropsType> = ({
         ])
       }
     }
-  }, [workshop?.fsm_p_type])
-
-
-  const t = useTranslate();
-  const { fsmId, eventId, section } = useParams();
-  const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
-
+  }, [workshop])
   const TabComponent = tabs[tabIndex]?.component;
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     getOneEventInfo({ eventId });
@@ -127,8 +120,8 @@ const EventComponent: FC<EventPropsType> = ({
   }, []);
 
   useEffect(() => {
-    if (event?.registration_form) {
-      getEventTeams({ registrationFormId: event?.registration_form });
+    if (event && event.registration_form) {
+      getEventTeams({ registrationFormId: event.registration_form });
     }
   }, [event]);
 
@@ -182,11 +175,8 @@ const mapStateToProps = (state) => ({
   workshop: state.workshop.workshop,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getEventTeams: getEventTeamsAction,
-    getOneEventInfo: getOneEventInfoAction,
-    getOneWorkshopsInfo: getOneWorkshopsInfoAction,
-  }
-)(EventComponent);
+export default connect(mapStateToProps, {
+  getEventTeams: getEventTeamsAction,
+  getOneEventInfo: getOneEventInfoAction,
+  getOneWorkshopsInfo: getOneWorkshopsInfoAction,
+})(EventComponent);
