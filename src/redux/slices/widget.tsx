@@ -141,7 +141,7 @@ export const markSubmissionAction = createAsyncThunkApi(
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
-  Apis.PATCH,
+  Apis.PATCH_FORM_DATA,
   widgetCRUDUrl,
   {
     bodyCreator: (widget) => ({ ...widget }),
