@@ -5,7 +5,9 @@ const putApi = async (url, body) => (await baseAxios.put(url, body)).data;
 
 const postApi = async (url, body) => (await baseAxios.post(url, body)).data;
 
-const patchApi = async (url, body) =>
+const patchApi = async (url, body) => (await baseAxios.patch(url, body)).data;
+
+const patchFormDataApi = async (url, body) =>
   (
     await baseAxios.patch(url, jsonToFormData(body), {
       headers: {
@@ -31,6 +33,7 @@ export const Apis = {
   PUT: putApi,
   POST: postApi,
   PATCH: patchApi,
+  PATCH_FORM_DATA: patchFormDataApi,
   POST_FORM_DATA: postFormDataApi,
   GET: getApi,
   DELETE: deleteApi,

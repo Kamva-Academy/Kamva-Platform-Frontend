@@ -42,11 +42,11 @@ const ArticleCard: FC<ArticleType> = ({ id, name = '', description = '', cover_p
             justifyContent: "space-between",
             alignItems: 'center'
           }}>
-          <Tooltip title='ویرایش' arrow>
+          {/* <Tooltip title='ویرایش' arrow>
             <IconButton component={Link} to={`/edit-article/${id}`} >
               <ModeEditTwoToneIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Stack>
         <CardMedia
           sx={{ height: 200 }}

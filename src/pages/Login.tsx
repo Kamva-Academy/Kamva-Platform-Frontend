@@ -1,8 +1,8 @@
 import {
   Button,
   Container,
-  Grid,
   Paper,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
@@ -79,91 +79,66 @@ const LoginPage: FC<LoginPagePropsType> = ({
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Grid container item xs={12} sm={8} md={4} spacing={2}>
-        <Grid style={{ height: 64, width: '100%' }}></Grid>
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2 }}>
-            <Grid container>
-              <Grid
-                container
-                item
-                direction="column"
-                justifyContent="center"
-                spacing={2}>
-                <Grid item>
-                  <Typography
-                    gutterBottom
-                    component="h1"
-                    variant="h2"
-                    align="center">
-                    {'ورود'}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <TextField
-                    autoComplete="on"
-                    variant="outlined"
-                    fullWidth
-                    onChange={(e) => {
-                      if (isJustDigits(e.target.value)) {
-                        putData(e);
-                      }
-                    }}
-                    value={data.username}
-                    name="username"
-                    label="نام کاربری"
-                    // helperText="نام کاربری، شماره تلفن یا شماره شناسنامه‌ی شماست."
-                    inputProps={{ className: 'ltr-input' }}
-                  />
-                </Grid>
+      <Stack width={400} spacing={2}>
+        <Stack width='md' sx={{ marginTop: 5, padding: 2, width: '100%' }} spacing={1.5} component={Paper}>
+          <Typography
+            gutterBottom
+            component="h1"
+            variant="h2"
+            align="center">
+            {'ورود'}
+          </Typography>
 
-                <Grid item>
-                  <TextField
-                    autoComplete="on"
-                    variant="outlined"
-                    fullWidth
-                    onChange={putData}
-                    label="گذرواژه"
-                    name="password"
-                    inputProps={{ className: 'ltr-input' }}
-                    type="password"
-                  />
-                </Grid>
-                <Grid container item direction="row" justifyContent="center">
-                  <Button
-                    onClick={doLogin}
-                    variant="contained"
-                    color="primary"
-                    disabled={isFetching}
-                    fullWidth>
-                    بزن بریم
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-        <Grid item>
-          <Typography gutterBottom>
-            <li>
-              <Link
-                style={{ textDecoration: 'none' }}
-                to={appendPreviousParams('/reset-password')}>
-                {'گذروازه‌ام را فراموش کرده‌ام :('}
-              </Link>
-            </li>
+          <TextField
+            autoComplete="on"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => {
+              if (isJustDigits(e.target.value)) {
+                putData(e);
+              }
+            }}
+            value={data.username}
+            name="username"
+            label="نام کاربری"
+            // helperText="نام کاربری، شماره تلفن یا شماره شناسنامه‌ی شماست."
+            inputProps={{ className: 'ltr-input' }}
+          />
+
+          <TextField
+            autoComplete="on"
+            variant="outlined"
+            fullWidth
+            onChange={putData}
+            label="گذرواژه"
+            name="password"
+            inputProps={{ className: 'ltr-input' }}
+            type="password"
+          />
+
+          <Button
+            onClick={doLogin}
+            variant="contained"
+            color="primary"
+            disabled={isFetching}
+            fullWidth>
+            بزن بریم
+          </Button>
+        </Stack>
+        <Stack>
+          <Typography gutterBottom align='center'>
+            <Link style={{ textDecoration: 'none' }} to={appendPreviousParams('/reset-password')}>
+              {'گذروازه‌ام را فراموش کرده‌ام :('}
+            </Link>
           </Typography>
-          <Typography>
-            <li>
-              <Link
-                style={{ textDecoration: 'none' }}
-                to={appendPreviousParams('/create-account')}>
-                {'می‌خواهم یک حساب کاربری جدید بسازم.'}
-              </Link>
-            </li>
+          <Typography align='center'>
+            <Link style={{ textDecoration: 'none' }} to={appendPreviousParams('/create-account')}>
+              {'می‌خواهم یک حساب کاربری جدید بسازم...'}
+            </Link>
           </Typography>
-        </Grid>
-      </Grid>
+        </Stack>
+      </Stack>
+
     </Container>
   );
 };

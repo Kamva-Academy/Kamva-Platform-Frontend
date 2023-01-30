@@ -6,6 +6,7 @@ import { sendSmallAnswerAction } from '../../../redux/slices/Paper';
 import TinyPreview from '../../tiny_editor/react_tiny/Preview';
 import { WidgetModes } from '..';
 import SmallAnswerProblemEditWidget from './edit';
+import { toast } from 'react-toastify';
 
 type SmallAnswerProblemWidgetPropsType = {
   sendSmallAnswer: any;
@@ -24,6 +25,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   mode,
   text: problemText,
   last_submitted_answer,
+  answer: mainAnswer,
 }) => {
   const t = useTranslate();
   const [answer, setAnswer] = useState<string>(last_submitted_answer ? last_submitted_answer.text : '');
@@ -37,11 +39,21 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   }
 
   const submit = () => {
-    setDisableSubmitButton(true);
-    setTimeout(() => {
-      setDisableSubmitButton(false);
-    }, 20000);
-    sendSmallAnswer({ widgetId: paperId, text: answer });
+    if (!answer) {
+      return;
+    }
+    if (mainAnswer && answer === mainAnswer.text) {
+      toast.success('آفرین! جوابت درست بود')
+    }
+    else if (mainAnswer) {
+      toast.error('بیشتر دقت کن...')
+    } else {
+      setDisableSubmitButton(true);
+      setTimeout(() => {
+        setDisableSubmitButton(false);
+      }, 20000);
+      sendSmallAnswer({ widgetId: paperId, text: answer });
+    }
   }
 
   return (

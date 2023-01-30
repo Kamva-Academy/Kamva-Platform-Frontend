@@ -4,8 +4,7 @@ export const logoutUrl = 'auth/accounts/logout/';
 export const refreshTokenUrl = 'auth/accounts/refresh/';
 export const changePasswordUrl = 'auth/accounts/change_pass/';
 export const verificationCodeUrl = 'auth/accounts/verification_code/';
-export const accountCRUDUrl = ({ id }) =>
-  id ? `auth/accounts/${id}/` : 'auth/accounts/';
+export const accountCRUDUrl = ({ id }) => id ? `auth/accounts/${id}/` : 'auth/accounts/';
 
 export const profileCRUDUrl = ({ id }) => id ? `auth/profile/${id}/` : 'auth/profile/';
 

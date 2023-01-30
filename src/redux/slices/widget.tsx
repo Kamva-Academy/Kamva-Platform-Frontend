@@ -141,7 +141,7 @@ export const markSubmissionAction = createAsyncThunkApi(
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
-  Apis.PATCH,
+  Apis.PATCH_FORM_DATA,
   widgetCRUDUrl,
   {
     bodyCreator: (widget) => ({ ...widget }),
@@ -220,19 +220,21 @@ export const updateTextWidgetAction = ({ paper, text, widgetId }) =>
     widgetId,
   });
 
-export const createUploadFileWidgetAction = ({ paper, text }) =>
+export const createUploadFileWidgetAction = ({ paper, text, solution }) =>
   createWidgetAction({
     paper,
     widget_type: 'UploadFileProblem',
     text,
+    solution,
   });
 
-export const updateUploadFileWidgetAction = ({ paper, text, widgetId }) =>
+export const updateUploadFileWidgetAction = ({ paper, text, widgetId, solution }) =>
   updateWidgetAction({
     paper,
     widget_type: 'UploadFileProblem',
     text,
     widgetId,
+    solution,
   });
 
 export const createSmallAnswerQuestionWidgetAction = ({ paper, text, solution }) =>
@@ -261,28 +263,20 @@ export const updateSmallAnswerQuestionWidgetAction = ({ paper, text, widgetId })
   });
 
 export const createBigAnswerQuestionWidgetAction = ({ paper, text, solution }) =>
-  solution
-    ? createWidgetAction({
-      paper,
-      widget_type: 'BigAnswerProblem',
-      text,
-      solution: {
-        text: solution,
-        answer_type: 'BigAnswer',
-      },
-    })
-    : createWidgetAction({
-      paper,
-      widget_type: 'BigAnswerProblem',
-      text,
-    })
+  createWidgetAction({
+    paper,
+    widget_type: 'BigAnswerProblem',
+    text,
+    solution,
+  })
 
-export const updateBigAnswerQuestionWidgetAction = ({ paper, text, widgetId }) =>
+export const updateBigAnswerQuestionWidgetAction = ({ paper, text, widgetId, solution }) =>
   updateWidgetAction({
     paper,
     widget_type: 'BigAnswerProblem',
     text,
     widgetId,
+    solution,
   });
 
 export const createMultiChoicesQuestionWidgetAction = ({ paper, text, solution, choices }) =>

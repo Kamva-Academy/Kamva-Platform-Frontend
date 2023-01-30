@@ -16,6 +16,7 @@ import {
   createUploadFileWidgetAction,
   updateUploadFileWidgetAction,
 } from '../../../redux/slices/widget';
+import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
 type UploadFileProblemEditWidgetPropsType = {
   updateUploadFileWidget: any;
@@ -25,6 +26,7 @@ type UploadFileProblemEditWidgetPropsType = {
   text: string;
   stateId: number;
   id: number;
+  solution: string;
 }
 
 const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
@@ -33,27 +35,38 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   handleClose,
 
   open,
-  text: previousText,
+  text: oldText,
+  solution: oldSolution,
   stateId,
   id: widgetId,
 }) => {
   const t = useTranslate();
-  const [newText, setNewText] = useState(previousText);
+  const [text, setText] = useState(oldText || '');
+  const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleSubmit = () => {
     if (widgetId) {
       updateUploadFileWidget({
         paper: stateId,
-        text: newText,
+        text: text,
         widgetId,
-      })
+        solution,
+      }).then((response) => {
+        if (response.type?.endsWith('fulfilled')) {
+          handleClose();
+        }
+      });
     } else {
       createUploadFileWidget({
         paper: stateId,
-        text: newText
+        text: text,
+        solution,
+      }).then((response) => {
+        if (response.type?.endsWith('fulfilled')) {
+          handleClose();
+        }
       });
     }
-    handleClose();
   };
 
   return (
@@ -67,9 +80,14 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
           <TextField
             autoFocus
             fullWidth
-            value={newText}
+            value={text}
             placeholder="مثال: لطفا فایل جواب را ارسال کنید."
-            onChange={(e) => setNewText(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
+          />
+          <label>{'راه‌حل'}</label>
+          <TinyEditorComponent
+            content={solution}
+            onChange={(val: string) => setSolution(val)}
           />
         </Stack>
       </DialogContent>

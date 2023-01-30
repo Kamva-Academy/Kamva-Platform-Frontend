@@ -41,7 +41,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
 }) => {
   const t = useTranslate();
   const [text, setText] = useState<string>(oldText);
-  const [solution, setSolution] = useState<string>(oldSolution?.text);
+  const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleClick = () => {
     if (widgetId) {
@@ -49,6 +49,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
         widgetId,
         paper: stateId,
         text: text,
+        solution,
       }).then((response) => {
         if (response.type?.endsWith('fulfilled')) {
           handleClose();
@@ -84,7 +85,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
             content={text}
             onChange={(val: string) => setText(val)}
           />
-          <label>{t('answer')}</label>
+          <label>{'راه‌حل'}</label>
           <TinyEditorComponent
             content={solution}
             onChange={(val: string) => setSolution(val)}

@@ -10,8 +10,8 @@ export const PARSE_SERVER_URL =
 
 export const LIVE_QUERY_SERVER_URL =
   process.env.NODE_ENV === 'development'
-    ? 'wss://parse.kamva.academy/ws'
-    : 'wss://parse.kamva.academy/ws';
+    ? 'wss://parse.kamva.academy/ws/'
+    : 'wss://parse.kamva.academy/ws/';
 
 export const ITEMS_PER_PAGE_NUMBER = 12;
 
