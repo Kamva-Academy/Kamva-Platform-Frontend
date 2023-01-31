@@ -155,7 +155,6 @@ function Index({
                   let firstLabel = (a.school_type ? SCHOOL_TYPES[a.school_type] + ' ' : '') + a.name
                   let secondLabel = (b.school_type ? SCHOOL_TYPES[b.school_type] + ' ' : '') + b.name
                   return firstLabel.localeCompare(secondLabel)
-                  //return firstLabel < secondLabel ? -1 : 1
                 }).map((school) => (
                   <MenuItem key={school.id} value={school.id}>
                     {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : '') + school.name}
