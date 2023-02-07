@@ -60,6 +60,13 @@ export const sendSmallAnswerAction = ({ widgetId, text }) =>
     answer_type: 'SmallAnswer',
   });
 
+export const sendInviteeUsernameResponseAction = ({ widgetId, username }) =>
+  _sendWidgetAnswerAction({
+    widgetId,
+    username,
+    answer_type: 'InviteeUsernameResponse',
+  });
+
 export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
   _sendWidgetAnswerAction({
     player: playerId,

@@ -178,3 +178,7 @@ export const getAnswerScoresAndCommentsUrl = 'scoring/get_answer_scores_and_comm
 export const setAnswerScoreUrl = 'scoring/set_answer_score/';
 export const createCommentUrl = 'scoring/create_comment/';
 
+
+// question
+export const checkUsernameUrl = 'question/check_username/';
+

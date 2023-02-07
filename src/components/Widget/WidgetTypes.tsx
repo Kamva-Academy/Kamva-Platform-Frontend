@@ -1,6 +1,7 @@
 import BigAnswerProblemWidget, {
   BigAnswerQuestionEditWidget,
 } from './BigAnswerProblemWidget';
+import InviteeUsername, { InviteeUsernameEdit } from './questions/InviteeUsername';
 import ImageWidget, { ImageEditWidget } from './ImageWidget';
 import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
 import MultiChoiceQuestionWidget, {
@@ -16,6 +17,12 @@ import UploadFileProblemWidget, {
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 
 const WIDGET_TYPES = {
+  InviteeUsernameQuestion: {
+    WidgetComponent: InviteeUsername,
+    EditWidgetDialog: InviteeUsernameEdit,
+    label: 'سوال کد معرف',
+    backendType: 'InviteeUsernameQuestion',
+  },
   SmallAnswerProblem: {
     WidgetComponent: SmallAnswerProblemWidget,
     EditWidgetDialog: SmallAnswerProblemEditWidget,

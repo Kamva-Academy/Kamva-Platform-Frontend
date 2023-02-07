@@ -13,6 +13,7 @@ import { workshopReducer } from './workshop';
 import { articleReducer } from './article';
 import { paperReducer } from './Paper';
 import { scoringReducer } from './scoring';
+import { questionReducer } from './Question';
 
 const allReducers = combineReducers({
   paper: paperReducer,
@@ -28,6 +29,7 @@ const allReducers = combineReducers({
   article: articleReducer,
   Intl: translatorReducer,
   scoring: scoringReducer,
+  question: questionReducer,
 });
 
 export default allReducers;

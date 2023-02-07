@@ -24,6 +24,7 @@ const ANSWER_TYPES = {
   Image: 'Image',
   Video: 'Video',
   Game: 'Game',
+  InviteeUsernameQuestion: 'InviteeUsernameResponse',
 };
 
 const RegistrationForm = ({
@@ -88,6 +89,8 @@ const RegistrationForm = ({
           [fieldName]: answer,
           answer_type: widgetType,
           problem: problemId,
+          // todo: fix TOF
+          question: problemId,
         });
       }
       return temporaryAnswers
