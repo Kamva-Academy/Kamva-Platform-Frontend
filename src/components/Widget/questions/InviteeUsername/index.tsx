@@ -48,7 +48,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
   useEffect(() => {
-    if (username.length > 1) {
+    if (username.length > 9) {
       checkUsername({ username });
     }
   }, [username])

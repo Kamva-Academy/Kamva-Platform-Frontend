@@ -33,7 +33,11 @@ const questionSlice = createSlice({
   reducers: {},
   extraReducers: {
 
-    [checkUsernameAction.pending.toString()]: isFetching,
+    [checkUsernameAction.pending.toString()]: (state) => {
+      state.inviteeUserFirstName = '';
+      state.inviteeUserLastName = '';
+      state.isFetching = true;
+    },
     [checkUsernameAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.inviteeUserFirstName = response.first_name;
       state.inviteeUserLastName = response.last_name;
