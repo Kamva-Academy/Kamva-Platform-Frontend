@@ -103,7 +103,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
               placeholder={'شماره تلفن همراه معرف'}
               onChange={changeText}
               size="small"
-              error={!!username && !inviteeUserFirstName && username.length > 9}
+              error={!!username && !inviteeUserFirstName}
               helperText={username && inviteeUserFirstName && `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`}
               color={username && inviteeUserFirstName ? 'success' : null}
             />
