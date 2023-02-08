@@ -104,7 +104,10 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
               onChange={changeText}
               size="small"
               error={!!username && !inviteeUserFirstName}
-              helperText={username && inviteeUserFirstName && `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`}
+              helperText={username &&
+                (inviteeUserFirstName
+                  ? `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`
+                  : 'نام کاربری معتبر نیست')}
               color={username && inviteeUserFirstName ? 'success' : null}
             />
             {mode === WidgetModes.View &&
