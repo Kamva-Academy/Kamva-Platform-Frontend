@@ -14,7 +14,7 @@ import { checkUsernameAction } from '../../../../redux/slices/Question';
 import TinyPreview from '../../../tiny_editor/react_tiny/Preview';
 import { WidgetModes } from '../..';
 import InviteeUsernameEdit from './edit';
-import { toast } from 'react-toastify';
+import isPhoneNumber from '../../../../utils/validators/isPhoneNumber';
 
 type InviteeUsernamePropsType = {
   sendInviteeUsernameResponse: any;
@@ -29,8 +29,6 @@ type InviteeUsernamePropsType = {
   answer: any;
   last_submitted_answer: any;
 }
-
-const USERNAME_TRESHOLD = 9;
 
 const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   sendInviteeUsernameResponse,
@@ -50,7 +48,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
   useEffect(() => {
-    if (username.length > USERNAME_TRESHOLD) {
+    if (isPhoneNumber(username)) {
       checkUsername({ username });
     }
   }, [username])
@@ -105,12 +103,12 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
               placeholder={'شماره تلفن همراه معرف'}
               onChange={changeText}
               size="small"
-              error={!!username && !(inviteeUserFirstName && username.length > USERNAME_TRESHOLD)}
+              error={!!username && !(inviteeUserFirstName && isPhoneNumber(username))}
               helperText={username &&
-                ((inviteeUserFirstName && username.length > USERNAME_TRESHOLD)
+                ((inviteeUserFirstName && isPhoneNumber(username))
                   ? `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`
                   : 'نام کاربری معتبر نیست')}
-              color={username && inviteeUserFirstName && username.length > USERNAME_TRESHOLD ? 'success' : null}
+              color={username && inviteeUserFirstName && isPhoneNumber(username) ? 'success' : null}
             />
             {mode === WidgetModes.View &&
               <Button
