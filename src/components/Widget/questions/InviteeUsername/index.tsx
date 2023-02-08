@@ -30,6 +30,8 @@ type InviteeUsernamePropsType = {
   last_submitted_answer: any;
 }
 
+const USERNAME_TRESHOLD = 9;
+
 const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   sendInviteeUsernameResponse,
   checkUsername,
@@ -48,7 +50,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   const [disableSubmitButton, setDisableSubmitButton] = useState(false);
 
   useEffect(() => {
-    if (username.length > 9) {
+    if (username.length > USERNAME_TRESHOLD) {
       checkUsername({ username });
     }
   }, [username])
@@ -104,7 +106,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
               onChange={changeText}
               size="small"
               error={!!username && !inviteeUserFirstName}
-              helperText={username &&
+              helperText={(username && username.length > USERNAME_TRESHOLD) &&
                 (inviteeUserFirstName
                   ? `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`
                   : 'نام کاربری معتبر نیست')}
