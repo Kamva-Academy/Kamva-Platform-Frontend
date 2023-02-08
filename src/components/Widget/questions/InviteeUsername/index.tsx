@@ -105,12 +105,12 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
               placeholder={'شماره تلفن همراه معرف'}
               onChange={changeText}
               size="small"
-              error={!!username && !inviteeUserFirstName}
-              helperText={(username && username.length > USERNAME_TRESHOLD) &&
-                (inviteeUserFirstName
+              error={!!username && !(inviteeUserFirstName && username.length > USERNAME_TRESHOLD)}
+              helperText={username &&
+                ((inviteeUserFirstName && username.length > USERNAME_TRESHOLD)
                   ? `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`
                   : 'نام کاربری معتبر نیست')}
-              color={username && inviteeUserFirstName ? 'success' : null}
+              color={username && inviteeUserFirstName && username.length > USERNAME_TRESHOLD ? 'success' : null}
             />
             {mode === WidgetModes.View &&
               <Button
