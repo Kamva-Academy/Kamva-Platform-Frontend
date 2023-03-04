@@ -7,9 +7,10 @@ const ImageWidget = ({ link, file, alt }) => {
     <img
       src={file || link} alt={alt}
       style={{
-        maxWidth: '100%',
-        maxHeight: 500,
         borderRadius: 10,
+        width: '100%',
+        height: 500,
+        objectFit: 'contain',
         display: 'block',
         marginLeft: 'auto',
         marginRight: 'auto',
