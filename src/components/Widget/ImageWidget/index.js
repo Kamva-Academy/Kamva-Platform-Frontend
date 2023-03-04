@@ -1,20 +1,22 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import ImageEditWidget from './edit';
 export { ImageEditWidget };
 
 const ImageWidget = ({ link, file, alt }) => {
   return (
-    <img
-      src={file || link} alt={alt}
-      style={{
-        borderRadius: 10,
-        width: '100%',
-        height: 500,
-        objectFit: 'contain',
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }} />
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+      <img
+        alt={alt}
+        src={file || link}
+        style={{
+          maxWidth: '100%',
+          maxHeight: 500,
+          borderRadius: 10,
+          objectFit: 'contain',
+        }} />
+    </Box>
+
   );
 };
 

@@ -1,19 +1,21 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import VideoEditWidget from './edit';
 export { VideoEditWidget };
 
 const VideoWidget = ({ link, file }) => {
   return (
-    <video controls src={file || link}
-      style={{
-        borderRadius: 10,
-        width: '100%',
-        height: 500,
-        objectFit: 'contain',
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }} />
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+      <video
+        controls
+        src={file || link}
+        style={{
+          maxWidth: '100%',
+          maxHeight: 500,
+          borderRadius: 10,
+          objectFit: 'contain',
+        }} />
+    </Box>
   );
 };
 
