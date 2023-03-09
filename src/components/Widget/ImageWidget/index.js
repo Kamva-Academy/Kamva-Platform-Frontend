@@ -12,7 +12,6 @@ const ImageWidget = ({ link, file, alt }) => {
         maxWidth: '100%',
         maxHeight: 500,
         objectFit: 'contain',
-        borderRadius: 10,
       }} />
   );
 };

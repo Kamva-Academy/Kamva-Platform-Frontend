@@ -12,7 +12,6 @@ const VideoWidget = ({ link, file }) => {
         maxWidth: '100%',
         maxHeight: 500,
         objectFit: 'contain',
-        borderRadius: 10,
       }} />
   );
 };
