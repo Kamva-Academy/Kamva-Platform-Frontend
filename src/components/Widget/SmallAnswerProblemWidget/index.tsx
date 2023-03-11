@@ -83,7 +83,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
             />
             {mode === WidgetModes.View &&
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 sx={{ whiteSpace: 'nowrap' }}
                 disabled={disableSubmitButton}

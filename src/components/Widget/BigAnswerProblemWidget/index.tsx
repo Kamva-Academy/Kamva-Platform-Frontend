@@ -67,7 +67,7 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
         <Button
           disabled={isButtonDisabled}
           fullWidth
-          variant="contained"
+          variant="outlined"
           color="primary"
           size="small"
           onClick={submitAnswer}>
