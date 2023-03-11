@@ -26,6 +26,7 @@
     "notistack": "^2.0.5",
     "parse": "^3.3.0",
     "react": "^18.2.0",
+    "react-confetti": "^6.1.0",
     "react-datepicker2": "^3.3.13",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.4",
