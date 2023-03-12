@@ -65,7 +65,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   return (
     <>
       {hasAnsweredCorrectly &&
-        <Confetti recycle={false} tweenDuration={10000} numberOfPieces={1500} />
+        <Confetti recycle={false} tweenDuration={6000} numberOfPieces={800} />
       }
       <Stack spacing={1}>
         <TinyPreview
