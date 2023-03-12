@@ -121,7 +121,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
             <Box sx={{ position: 'absolute', right: 0, top: -5 }}>
               <Tooltip title='راهنمایی' arrow>
                 <IconButton onClick={() => setViewHintDialog(true)}>
-                  <HelpIcon />
+                  <HelpIcon color='primary'/>
                 </IconButton>
               </Tooltip>
             </Box>
@@ -133,8 +133,8 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
           </>
           : null
         }
-        {widgetMemoizedComponent}
       </Stack>
+      {widgetMemoizedComponent}
     </Cover>
   );
 };
