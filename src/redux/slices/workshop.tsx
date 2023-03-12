@@ -265,7 +265,7 @@ const IndexSlice = createSlice({
     [updateStateAction.fulfilled.toString()]: (state, action) => {
       const newAllStates = [...state.allStates];
       for (let i = 0; i < newAllStates.length; i++) {
-        if (newAllStates[i].id == action.meta.arg.stateId) {
+        if (newAllStates[i].id == action.meta.arg.paperId) {
           newAllStates[i] = action.payload.response;
         }
       }

@@ -10,7 +10,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import { deleteStateAction } from '../../../redux/slices/widget';
 
-function DeleteStateDialog({ open, handleClose, deleteState, stateId }) {
+function DeleteStateDialog({ open, handleClose, deleteState, paperId }) {
   const t = useTranslate();
 
   return (
@@ -25,7 +25,7 @@ function DeleteStateDialog({ open, handleClose, deleteState, stateId }) {
         </Button>
         <Button
           onClick={() => {
-            deleteState({ id: stateId });
+            deleteState({ id: paperId });
             handleClose();
           }}
           color="primary"

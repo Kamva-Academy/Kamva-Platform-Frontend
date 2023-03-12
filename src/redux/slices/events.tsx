@@ -509,11 +509,11 @@ const eventSlice = createSlice({
     removeRequestMentor: (state, { payload: { teamId, fsmId } }) => {
       delete state.teamsRequests[teamId + '.' + fsmId];
     },
-    createNewTeamState: (state, { payload: { uuid, stateId, currentStateName, teamEnterTimeToState } }) => {
-      state.teamCurrentState = { uuid, stateId, currentStateName, teamEnterTimeToState };
+    createNewTeamState: (state, { payload: { uuid, paperId, currentStateName, teamEnterTimeToState } }) => {
+      state.teamCurrentState = { uuid, paperId, currentStateName, teamEnterTimeToState };
     },
-    updateNewTeamState: (state, { payload: { uuid, stateId, currentStateName, teamEnterTimeToState } }) => {
-      state.teamCurrentState = { uuid, stateId, currentStateName, teamEnterTimeToState };
+    updateNewTeamState: (state, { payload: { uuid, paperId, currentStateName, teamEnterTimeToState } }) => {
+      state.teamCurrentState = { uuid, paperId, currentStateName, teamEnterTimeToState };
     },
   },
   extraReducers: {

@@ -23,7 +23,7 @@ function VideoEditWidget({
   updateVideoWidget,
   createVideoWidget,
 
-  stateId,
+  paperId,
   open,
   link: oldLink,
   handleClose,
@@ -36,7 +36,7 @@ function VideoEditWidget({
 
   const handleClick = () => {
     let payload = {
-      paper: stateId,
+      paper: paperId,
     };
     if (file) {
       payload = {
@@ -66,7 +66,7 @@ function VideoEditWidget({
       <DialogTitle>فیلم</DialogTitle>
       <DialogContent>
         <Stack spacing={2}>
-          <UploadFile widgetId={widgetId} paperId={stateId} file={file} setFile={setFile} previousFile={previousFile} />
+          <UploadFile widgetId={widgetId} paperId={paperId} file={file} setFile={setFile} previousFile={previousFile} />
           <Divider>یا</Divider>
           <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
           <TextField

@@ -25,7 +25,7 @@ function InviteeUsernameEdit({
   text: oldText,
   solution: oldSolution,
   answer: oldAnswer,
-  stateId,
+  paperId,
   id: widgetId,
 }) {
   const t = useTranslate();
@@ -37,7 +37,7 @@ function InviteeUsernameEdit({
     if (widgetId) {
       updateSmallAnswerProblemWidget({
         widgetId,
-        paper: stateId,
+        paper: paperId,
         text: text,
         answer,
         solution,
@@ -48,7 +48,7 @@ function InviteeUsernameEdit({
       });
     } else {
       createSmallAnswerProblemWidget({
-        paper: stateId,
+        paper: paperId,
         text: text,
         answer,
         solution,

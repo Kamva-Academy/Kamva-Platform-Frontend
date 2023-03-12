@@ -29,7 +29,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
       {registrationForm &&
         <EditWidgets
           widgets={registrationForm.widgets}
-          stateId={registrationFormId}
+          paperId={registrationFormId}
         />
       }
     </>

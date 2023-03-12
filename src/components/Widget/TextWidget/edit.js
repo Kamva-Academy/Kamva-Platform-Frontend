@@ -23,7 +23,7 @@ function TextEditWidget({
   open,
   handleClose,
   text: oldText,
-  stateId,
+  paperId,
   id: widgetId,
 }) {
   const t = useTranslate();
@@ -32,13 +32,13 @@ function TextEditWidget({
   const handleClick = () => {
     if (widgetId) {
       updateTextWidget({
-        paper: stateId,
+        paper: paperId,
         text,
         widgetId,
       })
     } else {
       createTextWidget({
-        paper: stateId,
+        paper: paperId,
         text
       });
     }

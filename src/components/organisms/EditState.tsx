@@ -35,7 +35,7 @@ const EditState: FC<EditStatePropsType> = ({
 
   hints,
   widgets = [],
-  id: stateId,
+  id: paperId,
   name,
 }) => {
   const t = useTranslate();
@@ -63,7 +63,7 @@ const EditState: FC<EditStatePropsType> = ({
   return (
     <>
       <Stack spacing={2}>
-        {stateId &&
+        {paperId &&
           <Stack direction='row' alignItems='flex-start' justifyContent='space-between'>
             {isEditingStateName &&
               <TextField
@@ -81,7 +81,7 @@ const EditState: FC<EditStatePropsType> = ({
                 <Tooltip title='ذخیره' arrow>
                   <IconButton size='small'
                     onClick={() => {
-                      updateState({ stateId, name: newName, fsm: fsmId });
+                      updateState({ paperId, name: newName, fsm: fsmId });
                       setIsEditingStateName(false);
                     }
                     }>
@@ -108,30 +108,30 @@ const EditState: FC<EditStatePropsType> = ({
           {'مسئله‌ها'}
         </Typography>
         <Divider />
-        <EditWidgets widgets={problems} stateId={stateId} mode='problems' />
+        <EditWidgets widgets={problems} paperId={paperId} mode='problems' />
         <Typography variant='h2' gutterBottom>
           {'محتواها'}
         </Typography>
         <Divider />
-        <EditWidgets widgets={contents} stateId={stateId} mode='contents' />
-        <EditHints hints={hints} stateId={stateId} />
+        <EditWidgets widgets={contents} paperId={paperId} mode='contents' />
+        <EditHints hints={hints} paperId={paperId} />
       </Stack >
       <CreateWidgetDialog
         showProblems={true}
         showContent={false}
-        stateId={stateId}
+        paperId={paperId}
         open={openCreateProblemDialog}
         handleClose={() => setOpenCreateProblemDialog(false)}
       />
       <CreateWidgetDialog
-        stateId={stateId}
+        paperId={paperId}
         open={openCreateContentDialog}
         handleClose={() => setOpenCreateContentDialog(false)}
       />
       <AreYouSure
         open={openDeleteWidgetDialog}
         handleClose={() => setOpenDeleteWidgetDialog(false)}
-        callBackFunction={() => removeState({ stateId })}
+        callBackFunction={() => removeState({ paperId })}
       />
     </>
   );

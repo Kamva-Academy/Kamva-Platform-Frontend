@@ -38,12 +38,12 @@ enum AnswerType2WidgetType {
 type WidgetPropsType = {
   widget: any;
   mode: WidgetModes;
-  stateId?: number;
+  paperId?: number;
   collectAnswers?: any;
   coveredWithPaper?: boolean;
 }
 
-const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true, collectAnswers }) => {
+const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId, coveredWithPaper = true, collectAnswers }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openHintDialog, setOpenHintDialog] = useState(false);
@@ -94,18 +94,18 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
           </Box>
           <EditWidgetDialog
             {...widget}
-            stateId={stateId}
+            paperId={paperId}
             open={openEditDialog}
             handleClose={() => setOpenEditDialog(false)}
           />
           <DeleteWidgetDialog
-            stateId={stateId}
+            paperId={paperId}
             widgetId={widget.id}
             open={openDeleteWidgetDialog}
             handleClose={() => setOpenDeleteWidgetDialog(false)}
           />
           <EditHintsDialog
-            stateId={stateId}
+            paperId={paperId}
             widgetId={widget.id}
             open={openHintDialog}
             handleClose={() => setOpenHintDialog(false)}

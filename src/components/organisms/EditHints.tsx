@@ -13,7 +13,7 @@ import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
 type EditHintsPropsType = {
   papers: object;
   hints: any[];
-  stateId: number;
+  paperId: number;
   createHint: any;
   deleteHint: any;
 }
@@ -21,7 +21,7 @@ type EditHintsPropsType = {
 const EditHints: FC<EditHintsPropsType> = ({
   papers,
   hints = [],
-  stateId,
+  paperId,
   createHint,
   deleteHint,
 }) => {
@@ -62,7 +62,7 @@ const EditHints: FC<EditHintsPropsType> = ({
                     {hint.widgets.map((widget) => (
                       <Widget
                         key={widget.id}
-                        stateId={hint.id}
+                        paperId={hint.id}
                         widget={widget}
                         mode={WidgetModes.Edit}
                       />
@@ -91,11 +91,11 @@ const EditHints: FC<EditHintsPropsType> = ({
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
-        onClick={() => createHint({ stateId })}>
+        onClick={() => createHint({ paperId })}>
         {t('createHelp')}
       </Button>
       <CreateWidgetDialog
-        stateId={hintId}
+        paperId={hintId}
         open={!!hintId}
         handleClose={() => setHintId(null)}
       />

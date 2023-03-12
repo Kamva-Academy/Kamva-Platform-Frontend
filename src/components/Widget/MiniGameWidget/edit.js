@@ -25,7 +25,7 @@ function MiniGameEditWidget({
   updateMiniGameWidget,
   createMiniGameWidget,
 
-  stateId,
+  paperId,
   link: oldLink,
   id: widgetId,
 }) {
@@ -35,13 +35,13 @@ function MiniGameEditWidget({
   const handleClick = () => {
     if (widgetId) {
       updateMiniGameWidget({
-        paper: stateId,
+        paper: paperId,
         link,
         widgetId,
       })
     } else {
       createMiniGameWidget({
-        paper: stateId,
+        paper: paperId,
         link
       });
     }

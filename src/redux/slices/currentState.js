@@ -19,7 +19,7 @@ const changeTeamStateBroadcastAction = createAsyncThunk(
   'currentState/changeTeamStateBroadcast',
   async ({ response: { current_state }, arg: { teamId } }) => {
     await changeTeamState({
-      stateId: current_state.id.toString(),
+      paperId: current_state.id.toString(),
       uuid: teamId,
       currentStateName: current_state.name,
       teamEnterTimeToState: moment().format('HH:mm:ss')

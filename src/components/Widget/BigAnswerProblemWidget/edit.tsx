@@ -24,7 +24,7 @@ type BigAnswerProblemEditWidgetPropsType = {
   open: boolean;
   text: string;
   solution: any;
-  stateId: number;
+  paperId: number;
   id: string;
 }
 
@@ -36,7 +36,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
   open,
   text: oldText,
   solution: oldSolution,
-  stateId,
+  paperId,
   id: widgetId,
 }) => {
   const t = useTranslate();
@@ -47,7 +47,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
     if (widgetId) {
       updateBigAnswerQuestionWidget({
         widgetId,
-        paper: stateId,
+        paper: paperId,
         text: text,
         solution,
       }).then((response) => {
@@ -57,7 +57,7 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
       })
     } else {
       createBigAnswerQuestionWidget({
-        paper: stateId,
+        paper: paperId,
         text: text,
         solution,
       }).then((response) => {

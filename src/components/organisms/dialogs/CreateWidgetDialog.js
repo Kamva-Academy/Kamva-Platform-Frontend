@@ -14,7 +14,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import WIDGET_TYPES from '../../Widget/WidgetTypes';
 
-export default function CreateWidgetDialog({ open, handleClose, stateId, showContent = true, showProblems = false }) {
+export default function CreateWidgetDialog({ open, handleClose, paperId, showContent = true, showProblems = false }) {
   const [type, setType] = useState('');
   const t = useTranslate();
 
@@ -22,7 +22,7 @@ export default function CreateWidgetDialog({ open, handleClose, stateId, showCon
     const { EditWidgetDialog } = WIDGET_TYPES[type];
     return (
       <EditWidgetDialog
-        stateId={stateId}
+        paperId={paperId}
         open={open}
         handleClose={() => {
           setType('');

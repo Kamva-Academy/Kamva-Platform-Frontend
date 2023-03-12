@@ -347,7 +347,7 @@ export const createHintAction = createAsyncThunkApi(
   Apis.POST,
   hintUrl,
   {
-    bodyCreator: ({ stateId }) => ({ reference: stateId, name: 'help' }),
+    bodyCreator: ({ paperId }) => ({ reference: paperId, name: 'help' }),
   }
 );
 
@@ -380,7 +380,7 @@ const PaperSlice = createSlice({
   extraReducers: {
     [getOneStateAction.pending.toString()]: isFetching,
     [getOneStateAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.papers[arg.stateId] = response;
+      state.papers[arg.paperId] = response;
       response.hints.forEach((hint) => {
         state.papers[hint.id] = hint;
       })
@@ -405,14 +405,14 @@ const PaperSlice = createSlice({
 
     [deleteWidgetAction.pending.toString()]: isFetching,
     [deleteWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      const newWidgets = state.papers[arg.stateId].widgets;
+      const newWidgets = state.papers[arg.paperId].widgets;
       for (let i = 0; i < newWidgets.length; i++) {
         if (newWidgets[i].id === arg.widgetId) {
           newWidgets.splice(i, 1);
           break;
         }
       }
-      state.papers[arg.stateId].widgets = newWidgets;
+      state.papers[arg.paperId].widgets = newWidgets;
       state.isFetching = false;
     },
     [deleteWidgetAction.rejected.toString()]: isNotFetching,
@@ -434,8 +434,8 @@ const PaperSlice = createSlice({
 
     [createHintAction.pending.toString()]: isFetching,
     [createHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.papers[arg.stateId] ||= {};
-      state.papers[arg.stateId].hints = [...(state.papers[arg.stateId].hints || []), response];
+      state.papers[arg.paperId] ||= {};
+      state.papers[arg.paperId].hints = [...(state.papers[arg.paperId].hints || []), response];
       state.papers[response.id] = response;
       state.isFetching = false;
     },

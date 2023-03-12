@@ -34,7 +34,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
         </Typography>
         {article?.widgets.map((widget) => (
           <Box key={widget.id}>
-            <Widget stateId={article.id} mode={WidgetModes.View} coveredWithPaper={false} widget={widget} />
+            <Widget paperId={article.id} mode={WidgetModes.View} coveredWithPaper={false} widget={widget} />
           </Box>
         ))}
       </Stack>

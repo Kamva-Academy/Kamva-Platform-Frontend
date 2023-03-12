@@ -31,7 +31,7 @@ const EditArticle = ({
 				{article && (
 					<EditWidgets
 						widgets={article.widgets}
-						stateId={parseInt(articleId)}
+						paperId={parseInt(articleId)}
 					/>
 				)}
 			</Stack>

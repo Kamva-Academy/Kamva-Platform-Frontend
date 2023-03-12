@@ -7,11 +7,11 @@ import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
 
 type EditWidgetsPropsType = {
   widgets: any[];
-  stateId: number;
+  paperId: number;
   mode?: 'contents' | 'problems' | 'all';
 }
 
-const EditWidgets: FC<EditWidgetsPropsType> = ({ widgets, stateId, mode = 'all' }) => {
+const EditWidgets: FC<EditWidgetsPropsType> = ({ widgets, paperId, mode = 'all' }) => {
   const t = useTranslate();
   const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState(false);
 
@@ -28,7 +28,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({ widgets, stateId, mode = 'all' 
               widgets.map((widget) => (
                 <Widget
                   key={widget.id}
-                  stateId={stateId}
+                  paperId={paperId}
                   widget={widget}
                   mode={WidgetModes.Edit}
                 />
@@ -49,7 +49,7 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({ widgets, stateId, mode = 'all' 
       <CreateWidgetDialog
         showProblems={mode === 'problems' || mode === 'all'}
         showContent={mode === 'contents' || mode === 'all'}
-        stateId={stateId}
+        paperId={paperId}
         open={openCreateWidgetDialog}
         handleClose={() => setOpenCreateWidgetDialog(false)}
       />

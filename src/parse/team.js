@@ -2,22 +2,22 @@ import Parse from 'parse';
 
 const TeamState = Parse.Object.extend('TeamState');
 
-// export const createTeamState = async (uuid, stateId, currentStateName, teamEnterTimeToState) => {
+// export const createTeamState = async (uuid, paperId, currentStateName, teamEnterTimeToState) => {
 //   await Parse.Cloud.run('createTeamState', {
-//     stateId,
+//     paperId,
 //     uuid,
 //     currentStateName, 
 //     teamEnterTimeToState
 //   });
 // };
 
-// export const changeTeamState = async ({ stateId, uuid, currentStateName, teamEnterTimeToState }) => {
+// export const changeTeamState = async ({ paperId, uuid, currentStateName, teamEnterTimeToState }) => {
 //   if (!uuid) {
 //     // todo: fix for supervised workshops
 //     return;
 //   }
 //   await Parse.Cloud.run('changeTeamState', {
-//     stateId,
+//     paperId,
 //     uuid,
 //     currentStateName, 
 //     teamEnterTimeToState
@@ -38,23 +38,23 @@ export const getTeamState = async (uuid) => {
   return result;
 };
 
-export const createTeamState = async (uuid, stateId, currentStateName, teamEnterTimeToState) => {
-  return await new TeamState().save({ uuid, stateId, currentStateName, teamEnterTimeToState });
+export const createTeamState = async (uuid, paperId, currentStateName, teamEnterTimeToState) => {
+  return await new TeamState().save({ uuid, paperId, currentStateName, teamEnterTimeToState });
 };
 
-export const changeTeamState = async ({ uuid, stateId, currentStateName, teamEnterTimeToState }) => {
+export const changeTeamState = async ({ uuid, paperId, currentStateName, teamEnterTimeToState }) => {
   if (!uuid) {
     // todo: fix for supervised workshops
     return;
   }
   const teamState = await getTeamState(uuid);
   if (!teamState) {
-    await createTeamState(uuid, stateId, currentStateName, teamEnterTimeToState);
+    await createTeamState(uuid, paperId, currentStateName, teamEnterTimeToState);
 
   } else {
     teamState.set('currentStateName', currentStateName)
     teamState.set('teamEnterTimeToState', teamEnterTimeToState)
-    await teamState.save({ stateId });
+    await teamState.save({ paperId });
   }
 };
 

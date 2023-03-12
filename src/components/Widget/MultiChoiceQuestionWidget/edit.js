@@ -33,7 +33,7 @@ function MultiChoiceQuestionEditWidget({
   initChoices = ['', ''],
   initQuestion,
   initAnswer,
-  stateId,
+  paperId,
   id,
   createMultiChoicesQuestionWidget,
 }) {
@@ -55,7 +55,7 @@ function MultiChoiceQuestionEditWidget({
       // TODO: edit mode
     } else {
       createMultiChoicesQuestionWidget({
-        paper: stateId,
+        paper: paperId,
         text: question,
         answer,
         choices: choices.map((choice) => ({ text: choice })),

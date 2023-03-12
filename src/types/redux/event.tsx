@@ -35,6 +35,6 @@ export type InitialState = {
   team: Team,
   certificateLink: String,
   playerId: Object,
-  teamCurrentState: { uuid: string, stateId: string, currentStateName: string, teamEnterTimeToState: string },
+  teamCurrentState: { uuid: string, paperId: string, currentStateName: string, teamEnterTimeToState: string },
 };
 

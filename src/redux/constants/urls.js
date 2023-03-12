@@ -148,13 +148,13 @@ export const getAllWorkshopMentors = ({ fsmId }) => `/fsm/fsm/${fsmId}/get_mento
 export const removeMentorURL = ({ fsmId }) => `/fsm/fsm/${fsmId}/remove_mentor/`;
 
 // state:
-export const stateCRUDUrl = ({ stateId }) => stateId ? `/fsm/state/${stateId}/` : '/fsm/state/';
+export const stateCRUDUrl = ({ paperId }) => paperId ? `/fsm/state/${paperId}/` : '/fsm/state/';
 export const edgeUrl = ({ edgeId }) => edgeId ? `/fsm/edge/${edgeId}/` : '/fsm/edge/';
 
 // widget:
 export const makeWidgetFileEmptyUrl = ({ widgetId }) => `fsm/widget/${widgetId}/make_widget_file_empty/`;
 export const widgetCRUDUrl = ({ widgetId }) => widgetId ? `fsm/widget/${widgetId}/` : 'fsm/widget/';
-export const statesCRUDUrl = ({ stateId }) => stateId ? `fsm/state/${stateId}/` : 'fsm/state/';
+export const statesCRUDUrl = ({ paperId }) => paperId ? `fsm/state/${paperId}/` : 'fsm/state/';
 
 // fsm:
 export const eventInfoUrl = ({ pageNumber, eventId }) => eventId ? `fsm/event/${eventId}/` : `fsm/event/?page=${pageNumber}`;

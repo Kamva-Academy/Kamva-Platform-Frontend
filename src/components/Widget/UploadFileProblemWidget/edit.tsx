@@ -24,7 +24,7 @@ type UploadFileProblemEditWidgetPropsType = {
   handleClose: any;
   open: boolean;
   text: string;
-  stateId: number;
+  paperId: number;
   id: number;
   solution: string;
 }
@@ -37,7 +37,7 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   open,
   text: oldText,
   solution: oldSolution,
-  stateId,
+  paperId,
   id: widgetId,
 }) => {
   const t = useTranslate();
@@ -47,7 +47,7 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   const handleSubmit = () => {
     if (widgetId) {
       updateUploadFileWidget({
-        paper: stateId,
+        paper: paperId,
         text: text,
         widgetId,
         solution,
@@ -58,7 +58,7 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
       });
     } else {
       createUploadFileWidget({
-        paper: stateId,
+        paper: paperId,
         text: text,
         solution,
       }).then((response) => {

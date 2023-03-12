@@ -14,7 +14,7 @@ function DeleteWidgetDialog({
   handleClose,
   deleteWidget,
 
-  stateId,
+  paperId,
   open,
   widgetId
 }) {
@@ -31,7 +31,7 @@ function DeleteWidgetDialog({
         </Button>
         <Button
           onClick={() => {
-            deleteWidget({ widgetId, stateId });
+            deleteWidget({ widgetId, paperId });
             handleClose();
           }}
           color="primary"

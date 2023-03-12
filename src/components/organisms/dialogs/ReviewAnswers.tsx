@@ -53,7 +53,7 @@ const ReviewAnswers: FC<ReviewAnswersPropsType> = ({
             <Grid item key={widget.id} xs={12}>
               <Widget
                 coveredWithPaper={false}
-                stateId={widget.paper}
+                paperId={widget.paper}
                 mode={WidgetModes.Review}
                 widget={widget}
               />

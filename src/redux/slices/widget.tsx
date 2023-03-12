@@ -336,7 +336,7 @@ export const createHintAction = createAsyncThunkApi(
   Apis.POST,
   hintUrl,
   {
-    bodyCreator: ({ stateId }) => ({ reference: stateId, name: 'help' }),
+    bodyCreator: ({ paperId }) => ({ reference: paperId, name: 'help' }),
   }
 );
 

@@ -30,7 +30,7 @@ const Workshop = ({
   workshopState,
   needUpdateState,
   workshopId,
-  stateId,
+  paperId,
   studentPlayerId,
   myTeam,
   getOneWorkshop,
@@ -120,7 +120,7 @@ const Workshop = ({
   const [parseTeamState, setParseTeamState] = useState(null);
 
   const onUpdateStateFromParse = (teamState) =>
-    setParseTeamState(teamState.get('stateId'));
+    setParseTeamState(teamState.get('paperId'));
 
   useEffect(() => {
     if (!workshopState.id || !parseTeamState) return;
@@ -164,7 +164,7 @@ const Workshop = ({
 
   return (
     <StatePageContext.Provider
-      value={{ fsmId, stateId, playerId, teamId, isMentor, myTeam, teamRoom }}>
+      value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
       <Container component="main"
         sx={{
           background: '#F7F9FC',
@@ -195,7 +195,7 @@ const mapStateToProps = (state, ownProps) => ({
   workshopState: state.currentState.state,
   needUpdateState: state.currentState.needUpdateState,
   workshopId: state.currentState.workshopId,
-  // stateId: ownProps.match?.params?.stateId,
+  // paperId: ownProps.match?.params?.paperId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
   personsName: `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`,

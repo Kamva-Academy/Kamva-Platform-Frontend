@@ -42,7 +42,7 @@ const DesignWorkshop: FC<DesignWorkshopPropsType> = ({
 
   useEffect(() => {
     if (allStates[tab]) {
-      getOneState({ stateId: allStates[tab].id });
+      getOneState({ paperId: allStates[tab].id });
     }
   }, [allStates, tab]);
 
