@@ -331,14 +331,6 @@ export const visitWorkshopPlayerAction = createAsyncThunkApi(
   }
 );
 
-export const createHintAction = createAsyncThunkApi(
-  'widget/hints/create',
-  Apis.POST,
-  hintUrl,
-  {
-    bodyCreator: ({ paperId }) => ({ reference: paperId, name: 'help' }),
-  }
-);
 
 
 const widgetSlice = createSlice({
