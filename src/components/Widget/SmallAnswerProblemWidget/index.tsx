@@ -45,7 +45,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
     if (!answer) {
       return;
     }
-    if (mainAnswer && answer === mainAnswer.text) {
+    if (mainAnswer && answer.trim() === mainAnswer.text) {
       toast.success('آفرین! جوابت درست بود 🥳');
       setHasAnswered(true);
       setHasAnsweredCorrectly(true);

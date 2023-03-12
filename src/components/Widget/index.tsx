@@ -1,4 +1,4 @@
-import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip } from '@mui/material';
+import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip, Chip } from '@mui/material';
 import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/icons-material';
 import React, { FC, useMemo, useState } from 'react';
 
@@ -6,6 +6,7 @@ import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 import EditHintsDialog from '../organisms/dialogs/EditHintsDialog';
 import HelpDialog from '../SpecialComponents/WorkshopPage/components/HelpDialog';
+import { toPersianNumber } from '../../utils/translateNumber';
 
 export enum WidgetModes {
   View,
@@ -49,6 +50,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openEditHintDialog, setEditHintDialog] = useState(false);
   const [openViewHintDialog, setViewHintDialog] = useState(false);
+  const [hasClickedHintDialog, setClickedHintDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
@@ -72,7 +74,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
           <Stack>
             <Stack direction='row' alignItems='center' justifyContent='space-between'>
               <Typography variant='h3' gutterBottom>
-                {/* {widget.name ? widget.name : 'بی‌نام'} */}
+                {widget.name ? widget.name : `ویجت ${toPersianNumber(widget.id)}`}
               </Typography>
               <Box>
                 <Tooltip title='راهنمایی‌ها' arrow>
@@ -116,19 +118,19 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
             />
           </Stack>
         }
-        {widget?.hints.length ?
+        {(mode === WidgetModes.View && widget?.hints.length) ?
           <>
-            <Box sx={{ position: 'absolute', right: 0, top: -5 }}>
-              <Tooltip title='راهنمایی' arrow>
-                <IconButton onClick={() => setViewHintDialog(true)}>
-                  <HelpIcon color='primary'/>
-                </IconButton>
-              </Tooltip>
+            <Box sx={{ position: 'absolute', right: 0 }}>
+              <Chip
+                size='small' color='secondary'
+                sx={{ backgroundColor: 'white', animation: !hasClickedHintDialog ? "shake 13s infinite" : null }}
+                onClick={() => { setViewHintDialog(true); setClickedHintDialog(true); }}
+                icon={<HelpIcon />} label="راهنما" variant='outlined' />
             </Box>
             <HelpDialog
               open={openViewHintDialog}
               handleClose={() => setViewHintDialog(false)}
-              helps={widget?.hints || []}
+              helps={widget.hints}
             />
           </>
           : null
