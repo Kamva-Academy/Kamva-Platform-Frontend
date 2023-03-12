@@ -1,17 +1,13 @@
 import {
-  Box,
-  Button,
   Divider,
-  Grid,
   IconButton,
-  Paper,
   Stack,
   TextField,
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Add as AddIcon, Save as SaveIcon, Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-import React, { useEffect, useState, FC, useMemo } from 'react';
+import { Save as SaveIcon, Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
+import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router';
@@ -20,7 +16,6 @@ import {
   updateStateAction,
 } from '../../redux/slices/workshop';
 import AreYouSure from '../Dialog/AreYouSure';
-import Widget, { WidgetModes } from '../Widget';
 import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
 import EditWidgets from './EditWidgets';
 import EditHints from './EditHints';
