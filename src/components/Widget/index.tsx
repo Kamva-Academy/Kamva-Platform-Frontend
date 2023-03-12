@@ -1,9 +1,10 @@
 import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip } from '@mui/material';
-import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
+import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/icons-material';
 import React, { FC, useMemo, useState } from 'react';
 
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
+import EditHintsDialog from '../organisms/dialogs/EditHintsDialog';
 
 export enum WidgetModes {
   View,
@@ -38,13 +39,14 @@ type WidgetPropsType = {
   widget: any;
   mode: WidgetModes;
   stateId?: number;
-  collectAnswers? : any;
+  collectAnswers?: any;
   coveredWithPaper?: boolean;
 }
 
 const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId, coveredWithPaper = true, collectAnswers }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openHintDialog, setOpenHintDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
@@ -58,7 +60,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
     , [widget])
 
   const widgetMemoizedComponent = useMemo(() =>
-    <WidgetComponent {...widget} mode={mode} collectAnswers={collectAnswers}/>
+    <WidgetComponent {...widget} mode={mode} collectAnswers={collectAnswers} />
     , [widget])
 
   return (
@@ -70,6 +72,11 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
               {/* {widget.name ? widget.name : 'بی‌نام'} */}
             </Typography>
             <Box>
+              <Tooltip title='راهنمایی‌ها' arrow>
+                <IconButton size='small' onClick={() => setOpenHintDialog(true)}>
+                  <HelpIcon />
+                </IconButton>
+              </Tooltip>
               <Tooltip title='ویرایش ویجت' arrow>
                 <IconButton size='small' onClick={() => setOpenEditDialog(true)}>
                   <EditIcon />
@@ -96,6 +103,12 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, stateId,
             widgetId={widget.id}
             open={openDeleteWidgetDialog}
             handleClose={() => setOpenDeleteWidgetDialog(false)}
+          />
+          <EditHintsDialog
+            stateId={stateId}
+            widgetId={widget.id}
+            open={openHintDialog}
+            handleClose={() => setOpenHintDialog(false)}
           />
         </Stack>
       }
