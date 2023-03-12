@@ -3,6 +3,7 @@ import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   hintUrl,
+  widgetHintUrl,
   uploadFileUrl,
   stateCRUDUrl,
   widgetCRUDUrl,
@@ -347,7 +348,7 @@ export const createHintAction = createAsyncThunkApi(
   Apis.POST,
   hintUrl,
   {
-    bodyCreator: ({ paperId }) => ({ reference: paperId, name: 'help' }),
+    bodyCreator: ({ referenceId }) => ({ reference: referenceId, name: 'help' }),
   }
 );
 
@@ -356,6 +357,25 @@ export const deleteHintAction = createAsyncThunkApi(
   Apis.DELETE,
   hintUrl,
 );
+
+//////////////// WIDGET HINT ////////////////
+// TOFF
+
+export const createWidgetHintAction = createAsyncThunkApi(
+  'widget/widget-hints/create',
+  Apis.POST,
+  widgetHintUrl,
+  {
+    bodyCreator: ({ referenceId }) => ({ reference: referenceId, name: 'help' }),
+  }
+);
+
+export const deleteWidgetHintAction = createAsyncThunkApi(
+  'widget/widget-hints/delete',
+  Apis.DELETE,
+  widgetHintUrl,
+);
+
 
 //////////////// UTILITIES ////////////////
 
@@ -434,12 +454,19 @@ const PaperSlice = createSlice({
 
     [createHintAction.pending.toString()]: isFetching,
     [createHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.papers[arg.paperId] ||= {};
-      state.papers[arg.paperId].hints = [...(state.papers[arg.paperId].hints || []), response];
+      state.papers[arg.referenceId] ||= {};
+      state.papers[arg.referenceId].hints = [...(state.papers[arg.referenceId].hints || []), response];
       state.papers[response.id] = response;
       state.isFetching = false;
     },
     [createHintAction.rejected.toString()]: isNotFetching,
+
+    [createWidgetHintAction.pending.toString()]: isFetching,
+    [createWidgetHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+      state.papers[response.id] = response;
+      state.isFetching = false;
+    },
+    [createWidgetHintAction.rejected.toString()]: isNotFetching,
 
     [deleteHintAction.pending.toString()]: isFetching,
     [deleteHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {

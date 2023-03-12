@@ -5,6 +5,7 @@ import React, { FC, useMemo, useState } from 'react';
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 import EditHintsDialog from '../organisms/dialogs/EditHintsDialog';
+import HelpDialog from '../SpecialComponents/WorkshopPage/components/HelpDialog';
 
 export enum WidgetModes {
   View,
@@ -46,7 +47,8 @@ type WidgetPropsType = {
 const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId, coveredWithPaper = true, collectAnswers }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [openHintDialog, setOpenHintDialog] = useState(false);
+  const [openEditHintDialog, setEditHintDialog] = useState(false);
+  const [openViewHintDialog, setViewHintDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
@@ -65,54 +67,74 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
 
   return (
     <Cover>
-      {mode === WidgetModes.Edit &&
-        <Stack>
-          <Stack direction='row' alignItems='center' justifyContent='space-between'>
-            <Typography variant='h3' gutterBottom>
-              {/* {widget.name ? widget.name : 'بی‌نام'} */}
-            </Typography>
-            <Box>
-              <Tooltip title='راهنمایی‌ها' arrow>
-                <IconButton size='small' onClick={() => setOpenHintDialog(true)}>
+      <Stack sx={{ position: 'relative' }}>
+        {mode === WidgetModes.Edit &&
+          <Stack>
+            <Stack direction='row' alignItems='center' justifyContent='space-between'>
+              <Typography variant='h3' gutterBottom>
+                {/* {widget.name ? widget.name : 'بی‌نام'} */}
+              </Typography>
+              <Box>
+                <Tooltip title='راهنمایی‌ها' arrow>
+                  <IconButton size='small' onClick={() => setEditHintDialog(true)}>
+                    <HelpIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title='ویرایش ویجت' arrow>
+                  <IconButton size='small' onClick={() => setOpenEditDialog(true)}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title='حذف ویجت' arrow>
+                  <IconButton size='small' onClick={() => setOpenDeleteWidgetDialog(true)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Stack>
+            <Box mb={2}>
+              <Divider />
+            </Box>
+            <EditWidgetDialog
+              {...widget}
+              paperId={paperId}
+              open={openEditDialog}
+              handleClose={() => setOpenEditDialog(false)}
+            />
+            <DeleteWidgetDialog
+              paperId={paperId}
+              widgetId={widget.id}
+              open={openDeleteWidgetDialog}
+              handleClose={() => setOpenDeleteWidgetDialog(false)}
+            />
+            <EditHintsDialog
+              hints={widget.hints || []}
+              paperId={paperId}
+              widgetId={widget.id}
+              open={openEditHintDialog}
+              handleClose={() => setEditHintDialog(false)}
+            />
+          </Stack>
+        }
+        {widget?.hints.length ?
+          <>
+            <Box sx={{ position: 'absolute', right: 0, top: -5 }}>
+              <Tooltip title='راهنمایی' arrow>
+                <IconButton onClick={() => setViewHintDialog(true)}>
                   <HelpIcon />
                 </IconButton>
               </Tooltip>
-              <Tooltip title='ویرایش ویجت' arrow>
-                <IconButton size='small' onClick={() => setOpenEditDialog(true)}>
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title='حذف ویجت' arrow>
-                <IconButton size='small' onClick={() => setOpenDeleteWidgetDialog(true)}>
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
             </Box>
-          </Stack>
-          <Box mb={2}>
-            <Divider />
-          </Box>
-          <EditWidgetDialog
-            {...widget}
-            paperId={paperId}
-            open={openEditDialog}
-            handleClose={() => setOpenEditDialog(false)}
-          />
-          <DeleteWidgetDialog
-            paperId={paperId}
-            widgetId={widget.id}
-            open={openDeleteWidgetDialog}
-            handleClose={() => setOpenDeleteWidgetDialog(false)}
-          />
-          <EditHintsDialog
-            paperId={paperId}
-            widgetId={widget.id}
-            open={openHintDialog}
-            handleClose={() => setOpenHintDialog(false)}
-          />
-        </Stack>
-      }
-      {widgetMemoizedComponent}
+            <HelpDialog
+              open={openViewHintDialog}
+              handleClose={() => setViewHintDialog(false)}
+              helps={widget?.hints || []}
+            />
+          </>
+          : null
+        }
+        {widgetMemoizedComponent}
+      </Stack>
     </Cover>
   );
 };

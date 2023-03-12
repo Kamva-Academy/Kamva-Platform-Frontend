@@ -5,31 +5,43 @@ import { Delete as DeleteIcon } from '@mui/icons-material';
 import AreYouSure from '../Dialog/AreYouSure';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { createHintAction, deleteHintAction } from '../../redux/slices/Paper';
+import {
+  createHintAction,
+  deleteHintAction,
+  createWidgetHintAction,
+  deleteWidgetHintAction,
+} from '../../redux/slices/Paper';
 
 import Widget, { WidgetModes } from '../Widget';
 import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
 
 type EditHintsPropsType = {
+  type: 'widget' | 'state';
   papers: object;
   hints: any[];
-  paperId: number;
+  referenceId: number;
   createHint: any;
   deleteHint: any;
+  createWidgetHint: any,
+  deleteWidgetHint: any,
 }
 
 const EditHints: FC<EditHintsPropsType> = ({
+  type = 'state',
   papers,
   hints = [],
-  paperId,
+  referenceId,
   createHint,
   deleteHint,
+  createWidgetHint,
+  deleteWidgetHint,
 }) => {
   const t = useTranslate();
   const [hintId, setHintId] = useState<number>(null);
   const [deleteDialogId, setDeleteDialogId] = useState<number>(null);
 
-  const newHints = [];
+  // TOFF
+  const newHints = [...hints];
   for (const hint of hints) {
     if (Object.keys(papers).includes(hint.id.toString())) {
       newHints.push(papers[hint.id])
@@ -91,7 +103,7 @@ const EditHints: FC<EditHintsPropsType> = ({
         startIcon={<AddIcon />}
         variant="contained"
         color="primary"
-        onClick={() => createHint({ paperId })}>
+        onClick={() => type === 'state' ? createHint({ referenceId }) : createWidgetHint({ referenceId })}>
         {t('createHelp')}
       </Button>
       <CreateWidgetDialog
@@ -102,7 +114,7 @@ const EditHints: FC<EditHintsPropsType> = ({
       <AreYouSure
         open={!!deleteDialogId}
         handleClose={() => setDeleteDialogId(null)}
-        callBackFunction={() => deleteHint({ hintId: deleteDialogId })}
+        callBackFunction={() => type === 'state' ? deleteHint({ hintId: deleteDialogId }) : deleteWidgetHint({ hintId: deleteDialogId })}
       />
     </>
   );
@@ -112,10 +124,10 @@ const mapStateToProps = (state, ownProps) => ({
   papers: state.paper.papers,
 })
 
-export default connect(
-  mapStateToProps,
-  {
-    createHint: createHintAction,
-    deleteHint: deleteHintAction,
-  }
-)(EditHints);
+export default connect(mapStateToProps, {
+  createHint: createHintAction,
+  deleteHint: deleteHintAction,
+  // TOFF
+  createWidgetHint: createWidgetHintAction,
+  deleteWidgetHint: deleteWidgetHintAction,
+})(EditHints);

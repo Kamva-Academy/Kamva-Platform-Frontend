@@ -1,3 +1,4 @@
+import { Stack } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -12,6 +13,7 @@ import EditHints from '../EditHints';
 const EditHintsDialog = ({
   handleClose,
 
+  hints,
   paperId,
   open,
   widgetId
@@ -19,12 +21,10 @@ const EditHintsDialog = ({
   const t = useTranslate();
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{'ویرایش راهنمایی'}</DialogTitle>
-      <DialogContent>
-        {/* <DialogContentText>{t('wantRemoveWidget')}</DialogContentText> */}
-      </DialogContent>
       <DialogActions>
-        <EditHints />
+        <Stack spacing={2}>
+          <EditHints referenceId={widgetId} type='widget' hints={hints} />
+        </Stack>
       </DialogActions>
     </Dialog>
   );

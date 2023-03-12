@@ -65,7 +65,10 @@ export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/artic
 
 export const statesUrl = 'fsm/state/';
 
+/////////// HINT ///////////
+// TOFF
 export const hintUrl = ({ hintId }) => hintId ? `fsm/hint/${hintId}/` : 'fsm/hint/';
+export const widgetHintUrl = ({ hintId }) => hintId ? `fsm/widget-hint/${hintId}/` : 'fsm/widget-hint/';
 
 export const widgetUrl = 'fsm/widget/';
 
