@@ -14,6 +14,7 @@ import {
 
 import Widget, { WidgetModes } from '../Widget';
 import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
+import { toPersianNumber } from '../../utils/translateNumber';
 
 type EditHintsPropsType = {
   type: 'widget' | 'state';
@@ -62,7 +63,7 @@ const EditHints: FC<EditHintsPropsType> = ({
                 <Paper sx={{ padding: 1 }} key={hint.id} elevation={3}>
                   <Stack spacing={1}>
                     <Stack direction='row' alignItems='center' justifyContent='space-between'>
-                      <Typography>{t('helpNumber') + " " + (index + 1)}</Typography>
+                      <Typography>{t('helpNumber') + " " + toPersianNumber(index + 1)}</Typography>
                       <Box>
                         <Tooltip title='حذف راهنمایی' arrow>
                           <IconButton size='small' onClick={() => setDeleteDialogId(hint.id)}>

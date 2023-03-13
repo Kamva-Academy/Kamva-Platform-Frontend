@@ -110,8 +110,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
               handleClose={() => setOpenDeleteWidgetDialog(false)}
             />
             <EditHintsDialog
-              hints={widget.hints || []}
-              paperId={paperId}
+              hints={widget.hints}
               widgetId={widget.id}
               open={openEditHintDialog}
               handleClose={() => setEditHintDialog(false)}

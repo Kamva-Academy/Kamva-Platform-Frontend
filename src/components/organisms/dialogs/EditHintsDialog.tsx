@@ -12,9 +12,7 @@ import EditHints from '../EditHints';
 
 const EditHintsDialog = ({
   handleClose,
-
   hints,
-  paperId,
   open,
   widgetId
 }) => {
