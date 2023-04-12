@@ -53,19 +53,19 @@ function Index({
       <RegisterUsersViaCSV />
       <Divider />
       <Pagination
-          sx={{
-            padding: "10px",
-            justifySelf: 'center',
-          }}
-          count={Math.ceil(allRegistrationReceipts?.count / itemsPerPage) || 1}
-          page={page}
-          onChange={handleChange}
-          defaultPage={1}
-          color="primary"
-          size="large"
-          showFirstButton
-          showLastButton
-        />
+        sx={{
+          padding: "10px",
+          justifySelf: 'center',
+        }}
+        count={Math.ceil(allRegistrationReceipts?.count / itemsPerPage) || 1}
+        page={page}
+        onChange={handleChange}
+        defaultPage={1}
+        color="primary"
+        size="large"
+        showFirstButton
+        showLastButton
+      />
       <TableContainer>
         <Table>
           <TableHead>
@@ -89,7 +89,7 @@ function Index({
                 </TableCell>
                 <TableCell align='center'>
                   <Button
-                    href={'/registration-receipt/' + registrationReceipt?.id}
+                    href={`/registration-receipt/${registrationReceipt?.id}/`}
                     component="a" target="_blank">
                     {(registrationReceipt?.first_name && registrationReceipt?.last_name) ? `${registrationReceipt?.first_name} ${registrationReceipt?.last_name}` : 'بی‌نام'}
                   </Button>
