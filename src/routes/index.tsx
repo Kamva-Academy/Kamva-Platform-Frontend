@@ -55,6 +55,8 @@ const Root = () => {
           element={<FailedPayment />}
         />
 
+        <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
+
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
