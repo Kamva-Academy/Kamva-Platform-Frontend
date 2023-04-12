@@ -215,6 +215,7 @@ const Index: FC<PersonalProfilePropsType> = ({
           <FormControl fullWidth>
             <LocalizationProvider dateAdapter={AdapterJalali}>
               <DatePicker
+                label={'تاریخ تولد'}
                 openTo='year'
                 views={['year', 'month', 'day']}
                 value={moment(profile?.birth_date)}
