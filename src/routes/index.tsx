@@ -70,7 +70,7 @@ const Root = () => {
         />
         <Route path="/event/:eventId/status/" element={<Status />} />
         <Route
-          path="/event/:eventId/team_selection/"
+          path="/event/:eventId/team-selection/"
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />

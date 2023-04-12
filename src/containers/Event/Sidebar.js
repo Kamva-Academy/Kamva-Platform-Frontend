@@ -83,7 +83,7 @@ function Workshops({
               disabled={event?.event_type == 'Individual'}
               variant="outlined"
               fullWidth
-              onClick={() => navigate(`/event/${event?.id}/team_selection/`)}>
+              onClick={() => navigate(`/event/${event?.id}/team-selection/`)}>
               {'تیم‌کشی'}
             </Button>
             <Button
