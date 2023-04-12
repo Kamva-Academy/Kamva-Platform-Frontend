@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Button, Grid, Paper, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -85,100 +85,72 @@ const Payment = ({
 
   return (
     <Layout>
-      <Grid container justifyContent="space-evenly" alignItems="center" spacing={4}>
-        <Grid item xs={12}>
-          <Typography align="center"
-            sx={{
-              fontSize: 40,
-              fontWeight: 600,
-              textShadow: '1px 1px #dbd9d9',
-            }}>
-            {'وضعیت ثبت‌نام'}
-          </Typography>
-        </Grid>
+      <Stack spacing={4}>
+        <Typography align="center"
+          sx={{
+            fontSize: 40,
+            fontWeight: 600,
+            textShadow: '1px 1px #dbd9d9',
+          }}>
+          {'وضعیت ثبت‌نام'}
+        </Typography>
 
-        <Grid item xs={12}>
-          <Stepper step={step} />
-        </Grid>
+        <Stepper step={step} />
 
-        <Grid item xs={12}>
-          <Grid
-            component={Paper}
-            container
-            justifyContent="center"
-            alignItems="flex-end"
-            spacing={2}>
+        <Stack component={Paper} padding={2}>
+          <Grid container spacing={2}>
+
             {event?.user_registration_status == 'Accepted' && (
               <>
                 <Grid item container justifyContent="center" alignItems="center">
                   <Typography variant='h6' align="center">
-                    {
-                      'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'
-                    }
+                    {'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'}
                   </Typography>
                 </Grid>
-                <Grid
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  item
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  spacing={1}>
-                  <Grid item xs={12}>
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      label="کد تخفیف"
-                      onChange={(e) => setDiscountCode(e.target.value)}
-                    />
+                <Grid container item justifyContent="center" alignItems='end' spacing={2}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Stack spacing={1}>
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="کد تخفیف"
+                        onChange={(e) => setDiscountCode(e.target.value)}
+                      />
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={submitDiscount}>
+                        {'اعمال'}
+                      </Button>
+                    </Stack>
                   </Grid>
-                  <Grid item xs={12}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={submitDiscount}>
-                      {'اعمال'}
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Grid
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  item
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  spacing={1}>
-                  <Grid item xs={12}>
-                    <Typography align="center" gutterBottom>
-                      {'مبلغ قابل پرداخت:'}
-                    </Typography>
-                    <Typography
-                      align="center"
-                      sx={{
-                        fontSize: 25,
-                        fontWeight: 400,
-                        textShadow: '1px 1px #dbd9d9',
-                      }}>
-                      {`${toPersianNumber(price)} تومان`}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={goForPurchase}>
-                      {'پرداخت'}
-                    </Button>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Stack spacing={1}>
+                      <Typography align="center" gutterBottom>
+                        {'مبلغ قابل پرداخت:'}
+                      </Typography>
+                      <Typography
+                        align="center"
+                        sx={{
+                          fontSize: 25,
+                          fontWeight: 400,
+                        }}>
+                        {`${toPersianNumber(price)} تومان`}
+                      </Typography>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={goForPurchase}>
+                        {'پرداخت'}
+                      </Button>
+                    </Stack>
                   </Grid>
                 </Grid>
               </>
             )}
+
             {event?.user_registration_status == 'Waiting' && (
               <>
                 <Grid
@@ -195,6 +167,7 @@ const Payment = ({
                 </Grid>
               </>
             )}
+
             {event?.user_registration_status == 'Rejected' && (
               <>
                 <Grid
@@ -209,9 +182,10 @@ const Payment = ({
                 </Grid>
               </>
             )}
+
           </Grid>
-        </Grid>
-      </Grid>
+        </Stack>
+      </Stack>
     </Layout>
   );
 };
