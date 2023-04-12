@@ -27,7 +27,7 @@ function Workshops({
 
   useEffect(() => {
     if (event?.is_user_participating != undefined && !event?.is_user_participating) {
-      navigate(`/event/${eventId}/registration_form/`);
+      navigate(`/event/${eventId}/registration-form/`);
     }
   }, [event])
 

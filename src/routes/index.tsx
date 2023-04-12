@@ -65,7 +65,7 @@ const Root = () => {
 
         <Route path="/event/:eventId/profile/:section/" element={<Profile />} />
         <Route
-          path="/event/:eventId/registration_form/"
+          path="/event/:eventId/registration-form/"
           element={<RegistrationForm />}
         />
         <Route path="/event/:eventId/status/" element={<Status />} />

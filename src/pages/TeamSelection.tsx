@@ -115,7 +115,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   }, [registrationReceipt]);
 
   if (event?.user_registration_status == 'NotRegistered') {
-    navigate(`/event/${eventId}/registration_form/`);
+    navigate(`/event/${eventId}/registration-form/`);
   }
 
   const isHead = registrationReceipt?.id === team?.team_head

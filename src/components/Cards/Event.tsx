@@ -29,7 +29,7 @@ const EventCard: FC<EventCardPropsType> = ({
   event
 }) => {
   const t = useTranslate();
-  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/event/${event.id}/registration_form/`} text={t('register')} /> : null);
+  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/event/${event.id}/registration-form/`} text={t('register')} /> : null);
 
   useEffect(() => {
     if (!event) return;
