@@ -39,17 +39,19 @@ const Root = () => {
       <Route path="/login/" element={<Login />} />
       <Route path="/articles/" element={<Articles />} />
       <Route path="/article/:articleId/" element={<Article />} />
+
       <Route path="/" element={<Landing />} />
 
       <Route path="/" element={<PrivateRoute />}>
 
         <Route path="/edit-article/:articleId/" element={<EditArticle />} />
+
         <Route
-          path="/message/payment/success/:paymentId?/"
+          path="/message/payment/success/:paymentId?"
           element={<SuccessfulPayment />}
         />
         <Route
-          path="/message/payment/failure/:paymentId?/"
+          path="/message/payment/failure/:paymentId?"
           element={<FailedPayment />}
         />
 
@@ -80,6 +82,7 @@ const Root = () => {
         <Route path="/event/:eventId/workshop/:fsmId/correction/:answerId/" element={<Correction />} />
         <Route path="/event/:eventId/workshop/:fsmId/correction/" element={<GoToAnswer />} />
       </Route>
+
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
