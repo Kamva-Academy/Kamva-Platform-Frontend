@@ -18,13 +18,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddInstitute from '../../../components/Dialog/AddInstitute';
 import {
-  getInstitutesAction,
   getUserProfileAction,
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
-import { toEnglishNumber } from '../../../utils/translateNumber';
 
 const GRADES = [
   { value: 1, name: 'اول' },
@@ -54,38 +52,29 @@ const GENDER_TYPES = {
 }
 
 function StudentProfile({
-  getUserProfile,
   updateStudentShip,
-  getInstitutes,
-
-  userAccount,
   userProfile,
   institutes,
   newlyAddedInstitute,
 }) {
-  const [newStudentship, setNewStudentship] = useState();
+  const [studentship, setStudentship] = useState();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
   const { eventId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUserProfile({ id: userAccount?.id });
-  }, [getUserProfile]);
-
-  useEffect(() => {
-    if (userProfile?.city) {
-      getInstitutes({ cityTitle: Iran.Cities.find(city => userProfile?.city == city.title).title });
-      setNewStudentship({
-        ...newStudentship,
-        school: '',
+    if (userProfile) {
+      setStudentship({
+        school: userProfile.school_studentship.school,
+        grade: userProfile.school_studentship.grade,
       })
     }
   }, [userProfile])
 
   useEffect(() => {
     if (newlyAddedInstitute) {
-      setNewStudentship({
-        ...newStudentship,
+      setStudentship({
+        ...studentship,
         school: newlyAddedInstitute.id,
       })
     }
@@ -93,24 +82,24 @@ function StudentProfile({
 
   const handleStudentshipDocumentChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setNewStudentship({
-        ...newStudentship,
+      setStudentship({
+        ...studentship,
         document: event.target.files[0],
       });
     }
   };
 
   const handleStudentshipChange = (event) => {
-    setNewStudentship({
-      ...newStudentship,
-      [event.target.name]: toEnglishNumber(event.target.value),
+    setStudentship({
+      ...studentship,
+      [event.target.name]: event.target.value,
     });
   };
 
   const submitStudentship = () => {
     updateStudentShip({
       id: userProfile?.school_studentship?.id,
-      ...newStudentship,
+      ...studentship,
     }).then((response) => {
       if (response.type?.endsWith('fulfilled') && eventId) {
         navigate(`/event/${eventId}/`);
@@ -131,7 +120,7 @@ function StudentProfile({
     );
   };
 
-  if (!userProfile) {
+  if (!studentship) {
     return <></>;
   }
 
@@ -147,17 +136,18 @@ function StudentProfile({
           <Grid item xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.school_studentship?.school && !newStudentship?.school}
+              error={!studentship.school}
               fullWidth>
               <InputLabel>مدرسه</InputLabel>
               <Select
+                error={!institutes?.find((institute) => institute.id === studentship.school)}
                 IconComponent={AddSchoolInstituteIcon}
                 onChange={handleStudentshipChange}
                 name="school"
-                value={institutes ? newStudentship?.school || userProfile?.school_studentship?.school : ''}
+                value={institutes?.find((institute) => institute.id === studentship.school) ? studentship.school : ''}
                 label="مدرسه">
-                {institutes && institutes.length !== 0
-                  ? institutes.slice().sort((a, b) => {
+                {institutes?.length > 0 ?
+                  institutes.slice().sort((a, b) => {
                     let firstLabel = (a.school_type ? SCHOOL_TYPES[a.school_type] + ' ' : '') + a.name
                     let secondLabel = (b.school_type ? SCHOOL_TYPES[b.school_type] + ' ' : '') + b.name
                     return firstLabel.localeCompare(secondLabel)
@@ -165,8 +155,8 @@ function StudentProfile({
                     <MenuItem key={school.id} value={school.id}>
                       {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : '') + school.name}
                     </MenuItem>
-                  ))
-                  : <MenuItem disabled>
+                  )) :
+                  <MenuItem disabled>
                     {'موردی وجود ندارد.'}
                   </MenuItem>}
               </Select>
@@ -176,14 +166,13 @@ function StudentProfile({
           <Grid item xs={12} sm={6}>
             <FormControl
               required
-              error={!userProfile?.school_studentship?.grade && !newStudentship?.grade}
+              error={!studentship.grade}
               fullWidth>
               <InputLabel>پایه</InputLabel>
               <Select
-                defaultValue={userProfile?.school_studentship?.grade}
                 onChange={handleStudentshipChange}
                 name="grade"
-                value={newStudentship?.grade}
+                value={studentship.grade}
                 label="پایه">
                 {GRADES.map((grade) => (
                   <MenuItem key={grade.value} value={grade.value}>
@@ -264,5 +253,4 @@ export default connect(mapStateToProps, {
   updateUserAccount: updateUserAccountAction,
   getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,
-  getInstitutes: getInstitutesAction,
 })(StudentProfile);

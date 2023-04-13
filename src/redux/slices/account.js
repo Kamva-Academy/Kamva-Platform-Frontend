@@ -243,6 +243,7 @@ const accountSlice = createSlice({
     },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
 
+    
     [getInstitutesAction.pending.toString()]: isFetching,
     [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.institutes = response;
@@ -266,7 +267,10 @@ const accountSlice = createSlice({
 
 
     [updateUserAccountAction.pending.toString()]: isFetching,
-    [updateUserAccountAction.fulfilled.toString()]: isNotFetching,
+    [updateUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.userAccount = response
+      state.isFetching = false;
+    },
     [updateUserAccountAction.rejected.toString()]: isNotFetching,
 
 

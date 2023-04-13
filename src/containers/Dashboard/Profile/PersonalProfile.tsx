@@ -20,7 +20,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from "moment";
 import {
-  getUserProfileAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
@@ -33,28 +32,18 @@ const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 type PersonalProfilePropsType = {
   updateUserAccount: any;
-  getUserProfile: any;
-  userAccount: any;
   userProfile: PersonalProfileType;
   tabs: any;
 }
 
 const PersonalProfile: FC<PersonalProfilePropsType> = ({
   updateUserAccount,
-  getUserProfile,
-  userAccount,
   userProfile,
   tabs,
 }) => {
   const [profile, setProfile] = useState<PersonalProfileType>(null);
   const navigate = useNavigate();
   const { eventId, section } = useParams();
-
-  useEffect(() => {
-    if (userAccount?.id) {
-      getUserProfile({ id: userAccount.id });
-    }
-  }, [getUserProfile, userAccount]);
 
   useEffect(() => {
     if (userProfile) {
@@ -352,7 +341,6 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 }
 
 const mapStateToProps = (state) => ({
-  userAccount: state.account.userAccount,
   userProfile: state.account.userProfile,
   isFetching: state.account.isFetching,
   payments: state.account.payments,
@@ -361,5 +349,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   updateUserAccount: updateUserAccountAction,
-  getUserProfile: getUserProfileAction,
 })(PersonalProfile);

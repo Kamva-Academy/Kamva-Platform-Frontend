@@ -1,6 +1,5 @@
-import { Button, Grid, Tab, Tabs, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import React, { useState } from 'react';
+import { Grid, Tab, Tabs } from '@mui/material';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -14,6 +13,7 @@ import Layout from '../../Layout';
 import AcademicProfile from './AcademicProfile';
 import PersonalProfile from './PersonalProfile'
 import StudentProfile from './StudentProfile';
+import Iran from '../../../utils/iran';
 
 let tabs = [
   {
@@ -47,7 +47,10 @@ const SECTIONS = {
 }
 
 const Profile = ({
+  getUserProfile,
+  getInstitutes,
   event,
+  userAccount,
 }) => {
   const navigate = useNavigate();
   const { eventId, section } = useParams();
@@ -60,6 +63,18 @@ const Profile = ({
   } else if (event?.audience_type == 'All') {
     tabs = [tabs[0]];
   }
+
+  useEffect(() => {
+    if (userAccount) {
+      getUserProfile({ id: userAccount.id }).then(({ type, payload: { response } }) => {
+        // todo: fix TOF
+        if (type.endsWith('fulfilled')) {
+          getInstitutes({ cityTitle: Iran.Cities.find(city => response.city == city.title).title });
+        }
+      });
+
+    }
+  }, [userAccount]);
 
   return (
     <Layout>
