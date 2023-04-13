@@ -15,26 +15,6 @@ import AcademicProfile from './AcademicProfile';
 import PersonalProfile from './PersonalProfile'
 import StudentProfile from './StudentProfile';
 
-
-const useStyles = makeStyles((theme) => ({
-  profileImage: {
-    maxHeight: '100px',
-    borderRadius: '5px',
-  },
-  logo: {
-    height: 100,
-  },
-  formControl: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: theme.spacing(2),
-  },
-}));
-
-
 let tabs = [
   {
     name: 'personal',
@@ -66,7 +46,7 @@ const SECTIONS = {
   academic: 2,
 }
 
-const Index = ({
+const Profile = ({
   event,
 }) => {
   const navigate = useNavigate();
@@ -103,33 +83,9 @@ const Index = ({
               }
             </Tabs>
           </Grid>
-          {eventId &&
-            <>
-              {/* <Grid item>
-                {event?.audience_type == 'Student' ? (
-                  <Typography variant='h3' color='error'>
-                    {'تکمیل موارد ستاره‌دار در هر دو قسمت «مشخصات فردی» و «مشخصات دانش‌آموزی» الزامی است.'}
-                  </Typography>
-                ) : (event?.audience_type == 'Academic' ? (
-                  <Typography variant='h3' color='error'>
-                    {'تکمیل موارد ستاره‌دار در هر دو قسمت «مشخصات فردی» و «مشخصات دانشجویی» الزامی است.'}
-                  </Typography>
-                ) : event?.audience_type == 'All' && (
-                  <Typography variant='h3' color='error'>
-                    {'تکمیل موارد ستاره‌دار را الزامی است.'}
-                  </Typography>
-                ))}
-              </Grid> */}
-              <Grid item>
-                <Button onClick={() => navigate(`/event/${eventId}/`)} fullWidth variant='outlined'>
-                  {'بازگشت به رویداد'}
-                </Button>
-              </Grid>
-            </>
-          }
         </Grid>
         <Grid container item xs={12} sm={9}>
-          <TabComponent />
+          <TabComponent tabs={tabs.map(tab => tab.name)} />
         </Grid>
       </Grid>
     </Layout>
@@ -150,4 +106,4 @@ export default connect(mapStateToProps, {
   getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,
   getInstitutes: getInstitutesAction,
-})(Index);
+})(Profile);

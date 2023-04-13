@@ -10,13 +10,12 @@ import {
   Select,
   Tooltip,
   Typography,
-  TextField,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddInstitute from '../../../components/Dialog/AddInstitute';
 import {
   getInstitutesAction,
@@ -54,7 +53,7 @@ const GENDER_TYPES = {
   'Female': 'دخترانه',
 }
 
-function Index({
+function StudentProfile({
   getUserProfile,
   updateStudentShip,
   getInstitutes,
@@ -66,11 +65,13 @@ function Index({
 }) {
   const [newStudentship, setNewStudentship] = useState();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
+  const { eventId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserProfile({ id: userAccount?.id });
   }, [getUserProfile]);
-  
+
   useEffect(() => {
     if (userProfile?.city) {
       getInstitutes({ cityTitle: Iran.Cities.find(city => userProfile?.city == city.title).title });
@@ -110,7 +111,11 @@ function Index({
     updateStudentShip({
       id: userProfile?.school_studentship?.id,
       ...newStudentship,
-    });
+    }).then((response) => {
+      if (response.type?.endsWith('fulfilled') && eventId) {
+        navigate(`/event/${eventId}/`);
+      }
+    })
   };
 
   const AddSchoolInstituteIcon = () => {
@@ -149,19 +154,21 @@ function Index({
                 IconComponent={AddSchoolInstituteIcon}
                 onChange={handleStudentshipChange}
                 name="school"
-                value={newStudentship?.school || userProfile?.school_studentship?.school}
+                value={institutes ? newStudentship?.school || userProfile?.school_studentship?.school : ''}
                 label="مدرسه">
-                {institutes !== undefined ? [...institutes].sort((a, b) => {
-                  let firstLabel = (a.school_type ? SCHOOL_TYPES[a.school_type] + ' ' : '') + a.name
-                  let secondLabel = (b.school_type ? SCHOOL_TYPES[b.school_type] + ' ' : '') + b.name
-                  return firstLabel.localeCompare(secondLabel)
-                }).map((school) => (
-                  <MenuItem key={school.id} value={school.id}>
-                    {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : '') + school.name}
-                  </MenuItem>
-                )) : <MenuItem disabled>
-                {'موردی وجود ندارد.'}
-              </MenuItem>}
+                {institutes && institutes.length !== 0
+                  ? institutes.slice().sort((a, b) => {
+                    let firstLabel = (a.school_type ? SCHOOL_TYPES[a.school_type] + ' ' : '') + a.name
+                    let secondLabel = (b.school_type ? SCHOOL_TYPES[b.school_type] + ' ' : '') + b.name
+                    return firstLabel.localeCompare(secondLabel)
+                  }).map((school) => (
+                    <MenuItem key={school.id} value={school.id}>
+                      {(school.school_type ? SCHOOL_TYPES[school.school_type] + ' ' : '') + school.name}
+                    </MenuItem>
+                  ))
+                  : <MenuItem disabled>
+                    {'موردی وجود ندارد.'}
+                  </MenuItem>}
               </Select>
             </FormControl>
           </Grid>
@@ -221,7 +228,7 @@ function Index({
 
         </Grid>
 
-        <Grid item xs={12} spacing={2}>
+        <Grid item xs={12}>
           <Button
             onClick={submitStudentship}
             fullWidth
@@ -258,4 +265,4 @@ export default connect(mapStateToProps, {
   getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,
   getInstitutes: getInstitutesAction,
-})(Index);
+})(StudentProfile);

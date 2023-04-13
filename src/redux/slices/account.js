@@ -87,7 +87,7 @@ export const updateStudentShipAction = createAsyncThunkApi(
   studentshipCRUDUrl,
   {
     defaultNotification: {
-      success: 'اطلاعات با موفقیت به‌روز شدند!',
+      success: 'مشخصات دانش‌آموزی با موفقیت به‌روز شدند.',
     },
   }
 );
@@ -98,7 +98,7 @@ export const createInstitutesAction = createAsyncThunkApi(
   institutesUrl,
   {
     defaultNotification: {
-      success: 'مدرسه با موفقیت ایجاد شد!',
+      success: 'مدرسه با موفقیت ایجاد شد.',
     },
   }
 );
@@ -122,7 +122,7 @@ export const updateUserAccountAction = createAsyncThunkApi(
   accountCRUDUrl,
   {
     defaultNotification: {
-      success: 'اطلاعات با موفقیت به‌روز شدند.',
+      success: 'مشخصات فردی با موفقیت به‌روز شدند.',
       error: 'مشکلی در به‌روز‌رسانی اطلاعات وجود داشت.',
     },
   }

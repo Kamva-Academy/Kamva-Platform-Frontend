@@ -20,38 +20,35 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from "moment";
 import {
-  getInstitutesAction,
   getUserProfileAction,
-  updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
 import Iran from '../../../utils/iran';
 import { toEnglishNumber } from '../../../utils/translateNumber';
-import { PersonalProfile } from '../../../types/profile';
-import { Moment } from 'jalali-moment';
+import { PersonalProfileType } from '../../../types/profile';
+import isNumber from '../../../utils/validators/isNumber';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 type PersonalProfilePropsType = {
   updateUserAccount: any;
   getUserProfile: any;
-  updateStudentShip: any;
-  getInstitutes: any;
   userAccount: any;
-  userProfile: PersonalProfile;
-  institutes: any;
+  userProfile: PersonalProfileType;
+  tabs: any;
 }
 
-const Index: FC<PersonalProfilePropsType> = ({
+const PersonalProfile: FC<PersonalProfilePropsType> = ({
   updateUserAccount,
   getUserProfile,
-  updateStudentShip,
-  getInstitutes,
   userAccount,
   userProfile,
-  institutes,
+  tabs,
 }) => {
-  const [profile, setProfile] = useState<PersonalProfile>(null);
+  const [profile, setProfile] = useState<PersonalProfileType>(null);
+  const navigate = useNavigate();
+  const { eventId, section } = useParams();
 
   useEffect(() => {
     if (userAccount?.id) {
@@ -64,15 +61,6 @@ const Index: FC<PersonalProfilePropsType> = ({
       setProfile(userProfile);
     }
   }, [userProfile, userProfile?.profile_picture])
-
-  const isJustDigits = (number) => {
-    var regex = new RegExp(`\\d{${number.length}}`);
-    if (regex.test(toEnglishNumber(number))) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const handleProfilePictureChange = (event) => {
     if (event.target.files?.[0]) {
@@ -102,6 +90,10 @@ const Index: FC<PersonalProfilePropsType> = ({
     updateUserAccount({
       id: userProfile.id,
       ...newProfile,
+    }).then((response) => {
+      if (response.type?.endsWith('fulfilled') && eventId && tabs[tabs.indexOf(section) + 1]) {
+        navigate(`/event/${eventId}/profile/${tabs[tabs.indexOf(section) + 1]}/`);
+      }
     });
   };
 
@@ -120,10 +112,12 @@ const Index: FC<PersonalProfilePropsType> = ({
           <img
             alt=""
             style={{
-              maxHeight: '100px',
+              height: 100,
+              width: 100,
               borderRadius: '5px',
+              objectFit: 'cover',
             }}
-            src={profile?.profile_picture || PROFILE_PICTURE}
+            src={profile.profile_picture || PROFILE_PICTURE}
           />
         </Grid>
         <Grid item>
@@ -140,6 +134,7 @@ const Index: FC<PersonalProfilePropsType> = ({
             انتخاب تصویر
           </Button>
           <input
+            accept="image/*"
             id="userProfilePicture"
             style={{ display: 'none' }}
             type="file"
@@ -157,36 +152,34 @@ const Index: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!profile?.first_name}
+            error={!profile.first_name}
             fullWidth
-            value={profile?.first_name}
+            value={profile.first_name || ''}
             name="first_name"
             onChange={handleProfileChange}
-
             label='نام'
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!profile?.last_name}
+            error={!profile.last_name}
             fullWidth
-            value={profile?.last_name}
+            value={profile.last_name || ''}
             name="last_name"
             onChange={handleProfileChange}
-
             label="نام خانوادگی"
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!profile?.national_code}
+            error={!profile.national_code}
             fullWidth
-            value={profile?.national_code}
+            value={profile.national_code || ''}
             name="national_code"
             onChange={(e) => {
-              if (isJustDigits(e.target.value)) {
+              if (isNumber(e.target.value)) {
                 handleProfileChange(e);
               }
             }}
@@ -199,9 +192,9 @@ const Index: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             disabled={true}
-            value={profile?.phone_number}
+            value={profile.phone_number || ''}
             onChange={(e) => {
-              if (isJustDigits(e.target.value)) {
+              if (isNumber(e.target.value)) {
                 handleProfileChange(e);
               }
             }}
@@ -218,11 +211,12 @@ const Index: FC<PersonalProfilePropsType> = ({
                 label={'تاریخ تولد'}
                 openTo='year'
                 views={['year', 'month', 'day']}
-                value={moment(profile?.birth_date)}
-                renderInput={(params) => <TextField
-                  {...params} sx={{ width: "100%" }}
-                  error={!profile?.birth_date}
-                />}
+                value={moment(profile.birth_date) || ''}
+                renderInput={(params) =>
+                  <TextField
+                    {...params} sx={{ width: "100%" }}
+                    error={!profile.birth_date}
+                  />}
                 onChange={(date) => setProfile({ ...profile, birth_date: moment(date).format('YYYY-MM-DD') })}
               />
             </LocalizationProvider>
@@ -232,7 +226,7 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            value={profile?.email}
+            value={profile.email || ''}
             name="email"
             onChange={handleProfileChange}
             inputProps={{ className: 'ltr-input' }}
@@ -243,11 +237,11 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12}>
           <FormControl>
             <FormLabel
-              error={!profile?.gender}>جنسیت</FormLabel>
+              error={!profile.gender}>جنسیت</FormLabel>
             <RadioGroup
               name="gender"
               row
-              value={profile?.gender}
+              value={profile.gender || ''}
               onChange={handleProfileChange}>
               <FormControlLabel
                 value="Male"
@@ -268,12 +262,12 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item container xs={12} sm={6}>
           <FormControl
             fullWidth
-            error={!profile?.province}>
+            error={!profile.province}>
             <InputLabel>استان</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={profile?.province || profile?.province}
+              value={profile.province || ''}
               onChange={handleProfileChange}
               name="province"
               label="استان">
@@ -289,20 +283,20 @@ const Index: FC<PersonalProfilePropsType> = ({
         <Grid item container xs={12} sm={6}>
           <FormControl
             fullWidth
-            error={!profile?.city}>
+            error={!profile.city}>
             <InputLabel>شهر</InputLabel>
             <Select
-              disabled={!profile?.province && !profile?.city}
+              disabled={!profile.province && !profile.city}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={profile?.city || profile?.city}
+              value={profile.city || ''}
               onChange={handleProfileChange}
               name="city"
               label="شهر">
               {Iran.Cities.filter(
                 (city) =>
-                  Iran.Provinces.find(province => province.id == city.province_id).title == profile?.province ||
-                  Iran.Provinces.find(province => province.id == city.province_id).title == profile?.province
+                  Iran.Provinces.find(province => province.id == city.province_id).title == profile.province ||
+                  Iran.Provinces.find(province => province.id == city.province_id).title == profile.province
               ).map((city) => (
                 <MenuItem key={city.id} value={city.title}>
                   {city.title}
@@ -316,12 +310,11 @@ const Index: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             helperText='جوایز و یادگاری‌ها به این آدرس ارسال می‌شوند.'
-            value={profile?.address}
+            value={profile.address || ''}
             name="address"
             multiline
             rows={2}
             onChange={handleProfileChange}
-
             label="آدرس منزل"
           />
         </Grid>
@@ -330,14 +323,13 @@ const Index: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             name="postal_code"
-            value={profile?.postal_code}
+            value={profile.postal_code || ''}
             onChange={(e) => {
-              if (isJustDigits(e.target.value)) {
+              if (isNumber(e.target.value)) {
                 handleProfileChange(e);
               }
             }}
             inputProps={{ className: 'ltr-input' }}
-
             label="کد پستی"
           />
         </Grid>
@@ -370,6 +362,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   updateUserAccount: updateUserAccountAction,
   getUserProfile: getUserProfileAction,
-  updateStudentShip: updateStudentShipAction,
-  getInstitutes: getInstitutesAction,
-})(Index);
+})(PersonalProfile);
