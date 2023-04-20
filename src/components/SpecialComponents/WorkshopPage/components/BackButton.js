@@ -15,22 +15,26 @@ function BackButton({ inwardEdges = [], goBackward, mentorMoveBackward }) {
     return <></>;
   }
 
+  const backEdge = inwardEdges[0];
+
   const handleClick = () => {
     if (isMentor) {
       mentorMoveBackward({
-        id: inwardEdges[0].id,
+        id: backEdge.id,
         teamId,
       });
     } else {
-      goBackward({
-        id: inwardEdges[0].id,
-        teamId,
-      });
+      if (backEdge.is_back_enabled) {
+        goBackward({
+          id: inwardEdges[0].id,
+          teamId,
+        });
+      }
     }
   };
 
   return (
-    <Button fullWidth variant="outlined" color="primary" onClick={handleClick}>
+    <Button disabled={!backEdge.is_back_enabled} fullWidth variant="outlined" color="primary" onClick={handleClick}>
       قبلی
     </Button>
   );
