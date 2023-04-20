@@ -8,6 +8,7 @@ import {
   MenuItem,
   Paper,
   Select,
+  Stack,
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
@@ -42,8 +43,8 @@ function RegistrationReceipt({
   const [status, setStatus] = useState<string>(null);
 
   useEffect(() => {
-    getOneRegistrationReceipt({ registrationReceiptId })
-  }, [getOneRegistrationReceipt])
+    getOneRegistrationReceipt({ registrationReceiptId });
+  }, [])
 
   useEffect(() => {
     if (registrationReceipt?.user) {
@@ -67,25 +68,26 @@ function RegistrationReceipt({
 
   return (
     <Layout>
-      <Grid container spacing={2}>
-        <Grid xs={12} sm={8} container item spacing={2} direction='column'>
-          {registrationReceipt?.answers.map((answer, index) => (
-            <Grid item key={index}>
-              <Paper component={Paper} sx={{ padding: 2 }}>
-                <Widget mode={WidgetModes.View} widget={answer} />
-              </Paper>
-            </Grid>
-          ))}
+      <Grid container spacing={2} alignItems='flex-start'>
+        <Grid xs={12} sm={8} container item>
+          <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
+            {registrationReceipt?.length > 0 ?
+              registrationReceipt?.answers.map((answer, index) => (
+                <Widget key={index} coveredWithPaper={true} mode={WidgetModes.View} widget={answer} />
+              )) :
+              <Typography variant='h4' sx={{ padding: 2 }} textAlign='center'>
+                {'پاسخی در این رسید ثبت‌نام وجود ندارد!'}
+              </Typography>
+            }
+          </Stack>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Grid container spacing={2} direction='column' component={Paper}>
-            <Grid item>
-              <Typography align='center' variant='h2'>
-                {(userProfile?.first_name && userProfile?.last_name) ? `${userProfile?.first_name} ${userProfile?.last_name}` : 'بی‌نام'}
-              </Typography>
-            </Grid>
+          <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
+            <Typography align='center' variant='h2'>
+              {(userProfile?.first_name && userProfile?.last_name) ? `${userProfile?.first_name} ${userProfile?.last_name}` : 'بی‌نام'}
+            </Typography>
             <Divider />
-            <Grid item container spacing={1}>
+            <Grid container spacing={1}>
               <Grid item xs={6}>
                 <Typography >{`پایه‌ی ${userProfile?.school_studentship?.grade ? faSeri(userProfile?.school_studentship?.grade) : '؟'}`}</Typography>
               </Grid>
@@ -115,7 +117,7 @@ function RegistrationReceipt({
             </Grid> */}
             {/* <Divider /> */}
             {status &&
-              <Grid item>
+              <>
                 <FormControl fullWidth variant="outlined">
                   <InputLabel>وضعیت ثبت‌نام</InputLabel>
                   <Select
@@ -139,9 +141,9 @@ function RegistrationReceipt({
                     {registrationReceipt?.is_participating ? 'ثبت‌نام قطعی است' : 'ثبت'}
                   </Button>
                 </Box>
-              </Grid>
+              </>
             }
-          </Grid>
+          </Stack>
         </Grid>
       </Grid>
     </Layout >

@@ -38,7 +38,7 @@ export const getOneEventInfoUrl = ({ eventId }) => `fsm/event/${eventId}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) =>
   `fsm/registration/${id}/register/`;
-export const registrationReceiptUrl = ({ id }) => `fsm/receipts/${id}/`;
+export const registrationReceiptUrl = ({ registrationReceiptId }) => `fsm/receipts/${registrationReceiptId}/`;
 export const uploadFileUrl = 'fsm/upload_answer/';
 export const getTeamUrl = ({ teamId }) => `fsm/team/${teamId}/`;
 export const getTeamInvitationsUrl = ({ teamId }) =>
