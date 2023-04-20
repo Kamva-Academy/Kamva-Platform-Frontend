@@ -4,8 +4,10 @@ import {
   ButtonGroup,
   Grid,
   Paper,
+  Stack,
 } from '@mui/material';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import React, { FC, useEffect, useState } from 'react';
 import { connect, ConnectedComponent } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -129,7 +131,7 @@ const EventComponent: FC<EventPropsType> = ({
     <Layout>
       <Grid container spacing={2} direction="row" justifyContent="center">
         <Grid container item sm={3} xs={12} direction="column" justifyContent="flex-start">
-          <Grid item>
+          <Stack spacing={2}>
             <ButtonGroup variant="outlined" orientation="vertical" color="primary" fullWidth>
               {tabs.map((tab, index) => (
                 <Button
@@ -145,9 +147,13 @@ const EventComponent: FC<EventPropsType> = ({
                 </Button>
               ))}
             </ButtonGroup>
-          </Grid>
-          <Box mt={1}>
-            <Grid item>
+            <ButtonGroup variant="outlined" orientation="vertical" color="primary" fullWidth>
+              <Button
+                component={Link}
+                to={`/event/${eventId}/workshop/${fsmId}/`}
+                startIcon={<VisibilityIcon />}>
+                {'مشاهده کارگاه'}
+              </Button>
               <Button
                 fullWidth
                 variant='outlined'
@@ -157,8 +163,8 @@ const EventComponent: FC<EventPropsType> = ({
                 startIcon={<ExitToAppIcon />}>
                 {t('back')}
               </Button>
-            </Grid>
-          </Box>
+            </ButtonGroup>
+          </Stack>
         </Grid>
         <Grid item sm={9} xs={12}>
           <Paper elevation={3} sx={{ padding: 2 }} >
