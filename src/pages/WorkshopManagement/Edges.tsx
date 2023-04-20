@@ -186,6 +186,7 @@ const Index: FC<IndexPropsType> = ({
                         updateEdge({
                           edgeId: edge.id,
                           is_visible: !edge.is_visible,
+                          is_back_enabled: edge.is_back_enabled,
                           head: edge.head?.id,
                           tail: edge.tail?.id,
                         }) // todo: fix 
@@ -200,7 +201,7 @@ const Index: FC<IndexPropsType> = ({
                         updateEdge({
                           edgeId: edge.id,
                           is_visible: edge.is_visible,
-                          is_back_enabled: edge.is_back_enabled,
+                          is_back_enabled: !edge.is_back_enabled,
                           head: edge.head?.id,
                           tail: edge.tail?.id,
                         }) // todo: fix 
