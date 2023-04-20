@@ -70,6 +70,7 @@ const Index: FC<IndexPropsType> = ({
     tail: '',
     head: '',
     is_visible: false,
+    is_back_enabled: true,
   });
   const { fsmId } = useParams()
 
@@ -92,6 +93,7 @@ const Index: FC<IndexPropsType> = ({
                 <TableCell align='center'>شروع</TableCell>
                 <TableCell align='center'>پایان</TableCell>
                 <TableCell align='center'>قابل مشاهده</TableCell>
+                <TableCell align='center'>قابل بازگشت</TableCell>
                 <TableCell align='center'>عملیات</TableCell>
               </TableRow>
             </TableHead>
@@ -148,6 +150,18 @@ const Index: FC<IndexPropsType> = ({
                   />
                 </TableCell>
                 <TableCell align='center'>
+                  <Checkbox
+                    checked={newEdge.is_back_enabled}
+                    onChange={() => {
+                      setNewEdge({
+                        ...newEdge,
+                        is_back_enabled: !newEdge.is_back_enabled,
+                      })
+                    }}
+                    color="primary"
+                  />
+                </TableCell>
+                <TableCell align='center'>
                   <Button
                     onClick={() => {
                       addEdge(newEdge)
@@ -172,6 +186,21 @@ const Index: FC<IndexPropsType> = ({
                         updateEdge({
                           edgeId: edge.id,
                           is_visible: !edge.is_visible,
+                          head: edge.head?.id,
+                          tail: edge.tail?.id,
+                        }) // todo: fix 
+                      }}
+                      color="primary"
+                    />
+                  </TableCell>
+                  <TableCell align='center'>
+                    <Checkbox
+                      checked={edge.is_back_enabled}
+                      onChange={() => {
+                        updateEdge({
+                          edgeId: edge.id,
+                          is_visible: edge.is_visible,
+                          is_back_enabled: edge.is_back_enabled,
                           head: edge.head?.id,
                           tail: edge.tail?.id,
                         }) // todo: fix 
