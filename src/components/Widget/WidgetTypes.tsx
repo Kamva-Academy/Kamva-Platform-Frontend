@@ -15,6 +15,7 @@ import UploadFileProblemWidget, {
   UploadFileProblemEditWidget,
 } from './UploadFileProblemWidget';
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
+import AudioWidget, { AudioEditWidget } from './content/AudioWidget';
 
 const WIDGET_TYPES = {
   InviteeUsernameQuestion: {
@@ -64,6 +65,12 @@ const WIDGET_TYPES = {
     EditWidgetDialog: VideoEditWidget,
     label: 'فیلم',
     backendType: 'Video',
+  },
+  Audio: {
+    WidgetComponent: AudioWidget,
+    EditWidgetDialog: AudioEditWidget,
+    label: 'صوت',
+    backendType: 'Audio',
   },
   Game: {
     WidgetComponent: MiniGameWidget,

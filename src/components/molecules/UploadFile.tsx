@@ -63,7 +63,7 @@ const UploadFile: FC<UploadFilePropsType> = ({
         {'بارگذاری فایل'}
       </Button>
       <input
-        accept="video/* ,image/*"
+        accept="video/* ,image/*, audio/mp3"
         style={{ display: 'none' }}
         id={'upload-widget-file'}
         type="file"

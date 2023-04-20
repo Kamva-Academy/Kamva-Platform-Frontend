@@ -160,7 +160,7 @@ export const createWidgetAction = createAsyncThunkApi(
     bodyCreator: (widget) => ({ ...widget }),
     defaultNotification: {
       success: 'ویجت با موفقیت اضافه شد.',
-      error: 'مشکلی در پاک‌کردن ویجت وجود داشت.'
+      error: 'مشکلی در ایجاد ویجت وجود داشت.'
     },
   }
 );
@@ -171,10 +171,22 @@ export const createVideoWidgetAction = (props) =>
     widget_type: 'Video',
   });
 
+export const createAudioWidgetAction = (props) =>
+  createWidgetAction({
+    ...props,
+    widget_type: 'Audio',
+  });
+
 export const updateVideoWidgetAction = (props) =>
   updateWidgetAction({
     ...props,
     widget_type: 'Video',
+  });
+
+export const updateAudioWidgetAction = (props) =>
+  updateWidgetAction({
+    ...props,
+    widget_type: 'Audio',
   });
 
 export const createMiniGameWidgetAction = ({ paper, link }) =>
