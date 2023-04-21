@@ -23,7 +23,6 @@ import Article from '../pages/Article';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import WorkshopManagement from '../pages/WorkshopManagement';
-import GoToAnswer from '../containers/GoToAnswer';
 import Correction from '../pages/Correction';
 import EditArticle from '../pages/EditArticle';
 
@@ -81,8 +80,7 @@ const Root = () => {
 
         <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
 
-        <Route path="/event/:eventId/workshop/:fsmId/correction/:answerId/" element={<Correction />} />
-        <Route path="/event/:eventId/workshop/:fsmId/correction/" element={<GoToAnswer />} />
+        <Route path="/event/:eventId/workshop/:fsmId/manage/correction/:answerId/" element={<Correction />} />
       </Route>
 
 

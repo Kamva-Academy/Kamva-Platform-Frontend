@@ -117,7 +117,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
             />
           </Stack>
         }
-        {(mode === WidgetModes.View && widget?.hints.length) ?
+        {(mode === WidgetModes.View && widget?.hints?.length) ?
           <>
             <Box sx={{ position: 'absolute', right: 0 }}>
               <Chip

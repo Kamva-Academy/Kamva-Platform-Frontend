@@ -17,9 +17,6 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router-dom';
 import Widget, { WidgetModes } from '../components/Widget';
 import {
-  getUserProfileAction,
-} from '../redux/slices/account'
-import {
   getOneRegistrationReceiptAction,
   validateRegistrationReceiptAction,
 } from '../redux/slices/events'
@@ -33,10 +30,8 @@ function RegistrationReceipt({
   getOneRegistrationReceipt,
   validateRegistrationReceipt,
   addNotification,
-  getUserProfile,
 
   registrationReceipt,
-  userProfile,
 }) {
   const t = useTranslate();
   const { registrationReceiptId } = useParams();
@@ -47,13 +42,15 @@ function RegistrationReceipt({
   }, [])
 
   useEffect(() => {
-    if (registrationReceipt?.user) {
-      getUserProfile({ userId: registrationReceipt?.user })
-    }
     if (registrationReceipt?.status) {
-      setStatus(registrationReceipt?.status);
+      setStatus(registrationReceipt.status);
     }
   }, [registrationReceipt])
+
+  const userProfile = registrationReceipt?.user;
+  const answers = registrationReceipt?.answers;
+
+  console.log(answers);
 
   const handleButtonClick = () => {
     if (!status) {
@@ -71,9 +68,9 @@ function RegistrationReceipt({
       <Grid container spacing={2} alignItems='flex-start'>
         <Grid xs={12} sm={8} container item>
           <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
-            {registrationReceipt?.length > 0 ?
-              registrationReceipt?.answers.map((answer, index) => (
-                <Widget key={index} coveredWithPaper={true} mode={WidgetModes.View} widget={answer} />
+            {answers?.length > 0 ?
+              answers.map((answer, index) => (
+                <Widget key={index} coveredWithPaper={false} mode={WidgetModes.Review} widget={answer} />
               )) :
               <Typography variant='h4' sx={{ padding: 2 }} textAlign='center'>
                 {'پاسخی در این رسید ثبت‌نام وجود ندارد!'}
@@ -83,66 +80,69 @@ function RegistrationReceipt({
         </Grid>
         <Grid item xs={12} sm={4}>
           <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
-            <Typography align='center' variant='h2'>
-              {(userProfile?.first_name && userProfile?.last_name) ? `${userProfile?.first_name} ${userProfile?.last_name}` : 'بی‌نام'}
-            </Typography>
-            <Divider />
-            <Grid container spacing={1}>
-              <Grid item xs={6}>
-                <Typography >{`پایه‌ی ${userProfile?.school_studentship?.grade ? faSeri(userProfile?.school_studentship?.grade) : '؟'}`}</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography >{`جنسیت: ${userProfile?.gender == 'Male' ? 'پسر' : (userProfile?.gender == 'Female' ? 'دختر' : '؟')}`}</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography >{`استان: ${userProfile?.province ? userProfile?.province : '؟'}`}</Typography>
-              </Grid>
-              <Grid item xs={6}>
-                <Typography >{`شهر: ${userProfile?.city ? userProfile?.city : '؟'}`}</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography >{`شماره تماس: ${userProfile?.phone_number ? userProfile?.phone_number : '؟'}`}</Typography>
-              </Grid>
-            </Grid>
+            {userProfile &&
+              <>
+                <Typography align='center' variant='h2'>
+                  {(userProfile.first_name && userProfile.last_name) ? `${userProfile.first_name} ${userProfile.last_name}` : 'بی‌نام'}
+                </Typography>
+                <Divider />
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <Typography >{`پایه‌ی ${userProfile.school_studentship?.grade ? faSeri(userProfile.school_studentship?.grade) : '؟'}`}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography >{`جنسیت: ${userProfile.gender == 'Male' ? 'پسر' : (userProfile.gender == 'Female' ? 'دختر' : '؟')}`}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography >{`استان: ${userProfile.province ? userProfile.province : '؟'}`}</Typography>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography >{`شهر: ${userProfile.city ? userProfile.city : '؟'}`}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography >{`شماره تماس: ${userProfile.phone_number ? userProfile.phone_number : '؟'}`}</Typography>
+                  </Grid>
+                </Grid>
 
-            {/* <Grid item container justify='center'>
+                {/* <Grid item container justify='center'>
               <Button
                 fullWidth variant='outlined'
                 className={classes.lastUploadButton}
-                disabled={!userProfile?.school_studentship?.document}
-                href={userProfile?.school_studentship?.document}
+                disabled={!userProfile.school_studentship?.document}
+                href={userProfile.school_studentship?.document}
                 component="a" target="_blank">
                 {'مشاهده‌ی مدرک تحصیلی'}
               </Button>
             </Grid> */}
-            {/* <Divider /> */}
-            {status &&
-              <>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel>وضعیت ثبت‌نام</InputLabel>
-                  <Select
-                    value={status}
-                    disabled={registrationReceipt?.is_participating}
-                    onChange={(e) => setStatus(e.target.value)}
-                    name='status'
-                    label='وضعیت ثبت‌نام'
-                  >
-                    <MenuItem value={'Waiting'} >{'منتظر'}</MenuItem>
-                    <MenuItem value={'Accepted'} >{'مجاز به پرداخت'}</MenuItem>
-                    <MenuItem value={'Rejected'} >{'ردشده'}</MenuItem>
-                  </Select>
-                </FormControl >
-                <Box mt={1}>
-                  <Button
-                    disabled={registrationReceipt?.is_participating}
-                    fullWidth variant='contained'
-                    onClick={handleButtonClick}
-                    color='primary'>
-                    {registrationReceipt?.is_participating ? 'ثبت‌نام قطعی است' : 'ثبت'}
-                  </Button>
-                </Box>
-              </>
-            }
+                {/* <Divider /> */}
+                {status &&
+                  <>
+                    <FormControl fullWidth variant="outlined">
+                      <InputLabel>وضعیت ثبت‌نام</InputLabel>
+                      <Select
+                        value={status}
+                        disabled={registrationReceipt?.is_participating}
+                        onChange={(e) => setStatus(e.target.value)}
+                        name='status'
+                        label='وضعیت ثبت‌نام'
+                      >
+                        <MenuItem value={'Waiting'} >{'منتظر'}</MenuItem>
+                        <MenuItem value={'Accepted'} >{'مجاز به پرداخت'}</MenuItem>
+                        <MenuItem value={'Rejected'} >{'ردشده'}</MenuItem>
+                      </Select>
+                    </FormControl >
+                    <Box mt={1}>
+                      <Button
+                        disabled={registrationReceipt?.is_participating}
+                        fullWidth variant='contained'
+                        onClick={handleButtonClick}
+                        color='primary'>
+                        {registrationReceipt?.is_participating ? 'ثبت‌نام قطعی است' : 'ثبت'}
+                      </Button>
+                    </Box>
+                  </>
+                }
+              </>}
           </Stack>
         </Grid>
       </Grid>
@@ -151,16 +151,11 @@ function RegistrationReceipt({
 }
 
 const mapStateToProps = (state) => ({
-  userProfile: state.account.userProfile,
   registrationReceipt: state.events.registrationReceipt,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getOneRegistrationReceipt: getOneRegistrationReceiptAction,
-    validateRegistrationReceipt: validateRegistrationReceiptAction,
-    getUserProfile: getUserProfileAction,
-    addNotification: addNotificationAction,
-  }
-)(RegistrationReceipt);
+export default connect(mapStateToProps, {
+  getOneRegistrationReceipt: getOneRegistrationReceiptAction,
+  validateRegistrationReceipt: validateRegistrationReceiptAction,
+  addNotification: addNotificationAction,
+})(RegistrationReceipt);

@@ -14,6 +14,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import('../../types/models')
 import PersonIcon from '@mui/icons-material/Person';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import InfoIcon from '@mui/icons-material/Info';
@@ -34,6 +35,7 @@ import Info from './Info';
 import TeamRequests from './TeamRequests';
 import { Workshop, EventType } from '../../types/models';
 import Mentors from './Mentors';
+import GoToAnswer from './GoToAnswer';
 
 type EventPropsType = {
   getEventTeams: Function,
@@ -43,15 +45,7 @@ type EventPropsType = {
   event: EventType,
 }
 
-const SECTIONS = {
-  'info': 0,
-  'design': 1,
-  'edges': 2,
-  'mentors': 3,
-  'requests': 4,
-}
-
-const EventComponent: FC<EventPropsType> = ({
+const FSMManagement: FC<EventPropsType> = ({
   getEventTeams,
   getOneEventInfo,
   getOneWorkshopsInfo,
@@ -61,7 +55,6 @@ const EventComponent: FC<EventPropsType> = ({
   const t = useTranslate();
   const navigate = useNavigate();
   const { fsmId, eventId, section } = useParams();
-  const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
   const [tabs, setTabs] = useState<{ name: string, label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
     {
       name: 'info',
@@ -86,8 +79,16 @@ const EventComponent: FC<EventPropsType> = ({
       label: 'همیارها',
       icon: PersonIcon,
       component: Mentors,
+    },
+    {
+      name: 'correction',
+      label: 'تصحیح',
+      icon: BorderColorIcon,
+      component: GoToAnswer,
     }
   ])
+  const [currentTab, setCurrentTab] = useState(tabs.find((tab) => tab.name === section));
+  const TabComponent = currentTab?.component;
 
   useEffect(() => {
     if (workshop && workshop.id == fsmId && workshop.fsm_learning_type == 'Supervised') {
@@ -114,7 +115,6 @@ const EventComponent: FC<EventPropsType> = ({
       }
     }
   }, [workshop])
-  const TabComponent = tabs[tabIndex]?.component;
 
   useEffect(() => {
     getOneEventInfo({ eventId });
@@ -137,11 +137,10 @@ const EventComponent: FC<EventPropsType> = ({
                 <Button
                   key={index}
                   onClick={() => {
-                    setTabIndex(index)
-                    navigate(`/event/${eventId}/workshop/${fsmId}/manage/${tabs[index].name}`)
-                  }
-                  }
-                  variant={tabIndex == index ? 'contained' : 'outlined'}
+                    setCurrentTab(tab)
+                    navigate(`/event/${eventId}/workshop/${fsmId}/manage/${tabs[index].name}/`)
+                  }}
+                  variant={currentTab === tab ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>
@@ -168,7 +167,7 @@ const EventComponent: FC<EventPropsType> = ({
         </Grid>
         <Grid item sm={9} xs={12}>
           <Paper elevation={3} sx={{ padding: 2 }} >
-            {TabComponent ? <TabComponent {...tabs[tabIndex]?.props} /> : <></>}
+            {TabComponent ? <TabComponent {...currentTab?.props} /> : <></>}
           </Paper>
         </Grid>
       </Grid>
@@ -185,4 +184,4 @@ export default connect(mapStateToProps, {
   getEventTeams: getEventTeamsAction,
   getOneEventInfo: getOneEventInfoAction,
   getOneWorkshopsInfo: getOneWorkshopsInfoAction,
-})(EventComponent);
+})(FSMManagement);
