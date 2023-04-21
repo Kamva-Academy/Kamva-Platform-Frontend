@@ -20,16 +20,13 @@ import {
   getOneRegistrationReceiptAction,
   validateRegistrationReceiptAction,
 } from '../redux/slices/events'
-import {
-  addNotificationAction,
-} from '../redux/slices/notifications'
 import { faSeri } from '../utils/translateNumber';
 import Layout from './Layout';
+import { toast } from 'react-toastify';
 
 function RegistrationReceipt({
   getOneRegistrationReceipt,
   validateRegistrationReceipt,
-  addNotification,
 
   registrationReceipt,
 }) {
@@ -50,14 +47,9 @@ function RegistrationReceipt({
   const userProfile = registrationReceipt?.user;
   const answers = registrationReceipt?.answers;
 
-  console.log(answers);
-
   const handleButtonClick = () => {
     if (!status) {
-      addNotification({
-        message: 'لطفاً وضعیت را تعیین کن!',
-        type: 'error',
-      });
+      toast.error('لطفاً وضعیت را تعیین کن!');
       return;
     }
     validateRegistrationReceipt({ registrationReceiptId, status });
@@ -70,7 +62,7 @@ function RegistrationReceipt({
           <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
             {answers?.length > 0 ?
               answers.map((answer, index) => (
-                <Widget key={index} coveredWithPaper={false} mode={WidgetModes.Review} widget={answer} />
+                <Widget key={index} coveredWithPaper={false} mode={WidgetModes.Review} widget={{ last_submitted_answer: answer, ...answer }} />
               )) :
               <Typography variant='h4' sx={{ padding: 2 }} textAlign='center'>
                 {'پاسخی در این رسید ثبت‌نام وجود ندارد!'}
@@ -157,5 +149,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getOneRegistrationReceipt: getOneRegistrationReceiptAction,
   validateRegistrationReceipt: validateRegistrationReceiptAction,
-  addNotification: addNotificationAction,
 })(RegistrationReceipt);
