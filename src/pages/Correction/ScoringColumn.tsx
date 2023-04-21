@@ -1,30 +1,20 @@
 import {
+  Box,
   Button,
   Divider,
-  Grid,
-  Paper,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router-dom';
-
 import {
   createCommentAction,
   getAnswerAction,
   setScoreAction,
 } from '../../redux/slices/scoring';
-import {
-  getWidgetAction,
-} from '../../redux/slices/Paper';
-
-
-const useStyles = makeStyles((theme) => ({
-}));
 
 function Index({
   setScore,
@@ -32,7 +22,6 @@ function Index({
   scores,
   comments,
 }) {
-  const classes = useStyles();
   const t = useTranslate();
   const { answerId } = useParams();
   const [scoreValues, setScoreValues] = useState({});
@@ -64,8 +53,10 @@ function Index({
   return (
     <>
       <Stack spacing={2} justifyContent='center'>
-        <Typography variant='h2' align='center' gutterBottom>{'نمره‌دهی'}</Typography>
-        <Divider />
+        <Box>
+          <Typography variant='h2' align='center' gutterBottom>{'نمره‌دهی'}</Typography>
+          <Divider />
+        </Box>
         {scores?.map((score, index) => (
           <Stack key={index} spacing={1}>
             <TextField
@@ -78,15 +69,19 @@ function Index({
       </Stack>
 
       <Stack spacing={2} justifyContent='center' style={{ marginTop: 20 }}>
-        <Typography variant='h2' align='center' gutterBottom>{'نظرات'}</Typography>
-        <Divider />
-        <Stack sx={{ width: '100%' }} spacing={1}>
-          {comments?.map((comment, index) => (
-            <Typography key={index} onChange={(e) => setCommentContent((e.target as any).value)}>
-              {`${comment.writer.first_name ? comment.writer.first_name : '؟'} ${comment.writer.last_name ? comment.writer.last_name : '؟'}: ${comment.content}`}
-            </Typography>
-          ))}
-        </Stack>
+        <Box>
+          <Typography variant='h2' align='center' gutterBottom>{'نظرات'}</Typography>
+          <Divider />
+        </Box>
+        {comments?.length > 0 &&
+          <Stack spacing={1}>
+            {comments.map((comment, index) => (
+              <Typography key={index} onChange={(e) => setCommentContent((e.target as any).value)}>
+                {`${comment.writer.first_name ? comment.writer.first_name : '؟'} ${comment.writer.last_name ? comment.writer.last_name : '؟'}: ${comment.content}`}
+              </Typography>
+            ))}
+          </Stack>
+        }
         <Stack spacing={1}>
           <TextField value={commentContent} onChange={(e) => setCommentContent(e.target.value)} fullWidth label='نظر شما' />
           <Button onClick={() => handleCreateComment()} variant='outlined' color='primary' fullWidth>{'ثبت'}</Button>
@@ -101,12 +96,8 @@ const mapStateToProps = (state) => ({
   scores: state.scoring.scores,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    createComment: createCommentAction,
-    setScore: setScoreAction,
-    setComment: getWidgetAction,
-    getAnswer: getAnswerAction,
-  }
-)(Index);
+export default connect(mapStateToProps, {
+  createComment: createCommentAction,
+  setScore: setScoreAction,
+  getAnswer: getAnswerAction,
+})(Index);

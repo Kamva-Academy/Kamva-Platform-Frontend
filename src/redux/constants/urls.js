@@ -70,8 +70,6 @@ export const statesUrl = 'fsm/state/';
 export const hintUrl = ({ hintId }) => hintId ? `fsm/hint/${hintId}/` : 'fsm/hint/';
 export const widgetHintUrl = ({ hintId }) => hintId ? `fsm/widget-hint/${hintId}/` : 'fsm/widget-hint/';
 
-export const widgetUrl = 'fsm/widget/';
-
 export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
 export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
