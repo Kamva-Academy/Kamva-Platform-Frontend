@@ -93,11 +93,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
             autoComplete="on"
             variant="outlined"
             fullWidth
-            onChange={(e) => {
-              if (isJustDigits(e.target.value)) {
-                putData(e);
-              }
-            }}
+            onChange={putData}
             value={data.username}
             name="username"
             label="نام کاربری"
