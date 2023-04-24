@@ -49,7 +49,7 @@ const Payment = ({
 
   useEffect(() => {
     if (event?.registration_receipt) {
-      getOneRegistrationReceipt({ id: event?.registration_receipt });
+      getOneRegistrationReceipt({ registrationReceiptId: event?.registration_receipt });
     }
   }, [event]);
 

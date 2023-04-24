@@ -99,7 +99,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
 
   useEffect(() => {
     if (event?.registration_receipt) {
-      getOneRegistrationReceipt({ id: event.registration_receipt });
+      getOneRegistrationReceipt({ registrationReceiptId: event.registration_receipt });
     }
     if (event?.registration_form) {
       getMyInvitations({ registrationFormId: event.registration_form });
