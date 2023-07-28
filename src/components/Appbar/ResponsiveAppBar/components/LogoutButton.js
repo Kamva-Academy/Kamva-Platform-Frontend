@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { logoutAction } from '../../../../redux/slices/account';
+import { logoutAction } from 'redux/slices/account';
 
 const useStyles = makeStyles(() => ({
   iconImage: {
