@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import AreYouSure from '../../components/Dialog/AreYouSure';
-import Stepper from '../../components/SpecialComponents/RegistrationProcess/Stepper';
+import Stepper from '../../components/organisms/Stepper';
 import Widget from '../../components/Widget';
 import {
   getOneEventInfoAction,

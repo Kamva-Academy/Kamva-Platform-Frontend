@@ -7,7 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
-} from '../../../redux/slices/events';
+} from 'redux/slices/events';
 
 
 const useStyles = makeStyles((theme) => ({

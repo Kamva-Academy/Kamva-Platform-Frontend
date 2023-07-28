@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Stepper from '../components/SpecialComponents/RegistrationProcess/Stepper';
+import Stepper from '../components/organisms/Stepper';
 import {
   applyDiscountCodeAction,
   getOneEventInfoAction,
