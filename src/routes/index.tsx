@@ -33,18 +33,16 @@ const Root = () => {
 
       <Route path="/about-us/" element={<AboutUs />} />
 
+      <Route path="/" element={<Landing />} />
+
       <Route path="/reset-password/" element={<ResetPassword />} />
       <Route path="/create-account/" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
       <Route path="/articles/" element={<Articles />} />
       <Route path="/article/:articleId/" element={<Article />} />
 
-      <Route path="/" element={<Landing />} />
-
       <Route path="/" element={<PrivateRoute />}>
-
         <Route path="/edit-article/:articleId/" element={<EditArticle />} />
-
         <Route
           path="/message/payment/success/:paymentId?"
           element={<SuccessfulPayment />}
@@ -53,19 +51,12 @@ const Root = () => {
           path="/message/payment/failure/:paymentId?"
           element={<FailedPayment />}
         />
-
         <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
-
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/events/" element={<Events />} />
-
-        <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<WorkshopManagement />} />
-
         <Route path="/articles/" element={<Articles />} />
-
         <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
-
         <Route path="/event/:eventId/profile/:section/" element={<Profile />} />
         <Route
           path="/event/:eventId/registration-form/"
@@ -77,12 +68,13 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
-
-        <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
-
-        <Route path="/event/:eventId/workshop/:fsmId/manage/correction/:answerId/" element={<Correction />} />
       </Route>
 
+      <Route path="/" element={<PrivateRoute onlyMentorCanSee={true} />}>
+        <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
+        <Route path="/event/:eventId/workshop/:fsmId/manage/correction/:answerId/" element={<Correction />} />
+        <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<WorkshopManagement />} />
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

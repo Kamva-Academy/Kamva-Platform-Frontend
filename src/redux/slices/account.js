@@ -201,7 +201,7 @@ const accountSlice = createSlice({
     logout: () => initialState,
     setMentorToken: (state, { payload: { token } }) => ({
       token,
-      userAccount: { is_mentor: true },
+      userAccount: { isMentor: true },
     }),
     refreshToken: (state, action) => {
       state.token = action.payload.access;
@@ -243,7 +243,7 @@ const accountSlice = createSlice({
     },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
 
-    
+
     [getInstitutesAction.pending.toString()]: isFetching,
     [getInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.institutes = response;

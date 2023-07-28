@@ -1,31 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Navigate, useNavigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useParams } from 'react-router-dom';
+import NotFoundPage from '../containers/NotFoundPage';
 
-const PrivateRoute = ({ onlyMentor = false, isMentor = false, token }) => {
-  let navigate = useNavigate();
-  const hasAccess = token && (isMentor || !onlyMentor);
-
-  // todo: improve TOF!
-  const url = window.location.href;
-  const match = /event\/\d+/.exec(url);
-  let eventId;
-  if (match) {
-    eventId = match[0].substring(6, match[0].length);
+const PrivateRoute = ({ onlyMentorCanSee = false, isMentor = false, token }) => {
+  const { eventId } = useParams();
+  if (!token) {
+    return <Navigate to={eventId ? `/?private_event_enter=${eventId}` : '/'} />
   }
-  
-  return hasAccess ? (
-    <Outlet />
-  ) : (
-    <Navigate to={eventId ? `/?private_event_enter=${eventId}` : '/'} />
-  );
+  if (onlyMentorCanSee && !isMentor) {
+    return <NotFoundPage />
+  }
+  return <Outlet />
 };
 
 const mapStateToProps = (state) => ({
   token: state.account.token,
-  isMentor: state.account.userAccount
-    ? state.account.userAccount.is_mentor
-    : false,
+  isMentor: state.account.userAccount?.isMentor
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

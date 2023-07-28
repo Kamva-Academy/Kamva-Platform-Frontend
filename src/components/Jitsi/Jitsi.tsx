@@ -95,7 +95,7 @@ function Jitsi({ handleClose, displayName = 'User' }) {
 }
 
 const mapStatesToProps = (state) => ({
-  displayName: state.account.userAccount.is_mentor
+  displayName: state.account.userAccount.isMentor
     ? 'همیار'
     : state.account.userAccount?.first_name + ' ' + state.account.userAccount?.last_name,
 });
