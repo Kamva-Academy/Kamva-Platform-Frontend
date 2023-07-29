@@ -18,7 +18,7 @@ import {
   addNewRectangleNodeAction,
   changeWhiteboardModeAction,
 } from '../../../redux/slices/whiteboard';
-import DrawingModes from '../../Konva/Drawing/DrawingModes';
+import DrawingModes from '../Drawing/DrawingModes';
 
 const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
   const popupState = usePopupState({

@@ -26,7 +26,7 @@ import {
   undo,
 } from '../../redux/slices/whiteboard';
 import downloadFromURL from '../../utils/downloadFromURL';
-import DrawingModes from '../Konva/Drawing/DrawingModes';
+import DrawingModes from './Drawing/DrawingModes';
 import CircleMenu from './Components/CircleMenu';
 import RectangleMenu from './Components/RectangleMenu';
 import RemoveAllNodesDialog from './Components/RemoveAllNodesDialog';

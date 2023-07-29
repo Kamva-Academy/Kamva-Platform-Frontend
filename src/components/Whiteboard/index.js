@@ -14,7 +14,7 @@ import {
   selectWhiteboardNodeAction,
   updateWhiteboardNodeAction,
 } from '../../redux/slices/whiteboard';
-import Drawing from '../Konva/Drawing';
+import Drawing from './Drawing';
 import WhiteboardNavbar from './WhiteboardNavbar';
 
 const useStyles = makeStyles(() => ({

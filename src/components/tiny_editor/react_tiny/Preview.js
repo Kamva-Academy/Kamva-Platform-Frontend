@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Frame from '../../Frame/Frame';
+import Frame from '../Frame';
 import fixDocumentMathElements from './fixDocumentMathElements';
 
 const TinyPreview = ({ hidden = false, content = '', frameProps = {} }) => {

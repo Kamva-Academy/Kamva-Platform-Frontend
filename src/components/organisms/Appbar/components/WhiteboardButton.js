@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Brush as BrushIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 
-import CustomDraggable from 'components/CustomDraggable';
+import CustomDraggable from 'components/Whiteboard/CustomDraggable';
 import Whiteboard from 'components/Whiteboard';
 import useWidth from 'utils/UseWidth';
 

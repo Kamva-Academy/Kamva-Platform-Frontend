@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import undoable, { includeAction } from 'redux-undo';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import DrawingModes from '../../components/Konva/Drawing/DrawingModes';
+import DrawingModes from '../../components/Whiteboard/Drawing/DrawingModes';
 import {
   addWhiteboardNode,
   getWhiteboard,
