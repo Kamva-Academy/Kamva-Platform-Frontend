@@ -20,7 +20,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
-import { enterWorkshopAction } from '../../redux/slices/currentState';
+import { enterWorkshopAction } from 'redux/slices/currentState';
 import PasswordDialog from 'components/organisms/dialogs/PasswordDialog';
 
 const useStyles = makeStyles((theme) => ({

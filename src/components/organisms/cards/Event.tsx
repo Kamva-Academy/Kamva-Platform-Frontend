@@ -3,8 +3,8 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useNavigate } from 'react-router-dom';
-import { toPersianNumber } from '../../utils/translateNumber';
-import { EventType } from '../../types/models';
+import { toPersianNumber } from 'utils/translateNumber';
+import { EventType } from 'types/models';
 
 const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to, text, disabled = false }) => {
   const navigate = useNavigate();

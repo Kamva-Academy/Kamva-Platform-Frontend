@@ -7,7 +7,7 @@ import { Pagination } from '@mui/material';
 import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import WorkshopCard from '../../../components/Cards/WorkshopCardForMentors';
+import WorkshopCard from 'components/organisms/cards/WorkshopCardForMentors';
 import CreateWorkshopDialog from '../../../components/Dialog/CreateWorkshopDialog';
 import { ITEMS_PER_PAGE_NUMBER } from '../../../configs/Constants';
 

@@ -26,16 +26,16 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import {
   deleteRequestMentorAction,
   getPlayerFromTeamAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 import { useNavigate, useParams } from 'react-router-dom'
-import { Mentor } from '../../types/models';
-import { stringToColor } from '../../utils/stringToColor'
-import { getTeamStateSubscription, getTeamState } from '../../parse/team';
-import { e2p } from '../../utils/translateNumber';
+import { Mentor } from 'types/models';
+import { stringToColor } from 'utils/stringToColor'
+import { getTeamStateSubscription, getTeamState } from 'parse/team';
+import { e2p } from 'utils/translateNumber';
 import {
   announceMentorDeparture, getMentorsInRoom,
   getMentorsInRoomSubscription
-} from '../../parse/mentorsInRoom';
+} from 'parse/mentorsInRoom';
 var moment = require('moment');
 
 type TeamWorkshopInfoPropsType = {

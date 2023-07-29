@@ -17,15 +17,15 @@ import { NotificationsActive } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import validateURL from '../../utils/validators/urlValidator'
-import AreYouSure from '../Dialog/AreYouSure'
+import validateURL from 'utils/validators/urlValidator'
+import AreYouSure from 'components/Dialog/AreYouSure'
 
 import {
   makeTeamHeadAction,
   deleteTeamAction,
   updateTeamChatRoomLinkAction,
-} from '../../redux/slices/events';
-import TeamMember from '../atoms/TeamMember';
+} from 'redux/slices/events';
+import TeamMember from 'components/atoms/TeamMember';
 
 
 const useStyles = makeStyles({

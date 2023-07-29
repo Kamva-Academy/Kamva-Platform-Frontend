@@ -2,7 +2,7 @@ import { Grid, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import ArticleCard from '../components/Cards/ArticleCard';
+import ArticleCard from 'components/organisms/cards/ArticleCard';
 import { getAllArticlesAction } from '../redux/slices/article';
 import Layout from 'components/template/GeneralLayout';
 

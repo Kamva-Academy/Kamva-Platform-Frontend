@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import Pagination from '@mui/material/Pagination';
 
-import TeamInfoCard from '../../../../components/Cards/TeamInfo';
+import TeamInfoCard from 'components/organisms/cards/TeamInfo';
 import {
   addUserToTeamAction,
   createRequestMentorAction,

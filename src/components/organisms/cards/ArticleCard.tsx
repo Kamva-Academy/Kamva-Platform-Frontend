@@ -12,7 +12,7 @@ import React, { FC } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
-import { ArticleType } from '../../types/redux/article';
+import { ArticleType } from 'types/redux/article';
 
 
 const ArticleCard: FC<ArticleType> = ({ id, name = '', description = '', cover_page = '' }) => {

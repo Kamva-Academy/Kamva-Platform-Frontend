@@ -2,7 +2,7 @@ import { Tab, Box, Tabs, Typography, Grid } from '@mui/material';
 import React, { useEffect, useRef, FC, useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
-import TeamWorkshopInfoCard from '../../components/Cards/TeamWorkshopInfo';
+import TeamWorkshopInfoCard from 'components/organisms/cards/TeamWorkshopInfo';
 
 import { getRequestSubscription } from '../../parse/mentor';
 import {

@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 
-import WorkshopCard from 'components/Cards/WorkshopCard';
+import WorkshopCard from 'components/organisms/cards/WorkshopCard';
 
 export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
   if (isLoading)

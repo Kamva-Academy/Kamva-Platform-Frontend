@@ -3,8 +3,8 @@ import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import EventCard from '../components/Cards/Event';
-import WorkshopCard from '../components/Cards/WorkshopCard';
+import EventCard from 'components/organisms/cards/Event';
+import WorkshopCard from 'components/organisms/cards/WorkshopCard';
 import {
   getAllEventsInfoAction,
 } from '../redux/slices/events';
@@ -13,7 +13,7 @@ import {
 } from '../redux/slices/workshop';
 import Layout from 'components/template/GeneralLayout';
 import { EventType } from '../types/models';
-import EventSkeletonCard from '../components/Cards/EventSkeletonCard';
+import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 
 const useStyles = makeStyles((theme) => ({
   container: {
