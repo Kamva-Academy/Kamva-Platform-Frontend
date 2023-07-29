@@ -2,21 +2,16 @@ import {
   Box,
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
-  IconButton,
   Stack,
-  Tooltip,
   Typography,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link } from 'react-router-dom';
 
-import ModeEditTwoToneIcon from '@mui/icons-material/ModeEditTwoTone';
 import { ArticleType } from '../../types/redux/article';
 
 

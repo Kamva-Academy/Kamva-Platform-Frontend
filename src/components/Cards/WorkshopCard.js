@@ -14,7 +14,8 @@ import {
   Skeleton,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { Lock, LockOpen, ModeEditTwoToneIcon } from '@mui/icons-material';
+import { Lock, LockOpen } from '@mui/icons-material';
+import ModeEditTwoToneIcon from '@mui/icons-material/ModeEditTwoTone';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
