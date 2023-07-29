@@ -10,7 +10,7 @@ import {
   mentorMoveForwardAction,
 } from 'redux/slices/currentState';
 import ChangeStateDialog from 'components/organisms/dialogs/ChangeStateDialog';
-import StatePasswordDialog from './PasswordDialog';
+import StatePasswordDialog from 'components/organisms/dialogs/StatePasswordDialog';
 
 function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
   const t = useTranslate();
