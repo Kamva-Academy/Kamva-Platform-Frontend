@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { initParseServer } from '../parse/init';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import StatePage from '../components/SpecialComponents/WorkshopPage/StatePage';
+import FSMStateTemplate from 'components/template/FSMStateTemplate';
 import { createTeamState, getChangeTeamStateSubscription, getTeamState } from '../parse/team';
 import {
   enterWorkshopAction,
@@ -173,7 +173,7 @@ const Workshop = ({
 
         <ResponsiveAppBar mode={isMentor ? "MENTOR_WORKSHOP" : "WORKSHOP"} />
         <Toolbar id="back-to-top-anchor" />
-        <StatePage state={workshopState} />
+        <FSMStateTemplate state={workshopState} />
         {/* <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />

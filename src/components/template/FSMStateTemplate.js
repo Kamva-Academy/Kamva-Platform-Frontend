@@ -5,10 +5,10 @@ import clsx from 'clsx';
 import React, { useMemo, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import Widget from '../../Widget';
-import BackButton from './components/BackButton';
-import HelpDialog from './components/HelpDialog';
-import NextButton from './components/NextButton';
+import Widget from '../Widget';
+import BackButton from '../SpecialComponents/WorkshopPage/components/BackButton';
+import HelpDialog from '../SpecialComponents/WorkshopPage/components/HelpDialog';
+import NextButton from '../SpecialComponents/WorkshopPage/components/NextButton';
 
 const useStyles = makeStyles((theme) => ({
   workshopContent: {
