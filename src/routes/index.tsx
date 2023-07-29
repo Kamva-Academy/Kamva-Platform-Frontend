@@ -68,9 +68,8 @@ const Root = () => {
           element={<TeamSelection />}
         />
         <Route path="/event/:eventId/" element={<Event />} />
-      </Route>
 
-      <Route path="/" element={<PrivateRoute onlyMentorCanSee={true} />}>
+        {/* only mentors can visit: */}
         <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
         <Route path="/event/:eventId/workshop/:fsmId/manage/correction/:answerId/" element={<Correction />} />
         <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<FSMManagement />} />

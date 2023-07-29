@@ -199,10 +199,6 @@ const accountSlice = createSlice({
   initialState,
   reducers: {
     logout: () => initialState,
-    setMentorToken: (state, { payload: { token } }) => ({
-      token,
-      userAccount: { isMentor: true },
-    }),
     refreshToken: (state, action) => {
       state.token = action.payload.access;
       state.refresh = action.payload.refresh;
@@ -312,7 +308,7 @@ const accountSlice = createSlice({
   },
 });
 
-export const { logout: logoutAction, setMentorToken: setMentorTokenAction } =
+export const { logout: logoutAction } =
   accountSlice.actions;
 
 export const { reducer: accountReducer } = accountSlice;
