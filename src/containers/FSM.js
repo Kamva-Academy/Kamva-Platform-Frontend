@@ -19,7 +19,7 @@ import {
 import {
   getOneWorkshopAction,
 } from '../redux/slices/workshop';
-import { addMentorToRoom, updateMentorTime } from './../parse/mentorsInRoom';
+import { addMentorToRoom, updateMentorTime } from '../parse/mentorsInRoom';
 import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
 
 var moment = require('moment');

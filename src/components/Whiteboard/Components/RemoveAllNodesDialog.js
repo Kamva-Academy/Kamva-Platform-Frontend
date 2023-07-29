@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import React, { useContext } from 'react';
 
-import { StatePageContext } from '../../../containers/Workshop';
+import { StatePageContext } from '../../../containers/FSM';
 
 export default function RemoveAllNodesDialog({
   open,

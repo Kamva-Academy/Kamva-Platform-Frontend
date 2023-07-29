@@ -18,7 +18,7 @@ import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
 import RegistrationForm from '../containers/RegistrationForm';
 import Status from '../containers/RegistrationStatus';
 import TeamSelection from '../pages/TeamSelection';
-import Workshop from '../containers/Workshop';
+import Workshop from '../containers/FSM';
 import Article from '../pages/Article';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';

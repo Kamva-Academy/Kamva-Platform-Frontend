@@ -15,7 +15,7 @@ import {
 import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from '../../containers/Workshop';
+import { StatePageContext } from '../../containers/FSM';
 import {
   addNewTextNodeAction,
   changeWhiteboardModeAction,

@@ -9,7 +9,7 @@ import {
 import { OfflineBolt } from '@mui/icons-material';
 import React, { useContext } from 'react';
 
-import { StatePageContext } from '../../../../containers/Workshop';
+import { StatePageContext } from '../../../../containers/FSM';
 import { stringToColor } from '../../../../utils/stringToColor';
 
 const UsersAvatar = () => {

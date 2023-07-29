@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useNavigate } from 'react-router-dom';
 
-import { StatePageContext } from 'containers/Workshop';
+import { StatePageContext } from 'containers/FSM';
 import {
   goForwardAction,
   mentorMoveForwardAction,
