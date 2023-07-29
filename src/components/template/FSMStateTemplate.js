@@ -6,9 +6,9 @@ import React, { useMemo, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
 import Widget from 'components/Widget';
-import BackButton from '../SpecialComponents/WorkshopPage/components/BackButton';
+import BackButton from 'components/atoms/BackButton';
 import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
-import NextButton from '../SpecialComponents/WorkshopPage/components/NextButton';
+import NextButton from 'components/atoms/NextButton';
 
 const useStyles = makeStyles((theme) => ({
   workshopContent: {
