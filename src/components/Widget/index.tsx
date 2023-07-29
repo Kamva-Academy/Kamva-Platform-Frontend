@@ -5,7 +5,7 @@ import React, { FC, useMemo, useState } from 'react';
 import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
 import EditHintsDialog from '../organisms/dialogs/EditHintsDialog';
-import HelpDialog from '../SpecialComponents/WorkshopPage/components/HelpDialog';
+import HelpDialog from '../organisms/dialogs/FSMStateHelpDialog';
 import { toPersianNumber } from '../../utils/translateNumber';
 
 export enum WidgetModes {

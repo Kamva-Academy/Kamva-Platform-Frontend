@@ -2,9 +2,9 @@ import { Button, Dialog, Grid, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { toPersianNumber } from '../../../../utils/translateNumber';
+import { toPersianNumber } from 'utils/translateNumber';
 
-import Widget from '../../../Widget';
+import Widget from 'components/Widget';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
