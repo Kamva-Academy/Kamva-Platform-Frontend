@@ -36,7 +36,7 @@ import {
   inviteSomeoneAction,
 } from '../redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/templates/GeneralLayout';
 import { Team, EventType } from '../types/models';
 import RespondInvitation from '../components/molecules/RespondInvitation';
 

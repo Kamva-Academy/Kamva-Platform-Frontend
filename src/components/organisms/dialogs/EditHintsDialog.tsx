@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import EditHints from 'components/template/EditHints';
+import EditHints from 'components/templates/EditHints';
 
 const EditHintsDialog = ({
   handleClose,

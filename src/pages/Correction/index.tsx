@@ -16,7 +16,7 @@ import {
 import {
   getWidgetAction,
 } from '../../redux/slices/Paper';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/templates/GeneralLayout';
 import ScoringColumn from './ScoringColumn';
 
 function Correction({

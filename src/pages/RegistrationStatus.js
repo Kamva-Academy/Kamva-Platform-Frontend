@@ -14,7 +14,7 @@ import {
 } from '../redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
 import { toPersianNumber } from '../utils/translateNumber';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/templates/GeneralLayout';
 
 const Payment = ({
   getOneEventInfo,

@@ -11,7 +11,7 @@ import {
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
 } from '../../redux/slices/events';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/templates/GeneralLayout';
 import Info from './Info';
 import { WidgetModes } from '../../components/Widget';
 
