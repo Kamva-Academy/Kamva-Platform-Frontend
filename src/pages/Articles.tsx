@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import ArticleCard from '../components/Cards/ArticleCard';
 import { getAllArticlesAction } from '../redux/slices/article';
-import Layout from '../containers/Layout';
+import Layout from 'components/template/GeneralLayout';
 
 import { ArticleType } from '../types/redux/article';
 import { ITEMS_PER_PAGE_NUMBER } from '../configs/Constants';

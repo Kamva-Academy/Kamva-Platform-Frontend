@@ -11,7 +11,7 @@ import {
 import {
   getRegistrableWorkshopsAction,
 } from '../redux/slices/workshop';
-import Layout from '../containers/Layout';
+import Layout from 'components/template/GeneralLayout';
 import { EventType } from '../types/models';
 import EventSkeletonCard from '../components/Cards/EventSkeletonCard';
 

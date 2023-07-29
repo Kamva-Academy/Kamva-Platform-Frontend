@@ -9,7 +9,7 @@ import {
   updateStudentShipAction,
   updateUserAccountAction,
 } from '../../../redux/slices/account';
-import Layout from '../../Layout';
+import Layout from 'components/template/GeneralLayout';
 import AcademicProfile from './AcademicProfile';
 import PersonalProfile from './PersonalProfile'
 import StudentProfile from './StudentProfile';

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Routes, useNavigate, useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
-import AppBar from '../components/Appbar/ResponsiveAppBar';
-import { getUserProfileAction } from '../redux/slices/account';
-import { addNotificationAction } from '../redux/slices/notifications';
+import AppBar from '../Appbar/ResponsiveAppBar';
+import { getUserProfileAction } from '../../redux/slices/account';
+import { addNotificationAction } from '../../redux/slices/notifications';
 
 const Layout = ({
   appbarMode = 'STUDENT_DASHBOARD',
@@ -59,10 +59,13 @@ const Layout = ({
         sx={{
           display: 'flex',
           marginTop: 4,
+          marginBottom: 2,
           justifyContent: 'center',
           marginRight: 'auto !important',
           marginLeft: 'auto !important',
-        }}>{props.children}</Container>
+        }}>
+        {props.children}
+      </Container>
     </>
   );
 };

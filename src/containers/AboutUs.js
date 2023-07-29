@@ -2,7 +2,7 @@ import { Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 
-import Layout from './Layout';
+import Layout from 'components/template/GeneralLayout';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
