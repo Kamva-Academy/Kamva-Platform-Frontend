@@ -1,17 +1,14 @@
 import { Grid, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import WorkshopGridItems from '../../components/SpecialComponents/WorkshopsPage/WorkshopGridItems';
+import WorkshopGridItems from 'components/organisms/WorkshopGridItems';
 import {
   getEventWorkshopsAction,
 } from '../../redux/slices/events';
 import Layout from '../Layout';
 import Sidebar from './Sidebar';
-import NotFoundPage from '../NotFoundPage';
 import { ITEMS_PER_PAGE_NUMBER } from '../../configs/Constants';
 
 function Workshops({
