@@ -2,11 +2,11 @@ import { Button } from '@mui/material';
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from '../../../../containers/Workshop';
+import { StatePageContext } from 'containers/Workshop';
 import {
   goBackwardAction,
   mentorMoveBackwardAction,
-} from '../../../../redux/slices/currentState';
+} from 'redux/slices/currentState';
 
 function BackButton({ inwardEdges = [], goBackward, mentorMoveBackward }) {
   const { isMentor, teamId } = useContext(StatePageContext);

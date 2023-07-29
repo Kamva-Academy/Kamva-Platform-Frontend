@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useNavigate } from 'react-router-dom';
 
-import { StatePageContext } from '../../../../containers/Workshop';
+import { StatePageContext } from 'containers/Workshop';
 import {
   goForwardAction,
   mentorMoveForwardAction,
-} from '../../../../redux/slices/currentState';
-import ChangeStateDialog from './ChangeStateDialog';
+} from 'redux/slices/currentState';
+import ChangeStateDialog from 'components/organisms/dialogs/ChangeStateDialog';
 import StatePasswordDialog from './PasswordDialog';
 
 function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
