@@ -2,7 +2,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from '../../containers/FSM';
+import { StatePageContext } from 'pages/FSM';
 import { getWhiteboardActionSubscription } from '../../parse/whiteboard';
 import {
   addNewLineNodeAction,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate, Outlet, useParams } from 'react-router-dom';
-import NotFoundPage from '../containers/NotFoundPage';
+import NotFoundPage from 'pages/NotFoundPage';
 
 const PrivateRoute = ({ token }) => {
   const { eventId } = useParams();

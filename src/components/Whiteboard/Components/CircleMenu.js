@@ -13,7 +13,7 @@ import Menu from 'material-ui-popup-state/HoverMenu';
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from '../../../containers/FSM';
+import { StatePageContext } from 'pages/FSM';
 import {
   addNewCircleNodeAction,
   changeWhiteboardModeAction,

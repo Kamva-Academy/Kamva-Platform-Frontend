@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from 'containers/FSM';
+import { StatePageContext } from 'pages/FSM';
 import {
   goBackwardAction,
   mentorMoveBackwardAction,

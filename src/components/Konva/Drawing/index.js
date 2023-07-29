@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Layer, Line, Rect, Stage } from 'react-konva';
 
-import { StatePageContext } from '../../../containers/FSM';
+import { StatePageContext } from 'pages/FSM';
 import DrawingModes from './DrawingModes';
 import KonvaNode from './KonvaNode';
 

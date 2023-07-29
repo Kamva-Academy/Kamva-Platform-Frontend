@@ -7,7 +7,7 @@ import {
 import React, { useContext, useRef } from 'react';
 import { connect } from 'react-redux';
 import useWidth from '../../utils/UseWidth';
-import { StatePageContext } from '../../containers/FSM';
+import { StatePageContext } from 'pages/FSM';
 import { JitsiMeeting } from '@jitsi/react-sdk'
 import { interfaceConfigOverwrite, configOverwrite } from './Config';
 import CircularProgress from '@mui/material/CircularProgress';

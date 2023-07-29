@@ -12,7 +12,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { StatePageContext } from '../../../containers/FSM';
+import { StatePageContext } from 'pages/FSM';
 import { getScoresAction } from '../../../redux/slices/currentState';
 
 const useStyles = makeStyles((theme) => ({

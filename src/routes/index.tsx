@@ -1,30 +1,30 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import AboutUs from '../containers/AboutUs';
-import ResetPassword from '../pages/ResetPassword';
-import CreateAccount from '../pages/CreateAccount';
-import Dashboard from '../containers/Dashboard';
-import RegistrationReceipt from '../containers/RegistrationReceipt';
-import Events from '../pages/Events';
-import Profile from '../containers/Dashboard/Profile';
-import Event from '../containers/Event';
-import ManageEvent from '../containers/Event/manage';
-import Landing from '../containers/Landing';
-import NotFoundPage from '../containers/NotFoundPage';
-import Login from '../pages/Login';
-import FailedPayment from '../containers/Message/FailedPayment';
-import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
-import RegistrationForm from '../containers/RegistrationForm';
-import Status from '../containers/RegistrationStatus';
-import TeamSelection from '../pages/TeamSelection';
-import Workshop from '../containers/FSM';
-import Article from '../pages/Article';
-import Articles from '../pages/Articles';
+import AboutUs from 'pages/AboutUs';
+import ResetPassword from 'pages/ResetPassword';
+import CreateAccount from 'pages/CreateAccount';
+import Dashboard from 'pages/Dashboard';
+import RegistrationReceipt from 'pages/RegistrationReceipt';
+import Events from 'pages/Events';
+import Profile from 'pages/Dashboard/Profile';
+import Event from 'pages/Event';
+import ManageEvent from 'pages/Event/manage';
+import Landing from 'pages/Landing';
+import NotFoundPage from 'pages/NotFoundPage';
+import Login from 'pages/Login';
+import FailedPayment from 'pages/Message/FailedPayment';
+import SuccessfulPayment from 'pages/Message/SuccessfulPayment';
+import RegistrationForm from 'pages/RegistrationForm';
+import Status from 'pages/RegistrationStatus';
+import TeamSelection from 'pages/TeamSelection';
+import Workshop from 'pages/FSM';
+import Article from 'pages/Article';
+import Articles from 'pages/Articles';
 import PrivateRoute from './PrivateRoute';
 import FSMManagement from 'pages/FSMManagement';
-import Correction from '../pages/Correction';
-import EditArticle from '../pages/EditArticle';
+import Correction from 'pages/Correction';
+import EditArticle from 'pages/EditArticle';
 
 const Root = () => {
   return (
