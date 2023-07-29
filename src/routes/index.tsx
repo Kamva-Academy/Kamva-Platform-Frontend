@@ -16,7 +16,7 @@ import Login from '../pages/Login';
 import FailedPayment from '../containers/Message/FailedPayment';
 import SuccessfulPayment from '../containers/Message/SuccessfulPayment';
 import RegistrationForm from '../containers/RegistrationForm';
-import Status from '../containers/Status';
+import Status from '../containers/RegistrationStatus';
 import TeamSelection from '../pages/TeamSelection';
 import Workshop from '../containers/Workshop';
 import Article from '../pages/Article';
