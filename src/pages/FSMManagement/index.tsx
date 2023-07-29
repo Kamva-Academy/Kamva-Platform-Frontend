@@ -27,7 +27,7 @@ import {
 import {
   getOneWorkshopsInfoAction,
 } from '../../redux/slices/workshop';
-import Layout from 'components/templates/GeneralLayout';
+import Layout from 'components/template/GeneralLayout';
 import Design from './Design';
 import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';

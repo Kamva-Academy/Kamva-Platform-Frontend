@@ -2,8 +2,8 @@ import { Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Layout from 'components/templates/GeneralLayout';
-import EditWidgets from '../components/templates/EditWidgets';
+import Layout from 'components/template/GeneralLayout';
+import EditWidgets from '../components/template/EditWidgets';
 import { getArticleAction } from '../redux/slices/article';
 
 const EditArticle = ({

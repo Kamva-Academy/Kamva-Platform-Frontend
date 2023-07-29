@@ -7,7 +7,7 @@ import WorkshopGridItems from 'components/organisms/WorkshopGridItems';
 import {
   getEventWorkshopsAction,
 } from '../../redux/slices/events';
-import Layout from 'components/templates/GeneralLayout';
+import Layout from 'components/template/GeneralLayout';
 import Sidebar from './Sidebar';
 import { ITEMS_PER_PAGE_NUMBER } from '../../configs/Constants';
 

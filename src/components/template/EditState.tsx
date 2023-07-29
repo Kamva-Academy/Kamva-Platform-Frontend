@@ -15,7 +15,7 @@ import {
   removeStateAction,
   updateStateAction,
 } from '../../redux/slices/workshop';
-import AreYouSure from '../Dialog/AreYouSure';
+import AreYouSure from 'components/organisms/dialogs/AreYouSure';
 import CreateWidgetDialog from 'components/organisms/dialogs/CreateWidgetDialog';
 import EditWidgets from './EditWidgets';
 import EditHints from './EditHints';

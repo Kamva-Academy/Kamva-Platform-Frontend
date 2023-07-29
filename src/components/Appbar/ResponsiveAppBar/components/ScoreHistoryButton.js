@@ -1,7 +1,7 @@
 import { Button, SvgIcon } from '@mui/material';
 import React, { useState } from 'react';
 
-import ScoreHistoryDialog from '../../../Dialog/ScoreHistoryDialog/ScoreHistoryDialog';
+import ScoreHistoryDialog from '../../../Dialog/ScoreHistoryDialog';
 
 const ScoreIcon = () => (
   <SvgIcon>

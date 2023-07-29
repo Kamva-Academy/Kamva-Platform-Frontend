@@ -18,7 +18,7 @@ import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import validateURL from 'utils/validators/urlValidator'
-import AreYouSure from 'components/Dialog/AreYouSure'
+import AreYouSure from 'components/organisms/dialogs/AreYouSure'
 
 import {
   makeTeamHeadAction,

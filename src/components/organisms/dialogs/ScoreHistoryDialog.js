@@ -13,7 +13,7 @@ import React, { useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { StatePageContext } from 'pages/FSM';
-import { getScoresAction } from '../../../redux/slices/currentState';
+import { getScoresAction } from '../../redux/slices/currentState';
 
 const useStyles = makeStyles((theme) => ({
   dialog: {

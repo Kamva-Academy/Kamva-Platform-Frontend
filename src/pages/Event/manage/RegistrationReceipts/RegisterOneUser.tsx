@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import React, { useState, FC } from 'react';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import RegisterOneUserDialog from '../../../../components/Dialog/RegisterOneUserDialog';
+import RegisterOneUserDialog from 'components/organisms/dialogs/RegisterOneUserDialog';
 
 type AddOneUserPropsType = {}
 

@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router';
 
-import { createWorkshopAction } from '../../../redux/slices/events';
+import { createWorkshopAction } from 'redux/slices/events';
 
 function CreateWorkshopDialog({
   createWorkshop,

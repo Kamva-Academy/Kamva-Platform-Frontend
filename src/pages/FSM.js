@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { initParseServer } from '../parse/init';
 import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
-import FSMStateTemplate from 'components/templates/FSMStateTemplate';
+import FSMStateTemplate from 'components/template/FSMStateTemplate';
 import { createTeamState, getChangeTeamStateSubscription, getTeamState } from '../parse/team';
 import {
   enterWorkshopAction,

@@ -21,7 +21,7 @@ import {
   validateRegistrationReceiptAction,
 } from '../redux/slices/events'
 import { faSeri } from '../utils/translateNumber';
-import Layout from 'components/templates/GeneralLayout';
+import Layout from 'components/template/GeneralLayout';
 import { toast } from 'react-toastify';
 
 function RegistrationReceipt({

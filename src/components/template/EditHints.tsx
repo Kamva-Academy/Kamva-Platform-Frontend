@@ -2,7 +2,7 @@ import { Box, Button, Grid, Paper, Tooltip, Typography, Divider, Stack, IconButt
 import { Add as AddIcon } from '@mui/icons-material';
 import React, { useState, FC } from 'react';
 import { Delete as DeleteIcon } from '@mui/icons-material';
-import AreYouSure from '../Dialog/AreYouSure';
+import AreYouSure from 'components/organisms/dialogs/AreYouSure';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
@@ -10,11 +10,11 @@ import {
   deleteHintAction,
   createWidgetHintAction,
   deleteWidgetHintAction,
-} from '../../redux/slices/Paper';
+} from 'redux/slices/Paper';
 
 import Widget, { WidgetModes } from '../Widget';
 import CreateWidgetDialog from 'components/organisms/dialogs/CreateWidgetDialog';
-import { toPersianNumber } from '../../utils/translateNumber';
+import { toPersianNumber } from 'utils/translateNumber';
 
 type EditHintsPropsType = {
   type: 'widget' | 'state';

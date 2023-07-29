@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { WidgetModes } from '../components/Widget';
 import Widget from '../components/Widget';
 import { getArticleAction } from '../redux/slices/article';
-import ArticleLayout from '../components/templates/ArticleLayout';
+import ArticleLayout from 'components/template/ArticleLayout';
 
 type ArticlePropsType = {
   papers: any[];

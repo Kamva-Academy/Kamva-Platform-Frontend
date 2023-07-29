@@ -10,14 +10,14 @@ import {
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
-import AreYouSure from '../../components/Dialog/AreYouSure'
+import AreYouSure from 'components/organisms/dialogs/AreYouSure'
 import { removeFromTeamAction } from '../../redux/slices/events';
 
 import {
   makeTeamHeadAction,
   deleteTeamAction,
   updateTeamChatRoomLinkAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 
 type TeamMemberPropsType = {
   memberId: number;

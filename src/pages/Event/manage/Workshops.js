@@ -8,15 +8,12 @@ import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import WorkshopCard from 'components/organisms/cards/WorkshopCardForMentors';
-import CreateWorkshopDialog from '../../../components/Dialog/CreateWorkshopDialog';
-import { ITEMS_PER_PAGE_NUMBER } from '../../../configs/Constants';
-
-
-
+import CreateWorkshopDialog from 'components/organisms/dialogs/CreateWorkshopDialog';
+import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
 import {
   getEventWorkshopsAction,
-} from '../../../redux/slices/events';
-import { addMentorToWorkshopAction } from '../../../redux/slices/events';
+} from 'redux/slices/events';
+import { addMentorToWorkshopAction } from 'redux/slices/events';
 
 function Index({
   getEventWorkshops,

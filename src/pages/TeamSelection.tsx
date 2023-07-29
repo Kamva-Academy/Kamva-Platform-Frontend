@@ -22,8 +22,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import AreYouSure from '../components/Dialog/AreYouSure';
-import MakeInvitation from '../components/organisms/dialogs/MakeInvitation';
+import AreYouSure from 'components/organisms/dialogs/AreYouSure';
+import MakeInvitation from 'components/organisms/dialogs/MakeInvitation';
 import {
   createTeamAndJoinAction,
   deleteInvitationAction,
@@ -36,7 +36,7 @@ import {
   inviteSomeoneAction,
 } from '../redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
-import Layout from 'components/templates/GeneralLayout';
+import Layout from 'components/template/GeneralLayout';
 import { Team, EventType } from '../types/models';
 import RespondInvitation from '../components/molecules/RespondInvitation';
 

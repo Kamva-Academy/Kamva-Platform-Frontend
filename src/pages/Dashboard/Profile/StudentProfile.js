@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import AddInstitute from '../../../components/Dialog/AddInstitute';
+import AddInstitute from '../../../components/organisms/dialogs/AddInstitute';
 import {
   getUserProfileAction,
   updateStudentShipAction,

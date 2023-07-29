@@ -20,10 +20,10 @@ import { connect } from 'react-redux';
 import {
   createInstitutesAction,
   getInstitutesAction,
-} from '../../redux/slices/account';
+} from '../../../redux/slices/account';
 import {
   addNotificationAction,
-} from '../../redux/slices/notifications';
+} from '../../../redux/slices/notifications';
 
 const useStyles = makeStyles((theme) => ({
   container: {

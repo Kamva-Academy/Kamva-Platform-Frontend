@@ -15,8 +15,8 @@ import {
   getOneStateAction,
 } from '../../redux/slices/Paper';
 import { State } from '../../types/models';
-import EditHints from 'components/templates/EditHints';
-import EditState from 'components/templates/EditState';
+import EditHints from 'components/template/EditHints';
+import EditState from 'components/template/EditState';
 
 
 type DesignWorkshopPropsType = {

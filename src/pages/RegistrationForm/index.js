@@ -3,17 +3,17 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import AreYouSure from '../../components/Dialog/AreYouSure';
-import Stepper from '../../components/organisms/Stepper';
-import Widget from '../../components/Widget';
+import AreYouSure from 'components/organisms/dialogs/AreYouSure';
+import Stepper from 'components/organisms/Stepper';
+import Widget from 'components/Widget';
 import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
-} from '../../redux/slices/events';
-import Layout from 'components/templates/GeneralLayout';
+} from 'redux/slices/events';
+import Layout from 'components/template/GeneralLayout';
 import Info from './Info';
-import { WidgetModes } from '../../components/Widget';
+import { WidgetModes } from 'components/Widget';
 
 const ANSWER_TYPES = {
   SmallAnswerProblem: 'SmallAnswer',
