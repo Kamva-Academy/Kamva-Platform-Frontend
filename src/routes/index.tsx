@@ -22,7 +22,7 @@ import Workshop from '../containers/Workshop';
 import Article from '../pages/Article';
 import Articles from '../pages/Articles';
 import PrivateRoute from './PrivateRoute';
-import WorkshopManagement from '../pages/WorkshopManagement';
+import FSMManagement from 'pages/FSMManagement';
 import Correction from '../pages/Correction';
 import EditArticle from '../pages/EditArticle';
 
@@ -73,7 +73,7 @@ const Root = () => {
       <Route path="/" element={<PrivateRoute onlyMentorCanSee={true} />}>
         <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
         <Route path="/event/:eventId/workshop/:fsmId/manage/correction/:answerId/" element={<Correction />} />
-        <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<WorkshopManagement />} />
+        <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<FSMManagement />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />
