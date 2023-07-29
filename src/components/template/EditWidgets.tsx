@@ -3,7 +3,7 @@ import { Add as AddIcon } from '@mui/icons-material';
 import React, { useState, FC } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import Widget, { WidgetModes } from '../Widget';
-import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
+import CreateWidgetDialog from '../organisms/dialogs/CreateWidgetDialog';
 
 type EditWidgetsPropsType = {
   widgets: any[];

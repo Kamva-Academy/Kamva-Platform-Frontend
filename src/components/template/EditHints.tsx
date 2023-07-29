@@ -13,7 +13,7 @@ import {
 } from '../../redux/slices/Paper';
 
 import Widget, { WidgetModes } from '../Widget';
-import CreateWidgetDialog from './dialogs/CreateWidgetDialog';
+import CreateWidgetDialog from 'components/organisms/dialogs/CreateWidgetDialog';
 import { toPersianNumber } from '../../utils/translateNumber';
 
 type EditHintsPropsType = {

@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles'
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import EditWidgets from '../../../components/organisms/EditWidgets';
+import EditWidgets from '../../../components/template/EditWidgets';
 import { getRegistrationFormAction } from '../../../redux/slices/events';
 
 type RegistrationFormPropsType = {

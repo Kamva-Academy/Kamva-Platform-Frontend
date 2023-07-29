@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Layout from 'components/template/GeneralLayout';
-import EditWidgets from '../components/organisms/EditWidgets';
+import EditWidgets from '../components/template/EditWidgets';
 import { getArticleAction } from '../redux/slices/article';
 
 const EditArticle = ({
