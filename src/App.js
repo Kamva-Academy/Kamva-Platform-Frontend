@@ -12,7 +12,7 @@ import { IntlProvider } from 'react-redux-multilingual';
 import { useNavigate } from 'react-router-dom';
 import createEmotionCache from './configs/CreateEmotionCache'
 import selectTheme from './configs/themes';
-import Notifier from './components/Notifications/Notifications';
+import Notifier from './components/molecules/Notifications';
 import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
 import Root from './routes';
