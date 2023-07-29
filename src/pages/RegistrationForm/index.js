@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import AreYouSure from 'components/organisms/dialogs/AreYouSure';
 import Stepper from 'components/organisms/Stepper';
-import Widget from 'components/Widget';
+import Widget from 'components/organisms/Widget';
 import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
@@ -13,7 +13,7 @@ import {
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
 import Info from './Info';
-import { WidgetModes } from 'components/Widget';
+import { WidgetModes } from 'components/organisms/Widget';
 
 const ANSWER_TYPES = {
   SmallAnswerProblem: 'SmallAnswer',

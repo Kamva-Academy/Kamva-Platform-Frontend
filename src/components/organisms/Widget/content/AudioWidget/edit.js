@@ -12,16 +12,16 @@ import {
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import UploadFile from '../../molecules/UploadFile';
+import UploadFile from '../../../../molecules/UploadFile';
 
 import {
-  createVideoWidgetAction,
-  updateVideoWidgetAction,
-} from '../../../redux/slices/widget';
+  createAudioWidgetAction,
+  updateAudioWidgetAction,
+} from '../../../../../redux/slices/widget';
 
-function VideoEditWidget({
-  updateVideoWidget,
-  createVideoWidget,
+function AudioEditWidget({
+  updateAudioWidget,
+  createAudioWidget,
 
   paperId,
   open,
@@ -51,19 +51,19 @@ function VideoEditWidget({
       }
     }
     if (widgetId) {
-      updateVideoWidget({
+      updateAudioWidget({
         ...payload,
         widgetId,
       })
     } else {
-      createVideoWidget(payload);
+      createAudioWidget(payload);
     }
     handleClose();
   };
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>فیلم</DialogTitle>
+      <DialogTitle>صوت</DialogTitle>
       <DialogContent>
         <Stack spacing={2}>
           <UploadFile widgetId={widgetId} paperId={paperId} file={file} setFile={setFile} previousFile={previousFile} />
@@ -71,10 +71,10 @@ function VideoEditWidget({
           <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
           <TextField
             fullWidth
-            label="آدرس فیلم"
+            label="آدرس صوت"
             value={link}
             inputProps={{ className: 'ltr-input' }}
-            placeholder="http://example.com/example.mp4"
+            placeholder="http://example.com/example.mp3"
             onChange={(e) => setLink(e.target.value)}
           />
         </Stack>
@@ -88,10 +88,7 @@ function VideoEditWidget({
   );
 }
 
-export default connect(
-  null,
-  {
-    createVideoWidget: createVideoWidgetAction,
-    updateVideoWidget: updateVideoWidgetAction,
-  }
-)(VideoEditWidget);
+export default connect(null, {
+  createAudioWidget: createAudioWidgetAction,
+  updateAudioWidget: updateAudioWidgetAction,
+})(AudioEditWidget);

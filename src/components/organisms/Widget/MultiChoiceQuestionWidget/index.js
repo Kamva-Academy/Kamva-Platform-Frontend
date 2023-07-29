@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // import { sendMultiChoiceAnswerAction } from '../../../redux/slices/currentState';
-import TinyPreview from '../../tiny_editor/react_tiny/Preview';
+import TinyPreview from '../../../tiny_editor/react_tiny/Preview';
 import { WidgetModes } from '..';
 import MultiChoiceQuestionEditWidget from './edit';
 

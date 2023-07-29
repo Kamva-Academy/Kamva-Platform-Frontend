@@ -18,8 +18,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createMultiChoicesQuestionWidgetAction } from '../../../redux/slices/widget';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
+import { createMultiChoicesQuestionWidgetAction } from '../../../../redux/slices/widget';
+import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
 
 const useStyles = makeStyles((theme) => ({
   choice: {

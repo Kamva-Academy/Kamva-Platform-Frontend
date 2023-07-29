@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { toPersianNumber } from 'utils/translateNumber';
 
-import Widget from 'components/Widget';
+import Widget from 'components/organisms/Widget';
 
 const useStyles = makeStyles((theme) => ({
   paper: {

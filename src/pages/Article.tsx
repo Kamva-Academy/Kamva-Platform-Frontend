@@ -3,8 +3,8 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
-import { WidgetModes } from '../components/Widget';
-import Widget from '../components/Widget';
+import { WidgetModes } from '../components/organisms/Widget';
+import Widget from '../components/organisms/Widget';
 import { getArticleAction } from '../redux/slices/article';
 import ArticleLayout from 'components/template/ArticleLayout';
 

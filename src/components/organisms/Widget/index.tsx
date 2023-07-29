@@ -2,11 +2,11 @@ import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip, Chip } fro
 import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/icons-material';
 import React, { FC, useMemo, useState } from 'react';
 
-import DeleteWidgetDialog from '../organisms/dialogs/DeleteWidgetDialog';
+import DeleteWidgetDialog from '../dialogs/DeleteWidgetDialog';
 import WIDGET_TYPES from './WidgetTypes';
-import EditHintsDialog from '../organisms/dialogs/EditHintsDialog';
-import HelpDialog from '../organisms/dialogs/FSMStateHelpDialog';
-import { toPersianNumber } from '../../utils/translateNumber';
+import EditHintsDialog from '../dialogs/EditHintsDialog';
+import HelpDialog from '../dialogs/FSMStateHelpDialog';
+import { toPersianNumber } from '../../../utils/translateNumber';
 
 export enum WidgetModes {
   View,

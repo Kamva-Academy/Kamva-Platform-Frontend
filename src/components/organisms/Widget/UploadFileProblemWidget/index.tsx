@@ -9,10 +9,10 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
   uploadFileAnswerAction,
   makeAnswerEmptyAction,
-} from '../../../redux/slices/Paper';
+} from '../../../../redux/slices/Paper';
 import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from '..';
-import { BASE_URL } from '../../../configs/Constants';
+import { BASE_URL } from '../../../../configs/Constants';
 import { toast } from 'react-toastify';
 
 type UploadFileProblemWidgetPropsType = {

@@ -9,12 +9,12 @@ import {
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { sendInviteeUsernameResponseAction } from '../../../../redux/slices/Paper';
-import { checkUsernameAction } from '../../../../redux/slices/Question';
-import TinyPreview from '../../../tiny_editor/react_tiny/Preview';
+import { sendInviteeUsernameResponseAction } from '../../../../../redux/slices/Paper';
+import { checkUsernameAction } from '../../../../../redux/slices/Question';
+import TinyPreview from '../../../../tiny_editor/react_tiny/Preview';
 import { WidgetModes } from '../..';
 import InviteeUsernameEdit from './edit';
-import isPhoneNumber from '../../../../utils/validators/isPhoneNumber';
+import isPhoneNumber from '../../../../../utils/validators/isPhoneNumber';
 
 type InviteeUsernamePropsType = {
   sendInviteeUsernameResponse: any;

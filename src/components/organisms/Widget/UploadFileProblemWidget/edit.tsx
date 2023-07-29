@@ -15,8 +15,8 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
   createUploadFileWidgetAction,
   updateUploadFileWidgetAction,
-} from '../../../redux/slices/widget';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
+} from '../../../../redux/slices/widget';
+import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
 
 type UploadFileProblemEditWidgetPropsType = {
   updateUploadFileWidget: any;

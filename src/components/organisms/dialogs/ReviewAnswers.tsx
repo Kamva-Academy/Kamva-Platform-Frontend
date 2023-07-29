@@ -11,8 +11,8 @@ import {
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Widget from '../../Widget';
-import { WidgetModes } from '../../Widget';
+import Widget from '../Widget';
+import { WidgetModes } from '../Widget';
 import {
   getAnswersForReviewAction
 } from '../../../redux/slices/workshop';

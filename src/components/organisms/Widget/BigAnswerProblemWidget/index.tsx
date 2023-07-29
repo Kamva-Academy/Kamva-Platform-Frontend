@@ -2,10 +2,10 @@ import { Button, Grid, Paper, Stack, Typography } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import TinyPreview from '../../tiny_editor/react_tiny/Preview';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
+import TinyPreview from '../../../tiny_editor/react_tiny/Preview';
+import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
 import { WidgetModes } from '..';
-import { sendBigAnswerAction } from '../../../redux/slices/Paper';
+import { sendBigAnswerAction } from '../../../../redux/slices/Paper';
 import BigAnswerProblemEditWidget from './edit';
 
 export { BigAnswerProblemEditWidget as BigAnswerQuestionEditWidget };

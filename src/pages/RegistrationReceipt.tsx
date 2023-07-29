@@ -15,7 +15,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useParams } from 'react-router-dom';
-import Widget, { WidgetModes } from '../components/Widget';
+import Widget, { WidgetModes } from 'components/organisms/Widget';
 import {
   getOneRegistrationReceiptAction,
   validateRegistrationReceiptAction,

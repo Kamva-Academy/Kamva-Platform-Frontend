@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import React, { useState, FC } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import Widget, { WidgetModes } from '../Widget';
+import Widget, { WidgetModes } from '../organisms/Widget';
 import CreateWidgetDialog from '../organisms/dialogs/CreateWidgetDialog';
 
 type EditWidgetsPropsType = {

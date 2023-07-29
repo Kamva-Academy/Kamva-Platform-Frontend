@@ -13,8 +13,8 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
   createTextWidgetAction,
   updateTextWidgetAction,
-} from '../../../redux/slices/widget';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
+} from '../../../../redux/slices/widget';
+import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
 
 function TextEditWidget({
   updateTextWidget,

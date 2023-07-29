@@ -5,58 +5,66 @@ import {
   DialogContent,
   DialogTitle,
   Stack,
-  TextField,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import {
-  createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidgetAction,
-} from '../../../redux/slices/Paper';
-import TinyEditorComponent from '../../tiny_editor/react_tiny/TinyEditorComponent';
 
-function SmallAnswerProblemEditWidget({
-  createSmallAnswerProblemWidget,
-  updateSmallAnswerProblemWidget,
+import {
+  createBigAnswerQuestionWidgetAction,
+  updateBigAnswerQuestionWidgetAction,
+} from '../../../../redux/slices/widget';
+import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
+
+type BigAnswerProblemEditWidgetPropsType = {
+  handleClose: any;
+  createBigAnswerQuestionWidget: any;
+  updateBigAnswerQuestionWidget: any;
+
+  open: boolean;
+  text: string;
+  solution: any;
+  paperId: number;
+  id: string;
+}
+
+const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
   handleClose,
+  createBigAnswerQuestionWidget,
+  updateBigAnswerQuestionWidget,
 
   open,
   text: oldText,
   solution: oldSolution,
-  answer: oldAnswer,
   paperId,
   id: widgetId,
-}) {
+}) => {
   const t = useTranslate();
   const [text, setText] = useState<string>(oldText);
-  const [answer, setAnswer] = useState<string>(oldAnswer?.text || '');
   const [solution, setSolution] = useState<string>(oldSolution || '');
 
-  const handleSubmit = () => {
+  const handleClick = () => {
     if (widgetId) {
-      updateSmallAnswerProblemWidget({
+      updateBigAnswerQuestionWidget({
         widgetId,
         paper: paperId,
         text: text,
-        answer,
         solution,
       }).then((response) => {
         if (response.type?.endsWith('fulfilled')) {
           handleClose();
         }
-      });
+      })
     } else {
-      createSmallAnswerProblemWidget({
+      createBigAnswerQuestionWidget({
         paper: paperId,
         text: text,
-        answer,
         solution,
       }).then((response) => {
         if (response.type?.endsWith('fulfilled')) {
           handleClose();
         }
-      });
+      })
     }
   };
 
@@ -66,22 +74,16 @@ function SmallAnswerProblemEditWidget({
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
+      scroll="body"
       disableAutoFocus
       disableEnforceFocus>
-      <DialogTitle>{t('shortAnswerQuestion')}</DialogTitle>
+      <DialogTitle>{'سوال تشریحی'}</DialogTitle>
       <DialogContent>
         <Stack spacing={1}>
           <label>{'صورت سوال'}</label>
           <TinyEditorComponent
             content={text}
-            onChange={(text) => setText(text)}
-          />
-          <label>{t('answer')}</label>
-          <TextField
-            variant='outlined'
-            fullWidth
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
+            onChange={(val: string) => setText(val)}
           />
           <label>{'راه‌حل'}</label>
           <TinyEditorComponent
@@ -91,15 +93,18 @@ function SmallAnswerProblemEditWidget({
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSubmit} color="primary" variant="contained">
+        <Button onClick={handleClick} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
-    </Dialog >
+    </Dialog>
   );
 }
 
-export default connect(null, {
-  createSmallAnswerProblemWidget: createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidget: updateSmallAnswerProblemWidgetAction,
-})(SmallAnswerProblemEditWidget);
+export default connect(
+  null,
+  {
+    createBigAnswerQuestionWidget: createBigAnswerQuestionWidgetAction,
+    updateBigAnswerQuestionWidget: updateBigAnswerQuestionWidgetAction,
+  }
+)(BigAnswerProblemEditWidget);

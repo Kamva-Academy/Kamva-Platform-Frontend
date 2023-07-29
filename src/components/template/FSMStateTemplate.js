@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import React, { useMemo, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import Widget from 'components/Widget';
+import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
 import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';

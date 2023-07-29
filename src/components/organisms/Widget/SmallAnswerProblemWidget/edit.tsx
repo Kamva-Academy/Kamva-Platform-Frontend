@@ -16,7 +16,7 @@ import {
 } from '../../../../redux/slices/Paper';
 import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
 
-function InviteeUsernameEdit({
+function SmallAnswerProblemEditWidget({
   createSmallAnswerProblemWidget,
   updateSmallAnswerProblemWidget,
   handleClose,
@@ -68,16 +68,25 @@ function InviteeUsernameEdit({
       fullWidth
       disableAutoFocus
       disableEnforceFocus>
-      <DialogTitle>{'کد معرف'}</DialogTitle>
+      <DialogTitle>{t('shortAnswerQuestion')}</DialogTitle>
       <DialogContent>
         <Stack spacing={1}>
+          <label>{'صورت سوال'}</label>
+          <TinyEditorComponent
+            content={text}
+            onChange={(text) => setText(text)}
+          />
+          <label>{t('answer')}</label>
           <TextField
-            sx={{ mt: 1}}
             variant='outlined'
             fullWidth
             value={answer}
-            label={'متن سوال خود را وارد کنید'}
             onChange={(e) => setAnswer(e.target.value)}
+          />
+          <label>{'راه‌حل'}</label>
+          <TinyEditorComponent
+            content={solution}
+            onChange={(val: string) => setSolution(val)}
           />
         </Stack>
       </DialogContent>
@@ -93,4 +102,4 @@ function InviteeUsernameEdit({
 export default connect(null, {
   createSmallAnswerProblemWidget: createSmallAnswerProblemWidgetAction,
   updateSmallAnswerProblemWidget: updateSmallAnswerProblemWidgetAction,
-})(InviteeUsernameEdit);
+})(SmallAnswerProblemEditWidget);

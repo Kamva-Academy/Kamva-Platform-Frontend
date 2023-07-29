@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom'
 import {
   createMiniGameWidgetAction,
   updateMiniGameWidgetAction,
-} from '../../../redux/slices/widget';
+} from '../../../../redux/slices/widget';
 
 function MiniGameEditWidget({
   open,
