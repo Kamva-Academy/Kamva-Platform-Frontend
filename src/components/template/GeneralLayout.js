@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Routes, useNavigate, useParams } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
-import AppBar from '../Appbar/ResponsiveAppBar';
+import AppBar from 'components/organisms/Appbar';
 import { getUserProfileAction } from '../../redux/slices/account';
 import { addNotificationAction } from '../../redux/slices/notifications';
 

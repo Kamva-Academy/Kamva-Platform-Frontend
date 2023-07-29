@@ -3,9 +3,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Brush as BrushIcon } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 
-import CustomDraggable from '../../../CustomDraggable';
-import Whiteboard from '../../../Whiteboard';
-import useWidth from '../../../../utils/UseWidth';
+import CustomDraggable from 'components/CustomDraggable';
+import Whiteboard from 'components/Whiteboard';
+import useWidth from 'utils/UseWidth';
 
 const useStyle = makeStyles(() => ({
   dragArea: {

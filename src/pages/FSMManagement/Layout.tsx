@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import makeStyles from '@mui/styles/makeStyles';
 
-import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import AppBar from 'components/organisms/Appbar';
 
 const useStyles = makeStyles((theme) => ({
   container: {

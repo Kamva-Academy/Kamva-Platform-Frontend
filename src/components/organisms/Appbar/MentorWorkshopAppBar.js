@@ -7,7 +7,7 @@ import ChatRoomButton from './components/ChatRoomButton';
 import ReviewAnswersButton from './components/ReviewAnswersButton';
 import TeamAvatar from './components/UsersAvatar';
 import WhiteboardButton from './components/WhiteboardButton';
-import { announceMentorDeparture } from '../../../parse/mentorsInRoom';
+import { announceMentorDeparture } from 'parse/mentorsInRoom';
 
 const WorkshopAppBarItems = ({ workshop, isMentor, mentorId }) => {
 

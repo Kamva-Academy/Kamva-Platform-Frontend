@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { stringToColor } from '../../../../utils/stringToColor';
+import { stringToColor } from 'utils/stringToColor';
 
 function AvatarComponent({ name = 'بی‌نام' }) {
   return (

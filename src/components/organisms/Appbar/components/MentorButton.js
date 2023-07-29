@@ -3,8 +3,8 @@ import React, { useContext, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { StatePageContext } from 'pages/FSM';
-import { requestMentorAction } from '../../../../redux/slices/currentState';
-import useWidth from '../../../../utils/UseWidth';
+import { requestMentorAction } from 'redux/slices/currentState';
+import useWidth from 'utils/UseWidth';
 
 
 function MentorButton({ callMentor }) {

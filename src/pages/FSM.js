@@ -4,21 +4,21 @@ import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
-import { initParseServer } from '../parse/init';
-import ResponsiveAppBar from '../components/Appbar/ResponsiveAppBar';
+import { initParseServer } from 'parse/init';
+import ResponsiveAppBar from 'components/organisms/Appbar';
 import FSMStateTemplate from 'components/template/FSMStateTemplate';
 import { createTeamState, getChangeTeamStateSubscription, getTeamState } from '../parse/team';
 import {
   enterWorkshopAction,
   mentorGetCurrentStateAction,
   changeOpenChatRoomAction,
-} from '../redux/slices/currentState';
+} from 'redux/slices/currentState';
 import {
   addNotificationAction,
-} from '../redux/slices/notifications';
+} from 'redux/slices/notifications';
 import {
   getOneWorkshopAction,
-} from '../redux/slices/workshop';
+} from 'redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from '../parse/mentorsInRoom';
 import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
 

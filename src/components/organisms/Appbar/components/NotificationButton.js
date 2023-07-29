@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import dateFormatter from '../../../../utils/dateFormatter';
+import dateFormatter from '../../../../../utils/dateFormatter';
 
 const useStyles = makeStyles((theme) => ({
   badge: {

@@ -3,7 +3,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AppBar from '../../components/Appbar/ResponsiveAppBar';
+import AppBar from 'components/organisms/Appbar';
 
 const useStyles = makeStyles((theme) => ({
   container: {

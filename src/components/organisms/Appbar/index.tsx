@@ -15,10 +15,10 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import {
   getOneEventInfoAction,
-} from '../../../redux/slices/events';
+} from 'redux/slices/events';
 import HideOnScroll from './components/HideOnScroll';
 import modes from './modes';
-import useWidth from '../../../utils/UseWidth';
+import useWidth from 'utils/UseWidth';
 
 type AppbarPropsType = {
   isMentor: boolean;

@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import React from 'react';
 
-import AppBar from '../Appbar/ResponsiveAppBar';
+import AppBar from 'components/organisms/Appbar';
 
 const ArticleLayout = ({
   appbarMode = 'STUDENT_DASHBOARD',

@@ -2,7 +2,7 @@ import { Button, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React, { useState } from 'react';
 
-import ReviewAnswers from '../../../organisms/dialogs/ReviewAnswers';
+import ReviewAnswers from 'components/organisms/dialogs/ReviewAnswers';
 
 const useStyles = makeStyles(() => ({
   iconImage: {
