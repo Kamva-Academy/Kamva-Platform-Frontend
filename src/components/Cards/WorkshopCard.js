@@ -10,18 +10,17 @@ import {
   Stack,
   Box,
   IconButton,
-  Tooltip
+  Tooltip,
+  Skeleton,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { Lock, LockOpen } from '@mui/icons-material';
-import ModeEditTwoToneIcon from '@mui/icons-material/ModeEditTwoTone';
-import { Skeleton } from '@mui/material';
+import { Lock, LockOpen, ModeEditTwoToneIcon } from '@mui/icons-material';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import { enterWorkshopAction } from '../../redux/slices/currentState';
-import PasswordDialog from '../SpecialComponents/WorkshopsPage/PasswordDialog';
+import PasswordDialog from 'components/organisms/dialogs/PasswordDialog';
 
 const useStyles = makeStyles((theme) => ({
   card: {
