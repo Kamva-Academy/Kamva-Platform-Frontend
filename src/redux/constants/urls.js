@@ -59,7 +59,6 @@ export const TeamCRUDUrl = ({ teamId }) =>
 
 export const createTeamAndJoinActionUrl = 'fsm/team/create_team_and_join/';
 
-export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
 
 export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/articles/${articleId}` : `fsm/articles/?page=${pageNumber}`;
 
@@ -70,11 +69,8 @@ export const statesUrl = 'fsm/state/';
 export const hintUrl = ({ hintId }) => hintId ? `fsm/hint/${hintId}/` : 'fsm/hint/';
 export const widgetHintUrl = ({ hintId }) => hintId ? `fsm/widget-hint/${hintId}/` : 'fsm/widget-hint/';
 
-export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
-export const getLandingDataUrl = `https://res.cloudinary.com/dflcxtpro/raw/upload/v${Math.floor(
-  Math.random() * 10000000
-)}/rasta/landing-zero-v3_d5lbgq.json/`;
+
 
 export const goBackwardUrl = ({ id }) => `fsm/edge/${id}/go_backward/`;
 
@@ -89,7 +85,6 @@ export const mentorMoveForwardUrl = ({ id }) =>
 
 export const mentorGetCurrentStateUrl = ({ id }) => `fsm/player/${id}/`;
 
-export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 
 export const enterWorkshopUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/enter/`;
 
@@ -99,10 +94,9 @@ export const getEventRegistrationInfoUrl = 'auth/registration-info/';
 
 export const paymentRequestUrl = 'auth/pay/';
 
-// widget
-export const sendWidgetAnswerUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/submit_answer/`;
-export const makeAnswerEmptyUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/make_empty/`;
 
+// landing
+export const getLandingDataUrl = '?';
 
 //event
 export const getCertificateUrl = ({ registrationReceiptId }) => `/fsm/receipts/${registrationReceiptId}/get_certificate/`;
@@ -110,9 +104,7 @@ export const applyDiscountUrl = 'auth/verify-discount/';
 
 export const getScoresUrl = 'fsm/getscores/';
 
-export const getProblemsUrl = 'fsm/getproblems/';
 
-export const markSubmissionUrl = 'fsm/marksubmission/';
 
 // for mentors
 
@@ -152,11 +144,6 @@ export const removeMentorURL = ({ fsmId }) => `/fsm/fsm/${fsmId}/remove_mentor/`
 export const stateCRUDUrl = ({ paperId }) => paperId ? `/fsm/state/${paperId}/` : '/fsm/state/';
 export const edgeUrl = ({ edgeId }) => edgeId ? `/fsm/edge/${edgeId}/` : '/fsm/edge/';
 
-// widget:
-export const makeWidgetFileEmptyUrl = ({ widgetId }) => `fsm/widget/${widgetId}/make_widget_file_empty/`;
-export const widgetCRUDUrl = ({ widgetId }) => widgetId ? `fsm/widget/${widgetId}/` : 'fsm/widget/';
-export const statesCRUDUrl = ({ paperId }) => paperId ? `fsm/state/${paperId}/` : 'fsm/state/';
-
 // fsm:
 export const eventInfoUrl = ({ pageNumber, eventId }) => eventId ? `fsm/event/${eventId}/` : `fsm/event/?page=${pageNumber}`;
 export const allRegistrationReceiptsUrl = ({ registrationFormId, pageNumber }) => `fsm/registration/${registrationFormId}/receipts/?page=${pageNumber}`;
@@ -179,7 +166,18 @@ export const getAnswerScoresAndCommentsUrl = 'scoring/get_answer_scores_and_comm
 export const setAnswerScoreUrl = 'scoring/set_answer_score/';
 export const createCommentUrl = 'scoring/create_comment/';
 
-
 // question
 export const checkUsernameUrl = 'question/check_username/';
+
+// widget
+export const sendWidgetAnswerUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/submit_answer/`;
+export const makeAnswerEmptyUrl = ({ widgetId }) => `/fsm/widget/${widgetId}/make_empty/`;
+export const getProblemsUrl = 'fsm/getproblems/';
+export const getUnreadNotificationsUrl = 'notifications/api/unread_list/';
+export const markSubmissionUrl = 'fsm/marksubmission/';
+export const makeWidgetFileEmptyUrl = ({ widgetId }) => `fsm/widget/${widgetId}/make_widget_file_empty/`;
+export const widgetCRUDUrl = ({ widgetId }) => widgetId ? `fsm/widget/${widgetId}/` : 'fsm/widget/';
+export const statesCRUDUrl = ({ paperId }) => paperId ? `fsm/state/${paperId}/` : 'fsm/state/';
+export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
+export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
