@@ -42,7 +42,7 @@ const Landing = ({ token }) => {
           </Grid>
           <Grid item>
             <Typography variant="h2" align="center">
-              پتلفرم برگزاری دوره‌های آنلاین
+              پلتفرم برگزاری دوره‌های آنلاین
             </Typography>
           </Grid>
           <Grid item>
