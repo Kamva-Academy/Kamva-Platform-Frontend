@@ -202,9 +202,11 @@ const checkPermission = (audienceType, userProfile = {}) => {
   const checkPrimaryFields = !first_name || !last_name || !national_code || !birth_date || !gender || !province || !city;
 
   if (audienceType == 'Student') {
-    const { grade, school } = userProfile?.school_studentship;
-    if (checkPrimaryFields || !grade || !school) {
-      return false;
+    if (userProfile.school_studentship) {
+      const { grade, school } = userProfile.school_studentship;
+      if (checkPrimaryFields || !grade || !school) {
+        return false;
+      }
     }
   }
 
