@@ -123,7 +123,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   const submitCreateTeam = () => {
     if (!newTeamName) {
       addNotification({
-        message: 'لطفاً نام تیم را وارد کنید.',
+        message: 'لطفاً نام گروه را وارد کنید.',
         type: 'error',
       });
       return;
@@ -167,19 +167,19 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                   <>
                     <Typography variant="caption">
                       {
-                        'شما در تیمی عضو نیستید. یا خودتان یک تیم بسازید  و دیگران را به آن دعوت کنید، یا یکی از دعوت‌نامه‌هایی را که برایتان ارسال شده، قبول کنید.'
+                        'شما در تیمی عضو نیستید. یا خودتان یک گروه بسازید  و دیگران را به آن دعوت کنید، یا یکی از دعوت‌نامه‌هایی را که برایتان ارسال شده، قبول کنید.'
                       }
                     </Typography>
                     <Stack spacing={1}>
                       <Typography align="center" variant="h2">
-                        {'ایجاد تیم جدید'}
+                        {'ایجاد گروه جدید'}
                       </Typography>
                       <TextField
                         size="small"
                         fullWidth
                         variant="outlined"
                         value={newTeamName}
-                        label="نام تیم"
+                        label="نام گروه"
                         onChange={(e) => setNewTeamName(e.target.value)}
                       />
                       <Button
@@ -195,11 +195,11 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                 {team &&
                   <>
                     <Typography align="center" variant="h2" gutterBottom>
-                      {`تیم «${team.name}»`}
+                      {`گروه «${team.name}»`}
                     </Typography>
                     {isHead && (
                       <Box sx={{ position: 'absolute', right: 0, top: 0, marginTop: '0px !important' }}>
-                        <Tooltip title="حذف تیم" arrow>
+                        <Tooltip title="حذف گروه" arrow>
                           <IconButton
                             size="small"
                             onClick={() => changeDeleteTeamDialogStatus(true)}>
@@ -252,7 +252,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
               </Typography>
               {isHead && (
                 <Box sx={{ position: 'absolute', right: 0, top: 0 }}>
-                  <Tooltip title={'دعوت عضو جدید به تیم'} arrow>
+                  <Tooltip title={'دعوت عضو جدید به گروه'} arrow>
                     <IconButton
                       size="small"
                       onClick={
@@ -319,7 +319,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell align="center">تیم</TableCell>
+                      <TableCell align="center">گروه</TableCell>
                       <TableCell align="center">نام سرگروه</TableCell>
                       <TableCell align="center">شماره تلفن سرگروه</TableCell>
                       <TableCell align="center">پاسخ</TableCell>

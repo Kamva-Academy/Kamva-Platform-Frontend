@@ -210,7 +210,7 @@ export const createTeamAction = createAsyncThunkApi(
   TeamCRUDUrl,
   {
     defaultNotification: {
-      success: 'تیم با موفقیت ساخته شد.',
+      success: 'گروه با موفقیت ساخته شد.',
       error: 'مشکلی وجود داشت.',
     },
   }
@@ -222,7 +222,7 @@ export const createTeamAndJoinAction = createAsyncThunkApi(
   createTeamAndJoinActionUrl,
   {
     defaultNotification: {
-      success: 'تیم با موفقیت ساخته شد.',
+      success: 'گروه با موفقیت ساخته شد.',
       error: 'مشکلی وجود داشت.',
     },
   }
@@ -234,7 +234,7 @@ export const updateTeamChatRoomLinkAction = createAsyncThunkApi(
   TeamCRUDUrl,
   {
     defaultNotification: {
-      success: 'اتاق گفت‌وگوی تیم با موفقیت تغییر کرد.',
+      success: 'اتاق گفت‌وگوی گروه با موفقیت تغییر کرد.',
       error: 'مشکلی وجود داشت.',
     },
   }
@@ -247,7 +247,7 @@ export const deleteTeamAction = createAsyncThunkApi(
   TeamCRUDUrl,
   {
     defaultNotification: {
-      success: 'تیم با موفقیت حذف شد.',
+      success: 'گروه با موفقیت حذف شد.',
       error: 'مشکلی وجود داشت.',
     },
   }
@@ -436,7 +436,7 @@ export const makeTeamHeadAction = createAsyncThunkApi(
       receipt,
     }),
     defaultNotification: {
-      success: 'سرگروه تیم با موفقیت تغییر کرد.',
+      success: 'سرگروه گروه با موفقیت تغییر کرد.',
     },
   }
 );
@@ -450,7 +450,7 @@ export const removeFromTeamAction = createAsyncThunkApi(
       receipt,
     }),
     defaultNotification: {
-      success: 'کاربر از تیم با موفقیت حذف شد.',
+      success: 'کاربر از گروه با موفقیت حذف شد.',
     },
   }
 );

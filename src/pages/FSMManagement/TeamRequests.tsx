@@ -126,8 +126,8 @@ const Teams: FC<TeamPropsType> = ({
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="همه تیم‌ها" {...a11yProps(0)} />
-            <Tab label="تیم‌های نشان شده" {...a11yProps(1)} />
+            <Tab label="همه گروه‌ها" {...a11yProps(0)} />
+            <Tab label="گروه‌های نشان شده" {...a11yProps(1)} />
             <Tab label="درخواست‌ها" {...a11yProps(2)} />
           </Tabs>
         </Box>

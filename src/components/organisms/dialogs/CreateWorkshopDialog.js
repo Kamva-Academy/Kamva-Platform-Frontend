@@ -73,13 +73,13 @@ function CreateWorkshopDialog({
           </Grid>
           <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
-              <InputLabel>وضعیت تیم</InputLabel>
+              <InputLabel>وضعیت گروه</InputLabel>
               <Select
                 onChange={putData}
                 name='fsm_p_type'
-                label='وضعیت تیم'>
+                label='وضعیت گروه'>
                 <MenuItem value={'Individual'}>{'فردی'}</MenuItem>
-                <MenuItem value={'Team'}>{'تیمی'}</MenuItem>
+                <MenuItem value={'Team'}>{'گروهی'}</MenuItem>
                 <MenuItem value={'Hybrid'}>{'هیبرید'}</MenuItem>
               </Select>
             </FormControl >

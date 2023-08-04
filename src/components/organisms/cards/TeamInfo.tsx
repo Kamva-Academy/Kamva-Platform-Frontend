@@ -104,7 +104,7 @@ const TeamInfo = ({
               </Box>
             ))
               :
-              <Typography marginLeft='10px' marginTop='20px'>این تیم هیچ عضوی ندارد.</Typography>}
+              <Typography marginLeft='10px' marginTop='20px'>این گروه هیچ عضوی ندارد.</Typography>}
           </Stack>
         </CardContent>
         <CardActions sx={{ alignItems: 'center' }}>
@@ -117,7 +117,7 @@ const TeamInfo = ({
                 error={!linkIsValid && !(teamLink == '' || teamLink == null)}
                 helperText={(!linkIsValid && !(teamLink == '' || teamLink == null)) ? ".ورودی وارد شده لینک معتبری نیست" : ' '}
                 id="standard-multiline-static"
-                label="لینک تیم"
+                label="لینک گروه"
                 multiline
                 rows={3}
                 placeholder="somelink.somedomain"

@@ -128,7 +128,7 @@ const Workshop = ({
       if (isMentor) {
         addNotification({
           type: 'info',
-          message: 'یکی از دانش‌آموزان مکان تیم رو جا‌به‌جا کرد!',
+          message: 'یکی از دانش‌آموزان مکان گروه رو جا‌به‌جا کرد!',
         });
         mentorGetCurrentState({ id: playerId });
       } else {

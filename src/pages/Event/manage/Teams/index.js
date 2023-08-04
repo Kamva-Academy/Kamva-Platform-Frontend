@@ -90,7 +90,7 @@ function Teams({
       <Grid container spacing={2} margin='-8px' marginBottom='30px'>
         <Grid item xs={12}>
           <Typography variant='h4'>
-            {'ساخت تیم'}
+            {'ساخت گروه'}
           </Typography>
         </Grid>
         <Grid item container xs spacing={1}>
@@ -100,7 +100,7 @@ function Teams({
               size="small"
               fullWidth
               variant="outlined"
-              label="نام تیم"
+              label="نام گروه"
               onChange={(e) => { setNewTeamName(e.target.value) }}
             />
           </Grid>
@@ -122,7 +122,7 @@ function Teams({
 
         <Grid item xs={12}>
           <Typography variant='h4'>
-            {'افزودن کاربر به تیم'}
+            {'افزودن کاربر به گروه'}
           </Typography>
         </Grid>
         <Grid item container xs spacing={1}>
@@ -139,8 +139,8 @@ function Teams({
           </Grid>
           <Grid item xs={12} sm={4}>
             <FormControl size="small" fullWidth variant="outlined">
-              <InputLabel>تیم</InputLabel>
-              <Select defaultValue="" onChange={(e) => setSelectedTeamId(e.target.value)} label="تیم">
+              <InputLabel>گروه</InputLabel>
+              <Select defaultValue="" onChange={(e) => setSelectedTeamId(e.target.value)} label="گروه">
                 {allEventTeams?.map((team) => (
                   <MenuItem key={team.id} value={team.id || ''}>
                     {team.name}

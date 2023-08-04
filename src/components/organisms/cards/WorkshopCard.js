@@ -76,7 +76,7 @@ export const WorkshopCard = ({
             >
               <Stack direction='row' alignSelf='center' marginTop='7px'>
                 <Box marginLeft='5px' marginRight='5px'>{workshop?.has_lock ? <Lock /> : <LockOpen />}</Box>
-                <Typography>{workshop?.fsm_p_type == 'Team' ? 'تیمی' : 'فردی'}</Typography>
+                <Typography>{workshop?.fsm_p_type == 'Team' ? 'گروهی' : 'فردی'}</Typography>
               </Stack>
               <Box>
                 {

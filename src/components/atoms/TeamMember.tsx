@@ -82,7 +82,7 @@ const TeamMember: FC<TeamMemberPropsType> = ({
           <MenuItem onClick={() => {
             setRemoveTeamMemberDialog(true);
             handleClose();
-          }}>{'حذف از تیم'}</MenuItem>
+          }}>{'حذف از گروه'}</MenuItem>
         </Menu>
       </Stack>
 

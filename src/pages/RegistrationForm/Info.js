@@ -59,7 +59,7 @@ const RegistrationForm = ({
         )}
         <Typography align="center">{event?.description}</Typography>
         {event?.event_type == 'Team' && (
-          <Typography align="center">{`شرکت در این رویداد در قالب تیم‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
+          <Typography align="center">{`شرکت در این رویداد در قالب گروه‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
         )}
         {event?.event_type == 'Individual' && (
           <Typography align="center">{'شرکت در این رویداد به صورت فردی است.'}</Typography>

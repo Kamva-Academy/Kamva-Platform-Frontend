@@ -34,8 +34,8 @@ function Dashboard() {
           style={{ height: '100%' }}>
           <Grid container item direction="column" sm={5}>
             <Paper className={classes.paper}>
-              <Grid item>شماره تیم</Grid>
-              <Grid item>اسم تیم</Grid>
+              <Grid item>شماره گروه</Grid>
+              <Grid item>اسم گروه</Grid>
               <Grid item>salam</Grid>
               <Grid item>salam</Grid>
               <Grid item>
