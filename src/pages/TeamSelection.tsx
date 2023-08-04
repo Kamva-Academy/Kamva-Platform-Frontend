@@ -153,7 +153,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
         spacing={2}>
         <Grid item xs={12}>
           <Typography gutterBottom align="center" variant='h1'>
-            {'تیم‌کشی'}
+            {'گروه‌بندی'}
           </Typography>
         </Grid>
         <Grid item xs={12} sm={4}>

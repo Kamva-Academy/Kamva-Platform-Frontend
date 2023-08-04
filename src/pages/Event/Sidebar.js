@@ -84,7 +84,7 @@ function Workshops({
               variant="outlined"
               fullWidth
               onClick={() => navigate(`/event/${event?.id}/team-selection/`)}>
-              {'تیم‌کشی'}
+              {'گروه‌بندی'}
             </Button>
             <Button
               disabled={!event?.has_certificate || !event?.certificates_ready}
