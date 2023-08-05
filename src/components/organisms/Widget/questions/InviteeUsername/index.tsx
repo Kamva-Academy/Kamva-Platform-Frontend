@@ -106,7 +106,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
               error={!!username && !(inviteeUserFirstName && isPhoneNumber(username))}
               helperText={username &&
                 ((inviteeUserFirstName && isPhoneNumber(username))
-                  ? `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این رویداد دعوت شده‌اید!`
+                  ? `شما توسط ${inviteeUserFirstName} ${inviteeUserLastName} به این دوره دعوت شده‌اید!`
                   : 'نام کاربری معتبر نیست')}
               color={username && inviteeUserFirstName && isPhoneNumber(username) ? 'success' : null}
             />

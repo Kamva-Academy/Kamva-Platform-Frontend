@@ -99,7 +99,7 @@ function Workshops({
                 variant="contained"
                 fullWidth
                 onClick={() => navigate(`/event/${event?.id}/manage/info`)}>
-                {'مدیریت رویداد'}
+                {'مدیریت دوره'}
               </Button>
             </>}
           </Stack>

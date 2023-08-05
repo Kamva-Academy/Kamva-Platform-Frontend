@@ -25,7 +25,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const { eventId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
   const chatRoomButton = <ChatRoomButton />;
-  const backToEventButton = <DashboardButton name={'بازگشت به رویداد'} to={`/event/${eventId}/`} />;
+  const backToEventButton = <DashboardButton name={'بازگشت به دوره'} to={`/event/${eventId}/`} />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;

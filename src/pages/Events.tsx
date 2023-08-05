@@ -102,19 +102,19 @@ const Events = ({
       <Grid container spacing={4} justifyContent='center'>
         <Grid item xs={12}>
           <Typography variant="h1" align='center' component="h2">
-            {'رویدادها'}
+            {'دوره‌‌ها'}
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant='h2' gutterBottom>
-            {'رویدادهای در جریان'}
+            {'دوره‌‌های در جریان'}
           </Typography>
           <Divider />
         </Grid>
         { isLoading ? skeletonElements : activeEventsElement }
         <Grid item xs={12}>
           <Typography variant='h2' gutterBottom>
-            {'رویدادهای گذشته'}
+            {'دوره‌‌های گذشته'}
           </Typography>
           <Divider />
         </Grid>

@@ -104,7 +104,7 @@ const Payment = ({
               <>
                 <Grid item container justifyContent="center" alignItems="center">
                   <Typography variant='h6' align="center">
-                    {'شما برای شرکت در این رویداد پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'}
+                    {'شما برای شرکت در این دوره پذیرفته‌شده‌اید! توجه کنید تا پرداخت خود را انجام ندهید، ثبت‌نامتان قطعی نشده است.'}
                   </Typography>
                 </Grid>
                 <Grid container item justifyContent="center" alignItems='end' spacing={2}>
@@ -161,7 +161,7 @@ const Payment = ({
                   spacing={1}>
                   <Typography align="center">
                     {
-                      'شما فرم‌ثبت‌نام در این رویداد را پر کرده‌اید! منتظر نتیجه‌ی بررسی از جانب ما باشید.'
+                      'شما فرم‌ثبت‌نام در این دوره را پر کرده‌اید! منتظر نتیجه‌ی بررسی از جانب ما باشید.'
                     }
                   </Typography>
                 </Grid>
@@ -177,7 +177,7 @@ const Payment = ({
                   alignItems="center"
                   spacing={1}>
                   <Typography align="center">
-                    {'متاسفانه شما برای شرکت در این رویداد پذیرفته‌نشده‌اید :('}
+                    {'متاسفانه شما برای شرکت در این دوره پذیرفته‌نشده‌اید :('}
                   </Typography>
                 </Grid>
               </>

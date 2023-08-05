@@ -59,10 +59,10 @@ const RegistrationForm = ({
         )}
         <Typography align="center">{event?.description}</Typography>
         {event?.event_type == 'Team' && (
-          <Typography align="center">{`شرکت در این رویداد در قالب گروه‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
+          <Typography align="center">{`شرکت در این دوره در قالب گروه‌های ${toPersianNumber(event?.team_size)} نفره امکان‌پذیر است.`}</Typography>
         )}
         {event?.event_type == 'Individual' && (
-          <Typography align="center">{'شرکت در این رویداد به صورت فردی است.'}</Typography>
+          <Typography align="center">{'شرکت در این دوره به صورت فردی است.'}</Typography>
         )}
         {event?.merchandise?.price > 0 ? (
           <Typography align="center">{`هزینه‌ی ثبت‌نام برای هر نفر ${toPersianNumber(event?.merchandise?.price)} تومان است.`}</Typography>

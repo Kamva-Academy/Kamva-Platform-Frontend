@@ -76,7 +76,7 @@ const RegistrationForm = ({
     steps.push('پرداخت هزینه')
   }
 
-  steps.push('ورود به رویداد')
+  steps.push('ورود به دوره')
 
   useEffect(() => {
     if (event?.user_registration_status == 'Waiting' || event?.user_registration_status == 'Rejected') {

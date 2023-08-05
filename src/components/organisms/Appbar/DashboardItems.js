@@ -15,7 +15,7 @@ const DashboardItems = () => {
   }, [])
 
   const logoButton = <LogoButton />;
-  const eventsButton = <DashboardButton name={'رویدادها'} to={'/events/'} />;
+  const eventsButton = <DashboardButton name={'دوره‌‌ها'} to={'/events/'} />;
   const articlesButton = <DashboardButton name={'مقاله‌ها'} to={'/articles/'} />;
   const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/workshops/'} />;
   const profileButton = <DashboardButton name={'پروفایل'} to={'/profile/personal/'} />;

@@ -132,12 +132,12 @@ const RegistrationForm = ({
           {widgets}
           {event?.user_registration_status == 'DeadlineMissed' ?
             <Typography variant='h4' color='error' align="center" gutterBottom>
-              {'مهلت ثبت‌نام در رویداد پایان یافته است.'}
+              {'مهلت ثبت‌نام در دوره پایان یافته است.'}
             </Typography>
             : (
               event?.user_registration_status == 'NotPermitted' ? (
                 <Typography variant='h4' color='error' align="center" gutterBottom>
-                  {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید.'}
+                  {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این دوره نیستید.'}
                 </Typography>
               ) : (
                 !checkPermission(registrationForm?.audience_type, userProfile) ? (
