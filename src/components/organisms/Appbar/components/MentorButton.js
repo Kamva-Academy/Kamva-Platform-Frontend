@@ -19,7 +19,7 @@ function MentorButton({ callMentor }) {
       variant="contained"
       color="primary"
       disabled={!isEnable}
-      sx={{ marginLeft: 5, fontSize: width == 'xs' ? 12 : 18 }}
+      sx={{ marginLeft: 1, fontSize: width == 'xs' ? 12 : 18 }}
       onClick={() => {
         callMentor({ playerId, teamId, fsmId: +fsmId })
         setEnable(false);
