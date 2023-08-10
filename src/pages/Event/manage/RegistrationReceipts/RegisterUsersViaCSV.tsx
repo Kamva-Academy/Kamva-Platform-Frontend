@@ -50,7 +50,7 @@ const RegisterUsersViaCSV: FC<RegisterUsersViaCSVPropsType> = ({
           {'افزودن کاربران از طریق فایل csv'}
         </Typography>
         <Typography>
-          <Link style={{ textDecoration: 'none' }} target="_blank" download to={"/register-users-sample.csv"}>{'(نمونه فایل)'}</Link>
+          <Link style={{ textDecoration: 'none' }} target="_blank" download to={"/register-participants-sample.csv"}>{'(نمونه فایل)'}</Link>
         </Typography>
       </Stack>
       <Grid container spacing={1}>
