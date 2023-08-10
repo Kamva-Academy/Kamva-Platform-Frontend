@@ -10,7 +10,7 @@ import reduxStore from './redux/store';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
-    dsn: process.env.SENTRY_DNS,
+    dsn: process.env.REACT_APP_SENTRY_DNS,
     integrations: [new BrowserTracing()],
     tracesSampleRate: 1.0,
   });
