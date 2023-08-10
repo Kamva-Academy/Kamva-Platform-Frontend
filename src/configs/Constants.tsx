@@ -1,7 +1,4 @@
-export const BASE_URL =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8000'
-    : 'https://backend.kamva.academy'
+export const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000';
 
 export const PARSE_SERVER_URL =
   process.env.NODE_ENV === 'development'
