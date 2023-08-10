@@ -1,9 +1,9 @@
-export const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8000';
+export const BACKEND_URL = process.env.BACKEND_URL || 'https://backend.kamva.academy/';
 
 export const PARSE_SERVER_URL =
   process.env.NODE_ENV === 'development'
-    ? 'https://parse.kamva.academy/server'
-    : 'https://parse.kamva.academy/server';
+    ? 'https://parse.kamva.academy/server/'
+    : 'https://parse.kamva.academy/server/';
 
 export const LIVE_QUERY_SERVER_URL =
   process.env.NODE_ENV === 'development'
