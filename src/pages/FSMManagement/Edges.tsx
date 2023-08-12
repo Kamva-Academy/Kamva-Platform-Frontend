@@ -2,7 +2,6 @@ import {
   Button,
   Checkbox,
   FormControl,
-  FormControlLabel,
   Grid,
   IconButton,
   InputLabel,
@@ -14,35 +13,20 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TextField,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
-import makeStyles from '@mui/styles/makeStyles';
-
-import {
-  addNotificationAction,
-} from '../../redux/slices/notifications';
-
 import {
   addEdgeAction,
   getAllWorkshopEdgesAction,
   getAllWorkshopStatesInfoAction,
   removeEdgeAction,
   updateEdgeAction,
-} from '../../redux/slices/workshop';
-import { toEnglishNumber, toPersianNumber } from '../../utils/translateNumber';
-import { WorkshopEdge, State } from '../../types/models'
-
-const useStyles = makeStyles((theme) => ({
-  absolute: {
-    position: 'absolute',
-    right: 2,
-    zIndex: 5,
-  },
-}));
+} from 'redux/slices/workshop';
+import { WorkshopEdge, State } from 'types/models';
+import CustomJoyrideButton from 'components/atoms/CustomJoyrideButton';
 
 type IndexPropsType = {
   addNotification: Function,
@@ -56,7 +40,6 @@ type IndexPropsType = {
 }
 
 const Index: FC<IndexPropsType> = ({
-  addNotification,
   getAllWorkshopEdges,
   getAllWorkshopStatesInfo,
   addEdge,
@@ -79,22 +62,20 @@ const Index: FC<IndexPropsType> = ({
     getAllWorkshopStatesInfo({ fsmId });
   }, [])
 
-  const doSearch = () => {
-
-  }
 
   return (
     <>
+      <CustomJoyrideButton />
       <Grid container spacing={1} alignItems="center" justifyContent="center">
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell align='center'>شروع</TableCell>
+                <TableCell align='center' className='my-other-step'>شروع</TableCell>
                 <TableCell align='center'>پایان</TableCell>
                 <TableCell align='center'>قابل مشاهده</TableCell>
                 <TableCell align='center'>قابل بازگشت</TableCell>
-                <TableCell align='center'>عملیات</TableCell>
+                <TableCell align='center' className='my-first-step'>عملیات</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
