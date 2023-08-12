@@ -1,5 +1,9 @@
 FROM node:latest as build
 WORKDIR /app
+
+ARG REACT_APP_SENTRY_DNS
+ARG REACT_APP_BACKEND_URL
+
 COPY ./package.json ./yarn.lock ./
 RUN yarn --production
 ENV PATH="./node_modules/.bin:$PATH"
