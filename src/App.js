@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Slide, ToastContainer } from 'react-toastify';
 import React, { useEffect } from 'react';
-import { CssBaseline, LinearProgress } from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 import { CacheProvider } from "@emotion/react";
@@ -17,7 +17,7 @@ import { initParseServer } from './parse/init';
 import { initRedirectAction } from './redux/slices/redirect';
 import Root from './routes';
 import translations from './translations';
-
+import LinearLoading from 'components/atoms/LinearLoading';
 
 const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
   const navigate = useNavigate();
@@ -43,18 +43,6 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
     document.body.dir = dir;
   }, [dir]);
 
-  const Loading = () => {
-    if (loading) {
-      return (
-        <div style={{ width: '100%', position: 'fixed', top: '0px', zIndex: '99999' }}>
-          <LinearProgress />
-        </div>
-      )
-    } else {
-      return (<></>)
-    }
-  }
-
   return (
     <IntlProvider translations={translations}>
       <CacheProvider value={createEmotionCache(dir)}>
@@ -73,7 +61,7 @@ const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
               limit={3}
               draggable={false}
             />
-            <Loading />
+            <LinearLoading loading={loading} />
             <Notifier />
             <CssBaseline />
             <Root />
