@@ -6,7 +6,7 @@ ARG REACT_APP_BACKEND_URL
 ARG REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID
 
 COPY ./package.json ./yarn.lock ./
-RUN yarn --production
+RUN yarn
 ENV PATH="./node_modules/.bin:$PATH"
 COPY . .
 RUN yarn run build
