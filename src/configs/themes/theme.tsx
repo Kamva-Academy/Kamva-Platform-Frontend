@@ -26,6 +26,9 @@ const theme = (variables) => ({
     contrastThreshold: 3,
     tonalOffset: 0.1,
   },
+  shape: {
+    borderRadius: 8,
+  },
   overrides: {
     MuiButton: {
       text: {
