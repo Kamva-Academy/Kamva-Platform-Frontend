@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import AboutUs from 'pages/AboutUs';
@@ -25,8 +25,17 @@ import PrivateRoute from './PrivateRoute';
 import FSMManagement from 'pages/FSMManagement';
 import Correction from 'pages/Correction';
 import EditArticle from 'pages/EditArticle';
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = process.env.REACT_APP_TRACKING_ID;
+ReactGA.initialize(TRACKING_ID);
 
 const Root = () => {
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <Routes>
       <Route path="/loading/"></Route>

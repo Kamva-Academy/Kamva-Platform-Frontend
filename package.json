@@ -30,6 +30,7 @@
     "react-datepicker2": "^3.3.13",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.4",
+    "react-ga": "^3.3.1",
     "react-joyride": "^2.5.5",
     "react-konva": "^18.2.1",
     "react-lazyload": "^3.2.0",
@@ -41,7 +42,7 @@
     "redux": "^4.1.1",
     "redux-undo": "^1.0.1",
     "stylis": "^4.1.1",
-    "stylis-plugin-rtl": "^2.1.1",
+    "stylis-plugin-rtl": "2.0.2",
     "tinymce": "^5.9.1"
   },
   "scripts": {
@@ -66,7 +67,7 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^5.30.7",
     "eslint": "^8.20.0",
     "eslint-plugin-react": "^7.30.1",
