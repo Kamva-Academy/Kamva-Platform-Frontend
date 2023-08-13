@@ -51,9 +51,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -71,10 +68,6 @@
     "@typescript-eslint/parser": "^6.3.0",
     "eslint": "^8.47.0",
     "eslint-plugin-react": "^7.33.1",
-    "redux-devtools": "^3.7.0",
-    "redux-devtools-dock-monitor": "^1.2.0",
-    "redux-devtools-log-monitor": "^2.1.0",
-    "redux-logger": "^3.0.6",
     "typescript": "^5.1.6"
   }
 }
