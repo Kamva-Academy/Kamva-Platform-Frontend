@@ -66,7 +66,7 @@ const RegisterUsersViaCSV: FC<RegisterUsersViaCSVPropsType> = ({
             </Button>
             <input
               ref={fileRef}
-              accept=".csv"
+              accept=".xlsx"
               id={"csv-info-input"}
               style={{ display: 'none' }}
               type="file"
