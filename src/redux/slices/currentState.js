@@ -134,7 +134,7 @@ const stateNeedUpdate = (state) => {
 
 const getNewState = (state, { payload: { response } }) => {
   state.needUpdateState = false;
-  state.state = response.current_state;
+  state.fsmState = response.current_state;
   state.isFetching = false;
 };
 
@@ -145,7 +145,7 @@ const getPlayer = (state, { payload: { response } }) => {
   state.teamRoom = response.team?.chat_room;
   // todo: here I put playerId as teamId
   state.teamId = response.team?.id ? response.team?.id : String(response.id);
-  state.state = response.current_state;
+  state.fsmState = response.current_state;
   state.myTeam = response.team;
   state.isFetching = false;
 };

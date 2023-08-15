@@ -1,4 +1,4 @@
-import { Fab, Toolbar } from '@mui/material';
+import { Toolbar } from '@mui/material';
 import Container from '@mui/material/Container';
 import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import React, { useEffect, useRef, useState } from 'react';
@@ -27,9 +27,8 @@ var moment = require('moment');
 export const StatePageContext = React.createContext();
 
 const Workshop = ({
-  workshopState,
+  fsmState,
   needUpdateState,
-  workshopId,
   paperId,
   studentPlayerId,
   myTeam,
@@ -123,8 +122,8 @@ const Workshop = ({
     setParseTeamState(teamState.get('paperId'));
 
   useEffect(() => {
-    if (!workshopState.id || !parseTeamState) return;
-    if (+parseTeamState !== +workshopState.id) {
+    if (!fsmState?.id || !parseTeamState) return;
+    if (+parseTeamState !== +fsmState.id) {
       if (isMentor) {
         addNotification({
           type: 'info',
@@ -139,13 +138,14 @@ const Workshop = ({
         enterWorkshop({ eventId, fsmId });
       }
     }
-  }, [parseTeamState]);
+  }, [parseTeamState, fsmState]);
 
   useEffect(() => {
+    if (!teamId || !fsmState) return;
     const subscribe = async (teamId) => {
       const teamState = await getTeamState(teamId)
       if (!teamState) {
-        await createTeamState(teamId, workshopState.id.toString(), workshopState.name, moment().format('HH:mm:ss'))
+        await createTeamState(teamId, fsmState.id.toString(), fsmState.name, moment().format('HH:mm:ss'))
       }
       const subscriber = await getChangeTeamStateSubscription({
         uuid: teamId,
@@ -154,13 +154,11 @@ const Workshop = ({
       subscriber.on('update', onUpdateStateFromParse);
       subscriberRef.current = subscriber;
     }
-    if (teamId) {
-      subscribe(teamId);
-    }
+    subscribe(teamId);
     return () => {
       subscriberRef.current?.unsubscribe();
     }
-  }, [teamId]);
+  }, [teamId, fsmState]);
 
   return (
     <StatePageContext.Provider
@@ -170,10 +168,11 @@ const Workshop = ({
           background: '#F7F9FC',
           minHeight: '100%'
         }}>
-
         <ResponsiveAppBar mode={isMentor ? "MENTOR_WORKSHOP" : "WORKSHOP"} />
         <Toolbar id="back-to-top-anchor" />
-        <FSMStateTemplate state={workshopState} />
+        {fsmState &&
+          <FSMStateTemplate state={fsmState} />
+        }
         {/* <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
@@ -191,8 +190,7 @@ const mapStateToProps = (state, ownProps) => ({
   openChatRoom: state.currentState.openChatRoom,
   teamRoom: state.currentState.teamRoom,
   myTeam: state.currentState.myTeam,
-
-  workshopState: state.currentState.state,
+  fsmState: state.currentState.fsmState,
   needUpdateState: state.currentState.needUpdateState,
   workshopId: state.currentState.workshopId,
   // paperId: ownProps.match?.params?.paperId,
