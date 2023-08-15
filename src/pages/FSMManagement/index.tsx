@@ -55,7 +55,7 @@ const FSMManagement: FC<EventPropsType> = ({
   const t = useTranslate();
   const navigate = useNavigate();
   const { fsmId, eventId, section } = useParams();
-  const [tabs, setTabs] = useState<{ name: string, label: string; icon: any; component: ConnectedComponent<any, any> | FC<any>; props?: any }[]>([
+  const initialTabs = [
     {
       name: 'info',
       label: 'اطلاعات کلی',
@@ -86,35 +86,33 @@ const FSMManagement: FC<EventPropsType> = ({
       icon: BorderColorIcon,
       component: GoToAnswer,
     }
-  ])
-  const [currentTab, setCurrentTab] = useState(tabs.find((tab) => tab.name === section));
-  const TabComponent = currentTab?.component;
+  ]
 
-  useEffect(() => {
-    if (workshop && workshop.id == fsmId && workshop.fsm_learning_type == 'Supervised') {
-      if (workshop.fsm_p_type == 'Team') {
-        setTabs([
-          ...tabs,
-          {
-            name: 'requests',
-            label: 'درخواست‌ها',
-            icon: QuestionAnswerIcon,
-            component: TeamRequests,
-          },
-        ])
-      } else if (workshop.fsm_p_type == 'Individual') {
-        setTabs([
-          ...tabs,
+  const tabs = (workshop && workshop.id == fsmId && workshop.fsm_learning_type == 'Supervised') ?
+    (workshop.fsm_p_type == 'Team') ?
+      [
+        ...initialTabs,
+        {
+          name: 'requests',
+          label: 'درخواست‌ها',
+          icon: QuestionAnswerIcon,
+          component: TeamRequests,
+        },
+      ] : (workshop.fsm_p_type == 'Individual') ?
+        [
+          ...initialTabs,
           {
             name: 'requests',
             label: 'درخواست‌ها',
             icon: QuestionAnswerIcon,
             component: IndividualRequests,
           },
-        ])
-      }
-    }
-  }, [workshop])
+        ] : initialTabs : initialTabs
+
+
+  // @ts-ignore
+  const [currentTab, setCurrentTab] = useState(tabs.find(({name}) => name === section) ?? tabs[0]);
+  const TabComponent = currentTab?.component;
 
   useEffect(() => {
     getOneEventInfo({ eventId });
@@ -140,7 +138,7 @@ const FSMManagement: FC<EventPropsType> = ({
                     setCurrentTab(tab)
                     navigate(`/event/${eventId}/workshop/${fsmId}/manage/${tabs[index].name}/`)
                   }}
-                  variant={currentTab === tab ? 'contained' : 'outlined'}
+                  variant={currentTab.name === tab.name ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
                   {tab.label}
                 </Button>

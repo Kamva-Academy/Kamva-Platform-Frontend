@@ -102,13 +102,13 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
   //   })
   // }, [])
 
-  const checkForOfflineMentors = async () => {
-    for (let i = 0; i < mentorsInRoom.length; i++) {
-      if (Math.abs(moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds()) > 20000) {
-        await announceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
-      }
-    }
-  }
+  // const checkForOfflineMentors = async () => {
+  //   for (let i = 0; i < mentorsInRoom.length; i++) {
+  //     if (Math.abs(moment.duration(moment().diff(moment(mentorsInRoom[i].get('MentorLastUpdated'), 'HH:mm:ss'))).asMilliseconds()) > 20000) {
+  //       await announceMentorDeparture(mentorsInRoom[i].get('uuid'), mentorsInRoom[i].get('MentorId'))
+  //     }
+  //   }
+  // }
 
   // useEffect(() => {
   //   let updateInterval
@@ -128,7 +128,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
       const state = await getTeamState(teamId);
       if (!state) {
         return
-      };
+      }
       setCurrentStateName(state.get('currentStateName'))
       setTeamEnterTimeToState(state.get('teamEnterTimeToState'))
       const subscriber = await getTeamStateSubscription();
@@ -155,7 +155,7 @@ const TeamWorkshopInfo: FC<TeamWorkshopInfoPropsType> = ({
     return () => {
       stateChangeSubscriberRef.current?.unsubscribe();
     };
-  }, []);
+  }, [teamId]);
 
   {/* this function redirects mentor to a teams page, this team could have requested mentor or not, if so, we use the
 available playerId field, otherwise we fetch one team members Id and use it to access their page */}
