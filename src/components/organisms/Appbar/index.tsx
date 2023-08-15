@@ -102,7 +102,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
                   )}
                   {rightItems.map((item, index) => (
                     <Box mr={1} key={index}>
-                      {item}
+                      {item[0]}
                     </Box>
                   ))}
                 </Box>
@@ -110,7 +110,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {leftItems.map((item, index) => (
                     <Box ml={1} key={index}>
-                      {item}
+                      {item[0]}
                     </Box>
                   ))}
                 </Box>
@@ -124,7 +124,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
         onClose={() => setDrawerOpen(false)}>
         <List sx={{ width: 240 }}>
           {mobileMenuListItems.map((item, index) => (
-            <ListItem key={index}>{item}</ListItem>
+            <ListItem key={index}>{item[0]}</ListItem>
           ))}
         </List>
       </Drawer>

@@ -111,7 +111,7 @@ const FSMManagement: FC<EventPropsType> = ({
 
 
   // @ts-ignore
-  const [currentTab, setCurrentTab] = useState(tabs.find(({name}) => name === section) ?? tabs[0]);
+  const [currentTab, setCurrentTab] = useState(tabs.find(({ name }) => name === section) ?? tabs[0]);
   const TabComponent = currentTab?.component;
 
   useEffect(() => {

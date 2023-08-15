@@ -25,7 +25,7 @@ const DraggableChatRoom: FC<DraggableChatRoomPropsType> = ({ open, handleClose }
           zIndex: 1500,
         }}
       >
-        <Draggable disabled={width === 'xs'} position={width === 'xs' && { x: 0, y: 0 }}>
+        <Draggable disabled={width === 'xs'} position={width === 'xs' ? { x: 0, y: 0 } : null} >
           <Paper sx={{ boxShadow: '0px 0px 6px', width: '100%', height: '100%' }}>
             <ChatRoom handleClose={handleClose} />
           </Paper>
