@@ -121,24 +121,24 @@ const Workshop = ({
   const onUpdateStateFromParse = (teamState) =>
     setParseTeamState(teamState.get('paperId'));
 
-  useEffect(() => {
-    if (!fsmState?.id || !parseTeamState) return;
-    if (+parseTeamState !== +fsmState.id) {
-      if (isMentor) {
-        addNotification({
-          type: 'info',
-          message: 'یکی از دانش‌آموزان مکان گروه رو جا‌به‌جا کرد!',
-        });
-        mentorGetCurrentState({ id: playerId });
-      } else {
-        addNotification({
-          type: 'info',
-          message: 'جابه‌جا شدید!',
-        });
-        enterWorkshop({ eventId, fsmId });
-      }
-    }
-  }, [parseTeamState, fsmState]);
+  // useEffect(() => {
+  //   if (!fsmState?.id || !parseTeamState) return;
+  //   if (+parseTeamState !== +fsmState.id) {
+  //     if (isMentor) {
+  //       addNotification({
+  //         type: 'info',
+  //         message: 'یکی از دانش‌آموزان مکان گروه رو جا‌به‌جا کرد!',
+  //       });
+  //       mentorGetCurrentState({ id: playerId });
+  //     } else {
+  //       addNotification({
+  //         type: 'info',
+  //         message: 'جابه‌جا شدید!',
+  //       });
+  //       enterWorkshop({ eventId, fsmId });
+  //     }
+  //   }
+  // }, [parseTeamState]);
 
   useEffect(() => {
     if (!teamId || !fsmState) return;
