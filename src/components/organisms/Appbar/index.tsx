@@ -65,6 +65,8 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;
 
+  // todo: rightItems and leftItems don't contain just items! they also have a strange item
+
   return (
     <>
       <HideOnScroll disable={!hideOnScroll}>
@@ -102,15 +104,14 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
                   )}
                   {rightItems.map((item, index) => (
                     <Box mr={1} key={index}>
-                      {item[0]}
+                      {item}
                     </Box>
                   ))}
                 </Box>
-
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   {leftItems.map((item, index) => (
                     <Box ml={1} key={index}>
-                      {item[0]}
+                      {item}
                     </Box>
                   ))}
                 </Box>
@@ -124,7 +125,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
         onClose={() => setDrawerOpen(false)}>
         <List sx={{ width: 240 }}>
           {mobileMenuListItems.map((item, index) => (
-            <ListItem key={index}>{item[0]}</ListItem>
+            <ListItem key={index}>{item}</ListItem>
           ))}
         </List>
       </Drawer>
