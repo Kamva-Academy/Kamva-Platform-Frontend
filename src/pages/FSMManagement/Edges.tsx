@@ -65,7 +65,7 @@ const Index: FC<IndexPropsType> = ({
 
   return (
     <>
-      <CustomJoyrideButton />
+      {/* <CustomJoyrideButton /> */}
       <Grid container spacing={1} alignItems="center" justifyContent="center">
         <TableContainer>
           <Table>
