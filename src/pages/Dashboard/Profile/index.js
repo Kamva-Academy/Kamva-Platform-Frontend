@@ -65,15 +65,14 @@ const Profile = ({
   }
 
   useEffect(() => {
-    if (userAccount) {
-      getUserProfile({ id: userAccount.id }).then(({ type, payload: { response } }) => {
-        // todo: fix TOF
-        if (type.endsWith('fulfilled')) {
-          getInstitutes({ cityTitle: Iran.Cities.find(city => response.city == city.title).title });
-        }
-      });
-
-    }
+    if (!userAccount) return;
+    getUserProfile({ id: userAccount.id }).then(({ type, payload: { response } }) => {
+      if (!type.endsWith('fulfilled')) return;
+      // check if user has sat city, then fetch city's institutes
+      if (!response.city) return;
+      getInstitutes({ cityTitle: Iran.Cities.find(city => response.city == city.title).title });
+      
+    });
   }, [userAccount]);
 
   return (
