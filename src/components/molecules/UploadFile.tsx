@@ -29,9 +29,10 @@ const UploadFile: FC<UploadFilePropsType> = ({
   paperId,
   makeWidgetFileEmpty,
 }) => {
+
   const submitFile = (e) => {
-    e.preventDefault();
     const file = e.target.files[0];
+    if (!file) return;
     if (file.name.length > 100) {
       toast.error('حداکثر طول نام فایل حداکثر ۱۰۰ کاراکتر است.');
       return;
@@ -45,7 +46,6 @@ const UploadFile: FC<UploadFilePropsType> = ({
 
   const clearFile = (e) => {
     makeWidgetFileEmpty({ widgetId, paperId });
-    e.preventDefault();
   }
 
   const fileSrc = file ? window.URL.createObjectURL(file) : previousFile;
