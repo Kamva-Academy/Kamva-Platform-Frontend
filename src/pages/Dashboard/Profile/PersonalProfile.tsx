@@ -90,6 +90,8 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     return <></>;
   }
 
+  const selectedProvince = Iran.Provinces.find(province => province.title == profile.province);
+
   return (
     <Grid container item spacing={2}>
       <Grid item xs={12}>
@@ -254,8 +256,6 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             error={!profile.province}>
             <InputLabel>استان</InputLabel>
             <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={profile.province || ''}
               onChange={handleProfileChange}
               name="province"
@@ -276,21 +276,17 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             <InputLabel>شهر</InputLabel>
             <Select
               disabled={!profile.province && !profile.city}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
               value={profile.city || ''}
               onChange={handleProfileChange}
               name="city"
               label="شهر">
-              {Iran.Cities.filter(
-                (city) =>
-                  Iran.Provinces.find(province => province.id == city.province_id).title == profile.province ||
-                  Iran.Provinces.find(province => province.id == city.province_id).title == profile.province
-              ).map((city) => (
-                <MenuItem key={city.id} value={city.title}>
-                  {city.title}
-                </MenuItem>
-              ))}
+              {Iran.Cities.filter((city) =>
+                city.province_id == selectedProvince?.id)
+                .map((city) => (
+                  <MenuItem key={city.id} value={city.title}>
+                    {city.title}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
         </Grid>
