@@ -36,7 +36,7 @@ const GameWidget = ({ link = '' }) => {
         src={link}
         ref={iframeRef}
         height={iFrameHeight}
-        allowFullScreen="true"
+        allowFullScreen
         style={{
           width: '100%',
           border: 'none',

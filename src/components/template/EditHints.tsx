@@ -18,7 +18,7 @@ import { toPersianNumber } from 'utils/translateNumber';
 
 type EditHintsPropsType = {
   type: 'widget' | 'state';
-  papers: object;
+  papers: any[];
   hints: any[];
   referenceId: number;
   createHint: any;
@@ -30,7 +30,6 @@ type EditHintsPropsType = {
 const EditHints: FC<EditHintsPropsType> = ({
   type = 'state',
   papers,
-  hints = [],
   referenceId,
   createHint,
   deleteHint,
@@ -41,24 +40,24 @@ const EditHints: FC<EditHintsPropsType> = ({
   const [hintId, setHintId] = useState<number>(null);
   const [deleteDialogId, setDeleteDialogId] = useState<number>(null);
 
-  // TOFF
-  const newHints = [...hints];
-  for (const hint of hints) {
-    if (Object.keys(papers).includes(hint.id.toString())) {
-      newHints.push(papers[hint.id])
+  const hints = [];
+  for (const key in papers) {
+    const paper = papers[key];
+    if (paper.reference === referenceId) {
+      hints.push(paper);
     }
   }
 
   return (
-    <>
+    <Stack spacing={2} width='100%'>
       <Typography variant="h2" gutterBottom>
         {'راهنمایی‌ها'}
       </Typography>
       <Divider />
-      {newHints.length > 0 ?
+      {hints.length > 0 ?
         <Stack>
           <Grid container alignItems='stretch' spacing={2}>
-            {newHints.map((hint, index) => (
+            {hints.map((hint, index) => (
               <Grid item key={index} xs={12} md={6}>
                 <Paper sx={{ padding: 1 }} key={hint.id} elevation={3}>
                   <Stack spacing={1}>
@@ -115,9 +114,9 @@ const EditHints: FC<EditHintsPropsType> = ({
       <AreYouSure
         open={!!deleteDialogId}
         handleClose={() => setDeleteDialogId(null)}
-        callBackFunction={() => type === 'state' ? deleteHint({ hintId: deleteDialogId }) : deleteWidgetHint({ hintId: deleteDialogId })}
+        callBackFunction={() => type === 'state' ? deleteHint({ referenceId, hintId: deleteDialogId }) : deleteWidgetHint({ hintId: deleteDialogId })}
       />
-    </>
+    </Stack>
   );
 }
 
@@ -126,9 +125,9 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 export default connect(mapStateToProps, {
+  // todo: TOFF
   createHint: createHintAction,
   deleteHint: deleteHintAction,
-  // TOFF
   createWidgetHint: createWidgetHintAction,
   deleteWidgetHint: deleteWidgetHintAction,
 })(EditHints);

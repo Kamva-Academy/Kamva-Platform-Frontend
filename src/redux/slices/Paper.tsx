@@ -393,6 +393,23 @@ const isNotFetching = (state) => {
   state.isFetching = false;
 };
 
+const addNewPaperToList = (papers, newPaper) => {
+  let newPapers = { ...papers };
+  // put itself
+  newPapers[newPaper.id] = newPaper;
+  // put its hints
+  newPaper.hints?.forEach((hint) => {
+    newPapers[hint.id] = hint;
+  })
+  // put its widgets hints
+  newPaper.widgets?.forEach((widget) => {
+    widget.hints?.forEach((hint) => {
+      newPapers = addNewPaperToList(newPapers, hint);
+    })
+  })
+  return newPapers;
+}
+
 const PaperSlice = createSlice({
   name: 'PaperState',
   initialState: initialState,
@@ -401,12 +418,11 @@ const PaperSlice = createSlice({
     [getOneStateAction.pending.toString()]: isFetching,
     [getOneStateAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.papers[arg.paperId] = response;
-      response.hints.forEach((hint) => {
-        state.papers[hint.id] = hint;
-      })
+      state.papers = addNewPaperToList(state.papers, response);
       state.isFetching = false;
     },
     [getOneStateAction.rejected.toString()]: isNotFetching,
+
 
     [getWidgetAction.pending.toString()]: isFetching,
     [getWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -415,6 +431,7 @@ const PaperSlice = createSlice({
     },
     [getWidgetAction.rejected.toString()]: isNotFetching,
 
+
     [createWidgetAction.pending.toString()]: isFetching,
     [createWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.papers[arg.paper] ||= {};
@@ -422,6 +439,7 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
     [createWidgetAction.rejected.toString()]: isNotFetching,
+
 
     [deleteWidgetAction.pending.toString()]: isFetching,
     [deleteWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
@@ -452,21 +470,24 @@ const PaperSlice = createSlice({
     },
     [updateWidgetAction.rejected.toString()]: isNotFetching,
 
+
     [createHintAction.pending.toString()]: isFetching,
     [createHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.papers[arg.referenceId] ||= {};
       state.papers[arg.referenceId].hints = [...(state.papers[arg.referenceId].hints || []), response];
-      state.papers[response.id] = response;
+      state.papers = addNewPaperToList(state.papers, response);
       state.isFetching = false;
     },
     [createHintAction.rejected.toString()]: isNotFetching,
 
+
     [createWidgetHintAction.pending.toString()]: isFetching,
     [createWidgetHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
-      state.papers[response.id] = response;
+      state.papers = addNewPaperToList(state.papers, response);
       state.isFetching = false;
     },
     [createWidgetHintAction.rejected.toString()]: isNotFetching,
+
 
     [deleteHintAction.pending.toString()]: isFetching,
     [deleteHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
@@ -474,6 +495,15 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
     [deleteHintAction.rejected.toString()]: isNotFetching,
+
+
+    [deleteWidgetHintAction.pending.toString()]: isFetching,
+    [deleteWidgetHintAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+      delete state.papers[arg.hintId];
+      state.isFetching = false;
+    },
+    [deleteWidgetHintAction.rejected.toString()]: isNotFetching,
+
 
     [uploadFileAnswerAction.pending.toString()]: isFetching,
     [uploadFileAnswerAction.fulfilled.toString()]: (state, action) => {
