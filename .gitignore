@@ -26,3 +26,5 @@ yarn-error.log*
 react-app-env.d.ts
 
 /.vscode
+# Sentry Auth Token
+.sentryclirc
