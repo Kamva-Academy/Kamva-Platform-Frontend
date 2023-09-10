@@ -45,6 +45,7 @@ const UploadFile: FC<UploadFilePropsType> = ({
   };
 
   const clearFile = (e) => {
+    e.preventDefault(); // to prevent opening media file
     makeWidgetFileEmpty({ widgetId, paperId });
   }
 
