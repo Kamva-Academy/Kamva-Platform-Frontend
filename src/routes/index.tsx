@@ -25,10 +25,10 @@ import PrivateRoute from './PrivateRoute';
 import FSMManagement from 'pages/FSMManagement';
 import Correction from 'pages/Correction';
 import EditArticle from 'pages/EditArticle';
+import CustomPage from 'pages/CustomPage';
 import ReactGA from 'react-ga';
 
-const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
-ReactGA.initialize(TRACKING_ID);
+ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
 
 const Root = () => {
 
@@ -38,6 +38,8 @@ const Root = () => {
 
   return (
     <Routes>
+      <Route path="/hi!/" element={<CustomPage />} ></Route>
+
       <Route path="/loading/"></Route>
 
       <Route path="/about-us/" element={<AboutUs />} />
