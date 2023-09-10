@@ -20,7 +20,7 @@ const allReducers = combineReducers({
   currentState: currentStateReducer,
   notifications: notificationReducer,
   whiteboard: whiteboardReducer,
-  // widget: widgetReducer,
+  widget: widgetReducer,
   redirect: redirectReducer,
   events: eventsReducer,
   workshop: workshopReducer,
