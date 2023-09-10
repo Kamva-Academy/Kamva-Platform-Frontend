@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import * as Sentry from "@sentry/react";
-
+import TagManager from 'react-gtm-module'
 import App from './App';
 import reduxStore from './redux/store';
 
@@ -20,6 +20,10 @@ if (process.env.NODE_ENV === 'production') {
     replaysOnErrorSampleRate: 1.0,
     integrations: [new Sentry.Replay()],
   });
+
+  TagManager.initialize({
+    gtmId: 'process.env.REACT_APP_GTM_ID'
+  })
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
