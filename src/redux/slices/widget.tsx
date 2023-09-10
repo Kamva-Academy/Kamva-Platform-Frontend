@@ -152,6 +152,19 @@ export const updateWidgetAction = createAsyncThunkApi(
   }
 );
 
+export const longLastingUpdateWidgetAction = createAsyncThunkApi(
+  'widget/updateWidgetAction',
+  Apis.LONG_LASTING_PATCH_FORM_DATA,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت به‌روز شد.',
+      error: 'مشکلی در به‌روز‌رسانی ویجت وجود داشت.'
+    },
+  }
+);
+
 export const createWidgetAction = createAsyncThunkApi(
   'widget/widget/create',
   Apis.POST_FORM_DATA,
@@ -165,8 +178,21 @@ export const createWidgetAction = createAsyncThunkApi(
   }
 );
 
+export const longLastingCreateWidgetAction = createAsyncThunkApi(
+  'widget/widget/create',
+  Apis.LONG_LASTING_POST_FORM_DATA,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت اضافه شد.',
+      error: 'مشکلی در ایجاد ویجت وجود داشت.'
+    },
+  }
+);
+
 export const createVideoWidgetAction = (props) =>
-  createWidgetAction({
+  longLastingCreateWidgetAction({
     ...props,
     widget_type: 'Video',
   });
@@ -178,7 +204,7 @@ export const createAudioWidgetAction = (props) =>
   });
 
 export const updateVideoWidgetAction = (props) =>
-  updateWidgetAction({
+  longLastingUpdateWidgetAction({
     ...props,
     widget_type: 'Video',
   });
@@ -322,7 +348,6 @@ export const deleteStateAction = createAsyncThunkApi(
   statesCRUDUrl,
 );
 
-
 export const getWorkshopTeamsAction = createAsyncThunkApi(
   'workshops/teams/getAll',
   Apis.POST,
@@ -342,8 +367,6 @@ export const visitWorkshopPlayerAction = createAsyncThunkApi(
     }),
   }
 );
-
-
 
 const widgetSlice = createSlice({
   name: 'widgetSlice',
