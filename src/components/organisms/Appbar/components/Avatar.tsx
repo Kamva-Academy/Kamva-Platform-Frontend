@@ -22,20 +22,18 @@ function AvatarComponent({ name = 'بی‌نام', logout }) {
 
   return (
     <>
-      <Tooltip title={name} arrow>
-        <IconButton sx={{ padding: 0, paddingLeft: 1 }} onClick={handleClick}>
-          <Avatar
-            style={{ backgroundColor: stringToColor(name) }}
-            alt="logo">
-            {name[0]}
-          </Avatar>
-        </IconButton>
-      </Tooltip>
+      <IconButton sx={{ padding: 0, paddingLeft: 1 }} onClick={handleClick}>
+        <Avatar
+          sx={{ backgroundColor: stringToColor(name) }}
+          alt="logo">
+          {name[0]}
+        </Avatar>
+      </IconButton>
       <Menu
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}>
-        <Typography sx={{ padding: 1, paddingX: 2 }} fontWeight={500} fontSize={20}>
+        <Typography sx={{ padding: 1, paddingX: 2, userSelect: 'none' }} fontWeight={500} fontSize={20}>
           {name || 'بی‌نام بی‌نام‌زاده'}
         </Typography>
         <MenuItem onClick={() => {
