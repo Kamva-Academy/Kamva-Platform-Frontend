@@ -35,6 +35,9 @@ function AvatarComponent({ name = 'بی‌نام', logout }) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}>
+        <Typography sx={{ padding: 1, paddingX: 2 }} fontWeight={500} fontSize={20}>
+          {name || 'بی‌نام بی‌نام‌زاده'}
+        </Typography>
         <MenuItem onClick={() => {
           if (eventId) {
             navigate(`/event/${eventId}/profile/personal/`);
