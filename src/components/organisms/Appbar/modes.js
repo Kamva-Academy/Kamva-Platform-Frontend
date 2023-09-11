@@ -1,16 +1,16 @@
 import StudentDashboardItems from './DashboardItems';
-import EventAppBarItems from './Event';
+import CourseAppBarItems from './Course';
 import GeneralPagesAppbarItems from './GeneralPagesAppbarItems';
-import WorkshopAppBarItems from './WorkshopAppBarItems';
-import MentorWorkshopAppBar from './MentorWorkshopAppBar';
+import FSMAppBarItems from './FSMAppBarItems';
+import MentorFSMAppBar from './MentorFSMAppBar';
 
-const AppbarModes = {
+const AppBarModes = {
   STUDENT_DASHBOARD: StudentDashboardItems,
-  WORKSHOP: WorkshopAppBarItems,
-  MENTOR_WORKSHOP: MentorWorkshopAppBar,
-  EVENT: EventAppBarItems,
+  FSM: FSMAppBarItems,
+  MENTOR_FSM: MentorFSMAppBar,
+  COURSE: CourseAppBarItems,
   GENERAL: GeneralPagesAppbarItems,
   ARTICLE: GeneralPagesAppbarItems,
 };
 
-export default AppbarModes;
+export default AppBarModes;

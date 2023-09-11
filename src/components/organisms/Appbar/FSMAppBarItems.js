@@ -25,11 +25,10 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const { eventId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
   const chatRoomButton = <ChatRoomButton />;
-  const backToEventButton = <DashboardButton name={'بازگشت به دوره'} to={`/event/${eventId}/`} />;
+  const backToEventButton = <DashboardButton name={'بازگشت'} to={`/event/${eventId}/`} />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;
-  const userAvatar = <UserAvatar />;
 
   const desktopLeftItems = [];
   const desktopRightItems = [];
@@ -42,9 +41,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     mobileMenuListItems.push(reviewAnswers);
   }
 
-  if (workshop?.fsm_p_type == 'Individual') {
-    desktopRightItems.push(userAvatar);
-  } else {
+  if (workshop?.fsm_p_type == 'Team') {
     desktopRightItems.push(teamAvatar);
   }
   if (workshop?.fsm_learning_type == 'Supervised') {
@@ -55,8 +52,6 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   } else {
     desktopLeftItems.push(backToEventButton)
   }
-
-
 
   mobileMenuListItems.push(backToEventButton);
 

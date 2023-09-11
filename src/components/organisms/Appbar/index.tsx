@@ -37,7 +37,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   getOneEventInfo,
   workshop,
   event,
-  mode = 'WORKSHOP',
+  mode = 'FSM',
   showBackOnScroll = false,
   hideOnScroll = false,
   position = 'fixed',
@@ -96,9 +96,8 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={() => setDrawerOpen(!drawerOpen)}
-                        size="large">
-                        <MenuIcon />
+                        onClick={() => setDrawerOpen(!drawerOpen)}>
+                        <MenuIcon fontSize='large' />
                       </IconButton>
                     </Box>
                   )}

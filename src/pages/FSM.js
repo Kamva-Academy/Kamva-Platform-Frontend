@@ -168,7 +168,7 @@ const Workshop = ({
           background: '#F7F9FC',
           minHeight: '100%'
         }}>
-        <ResponsiveAppBar mode={isMentor ? "MENTOR_WORKSHOP" : "WORKSHOP"} />
+        <ResponsiveAppBar mode={isMentor ? "MENTOR_FSM" : "FSM"} />
         <Toolbar id="back-to-top-anchor" />
         {fsmState &&
           <FSMStateTemplate state={fsmState} />

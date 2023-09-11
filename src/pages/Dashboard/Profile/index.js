@@ -8,12 +8,12 @@ import {
   getUserProfileAction,
   updateStudentShipAction,
   updateUserAccountAction,
-} from '../../../redux/slices/account';
+} from 'redux/slices/account';
 import Layout from 'components/template/GeneralLayout';
 import AcademicProfile from './AcademicProfile';
 import PersonalProfile from './PersonalProfile'
 import StudentProfile from './StudentProfile';
-import Iran from '../../../utils/iran';
+import Iran from 'utils/iran';
 
 let tabs = [
   {

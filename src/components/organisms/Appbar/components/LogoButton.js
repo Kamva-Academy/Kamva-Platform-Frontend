@@ -18,9 +18,9 @@ export default function LogoButton({ size }) {
   return (
     <Tooltip title="کاموا" arrow>
       <IconButton
-        onClick={() => navigate('/events/')}
-        className={classes.logoButton}
-        size="large">
+        disableRipple
+        sx={{ padding: 0, paddingRight: 1 }}
+        className={classes.logoButton}>
         <img
           src={process.env.PUBLIC_URL + '/logo.png'}
           alt="logo"

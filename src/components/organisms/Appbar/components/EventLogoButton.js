@@ -1,7 +1,6 @@
 import { IconButton, Tooltip } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   logo: ({ size }) => ({
@@ -15,15 +14,11 @@ const useStyles = makeStyles(() => ({
   }),
 }));
 
-export default function LogoButton({ size, image, name = 'کاموا', eventId }) {
-  const navigate = useNavigate();
+function LogoButton({ size, image, name = 'کاموا' }) {
   const classes = useStyles({ size });
   return (
     <Tooltip title={name} arrow>
-      <IconButton
-        onClick={() => navigate(`/event/${eventId}/`)}
-        className={classes.logoButton}
-        size="large">
+      <IconButton sx={{ padding: 0, paddingRight: 1 }} disableRipple className={classes.logoButton}>
         <img
           src={image}
           alt=''
@@ -33,3 +28,5 @@ export default function LogoButton({ size, image, name = 'کاموا', eventId }
     </Tooltip>
   );
 }
+
+export default LogoButton;

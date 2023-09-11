@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 import AvatarComponent from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
 import EventLogoButton from './components/EventLogoButton';
-import LogoutButton from './components/LogoutButton';
 
 const DashboardItems = ({ event }) => {
 
@@ -18,16 +17,16 @@ const DashboardItems = ({ event }) => {
 
   const logoButton = <EventLogoButton image={event?.cover_page} name={event?.name} eventId={eventId} />;
   const eventButton = <DashboardButton name={event?.name} to={`/event/${eventId}/`} />;
-  const profileButton = <DashboardButton name={'پروفایل'} to={`/event/${eventId}/profile/personal/`} />;
-  const logoutButton = <LogoutButton />;
-  const Avatar = <AvatarComponent />;
+  const FSMsButton = <DashboardButton name={'کارگاه‌ها'} to={`/event/${eventId}/`} />;
+  const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/events/'} />;
+  const Avatar = <AvatarComponent />
 
   return {
-    desktopLeftItems: [logoutButton, Avatar],
-    desktopRightItems: [logoButton, profileButton],
+    desktopLeftItems: [backButton, Avatar],
+    desktopRightItems: [logoButton, FSMsButton],
     mobileLeftItems: [Avatar],
     mobileRightItems: [],
-    mobileMenuListItems: [eventButton, profileButton, logoutButton],
+    mobileMenuListItems: [eventButton, backButton],
   };
 };
 
