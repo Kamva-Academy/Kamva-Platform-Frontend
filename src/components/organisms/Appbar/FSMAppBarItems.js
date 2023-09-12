@@ -44,16 +44,17 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   if (workshop?.fsm_p_type == 'Team') {
     desktopRightItems.push(teamAvatar);
   }
+
   if (workshop?.fsm_learning_type == 'Supervised') {
     desktopLeftItems.push([whiteboardButton, mentorButton]);
     desktopRightItems.push([chatRoomButton, backToEventButton]);
     mobileLeftItems.push([whiteboardButton, mentorButton]);
     mobileRightItems.push([chatRoomButton]);
+    mobileMenuListItems.push(backToEventButton);
   } else {
+    mobileLeftItems.push(backToEventButton);
     desktopLeftItems.push(backToEventButton)
   }
-
-  mobileMenuListItems.push(backToEventButton);
 
   return {
     desktopLeftItems,
