@@ -22,7 +22,7 @@ function HelpDialog({ open, handleClose, helps }) {
 
   const help = helps[index];
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="xs" fullWidth>
+    <Dialog disableScrollLock open={open} onClose={handleClose} maxWidth="xs" fullWidth>
       <Paper className={classes.paper} key={help.id}>
         <Typography>{t('helpNumber') + " " + (toPersianNumber(index + 1))}</Typography>
         <div className={classes.widgets}>

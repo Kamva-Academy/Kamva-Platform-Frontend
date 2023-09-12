@@ -1,12 +1,12 @@
-import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip, Chip } from '@mui/material';
-import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon, Opacity } from '@mui/icons-material';
+import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip } from '@mui/material';
+import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/icons-material';
 import React, { FC, useMemo, useState } from 'react';
 
-import DeleteWidgetDialog from '../dialogs/DeleteWidgetDialog';
-import WIDGET_TYPES from './WidgetTypes';
-import EditHintsDialog from '../dialogs/EditHintsDialog';
-import HelpDialog from '../dialogs/FSMStateHelpDialog';
-import { toPersianNumber } from '../../../utils/translateNumber';
+import DeleteWidgetDialog from 'components/organisms/dialogs/DeleteWidgetDialog';
+import WIDGET_TYPES from 'components/organisms/Widget/WidgetTypes';
+import EditHintsDialog from 'components/organisms/dialogs/EditHintsDialog';
+import { toPersianNumber } from 'utils/translateNumber';
+import WidgetHint from 'components/molecules/WidgetHint';
 
 export enum WidgetModes {
   View,
@@ -49,8 +49,6 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openEditHintDialog, setEditHintDialog] = useState(false);
-  const [openViewHintDialog, setViewHintDialog] = useState(false);
-  const [hasClickedHintDialog, setClickedHintDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
   const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
 
@@ -117,29 +115,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
             />
           </Stack>
         }
-        {(mode === WidgetModes.View && widget?.hints?.length) ?
-          <>
-            <Box sx={{ position: 'absolute', right: 4 }}>
-              <Chip
-                size='small'
-                color='secondary'
-                sx={{
-                  opacity: 0,
-                  animation: !hasClickedHintDialog ? "starred 9s infinite" : 'none',
-                  ":hover": { opacity: 1, animation: 'none' },
-                }}
-                onClick={() => { setViewHintDialog(true); setClickedHintDialog(true); }}
-                icon={<HelpIcon />}
-                label="راهنما" />
-            </Box>
-            <HelpDialog
-              open={openViewHintDialog}
-              handleClose={() => setViewHintDialog(false)}
-              helps={widget.hints}
-            />
-          </>
-          : null
-        }
+        {(mode === WidgetModes.View && widget?.hints?.length) ? <WidgetHint hints={widget.hints} /> : null}
       </Stack>
       {widgetMemoizedComponent}
     </Cover>
