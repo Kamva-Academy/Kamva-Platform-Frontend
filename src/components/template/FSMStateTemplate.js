@@ -71,7 +71,7 @@ function StatePage({ state = {} }) {
           <Grid item xs={12} md={8} lg={8}>
             <Stack component={Paper} sx={{ padding: 1 }} spacing={1}>
               {notQuestionWidgets}
-              <Stack sx={{ display: { xs: 'inherit', md: 'none' }, paddingTop: 1 }} >
+              <Stack sx={{ display: { xs: 'inherit', md: 'none' }, paddingY: 1 }} >
                 <Grid container item xs={12} spacing={2}>
                   <Grid item xs={6}>
                     <BackButton inwardEdges={inward_edges} />
