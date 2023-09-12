@@ -5,6 +5,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useNavigate } from 'react-router-dom';
 import { toPersianNumber } from 'utils/translateNumber';
 import { EventType } from 'types/models';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 
 const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to, text, disabled = false }) => {
   const navigate = useNavigate();
@@ -100,17 +101,30 @@ const EventCard: FC<EventCardPropsType> = ({
               {event.description}
             </Typography>
             <Stack spacing={1}>
-              <Box>
-                <Chip
-                  variant="outlined"
-                  icon={<PeopleAltIcon />}
-                  label={
-                    event.event_type === 'Individual'
-                      ? 'انفرادی'
-                      : `${toPersianNumber(event.team_size)} ${t('person')}`
-                  }
-                />
-              </Box>
+              <Grid container direction={'row'} spacing={1}>
+                <Grid item>
+                  <Chip
+                    color='info'
+                    sx={{ userSelect: 'none' }}
+                    icon={<PeopleAltIcon />}
+                    label={
+                      event.event_type === 'Individual'
+                        ? 'انفرادی'
+                        : `${toPersianNumber(event.team_size)} ${t('person')}`
+                    }
+                  />
+                </Grid>
+                {(!event.merchandise || event.merchandise.price === 0) &&
+                  <Grid item>
+                    <Chip
+                      color='success'
+                      sx={{ userSelect: 'none' }}
+                      icon={<InsertEmoticonIcon />}
+                      label={'رایگان'}
+                    />
+                  </Grid>
+                }
+              </Grid>
               {eventButtonObj}
             </Stack>
           </Stack>

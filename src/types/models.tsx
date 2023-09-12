@@ -20,7 +20,7 @@ export type EventType = {
   is_paid: boolean;
   is_user_participating: boolean;
   maximum_participant: number | null;
-  merchandise: string | null;
+  merchandise: Merchandise | null;
   name: string;
   participants_size: number;
   registration_form: number;

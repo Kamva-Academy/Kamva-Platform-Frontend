@@ -13,7 +13,7 @@ export const Workshop = {
     red: '#eb1748',
     orange: '#f4772e',
     yellow: '#ffc926',
-    green: '#42a922',
+    green: '#9AFF9A',
     teal: '#18e1a5',
     cyan: '#27dcf3',
   },
