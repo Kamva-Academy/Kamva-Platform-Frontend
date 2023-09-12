@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import MiniGameEditWidget from './edit';
@@ -30,7 +30,7 @@ const GameWidget = ({ link = '' }) => {
   }
 
   return (
-    <>
+    <Stack alignItems={'start'}>
       <iframe
         title={t('game')}
         src={link}
@@ -46,7 +46,7 @@ const GameWidget = ({ link = '' }) => {
       <Button sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }} variant='outlined' onClick={handleFullScreen}>
         {'حالت تمام صفحه'}
       </Button>
-    </>
+    </Stack>
   );
 };
 
