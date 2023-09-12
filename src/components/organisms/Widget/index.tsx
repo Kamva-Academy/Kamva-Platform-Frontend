@@ -1,5 +1,5 @@
 import { Box, Divider, IconButton, Paper, Stack, Typography, Tooltip, Chip } from '@mui/material';
-import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/icons-material';
+import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon, Opacity } from '@mui/icons-material';
 import React, { FC, useMemo, useState } from 'react';
 
 import DeleteWidgetDialog from '../dialogs/DeleteWidgetDialog';
@@ -119,12 +119,18 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
         }
         {(mode === WidgetModes.View && widget?.hints?.length) ?
           <>
-            <Box sx={{ position: 'absolute', right: 0 }}>
+            <Box sx={{ position: 'absolute', right: 4 }}>
               <Chip
-                size='small' color='secondary'
-                sx={{ backgroundColor: 'white', animation: !hasClickedHintDialog ? "shake 13s infinite" : null }}
+                size='small'
+                color='secondary'
+                sx={{
+                  opacity: 0,
+                  animation: !hasClickedHintDialog ? "starred 9s infinite" : 'none',
+                  ":hover": { opacity: 1, animation: 'none' },
+                }}
                 onClick={() => { setViewHintDialog(true); setClickedHintDialog(true); }}
-                icon={<HelpIcon />} label="راهنما" variant='outlined' />
+                icon={<HelpIcon />}
+                label="راهنما" />
             </Box>
             <HelpDialog
               open={openViewHintDialog}
