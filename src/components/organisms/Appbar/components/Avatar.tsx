@@ -30,6 +30,7 @@ function AvatarComponent({ name = 'بی‌نام', logout }) {
         </Avatar>
       </IconButton>
       <Menu
+        disableScrollLock
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}>

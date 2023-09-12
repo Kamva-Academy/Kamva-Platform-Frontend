@@ -166,7 +166,8 @@ const Workshop = ({
       <Container component="main"
         sx={{
           background: '#F7F9FC',
-          minHeight: '100%'
+          minHeight: '100vh',
+          paddingBottom: 4,
         }}>
         <ResponsiveAppBar mode={isMentor ? "MENTOR_FSM" : "FSM"} />
         <Toolbar id="back-to-top-anchor" />
