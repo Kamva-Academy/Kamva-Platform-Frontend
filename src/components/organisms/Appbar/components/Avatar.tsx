@@ -9,7 +9,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function AvatarComponent({ name = 'بی‌نام', logout }) {
   const navigate = useNavigate();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -38,8 +38,8 @@ function AvatarComponent({ name = 'بی‌نام', logout }) {
           {name || 'بی‌نام بی‌نام‌زاده'}
         </Typography>
         <MenuItem onClick={() => {
-          if (eventId) {
-            navigate(`/event/${eventId}/profile/personal/`);
+          if (programId) {
+            navigate(`/program/${programId}/profile/personal/`);
           } else {
             navigate('/profile/personal/');
           }

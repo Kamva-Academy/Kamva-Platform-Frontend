@@ -46,7 +46,7 @@ export const WorkshopCard = ({
   enterWorkshop,
 }) => {
   const classes = useStyles();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [openPassword, setOpenPassword] = useState(false);
 
   return (
@@ -83,7 +83,7 @@ export const WorkshopCard = ({
                   workshop.is_mentor ?
                     <Tooltip title='ورود به بخش همیاران' arrow>
                       <span>
-                        <IconButton component={Link} to={`/event/${eventId}/workshop/${workshop?.id}/manage/info`} >
+                        <IconButton component={Link} to={`/program/${programId}/fsm/${workshop?.id}/manage/info`} >
                           <ModeEditTwoToneIcon />
                         </IconButton>
                       </span>
@@ -137,7 +137,7 @@ export const WorkshopCard = ({
               onClick={
                 workshop.has_lock
                   ? () => setOpenPassword(true)
-                  : () => enterWorkshop({ fsmId: workshop.id, eventId })
+                  : () => enterWorkshop({ fsmId: workshop.id,  programId })
               }>
               بزن بریم!
             </Button>
@@ -150,7 +150,7 @@ export const WorkshopCard = ({
               onClick={
                 workshop.has_lock
                   ? () => setOpenPassword(true)
-                  : () => enterWorkshop({ fsmId: workshop.id, eventId })
+                  : () => enterWorkshop({ fsmId: workshop.id,  programId })
               }>
               بزن بریم!
             </Button>

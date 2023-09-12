@@ -16,7 +16,7 @@ const Layout = ({
   userAccount,
   ...props
 }) => {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -52,7 +52,7 @@ const Layout = ({
           left: '0',
           backgroundColor: '#EBECED',
         }} />
-      {eventId ? <AppBar mode='COURSE' position="relative" />
+      {programId ? <AppBar mode='COURSE' position="relative" />
         : <AppBar mode={appbarMode} position="relative" />
       }
       <Container maxWidth='lg'

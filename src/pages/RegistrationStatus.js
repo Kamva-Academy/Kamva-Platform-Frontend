@@ -11,7 +11,7 @@ import {
   getOneRegistrationReceiptAction,
   purchaseEventAction,
   submitRegistrationFormAction,
-} from '../redux/slices/events';
+} from 'redux/slices/events';
 import { addNotificationAction } from '../redux/slices/notifications';
 import { toPersianNumber } from '../utils/translateNumber';
 import Layout from 'components/template/GeneralLayout';
@@ -27,12 +27,12 @@ const Payment = ({
   event,
 }) => {
   const navigate = useNavigate();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [discountCode, setDiscountCode] = useState();
   const [price, setPrice] = useState(0);
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
+    getOneEventInfo({  programId });
   }, []);
 
   useEffect(() => {
@@ -73,10 +73,10 @@ const Payment = ({
 
   useEffect(() => {
     if (event?.is_user_participating) {
-      navigate(`/event/${eventId}/`);
+      navigate(`/program/${programId}/`);
     }
     if (event?.user_registration_status && !['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
-      navigate('/events/');
+      navigate('/programs/');
     }
   }, [event])
 

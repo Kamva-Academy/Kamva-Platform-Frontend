@@ -13,7 +13,7 @@ const Landing = ({ token }) => {
 
   useEffect(() => {
     if (token) {
-      navigate('/events');
+      navigate('/programs/');
     }
   }, [token])
 

@@ -10,11 +10,11 @@ import { useParams } from 'react-router';
 import StatesTabbar from '../../components/organisms/StatesTabbar';
 import {
   getAllWorkshopStatesInfoAction,
-} from '../../redux/slices/workshop';
+} from 'redux/slices/workshop';
 import {
   getOneStateAction,
-} from '../../redux/slices/Paper';
-import { State } from '../../types/models';
+} from 'redux/slices/Paper';
+import { State } from 'types/models';
 import EditState from 'components/template/EditState';
 
 

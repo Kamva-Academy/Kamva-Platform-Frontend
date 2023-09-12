@@ -95,7 +95,7 @@ export const enterWorkshopAction = createAsyncThunkApi(
   Apis.POST,
   enterWorkshopUrl,
   {
-    bodyCreator: ({ eventId, fsmId, password }) => ({ event: eventId, fsm: fsmId, key: password }),
+    bodyCreator: ({ programId, fsmId, password }) => ({ event: programId, fsm: fsmId, key: password }),
     defaultNotification: {
       showHttpError: true,
     },
@@ -140,7 +140,7 @@ const getNewState = (state, { payload: { response } }) => {
 
 const getPlayer = (state, { payload: { response } }) => {
   state.needUpdateState = false;
-  state.workshopId = response.fsm;
+  state.fsmId = response.fsm;
   state.playerId = response.id;
   state.teamRoom = response.team?.chat_room;
   // todo: here I put playerId as teamId

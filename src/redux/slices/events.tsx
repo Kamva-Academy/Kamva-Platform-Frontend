@@ -44,8 +44,8 @@ import {
 import {
   createWidgetAction,
 } from './widget';
-import { getRequests, deleteRequest } from '../../parse/mentor'
-import { InitialState } from '../../types/redux/event'
+import { getRequests, deleteRequest } from 'parse/mentor'
+import { InitialState } from 'types/redux/event'
 
 const initialState: InitialState = {
   isFetching: false,
@@ -258,8 +258,8 @@ export const getEventRegistrationInfoAction = createAsyncThunkApi(
   Apis.POST,
   getEventRegistrationInfoUrl,
   {
-    bodyCreator: ({ eventId, memberUuid }) => ({
-      event_id: eventId,
+    bodyCreator: ({ programId, memberUuid }) => ({
+      event_id: programId,
       member_uuid: memberUuid,
     }),
   }

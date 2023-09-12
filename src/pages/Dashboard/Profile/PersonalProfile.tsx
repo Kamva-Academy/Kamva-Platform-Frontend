@@ -43,7 +43,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 }) => {
   const [profile, setProfile] = useState<PersonalProfileType>(null);
   const navigate = useNavigate();
-  const { eventId, section } = useParams();
+  const { programId, section } = useParams();
 
   useEffect(() => {
     if (userProfile) {
@@ -80,8 +80,8 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
       id: userProfile.id,
       ...newProfile,
     }).then((response) => {
-      if (response.type?.endsWith('fulfilled') && eventId && tabs[tabs.indexOf(section) + 1]) {
-        navigate(`/event/${eventId}/profile/${tabs[tabs.indexOf(section) + 1]}/`);
+      if (response.type?.endsWith('fulfilled') && programId && tabs[tabs.indexOf(section) + 1]) {
+        navigate(`/program/${programId}/profile/${tabs[tabs.indexOf(section) + 1]}/`);
       }
     });
   };

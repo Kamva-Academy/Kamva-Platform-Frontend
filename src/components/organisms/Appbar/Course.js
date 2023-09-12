@@ -13,12 +13,12 @@ const DashboardItems = ({ event }) => {
     }
   }, [event?.name])
 
-  const { eventId } = useParams();
+  const { programId } = useParams();
 
-  const logoButton = <EventLogoButton image={event?.cover_page} name={event?.name} eventId={eventId} />;
-  const eventButton = <DashboardButton name={event?.name} to={`/event/${eventId}/`} />;
-  const FSMsButton = <DashboardButton name={'کارگاه‌ها'} to={`/event/${eventId}/`} />;
-  const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/events/'} />;
+  const logoButton = <EventLogoButton image={event?.cover_page} name={event?.name} programId={programId} />;
+  const eventButton = <DashboardButton name={event?.name} to={`/program/${programId}/`} />;
+  const FSMsButton = <DashboardButton name={'کارگاه‌ها'} to={`/program/${programId}/`} />;
+  const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/programs/'} />;
   const Avatar = <AvatarComponent />
 
   return {

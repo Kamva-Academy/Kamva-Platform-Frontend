@@ -60,7 +60,7 @@ const Workshop = ({
   if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
     readyToAddMentor = true
   }
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const subscriberRef = useRef(null);
   const [mentorAdded, setMentorAdded] = useState(false)
 
@@ -88,7 +88,7 @@ const Workshop = ({
 
   useEffect(() => {
     if (fsmId) {
-      getOneWorkshop({ workshopId: fsmId });
+      getOneWorkshop({ fsmId });
     }
   }, [fsmId])
 
@@ -100,7 +100,7 @@ const Workshop = ({
 
   useEffect(() => {
     if (!isMentor) {
-      enterWorkshop({ eventId, fsmId });
+      enterWorkshop({ programId, fsmId });
     }
   }, [fsmId, isMentor]);
 
@@ -109,7 +109,7 @@ const Workshop = ({
       if (isMentor) {
         mentorGetCurrentState({ id: playerId });
       } else {
-        enterWorkshop({ eventId, fsmId });
+        enterWorkshop({ programId, fsmId });
       }
     }
   };
@@ -135,7 +135,7 @@ const Workshop = ({
   //         type: 'info',
   //         message: 'جابه‌جا شدید!',
   //       });
-  //       enterWorkshop({ eventId, fsmId });
+  //       enterWorkshop({  programId, fsmId });
   //     }
   //   }
   // }, [parseTeamState]);
@@ -193,8 +193,6 @@ const mapStateToProps = (state, ownProps) => ({
   myTeam: state.currentState.myTeam,
   fsmState: state.currentState.fsmState,
   needUpdateState: state.currentState.needUpdateState,
-  workshopId: state.currentState.workshopId,
-  // paperId: ownProps.match?.params?.paperId,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
   personsName: `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`,

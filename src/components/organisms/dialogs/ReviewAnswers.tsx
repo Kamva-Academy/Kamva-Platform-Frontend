@@ -15,8 +15,8 @@ import Widget from '../Widget';
 import { WidgetModes } from '../Widget';
 import {
   getAnswersForReviewAction
-} from '../../../redux/slices/workshop';
-import { Answer } from '../../../types/models';
+} from 'redux/slices/workshop';
+import { Answer } from 'types/models';
 
 type ReviewAnswersPropsType = {
   open: boolean;

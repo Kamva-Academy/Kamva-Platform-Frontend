@@ -19,11 +19,11 @@ import { useParams } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
 import {
   getEventWorkshopsAction,
-} from '../../redux/slices/events';
-import { addMentorToWorkshopAction } from '../../redux/slices/events';
-import { getAllWorkshopMentorsAction, removeMentorFromWorkshopAction } from '../../redux/slices/workshop';
-import { Mentor } from '../../types/models';
-import { toEnglishNumber } from '../../utils/translateNumber';
+} from 'redux/slices/events';
+import { addMentorToWorkshopAction } from 'redux/slices/events';
+import { getAllWorkshopMentorsAction, removeMentorFromWorkshopAction } from 'redux/slices/workshop';
+import { Mentor } from 'types/models';
+import { toEnglishNumber } from 'utils/translateNumber';
 
 type MentorsPropsType = {
   addMentorToWorkshop: Function,
@@ -42,7 +42,7 @@ const Mentors: FC<MentorsPropsType> = ({
   fsmId,
   workshopMentors = []
 }) => {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [pageNumber, setPageNumber] = useState(1);
   const [properties, setProperties] = useState({
     username: '',
@@ -50,13 +50,13 @@ const Mentors: FC<MentorsPropsType> = ({
   });
 
   useEffect(() => {
-    if(fsmId){
+    if (fsmId) {
       getAllWorkshopMentors({ fsmId })
     }
   }, [fsmId])
 
   useEffect(() => {
-    getEventWorkshops({ eventId, pageNumber });
+    getEventWorkshops({  programId, pageNumber });
   }, [pageNumber]);
 
   const putData = (e) => {
@@ -154,7 +154,7 @@ const Mentors: FC<MentorsPropsType> = ({
                     <IconButton size='small'
                       onClick={async () => {
                         // TODO: Hashem
-                        await removeMentorFromWorkshop({ fsmId, mentor: {username: mentor.phone_number} })
+                        await removeMentorFromWorkshop({ fsmId, mentor: { username: mentor.phone_number } })
                         getAllWorkshopMentors({ fsmId })
                       }}>
                       <ClearIcon />

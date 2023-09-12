@@ -42,7 +42,7 @@ function NextButton({ outwardEdges = [], goForward, mentorMoveForward }) {
 
   const handleClick = () => {
     if (edges.length === 0) {
-      navigate('/events/');
+      navigate('/programs/');
     }
     if (edges.length === 1) {
       changeState(edges[0]);

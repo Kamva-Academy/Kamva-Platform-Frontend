@@ -16,7 +16,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   getEventTeamsAction,
   getOneEventInfoAction,
-} from '../../../redux/slices/events';
+} from 'redux/slices/events';
 
 import Layout from 'components/template/GeneralLayout';
 import DiscountCode from './DiscountCode';
@@ -86,13 +86,13 @@ const Event: FC<EventType> = ({
   event
 }) => {
   const t = useTranslate();
-  const { eventId, section } = useParams();
+  const { programId, section } = useParams();
   const [tabIndex, setTabIndex] = useState(SECTIONS[section]);
   const TabComponent = tabs[SECTIONS[section]].component;
   const navigate = useNavigate();
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
+    getOneEventInfo({  programId });
   }, []);
 
   useEffect(() => {
@@ -118,7 +118,7 @@ const Event: FC<EventType> = ({
                   key={index}
                   onClick={() => {
                     setTabIndex(index)
-                    navigate(`/event/${eventId}/manage/${tabs[index].name}`)
+                    navigate(`/program/${programId}/manage/${tabs[index].name}`)
                   }}
                   variant={tabIndex == index ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
@@ -134,7 +134,7 @@ const Event: FC<EventType> = ({
                 variant='outlined'
                 color="primary"
                 component={Link}
-                to={`/event/${event?.id}`}
+                to={`/program/${event?.id}`}
                 startIcon={<ExitToAppIcon />}>
                 {t('back')}
               </Button>

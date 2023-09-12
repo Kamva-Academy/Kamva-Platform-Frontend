@@ -36,7 +36,7 @@ const WorkshopCard = ({
 }) => {
   const classes = useStyles();
   const t = useTranslate();
-  const { eventId } = useParams();
+  const { programId } = useParams();
 
   return (
     <Card className={classes.root}
@@ -98,7 +98,7 @@ const WorkshopCard = ({
       <CardActions>
         <Button
           variant="contained" fullWidth color="primary"
-          component={Link} to={`/event/${eventId}/workshop/${id}/manage/info`}>
+          component={Link} to={`/program/${programId}/fsm/${id}/manage/info`}>
           {'ویرایش کارگاه'}
         </Button>
       </CardActions>

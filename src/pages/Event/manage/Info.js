@@ -8,7 +8,7 @@ import {makeStyles} from '@mui/styles'
 
 import {
   addUserToTeamAction,
-} from '../../../redux/slices/events';
+} from 'redux/slices/events';
 
 const useStyles = makeStyles((theme) => ({
 }));

@@ -22,7 +22,7 @@ import {
   createTeamAction,
   getRequestMentorAction,
   removeRequestMentorAction,
-} from '../../../../redux/slices/events';
+} from 'redux/slices/events';
 
 function Teams({
   addUserToTeam,

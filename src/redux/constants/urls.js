@@ -19,11 +19,11 @@ export const purchaseEventUrl = 'auth/payment/purchase/';
 export const submitDiscountCodeUrl = 'auth/payment/verify_discount/';
 
 // workshop
-export const getOneWorkshopUrl = ({ workshopId }) => `fsm/fsm/${workshopId}/`;
-export const getWorkshopsUrl = ({ eventId, pageNumber }) => {
+export const getOneWorkshopUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/`;
+export const getWorkshopsUrl = ({ programId, pageNumber }) => {
   let url = 'fsm/fsm/';
-  if (eventId) {
-    url += `?event=${eventId}`;
+  if (programId) {
+    url += `?event=${programId}`;
   }
   if (pageNumber) {
     url += `&page=${pageNumber}`;
@@ -34,7 +34,7 @@ export const getRegistrableWorkshopsUrl = 'fsm/fsm/?registrable=true';
 export const reviewAnswersUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/review/`;
 
 export const getAllEventsInfoUrl = 'fsm/event/';
-export const getOneEventInfoUrl = ({ eventId }) => `fsm/event/${eventId}/`;
+export const getOneEventInfoUrl = ({ programId }) => `fsm/event/${programId}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) =>
   `fsm/registration/${id}/register/`;
@@ -128,7 +128,7 @@ export const registerOneUserUrl = ({ registrationFormId }) => `fsm/registration_
 // event:
 export const teamCRUDUrl = ({ teamId }) => teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
 export const addMentorToWorkshopUrl = ({ fsmId }) => `/fsm/fsm/${fsmId}/add_mentor/`;
-export const getMentoredFsmsUrl = ({ eventId }) => `/fsm/event/${eventId}/get_mentored_fsms/`;
+export const getMentoredFsmsUrl = ({ programId }) => `/fsm/event/${programId}/get_mentored_fsms/`;
 export const registrationFormCRUDUrl = ({ registrationFormId }) => registrationFormId ? `fsm/registration/${registrationFormId}/` : 'fsm/registration/';
 
 
@@ -145,7 +145,7 @@ export const stateCRUDUrl = ({ paperId }) => paperId ? `/fsm/state/${paperId}/` 
 export const edgeUrl = ({ edgeId }) => edgeId ? `/fsm/edge/${edgeId}/` : '/fsm/edge/';
 
 // fsm:
-export const eventInfoUrl = ({ pageNumber, eventId }) => eventId ? `fsm/event/${eventId}/` : `fsm/event/?page=${pageNumber}`;
+export const eventInfoUrl = ({ pageNumber, programId }) => programId ? `fsm/event/${programId}/` : `fsm/event/?page=${pageNumber}`;
 export const allRegistrationReceiptsUrl = ({ registrationFormId, pageNumber }) => `fsm/registration/${registrationFormId}/receipts/?page=${pageNumber}`;
 export const validateRegistrationReceiptUrl = ({ registrationReceiptId }) => `/fsm/receipts/${registrationReceiptId}/validate/`;
 export const getPlayerFromTeamUrl = ({ id }) => `/fsm/fsm/${id}/get_player_from_team/`;

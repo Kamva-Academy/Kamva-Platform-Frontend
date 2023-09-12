@@ -29,7 +29,7 @@ const EventCard: FC<EventCardPropsType> = ({
   event
 }) => {
   const t = useTranslate();
-  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/event/${event.id}/registration-form/`} text={t('register')} /> : null);
+  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/program/${event.id}/registration-form/`} text={t('register')} /> : null);
 
   useEffect(() => {
     if (!event) return;
@@ -40,10 +40,10 @@ const EventCard: FC<EventCardPropsType> = ({
       setEventButtonObj(<EventButton text={'ثبت‌نام تمام شده'} disabled />);
     }
     if (['Waiting', 'Rejected', 'Accepted'].includes(event.user_registration_status)) {
-      setEventButtonObj(<EventButton to={`/event/${event.id}/status/`} text={'مشاهده وضعیت ثبت‌نام'} />);
+      setEventButtonObj(<EventButton to={`/program/${event.id}/status/`} text={'مشاهده وضعیت ثبت‌نام'} />);
     }
     if (event.is_user_participating) {
-      setEventButtonObj(<EventButton to={`/event/${event.id}/`} text={'ورود'} />);
+      setEventButtonObj(<EventButton to={`/program/${event.id}/`} text={'ورود'} />);
     }
   }, [event]);
 

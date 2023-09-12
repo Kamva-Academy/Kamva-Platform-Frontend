@@ -20,12 +20,12 @@ function Index({
   workshopsCount,
   allEventWorkshops,
 }) {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [openCreateWorkshopDialog, setOpenCreateWorkshopDialog] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
-    getEventWorkshops({ eventId, pageNumber });
+    getEventWorkshops({  programId, pageNumber });
   }, [pageNumber]);
 
   return (

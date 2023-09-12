@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate, Outlet, useParams } from 'react-router-dom';
-import NotFoundPage from 'pages/NotFoundPage';
 
 const PrivateRoute = ({ token }) => {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   if (!token) {
-    return <Navigate to={eventId ? `/?private_event_enter=${eventId}` : '/'} />
+    return <Navigate to={programId ? `/?private_event_enter=${programId}` : '/'} />
   }
   return <Outlet />
 };

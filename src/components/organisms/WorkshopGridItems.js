@@ -3,7 +3,7 @@ import React from 'react';
 
 import WorkshopCard from 'components/organisms/cards/WorkshopCard';
 
-export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
+export default function WorkshopGridItems({ programId, workshops, isLoading }) {
   if (isLoading)
     return [...Array(3)].map((e, i) => (
       <Grid item key={i} xs={12} sm={6} lg={4}>
@@ -15,7 +15,7 @@ export default function WorkshopGridItems({ eventId, workshops, isLoading }) {
     let tmpArr = [...workshops].sort((workshop1, workshop2) => workshop2.id - workshop1.id)
     return tmpArr.map((workshop) => (
       <Grid item key={workshop.id} xs={12} sm={6} lg={4}>
-        <WorkshopCard eventId={eventId} workshop={workshop} />
+        <WorkshopCard programId={programId} workshop={workshop} />
       </Grid>
     ));
   } else {

@@ -34,11 +34,11 @@ import {
   getTeamAction,
   getTeamInvitationsAction,
   inviteSomeoneAction,
-} from '../redux/slices/events';
-import { addNotificationAction } from '../redux/slices/notifications';
+} from 'redux/slices/events';
+import { addNotificationAction } from 'redux/slices/notifications';
 import Layout from 'components/template/GeneralLayout';
-import { Team, EventType } from '../types/models';
-import RespondInvitation from '../components/molecules/RespondInvitation';
+import { Team, EventType } from 'types/models';
+import RespondInvitation from 'components/molecules/RespondInvitation';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
@@ -88,13 +88,13 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   isFetching,
 }) => {
   const navigate = useNavigate();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [isCreateInvitationDialogOpen, changeCreateInvitationDialogStatus] = useState(false);
   const [isDeleteTeamDialogOpen, changeDeleteTeamDialogStatus] = useState(false);
   const [newTeamName, setNewTeamName] = useState('');
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
+    getOneEventInfo({  programId });
   }, []);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   }, [registrationReceipt]);
 
   if (event?.user_registration_status == 'NotRegistered') {
-    navigate(`/event/${eventId}/registration-form/`);
+    navigate(`/program/${programId}/registration-form/`);
   }
 
   const isHead = registrationReceipt?.id === team?.team_head

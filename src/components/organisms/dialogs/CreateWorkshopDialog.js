@@ -25,13 +25,13 @@ function CreateWorkshopDialog({
   handleClose,
 }) {
   const t = useTranslate();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [properties, setProperties] = useState({
     name: '',
     description: '',
     fsm_learning_type: '',
     fsm_p_type: '',
-    event: eventId,
+    event: programId,
   });
 
   const putData = (event) => {

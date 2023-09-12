@@ -43,16 +43,16 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   position = 'fixed',
   mentorId,
 }) => {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
   const width = useWidth();
 
   useEffect(() => {
-    if (eventId) {
-      getOneEventInfo({ eventId });
+    if (programId) {
+      getOneEventInfo({  programId });
     }
-  }, [eventId])
+  }, [programId])
 
   const {
     desktopLeftItems,

@@ -27,7 +27,7 @@ function Correction({
   problem,
 }) {
   const t = useTranslate();
-  const { eventId, answerId } = useParams();
+  const { answerId } = useParams();
 
   useEffect(() => {
     getAnswer({ answerId })

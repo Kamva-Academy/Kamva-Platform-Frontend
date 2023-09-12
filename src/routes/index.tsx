@@ -65,25 +65,25 @@ const Root = () => {
         <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
         <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
-        <Route path="/events/" element={<Events />} />
+        <Route path="/programs/" element={<Events />} />
         <Route path="/articles/" element={<Articles />} />
-        <Route path="/event/:eventId/workshop/:fsmId/" element={<Workshop />} />
-        <Route path="/event/:eventId/profile/:section/" element={<Profile />} />
+        <Route path="/program/:programId/fsm/:fsmId/" element={<Workshop />} />
+        <Route path="/program/:programId/profile/:section/" element={<Profile />} />
         <Route
-          path="/event/:eventId/registration-form/"
+          path="/program/:programId/registration-form/"
           element={<RegistrationForm />}
         />
-        <Route path="/event/:eventId/status/" element={<Status />} />
+        <Route path="/program/:programId/status/" element={<Status />} />
         <Route
-          path="/event/:eventId/team-selection/"
+          path="/program/:programId/team-selection/"
           element={<TeamSelection />}
         />
-        <Route path="/event/:eventId/" element={<Event />} />
+        <Route path="/program/:programId/" element={<Event />} />
 
         {/* only mentors can visit: */}
-        <Route path="/event/:eventId/manage/:section" element={<ManageEvent />} />
-        <Route path="/event/:eventId/workshop/:fsmId/manage/correction/:answerId/" element={<Correction />} />
-        <Route path="/event/:eventId/workshop/:fsmId/manage/:section" element={<FSMManagement />} />
+        <Route path="/program/:programId/manage/:section" element={<ManageEvent />} />
+        <Route path="/program/:programId/fsm/:fsmId/manage/correction/:answerId/" element={<Correction />} />
+        <Route path="/program/:programId/fsm/:fsmId/manage/:section" element={<FSMManagement />} />
       </Route>
 
       <Route path="*" element={<NotFoundPage />} />

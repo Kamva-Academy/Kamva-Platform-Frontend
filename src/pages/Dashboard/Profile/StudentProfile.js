@@ -59,7 +59,7 @@ function StudentProfile({
 }) {
   const [studentship, setStudentship] = useState();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,8 +101,8 @@ function StudentProfile({
       id: userProfile?.school_studentship?.id,
       ...studentship,
     }).then((response) => {
-      if (response.type?.endsWith('fulfilled') && eventId) {
-        navigate(`/event/${eventId}/`);
+      if (response.type?.endsWith('fulfilled') && programId) {
+        navigate(`/program/${programId}/`);
       }
     })
   };

@@ -53,7 +53,7 @@ const Profile = ({
   userAccount,
 }) => {
   const navigate = useNavigate();
-  const { eventId, section } = useParams();
+  const { programId, section } = useParams();
   const TabComponent = tabs[SECTIONS[section]].component;
 
   if (event?.audience_type == 'Student') {
@@ -71,7 +71,7 @@ const Profile = ({
       // check if user has sat city, then fetch city's institutes
       if (!response.city) return;
       getInstitutes({ cityTitle: Iran.Cities.find(city => response.city == city.title).title });
-      
+
     });
   }, [userAccount]);
 
@@ -87,7 +87,7 @@ const Profile = ({
               orientation="vertical"
               variant="scrollable"
               value={SECTIONS[section]}
-              onChange={(event, newValue) => navigate(eventId ? `/event/${eventId}/profile/${tabs[newValue].name}` : `/profile/${tabs[newValue].name}`)}>
+              onChange={(event, newValue) => navigate(programId ? `/program/${programId}/profile/${tabs[newValue].name}` : `/profile/${tabs[newValue].name}`)}>
               {
                 tabs.map((tab, index) => {
                   return (

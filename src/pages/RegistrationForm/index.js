@@ -37,7 +37,7 @@ const RegistrationForm = ({
   isFetching,
 }) => {
   const navigate = useNavigate();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
   const [answers, setAnswers] = useState([]);
 
@@ -49,10 +49,10 @@ const RegistrationForm = ({
 
   useEffect(() => {
     if (event?.is_user_participating) {
-      navigate(`/event/${eventId}/`);
+      navigate(`/program/${programId}/`);
     }
     if (['Waiting', 'Accepted', 'Rejected'].includes(event?.user_registration_status)) {
-      navigate(`/event/${eventId}/status/`);
+      navigate(`/program/${programId}/status/`);
     }
   }, [event])
 
@@ -62,7 +62,7 @@ const RegistrationForm = ({
     submitRegistrationForm({
       id: event?.registration_form,
       answers,
-      eventId,
+       programId,
     });
   };
 
@@ -143,7 +143,7 @@ const RegistrationForm = ({
                 !checkPermission(registrationForm?.audience_type, userProfile) ? (
                   <Typography variant='h4' color='error' align="center" gutterBottom>
                     {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
-                    <Link to={`/event/${eventId}/profile/personal/`}>{'اینجا'}</Link>
+                    <Link to={`/program/${programId}/profile/personal/`}>{'اینجا'}</Link>
                     {' تکمیل کنید.'}
                   </Typography>
                 ) : (
@@ -151,7 +151,7 @@ const RegistrationForm = ({
                     event?.user_registration_status == 'StudentshipDataIncomplete') &&
                   <Typography variant='h4' color='error' align="center" gutterBottom>
                     {'لطفاً از '}
-                    <Link to={`/event/${eventId}/profile/student/`}>{'اینجا'}</Link>
+                    <Link to={`/program/${programId}/profile/student/`}>{'اینجا'}</Link>
                     {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
                   </Typography>
                 )))}

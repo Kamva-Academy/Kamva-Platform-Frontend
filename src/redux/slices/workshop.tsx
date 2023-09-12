@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { Apis } from '../apis';
-import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
+import { Apis } from 'redux/apis';
+import { createAsyncThunkApi } from 'redux/apis/cerateApiAsyncThunk';
 import {
   getOneWorkshopUrl,
   getRegistrableWorkshopsUrl,
@@ -16,8 +16,8 @@ import {
   workshopCRUDUrl,
   getAllWorkshopMentors,
   removeMentorURL,
-} from '../constants/urls';
-import { InitialStateType } from '../../types/redux/workshop';
+} from 'redux/constants/urls';
+import { InitialStateType } from 'types/redux/workshop';
 
 const initialState: InitialStateType = {
   currentState: {

@@ -23,17 +23,17 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import {
   getEventTeamsAction,
   getOneEventInfoAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 import {
   getOneWorkshopsInfoAction,
-} from '../../redux/slices/workshop';
+} from 'redux/slices/workshop';
 import Layout from 'components/template/GeneralLayout';
 import Design from './Design';
 import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
-import { Workshop, EventType } from '../../types/models';
+import { Workshop, EventType } from 'types/models';
 import Mentors from './Mentors';
 import GoToAnswer from './GoToAnswer';
 
@@ -54,7 +54,7 @@ const FSMManagement: FC<EventPropsType> = ({
 }) => {
   const t = useTranslate();
   const navigate = useNavigate();
-  const { fsmId, eventId, section } = useParams();
+  const { fsmId, programId, section } = useParams();
   const initialTabs = [
     {
       name: 'info',
@@ -115,7 +115,7 @@ const FSMManagement: FC<EventPropsType> = ({
   const TabComponent = currentTab?.component;
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
+    getOneEventInfo({  programId });
     getOneWorkshopsInfo({ fsmId });
   }, []);
 
@@ -136,7 +136,7 @@ const FSMManagement: FC<EventPropsType> = ({
                   key={index}
                   onClick={() => {
                     setCurrentTab(tab)
-                    navigate(`/event/${eventId}/workshop/${fsmId}/manage/${tabs[index].name}/`)
+                    navigate(`/program/${programId}/fsm/${fsmId}/manage/${tabs[index].name}/`)
                   }}
                   variant={currentTab.name === tab.name ? 'contained' : 'outlined'}
                   startIcon={tab.icon && <tab.icon />}>
@@ -147,7 +147,7 @@ const FSMManagement: FC<EventPropsType> = ({
             <ButtonGroup variant="outlined" orientation="vertical" color="primary" fullWidth>
               <Button
                 component={Link}
-                to={`/event/${eventId}/workshop/${fsmId}/`}
+                to={`/program/${programId}/fsm/${fsmId}/`}
                 startIcon={<VisibilityIcon />}>
                 {'مشاهده کارگاه'}
               </Button>
@@ -156,7 +156,7 @@ const FSMManagement: FC<EventPropsType> = ({
                 variant='outlined'
                 color="primary"
                 component={Link}
-                to={`/event/${eventId}/`}
+                to={`/program/${programId}/`}
                 startIcon={<ExitToAppIcon />}>
                 {t('back')}
               </Button>

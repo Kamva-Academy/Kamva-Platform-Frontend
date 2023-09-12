@@ -7,12 +7,12 @@ import EventCard from 'components/organisms/cards/Event';
 import WorkshopCard from 'components/organisms/cards/WorkshopCard';
 import {
   getAllEventsInfoAction,
-} from '../redux/slices/events';
+} from 'redux/slices/events';
 import {
   getRegistrableWorkshopsAction,
-} from '../redux/slices/workshop';
+} from 'redux/slices/workshop';
 import Layout from 'components/template/GeneralLayout';
-import { EventType } from '../types/models';
+import { EventType } from 'types/models';
 import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 
 const useStyles = makeStyles((theme) => ({

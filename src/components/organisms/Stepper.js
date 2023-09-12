@@ -38,14 +38,13 @@ const RegistrationForm = ({
   registrationForm,
   event,
 }) => {
-  const classes = useStyles();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [hasPayment, setPayment] = useState(false);
   const [hasPending, setPending] = useState(false);
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
+    getOneEventInfo({  programId });
   }, []);
 
   useEffect(() => {

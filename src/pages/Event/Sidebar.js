@@ -14,7 +14,7 @@ import {
   getCertificateAction,
   getOneEventInfoAction,
   getOneRegistrationFormAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,11 +34,11 @@ function Workshops({
 }) {
   const navigate = useNavigate();
   const classes = useStyles();
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const [amount, setAmount] = React.useState('');
 
   useEffect(() => {
-    getOneEventInfo({ eventId });
+    getOneEventInfo({  programId });
   }, []);
 
   const handleAmountChange = (event) => {
@@ -83,7 +83,7 @@ function Workshops({
               disabled={event?.event_type == 'Individual'}
               variant="outlined"
               fullWidth
-              onClick={() => navigate(`/event/${event?.id}/team-selection/`)}>
+              onClick={() => navigate(`/program/${event?.id}/team-selection/`)}>
               {'گروه‌بندی'}
             </Button>
             <Button
@@ -98,7 +98,7 @@ function Workshops({
               <Button
                 variant="contained"
                 fullWidth
-                onClick={() => navigate(`/event/${event?.id}/manage/info`)}>
+                onClick={() => navigate(`/program/${event?.id}/manage/info`)}>
                 {'مدیریت دوره'}
               </Button>
             </>}

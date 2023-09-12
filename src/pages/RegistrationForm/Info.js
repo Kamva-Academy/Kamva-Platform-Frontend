@@ -7,21 +7,21 @@ import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 import { toPersianNumber } from '../../utils/translateNumber';
 
 const RegistrationForm = ({
   getOneEventInfo,
   event,
 }) => {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const width = useWidth();
 
   useEffect(() => {
-    if (eventId) {
-      getOneEventInfo({ eventId });
+    if (programId) {
+      getOneEventInfo({  programId });
     }
-  }, [eventId]);
+  }, [programId]);
 
   return (
     <Stack

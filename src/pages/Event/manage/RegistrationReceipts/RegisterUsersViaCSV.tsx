@@ -11,8 +11,8 @@ import React, { FC, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   registerUsersViaCSVAction,
-} from '../../../../redux/slices/events';
-import { EventType } from '../../../../types/models';
+} from 'redux/slices/events';
+import { EventType } from 'types/models';
 
 type RegisterUsersViaCSVPropsType = {
   registerUsersViaCSV: any;

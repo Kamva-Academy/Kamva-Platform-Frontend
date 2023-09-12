@@ -6,10 +6,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import WorkshopGridItems from 'components/organisms/WorkshopGridItems';
 import {
   getEventWorkshopsAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
 import Sidebar from './Sidebar';
-import { ITEMS_PER_PAGE_NUMBER } from '../../configs/Constants';
+import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
 
 function Workshops({
   workshops,
@@ -18,18 +18,18 @@ function Workshops({
   isLoading,
   getEventWorkshops,
 }) {
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     if (event?.is_user_participating != undefined && !event?.is_user_participating) {
-      navigate(`/event/${eventId}/registration-form/`);
+      navigate(`/program/${programId}/registration-form/`);
     }
   }, [event])
 
   useEffect(() => {
-    getEventWorkshops({ eventId, pageNumber });
+    getEventWorkshops({  programId, pageNumber });
   }, [pageNumber]);
 
   // todo: handle event not found
@@ -52,7 +52,7 @@ function Workshops({
           </Grid>
           <Grid container item spacing={3} justifyContent='flex-start'>
             <WorkshopGridItems
-              eventId={eventId}
+              programId={programId}
               workshops={workshops}
               isLoading={isLoading}
             />

@@ -34,17 +34,17 @@ const LoginPage: FC<LoginPagePropsType> = ({
   });
 
   const urlParams = new URLSearchParams(window.location.search);
-  const eventId = urlParams.get('private_event_enter');
+  const programId = urlParams.get('private_event_enter');
 
   useEffect(() => {
     if (token) {
-      if (eventId) {
-        navigate(`/event/${eventId}/`);
+      if (programId) {
+        navigate(`/program/${programId}/`);
       } else {
-        navigate('/events/');
+        navigate('/programs/');
       }
     }
-  }, [eventId, navigate, token])
+  }, [programId, navigate, token])
 
 
   const isJustDigits = (number) => {

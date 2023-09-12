@@ -22,10 +22,10 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
 
 
 
-  const { eventId } = useParams();
+  const { programId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
   const chatRoomButton = <ChatRoomButton />;
-  const backToEventButton = <DashboardButton name={'بازگشت'} to={`/event/${eventId}/`} />;
+  const backToEventButton = <DashboardButton name={'بازگشت'} to={`/program/${programId}/`} />;
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;

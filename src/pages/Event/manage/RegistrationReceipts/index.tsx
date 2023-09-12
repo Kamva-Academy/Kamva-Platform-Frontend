@@ -19,8 +19,8 @@ import RegisterUsersViaCSV from './RegisterUsersViaCSV';
 import RegisterOneUser from './RegisterOneUser';
 import {
   getAllRegistrationReceiptsAction,
-} from '../../../../redux/slices/events';
-import { faSeri, toPersianNumber } from '../../../../utils/translateNumber';
+} from 'redux/slices/events';
+import { faSeri, toPersianNumber } from 'utils/translateNumber';
 
 const STATUS = {
   Waiting: 'منتظر',

@@ -1,10 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
-import { makeStyles } from '@mui/styles'
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import EditWidgets from '../../../components/template/EditWidgets';
-import { getRegistrationFormAction } from '../../../redux/slices/events';
+import EditWidgets from 'components/template/EditWidgets';
+import { getRegistrationFormAction } from 'redux/slices/events';
 
 type RegistrationFormPropsType = {
   registrationFormId: any;

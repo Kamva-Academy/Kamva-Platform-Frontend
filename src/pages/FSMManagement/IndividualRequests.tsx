@@ -12,17 +12,17 @@ import React, { useEffect, useRef, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 
-import { getRequestSubscription } from '../../parse/mentor';
+import { getRequestSubscription } from 'parse/mentor';
 import {
   createRequestMentorAction,
   deleteRequestMentorAction,
   getRequestMentorAction,
   removeRequestMentorAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 import {
   getFSMPlayersAction,
-} from '../../redux/slices/workshop';
-import { Request, Player, Token } from '../../types/models'
+} from 'redux/slices/workshop';
+import { Request, Player, Token } from 'types/models'
 
 type InfoPropsType = {
   getFSMPlayers: Function,

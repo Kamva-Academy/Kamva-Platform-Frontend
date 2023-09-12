@@ -1,17 +1,17 @@
-import { Tab, Box, Tabs, Typography, Grid } from '@mui/material';
-import React, { useEffect, useRef, FC, useState, useMemo } from 'react';
+import { Tab, Box, Tabs } from '@mui/material';
+import React, { useEffect, useRef, FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router';
 import TeamWorkshopInfoCard from 'components/organisms/cards/TeamWorkshopInfo';
 
-import { getRequestSubscription } from '../../parse/mentor';
+import { getRequestSubscription } from 'parse/mentor';
 import {
   createRequestMentorAction,
   getRequestMentorAction,
   removeRequestMentorAction,
-} from '../../redux/slices/events';
+} from 'redux/slices/events';
 
-import { Team } from "../../types/models";
+import { Team } from "types/models";
 import TeamsTab from './TeamsTab';
 
 const Teams: FC<TeamPropsType> = ({

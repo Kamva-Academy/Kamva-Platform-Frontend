@@ -19,7 +19,7 @@ import Widget, { WidgetModes } from 'components/organisms/Widget';
 import {
   getOneRegistrationReceiptAction,
   validateRegistrationReceiptAction,
-} from '../redux/slices/events'
+} from 'redux/slices/events'
 import { faSeri } from '../utils/translateNumber';
 import Layout from 'components/template/GeneralLayout';
 import { toast } from 'react-toastify';
