@@ -12,7 +12,7 @@ function ChangeStateDialog({ open, handleClose, edges, changeState }) {
   const t = useTranslate();
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h3">{t('chooseNextState')}</Typography>
       </DialogTitle>

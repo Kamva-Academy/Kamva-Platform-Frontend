@@ -1,38 +1,13 @@
-import { Divider, Fab, Grid, Paper, Typography, Box } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Divider, Fab, Grid, Paper, Typography, Box, Stack } from '@mui/material';
 import { Help as HelpIcon } from '@mui/icons-material';
-import clsx from 'clsx';
 import React, { useMemo, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-
 import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
 import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';
 
-const useStyles = makeStyles((theme) => ({
-  workshopContent: {
-    paddingTop: 30,
-  },
-  paper: {
-    padding: theme.spacing(0, 1),
-    overflow: 'hidden',
-  },
-  mainItem: {
-    margin: theme.spacing(1, 0),
-  },
-  item: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1, 0),
-    background: '#fafafa',
-  },
-  actionPaper: {
-    padding: theme.spacing(2, 1),
-  },
-}));
-
 function StatePage({ state = {} }) {
-  const classes = useStyles();
   const t = useTranslate();
   const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
@@ -49,11 +24,11 @@ function StatePage({ state = {} }) {
   );
 
   const questionWidgets = useMemo(() =>
-    questions.map((widget) => (
-      <Grid item key={widget.id} xs={12}>
+    questions.map((widget, index) => (
+      <Stack key={widget.id}>
+        <Divider style={{ marginBottom: 20 }} />
         <Widget coveredWithPaper={false} key={widget.id} widget={widget} />
-        <Divider style={{ marginTop: 20 }} />
-      </Grid>
+      </Stack>
     )), [questions]);
 
   const notQuestions = widgets.filter(
@@ -62,53 +37,51 @@ function StatePage({ state = {} }) {
 
   const notQuestionWidgets = useMemo(() =>
     notQuestions.map((widget) => (
-      <div className={classes.mainItem} key={widget.id}>
+      <Stack key={widget.id}>
         <Widget coveredWithPaper={false} widget={widget} />
-      </div>
+      </Stack>
     )), [notQuestions]);
 
   return (
     <>
-      <Grid
-        container
-        spacing={2}
-        className={classes.workshopContent}
-        justifyContent="center">
+      <Grid container spacing={2} sx={{ paddingTop: 4 }} justifyContent="center">
         <Grid
-          item
-          xs={12}
+          item xs={12}
           md={notQuestions.length > 0 ? 4 : 6}
           lg={notQuestions.length > 0 ? 4 : 8}>
-          <Paper className={clsx(classes.paper, classes.actionPaper)}>
-            <Grid container spacing={2} >
-              <Grid item xs={12}>
-                <Typography align="center" component="h2" variant="h3" gutterBottom>
-                  {state.name}
-                </Typography>
-                <Divider />
+          <Stack spacing={2} component={Paper} sx={{ padding: 2 }}>
+            <Typography align="center" component="h2" variant="h3" gutterBottom>
+              {state.name}
+            </Typography>
+            {questionWidgets}
+            <Divider sx={{ display: { xs: 'none', md: 'inherit' } }} />
+            <Stack sx={{ display: { xs: 'none', md: 'inherit' } }}>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <BackButton inwardEdges={inward_edges} />
+                </Grid>
+                <Grid item xs={6}>
+                  <NextButton outwardEdges={outward_edges} />
+                </Grid>
               </Grid>
-
-              {questionWidgets}
-
-              {inward_edges && outward_edges && (
-                <>
+            </Stack>
+          </Stack>
+        </Grid>
+        {notQuestions.length > 0 && (
+          <Grid item xs={12} md={8} lg={8}>
+            <Stack component={Paper} sx={{ padding: 1 }} spacing={1}>
+              {notQuestionWidgets}
+              <Stack sx={{ display: { xs: 'inherit', md: 'none' }, paddingTop: 1 }} >
+                <Grid container item xs={12} spacing={2}>
                   <Grid item xs={6}>
                     <BackButton inwardEdges={inward_edges} />
                   </Grid>
                   <Grid item xs={6}>
                     <NextButton outwardEdges={outward_edges} />
                   </Grid>
-                </>
-              )}
-            </Grid>
-
-          </Paper>
-        </Grid>
-        {notQuestions.length > 0 && (
-          <Grid item xs={12} md={8} lg={8}>
-            <Paper className={classes.paper}>
-              {notQuestionWidgets}
-            </Paper>
+                </Grid>
+              </Stack>
+            </Stack>
           </Grid>
         )}
       </Grid>
