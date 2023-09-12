@@ -11,7 +11,7 @@ const LinearLoading: FC<LinearLoadingPropsType> = ({
 }) => {
   if (loading) {
     return (
-      <div style={{ width: '100%', position: 'fixed', top: '0px', zIndex: '99999' }}>
+      <div style={{ width: '100vw', position: 'fixed', top: '0px', zIndex: '99999' }}>
         <LinearProgress />
       </div>
     )
