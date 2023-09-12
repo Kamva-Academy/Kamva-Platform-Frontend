@@ -40,8 +40,6 @@ const Root = () => {
     <Routes>
       <Route path="/hi/" element={<CustomPage />} ></Route>
 
-      <Route path="/loading/"></Route>
-
       <Route path="/about-us/" element={<AboutUs />} />
 
       <Route path="/" element={<Landing />} />

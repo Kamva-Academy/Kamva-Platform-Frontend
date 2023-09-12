@@ -14,26 +14,20 @@ import createEmotionCache from './configs/CreateEmotionCache'
 import selectTheme from './configs/themes';
 import Notifier from './components/molecules/Notifications';
 import { initParseServer } from './parse/init';
-import { initRedirectAction } from './redux/slices/redirect';
+import { resetRedirectAction } from './redux/slices/redirect';
 import Root from './routes';
 import translations from './translations';
 import LinearLoading from 'components/atoms/LinearLoading';
 
-const App = ({ dir, redirectTo, forceRedirect, initRedirect, loading }) => {
+const App = ({ dir, redirectTo, resetRedirect, loading }) => {
   const navigate = useNavigate();
+
   useEffect(() => {
     if (redirectTo !== null) {
       navigate(redirectTo);
-      if (forceRedirect) {
-        navigate(redirectTo);
-        navigate('/loading/');
-        navigate(-1);
-      } else {
-        navigate(redirectTo);
-      }
-      initRedirect();
+      resetRedirect();
     }
-  }, [redirectTo, forceRedirect, initRedirect, navigate]);
+  }, [redirectTo]);
 
   useEffect(() => {
     initParseServer();
@@ -83,4 +77,4 @@ const mapStateToProps = (state) => ({
     state.paper.isFetching,
 });
 
-export default connect(mapStateToProps, { initRedirect: initRedirectAction })(App);
+export default connect(mapStateToProps, { resetRedirect: resetRedirectAction })(App);

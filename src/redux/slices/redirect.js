@@ -7,7 +7,7 @@ const redirectSlice = createSlice({
   name: 'redirect',
   initialState,
   reducers: {
-    initRedirect: () => initialState,
+    resetRedirect: () => initialState,
   },
   extraReducers: {
     [enterWorkshopAction.fulfilled.toString()]: (state, { meta }) => {
@@ -18,6 +18,6 @@ const redirectSlice = createSlice({
   },
 });
 
-export const { initRedirect: initRedirectAction } = redirectSlice.actions;
+export const { resetRedirect: resetRedirectAction } = redirectSlice.actions;
 
 export const { reducer: redirectReducer } = redirectSlice;
