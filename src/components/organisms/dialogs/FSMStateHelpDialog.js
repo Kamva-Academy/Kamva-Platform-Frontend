@@ -33,7 +33,7 @@ function HelpDialog({ open, handleClose, helps }) {
         <Grid container justifyContent="space-between">
           <Grid item>
             {index > 0 && (
-              <Button color="primary" onClick={() => setIndex(index - 1)}>
+              <Button variant='outlined' color="primary" onClick={() => setIndex(index - 1)}>
                 قبلی
               </Button>
             )}
@@ -41,7 +41,8 @@ function HelpDialog({ open, handleClose, helps }) {
           <Grid item>
             {index < helps.length - 1 && (
               <Button
-                variant="outlined"
+                sx={{ animation: "shake 12s infinite" }}
+                variant="contained"
                 color="primary"
                 onClick={() => setIndex(index + 1)}>
                 بازم کمک لازم دارم
