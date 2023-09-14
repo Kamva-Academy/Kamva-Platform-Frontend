@@ -92,14 +92,14 @@ const Event: FC<EventType> = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    getOneEventInfo({  programId });
+    getOneEventInfo({ programId });
   }, []);
 
   useEffect(() => {
     if (event?.registration_form) {
       getEventTeams({ registrationFormId: event?.registration_form });
     }
-  }, [event]);
+  }, [event?.registration_form]);
 
   return (
     <Layout>
