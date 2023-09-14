@@ -18,12 +18,12 @@ import VideoWidget, { VideoEditWidget } from './VideoWidget';
 import AudioWidget, { AudioEditWidget } from './content/AudioWidget';
 
 const WIDGET_TYPES = {
-  InviteeUsernameQuestion: {
-    WidgetComponent: InviteeUsername,
-    EditWidgetDialog: InviteeUsernameEdit,
-    label: 'سوال کد معرف',
-    backendType: 'InviteeUsernameQuestion',
-  },
+  // InviteeUsernameQuestion: {
+  //   WidgetComponent: InviteeUsername,
+  //   EditWidgetDialog: InviteeUsernameEdit,
+  //   label: 'سوال کد معرف',
+  //   backendType: 'InviteeUsernameQuestion',
+  // },
   SmallAnswerProblem: {
     WidgetComponent: SmallAnswerProblemWidget,
     EditWidgetDialog: SmallAnswerProblemEditWidget,
