@@ -38,7 +38,7 @@ const Root = () => {
 
   return (
     <Routes>
-      <Route path="/hi/" element={<CustomPage />} ></Route>
+      <Route path="/l/mr4k2309" element={<CustomPage />} ></Route>
 
       <Route path="/about-us/" element={<AboutUs />} />
 
