@@ -18,13 +18,10 @@
 
   <meta name="theme-color" content="#ffffff" />
 
-  <meta property="og:title" content="پتلفرم برگزاری دوره‌های آنلاین" />
-
+  <meta property="og:title" content="آکادمی کاموا" />
   <meta property="og:type" content="website" />
-
   <meta property="og:image" content="%PUBLIC_URL%/logo.png" />
-
-  <meta property="og:description" content="پتلفرم برگزاری دوره‌های آنلاین" />
+  <meta property="og:description" content="پلتفرم برگزاری دوره‌های آنلاین" />
 
   <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon/apple-touch-icon.png" />
 
@@ -45,24 +42,25 @@
       var i = 'PhLmCZ',
         a = window,
         d = document;
+
       function g() {
         var g = d.createElement('script'),
           s = 'https://www.goftino.com/widget/' + i,
           l = localStorage.getItem('goftino_' + i);
         (g.async = !0),
-          (
-            g.src = l
-              ? s + '?o=' + l
-              : s);
+        (
+          g.src = l ?
+          s + '?o=' + l :
+          s);
         d
           .getElementsByTagName('head')[0]
           .appendChild(g);
       }
-      'complete' === d.readyState
-        ? g()
-        : a.attachEvent
-          ? a.attachEvent('onload', g)
-          : a.addEventListener('load', g, !1);
+      'complete' === d.readyState ?
+        g() :
+        a.attachEvent ?
+        a.attachEvent('onload', g) :
+        a.addEventListener('load', g, !1);
     })();
   </script>
 
