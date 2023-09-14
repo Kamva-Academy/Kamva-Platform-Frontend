@@ -6,6 +6,7 @@ import * as Sentry from "@sentry/react";
 import TagManager from 'react-gtm-module'
 import App from './App';
 import reduxStore from './redux/store';
+import ReactGA from "react-ga4";
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -20,6 +21,8 @@ if (process.env.NODE_ENV === 'production') {
     replaysOnErrorSampleRate: 1.0,
     integrations: [new Sentry.Replay()],
   });
+
+  ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
 
   TagManager.initialize({
     gtmId: 'process.env.REACT_APP_GTM_ID'

@@ -26,16 +26,9 @@ import FSMManagement from 'pages/FSMManagement';
 import Correction from 'pages/Correction';
 import EditArticle from 'pages/EditArticle';
 import CustomPage from 'pages/CustomPage';
-import ReactGA from 'react-ga';
-
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
 
 const Root = () => {
-
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
-
+  
   return (
     <Routes>
       <Route path="/hi/" element={<CustomPage />} ></Route>
