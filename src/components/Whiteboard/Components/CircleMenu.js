@@ -39,7 +39,7 @@ const CircleMenu = ({ changeMode, addNewCircleNode }) => {
       <IconButton variant="contained" {...bindHover(popupState)} size="large">
         <FiberManualRecordOutlinedIcon />
       </IconButton>
-      <Menu
+      <Menu disableScrollLock
         {...bindMenu(popupState)}
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

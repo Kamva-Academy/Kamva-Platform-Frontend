@@ -10,7 +10,7 @@ const EditHintsDialog = ({
   referenceId
 }) => {
   return (
-    <Dialog open={open} onClose={handleClose} fullWidth>
+    <Dialog disableScrollLock open={open} onClose={handleClose} fullWidth>
       <DialogContent>
         <EditHints referenceId={referenceId} type='widget' hints={hints} />
       </DialogContent>

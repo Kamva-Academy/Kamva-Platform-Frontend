@@ -42,7 +42,7 @@ function CreateWorkshopDialog({
   }
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="xs">
+    <Dialog disableScrollLock open={open} onClose={handleClose} maxWidth="xs">
       <DialogTitle>{t('createWorkshop')}</DialogTitle>
       <DialogContent>
         <DialogContentText>

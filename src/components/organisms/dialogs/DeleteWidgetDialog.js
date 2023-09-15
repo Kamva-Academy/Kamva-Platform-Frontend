@@ -20,7 +20,7 @@ function DeleteWidgetDialog({
 }) {
   const t = useTranslate();
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>{t('removeWidget')}</DialogTitle>
       <DialogContent>
         <DialogContentText>{t('wantRemoveWidget')}</DialogContentText>

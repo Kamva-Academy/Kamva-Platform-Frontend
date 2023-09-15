@@ -61,7 +61,7 @@ function InviteeUsernameEdit({
   };
 
   return (
-    <Dialog
+    <Dialog disableScrollLock
       open={open}
       onClose={handleClose}
       maxWidth="sm"

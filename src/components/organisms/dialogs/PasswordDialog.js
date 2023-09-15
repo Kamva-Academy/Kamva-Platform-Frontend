@@ -14,7 +14,7 @@ function PasswordDialog({ open, handleClose, programId, fsmId, enterWorkshop }) 
   const [password, setPassword] = useState('');
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm">
+    <Dialog disableScrollLock open={open} onClose={handleClose} maxWidth="sm">
       <DialogTitle>
         برای ورود به این کارگاه باید رمز آن را وارد کنید!
       </DialogTitle>

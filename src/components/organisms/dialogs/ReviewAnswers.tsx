@@ -40,7 +40,7 @@ const ReviewAnswers: FC<ReviewAnswersPropsType> = ({
   }, [open])
 
   return (
-    <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
+    <Dialog disableScrollLock maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h1" gutterBottom align="center">
           {'پاسخ‌های شما'}

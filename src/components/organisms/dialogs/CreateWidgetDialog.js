@@ -33,7 +33,7 @@ export default function CreateWidgetDialog({ open, handleClose, paperId, showCon
   }
 
   return (
-    <Dialog open={open} maxWidth='sm' onClose={handleClose}>
+    <Dialog disableScrollLock open={open} maxWidth='sm' onClose={handleClose}>
       <DialogTitle>{t('createWidget')}</DialogTitle>
       <DialogContent>
         <FormControl size='small' fullWidth style={{ width: '200px' }} variant="outlined">

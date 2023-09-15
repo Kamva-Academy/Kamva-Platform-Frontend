@@ -64,7 +64,7 @@ const RegisterOneUserDialog: FC<AddOneUserDialogPropsType> = ({
   };
 
   return (
-    <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
+    <Dialog disableScrollLock maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <DialogTitle>
         {'افزودن کاربر جدید'}
       </DialogTitle>

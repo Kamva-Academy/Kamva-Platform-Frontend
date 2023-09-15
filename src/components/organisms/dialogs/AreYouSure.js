@@ -11,7 +11,7 @@ import React from 'react';
 
 function AreYouSure({ open, handleClose, callBackFunction }) {
   return (
-    <Dialog maxWidth="xs" open={open} onClose={handleClose}>
+    <Dialog disableScrollLock maxWidth="xs" open={open} onClose={handleClose}>
       <DialogContent>
         <Grid item>
           <Typography variant="h5" align="center">

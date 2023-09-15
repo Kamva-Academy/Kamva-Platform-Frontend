@@ -17,7 +17,7 @@ export default function RemoveAllNodesDialog({
   const { teamId } = useContext(StatePageContext);
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogContent>
         <DialogContentText>
           آیا مایل به حذف اطلاعات تخته هستید؟

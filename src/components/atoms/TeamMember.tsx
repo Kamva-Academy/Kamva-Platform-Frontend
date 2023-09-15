@@ -75,7 +75,7 @@ const TeamMember: FC<TeamMemberPropsType> = ({
         <IconButton onClick={handleClick}>
           <MoreVertIcon />
         </IconButton>
-        <Menu
+        <Menu disableScrollLock
           anchorEl={anchorEl}
           open={openMenu}
           onClose={handleClose}>

@@ -44,7 +44,7 @@ function WhiteboardButton() {
         <BrushIcon />
       </IconButton>
     </Tooltip>
-    <Dialog
+    <Dialog disableScrollLock
       maxWidth="lg"
       open={open}
       onClose={() => setOpen(false)}

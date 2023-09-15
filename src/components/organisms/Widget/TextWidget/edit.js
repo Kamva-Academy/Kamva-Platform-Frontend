@@ -46,7 +46,7 @@ function TextEditWidget({
   };
 
   return (
-    <Dialog
+    <Dialog disableScrollLock
       open={open}
       onClose={handleClose}
       disableAutoFocus

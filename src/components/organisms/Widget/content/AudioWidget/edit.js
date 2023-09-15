@@ -62,7 +62,7 @@ function AudioEditWidget({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>صوت</DialogTitle>
       <DialogContent>
         <Stack spacing={2}>

@@ -89,7 +89,7 @@ function Index({
   };
 
   return (
-    <Dialog maxWidth="sm" fullWidth open={open} onClose={handleClose}>
+    <Dialog disableScrollLock maxWidth="sm" fullWidth open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h2" gutterBottom align="center">
           {'افزودن مدرسه‌ی جدید'}

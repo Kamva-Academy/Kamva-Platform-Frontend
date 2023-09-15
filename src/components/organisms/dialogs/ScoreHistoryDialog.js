@@ -51,7 +51,7 @@ function ScoreHistoryDialog({
   }, [open]);
 
   return (
-    <Dialog
+    <Dialog disableScrollLock
       open={open}
       onClose={handleClose}
       maxWidth="xs"

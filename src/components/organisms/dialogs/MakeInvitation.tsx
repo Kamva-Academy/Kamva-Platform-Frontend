@@ -39,7 +39,7 @@ const MakeInvitationDialog: FC<MakeInvitationDialogPropsType> = ({ inviteSomeone
   };
 
   return (
-    <Dialog maxWidth="sm" open={open} onClose={handleClose}>
+    <Dialog disableScrollLock maxWidth="sm" open={open} onClose={handleClose}>
       <DialogContent>
         <Typography gutterBottom>
           {'شماره تلفن فرد مورد نظر را وارد کنید.'}

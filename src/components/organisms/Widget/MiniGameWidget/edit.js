@@ -49,7 +49,7 @@ function MiniGameEditWidget({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>{t('لینک')}</DialogTitle>
       <DialogContent>
         <DialogContentText>

@@ -39,7 +39,7 @@ const RectangleMenu = ({ changeMode, addNewRectangleNode }) => {
       <IconButton variant="contained" {...bindHover(popupState)} size="large">
         <StopOutlinedIcon />
       </IconButton>
-      <Menu
+      <Menu disableScrollLock
         {...bindMenu(popupState)}
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

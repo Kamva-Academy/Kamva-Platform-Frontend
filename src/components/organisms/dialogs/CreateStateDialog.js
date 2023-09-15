@@ -23,7 +23,7 @@ function CreateStateDialog({
   const t = useTranslate();
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>{t('createState')}</DialogTitle>
       <DialogContent>
         <TextField

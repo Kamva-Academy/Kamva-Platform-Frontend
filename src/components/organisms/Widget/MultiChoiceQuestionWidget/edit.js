@@ -65,7 +65,7 @@ function MultiChoiceQuestionEditWidget({
   };
 
   return (
-    <Dialog
+    <Dialog disableScrollLock
       open={open}
       onClose={handleClose}
       maxWidth="sm"

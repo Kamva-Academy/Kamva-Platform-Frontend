@@ -40,7 +40,7 @@ const UsersAvatar = () => {
       </Avatar>
     </Tooltip>
 
-    <Menu
+    <Menu disableScrollLock
       anchorEl={anchorEl}
       keepMounted
       open={open}

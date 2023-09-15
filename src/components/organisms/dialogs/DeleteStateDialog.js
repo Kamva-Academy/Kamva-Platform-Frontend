@@ -14,7 +14,7 @@ function DeleteStateDialog({ open, handleClose, deleteState, paperId }) {
   const t = useTranslate();
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>{t('removeState')}</DialogTitle>
       <DialogContent>
         <DialogContentText>{t('wantDeleteState')}</DialogContentText>

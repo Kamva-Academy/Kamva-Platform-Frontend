@@ -14,7 +14,7 @@ function StatePasswordDialog({ open, handleClose, onSubmit }) {
   const [password, setPassword] = useState('');
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm">
+    <Dialog disableScrollLock open={open} onClose={handleClose} maxWidth="sm">
       <DialogTitle>
         برای ورود به این گام باید رمز آن را وارد کنید! )اگر قبلا به این گام
         رفته‌اید نیازی به رمز نیست(
