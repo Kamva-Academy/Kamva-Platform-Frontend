@@ -1,5 +1,6 @@
 import { Box, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import {
+  Cancel as CancelIcon,
   Refresh as RefreshIcon,
   Warning as WarningIcon,
   Help as HelpIcon,
@@ -65,6 +66,12 @@ function Meeting({ handleClose, displayName }) {
           <Tooltip title='refresh' arrow>
             <IconButton size='small' onClick={refresh}>
               <RefreshIcon />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip sx={{ display: { xs: 'inherit', sm: 'none' } }} title='بستن' arrow>
+            <IconButton size='small' onClick={handleClose}>
+              <CancelIcon />
             </IconButton>
           </Tooltip>
         </Stack>

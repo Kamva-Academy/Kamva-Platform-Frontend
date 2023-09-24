@@ -20,7 +20,7 @@ const DraggableMeeting: FC<DraggableMeetingPropsType> = ({ open, handleClose }) 
           left: { xs: 0, sm: 10 },
           bottom: { xs: 'auto', sm: 10 },
           top: { xs: 0, sm: 'auto' },
-          height: { xs: '80vh', sm: 350 },
+          height: { xs: '85vh', sm: 350 },
           width: { xs: '100%', sm: 600 },
           zIndex: 1500,
         }}>
