@@ -1,15 +1,16 @@
+// link to reducing resource usage:
+// https://community.jitsi.org/t/reducing-resource-usage-to-improve-performance-both-client-side-and-server-side/39891
 
-// https://github.com/jitsi/jitsi-meet/blob/master/config.js
 
 const interfaceConfigOverwrite = {
-  // BRAND_WATERMARK_LINK:'https://rastaiha.ir',
+  BRAND_WATERMARK_LINK: 'https://kamva.academy/',
 
   SET_FILMSTRIP_ENABLED: false,
   DISABLE_FOCUS_INDICATOR: true,
   DISABLE_DOMINANT_SPEAKER_INDICATOR: true,
   DISABLE_VIDEO_BACKGROUND: true,
 
-  DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+  // DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
   SHOW_CHROME_EXTENSION_BANNER: false,
   RECENT_LIST_ENABLED: false,
   VIDEO_QUALITY_LABEL_DISABLED: true,
@@ -21,10 +22,10 @@ const interfaceConfigOverwrite = {
   DISPLAY_WELCOME_PAGE_CONTENT: false,
   GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
   SHOW_JITSI_WATERMARK: false,
-  APP_NAME: 'Kamva Meet',
-  NATIVE_APP_NAME: 'Kamva Meet',
+  APP_NAME: 'Kamva Academy',
+  NATIVE_APP_NAME: 'Kamva Academy',
   MOBILE_APP_PROMO: false,
-  PROVIDER_NAME: 'Kamva',
+  PROVIDER_NAME: 'Kamva Academy',
   TOOLBAR_BUTTONS: [
     'microphone',
     'camera',
@@ -40,10 +41,24 @@ const interfaceConfigOverwrite = {
   ],
 };
 
+// https://github.com/jitsi/jitsi-meet/blob/master/config.js
 const configOverwrite = {
 
   useAppLanguage: true,
   defaultLanguage: 'fa',
+
+  // Default local name to be displayed
+  defaultLocalDisplayName: 'من',
+
+  // Default remote name to be displayed
+  defaultRemoteDisplayName: 'غریبه',
+
+  // Disables profile and the edit of all fields from the profile settings (display name and email)
+  disableProfile: false,
+
+  // When 'true', the user cannot edit the display name.
+  // (Mainly useful when used in conjunction with the JWT so the JWT name becomes read only.)
+  readOnlyName: true,
 
   // Disables self-view tile. (hides it from tile view and from filmstrip)
   disableSelfView: false,
@@ -52,9 +67,11 @@ const configOverwrite = {
   disableSelfViewSettings: true,
 
   disableLocalVideoFlip: true,
-
   doNotFlipLocalVideo: true,
+  enableLocalVideoFlip: true,
 
+  // Disables all invite functions from the app (share, invite, dial out...etc)
+  disableInviteFunctions: true,
 
   remoteVideoMenu: {
     // Whether the remote video context menu to be rendered or not.
@@ -70,12 +87,15 @@ const configOverwrite = {
   // Options related to the participants pane.
   participantsPane: {
     // Hides the moderator settings tab.
-    hideModeratorSettingsTab: false,
+    hideModeratorSettingsTab: true,
     // Hides the more actions button.
-    hideMoreActionsButton: false,
+    hideMoreActionsButton: true,
     // Hides the mute all button.
-    hideMuteAllButton: false,
+    hideMuteAllButton: true,
   },
+
+  // good for disabling buttons:
+  // buttonsWithNotifyClick: [],
 
   // Options related to the breakout rooms feature.
   breakoutRooms: {
@@ -87,41 +107,39 @@ const configOverwrite = {
     hideJoinRoomButton: false,
   },
 
-  testing: {
-    disableE2EE: false,
-    p2pTestMode: false,
-  },
-
-  p2p: {
-    // Enables peer to peer mode. When enabled the system will try to
-    // establish a direct connection when there are exactly 2 participants
-    // in the room. If that succeeds the conference will stop sending data
-    // through the JVB and use the peer to peer connection instead. When a
-    // 3rd participant joins the conference will be moved back to the JVB
-    // connection.
-    enabled: false,
-  },
-
-  conferenceInfo: {
-    // hide raised hands count
-    alwaysVisible: []
-  },
-  hideConferenceSubject: true,
-  hideConferenceTimer: true,
+  // hideConferenceSubject: true,
+  // hideConferenceTimer: true,
   disableReactions: true,
   disableReactionsModeration: false,
   disablePolls: true,
   startWithAudioMuted: true,
   startWithVideoMuted: true,
 
-
-  // ???
   startAudioOnly: false,
   disableModeratorIndicator: true,
   startScreenSharing: true,
   enableEmailInStats: false,
   disableDeepLinking: true,
   prejoinPageEnabled: false,
+
+  // reload
+  enableIceRestart: true,
+  enableForcedReload: true,
+
+  // Logging
+  logging: {
+    // Default log level for the app and lib-jitsi-meet.
+    defaultLogLevel: 'error',
+    // Option to disable LogCollector (which stores the logs on CallStats).
+    disableLogCollector: true,
+    // Individual loggers are customizable.
+    loggers: {
+      // The following are too verbose in their logging with the default level.
+      'modules/RTC/TraceablePeerConnection.js': 'error',
+      'modules/statistics/CallStats.js': 'error',
+      'modules/xmpp/strophe.util.js': 'error',
+    },
+  }
 }
 
 export { interfaceConfigOverwrite, configOverwrite }

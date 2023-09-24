@@ -19,8 +19,8 @@ import {
 import {
   getOneWorkshopAction,
 } from 'redux/slices/workshop';
-import { addMentorToRoom, updateMentorTime } from '../parse/mentorsInRoom';
-import DraggableChatRoom from '../components/Jitsi/DraggableChatRoom';
+import { addMentorToRoom, updateMentorTime } from 'parse/mentorsInRoom';
+import DraggableChatRoom from 'components/organisms/DraggableMeeting';
 
 var moment = require('moment');
 
