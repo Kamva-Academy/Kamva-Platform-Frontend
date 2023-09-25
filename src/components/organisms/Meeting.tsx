@@ -24,7 +24,7 @@ function Meeting({ handleClose, displayName }) {
   }
 
   const iframeRef = useRef(null);
-  let { myTeam, teamId, teamRoom } = useContext(StatePageContext);
+  const { myTeam, teamId, teamRoom } = useContext(StatePageContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -96,7 +96,7 @@ function Meeting({ handleClose, displayName }) {
             ? <CustomJitsiMeeting
               key={random}
               appId={teamId}
-              userDisplayName={displayName} userEmail={''} roomName={`گروه ${myTeam.name}`} />
+              userDisplayName={displayName} userEmail={''} roomName={`گروه ${myTeam?.name}`} />
             : <MeetingCustomSpinner />
         }
       </Box>
