@@ -26,7 +26,7 @@ var moment = require('moment');
 
 export const StatePageContext = React.createContext();
 
-const Workshop = ({
+const FSM = ({
   fsmState,
   needUpdateState,
   paperId,
@@ -206,4 +206,4 @@ export default connect(mapStateToProps, {
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
   changeOpenChatRoom: changeOpenChatRoomAction,
-})(Workshop);
+})(FSM);
