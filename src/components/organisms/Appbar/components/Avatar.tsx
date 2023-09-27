@@ -27,7 +27,7 @@ function AvatarComponent({ name = 'بی‌نام', logout }: AvatarComponentProp
 
   return (
     <>
-      <IconButton sx={{ marginRight: -1 }} onClick={handleClick}>
+      <IconButton onClick={handleClick}>
         <Avatar
           sx={{ backgroundColor: stringToColor(name) }}
           alt="logo">

@@ -7,8 +7,7 @@ function ProgramLogoButton({ image, name, programId }) {
   const width = useWidth();
   return (
     <Stack direction={'row'} alignItems={'center'}>
-      <IconButton disabled={width !== 'xs'} sx={{ marginLeft: -1 }}
-        component={Link} to={`/program/${programId}/`}>
+      <IconButton disabled={width !== 'xs'} component={Link} to={`/program/${programId}/`}>
         <img
           src={image}
           alt='course-logo'
