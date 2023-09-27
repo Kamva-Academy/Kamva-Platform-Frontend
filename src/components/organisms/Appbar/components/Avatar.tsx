@@ -7,7 +7,12 @@ import { logoutAction } from 'redux/slices/account';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-function AvatarComponent({ name = 'بی‌نام', logout }) {
+type AvatarComponentPropsType = {
+  name: string;
+  logout: any;
+}
+
+function AvatarComponent({ name = 'بی‌نام', logout }: AvatarComponentPropsType) {
   const navigate = useNavigate();
   const { programId } = useParams();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -22,7 +27,7 @@ function AvatarComponent({ name = 'بی‌نام', logout }) {
 
   return (
     <>
-      <IconButton sx={{ padding: 0, paddingLeft: 1 }} onClick={handleClick}>
+      <IconButton sx={{ marginRight: -1 }} onClick={handleClick}>
         <Avatar
           sx={{ backgroundColor: stringToColor(name) }}
           alt="logo">
