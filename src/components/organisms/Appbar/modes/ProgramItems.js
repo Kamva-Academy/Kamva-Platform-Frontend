@@ -19,7 +19,7 @@ const DashboardItems = ({ event }) => {
   const userInfo = <UserInfo />
 
   const desktopRightItems = [logoButton];
-  if (!event?.is_private && !desktopRightItems.includes(backButton)) {
+  if (event && !event?.is_private && !desktopRightItems.includes(backButton)) {
     desktopRightItems.push(backButton);
   }
 
