@@ -52,7 +52,7 @@ const Layout = ({
           left: '0',
           backgroundColor: '#EBECED',
         }} />
-      {programId ? <AppBar mode='COURSE' position="relative" />
+      {programId ? <AppBar mode='PROGRAM' position="relative" />
         : <AppBar mode={appbarMode} position="relative" />
       }
       <Container maxWidth='lg'

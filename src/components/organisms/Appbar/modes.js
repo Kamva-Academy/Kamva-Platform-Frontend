@@ -1,5 +1,5 @@
 import StudentDashboardItems from './DashboardItems';
-import CourseAppBarItems from './Course';
+import ProgramAppBarItems from './Program';
 import GeneralPagesAppbarItems from './GeneralPagesAppbarItems';
 import FSMAppBarItems from './FSMAppBarItems';
 import MentorFSMAppBar from './MentorFSMAppBar';
@@ -8,7 +8,7 @@ const AppBarModes = {
   STUDENT_DASHBOARD: StudentDashboardItems,
   FSM: FSMAppBarItems,
   MENTOR_FSM: MentorFSMAppBar,
-  COURSE: CourseAppBarItems,
+  PROGRAM: ProgramAppBarItems,
   GENERAL: GeneralPagesAppbarItems,
   ARTICLE: GeneralPagesAppbarItems,
 };
