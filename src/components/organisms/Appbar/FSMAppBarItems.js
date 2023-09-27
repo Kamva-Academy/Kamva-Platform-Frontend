@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
-import UserAvatar from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
 import ChatRoomButton from './components/ChatRoomButton';
 import MentorButton from './components/MentorButton';
