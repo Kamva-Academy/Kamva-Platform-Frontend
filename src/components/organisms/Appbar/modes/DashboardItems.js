@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
-import DashboardButton from './components/DashboardButton';
-import Brand from './components/Brand';
-import UserInfo from './components/UserInfo';
+import DashboardButton from '../components/DashboardButton';
+import Brand from '../components/Brand';
+import UserInfo from '../components/UserInfo';
 
 const DashboardItems = () => {
 

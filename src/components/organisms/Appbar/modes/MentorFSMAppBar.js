@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom'
 
-import UserAvatar from './components/Avatar';
-import DashboardButton from './components/DashboardButton';
-import ChatRoomButton from './components/ChatRoomButton';
-import ReviewAnswersButton from './components/ReviewAnswersButton';
-import TeamAvatar from './components/UsersAvatar';
-import WhiteboardButton from './components/WhiteboardButton';
+import UserAvatar from '../components/Avatar';
+import DashboardButton from '../components/DashboardButton';
+import ChatRoomButton from '../components/ChatRoomButton';
+import TeamAvatar from '../components/UsersAvatar';
+import WhiteboardButton from '../components/WhiteboardButton';
 import { announceMentorDeparture } from 'parse/mentorsInRoom';
 
 const WorkshopAppBarItems = ({ workshop, isMentor, mentorId }) => {

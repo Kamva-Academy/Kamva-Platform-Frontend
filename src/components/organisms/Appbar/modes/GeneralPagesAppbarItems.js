@@ -1,6 +1,6 @@
 import React from 'react';
-import DashboardButton from './components/DashboardButton';
-import Brand from './components/Brand';
+import DashboardButton from '../components/DashboardButton';
+import Brand from '../components/Brand';
 
 const GeneralPagesAppbarItems = () => {
   const backToLanding = <DashboardButton name={'بازگشت'} to={-1} />;

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import DashboardButton from './components/DashboardButton';
-import ProgramLogoButton from './components/ProgramLogoButton';
-import UserInfo from './components/UserInfo';
+import DashboardButton from '../components/DashboardButton';
+import ProgramLogoButton from '../components/ProgramLogoButton';
+import UserInfo from '../components/UserInfo';
 
 const DashboardItems = ({ event }) => {
 

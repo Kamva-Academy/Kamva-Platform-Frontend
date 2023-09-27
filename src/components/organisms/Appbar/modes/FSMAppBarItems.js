@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
-import DashboardButton from './components/DashboardButton';
-import ChatRoomButton from './components/ChatRoomButton';
-import MentorButton from './components/MentorButton';
-import ReviewAnswersButton from './components/ReviewAnswersButton';
-import TeamAvatar from './components/UsersAvatar';
-import WhiteboardButton from './components/WhiteboardButton';
+import DashboardButton from '../components/DashboardButton';
+import ChatRoomButton from '../components/ChatRoomButton';
+import MentorButton from '../components/MentorButton';
+import ReviewAnswersButton from '../components/ReviewAnswersButton';
+import TeamAvatar from '../components/UsersAvatar';
+import WhiteboardButton from '../components/WhiteboardButton';
 
 const WorkshopAppBarItems = ({ workshop, isMentor }) => {
 
