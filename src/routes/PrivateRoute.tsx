@@ -5,7 +5,7 @@ import { Navigate, Outlet, useParams } from 'react-router-dom';
 const PrivateRoute = ({ token }) => {
   const { programId } = useParams();
   if (!token) {
-    return <Navigate to={programId ? `/?private_event_enter=${programId}` : '/'} />
+    return <Navigate to={programId ? `/?private_program_id=${programId}` : '/'} />
   }
   return <Outlet />
 };

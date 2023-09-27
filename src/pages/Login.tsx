@@ -34,7 +34,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
   });
 
   const urlParams = new URLSearchParams(window.location.search);
-  const programId = urlParams.get('private_event_enter');
+  const programId = urlParams.get('private_program_id');
 
   useEffect(() => {
     if (token) {
