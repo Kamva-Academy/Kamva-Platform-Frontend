@@ -143,11 +143,7 @@ const TeamInfo = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  token: state.account.token,
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   makeTeamHead: makeTeamHeadAction,
   deleteTeam: deleteTeamAction,
   updateTeamChatRoomLink: updateTeamChatRoomLinkAction
