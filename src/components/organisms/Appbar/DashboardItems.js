@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
-import AvatarComponent from './components/Avatar';
 import DashboardButton from './components/DashboardButton';
-import LogoButton from './components/LogoButton';
+import Brand from './components/Brand';
+import UserInfo from './components/UserInfo';
 
 const DashboardItems = () => {
 
@@ -13,16 +13,16 @@ const DashboardItems = () => {
     }
   }, [])
 
-  const logoButton = <LogoButton />;
   const eventsButton = <DashboardButton name={'دوره‌‌ها'} to={'/programs/'} />;
   const articlesButton = <DashboardButton name={'مقاله‌ها'} to={'/articles/'} />;
-  const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/fsms/'} />;
-  const Avatar = <AvatarComponent />;
+  const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/fsms/'} />; // todo: add fsms section
+  const brand = <Brand />
+  const userInfo = <UserInfo />
 
   return {
-    desktopLeftItems: [Avatar],
-    desktopRightItems: [logoButton, eventsButton, articlesButton],
-    mobileLeftItems: [Avatar],
+    desktopLeftItems: [userInfo],
+    desktopRightItems: [brand, eventsButton, articlesButton],
+    mobileLeftItems: [userInfo],
     mobileRightItems: [],
     mobileMenuListItems: [eventsButton, articlesButton],
   };

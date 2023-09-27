@@ -1,15 +1,15 @@
 import React from 'react';
 import DashboardButton from './components/DashboardButton';
-import LogoButton from './components/LogoButton';
+import Brand from './components/Brand';
 
 const GeneralPagesAppbarItems = () => {
-  const logoButton = <LogoButton />;
   const backToLanding = <DashboardButton name={'بازگشت'} to={-1} />;
+  const brand = <Brand />;
 
   const desktopLeftItems = [backToLanding];
-  const desktopRightItems = [logoButton];
+  const desktopRightItems = [brand];
   const mobileLeftItems = [backToLanding];
-  const mobileRightItems = [logoButton];
+  const mobileRightItems = [brand];
   const mobileMenuListItems = [];
 
   return {
