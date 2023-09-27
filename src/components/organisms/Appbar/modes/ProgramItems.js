@@ -5,6 +5,7 @@ import ProgramLogoButton from '../components/ProgramLogoButton';
 import UserInfo from '../components/UserInfo';
 
 const DashboardItems = ({ event }) => {
+  const { programId } = useParams();
 
   useEffect(() => {
     if (event?.name) {
@@ -12,15 +13,19 @@ const DashboardItems = ({ event }) => {
     }
   }, [event])
 
-  const { programId } = useParams();
 
   const logoButton = <ProgramLogoButton image={event?.cover_page} name={event?.name} programId={programId} />;
   const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/programs/'} />;
   const userInfo = <UserInfo />
 
+  const desktopRightItems = [logoButton];
+  if (!event?.is_private && !desktopRightItems.includes(backButton)) {
+    desktopRightItems.push(backButton);
+  }
+
   return {
     desktopLeftItems: [userInfo],
-    desktopRightItems: [logoButton, backButton],
+    desktopRightItems,
     mobileLeftItems: [userInfo],
     mobileRightItems: [logoButton],
     mobileMenuListItems: [],
