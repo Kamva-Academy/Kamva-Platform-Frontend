@@ -10,7 +10,7 @@ import iranyekanwebmedium from '../fonts/iranyekanwebmedium.woff';
 import iranyekanwebextrabold from '../fonts/iranyekanwebextrabold.woff';
 import iranyekanwebblack from '../fonts/iranyekanwebblack.woff';
 import iranyekanwebextrablack from '../fonts/iranyekanwebextrablack.woff';
-
+import Lalezar from '../fonts/Lalezar.woff2'
 
 const RTLMuiTheme = createTheme({
   direction: 'rtl',
@@ -21,8 +21,8 @@ const RTLMuiTheme = createTheme({
       styleOverrides: `
 
       @font-face {
-        font-family: "Lalezar";
-        src: url("https://cdn.fontcdn.ir/Fonts/Lalezar/148c72044161f7fdd874a7743f5402f15b04bc2b9a609d2734deb22057bef2d5.woff2") format("woff2");
+        font-family: Lalezar;
+        src: url(${Lalezar}) format("woff2");
         font-weight: 400;
         font-style: normal;
       }
