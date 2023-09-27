@@ -18,16 +18,20 @@ const DashboardItems = ({ event }) => {
   const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/programs/'} />;
   const userInfo = <UserInfo />
 
+  const desktopLeftItems = [];
   const desktopRightItems = [logoButton];
+  const mobileRightItems = [logoButton];
   if (event && !event?.is_private && !desktopRightItems.includes(backButton)) {
-    desktopRightItems.push(backButton);
+    desktopLeftItems.push(backButton);
+    mobileRightItems.push(backButton);
   }
+  desktopLeftItems.push(userInfo);
 
   return {
-    desktopLeftItems: [userInfo],
+    desktopLeftItems,
     desktopRightItems,
     mobileLeftItems: [userInfo],
-    mobileRightItems: [logoButton],
+    mobileRightItems,
     mobileMenuListItems: [],
   };
 };
