@@ -48,10 +48,10 @@
           s = 'https://www.goftino.com/widget/' + i,
           l = localStorage.getItem('goftino_' + i);
         (g.async = !0),
-        (
-          g.src = l ?
-          s + '?o=' + l :
-          s);
+          (
+            g.src = l ?
+              s + '?o=' + l :
+              s);
         d
           .getElementsByTagName('head')[0]
           .appendChild(g);
@@ -59,12 +59,14 @@
       'complete' === d.readyState ?
         g() :
         a.attachEvent ?
-        a.attachEvent('onload', g) :
-        a.addEventListener('load', g, !1);
+          a.attachEvent('onload', g) :
+          a.addEventListener('load', g, !1);
     })();
   </script>
 
-  <script src="/scripts/tex-svg.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-svg.min.js"
+    integrity="sha512-9irB0qyXMAf4xUF5UEVOhb4NMCWo7xeKakVbl0lfJ09HyhrplRCqTFMtaW6lP7G0IbHfIcmSo3dFZrWcrsGnOA=="
+    crossorigin="anonymous"></script>
 
 </head>
 
