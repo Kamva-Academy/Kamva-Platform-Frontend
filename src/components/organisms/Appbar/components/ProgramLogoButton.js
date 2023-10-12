@@ -23,7 +23,7 @@ function ProgramLogoButton({ image, name, programId }) {
         </IconButton>
       </Tooltip>
       <Button sx={{ display: { xs: 'none', sm: 'inline' }, paddingLeft: 0 }} component={Link} to={`/program/${programId}/`}>
-        <Typography fontSize={20} fontWeight={440} color={'black'}>
+        <Typography fontSize={20} fontWeight={440} color={'black'} align='center'>
           {name}
         </Typography>
       </Button>
