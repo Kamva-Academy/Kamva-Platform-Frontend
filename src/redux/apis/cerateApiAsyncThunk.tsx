@@ -2,8 +2,6 @@ import { AsyncThunk, createAsyncThunk } from '@reduxjs/toolkit';
 
 import errorHandler from './errorHandler';
 
-type a = {}
-
 type CreateAsyncThunkApiType =
   (
     typePrefix: string,
@@ -16,7 +14,13 @@ export const createAsyncThunkApi: CreateAsyncThunkApiType = (typePrefix, api, ur
   createAsyncThunk(typePrefix, async (arg, { rejectWithValue, dispatch, getState }) => {
     try {
       const body = options?.bodyCreator?.(arg) || arg;
-      const stringUrl = typeof url === 'function' ? url(arg) : url;
+      let stringUrl = typeof url === 'function' ? url(arg) : url;
+
+      if (arg?.parameters) {
+        for (const parameter of arg?.parameters) {
+          stringUrl += `?${parameter[0]}=${parameter[1]}`
+        }
+      }
 
       const response = await api(stringUrl, body);
 

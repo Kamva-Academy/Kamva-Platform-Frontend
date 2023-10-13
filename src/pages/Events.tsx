@@ -1,67 +1,30 @@
-import { Divider, Grid, Typography, Skeleton } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Divider, Grid, Typography, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-
 import EventCard from 'components/organisms/cards/Event';
-import WorkshopCard from 'components/organisms/cards/WorkshopCard';
 import {
   getAllEventsInfoAction,
 } from 'redux/slices/events';
 import {
-  getRegistrableWorkshopsAction,
-} from 'redux/slices/workshop';
+  getBannersAction,
+} from 'redux/slices/WebSiteAppearance';
 import Layout from 'components/template/GeneralLayout';
 import { EventType } from 'types/models';
 import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
+import Banner from 'components/molecules/Banner';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginTop: 80,
-    height: `calc(100vh - ${80}px)`,
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: 2,
-    paddingBottom: 2,
-  },
-  logo: {
-    maxHeight: '80vh',
-    maxWidth: '100%',
-  },
-  paper: {
-    width: '100%',
-    height: '100%',
-    padding: 2,
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: 600,
-    textShadow: '1px 1px #dbd9d9',
-  },
-  subtitle: {
-    fontSize: 25,
-    fontWeight: 400,
-    textShadow: '1px 1px #dbd9d9',
-  },
-  listItem: {
-    fontSize: 20,
-    fontWeight: 300,
-    textShadow: '1px 1px #dbd9d9',
-  },
-}));
 
 const Events = ({
   getAllEventsInfo,
-  getRegistrableWorkshops,
+  getBanners,
   events,
-  registrableWorkshops,
+  banners,
   isLoading
 }) => {
-  const classes = useStyles();
 
   useEffect(() => {
     getAllEventsInfo();
-    getRegistrableWorkshops();
+    getBanners({ parameters: [['banner_type', 'ProgramsPage']] });
   }, []);
 
   const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
@@ -89,7 +52,7 @@ const Events = ({
 
   const skeletonElements = (
     <Grid item container spacing={2} xs={12}>
-      {[...Array(6)].map((event, index) => (
+      {[...Array(6)].map((_, index) => (
         <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
           <EventSkeletonCard />
         </Grid>
@@ -99,27 +62,26 @@ const Events = ({
 
   return (
     <Layout>
-      <Grid container spacing={4} justifyContent='center'>
-        <Grid item xs={12}>
-          <Typography variant="h1" align='center' component="h2">
-            {'دوره‌‌ها'}
-          </Typography>
+      <Stack width={'100%'} spacing={4} justifyContent='center'>
+        <Banner banners={banners} />
+        <Typography variant="h1" align='center'>
+          {'دوره‌‌ها'}
+        </Typography>
+        <Typography variant='h2' gutterBottom>
+          {'دوره‌‌های در جریان'}
+        </Typography>
+        <Divider />
+        <Grid container>
+          {isLoading ? skeletonElements : activeEventsElement}
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant='h2' gutterBottom>
-            {'دوره‌‌های در جریان'}
-          </Typography>
-          <Divider />
+        <Typography variant='h2' gutterBottom>
+          {'دوره‌‌های گذشته'}
+        </Typography>
+        <Divider />
+        <Grid container>
+          {isLoading ? skeletonElements : inactiveEventsElement}
         </Grid>
-        { isLoading ? skeletonElements : activeEventsElement }
-        <Grid item xs={12}>
-          <Typography variant='h2' gutterBottom>
-            {'دوره‌‌های گذشته'}
-          </Typography>
-          <Divider />
-        </Grid>
-        { isLoading ? skeletonElements : inactiveEventsElement }
-      </Grid>
+      </Stack>
     </Layout>
   );
 };
@@ -128,9 +90,10 @@ const mapStateToProps = (state) => ({
   events: state.events.events || [],
   registrableWorkshops: state.workshop.registrableWorkshops,
   isLoading: state.events.isFetching,
+  banners: state.WebSiteAppearance.banners,
 });
 
 export default connect(mapStateToProps, {
   getAllEventsInfo: getAllEventsInfoAction,
-  getRegistrableWorkshops: getRegistrableWorkshopsAction,
+  getBanners: getBannersAction,
 })(Events);

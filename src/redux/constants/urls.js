@@ -181,3 +181,6 @@ export const statesCRUDUrl = ({ paperId }) => paperId ? `fsm/state/${paperId}/` 
 export const visitWorkshopPlayerUrl = 'fsm/visitteam/';
 export const workshopTeamsUrl = 'fsm/workshopplayers/';
 
+// Website Appearance
+
+export const bannersCRUDUrl = 'websiteappearance/banner/';

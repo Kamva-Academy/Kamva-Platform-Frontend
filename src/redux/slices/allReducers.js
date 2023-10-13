@@ -13,11 +13,13 @@ import { articleReducer } from './article';
 import { paperReducer } from './Paper';
 import { scoringReducer } from './scoring';
 import { questionReducer } from './Question';
+import { WebSiteAppearanceReducer } from './WebSiteAppearance';
 
 const allReducers = combineReducers({
   paper: paperReducer,
   account: accountReducer,
   currentState: currentStateReducer,
+  WebSiteAppearance: WebSiteAppearanceReducer,
   notifications: notificationReducer,
   whiteboard: whiteboardReducer,
   widget: widgetReducer,
