@@ -31,11 +31,11 @@ const Banner: FC<BannerPropsType> = ({ banners }) => {
       spaceBetween={10}
       slidesPerView={1}
       modules={[Virtual, Autoplay]}
-      autoplay={{ delay: 6000 }}
+      autoplay={{ delay: 6000, disableOnInteraction: false }}
       virtual>
       {banners.map((banner, index) => (
         <SwiperSlide key={index} virtualIndex={index} onClick={() => window.location.href = banner.redirect_to}>
-          <img src={BACKEND_URL + banner.image} style={{ width: '100%', borderRadius: 10 }} />
+          <img src={banner.image.includes('http') ? banner.image : BACKEND_URL + banner.image} style={{ width: '100%', borderRadius: 10 }} />
         </SwiperSlide>
       ))}
     </Swiper>
