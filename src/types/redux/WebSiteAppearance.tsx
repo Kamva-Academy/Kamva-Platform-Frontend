@@ -3,6 +3,7 @@ export type WebsiteAppearanceInitialStateType = {
 }
 
 export type BannerType = {
-  image: string;
+  desktop_image: string;
+  mobile_image: string;
   redirect_to: string;
 }

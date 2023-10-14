@@ -8,7 +8,7 @@ import 'swiper/css/virtual';
 import 'swiper/css/autoplay';
 import { useNavigate } from 'react-router-dom';
 import { BannerType } from 'types/redux/WebSiteAppearance';
-import { BACKEND_URL } from 'configs/Constants';
+import useWidth from 'utils/UseWidth';
 
 type BannerPropsType = {
   banners: BannerType[]
@@ -16,6 +16,7 @@ type BannerPropsType = {
 
 const Banner: FC<BannerPropsType> = ({ banners }) => {
   const navigate = useNavigate();
+  const width = useWidth();
 
   // https://swiperjs.com/react
 
@@ -35,7 +36,7 @@ const Banner: FC<BannerPropsType> = ({ banners }) => {
       virtual>
       {banners.map((banner, index) => (
         <SwiperSlide key={index} virtualIndex={index} onClick={() => window.location.href = banner.redirect_to}>
-          <img src={banner.image.includes('http') ? banner.image : BACKEND_URL + banner.image} style={{ width: '100%', borderRadius: 10 }} />
+          <img src={(width === 'xs' || width === 'sm') ? banner.mobile_image : banner.desktop_image} style={{ width: '100%', borderRadius: 10 }} />
         </SwiperSlide>
       ))}
     </Swiper>
