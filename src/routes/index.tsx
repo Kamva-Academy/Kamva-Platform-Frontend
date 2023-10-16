@@ -26,6 +26,7 @@ import FSMManagement from 'pages/FSMManagement';
 import Correction from 'pages/Correction';
 import EditArticle from 'pages/EditArticle';
 import CustomPage from 'pages/CustomPage';
+import GraphPage from 'components/organisms/Graph';
 
 const Root = () => {
   
@@ -38,6 +39,7 @@ const Root = () => {
       <Route path="/" element={<Landing />} />
 
       <Route path="/reset-password/" element={<ResetPassword />} />
+      <Route path="/graph/" element={<GraphPage />} />
       <Route path="/create-account/" element={<CreateAccount />} />
       <Route path="/login/" element={<Login />} />
       <Route path="/articles/" element={<Articles />} />
