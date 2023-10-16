@@ -11,6 +11,3 @@ export const LIVE_QUERY_SERVER_URL =
     : 'wss://parse.kamva.academy/ws/';
 
 export const ITEMS_PER_PAGE_NUMBER = 12;
-
-// show loading while sending file
-// trello
