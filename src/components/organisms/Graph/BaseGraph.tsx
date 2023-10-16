@@ -23,11 +23,6 @@ const BaseGraph = ({
     }, 100)
   }
 
-  function handleWindowResize() {
-    setWidth(boxRef.current.clientWidth);
-    goToCurrentNode();
-  }
-
   useEffect(() => {
     goToCurrentNode();
   }, [currentNode])
@@ -49,12 +44,13 @@ const BaseGraph = ({
       event.preventDefault();
       event.stopPropagation();
     });
-    return () => {
-      boxRef.current.removeEventListener('resize', handleWindowResize);
-    };
   }, [boxRef.current])
 
   useEffect(() => {
+    function handleWindowResize() {
+      setWidth(boxRef.current.clientWidth);
+      goToCurrentNode();
+    }
     handleWindowResize();
     window.addEventListener('resize', handleWindowResize);
     return () => {
