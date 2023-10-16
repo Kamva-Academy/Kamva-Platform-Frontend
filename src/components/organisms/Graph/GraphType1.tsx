@@ -1,29 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import BaseGraph from './BaseGraph';
 
-const _nodes = [
-  { id: "علی", color: '#80ff2b', x: 0, y: 400 },
-  { id: "محمد", x: 100, y: 400 },
-  { id: "رضا", x: 200, y: 400 },
-  { id: "حسن", x: 300, y: 400 },
-  { id: "تقی", x: 400, y: 400 },
-  { id: "میرزا", x: 500, y: 400 },
-];
+const GraphType1 = ({ currentNode, passedLinks, futureLinks }) => {
 
-const _links = [
-  { source: "علی", target: "محمد" },
-  { source: "علی", target: "رضا" },
-  { source: "رضا", target: "تقی" },
-  { source: "میرزا", target: "حسن" },
-];
+  const adaptedLinks = [];
+  const nodes = new Set();
 
+  const addNode = (() => {
+    let [x, y] = [1000 * Math.random(), 0];
+    return (id) => {
+      nodes.add({ id, x, y });
+      x += 100;
+      y = Math.floor(150 * Math.random() - 50);
+    }
+  })();
 
-const GraphType1 = () => {
+  passedLinks.forEach((link) => {
+    addNode(link.tail.name);
+    adaptedLinks.push({
+      source: link.tail.name,
+      target: link.head.name,
+    })
+  })
+
+  addNode(currentNode);
+
+  futureLinks.forEach((link) => {
+    addNode(link.head.name);
+    adaptedLinks.push({
+      source: link.tail.name,
+      target: link.head.name,
+    })
+  });
 
   return (
-    <>
-      <BaseGraph tragAndDrop={false} currentNodeId={'علی'} nodes={_nodes} links={_links} />
-    </>
+    <BaseGraph height={200} dragAndDrop={false} currentNode={currentNode} nodes={Array.from(nodes)} links={adaptedLinks} />
   );
 };
 

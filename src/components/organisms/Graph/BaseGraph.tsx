@@ -1,23 +1,75 @@
-import React, { useEffect, useState } from 'react';
+import { Box, Button, IconButton } from '@mui/material';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Graph } from "react-d3-graph";
+import MyLocationIcon from '@mui/icons-material/MyLocation';
 
 const BaseGraph = ({
-  currentNodeId = null,
+  currentNode = null,
   nodes,
   links,
-  tragAndDrop,
+  dragAndDrop,
+  height = 400,
 }) => {
-
+  const boxRef = useRef(null);
+  const graphRef = useRef(null);
   const [focused, setFocused] = useState(null);
+  const [width, setWidth] = useState(null);
+
+  // todo: maybe there is a better way to solve :?
+  const goToCurrentNode = () => {
+    setFocused(null);
+    setTimeout(() => {
+      setFocused(currentNode)
+    }, 100)
+  }
+
+  function handleWindowResize() {
+    setWidth(boxRef.current.clientWidth);
+    goToCurrentNode();
+  }
 
   useEffect(() => {
-    setFocused(currentNodeId)
+    goToCurrentNode();
+  }, [currentNode])
+
+  // make current node green
+  nodes = nodes.map(node => {
+    if (node.id === currentNode) {
+      return ({
+        ...node,
+        color: '#80ff2b',
+      })
+    }
+    return node;
+  });
+
+  useEffect(() => {
+    if (!boxRef.current) return;
+    boxRef.current.addEventListener('mousewheel', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    return () => {
+      boxRef.current.removeEventListener('resize', handleWindowResize);
+    };
+  }, [boxRef.current])
+
+  useEffect(() => {
+    handleWindowResize();
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
   }, [])
 
   return (
-    <>
+    <Box overflow={'hidden'} ref={boxRef} height={height} sx={{ position: 'relative' }}>
+      <IconButton sx={{ position: 'absolute', bottom: 0 }} onClick={goToCurrentNode}>
+        <MyLocationIcon color='secondary' />
+      </IconButton>
       {/* https://danielcaldas.github.io/react-d3-graph/docs/index.html */}
       <Graph
+        ref={graphRef}
         id="fsm-map"
         data={{
           nodes,
@@ -27,13 +79,14 @@ const BaseGraph = ({
         config={{
           directed: true,
           minZoom: 1,
-          maxZoom: 5,
-          initialZoom: 5,
-          height: window.innerHeight,
-          width: window.innerWidth,
-          staticGraph: !tragAndDrop,
-          staticGraphWithDragAndDrop: tragAndDrop,
-          nodeHighlightBehavior: true,
+          maxZoom: 2,
+          focuseZoom: 2,
+          initialZoom: 2,
+          height: height,
+          width: width,
+          staticGraph: !dragAndDrop,
+          staticGraphWithDragAndDrop: dragAndDrop,
+          // nodeHighlightBehavior: true,
           // linkHighlightBehavior: true,
           node: {
             labelPosition: "bottom",
@@ -53,8 +106,8 @@ const BaseGraph = ({
             // disableLinkForce: true,
           },
         }}
-      />;
-    </>
+      />
+    </Box>
   );
 };
 

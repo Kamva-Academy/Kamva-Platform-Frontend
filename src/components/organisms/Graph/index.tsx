@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Graph } from "react-d3-graph";
+import React from 'react';
 import GraphType1 from './GraphType1';
 import GraphType2 from './GraphType2';
 
@@ -19,22 +18,10 @@ const _links = [
   { source: "میرزا", target: "حسن" },
 ];
 
-
-const GraphPage = ({
-  currentNodeId = _nodes[Math.floor(Math.random() * _nodes.length)].id,
-  nodes = _nodes,
-  links = _links,
-}) => {
-
-  const [focused, setFocused] = useState(null);
-
-  useEffect(() => {
-    setFocused(currentNodeId)
-  }, [])
+const GraphPage = () => {
 
   return (
     <>
-      <GraphType1 />
       {/* <GraphType2 /> */}
     </>
   );

@@ -22,7 +22,7 @@ const GraphType2 = () => {
 
   return (
     <>
-      <BaseGraph tragAndDrop={true} currentNodeId={'علی'} nodes={_nodes} links={_links} />
+      <BaseGraph dragAndDrop={true} currentNode={'علی'} nodes={_nodes} links={_links} />
     </>
   );
 };

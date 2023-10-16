@@ -1,11 +1,12 @@
 import { Divider, Fab, Grid, Paper, Typography, Box, Stack } from '@mui/material';
 import { Help as HelpIcon } from '@mui/icons-material';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
 import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';
+import GraphType1 from 'components/organisms/Graph/GraphType1';
 
 function StatePage({ state = {} }) {
   const t = useTranslate();
@@ -49,22 +50,27 @@ function StatePage({ state = {} }) {
           item xs={12}
           md={notQuestions.length > 0 ? 4 : 6}
           lg={notQuestions.length > 0 ? 4 : 8}>
-          <Stack spacing={2} component={Paper} sx={{ padding: 2 }}>
-            <Typography align="center" component="h2" variant="h3" gutterBottom>
-              {state.name}
-            </Typography>
-            {questionWidgets}
-            <Divider sx={{ display: { xs: 'none', md: 'inherit' } }} />
-            <Stack sx={{ display: { xs: 'none', md: 'inherit' } }}>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <BackButton inwardEdges={inward_edges} />
+          <Stack spacing={2}>
+            <Stack spacing={2} component={Paper} sx={{ padding: 2 }}>
+              <Typography align="center" component="h2" variant="h3" gutterBottom>
+                {state.name}
+              </Typography>
+              {questionWidgets}
+              <Divider sx={{ display: { xs: 'none', md: 'inherit' } }} />
+              <Stack sx={{ display: { xs: 'none', md: 'inherit' } }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <BackButton inwardEdges={inward_edges} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <NextButton outwardEdges={outward_edges} />
+                  </Grid>
                 </Grid>
-                <Grid item xs={6}>
-                  <NextButton outwardEdges={outward_edges} />
-                </Grid>
-              </Grid>
+              </Stack>
             </Stack>
+            <Box component={Paper}>
+              <GraphType1 currentNode={state.name} passedLinks={state.inward_edges} futureLinks={state.outward_edges} />
+            </Box>
           </Stack>
         </Grid>
         {notQuestions.length > 0 && (
@@ -84,25 +90,27 @@ function StatePage({ state = {} }) {
             </Stack>
           </Grid>
         )}
-      </Grid>
+      </Grid >
 
-      {hints.length > 0 && (
-        <>
-          <Fab
-            size="small"
-            variant="extended"
-            sx={{ position: 'fixed', left: 20, bottom: 20 }}
-            onClick={() => setOpenHelpDialog(true)}>
-            <HelpIcon sx={{ marginRight: 1 }} />
-            <Typography>{t('help')}</Typography>
-          </Fab>
-          <HelpDialog
-            open={openHelpDialog}
-            handleClose={() => setOpenHelpDialog(false)}
-            helps={hints}
-          />
-        </>
-      )}
+      {
+        hints.length > 0 && (
+          <>
+            <Fab
+              size="small"
+              variant="extended"
+              sx={{ position: 'fixed', left: 20, bottom: 20 }}
+              onClick={() => setOpenHelpDialog(true)}>
+              <HelpIcon sx={{ marginRight: 1 }} />
+              <Typography>{t('help')}</Typography>
+            </Fab>
+            <HelpDialog
+              open={openHelpDialog}
+              handleClose={() => setOpenHelpDialog(false)}
+              helps={hints}
+            />
+          </>
+        )
+      }
     </>
   );
 }
