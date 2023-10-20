@@ -19,8 +19,6 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     }
   }, [workshop?.name])
 
-
-
   const { programId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
   const chatRoomButton = <ChatRoomButton />;

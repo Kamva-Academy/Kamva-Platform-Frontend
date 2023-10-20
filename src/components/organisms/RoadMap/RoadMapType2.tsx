@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import BaseGraph from './BaseGraph';
+import GraphMapBase from './Base';
 
 const _nodes = [
   { id: "علی", color: '#80ff2b' },
@@ -22,7 +22,7 @@ const GraphType2 = () => {
 
   return (
     <>
-      <BaseGraph dragAndDrop={true} currentNode={'علی'} nodes={_nodes} links={_links} />
+      <GraphMapBase dragAndDrop={true} currentNode={'علی'} nodes={_nodes} links={_links} />
     </>
   );
 };

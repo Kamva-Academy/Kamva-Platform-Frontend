@@ -6,7 +6,7 @@ import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
 import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';
-import GraphType1 from 'components/organisms/Graph/GraphType1';
+import RoadMapType1 from 'components/organisms/RoadMap/RoadMapType1';
 
 function StatePage({ state = {} }) {
   const t = useTranslate();
@@ -69,7 +69,10 @@ function StatePage({ state = {} }) {
               </Stack>
             </Stack>
             <Box component={Paper}>
-              <GraphType1 currentNode={state.name} passedLinks={state.inward_edges} futureLinks={state.outward_edges} />
+              <Typography variant='h4' padding={2}>
+                {'نقشه راه'}
+              </Typography>
+              <RoadMapType1 currentNode={state.name} links={[...state.inward_edges, ...state.outward_edges]} />
             </Box>
           </Stack>
         </Grid>
