@@ -1,12 +1,12 @@
-import { Divider, Fab, Grid, Paper, Typography, Box, Stack } from '@mui/material';
+import { Divider, Fab, Grid, Paper, Typography, Stack } from '@mui/material';
 import { Help as HelpIcon } from '@mui/icons-material';
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
 import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';
-import RoadMapType1 from 'components/organisms/RoadMap/RoadMapType1';
+import FSMStateRoadMap from 'components/organisms/FSMStateRoadMap';
 
 function StatePage({ state = {} }) {
   const t = useTranslate();
@@ -68,12 +68,7 @@ function StatePage({ state = {} }) {
                 </Grid>
               </Stack>
             </Stack>
-            <Box component={Paper}>
-              <Typography variant='h4' padding={2}>
-                {'نقشه راه'}
-              </Typography>
-              <RoadMapType1 currentNode={state.name} links={[...state.inward_edges, ...state.outward_edges]} />
-            </Box>
+            <FSMStateRoadMap currentNodeId={state.name} links={[...state.inward_edges, ...state.outward_edges]} highlighPath={[]} />
           </Stack>
         </Grid>
         {notQuestions.length > 0 && (
@@ -94,7 +89,6 @@ function StatePage({ state = {} }) {
           </Grid>
         )}
       </Grid >
-
       {
         hints.length > 0 && (
           <>

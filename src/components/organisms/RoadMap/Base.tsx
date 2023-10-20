@@ -4,44 +4,47 @@ import { Graph } from "react-d3-graph";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 
 const GraphMapBase = ({
-  currentNode,
+  currentNodeId,
   nodes,
   links,
   dragAndDrop,
   height = 400,
+  highlighPath = [],
 }) => {
+  const highlightColor = '#80ff2b';
   const boxRef = useRef(null);
   const graphRef = useRef(null);
   const [focused, setFocused] = useState(null);
   const [width, setWidth] = useState(null);
 
-  // todo: maybe there is a better way to solve :?
   const goToCurrentNode = () => {
     setFocused(null);
     setTimeout(() => {
-      setFocused(currentNode)
+      setFocused(currentNodeId)
     }, 100)
     setTimeout(() => {
       setFocused(null)
     }, 200)
   }
 
-  function handleBoxResize() {
+  const handleBoxResize = () => {
     if (boxRef.current) {
       setWidth(boxRef.current.clientWidth);
     }
   }
 
-  // make current node green:
-  nodes = nodes.map(node => {
-    if (node.id === currentNode) {
-      return ({
-        ...node,
-        color: '#80ff2b',
-      })
-    }
-    return node;
+  // make previous path highlighted:
+  highlighPath.forEach(pathLink => {
+    nodes.find(node => node.id === pathLink.source)['color'] = highlightColor;
+    nodes.find(node => node.id === pathLink.target)['color'] = highlightColor;
+    links.find(link => link.source === pathLink.source && link.target === pathLink.target)
   });
+
+  // make current node green:
+  const currentNode = nodes.find(node => node.id === currentNodeId)
+  if (currentNode) {
+    currentNode['color'] = highlightColor;
+  }
 
   useEffect(() => {
     handleBoxResize();
@@ -50,8 +53,7 @@ const GraphMapBase = ({
 
   useEffect(() => {
     goToCurrentNode();
-  }, [currentNode])
-
+  }, [currentNodeId])
 
   useEffect(() => {
     if (!boxRef.current) return;
@@ -59,13 +61,11 @@ const GraphMapBase = ({
       event.preventDefault();
       event.stopPropagation();
     });
-
-    const resizeObserver = new ResizeObserver(handleBoxResize);
-    resizeObserver.observe(boxRef.current);
+    new ResizeObserver(handleBoxResize).observe(boxRef.current);
   }, [boxRef.current])
 
   return (
-    <Box id={currentNode} overflow={'hidden'} ref={boxRef} height={height} sx={{ position: 'relative', userSelect: 'none' }}>
+    <Box id={currentNodeId} overflow={'hidden'} ref={boxRef} height={height} sx={{ position: 'relative', userSelect: 'none' }}>
       <IconButton sx={{ position: 'absolute', bottom: 0 }} onClick={goToCurrentNode}>
         <MyLocationIcon color='secondary' />
       </IconButton>
