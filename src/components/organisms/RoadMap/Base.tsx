@@ -41,10 +41,15 @@ const GraphMapBase = ({
   });
 
   // make current node green:
-  const currentNode = nodes.find(node => node.id === currentNodeId)
-  if (currentNode) {
-    currentNode['color'] = highlightColor;
-  }
+  nodes = nodes.map(node => {
+    if (node.id === currentNodeId) {
+      return {
+        ...node,
+        color: highlightColor,
+      }
+    }
+    return node;
+  })
 
   useEffect(() => {
     handleBoxResize();

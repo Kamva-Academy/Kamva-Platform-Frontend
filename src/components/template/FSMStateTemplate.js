@@ -69,14 +69,28 @@ function StatePage({ state = {} }) {
               </Stack>
             </Stack>
             <FSMStateRoadMap currentNodeId={state.name} links={[...state.inward_edges, ...state.outward_edges]} highlighPath={[]} />
+            {notQuestions.length === 0 &&
+              <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <BackButton inwardEdges={inward_edges} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <NextButton outwardEdges={outward_edges} />
+                  </Grid>
+                </Grid>
+              </Stack>
+            }
           </Stack>
         </Grid>
         {notQuestions.length > 0 && (
           <Grid item xs={12} md={8} lg={8}>
-            <Stack component={Paper} sx={{ padding: 1 }} spacing={1}>
-              {notQuestionWidgets}
-              <Stack sx={{ display: { xs: 'inherit', md: 'none' }, paddingY: 1 }} >
-                <Grid container item xs={12} spacing={2}>
+            <Stack spacing={2}>
+              <Stack component={Paper} sx={{ padding: 1 }} spacing={1}>
+                {notQuestionWidgets}
+              </Stack>
+              <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
+                <Grid container spacing={2}>
                   <Grid item xs={6}>
                     <BackButton inwardEdges={inward_edges} />
                   </Grid>
