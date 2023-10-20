@@ -7,6 +7,7 @@ import MentorButton from '../components/MentorButton';
 import ReviewAnswersButton from '../components/ReviewAnswersButton';
 import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
+import Brand from '../components/Brand';
 
 const WorkshopAppBarItems = ({ workshop, isMentor }) => {
 
@@ -26,6 +27,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;
+  const KamvaBrand = <Brand />;
 
   const desktopLeftItems = [];
   const desktopRightItems = [];
@@ -49,6 +51,8 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
     mobileRightItems.push([chatRoomButton]);
     mobileMenuListItems.push(backToEventButton);
   } else {
+    mobileRightItems.push(KamvaBrand);
+    desktopRightItems.push(KamvaBrand);
     mobileLeftItems.push(backToEventButton);
     desktopLeftItems.push(backToEventButton)
   }
