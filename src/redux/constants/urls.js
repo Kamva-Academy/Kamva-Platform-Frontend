@@ -184,3 +184,7 @@ export const workshopTeamsUrl = 'fsm/workshopplayers/';
 // Website Appearance
 
 export const bannersCRUDUrl = 'websiteappearance/banner/';
+
+// Roadmap
+
+export const roadmapCRUDUrl = 'roadmap/';

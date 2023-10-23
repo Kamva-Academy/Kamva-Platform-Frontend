@@ -1,9 +1,19 @@
 import { Box, IconButton } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Graph } from "react-d3-graph";
 import MyLocationIcon from '@mui/icons-material/MyLocation';
+import { Link, Node } from 'types/redux/Roadmap';
 
-const GraphMapBase = ({
+type GraphMapBasePropsType = {
+  currentNodeId: string;
+  nodes: Node[];
+  links: Link[];
+  dragAndDrop: any;
+  height?: number;
+  highlighPath?: Link[];
+};
+
+const GraphMapBase: FC<GraphMapBasePropsType> = ({
   currentNodeId,
   nodes,
   links,

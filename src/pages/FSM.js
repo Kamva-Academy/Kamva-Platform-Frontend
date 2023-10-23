@@ -172,7 +172,7 @@ const FSM = ({
         <ResponsiveAppBar mode={isMentor ? "MENTOR_FSM" : "FSM"} />
         <Toolbar id="back-to-top-anchor" />
         {fsmState &&
-          <FSMStateTemplate state={fsmState} />
+          <FSMStateTemplate state={fsmState} playerId={playerId} />
         }
         {/* <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">

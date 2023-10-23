@@ -8,7 +8,7 @@ import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';
 import FSMStateRoadMap from 'components/organisms/FSMStateRoadMap';
 
-function StatePage({ state = {} }) {
+function FSMStateTemplate({ state = {}, playerId }) {
   const t = useTranslate();
   const [openHelpDialog, setOpenHelpDialog] = useState(false);
 
@@ -68,7 +68,7 @@ function StatePage({ state = {} }) {
                 </Grid>
               </Stack>
             </Stack>
-            <FSMStateRoadMap currentNodeId={state.name} links={[...state.inward_edges, ...state.outward_edges]} highlighPath={[]} />
+            <FSMStateRoadMap currentNodeId={state.name} edges={[...state.inward_edges, ...state.outward_edges]} playerId={playerId} fsmId={state.fsm} />
             {notQuestions.length === 0 &&
               <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
                 <Grid container spacing={2}>
@@ -126,4 +126,4 @@ function StatePage({ state = {} }) {
   );
 }
 
-export default StatePage;
+export default FSMStateTemplate;
