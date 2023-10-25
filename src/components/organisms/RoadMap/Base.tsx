@@ -27,14 +27,14 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
   const [focused, setFocused] = useState(null);
   const [width, setWidth] = useState(null);
 
-  const goToCurrentNode = () => {
+  const goToCurrentNode = (delay = 100) => {
     setFocused(null);
     setTimeout(() => {
       setFocused(currentNodeId)
-    }, 100)
+    }, delay)
     setTimeout(() => {
       setFocused(null)
-    }, 200)
+    }, 2 * delay)
   }
 
   const handleBoxResize = () => {
@@ -63,7 +63,7 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
 
   useEffect(() => {
     handleBoxResize();
-    goToCurrentNode();
+    goToCurrentNode(1000);
   }, [])
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
 
   return (
     <Box id={currentNodeId} overflow={'hidden'} ref={boxRef} height={height} sx={{ position: 'relative', userSelect: 'none' }}>
-      <IconButton sx={{ position: 'absolute', bottom: 0 }} onClick={goToCurrentNode}>
+      <IconButton sx={{ position: 'absolute', bottom: 0 }} onClick={() => goToCurrentNode()}>
         <MyLocationIcon color='secondary' />
       </IconButton>
       {/* https://danielcaldas.github.io/react-d3-graph/docs/index.html */}
@@ -95,10 +95,10 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
         }}
         config={{
           directed: true,
-          minZoom: 1,
+          minZoom: 0.5,
           maxZoom: 2,
           focuseZoom: 2,
-          initialZoom: 2,
+          initialZoom: 1  ,
           focusAnimationDuration: 0.5,
           height,
           width,
