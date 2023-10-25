@@ -26,11 +26,34 @@ const FSMStateRoadMap: FC<FSMStateRoadMapPropsType> = ({
   getFSMRoadmap,
 }) => {
   const [openRoadMap, setOpenRoadMap] = useState(true);
+  const [lastTakenNode, setLastTakenNode] = useState<string>(null);
+  const [_playerTakenPath, set_PlayerTakenPath] = useState<Link[]>([]);
 
   useEffect(() => {
     getPlayerTakenPath({ player_id: playerId });
     getFSMRoadmap({ fsm_id: fsmId });
   }, [])
+
+  useEffect(() => {
+    setLastTakenNode(currentNodeId);
+    set_PlayerTakenPath(playerTakenPath);
+  }, [playerTakenPath])
+
+  useEffect(() => {
+    if (currentNodeId !== lastTakenNode) {
+      const lastTakenLink = _playerTakenPath[_playerTakenPath.length - 1];
+      if (!lastTakenLink) {
+        set_PlayerTakenPath([{ source: lastTakenNode, target: currentNodeId }]);
+      } else {
+        if (currentNodeId === lastTakenLink.source) {
+          set_PlayerTakenPath([..._playerTakenPath].slice(0, -1));
+        } else {
+          set_PlayerTakenPath([..._playerTakenPath, ({ source: lastTakenLink.target, target: currentNodeId })]);
+        }
+      }
+      setLastTakenNode(currentNodeId);
+    }
+  }, [currentNodeId])
 
   return (
     <Box component={Paper}>
@@ -42,7 +65,7 @@ const FSMStateRoadMap: FC<FSMStateRoadMapPropsType> = ({
       </Typography>
       <Collapse in={openRoadMap}>
         <Divider />
-        <RoadMapType1 currentNodeId={currentNodeId} links={FSMRoadmap} highlighPath={playerTakenPath} />
+        <RoadMapType1 currentNodeId={currentNodeId} links={FSMRoadmap} highlighedPath={_playerTakenPath} />
       </Collapse>
     </Box>
   );

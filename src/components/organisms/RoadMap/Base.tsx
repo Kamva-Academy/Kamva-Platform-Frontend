@@ -10,7 +10,7 @@ type GraphMapBasePropsType = {
   links: Link[];
   dragAndDrop: any;
   height?: number;
-  highlighPath?: Link[];
+  highlighedPath?: Link[];
 };
 
 const GraphMapBase: FC<GraphMapBasePropsType> = ({
@@ -19,9 +19,10 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
   links,
   dragAndDrop,
   height = 400,
-  highlighPath = [],
+  highlighedPath = [],
 }) => {
-  const highlightColor = '#80ff2b';
+  const highlightGreenColor = '#80ff2b';
+  const highlightBlueColor = '#00b4e0';
   const boxRef = useRef(null);
   const graphRef = useRef(null);
   const [focused, setFocused] = useState(null);
@@ -44,10 +45,13 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
   }
 
   // make previous path highlighted:
-  highlighPath.forEach(pathLink => {
-    nodes.find(node => node.id === pathLink.source)['color'] = highlightColor;
-    nodes.find(node => node.id === pathLink.target)['color'] = highlightColor;
-    links.find(link => link.source === pathLink.source && link.target === pathLink.target)
+  highlighedPath.forEach(pathLink => {
+    const linkSourceNode = nodes.find(node => node.id === pathLink.source);
+    if (linkSourceNode) linkSourceNode['color'] = highlightGreenColor;
+    const linkTargetNode = nodes.find(node => node.id === pathLink.target);
+    if (linkTargetNode) linkTargetNode['color'] = highlightGreenColor;
+    const link = links.find(link => link.source === pathLink.source && link.target === pathLink.target);
+    if (link) link['color'] = highlightGreenColor;
   });
 
   // make current node green:
@@ -55,7 +59,7 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
     if (node.id === currentNodeId) {
       return {
         ...node,
-        color: highlightColor,
+        color: highlightGreenColor,
       }
     }
     return node;
@@ -98,7 +102,7 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
           minZoom: 0.5,
           maxZoom: 2,
           focuseZoom: 2,
-          initialZoom: 1  ,
+          initialZoom: 1,
           focusAnimationDuration: 0.5,
           height,
           width,
@@ -109,11 +113,11 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
             labelPosition: "bottom",
             highlightFontSize: 9,
             highlightFontWeight: "bold",
-            highlightStrokeColor: "#00b4e0",
+            highlightStrokeColor: highlightBlueColor,
             strokeWidth: 2,
           },
           link: {
-            highlightColor: '#00b4e0',
+            highlightColor: highlightBlueColor,
           }
         }}
       />

@@ -5,13 +5,13 @@ import { Link, Node } from 'types/redux/Roadmap';
 type GraphType1PropsType = {
   currentNodeId: string;
   links: Link[];
-  highlighPath: Link[];
+  highlighedPath: Link[];
 };
 
 const GraphType1: FC<GraphType1PropsType> = ({
   currentNodeId,
   links: inputLinks,
-  highlighPath,
+  highlighedPath,
 }) => {
   const nodesXdistance = 120;
   const nodesYdistance = 200;
@@ -81,7 +81,7 @@ const GraphType1: FC<GraphType1PropsType> = ({
   developGraph();
 
   return (
-    <BaseGraph height={200} dragAndDrop={false} currentNodeId={currentNodeId} nodes={nodes} links={links} />
+    <BaseGraph height={200} dragAndDrop={false} currentNodeId={currentNodeId} nodes={nodes} links={links} highlighedPath={highlighedPath} />
   );
 };
 
