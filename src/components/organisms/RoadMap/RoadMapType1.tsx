@@ -15,8 +15,9 @@ const GraphType1: FC<GraphType1PropsType> = ({
 }) => {
   const nodesXdistance = 120;
   const nodesYdistance = 200;
-  const [finalLinks, setFinalLinks] = useState([]);
-  const [finalNodes, setFinalNodes] = useState([]);
+
+  const nodes = [];
+  const links = [];
 
   const getY = (initialY) => initialY + Math.floor(nodesYdistance * Math.random() - (nodesYdistance / 2))
 
@@ -51,8 +52,10 @@ const GraphType1: FC<GraphType1PropsType> = ({
   }
 
   const developGraph = () => {
-    const nodes = [...finalNodes];
-    const links = [...finalLinks];
+    // check weather inputLinks are updated and are not cached in the redux from previous fsm
+    if (!inputLinks.find(link => link.source === currentNodeId || link.target === currentNodeId)) {
+      return;
+    }
 
     let currentNode = nodes.find(node => node.id === currentNodeId);
     if (!currentNode) {
@@ -60,31 +63,25 @@ const GraphType1: FC<GraphType1PropsType> = ({
       nodes.push(currentNode);
     }
 
-    const tmpLinks = [...inputLinks];
-    while (tmpLinks.length > 0) {
-      const link = tmpLinks[0];
+    const inputLinksCopy = [...inputLinks];
+
+    while (inputLinksCopy.length > 0) {
+      const link = inputLinksCopy[0];
       let sourceNode = nodes.find(node => node.id === link.source);
       let targetNode = nodes.find(node => node.id === link.target);
-
       if (!sourceNode && !targetNode) {
-        tmpLinks.push(tmpLinks.shift());
-        continue;
+        inputLinksCopy.push(inputLinksCopy.shift());
       } else {
         handleAddingLink(link.source, link.target, nodes, links);
-        tmpLinks.shift();
+        inputLinksCopy.shift();
       }
     }
-
-    setFinalNodes(nodes);
-    setFinalLinks(links);
   }
-  
-  useEffect(() => {
-    developGraph();
-  }, [inputLinks, highlighPath, currentNodeId])
+
+  developGraph();
 
   return (
-    <BaseGraph height={200} dragAndDrop={false} currentNodeId={currentNodeId} nodes={finalNodes} links={finalLinks} />
+    <BaseGraph height={200} dragAndDrop={false} currentNodeId={currentNodeId} nodes={nodes} links={links} />
   );
 };
 
