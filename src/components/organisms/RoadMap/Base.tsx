@@ -108,7 +108,7 @@ const GraphMapBase: FC<GraphMapBasePropsType> = ({
           width,
           staticGraph: !dragAndDrop,
           staticGraphWithDragAndDrop: dragAndDrop,
-          nodeHighlightBehavior: true,
+          // nodeHighlightBehavior: true,
           node: {
             labelPosition: "bottom",
             highlightFontSize: 9,
