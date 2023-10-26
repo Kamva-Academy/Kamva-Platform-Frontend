@@ -1,17 +1,17 @@
-import { Divider, Fab, Grid, Paper, Typography, Stack } from '@mui/material';
-import { Help as HelpIcon } from '@mui/icons-material';
-import React, { useMemo, useState } from 'react';
-import { useTranslate } from 'react-redux-multilingual/lib/context';
+import { Box, Divider, Grid, Paper, Typography, Stack } from '@mui/material';
+import React, { FC, useMemo } from 'react';
 import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
-import HelpDialog from 'components/organisms/dialogs/FSMStateHelpDialog';
 import NextButton from 'components/atoms/NextButton';
 import FSMStateRoadMap from 'components/organisms/FSMStateRoadMap';
+import FSMStateHelpButton from 'components/molecules/FSMStateHelpButton';
 
-function FSMStateTemplate({ state = {}, playerId }) {
-  const t = useTranslate();
-  const [openHelpDialog, setOpenHelpDialog] = useState(false);
+type FSMStateTemplatePropsType = {
+  state: any;
+  playerId: number;
+}
 
+const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId }) => {
   const widgets = [...state.widgets];
   const hints = [...state.hints];
 
@@ -52,7 +52,10 @@ function FSMStateTemplate({ state = {}, playerId }) {
           lg={notQuestions.length > 0 ? 4 : 8}>
           <Stack spacing={2}>
             <Stack spacing={2} component={Paper} sx={{ padding: 2 }}>
-              <Typography align="center" component="h2" variant="h3" gutterBottom>
+              <Typography width={'fit-content'} alignSelf={'center'} textAlign={'center'} alignContent={'center'} position={'relative'} align="center" component="h2" variant="h3">
+                <Box position={'absolute'} left={0} marginLeft={-7} marginTop={-2.2}>
+                  <FSMStateHelpButton hints={hints} />
+                </Box>
                 {state.name}
               </Typography>
               {questionWidgets}
@@ -68,7 +71,7 @@ function FSMStateTemplate({ state = {}, playerId }) {
                 </Grid>
               </Stack>
             </Stack>
-            <FSMStateRoadMap currentNodeId={state.name} edges={[...state.inward_edges, ...state.outward_edges]} playerId={playerId} fsmId={state.fsm} />
+            <FSMStateRoadMap currentNodeId={state.name} playerId={playerId} fsmId={state.fsm} />
             {notQuestions.length === 0 &&
               <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
                 <Grid container spacing={2}>
@@ -103,25 +106,6 @@ function FSMStateTemplate({ state = {}, playerId }) {
           </Grid>
         )}
       </Grid >
-      {
-        hints.length > 0 && (
-          <>
-            <Fab
-              size="small"
-              variant="extended"
-              sx={{ position: 'fixed', left: 20, bottom: 20 }}
-              onClick={() => setOpenHelpDialog(true)}>
-              <HelpIcon sx={{ marginRight: 1 }} />
-              <Typography>{t('help')}</Typography>
-            </Fab>
-            <HelpDialog
-              open={openHelpDialog}
-              handleClose={() => setOpenHelpDialog(false)}
-              helps={hints}
-            />
-          </>
-        )
-      }
     </>
   );
 }

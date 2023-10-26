@@ -39,7 +39,7 @@ enum AnswerType2WidgetType {
 
 type WidgetPropsType = {
   widget: any;
-  mode: WidgetModes;
+  mode?: WidgetModes;
   paperId?: number;
   collectAnswers?: any;
   coveredWithPaper?: boolean;
