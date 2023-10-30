@@ -1,16 +1,16 @@
-import StudentDashboardItems from './modes/DashboardItems';
-import ProgramAppBarItems from './modes/ProgramItems';
-import GeneralPagesAppbarItems from './modes/GeneralPagesAppbarItems';
-import FSMAppBarItems from './modes/FSMAppBarItems';
-import MentorFSMAppBar from './modes/MentorFSMAppBar';
+import StudentDashboardItems from './modes/DashboardAppbarItems';
+import ProgramAppBarItems from './modes/ProgramAppbarItems';
+import GeneralAppbarItems from './modes/GeneralAppbarItems';
+import FSMAppbarItems from './modes/FSMAppbarItems';
+import MentorFSMAppBar from './modes/MentorFSMAppbarItems';
 
 const AppBarModes = {
   STUDENT_DASHBOARD: StudentDashboardItems,
-  FSM: FSMAppBarItems,
+  FSM: FSMAppbarItems,
   MENTOR_FSM: MentorFSMAppBar,
   PROGRAM: ProgramAppBarItems,
-  GENERAL: GeneralPagesAppbarItems,
-  ARTICLE: GeneralPagesAppbarItems,
+  GENERAL: GeneralAppbarItems,
+  ARTICLE: GeneralAppbarItems,
 };
 
 export default AppBarModes;

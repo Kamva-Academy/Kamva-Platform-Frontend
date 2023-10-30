@@ -8,7 +8,7 @@ import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import { announceMentorDeparture } from 'parse/mentorsInRoom';
 
-const WorkshopAppBarItems = ({ workshop, isMentor, mentorId }) => {
+const MentorFSMAppbarItems = ({ workshop, isMentor, mentorId }) => {
 
   useEffect(() => {
     if (workshop?.name) {
@@ -58,4 +58,4 @@ const WorkshopAppBarItems = ({ workshop, isMentor, mentorId }) => {
   };
 };
 
-export default WorkshopAppBarItems;
+export default MentorFSMAppbarItems;

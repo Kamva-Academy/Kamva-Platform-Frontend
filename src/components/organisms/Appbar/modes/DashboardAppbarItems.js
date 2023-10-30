@@ -4,7 +4,7 @@ import DashboardButton from '../components/DashboardButton';
 import Brand from '../components/Brand';
 import UserInfo from '../components/UserInfo';
 
-const DashboardItems = () => {
+const DashboardAppbarItems = () => {
 
   useEffect(() => {
     document.title = 'کاموا';
@@ -28,4 +28,4 @@ const DashboardItems = () => {
   };
 };
 
-export default DashboardItems;
+export default DashboardAppbarItems;

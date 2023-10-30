@@ -3,7 +3,7 @@ import DashboardButton from '../components/DashboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import UserInfo from '../components/UserInfo';
 
-const DashboardItems = ({ event }) => {
+const ProgramAppbarItems = ({ event }) => {
 
   useEffect(() => {
     if (event?.name) {
@@ -34,4 +34,4 @@ const DashboardItems = ({ event }) => {
   };
 };
 
-export default DashboardItems;
+export default ProgramAppbarItems;

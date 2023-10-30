@@ -2,7 +2,7 @@ import React from 'react';
 import DashboardButton from '../components/DashboardButton';
 import Brand from '../components/Brand';
 
-const GeneralPagesAppbarItems = () => {
+const GeneralAppbarItems = () => {
   const backToLanding = <DashboardButton name={'بازگشت'} to={-1} />;
   const brand = <Brand />;
 
@@ -21,4 +21,4 @@ const GeneralPagesAppbarItems = () => {
   };
 };
 
-export default GeneralPagesAppbarItems;
+export default GeneralAppbarItems;

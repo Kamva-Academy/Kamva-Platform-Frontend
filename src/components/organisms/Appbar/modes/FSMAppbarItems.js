@@ -9,7 +9,7 @@ import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 
-const FSMAppBarItems = ({ workshop, isMentor }) => {
+const FSMAppbarItems = ({ workshop, isMentor }) => {
 
   useEffect(() => {
     if (workshop?.name) {
@@ -63,4 +63,4 @@ const FSMAppBarItems = ({ workshop, isMentor }) => {
   };
 };
 
-export default FSMAppBarItems;
+export default FSMAppbarItems;
