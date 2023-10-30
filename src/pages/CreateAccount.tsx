@@ -10,19 +10,18 @@ import {
 import {
   createAccountAction,
   getVerificationCodeAction,
-} from '../redux/slices/account';
+} from 'redux/slices/account';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addNotificationAction } from '../redux/slices/notifications';
-import appendPreviousParams from '../utils/AppendPreviousParams';
-import isNumber from '../utils/validators/isNumber';
-import isPhoneNumber from '../utils/validators/isPhoneNumber';
+import appendPreviousParams from 'utils/AppendPreviousParams';
+import isNumber from 'utils/validators/isNumber';
+import isPhoneNumber from 'utils/validators/isPhoneNumber';
+import { toast } from 'react-toastify';
 
 type CreateAccountPropsType = {
   isFetching: boolean;
   createAccount: any;
   getVerificationCode: any;
-  addNotification: any;
   token: string;
 }
 
@@ -30,7 +29,6 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
   isFetching,
   createAccount,
   getVerificationCode,
-  addNotification,
   token,
 }) => {
   const navigate = useNavigate();
@@ -66,10 +64,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
 
   const handleGettingVerificationCode = () => {
     if (!isPhoneNumber(data.phoneNumber)) {
-      addNotification({
-        message: 'شماره تلفن وارد‌شده معتبر نیست',
-        type: 'error',
-      });
+      toast.error('شماره تلفن وارد‌شده معتبر نیست');
       return;
     }
     setButtonDisable(true);
@@ -86,18 +81,12 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
   const handleCreatingAccount = () => {
     const { phoneNumber, password, confirmationPassword, firstName, lastName } = data;
     if (!phoneNumber || !password || !confirmationPassword || !firstName || !lastName) {
-      addNotification({
-        message: 'همه‌ی موارد خواسته شده را پر کن',
-        type: 'error',
-      });
+      toast.error('همه‌ی موارد خواسته شده را پر کن');
       return;
     }
 
     if (password !== confirmationPassword) {
-      addNotification({
-        message: 'رمزهای وارد شده مشابه نیستند',
-        type: 'error',
-      });
+      toast.error('رمزهای وارد شده مشابه نیستند');
       return;
     }
     createAccount(data);
@@ -111,7 +100,13 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Stack width={400} component={Paper} sx={{ padding: 2 }} spacing={1.5}>
+      <Stack
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            handleCreatingAccount();
+          }
+        }}
+        width={400} component={Paper} sx={{ padding: 2 }} spacing={1.5}>
 
         <Typography gutterBottom variant='h2' align='center'>{'ایجاد حساب کاربری'}</Typography>
 
@@ -224,5 +219,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   createAccount: createAccountAction,
   getVerificationCode: getVerificationCodeAction,
-  addNotification: addNotificationAction,
 })(CreateAccount);

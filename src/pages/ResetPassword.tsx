@@ -2,27 +2,25 @@ import { Button, TextField, Container, Grid, Paper, Typography, Stack } from '@m
 import React, { useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import {
   changePasswordAction,
   getVerificationCodeAction,
-} from '../redux/slices/account';
-import { addNotificationAction } from '../redux/slices/notifications';
-import appendPreviousParams from '../utils/AppendPreviousParams';
-import { toEnglishNumber } from '../utils/translateNumber';
+} from 'redux/slices/account';
+import appendPreviousParams from 'utils/AppendPreviousParams';
+import { toEnglishNumber } from 'utils/translateNumber';
 
 type ResetPasswordPropsType = {
   isFetching: boolean;
   getVerificationCode: any;
   changePassword: any;
-  addNotification: any;
 }
 
 const ResetPassword: FC<ResetPasswordPropsType> = ({
   isFetching,
   getVerificationCode,
   changePassword,
-  addNotification,
 }) => {
   const [buttonText, setButtonText] = useState('دریافت کد');
   const [data, setData] = useState({
@@ -59,15 +57,12 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
 
   const doGetVerificationCode = () => {
     if (!data.phoneNumber) {
-      addNotification({
-        message: 'شماره تلفنی را وارد کن!',
-        type: 'error',
-      });
+      toast.error('شماره تلفنی را وارد کن!');
       return;
     }
 
     if (!isPhoneNumberValid(data.phoneNumber)) {
-      addNotification({ message: 'شماره تلفنت معتبر نیست!', type: 'error' });
+      toast.error('شماره تلفنت معتبر نیست');
       return;
     }
 
@@ -88,18 +83,12 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
   const doChangePassword = () => {
     const { phoneNumber, password, confirmationPassword } = data;
     if (!phoneNumber || !password) {
-      addNotification({
-        message: 'لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن!',
-        type: 'error',
-      });
+      toast.error('لطفاً همه‌ی مواردی که ازت خواسته شده رو پر کن');
       return;
     }
 
     if (password !== confirmationPassword) {
-      addNotification({
-        message: 'رمزهایی که وارد کردی مشابه هم نیستند!',
-        type: 'error',
-      });
+      toast.error('رمزهایی که وارد کردی مشابه هم نیستند');
       return;
     }
     changePassword(data);
@@ -157,6 +146,11 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
         />
 
         <Stack
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              doChangePassword();
+            }
+          }}
           direction='row'
           alignItems='stretch'
           justifyContent='space-between'
@@ -216,5 +210,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getVerificationCode: getVerificationCodeAction,
   changePassword: changePasswordAction,
-  addNotification: addNotificationAction,
 })(ResetPassword);
