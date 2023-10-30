@@ -143,6 +143,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           value={data.phoneNumber}
           name="phoneNumber"
           label="شماره تلفن همراه"
+          placeholder='09...'
           inputProps={{ className: 'ltr-input' }}
           type="tel"
           inputMode='tel'

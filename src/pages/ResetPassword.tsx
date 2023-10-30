@@ -142,8 +142,9 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
           }}
           value={data.phoneNumber}
           name="phoneNumber"
-          inputProps={{ className: 'ltr-input' }}
           label="شماره تلفن همراه"
+          placeholder='09...'
+          inputProps={{ className: 'ltr-input' }}
           type="tel"
           inputMode='tel'
         />
