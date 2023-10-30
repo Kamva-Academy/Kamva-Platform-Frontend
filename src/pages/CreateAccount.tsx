@@ -162,6 +162,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
             label="کد تایید پیامک‌شده"
             inputProps={{ className: 'ltr-input' }}
             autoComplete='false'
+            type='number'
             inputMode='numeric'
           />
           <Button

@@ -171,6 +171,7 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
             name="code"
             inputProps={{ className: 'ltr-input' }}
             label="کد پیامک‌شده"
+            type='number'
             inputMode='numeric'
           />
           <Button
