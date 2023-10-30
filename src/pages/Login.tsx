@@ -93,6 +93,8 @@ const LoginPage: FC<LoginPagePropsType> = ({
             label="نام کاربری"
             // helperText="نام کاربری، شماره تلفن یا شماره شناسنامه‌ی شماست."
             inputProps={{ className: 'ltr-input' }}
+            type='text'
+            inputMode='text'
           />
 
           <TextField
@@ -104,6 +106,7 @@ const LoginPage: FC<LoginPagePropsType> = ({
             name="password"
             inputProps={{ className: 'ltr-input' }}
             type="password"
+            inputMode='text'
           />
 
           <Button

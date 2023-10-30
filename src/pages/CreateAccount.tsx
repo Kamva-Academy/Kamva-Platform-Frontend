@@ -117,6 +117,8 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           value={data.firstName}
           name="firstName"
           label="نام"
+          type='text'
+          inputMode='text'
         />
 
         <TextField
@@ -126,6 +128,8 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           value={data.lastName}
           name="lastName"
           label="نام خانوادگی"
+          type='text'
+          inputMode='text'
         />
 
         <TextField
@@ -141,6 +145,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           label="شماره تلفن همراه"
           inputProps={{ className: 'ltr-input' }}
           type="tel"
+          inputMode='tel'
         />
 
         <Stack direction='row' spacing={1}>
@@ -157,6 +162,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
             label="کد تایید پیامک‌شده"
             inputProps={{ className: 'ltr-input' }}
             autoComplete='false'
+            inputMode='numeric'
           />
           <Button
             size="small"
@@ -180,6 +186,7 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           name="password"
           inputProps={{ className: 'ltr-input' }}
           type="password"
+          inputMode='text'
         />
 
         <TextField
@@ -187,9 +194,10 @@ const CreateAccount: FC<CreateAccountPropsType> = ({
           fullWidth
           onChange={collectData}
           label="تکرار گذرواژه"
-          type="password"
           inputProps={{ className: 'ltr-input' }}
           name="confirmationPassword"
+          type="password"
+          inputMode='text'
         />
 
         <Button

@@ -116,6 +116,7 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
           name="password"
           inputProps={{ className: 'ltr-input' }}
           type="password"
+          inputMode='text'
         />
 
         <TextField
@@ -124,9 +125,10 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
           fullWidth
           onChange={putData}
           label="تکرار رمز عبور جدید"
-          type="password"
           inputProps={{ className: 'ltr-input' }}
           name="confirmationPassword"
+          type="password"
+          inputMode='text'
         />
 
         <TextField
@@ -143,6 +145,7 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
           inputProps={{ className: 'ltr-input' }}
           label="شماره تلفن همراه"
           type="tel"
+          inputMode='tel'
         />
 
         <Stack
@@ -168,7 +171,7 @@ const ResetPassword: FC<ResetPasswordPropsType> = ({
             name="code"
             inputProps={{ className: 'ltr-input' }}
             label="کد پیامک‌شده"
-            type="text"
+            inputMode='numeric'
           />
           <Button
             sx={{
