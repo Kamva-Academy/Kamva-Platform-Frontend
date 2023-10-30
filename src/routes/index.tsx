@@ -15,7 +15,7 @@ import NotFoundPage from 'pages/NotFoundPage';
 import Login from 'pages/Login';
 import FailedPayment from 'pages/Message/FailedPayment';
 import SuccessfulPayment from 'pages/Message/SuccessfulPayment';
-import RegistrationForm from 'pages/RegistrationForm';
+import ProgramRegistrationForm from 'pages/ProgramRegistrationForm';
 import Status from 'pages/RegistrationStatus';
 import TeamSelection from 'pages/TeamSelection';
 import Workshop from 'pages/FSM';
@@ -62,7 +62,7 @@ const Root = () => {
         <Route path="/program/:programId/profile/:section/" element={<Profile />} />
         <Route
           path="/program/:programId/registration-form/"
-          element={<RegistrationForm />}
+          element={<ProgramRegistrationForm />}
         />
         <Route path="/program/:programId/status/" element={<Status />} />
         <Route

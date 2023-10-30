@@ -27,7 +27,7 @@ const ANSWER_TYPES = {
   InviteeUsernameQuestion: 'InviteeUsernameResponse',
 };
 
-const RegistrationForm = ({
+const ProgramRegistrationForm = ({
   getOneRegistrationForm,
 
   userProfile,
@@ -184,7 +184,6 @@ const RegistrationForm = ({
 
 const mapStateToProps = (state) => ({
   userProfile: state.account.userProfile,
-  events: state.events.events || [],
   event: state.events.event,
   registrationForm: state.events.registrationForm,
   isFetching: state.events.isFetching,
@@ -194,7 +193,7 @@ export default connect(mapStateToProps, {
   getOneRegistrationForm: getOneRegistrationFormAction,
   getOneEventInfo: getOneEventInfoAction,
   submitRegistrationForm: submitRegistrationFormAction,
-})(RegistrationForm);
+})(ProgramRegistrationForm);
 
 
 const checkPermission = (audienceType, userProfile = {}) => {
