@@ -61,11 +61,6 @@ const LoginPage: FC<LoginPagePropsType> = ({
 
   return (
     <Container
-      onKeyDown={(event) => {
-        if (event.key === 'Enter') {
-          doLogin();
-        }
-      }}
       sx={{
         minHeight: '100vh',
         display: 'flex',
@@ -73,7 +68,13 @@ const LoginPage: FC<LoginPagePropsType> = ({
         justifyContent: 'center',
       }}>
       <Stack width={400} spacing={2}>
-        <Stack width='md' sx={{ marginTop: 5, padding: 2, width: '100%' }} spacing={1.5} component={Paper}>
+        <Stack
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              doLogin();
+            }
+          }}
+          width='md' sx={{ marginTop: 5, padding: 2, width: '100%' }} spacing={1.5} component={Paper}>
           <Typography
             gutterBottom
             component="h1"
