@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import DashboardButton from '../components/DashboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import UserInfo from '../components/UserInfo';
 
 const DashboardItems = ({ event }) => {
-  const { programId } = useParams();
 
   useEffect(() => {
     if (event?.name) {
@@ -14,7 +12,7 @@ const DashboardItems = ({ event }) => {
   }, [event])
 
 
-  const logoButton = <ProgramLogoButton image={event?.cover_page} name={event?.name} programId={programId} />;
+  const logoButton = <ProgramLogoButton />;
   const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/programs/'} />;
   const userInfo = <UserInfo />
 

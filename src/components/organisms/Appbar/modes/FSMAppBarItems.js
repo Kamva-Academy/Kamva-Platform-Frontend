@@ -7,9 +7,9 @@ import MentorButton from '../components/MentorButton';
 import ReviewAnswersButton from '../components/ReviewAnswersButton';
 import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
-import Brand from '../components/Brand';
+import ProgramLogoButton from '../components/ProgramLogoButton';
 
-const WorkshopAppBarItems = ({ workshop, isMentor }) => {
+const FSMAppBarItems = ({ workshop, isMentor }) => {
 
   useEffect(() => {
     if (workshop?.name) {
@@ -27,7 +27,7 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   const whiteboardButton = <WhiteboardButton />;
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;
-  const KamvaBrand = <Brand />;
+  const programLogoButton = <ProgramLogoButton />;
 
   const desktopLeftItems = [];
   const desktopRightItems = [];
@@ -46,15 +46,12 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
 
   if (workshop?.fsm_learning_type == 'Supervised') {
     desktopLeftItems.push([whiteboardButton, mentorButton]);
-    desktopRightItems.push([chatRoomButton, backToEventButton]);
+    desktopRightItems.push([chatRoomButton]);
     mobileLeftItems.push([whiteboardButton, mentorButton]);
     mobileRightItems.push([chatRoomButton]);
-    mobileMenuListItems.push(backToEventButton);
   } else {
-    mobileRightItems.push(KamvaBrand);
-    desktopRightItems.push(KamvaBrand);
-    mobileLeftItems.push(backToEventButton);
-    desktopLeftItems.push(backToEventButton)
+    mobileRightItems.push(programLogoButton);
+    desktopRightItems.push(programLogoButton);
   }
 
   return {
@@ -66,4 +63,4 @@ const WorkshopAppBarItems = ({ workshop, isMentor }) => {
   };
 };
 
-export default WorkshopAppBarItems;
+export default FSMAppBarItems;
