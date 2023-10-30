@@ -9,22 +9,19 @@ import {
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginAction } from '../redux/slices/account';
-import { addNotificationAction } from '../redux/slices/notifications';
-import appendPreviousParams from '../utils/AppendPreviousParams';
-import { toEnglishNumber } from '../utils/translateNumber';
+import { loginAction } from 'redux/slices/account';
+import appendPreviousParams from 'utils/AppendPreviousParams';
+import { toEnglishNumber } from 'utils/translateNumber';
 
 type LoginPagePropsType = {
   isFetching: boolean;
   login: any;
-  addNotification: any;
   token: string;
 };
 
 const LoginPage: FC<LoginPagePropsType> = ({
   isFetching,
   login,
-  addNotification,
   token,
 }) => {
   const navigate = useNavigate();
@@ -47,15 +44,6 @@ const LoginPage: FC<LoginPagePropsType> = ({
   }, [programId, navigate, token])
 
 
-  const isJustDigits = (number) => {
-    var regex = new RegExp(`\\d{${number.length}}`);
-    if (regex.test(toEnglishNumber(number))) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   const putData = (event) => {
     setData({
       ...data,
@@ -73,6 +61,11 @@ const LoginPage: FC<LoginPagePropsType> = ({
 
   return (
     <Container
+      onKeyDown={(event) => {
+        if (event.key === 'Enter') {
+          doLogin();
+        }
+      }}
       sx={{
         minHeight: '100vh',
         display: 'flex',
@@ -146,5 +139,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   login: loginAction,
-  addNotification: addNotificationAction,
 })(LoginPage);
