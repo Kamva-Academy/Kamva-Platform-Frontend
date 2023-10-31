@@ -12,13 +12,13 @@ const ProgramAppbarItems = ({ event }) => {
   }, [event])
 
 
-  const logoButton = <ProgramLogoButton />;
+  const programLogoButton = <ProgramLogoButton />;
   const backButton = <DashboardButton name={'بازگشت به دوره‌ها'} to={'/programs/'} />;
   const userInfo = <UserInfo />
 
   const desktopLeftItems = [];
-  const desktopRightItems = [logoButton];
-  const mobileRightItems = [logoButton];
+  const desktopRightItems = [programLogoButton];
+  const mobileRightItems = [programLogoButton];
   if (event && !event?.is_private && !desktopRightItems.includes(backButton)) {
     desktopLeftItems.push(backButton);
     mobileRightItems.push(backButton);
