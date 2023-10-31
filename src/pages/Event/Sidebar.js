@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import downloadFile from 'utils/downloadFile';
 
 import {
   getCertificateAction,
@@ -38,7 +39,7 @@ function Workshops({
   const [amount, setAmount] = React.useState('');
 
   useEffect(() => {
-    getOneEventInfo({  programId });
+    getOneEventInfo({ programId });
   }, []);
 
   const handleAmountChange = (event) => {
@@ -60,7 +61,7 @@ function Workshops({
     getCertificate({ registrationReceiptId: event?.registration_receipt }).then(
       (action) => {
         if (action.meta.requestStatus === 'fulfilled') {
-          window.open(action.payload.response.certificate, '_blank');
+          downloadFile(action.payload.response.certificate, `گواهی حضور ${event?.name}`, 'image/jpeg');
         }
       }
     );
