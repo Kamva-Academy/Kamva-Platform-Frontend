@@ -32,6 +32,7 @@ const GameWidget = ({ link = '' }) => {
   return (
     <Stack alignItems={'start'}>
       <iframe
+        loading='eager'
         title={t('game')}
         src={link}
         ref={iframeRef}
