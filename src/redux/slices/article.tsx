@@ -57,7 +57,7 @@ const mentorSlice = createSlice({
   extraReducers: {
 
     [getAllArticlesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.articles = response.results;
+      state.articles = response;
       state.articlesCount = response.count;
     },
   },
