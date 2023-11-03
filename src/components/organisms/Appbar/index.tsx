@@ -133,10 +133,10 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
 }
 
 const mapStateToProps = (state) => ({
-  isMentor: state.account.userAccount?.isMentor,
+  isMentor: state.account.userInfo?.isMentor,
   event: state.events.event,
   workshop: state.workshop.workshop,
-  mentorId: state.account.userAccount?.id,
+  mentorId: state.account.userInfo?.id,
 })
 
 export default connect(mapStateToProps, {

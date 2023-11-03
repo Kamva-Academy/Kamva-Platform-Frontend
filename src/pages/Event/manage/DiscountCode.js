@@ -12,7 +12,6 @@ import {
   Typography,
 } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
@@ -20,19 +19,11 @@ import {
   createDiscountCodeAction,
   deleteDiscountCodeAction,
   getAllMerchandiseDiscountCodesAction,
-} from '../../../redux/slices/account';
+} from 'redux/slices/account';
 import {
   addNotificationAction,
-} from '../../../redux/slices/notifications';
-import { toEnglishNumber, toPersianNumber } from '../../../utils/translateNumber';
-
-const useStyles = makeStyles((theme) => ({
-  absolute: {
-    position: 'absolute',
-    right: theme.spacing(2),
-    zIndex: 5,
-  },
-}));
+} from 'redux/slices/notifications';
+import { toEnglishNumber, toPersianNumber } from 'utils/translateNumber';
 
 function Index({
   addNotification,
@@ -41,7 +32,6 @@ function Index({
   getAllMerchandiseDiscountCodes,
 
   event,
-  userAccount,
   discountCodes,
 }) {
   const [value, setValue] = useState();
@@ -166,17 +156,13 @@ function Index({
 
 const mapStateToProps = (state) => ({
   event: state.events.event,
-  userAccount: state.account.userAccount,
   newDiscountCode: state.account.newDiscountCode,
   discountCodes: state.account.discountCodes,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    addNotification: addNotificationAction,
-    createDiscountCode: createDiscountCodeAction,
-    deleteDiscountCode: deleteDiscountCodeAction,
-    getAllMerchandiseDiscountCodes: getAllMerchandiseDiscountCodesAction,
-  }
-)(Index);
+export default connect(mapStateToProps, {
+  addNotification: addNotificationAction,
+  createDiscountCode: createDiscountCodeAction,
+  deleteDiscountCode: deleteDiscountCodeAction,
+  getAllMerchandiseDiscountCodes: getAllMerchandiseDiscountCodesAction,
+})(Index);

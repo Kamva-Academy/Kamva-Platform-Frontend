@@ -195,8 +195,8 @@ const mapStateToProps = (state, ownProps) => ({
   needUpdateState: state.currentState.needUpdateState,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
-  personsName: `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`,
-  mentorId: state.account.userAccount?.id,
+  personsName: `${state.account.userInfo?.first_name} ${state.account.userInfo?.last_name}`,
+  mentorId: state.account.userInfo?.id,
   workshop: state.workshop.workshop,
 });
 

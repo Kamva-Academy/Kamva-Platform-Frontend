@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Stepper from '../components/organisms/Stepper';
+import Stepper from '../../components/organisms/Stepper';
 import {
   applyDiscountCodeAction,
   getOneEventInfoAction,
@@ -12,8 +12,8 @@ import {
   purchaseEventAction,
   submitRegistrationFormAction,
 } from 'redux/slices/events';
-import { addNotificationAction } from '../redux/slices/notifications';
-import { toPersianNumber } from '../utils/translateNumber';
+import { addNotificationAction } from '../../redux/slices/notifications';
+import { toPersianNumber } from '../../utils/translateNumber';
 import Layout from 'components/template/GeneralLayout';
 
 const Payment = ({

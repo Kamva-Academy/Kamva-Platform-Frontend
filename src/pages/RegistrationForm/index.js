@@ -30,7 +30,7 @@ const ANSWER_TYPES = {
 const ProgramRegistrationForm = ({
   getOneRegistrationForm,
 
-  userProfile,
+  userInfo,
   event,
   registrationForm,
   submitRegistrationForm,
@@ -62,7 +62,7 @@ const ProgramRegistrationForm = ({
     submitRegistrationForm({
       id: event?.registration_form,
       answers,
-       programId,
+      programId,
     });
   };
 
@@ -121,14 +121,16 @@ const ProgramRegistrationForm = ({
 
   return (
     <Layout>
-      <Stack sx={{ width: '100%' }} spacing={3}>
+      <Stack width={'100%'} spacing={3} alignItems={'center'}>
         <Info />
-        <Stepper />
+        <Box width={'100%'}>
+          <Stepper />
+        </Box>
         <Stack
+          width={'100%'}
           component={Paper}
           sx={{ padding: 2 }}
-          spacing={2}
-        >
+          spacing={2}>
           {widgets}
           {event?.user_registration_status == 'DeadlineMissed' ?
             <Typography variant='h4' color='error' align="center" gutterBottom>
@@ -140,34 +142,46 @@ const ProgramRegistrationForm = ({
                   {'با توجه به پایه‌ی تحصیلیتان، شما مجاز به شرکت در این دوره نیستید.'}
                 </Typography>
               ) : (
-                !checkPermission(registrationForm?.audience_type, userProfile) ? (
-                  <Typography variant='h4' color='error' align="center" gutterBottom>
-                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
-                    <Link to={`/program/${programId}/profile/personal/`}>{'اینجا'}</Link>
-                    {' تکمیل کنید.'}
-                  </Typography>
+                !checkPermission(registrationForm?.audience_type, userInfo) ? (
+                  <Stack direction={'row'} justifyContent={'center'}>
+                    <Typography variant='h4' color={'red'}>
+                      {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
+                    </Typography>
+                    <Typography marginX={'0.25em'} variant='h4' color={'blue'} component={Link} to={`/program/${programId}/profile/personal/`}>
+                      {'اینجا'}
+                    </Typography>
+                    <Typography variant='h4' color={'red'}>
+                      {' تکمیل کنید.'}
+                    </Typography>
+                  </Stack>
                 ) : (
                   (event?.user_registration_status == 'GradeNotAvailable' ||
                     event?.user_registration_status == 'StudentshipDataIncomplete') &&
-                  <Typography variant='h4' color='error' align="center" gutterBottom>
-                    {'لطفاً از '}
-                    <Link to={`/program/${programId}/profile/student/`}>{'اینجا'}</Link>
-                    {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
-                  </Typography>
+                  <Stack direction={'row'} justifyContent={'center'}>
+                    <Typography variant='h4' color={'red'}>
+                      {'لطفاً از '}
+                    </Typography>
+                    <Typography marginX={'0.25em'} variant='h4' color={'blue'} component={Link} to={`/program/${programId}/profile/student/`}>
+                      {'اینجا'}
+                    </Typography>
+                    <Typography variant='h4' color={'red'}>
+                      {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
+                    </Typography>
+                  </Stack>
+
                 )))}
           <Button
             disabled={event?.user_registration_status == 'DeadlineMissed' ||
               event?.user_registration_status == 'NotPermitted' ||
               event?.user_registration_status == 'GradeNotAvailable' ||
               event?.user_registration_status == 'StudentshipDataIncomplete' ||
-              !checkPermission(registrationForm?.audience_type, userProfile)}
-            fullWidth
+              !checkPermission(registrationForm?.audience_type, userInfo)}
             variant="contained"
             color="primary"
             onClick={() => {
               setDialogStatus(true);
             }}>
-            {'ثبت'}
+            {'تکمیل مشخصات'}
           </Button>
         </Stack>
       </Stack>
@@ -183,7 +197,7 @@ const ProgramRegistrationForm = ({
 };
 
 const mapStateToProps = (state) => ({
-  userProfile: state.account.userProfile,
+  userInfo: state.account.userInfo,
   event: state.events.event,
   registrationForm: state.events.registrationForm,
   isFetching: state.events.isFetching,
@@ -195,14 +209,14 @@ export default connect(mapStateToProps, {
   submitRegistrationForm: submitRegistrationFormAction,
 })(ProgramRegistrationForm);
 
-
-const checkPermission = (audienceType, userProfile = {}) => {
-  const { first_name, last_name, national_code, birth_date, gender, province, city } = userProfile;
+// todo: check weather the user has completed the base informations (for All type audience)
+const checkPermission = (audienceType, userInfo = {}) => {
+  const { first_name, last_name, national_code, birth_date, gender, province, city } = userInfo;
   const checkPrimaryFields = !first_name || !last_name || !national_code || !birth_date || !gender || !province || !city;
 
   if (audienceType == 'Student') {
-    if (userProfile.school_studentship) {
-      const { grade, school } = userProfile.school_studentship;
+    if (userInfo.school_studentship) {
+      const { grade, school } = userInfo.school_studentship;
       if (checkPrimaryFields || !grade || !school) {
         return false;
       }

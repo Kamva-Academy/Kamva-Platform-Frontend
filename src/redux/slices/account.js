@@ -185,6 +185,8 @@ const isNotFetching = (state) => {
 };
 
 const initialState = {
+  // userInfo includes both user account information + user profile information
+  userInfo: {},
   institutes: [],
   isFetching: false,
   token: '',
@@ -209,7 +211,7 @@ const accountSlice = createSlice({
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userAccount = response.account;
+      state.userInfo = response.account;
       state.token = response.access;
       state.refresh = response.refresh;
       state.isFetching = false;
@@ -219,7 +221,7 @@ const accountSlice = createSlice({
 
     [createAccountAction.pending.toString()]: isFetching,
     [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userAccount = response.account;
+      state.userInfo = response.account;
       state.token = response.access;
       state.refresh = response.refresh;
       state.isFetching = false;
@@ -234,7 +236,7 @@ const accountSlice = createSlice({
 
     [getUserProfileAction.pending.toString()]: isFetching,
     [getUserProfileAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userProfile = response;
+      state.userInfo = { ...state.userInfo, ...response };
       state.isFetching = false;
     },
     [getUserProfileAction.rejected.toString()]: isNotFetching,
@@ -264,7 +266,7 @@ const accountSlice = createSlice({
 
     [updateUserAccountAction.pending.toString()]: isFetching,
     [updateUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userAccount = response
+      state.userInfo = { ...state.userInfo, ...response }
       state.isFetching = false;
     },
     [updateUserAccountAction.rejected.toString()]: isNotFetching,

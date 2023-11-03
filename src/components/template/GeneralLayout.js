@@ -1,45 +1,21 @@
 import { Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Routes, useNavigate, useParams } from 'react-router-dom';
-import { Route, Switch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import AppBar from 'components/organisms/Appbar';
-import { getUserProfileAction } from '../../redux/slices/account';
-import { addNotificationAction } from '../../redux/slices/notifications';
+import { getUserProfileAction } from 'redux/slices/account';
 
 const Layout = ({
   appbarMode = 'STUDENT_DASHBOARD',
   getUserProfile,
-  addNotification,
-  userProfile,
-  userAccount,
+  userInfo,
   ...props
 }) => {
   const { programId } = useParams();
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (
-  //     userProfile &&
-  //     (!userProfile?.first_name ||
-  //       !userProfile?.last_name ||
-  //       !userProfile?.gender ||
-  //       !userProfile?.province ||
-  //       !userProfile?.city) &&
-  //     !window.location.href.includes('profile')
-  //   ) {
-  //     addNotification({
-  //       message:
-  //         'پیش از هر چیز، لطفاً موارد الزامی در پروفایل رو تکمیل کن! موارد الزامی با ستاره مشخص شده‌اند.',
-  //       type: 'error',
-  //     });
-  //     navigate('/profile/');
-  //   }
-  // }, [userProfile]);
 
   useEffect(() => {
-    getUserProfile({ id: userAccount?.id });
+    getUserProfile({ id: userInfo?.id });
   }, []);
 
   return (
@@ -71,11 +47,9 @@ const Layout = ({
 };
 
 const mapStateToProps = (state) => ({
-  userProfile: state.account.userProfile,
-  userAccount: state.account.userAccount,
+  userInfo: state.account.userInfo,
 });
 
 export default connect(mapStateToProps, {
   getUserProfile: getUserProfileAction,
-  addNotification: addNotificationAction,
 })(Layout);

@@ -1,19 +1,11 @@
 import { Grid, Tab, Tabs } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import {
-  getInstitutesAction,
-  getUserProfileAction,
-  updateStudentShipAction,
-  updateUserAccountAction,
-} from 'redux/slices/account';
 import Layout from 'components/template/GeneralLayout';
-import AcademicProfile from './AcademicProfile';
-import PersonalProfile from './PersonalProfile'
-import StudentProfile from './StudentProfile';
-import Iran from 'utils/iran';
+import AcademicProfile from 'components/template/profiles/AcademicProfile';
+import PersonalProfile from 'components/template/profiles/PersonalProfile'
+import StudentProfile from 'components/template/profiles/StudentProfile';
 
 let tabs = [
   {
@@ -29,7 +21,6 @@ let tabs = [
     icon: '',
     component: StudentProfile,
     disabled: false,
-
   },
   {
     name: 'academic',
@@ -47,10 +38,7 @@ const SECTIONS = {
 }
 
 const Profile = ({
-  getUserProfile,
-  getInstitutes,
   event,
-  userAccount,
 }) => {
   const navigate = useNavigate();
   const { programId, section } = useParams();
@@ -63,17 +51,6 @@ const Profile = ({
   } else if (event?.audience_type == 'All') {
     tabs = [tabs[0]];
   }
-
-  useEffect(() => {
-    if (!userAccount) return;
-    getUserProfile({ id: userAccount.id }).then(({ type, payload: { response } }) => {
-      if (!type.endsWith('fulfilled')) return;
-      // check if user has sat city, then fetch city's institutes
-      if (!response.city) return;
-      getInstitutes({ cityTitle: Iran.Cities.find(city => response.city == city.title).title });
-
-    });
-  }, [userAccount]);
 
   return (
     <Layout>
@@ -108,16 +85,6 @@ const Profile = ({
 
 const mapStateToProps = (state) => ({
   event: state.events.event,
-  userAccount: state.account.userAccount,
-  userProfile: state.account.userProfile,
-  isFetching: state.account.isFetching,
-  payments: state.account.payments,
-  institutes: state.account.institutes,
 });
 
-export default connect(mapStateToProps, {
-  updateUserAccount: updateUserAccountAction,
-  getUserProfile: getUserProfileAction,
-  updateStudentShip: updateStudentShipAction,
-  getInstitutes: getInstitutesAction,
-})(Profile);
+export default connect(mapStateToProps)(Profile);

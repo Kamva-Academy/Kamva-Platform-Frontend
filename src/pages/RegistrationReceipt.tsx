@@ -44,7 +44,7 @@ function RegistrationReceipt({
     }
   }, [registrationReceipt])
 
-  const userProfile = registrationReceipt?.user;
+  const userInfo = registrationReceipt?.user;
   const answers = registrationReceipt?.answers;
 
   const handleButtonClick = () => {
@@ -72,41 +72,29 @@ function RegistrationReceipt({
         </Grid>
         <Grid item xs={12} sm={4}>
           <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
-            {userProfile &&
+            {userInfo &&
               <>
                 <Typography align='center' variant='h2'>
-                  {(userProfile.first_name && userProfile.last_name) ? `${userProfile.first_name} ${userProfile.last_name}` : 'بی‌نام'}
+                  {(userInfo.first_name && userInfo.last_name) ? `${userInfo.first_name} ${userInfo.last_name}` : 'بی‌نام'}
                 </Typography>
                 <Divider />
                 <Grid container spacing={1}>
                   <Grid item xs={6}>
-                    <Typography >{`پایه‌ی ${userProfile.school_studentship?.grade ? faSeri(userProfile.school_studentship?.grade) : '؟'}`}</Typography>
+                    <Typography >{`پایه‌ی ${userInfo.school_studentship?.grade ? faSeri(userInfo.school_studentship?.grade) : '؟'}`}</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography >{`جنسیت: ${userProfile.gender == 'Male' ? 'پسر' : (userProfile.gender == 'Female' ? 'دختر' : '؟')}`}</Typography>
+                    <Typography >{`جنسیت: ${userInfo.gender == 'Male' ? 'پسر' : (userInfo.gender == 'Female' ? 'دختر' : '؟')}`}</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography >{`استان: ${userProfile.province ? userProfile.province : '؟'}`}</Typography>
+                    <Typography >{`استان: ${userInfo.province ? userInfo.province : '؟'}`}</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography >{`شهر: ${userProfile.city ? userProfile.city : '؟'}`}</Typography>
+                    <Typography >{`شهر: ${userInfo.city ? userInfo.city : '؟'}`}</Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Typography >{`شماره تماس: ${userProfile.phone_number ? userProfile.phone_number : '؟'}`}</Typography>
+                    <Typography >{`شماره تماس: ${userInfo.phone_number ? userInfo.phone_number : '؟'}`}</Typography>
                   </Grid>
                 </Grid>
-
-                {/* <Grid item container justify='center'>
-              <Button
-                fullWidth variant='outlined'
-                className={classes.lastUploadButton}
-                disabled={!userProfile.school_studentship?.document}
-                href={userProfile.school_studentship?.document}
-                component="a" target="_blank">
-                {'مشاهده‌ی مدرک تحصیلی'}
-              </Button>
-            </Grid> */}
-                {/* <Divider /> */}
                 {status &&
                   <>
                     <FormControl fullWidth variant="outlined">

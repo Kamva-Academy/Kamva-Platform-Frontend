@@ -21,63 +21,63 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from "moment";
 import {
   updateUserAccountAction,
-} from '../../../redux/slices/account';
-import Iran from '../../../utils/iran';
-import { toEnglishNumber } from '../../../utils/translateNumber';
-import { PersonalProfileType } from '../../../types/profile';
-import isNumber from '../../../utils/validators/isNumber';
+} from 'redux/slices/account';
+import Iran from 'utils/iran';
+import { toEnglishNumber } from 'utils/translateNumber';
+import { PersonalProfileType } from 'types/profile';
+import isNumber from 'utils/validators/isNumber';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 type PersonalProfilePropsType = {
   updateUserAccount: any;
-  userProfile: PersonalProfileType;
+  userInfo: PersonalProfileType;
   tabs: any;
 }
 
 const PersonalProfile: FC<PersonalProfilePropsType> = ({
   updateUserAccount,
-  userProfile,
+  userInfo: initialUserInfo,
   tabs,
 }) => {
-  const [profile, setProfile] = useState<PersonalProfileType>(null);
+  const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
   const { programId, section } = useParams();
 
   useEffect(() => {
-    if (userProfile) {
-      setProfile(userProfile);
+    if (initialUserInfo) {
+      setUserInfo(initialUserInfo);
     }
-  }, [userProfile, userProfile?.profile_picture])
+  }, [initialUserInfo])
 
   const handleProfilePictureChange = (event) => {
     if (event.target.files?.[0]) {
       updateUserAccount({
-        id: userProfile.id,
+        id: userInfo.id,
         profile_picture: event.target.files[0],
       });
     }
   };
 
   const handleProfileChange = (event) => {
-    setProfile({
-      ...profile,
+    setUserInfo({
+      ...userInfo,
       [event.target.name]: toEnglishNumber(event.target.value),
     });
   };
 
   const submitProfile = () => {
     const newProfile = {};
-    for (const key in profile) {
-      const newVal = profile[key];
-      const oldVal = userProfile[key];
+    for (const key in userInfo) {
+      const newVal = userInfo[key];
+      const oldVal = userInfo[key];
       if (oldVal !== newVal) {
         newProfile[key] = newVal;
       }
     }
     updateUserAccount({
-      id: userProfile.id,
+      id: userInfo.id,
       ...newProfile,
     }).then((response) => {
       if (response.type?.endsWith('fulfilled') && programId && tabs[tabs.indexOf(section) + 1]) {
@@ -86,11 +86,9 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     });
   };
 
-  if (!profile) {
-    return <></>;
-  }
+  if (!userInfo) return null;
 
-  const selectedProvince = Iran.Provinces.find(province => province.title == profile.province);
+  const selectedProvince = Iran.Provinces.find(province => province.title == userInfo.province);
 
   return (
     <Grid container item spacing={2}>
@@ -108,7 +106,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
               borderRadius: '5px',
               objectFit: 'cover',
             }}
-            src={profile.profile_picture || PROFILE_PICTURE}
+            src={userInfo.profile_picture || PROFILE_PICTURE}
           />
         </Grid>
         <Grid item>
@@ -143,9 +141,9 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!profile.first_name}
+            error={!userInfo.first_name}
             fullWidth
-            value={profile.first_name || ''}
+            value={userInfo.first_name || ''}
             name="first_name"
             onChange={handleProfileChange}
             label='نام'
@@ -154,9 +152,9 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!profile.last_name}
+            error={!userInfo.last_name}
             fullWidth
-            value={profile.last_name || ''}
+            value={userInfo.last_name || ''}
             name="last_name"
             onChange={handleProfileChange}
             label="نام خانوادگی"
@@ -165,9 +163,9 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!profile.national_code}
+            error={!userInfo.national_code}
             fullWidth
-            value={profile.national_code || ''}
+            value={userInfo.national_code || ''}
             name="national_code"
             onChange={(e) => {
               if (isNumber(e.target.value)) {
@@ -183,7 +181,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             disabled={true}
-            value={profile.phone_number || ''}
+            value={userInfo.phone_number || ''}
             onChange={(e) => {
               if (isNumber(e.target.value)) {
                 handleProfileChange(e);
@@ -202,13 +200,13 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
                 label={'تاریخ تولد'}
                 openTo='year'
                 views={['year', 'month', 'day']}
-                value={moment(profile.birth_date) || ''}
+                value={moment(userInfo.birth_date) || ''}
                 renderInput={(params) =>
                   <TextField
                     {...params} sx={{ width: "100%" }}
-                    error={!profile.birth_date}
+                    error={!userInfo.birth_date}
                   />}
-                onChange={(date) => setProfile({ ...profile, birth_date: moment(date).format('YYYY-MM-DD') })}
+                onChange={(date) => setUserInfo({ ...userInfo, birth_date: moment(date).format('YYYY-MM-DD') })}
               />
             </LocalizationProvider>
           </FormControl>
@@ -217,7 +215,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            value={profile.email || ''}
+            value={userInfo.email || ''}
             name="email"
             onChange={handleProfileChange}
             inputProps={{ className: 'ltr-input' }}
@@ -228,11 +226,11 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         <Grid item xs={12}>
           <FormControl>
             <FormLabel
-              error={!profile.gender}>جنسیت</FormLabel>
+              error={!userInfo.gender}>جنسیت</FormLabel>
             <RadioGroup
               name="gender"
               row
-              value={profile.gender || ''}
+              value={userInfo.gender || ''}
               onChange={handleProfileChange}>
               <FormControlLabel
                 value="Male"
@@ -253,10 +251,10 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         <Grid item container xs={12} sm={6}>
           <FormControl
             fullWidth
-            error={!profile.province}>
+            error={!userInfo.province}>
             <InputLabel>استان</InputLabel>
             <Select
-              value={profile.province || ''}
+              value={userInfo.province || ''}
               onChange={handleProfileChange}
               name="province"
               label="استان">
@@ -272,11 +270,11 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         <Grid item container xs={12} sm={6}>
           <FormControl
             fullWidth
-            error={!profile.city}>
+            error={!userInfo.city}>
             <InputLabel>شهر</InputLabel>
             <Select
-              disabled={!profile.province && !profile.city}
-              value={profile.city || ''}
+              disabled={!userInfo.province && !userInfo.city}
+              value={userInfo.city || ''}
               onChange={handleProfileChange}
               name="city"
               label="شهر">
@@ -295,7 +293,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             helperText='جوایز و یادگاری‌ها به این آدرس ارسال می‌شوند.'
-            value={profile.address || ''}
+            value={userInfo.address || ''}
             name="address"
             multiline
             rows={2}
@@ -308,7 +306,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
           <TextField
             fullWidth
             name="postal_code"
-            value={profile.postal_code || ''}
+            value={userInfo.postal_code || ''}
             onChange={(e) => {
               if (isNumber(e.target.value)) {
                 handleProfileChange(e);
@@ -337,7 +335,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 }
 
 const mapStateToProps = (state) => ({
-  userProfile: state.account.userProfile,
+  userInfo: state.account.userInfo,
   isFetching: state.account.isFetching,
   payments: state.account.payments,
   institutes: state.account.institutes,

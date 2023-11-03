@@ -14,15 +14,15 @@ import {
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import { getInstitutesAction } from 'redux/slices/account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import AddInstitute from '../../../components/organisms/dialogs/AddInstitute';
+import AddInstitute from 'components/organisms/dialogs/AddInstitute';
 import {
   getUserProfileAction,
   updateStudentShipAction,
   updateUserAccountAction,
-} from '../../../redux/slices/account';
-import Iran from '../../../utils/iran';
+} from 'redux/slices/account';
+import Iran from 'utils/iran';
 
 const GRADES = [
   { value: 1, name: 'اول' },
@@ -52,24 +52,25 @@ const GENDER_TYPES = {
 }
 
 function StudentProfile({
+  getInstitutes,
   updateStudentShip,
-  userProfile,
+  userInfo,
   institutes,
   newlyAddedInstitute,
 }) {
-  const [studentship, setStudentship] = useState();
+  const [studentship, setStudentship] = useState<{ school: string; grade: string; }>();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
   const { programId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userProfile) {
+    if (userInfo) {
       setStudentship({
-        school: userProfile.school_studentship.school,
-        grade: userProfile.school_studentship.grade,
+        school: userInfo.school_studentship.school,
+        grade: userInfo.school_studentship.grade,
       })
     }
-  }, [userProfile])
+  }, [userInfo])
 
   useEffect(() => {
     if (newlyAddedInstitute) {
@@ -80,14 +81,10 @@ function StudentProfile({
     }
   }, [newlyAddedInstitute])
 
-  const handleStudentshipDocumentChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setStudentship({
-        ...studentship,
-        document: event.target.files[0],
-      });
-    }
-  };
+  useEffect(() => {
+    if (!userInfo?.city) return;
+    getInstitutes({ cityTitle: Iran.Cities.find(city => userInfo.city == city.title).title });
+  }, [userInfo]);
 
   const handleStudentshipChange = (event) => {
     setStudentship({
@@ -98,7 +95,7 @@ function StudentProfile({
 
   const submitStudentship = () => {
     updateStudentShip({
-      id: userProfile?.school_studentship?.id,
+      id: userInfo?.school_studentship?.id,
       ...studentship,
     }).then((response) => {
       if (response.type?.endsWith('fulfilled') && programId) {
@@ -110,10 +107,10 @@ function StudentProfile({
   const AddSchoolInstituteIcon = () => {
     return (
       <Tooltip title={
-        userProfile?.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
+        userInfo?.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
         <IconButton
           size="small"
-          onClick={userProfile?.city ? () => setAddInstituteDialogStatus(true) : () => { }}>
+          onClick={userInfo?.city ? () => setAddInstituteDialogStatus(true) : () => { }}>
           <AddCircleOutlineIcon />
         </IconButton>
       </Tooltip>
@@ -182,39 +179,6 @@ function StudentProfile({
               </Select>
             </FormControl>
           </Grid>
-
-          {/* <Grid item container justifyContent="center" xs={12} sm={6}>
-            <Button
-              fullWidth
-              variant='outlined'
-              color="secondary"
-              onClick={() =>
-                document.getElementById('school-studentship-document').click()
-              }>
-              انتخاب مدرک شناسایی تحصیلی*
-            </Button>
-            <input
-              id="school-studentship-document"
-              style={{ display: 'none' }}
-              type="file"
-              onChange={handleStudentshipDocumentChange}
-            />
-            {userProfile?.school_studentship?.document && (
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href={userProfile?.school_studentship?.document}>
-                آخرین مدرک بارگذاری‌شده
-              </a>
-            )}
-            {!userProfile?.school_studentship?.document && (
-              <Typography variant="caption" align="center">
-                * منظور از مدرک شناسایی تحصیلی، سندی‌ست که نشان دهد شما مشغول به
-                تحصیل در این پایه هستید.
-              </Typography>
-            )}
-          </Grid> */}
-
         </Grid>
 
         <Grid item xs={12}>
@@ -229,8 +193,8 @@ function StudentProfile({
       </Grid>
 
       <AddInstitute
-        province={userProfile?.province}
-        city={userProfile?.city}
+        province={userInfo?.province}
+        city={userInfo?.city}
         open={addInstituteDialog}
         handleClose={() => {
           setAddInstituteDialogStatus(false);
@@ -242,14 +206,14 @@ function StudentProfile({
 
 const mapStateToProps = (state) => ({
   newlyAddedInstitute: state.account.newlyAddedInstitute,
-  userAccount: state.account.userAccount,
-  userProfile: state.account.userProfile,
+  userInfo: state.account.userInfo,
   isFetching: state.account.isFetching,
   payments: state.account.payments,
   institutes: state.account.institutes,
 });
 
 export default connect(mapStateToProps, {
+  getInstitutes: getInstitutesAction,
   updateUserAccount: updateUserAccountAction,
   getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,

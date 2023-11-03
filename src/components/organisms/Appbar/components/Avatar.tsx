@@ -70,8 +70,8 @@ function AvatarComponent({ name = 'بی‌نام', logout }: AvatarComponentProp
 }
 
 const mapStateToProps = (state) => ({
-  name: state.account.userAccount?.first_name && state.account.userAccount?.last_name
-    ? `${state.account.userAccount?.first_name} ${state.account.userAccount?.last_name}`
+  name: state.account.userInfo?.first_name && state.account.userInfo?.last_name
+    ? `${state.account.userInfo?.first_name} ${state.account.userInfo?.last_name}`
     : ''
 });
 

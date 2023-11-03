@@ -4,10 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import AboutUs from 'pages/AboutUs';
 import ResetPassword from 'pages/ResetPassword';
 import CreateAccount from 'pages/CreateAccount';
-import Dashboard from 'pages/Dashboard';
 import RegistrationReceipt from 'pages/RegistrationReceipt';
 import Events from 'pages/Events';
-import Profile from 'pages/Dashboard/Profile';
+import Profile from 'pages/Profile';
 import Event from 'pages/Event';
 import ManageEvent from 'pages/Event/manage';
 import Landing from 'pages/Landing';
@@ -15,8 +14,8 @@ import NotFoundPage from 'pages/NotFoundPage';
 import Login from 'pages/Login';
 import FailedPayment from 'pages/Message/FailedPayment';
 import SuccessfulPayment from 'pages/Message/SuccessfulPayment';
-import ProgramRegistrationForm from 'pages/ProgramRegistrationForm';
-import Status from 'pages/RegistrationStatus';
+import ProgramRegistrationForm from 'pages/RegistrationForm';
+import Status from 'pages/RegistrationForm/RegistrationStatus';
 import TeamSelection from 'pages/TeamSelection';
 import Workshop from 'pages/FSM';
 import Article from 'pages/Article';
@@ -28,7 +27,7 @@ import EditArticle from 'pages/EditArticle';
 import CustomPage from 'pages/CustomPage';
 
 const Root = () => {
-  
+
   return (
     <Routes>
       <Route path="/l/mr4k2309" element={<CustomPage />} ></Route>
@@ -44,6 +43,7 @@ const Root = () => {
       <Route path="/article/:articleId/" element={<Article />} />
 
       <Route path="/" element={<PrivateRoute />}>
+
         <Route path="/edit-article/:articleId/" element={<EditArticle />} />
         <Route
           path="/message/payment/success/:paymentId?"
@@ -54,7 +54,6 @@ const Root = () => {
           element={<FailedPayment />}
         />
         <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
-        <Route path="/dashboard/" element={<Dashboard />} />
         <Route path="/profile/:section/" element={<Profile />} />
         <Route path="/programs/" element={<Events />} />
         <Route path="/articles/" element={<Articles />} />
