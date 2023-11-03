@@ -15,12 +15,27 @@ import selectTheme from './configs/themes';
 import Notifier from './components/molecules/Notifications';
 import { initParseServer } from './parse/init';
 import { resetRedirectAction } from './redux/slices/redirect';
+import { getUserProfileAction } from 'redux/slices/account';
+
 import Root from './routes';
 import translations from './translations';
 import LinearLoading from 'components/atoms/LinearLoading';
 
-const App = ({ dir, redirectTo, resetRedirect, loading }) => {
+const App = ({
+  dir,
+  redirectTo,
+  resetRedirect,
+  loading,
+  userInfo,
+  getUserProfile,
+}) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userInfo?.id) {
+      getUserProfile({ id: userInfo.id });
+    }
+  }, []);
 
   useEffect(() => {
     if (redirectTo !== null) {
@@ -67,6 +82,7 @@ const App = ({ dir, redirectTo, resetRedirect, loading }) => {
 };
 
 const mapStateToProps = (state) => ({
+  userInfo: state.account.userInfo,
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
@@ -77,4 +93,7 @@ const mapStateToProps = (state) => ({
     state.paper.isFetching,
 });
 
-export default connect(mapStateToProps, { resetRedirect: resetRedirectAction })(App);
+export default connect(mapStateToProps, {
+  resetRedirect: resetRedirectAction,
+  getUserProfile: getUserProfileAction,
+})(App);

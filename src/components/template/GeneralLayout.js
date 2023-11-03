@@ -1,10 +1,9 @@
 import { Container } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import AppBar from 'components/organisms/Appbar';
-import { getUserProfileAction } from 'redux/slices/account';
 
 const Layout = ({
   appbarMode = 'STUDENT_DASHBOARD',
@@ -13,10 +12,6 @@ const Layout = ({
   ...props
 }) => {
   const { programId } = useParams();
-
-  useEffect(() => {
-    getUserProfile({ id: userInfo?.id });
-  }, []);
 
   return (
     <>
@@ -50,6 +45,4 @@ const mapStateToProps = (state) => ({
   userInfo: state.account.userInfo,
 });
 
-export default connect(mapStateToProps, {
-  getUserProfile: getUserProfileAction,
-})(Layout);
+export default connect(mapStateToProps)(Layout);
