@@ -143,32 +143,23 @@ const ProgramRegistrationForm = ({
                 </Typography>
               ) : (
                 !checkPermission(registrationForm?.audience_type, userInfo) ? (
-                  <Stack direction={'row'} justifyContent={'center'}>
-                    <Typography variant='h4' color={'red'}>
-                      {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
-                    </Typography>
-                    <Typography marginX={'0.25em'} variant='h4' color={'blue'} component={Link} to={`/program/${programId}/profile/personal/`}>
+                  <Typography variant='h4' color={'red'}>
+                    {'لطفاً برای ادامه‌ی ثبت‌نام، مشخصات خود را در '}
+                    <Typography variant='h4' color={'blue'} component={Link} to={`/program/${programId}/profile/personal/`}>
                       {'اینجا'}
                     </Typography>
-                    <Typography variant='h4' color={'red'}>
-                      {' تکمیل کنید.'}
-                    </Typography>
-                  </Stack>
+                    {' تکمیل کنید.'}
+                  </Typography>
                 ) : (
                   (event?.user_registration_status == 'GradeNotAvailable' ||
                     event?.user_registration_status == 'StudentshipDataIncomplete') &&
-                  <Stack direction={'row'} justifyContent={'center'}>
-                    <Typography variant='h4' color={'red'}>
-                      {'لطفاً از '}
-                    </Typography>
+                  <Typography variant='h4' color={'red'}>
+                    {'لطفاً از '}
                     <Typography marginX={'0.25em'} variant='h4' color={'blue'} component={Link} to={`/program/${programId}/profile/student/`}>
                       {'اینجا'}
                     </Typography>
-                    <Typography variant='h4' color={'red'}>
-                      {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
-                    </Typography>
-                  </Stack>
-
+                    {' قسمت «مشخصات دانش‌آموزی» را هم تکمیل کنید.'}
+                  </Typography>
                 )))}
           <Button
             disabled={event?.user_registration_status == 'DeadlineMissed' ||
