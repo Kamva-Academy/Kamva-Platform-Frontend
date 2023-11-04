@@ -118,7 +118,7 @@ function StudentProfile({
   };
 
   if (!studentship) {
-    return <></>;
+    return null;
   }
 
   return (

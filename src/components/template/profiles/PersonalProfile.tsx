@@ -71,7 +71,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     const newProfile = {};
     for (const key in userInfo) {
       const newVal = userInfo[key];
-      const oldVal = userInfo[key];
+      const oldVal = initialUserInfo[key];
       if (oldVal !== newVal) {
         newProfile[key] = newVal;
       }
