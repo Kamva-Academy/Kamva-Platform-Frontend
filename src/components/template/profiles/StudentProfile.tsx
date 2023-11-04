@@ -64,7 +64,7 @@ function StudentProfile({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo?.school_studentship) {
       setStudentship({
         school: userInfo.school_studentship.school,
         grade: userInfo.school_studentship.grade,
