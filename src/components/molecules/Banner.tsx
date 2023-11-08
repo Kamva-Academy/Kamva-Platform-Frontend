@@ -6,7 +6,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/virtual';
 import 'swiper/css/autoplay';
-import { useNavigate } from 'react-router-dom';
 import { BannerType } from 'types/redux/WebSiteAppearance';
 import useWidth from 'utils/UseWidth';
 
@@ -15,7 +14,6 @@ type BannerPropsType = {
 }
 
 const Banner: FC<BannerPropsType> = ({ banners }) => {
-  const navigate = useNavigate();
   const width = useWidth();
 
   // https://swiperjs.com/react
