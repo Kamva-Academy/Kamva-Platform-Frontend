@@ -20,30 +20,25 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from "moment";
 import {
-  updateUserAccountAction,
+  updateUserInfoAction,
 } from 'redux/slices/account';
 import Iran from 'utils/iran';
 import { toEnglishNumber } from 'utils/translateNumber';
 import { PersonalProfileType } from 'types/profile';
 import isNumber from 'utils/validators/isNumber';
-import { useNavigate, useParams } from 'react-router-dom';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 type PersonalProfilePropsType = {
-  updateUserAccount: any;
+  updateUserInfo: any;
   userInfo: PersonalProfileType;
-  tabs: any;
 }
 
 const PersonalProfile: FC<PersonalProfilePropsType> = ({
-  updateUserAccount,
+  updateUserInfo,
   userInfo: initialUserInfo,
-  tabs,
 }) => {
   const [userInfo, setUserInfo] = useState(null);
-  const navigate = useNavigate();
-  const { programId, section } = useParams();
 
   useEffect(() => {
     if (initialUserInfo) {
@@ -51,9 +46,11 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     }
   }, [initialUserInfo])
 
+  if (!userInfo) return null;
+
   const handleProfilePictureChange = (event) => {
     if (event.target.files?.[0]) {
-      updateUserAccount({
+      updateUserInfo({
         id: userInfo.id,
         profile_picture: event.target.files[0],
       });
@@ -67,7 +64,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     });
   };
 
-  const submitProfile = () => {
+  const submitUserInfo = () => {
     const newProfile = {};
     for (const key in userInfo) {
       const newVal = userInfo[key];
@@ -76,17 +73,11 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         newProfile[key] = newVal;
       }
     }
-    updateUserAccount({
+    updateUserInfo({
       id: userInfo.id,
       ...newProfile,
-    }).then((response) => {
-      if (response.type?.endsWith('fulfilled') && programId && tabs[tabs.indexOf(section) + 1]) {
-        navigate(`/program/${programId}/profile/${tabs[tabs.indexOf(section) + 1]}/`);
-      }
-    });
+    })
   };
-
-  if (!userInfo) return null;
 
   const selectedProvince = Iran.Provinces.find(province => province.title == userInfo.province);
 
@@ -141,7 +132,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!userInfo.first_name}
+            required
             fullWidth
             value={userInfo.first_name || ''}
             name="first_name"
@@ -152,7 +143,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!userInfo.last_name}
+            required
             fullWidth
             value={userInfo.last_name || ''}
             name="last_name"
@@ -163,7 +154,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
-            error={!userInfo.national_code}
+            required
             fullWidth
             value={userInfo.national_code || ''}
             name="national_code"
@@ -179,6 +170,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
 
         <Grid item xs={12} sm={6}>
           <TextField
+            required
             fullWidth
             disabled={true}
             value={userInfo.phone_number || ''}
@@ -194,18 +186,14 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <FormControl fullWidth>
+          <FormControl required fullWidth>
             <LocalizationProvider dateAdapter={AdapterJalali}>
               <DatePicker
                 label={'تاریخ تولد'}
                 openTo='year'
                 views={['year', 'month', 'day']}
                 value={moment(userInfo.birth_date) || ''}
-                renderInput={(params) =>
-                  <TextField
-                    {...params} sx={{ width: "100%" }}
-                    error={!userInfo.birth_date}
-                  />}
+                renderInput={(params) => <TextField value={moment(userInfo.birth_date) || ''} required {...{ ...params, error: false }} sx={{ width: "100%" }} />}
                 onChange={(date) => setUserInfo({ ...userInfo, birth_date: moment(date).format('YYYY-MM-DD') })}
               />
             </LocalizationProvider>
@@ -219,14 +207,13 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             name="email"
             onChange={handleProfileChange}
             inputProps={{ className: 'ltr-input' }}
-            label="ایمیل"
+            label="ایمیل (اختیاری)"
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControl>
-            <FormLabel
-              error={!userInfo.gender}>جنسیت</FormLabel>
+            <FormLabel required>جنسیت</FormLabel>
             <RadioGroup
               name="gender"
               row
@@ -249,9 +236,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         </Grid>
 
         <Grid item container xs={12} sm={6}>
-          <FormControl
-            fullWidth
-            error={!userInfo.province}>
+          <FormControl fullWidth required>
             <InputLabel>استان</InputLabel>
             <Select
               value={userInfo.province || ''}
@@ -268,9 +253,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         </Grid>
 
         <Grid item container xs={12} sm={6}>
-          <FormControl
-            fullWidth
-            error={!userInfo.city}>
+          <FormControl fullWidth required>
             <InputLabel>شهر</InputLabel>
             <Select
               disabled={!userInfo.province && !userInfo.city}
@@ -298,7 +281,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             multiline
             rows={2}
             onChange={handleProfileChange}
-            label="آدرس منزل"
+            label="آدرس منزل (اختیاری)"
           />
         </Grid>
 
@@ -313,7 +296,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
               }
             }}
             inputProps={{ className: 'ltr-input' }}
-            label="کد پستی"
+            label="کد پستی (اختیاری)"
           />
         </Grid>
       </Grid>
@@ -321,7 +304,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
       <Grid item container spacing={2}>
         <Grid item xs={12}>
           <Button
-            onClick={submitProfile}
+            onClick={submitUserInfo}
             fullWidth
             variant="contained"
             color="secondary">
@@ -330,7 +313,6 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         </Grid>
       </Grid>
     </Grid>
-
   );
 }
 
@@ -342,5 +324,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  updateUserAccount: updateUserAccountAction,
+  updateUserInfo: updateUserInfoAction,
 })(PersonalProfile);

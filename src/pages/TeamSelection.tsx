@@ -37,7 +37,7 @@ import {
 } from 'redux/slices/events';
 import { addNotificationAction } from 'redux/slices/notifications';
 import Layout from 'components/template/GeneralLayout';
-import { Team, EventType } from 'types/models';
+import { Team, ProgramType } from 'types/models';
 import RespondInvitation from 'components/molecules/RespondInvitation';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
@@ -60,7 +60,7 @@ type TeamSelectionPropsType = {
   inviteSomeone: any;
   createTeamAndJoin: any;
 
-  event: EventType;
+  event: ProgramType;
   team: Team;
   myInvitations: any[],
   teamInvitations: any[],
@@ -94,7 +94,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   const [newTeamName, setNewTeamName] = useState('');
 
   useEffect(() => {
-    getOneEventInfo({  programId });
+    getOneEventInfo({ programId });
   }, []);
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   }, [registrationReceipt]);
 
   if (event?.user_registration_status == 'NotRegistered') {
-    navigate(`/program/${programId}/registration-form/`);
+    navigate(`/program/${programId}/registration/`);
   }
 
   const isHead = registrationReceipt?.id === team?.team_head

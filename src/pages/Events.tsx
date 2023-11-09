@@ -9,7 +9,7 @@ import {
   getBannersAction,
 } from 'redux/slices/WebSiteAppearance';
 import Layout from 'components/template/GeneralLayout';
-import { EventType } from 'types/models';
+import { ProgramType } from 'types/models';
 import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 import Banner from 'components/molecules/Banner';
 
@@ -27,8 +27,8 @@ const Events = ({
     getBanners({ parameters: [['banner_type', 'ProgramsPage']] });
   }, []);
 
-  const activeEvents: EventType[] = events.filter((event: EventType) => event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
-  const inactiveEvents: EventType[] = events.filter((event: EventType) => !event?.is_active).sort((event1: EventType, event2: EventType) => event2.id - event1.id)
+  const activeEvents: ProgramType[] = events.filter((event: ProgramType) => event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
+  const inactiveEvents: ProgramType[] = events.filter((event: ProgramType) => !event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
 
   const activeEventsElement = (
     <Grid item container spacing={2} xs={12}>

@@ -64,7 +64,7 @@ const initialState: InitialState = {
   allEventTeams: [],
   teamsRequests: null,
   myWorkshops: [],
-  registrationForm: {},
+  registrationForm: null,
   merchandise: {},
   discountedPrice: 0,
   team: null,
@@ -544,20 +544,14 @@ const eventSlice = createSlice({
     [getOneEventInfoAction.rejected.toString()]: isNotFetching,
 
     [getOneRegistrationFormAction.pending.toString()]: isFetching,
-    [getOneRegistrationFormAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getOneRegistrationFormAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.registrationForm = response;
       state.isFetching = false;
     },
     [getOneRegistrationFormAction.rejected.toString()]: isNotFetching,
 
     [getOneMerchandiseAction.pending.toString()]: isFetching,
-    [getOneMerchandiseAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
+    [getOneMerchandiseAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.merchandise = response;
     },
     [getOneMerchandiseAction.rejected.toString()]: isNotFetching,

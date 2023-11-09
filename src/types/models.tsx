@@ -3,7 +3,7 @@ type EventTypeType = "Team" | "Individual";
 
 export type Workshop = any
 
-export type EventType = {
+export type ProgramType = {
   accessible_after_closure: boolean;
   audience_type: AudienceTypeType;
   certificates_ready: boolean
@@ -29,7 +29,16 @@ export type EventType = {
   registration_till: string | null;
   start_date: string | null
   team_size: number;
-  user_registration_status: string;
+  user_registration_status:
+  'Waiting' |
+  'Rejected' |
+  'Accepted' |
+  'DeadlineMissed' |
+  'NotPermitted' |
+  'NotRegistered' |
+  'NotStarted' |
+  'GradeNotAvailable' |
+  'StudentshipDataIncomplete';
 }
 
 export type Invitation = any
@@ -37,7 +46,7 @@ export type RegistrationReceipt = any
 export type Widget = any
 export type Team = any
 export type Request = any
-export type RegistrationForm = any
+export type RegistrationFormType = any
 export type Merchandise = any
 export type Article = any
 export type Notification = any

@@ -116,8 +116,8 @@ export const getUserAccountAction = createAsyncThunkApi(
   accountCRUDUrl
 );
 
-export const updateUserAccountAction = createAsyncThunkApi(
-  'account/updateUserAccountAction',
+export const updateUserInfoAction = createAsyncThunkApi(
+  'account/updateUserInfoAction',
   Apis.PATCH_FORM_DATA,
   accountCRUDUrl,
   {
@@ -264,12 +264,12 @@ const accountSlice = createSlice({
     [createInstitutesAction.rejected.toString()]: isNotFetching,
 
 
-    [updateUserAccountAction.pending.toString()]: isFetching,
-    [updateUserAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [updateUserInfoAction.pending.toString()]: isFetching,
+    [updateUserInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.userInfo = { ...state.userInfo, ...response }
       state.isFetching = false;
     },
-    [updateUserAccountAction.rejected.toString()]: isNotFetching,
+    [updateUserInfoAction.rejected.toString()]: isNotFetching,
 
 
     [updateStudentShipAction.pending.toString()]: isFetching,

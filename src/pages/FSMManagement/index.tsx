@@ -33,7 +33,7 @@ import Edges from './Edges';
 import IndividualRequests from './IndividualRequests';
 import Info from './Info';
 import TeamRequests from './TeamRequests';
-import { Workshop, EventType } from 'types/models';
+import { Workshop, ProgramType } from 'types/models';
 import Mentors from './Mentors';
 import GoToAnswer from './GoToAnswer';
 
@@ -42,7 +42,7 @@ type EventPropsType = {
   getOneEventInfo: Function,
   getOneWorkshopsInfo: Function,
   workshop: Workshop,
-  event: EventType,
+  event: ProgramType,
 }
 
 const FSMManagement: FC<EventPropsType> = ({

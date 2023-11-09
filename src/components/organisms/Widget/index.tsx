@@ -61,10 +61,6 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
       : (props) => props.children
     , [widget])
 
-  const widgetMemoizedComponent = useMemo(() =>
-    <WidgetComponent {...widget} mode={mode} collectAnswers={collectAnswers} />
-    , [widget])
-
   return (
     <Cover>
       <Stack sx={{ position: 'relative' }}>
@@ -117,7 +113,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
         }
         {(mode === WidgetModes.View && widget?.hints?.length) ? <WidgetHint hints={widget.hints} /> : null}
       </Stack>
-      {widgetMemoizedComponent}
+      <WidgetComponent {...widget} mode={mode} collectAnswers={collectAnswers} />
     </Cover>
   );
 };

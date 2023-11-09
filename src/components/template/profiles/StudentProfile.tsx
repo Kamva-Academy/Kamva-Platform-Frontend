@@ -11,16 +11,15 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
 import { getInstitutesAction } from 'redux/slices/account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddInstitute from 'components/organisms/dialogs/AddInstitute';
 import {
   getUserProfileAction,
   updateStudentShipAction,
-  updateUserAccountAction,
+  updateUserInfoAction,
 } from 'redux/slices/account';
 import Iran from 'utils/iran';
 
@@ -46,22 +45,23 @@ const SCHOOL_TYPES = {
   'SchoolOfArt': 'هنرستان',
 }
 
-const GENDER_TYPES = {
-  'Male': 'پسرانه',
-  'Female': 'دخترانه',
+type StudentProfilePropsType = {
+  getInstitutes: any;
+  updateStudentShip: any;
+  userInfo: any;
+  institutes: any[];
+  newlyAddedInstitute?: any;
 }
 
-function StudentProfile({
+const StudentProfile: FC<StudentProfilePropsType> = ({
   getInstitutes,
   updateStudentShip,
   userInfo,
   institutes,
   newlyAddedInstitute,
-}) {
-  const [studentship, setStudentship] = useState<{ school: string; grade: string; }>();
+}) => {
+  const [studentship, setStudentship] = useState<{ school: string; grade: number; }>();
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
-  const { programId } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (userInfo?.school_studentship) {
@@ -70,7 +70,7 @@ function StudentProfile({
         grade: userInfo.school_studentship.grade,
       })
     }
-  }, [userInfo])
+  }, [userInfo?.school_studentship])
 
   useEffect(() => {
     if (newlyAddedInstitute) {
@@ -82,9 +82,11 @@ function StudentProfile({
   }, [newlyAddedInstitute])
 
   useEffect(() => {
-    if (!userInfo?.city) return;
+    if (!userInfo.city) return;
     getInstitutes({ cityTitle: Iran.Cities.find(city => userInfo.city == city.title).title });
   }, [userInfo]);
+
+  if (!userInfo || !institutes) return null;
 
   const handleStudentshipChange = (event) => {
     setStudentship({
@@ -95,31 +97,23 @@ function StudentProfile({
 
   const submitStudentship = () => {
     updateStudentShip({
-      id: userInfo?.school_studentship?.id,
+      id: userInfo.school_studentship.id,
       ...studentship,
-    }).then((response) => {
-      if (response.type?.endsWith('fulfilled') && programId) {
-        navigate(`/program/${programId}/`);
-      }
-    })
+    });
   };
 
   const AddSchoolInstituteIcon = () => {
     return (
       <Tooltip title={
-        userInfo?.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
+        userInfo.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
         <IconButton
           size="small"
-          onClick={userInfo?.city ? () => setAddInstituteDialogStatus(true) : () => { }}>
+          onClick={userInfo.city ? () => setAddInstituteDialogStatus(true) : () => { }}>
           <AddCircleOutlineIcon />
         </IconButton>
       </Tooltip>
     );
   };
-
-  if (!studentship) {
-    return null;
-  }
 
   return (
     <>
@@ -137,13 +131,13 @@ function StudentProfile({
               fullWidth>
               <InputLabel>مدرسه</InputLabel>
               <Select
-                error={!institutes?.find((institute) => institute.id === studentship.school)}
+                error={!institutes.find((institute) => institute.id === studentship.school)}
                 IconComponent={AddSchoolInstituteIcon}
                 onChange={handleStudentshipChange}
                 name="school"
                 value={institutes?.find((institute) => institute.id === studentship.school) ? studentship.school : ''}
                 label="مدرسه">
-                {institutes?.length > 0 ?
+                {institutes.length > 0 ?
                   institutes.slice().sort((a, b) => {
                     let firstLabel = (a.school_type ? SCHOOL_TYPES[a.school_type] + ' ' : '') + a.name
                     let secondLabel = (b.school_type ? SCHOOL_TYPES[b.school_type] + ' ' : '') + b.name
@@ -161,10 +155,7 @@ function StudentProfile({
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <FormControl
-              required
-              error={!studentship.grade}
-              fullWidth>
+            <FormControl required fullWidth>
               <InputLabel>پایه</InputLabel>
               <Select
                 onChange={handleStudentshipChange}
@@ -193,8 +184,8 @@ function StudentProfile({
       </Grid>
 
       <AddInstitute
-        province={userInfo?.province}
-        city={userInfo?.city}
+        province={userInfo.province}
+        city={userInfo.city}
         open={addInstituteDialog}
         handleClose={() => {
           setAddInstituteDialogStatus(false);
@@ -214,7 +205,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getInstitutes: getInstitutesAction,
-  updateUserAccount: updateUserAccountAction,
+  updateUserAccount: updateUserInfoAction,
   getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,
 })(StudentProfile);

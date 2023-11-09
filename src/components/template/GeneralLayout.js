@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,8 +15,8 @@ const Layout = ({
 
   return (
     <>
-      <div
-        style={{
+      <Box
+        sx={{
           width: '100%',
           position: 'fixed',
           top: '0',

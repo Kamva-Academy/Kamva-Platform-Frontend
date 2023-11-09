@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import WorkshopGridItems from 'components/organisms/WorkshopGridItems';
 import {
   getEventWorkshopsAction,
+  getOneEventInfoAction,
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
 import Sidebar from './Sidebar';
@@ -17,19 +18,24 @@ function Workshops({
   event,
   isLoading,
   getEventWorkshops,
+  getOneEventInfo,
 }) {
   const { programId } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
+    getOneEventInfo({ programId });
+  }, []);
+
+  useEffect(() => {
     if (event?.is_user_participating != undefined && !event?.is_user_participating) {
-      navigate(`/program/${programId}/registration-form/`);
+      navigate(`/program/${programId}/registration/`);
     }
   }, [event])
 
   useEffect(() => {
-    getEventWorkshops({  programId, pageNumber });
+    getEventWorkshops({ programId, pageNumber });
   }, [pageNumber]);
 
   // todo: handle event not found
@@ -84,4 +90,5 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(mapStateToProps, {
   getEventWorkshops: getEventWorkshopsAction,
+  getOneEventInfo: getOneEventInfoAction,
 })(Workshops);

@@ -17,11 +17,11 @@ import { connect } from 'react-redux';
 import {
   registerOneUserAction,
 } from 'redux/slices/events';
-import { EventType } from 'types/models';
+import { ProgramType } from 'types/models';
 
 type AddOneUserDialogPropsType = {
   registerOneUser: any;
-  event: EventType;
+  event: ProgramType;
   open: boolean;
   handleClose: any;
   isFetching: boolean;

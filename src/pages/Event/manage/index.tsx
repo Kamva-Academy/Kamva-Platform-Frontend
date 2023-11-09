@@ -34,7 +34,7 @@ const tabs: { name: string, label: string, icon: any, component: any }[] = [
     component: Info,
   },
   {
-    name: 'registration-form',
+    name: 'registration',
     label: 'فرم ثبت‌نام',
     icon: HistoryEduIcon,
     component: RegistrationForm,
@@ -67,7 +67,7 @@ const tabs: { name: string, label: string, icon: any, component: any }[] = [
 
 const SECTIONS = {
   'info': 0,
-  'registration-form': 1,
+  'registration': 1,
   'registration-receipts': 2,
   'discount-codes': 3,
   'teams': 4,

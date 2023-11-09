@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { useNavigate } from 'react-router-dom';
 import { toPersianNumber } from 'utils/translateNumber';
-import { EventType } from 'types/models';
+import { ProgramType } from 'types/models';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 
 const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to, text, disabled = false }) => {
@@ -23,14 +23,14 @@ const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to
 }
 
 type EventCardPropsType = {
-  event: EventType;
+  event: ProgramType;
 }
 
 const EventCard: FC<EventCardPropsType> = ({
   event
 }) => {
   const t = useTranslate();
-  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/program/${event.id}/registration-form/`} text={t('register')} /> : null);
+  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/program/${event.id}/registration/`} text={t('register')} /> : null);
 
   useEffect(() => {
     if (!event) return;

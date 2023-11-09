@@ -14,8 +14,8 @@ import NotFoundPage from 'pages/NotFoundPage';
 import Login from 'pages/Login';
 import FailedPayment from 'pages/Message/FailedPayment';
 import SuccessfulPayment from 'pages/Message/SuccessfulPayment';
-import ProgramRegistrationForm from 'pages/RegistrationForm';
-import Status from 'pages/RegistrationForm/RegistrationStatus';
+import Registration from 'pages/Registration';
+import Status from 'pages/Registration/Status';
 import TeamSelection from 'pages/TeamSelection';
 import Workshop from 'pages/FSM';
 import Article from 'pages/Article';
@@ -60,8 +60,8 @@ const Root = () => {
         <Route path="/program/:programId/fsm/:fsmId/" element={<Workshop />} />
         <Route path="/program/:programId/profile/:section/" element={<Profile />} />
         <Route
-          path="/program/:programId/registration-form/"
-          element={<ProgramRegistrationForm />}
+          path="/program/:programId/registration/"
+          element={<Registration />}
         />
         <Route path="/program/:programId/status/" element={<Status />} />
         <Route
