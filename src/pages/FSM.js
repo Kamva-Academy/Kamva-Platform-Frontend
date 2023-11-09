@@ -160,6 +160,8 @@ const FSM = ({
     }
   }, [teamId, fsmState]);
 
+  if (!fsmState || !workshop) return null;
+
   return (
     <StatePageContext.Provider
       value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
@@ -171,16 +173,14 @@ const FSM = ({
         }}>
         <ResponsiveAppBar mode={isMentor ? "MENTOR_FSM" : "FSM"} />
         <Toolbar id="back-to-top-anchor" />
-        {fsmState &&
-          <FSMStateTemplate state={fsmState} playerId={playerId} />
-        }
+        <FSMStateTemplate state={fsmState} playerId={playerId} />
         {/* <ScrollTop>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
         </ScrollTop> */}
       </Container>
-      {(workshop?.fsm_p_type == 'Team' || workshop?.fsm_learning_type == 'Supervised') &&
+      {(workshop.fsm_p_type == 'Team' || workshop.fsm_learning_type == 'Supervised') &&
         <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
       }
     </StatePageContext.Provider>
