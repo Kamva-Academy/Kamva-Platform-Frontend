@@ -21,6 +21,7 @@ import {
 } from 'redux/slices/workshop';
 import { addMentorToRoom, updateMentorTime } from 'parse/mentorsInRoom';
 import DraggableChatRoom from 'components/organisms/DraggableMeeting';
+import { getOneEventInfoAction } from 'redux/slices/events';
 
 var moment = require('moment');
 
@@ -34,6 +35,7 @@ const FSM = ({
   myTeam,
   getOneWorkshop,
   enterWorkshop,
+  getOneEventInfo,
   mentorGetCurrentState,
   addNotification,
   // todo:
@@ -45,7 +47,9 @@ const FSM = ({
   workshop,
   teamId,
 }) => {
-  const { fsmId } = useParams();
+  const { fsmId, programId } = useParams();
+  const subscriberRef = useRef(null);
+  const [mentorAdded, setMentorAdded] = useState(false)
   const search = useLocation().search;
   let playerId = new URLSearchParams(search).get('playerId');
   teamId = new URLSearchParams(search).get('teamId') || teamId
@@ -60,9 +64,6 @@ const FSM = ({
   if (teamId !== undefined && mentorId !== undefined && personsName !== undefined) {
     readyToAddMentor = true
   }
-  const { programId } = useParams();
-  const subscriberRef = useRef(null);
-  const [mentorAdded, setMentorAdded] = useState(false)
 
   useEffect(() => {
     initParseServer();
@@ -87,10 +88,9 @@ const FSM = ({
   // }, [isMentor, readyToAddMentor])
 
   useEffect(() => {
-    if (fsmId) {
-      getOneWorkshop({ fsmId });
-    }
-  }, [fsmId])
+    getOneWorkshop({ fsmId });
+    getOneEventInfo({ programId });
+  }, [])
 
   useEffect(() => {
     if (isMentor) {
@@ -206,4 +206,5 @@ export default connect(mapStateToProps, {
   mentorGetCurrentState: mentorGetCurrentStateAction,
   addNotification: addNotificationAction,
   changeOpenChatRoom: changeOpenChatRoomAction,
+  getOneEventInfo: getOneEventInfoAction,
 })(FSM);
