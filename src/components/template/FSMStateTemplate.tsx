@@ -71,7 +71,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
                 </Grid>
               </Stack>
             </Stack>
-            <FSMStateRoadMap currentNodeId={state.name} playerId={playerId} fsmId={state.fsm} />
+            {/* <FSMStateRoadMap currentNodeId={state.name} playerId={playerId} fsmId={state.fsm} /> */}
             {notQuestions.length === 0 &&
               <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
                 <Grid container spacing={2}>
