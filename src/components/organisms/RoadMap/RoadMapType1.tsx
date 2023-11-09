@@ -6,12 +6,14 @@ type GraphType1PropsType = {
   currentNodeId: string;
   links: Link[];
   highlighedPath: Link[];
+  firstStateName: string;
 };
 
 const GraphType1: FC<GraphType1PropsType> = ({
   currentNodeId,
   links: inputLinks,
   highlighedPath,
+  firstStateName,
 }) => {
   const nodesXdistance = 120;
   const nodesYdistance = 200;
@@ -57,15 +59,17 @@ const GraphType1: FC<GraphType1PropsType> = ({
       return;
     }
 
-    let currentNode = nodes.find(node => node.id === currentNodeId);
-    if (!currentNode) {
-      currentNode = { id: currentNodeId, x: 0, y: getY(0) };
-      nodes.push(currentNode);
+    let firstNode = nodes.find(node => node.id === firstStateName);
+
+    if (!firstNode) {
+      firstNode = { id: firstStateName, x: 0, y: getY(0) };
+      nodes.push(firstNode);
     }
 
     const inputLinksCopy = [...inputLinks];
 
-    while (inputLinksCopy.length > 0) {
+    let counter = 10_000;
+    while (inputLinksCopy.length > 0 && counter--) {
       const link = inputLinksCopy[0];
       let sourceNode = nodes.find(node => node.id === link.source);
       let targetNode = nodes.find(node => node.id === link.target);

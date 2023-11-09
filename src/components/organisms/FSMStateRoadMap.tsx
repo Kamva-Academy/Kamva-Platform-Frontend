@@ -4,12 +4,12 @@ import RoadMapType1 from 'components/organisms/RoadMap/RoadMapType1';
 import ArrowDropDownCircleIcon from '@mui/icons-material/ArrowDropDownCircle';
 import { getPlayerTakenPathAction, getFSMRoadmapAction } from 'redux/slices/Roadmap';
 import { connect } from 'react-redux';
-import { Link } from 'types/redux/Roadmap';
+import { FSMRoadmapType, Link } from 'types/redux/Roadmap';
 
 type FSMStateRoadMapPropsType = {
   currentNodeId: string;
   playerTakenPath: Link[];
-  FSMRoadmap: Link[];
+  FSMRoadmap: FSMRoadmapType;
   playerId: number;
   fsmId: number;
   getPlayerTakenPath: any;
@@ -55,6 +55,8 @@ const FSMStateRoadMap: FC<FSMStateRoadMapPropsType> = ({
     }
   }, [currentNodeId])
 
+  if (!FSMRoadmap || !playerTakenPath) return null;
+
   return (
     <Box component={Paper}>
       <Typography variant='h4' padding={1}>
@@ -65,7 +67,7 @@ const FSMStateRoadMap: FC<FSMStateRoadMapPropsType> = ({
       </Typography>
       <Collapse in={openRoadMap}>
         <Divider />
-        <RoadMapType1 currentNodeId={currentNodeId} links={FSMRoadmap} highlighedPath={_playerTakenPath} />
+        <RoadMapType1 currentNodeId={currentNodeId} firstStateName={FSMRoadmap.firstStateName} links={FSMRoadmap.links} highlighedPath={_playerTakenPath} />
       </Collapse>
     </Box>
   );

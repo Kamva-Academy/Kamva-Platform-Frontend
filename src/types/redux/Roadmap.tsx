@@ -1,6 +1,11 @@
 export type RoadmapInitialStateType = {
   playerTakenPath: Link[];
-  FSMRoadmap: Link[];
+  FSMRoadmap: FSMRoadmapType;
+}
+
+export type FSMRoadmapType = {
+  firstStateName: string;
+  links: Link[],
 }
 
 export type Link = {

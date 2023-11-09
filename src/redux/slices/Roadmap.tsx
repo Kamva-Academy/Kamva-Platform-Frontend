@@ -9,8 +9,8 @@ import {
 import { RoadmapInitialStateType } from 'types/redux/Roadmap'
 
 const initialState: RoadmapInitialStateType = {
-  playerTakenPath: [],
-  FSMRoadmap: [],
+  playerTakenPath: null,
+  FSMRoadmap: null,
 };
 
 export const getPlayerTakenPathAction = createAsyncThunkApi(
@@ -47,7 +47,10 @@ const RoadmapSlice = createSlice({
 
     [getFSMRoadmapAction.pending.toString()]: isFetching,
     [getFSMRoadmapAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.FSMRoadmap = response;
+      state.FSMRoadmap = {
+        firstStateName: response.first_state_name,
+        links: response.links,
+      }
     },
     [getFSMRoadmapAction.rejected.toString()]: isNotFetching,
   },
