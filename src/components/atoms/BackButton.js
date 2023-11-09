@@ -8,11 +8,11 @@ import {
   mentorMoveBackwardAction,
 } from 'redux/slices/currentState';
 
-function BackButton({ inwardEdges = [], goBackward, mentorMoveBackward }) {
+function BackButton({ inwardEdges = [], goBackward, mentorMoveBackward, playerId }) {
   const { isMentor, teamId } = useContext(StatePageContext);
 
   if (inwardEdges.length === 0) {
-    return <></>;
+    return null;
   }
 
   const backEdge = inwardEdges[0];
@@ -20,13 +20,13 @@ function BackButton({ inwardEdges = [], goBackward, mentorMoveBackward }) {
   const handleClick = () => {
     if (isMentor) {
       mentorMoveBackward({
-        id: backEdge.id,
+        id: playerId,
         teamId,
       });
     } else {
       if (backEdge.is_back_enabled) {
         goBackward({
-          id: inwardEdges[0].id,
+          id: playerId,
           teamId,
         });
       }

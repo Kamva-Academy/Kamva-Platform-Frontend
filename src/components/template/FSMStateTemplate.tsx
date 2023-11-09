@@ -63,7 +63,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
               <Stack sx={{ display: { xs: 'none', md: 'inherit' } }}>
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <BackButton inwardEdges={inward_edges} />
+                    <BackButton inwardEdges={inward_edges} playerId={playerId} />
                   </Grid>
                   <Grid item xs={6}>
                     <NextButton outwardEdges={outward_edges} />
@@ -76,7 +76,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
               <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <BackButton inwardEdges={inward_edges} />
+                    <BackButton inwardEdges={inward_edges} playerId={playerId} />
                   </Grid>
                   <Grid item xs={6}>
                     <NextButton outwardEdges={outward_edges} />
@@ -95,7 +95,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
               <Stack sx={{ display: { xs: 'inherit', md: 'none' } }} >
                 <Grid container spacing={2}>
                   <Grid item xs={6}>
-                    <BackButton inwardEdges={inward_edges} />
+                    <BackButton inwardEdges={inward_edges} playerId={playerId} />
                   </Grid>
                   <Grid item xs={6}>
                     <NextButton outwardEdges={outward_edges} />
