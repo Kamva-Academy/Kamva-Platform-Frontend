@@ -1,8 +1,13 @@
 import { Paper, Stack, Typography } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 import { connect } from 'react-redux';
+import { ProgramType } from 'types/models';
 
-const Status = ({
+type StatusPropsType = {
+  program: ProgramType;
+}
+
+const Status: FC<StatusPropsType> = ({
   program
 }) => {
 

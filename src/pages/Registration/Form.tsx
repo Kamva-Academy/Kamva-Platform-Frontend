@@ -89,7 +89,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
   }
 
   return (
-    <>
+    <Stack spacing={2}>
       <ProgramInfo program={program} />
       <Stack width={'100%'} component={Paper} padding={2} spacing={2}>
         {registrationForm.widgets.map((widget) => (
@@ -117,7 +117,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
         }}
         callBackFunction={submit}
       />
-    </>
+    </Stack>
   );
 };
 
