@@ -26,16 +26,8 @@ const App = ({
   redirectTo,
   resetRedirect,
   loading,
-  userInfo,
-  getUserProfile,
 }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (userInfo?.id) {
-      getUserProfile({ id: userInfo.id });
-    }
-  }, [userInfo?.id]);
 
   useEffect(() => {
     if (redirectTo !== null) {
@@ -82,7 +74,6 @@ const App = ({
 };
 
 const mapStateToProps = (state) => ({
-  userInfo: state.account.userInfo,
   dir: state.Intl.locale === 'fa' ? 'rtl' : 'ltr',
   redirectTo: state.redirect.redirectTo,
   forceRedirect: state.redirect.force,
@@ -95,5 +86,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   resetRedirect: resetRedirectAction,
-  getUserProfile: getUserProfileAction,
 })(App);

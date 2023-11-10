@@ -17,7 +17,6 @@ import { getInstitutesAction } from 'redux/slices/account';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddInstitute from 'components/organisms/dialogs/AddInstitute';
 import {
-  getUserProfileAction,
   updateStudentShipAction,
 } from 'redux/slices/account';
 import Iran from 'utils/iran';
@@ -199,6 +198,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getInstitutes: getInstitutesAction,
-  getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,
 })(StudentProfile);

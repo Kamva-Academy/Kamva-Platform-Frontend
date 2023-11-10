@@ -1,11 +1,12 @@
 import { Grid, Tab, Tabs } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from 'components/template/GeneralLayout';
 import AcademicProfile from 'components/template/profiles/AcademicProfile';
 import PersonalProfile from 'components/template/profiles/PersonalProfile'
 import StudentProfile from 'components/template/profiles/StudentProfile';
+import { getUserProfileAction } from 'redux/slices/account';
 
 let tabs = [
   {
@@ -38,11 +39,19 @@ const SECTIONS = {
 }
 
 const Profile = ({
+  getUserProfile,
+  userInfo,
   event,
 }) => {
   const navigate = useNavigate();
   const { programId, section } = useParams();
   const TabComponent = tabs[SECTIONS[section]].component;
+
+  useEffect(() => {
+    if (userInfo?.id) {
+      getUserProfile({ id: userInfo.id });
+    }
+  }, [userInfo?.id]);
 
   if (event?.audience_type == 'Student') {
     tabs = [tabs[0], tabs[1]];
@@ -84,7 +93,10 @@ const Profile = ({
 };
 
 const mapStateToProps = (state) => ({
+  userInfo: state.account.userInfo,
   event: state.events.event,
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, {
+  getUserProfile: getUserProfileAction,
+})(Profile);

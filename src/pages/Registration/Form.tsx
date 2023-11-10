@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Stack } from '@mui/material';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -30,16 +30,22 @@ type RegistrationFormPropsType = {
   program: ProgramType;
   registrationForm: RegistrationFormType;
   submitRegistrationForm: any;
+  getOneEventInfo: any;
 }
 
 const RegistrationForm: FC<RegistrationFormPropsType> = ({
   program,
   registrationForm,
   submitRegistrationForm,
+  getOneEventInfo,
 }) => {
   const { programId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
   const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    getOneEventInfo({ programId });
+  }, []);
 
   const submit = () => {
     submitRegistrationForm({

@@ -122,6 +122,7 @@ export const updateUserInfoAction = createAsyncThunkApi(
   }
 );
 
+// user profile includes user full info
 export const getUserProfileAction = createAsyncThunkApi(
   'account/getUserProfileAction',
   Apis.GET,
@@ -130,7 +131,6 @@ export const getUserProfileAction = createAsyncThunkApi(
 
 
 // actions for mentors:
-
 export const getUserStudentshipAction = createAsyncThunkApi(
   'account/getUserStudentshipAction',
   Apis.GET,

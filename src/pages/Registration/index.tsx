@@ -17,7 +17,7 @@ import Status from './Status';
 import Payment from './Payment';
 import { StepperStepType } from 'types/global';
 import { ProgramType, RegistrationFormType } from 'types/models';
-
+import { getUserProfileAction } from 'redux/slices/account';
 
 type RegistrationProcessPropsType = {
   registrationForm?: RegistrationFormType;
@@ -25,6 +25,7 @@ type RegistrationProcessPropsType = {
   program?: ProgramType;
   getOneRegistrationForm: any;
   getOneEventInfo: any;
+  getUserProfile: any;
 }
 
 const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
@@ -33,9 +34,16 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
   program,
   getOneRegistrationForm,
   getOneEventInfo,
+  getUserProfile,
 }) => {
   const navigate = useNavigate();
   const { programId } = useParams();
+
+  useEffect(() => {
+    if (userInfo?.id) {
+      getUserProfile({ id: userInfo.id });
+    }
+  }, [userInfo?.id]);
 
   useEffect(() => {
     getOneEventInfo({ programId });
@@ -43,7 +51,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
 
   useEffect(() => {
     if (program?.registration_form) {
-      getOneRegistrationForm({ id: program?.registration_form });
+      getOneRegistrationForm({ id: program.registration_form });
     }
   }, [program?.registration_form]);
 
@@ -51,15 +59,6 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
 
   if (program.is_user_participating) {
     navigate(`/program/${programId}/`);
-    return null;
-  }
-  if (program.user_registration_status == 'DeadlineMissed') {
-    navigate('/programs/');
-    return null;
-  }
-  if (program.user_registration_status == 'NotPermitted') {
-    // شما مجاز به شرکت در این دوره نیستید
-    navigate('/programs/');
     return null;
   }
 
@@ -113,6 +112,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getOneRegistrationForm: getOneRegistrationFormAction,
   getOneEventInfo: getOneEventInfoAction,
+  getUserProfile: getUserProfileAction,
 })(RegistrationProcess);
 
 const hasUserCompletedPrimaryInformation = (userInfo) => {
