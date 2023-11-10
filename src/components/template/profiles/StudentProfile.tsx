@@ -113,8 +113,6 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
     );
   };
 
-  console.log(schoolStudentship);
-
   return (
     <>
       <Grid container item spacing={2}>
