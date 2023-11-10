@@ -109,13 +109,7 @@ export const getInstitutesAction = createAsyncThunkApi(
   institutesUrl
 );
 
-// todo: clean these 3 functions
-export const getUserAccountAction = createAsyncThunkApi(
-  'account/getUserAccountAction',
-  Apis.GET,
-  accountCRUDUrl
-);
-
+// todo: what is difference between this and updateProfile?
 export const updateUserInfoAction = createAsyncThunkApi(
   'account/updateUserInfoAction',
   Apis.PATCH_FORM_DATA,
@@ -211,7 +205,8 @@ const accountSlice = createSlice({
   extraReducers: {
     [loginAction.pending.toString()]: isFetching,
     [loginAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userInfo = response.account;
+      state.userInfo = { ...state.userInfo, ...response.account };
+      state.id = response.account.id;
       state.token = response.access;
       state.refresh = response.refresh;
       state.isFetching = false;
@@ -221,7 +216,8 @@ const accountSlice = createSlice({
 
     [createAccountAction.pending.toString()]: isFetching,
     [createAccountAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.userInfo = response.account;
+      state.userInfo = { ...state.userInfo, ...response.account };
+      state.id = response.account.id;
       state.token = response.access;
       state.refresh = response.refresh;
       state.isFetching = false;
@@ -250,14 +246,9 @@ const accountSlice = createSlice({
     [getInstitutesAction.rejected.toString()]: isNotFetching,
 
 
-    [getUserAccountAction.pending.toString()]: isFetching,
-    [getUserAccountAction.fulfilled.toString()]: isNotFetching,
-    [getUserAccountAction.rejected.toString()]: isNotFetching,
-
-
     [createInstitutesAction.pending.toString()]: isFetching,
     [createInstitutesAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.institutes = [...state.institutes, response,];
+      state.institutes = [...state.institutes, response];
       state.newlyAddedInstitute = response;
       state.isFetching = false;
     },
@@ -273,11 +264,20 @@ const accountSlice = createSlice({
 
 
     [updateStudentShipAction.pending.toString()]: isFetching,
-    [updateStudentShipAction.fulfilled.toString()]: isNotFetching,
+    [updateStudentShipAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.userInfo = {
+        ...state.userInfo,
+        school_studentship: {
+          ...state.userInfo.school_studentship,
+          ...response,
+        }
+      }
+      state.isFetching = false;
+    },
     [updateStudentShipAction.rejected.toString()]: isNotFetching,
 
-    // for mentors
 
+    // for mentors
     [createDiscountCodeAction.pending.toString()]: isFetching,
     [createDiscountCodeAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.discountCodes = [...state.discountCodes, response]
@@ -310,7 +310,6 @@ const accountSlice = createSlice({
   },
 });
 
-export const { logout: logoutAction } =
-  accountSlice.actions;
+export const { logout: logoutAction } = accountSlice.actions;
 
 export const { reducer: accountReducer } = accountSlice;

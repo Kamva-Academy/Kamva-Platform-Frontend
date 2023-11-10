@@ -41,8 +41,6 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     getOneEventInfo({ programId });
   }, []);
 
-  console.log("###########")
-
   useEffect(() => {
     if (program?.registration_form) {
       getOneRegistrationForm({ id: program?.registration_form });
@@ -98,7 +96,9 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     <Layout>
       <Stack width={'100%'} spacing={2}>
         <Stepper program={program} registrationForm={registrationForm} activeStep={activeStep} />
-        {stepComponent}
+        <Stack>
+          {stepComponent}
+        </Stack>
       </Stack>
     </Layout >
   );
@@ -129,6 +129,6 @@ const hasUserCompletedStudentshipInformation = (userInfo) => {
 }
 
 const hasUserCompletedAcademicInformation = (userInfo) => {
-  // todo
+  // todo: not implemented yet
   return true;
 }

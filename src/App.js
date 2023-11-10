@@ -30,10 +30,12 @@ const App = ({
   getUserProfile,
 }) => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    getUserProfile({ id: userInfo.id });
-  }, []);
+    if (userInfo?.id) {
+      getUserProfile({ id: userInfo.id });
+    }
+  }, [userInfo?.id]);
 
   useEffect(() => {
     if (redirectTo !== null) {

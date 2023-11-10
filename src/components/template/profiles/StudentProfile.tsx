@@ -19,7 +19,6 @@ import AddInstitute from 'components/organisms/dialogs/AddInstitute';
 import {
   getUserProfileAction,
   updateStudentShipAction,
-  updateUserInfoAction,
 } from 'redux/slices/account';
 import Iran from 'utils/iran';
 
@@ -60,12 +59,13 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
   institutes,
   newlyAddedInstitute,
 }) => {
-  const [studentship, setStudentship] = useState<{ school: string; grade: number; }>();
+  const [schoolStudentship, setSchoolStudentship] = useState<{ id: string; school: string; grade: number; }>(null);
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
 
   useEffect(() => {
     if (userInfo?.school_studentship) {
-      setStudentship({
+      setSchoolStudentship({
+        id: userInfo.school_studentship.id,
         school: userInfo.school_studentship.school,
         grade: userInfo.school_studentship.grade,
       })
@@ -74,32 +74,30 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
 
   useEffect(() => {
     if (newlyAddedInstitute) {
-      setStudentship({
-        ...studentship,
+      setSchoolStudentship({
+        ...schoolStudentship,
         school: newlyAddedInstitute.id,
       })
     }
   }, [newlyAddedInstitute])
 
   useEffect(() => {
-    if (!userInfo.city) return;
-    getInstitutes({ cityTitle: Iran.Cities.find(city => userInfo.city == city.title).title });
-  }, [userInfo]);
+    if (userInfo?.city) {
+      getInstitutes({ cityTitle: Iran.Cities.find(city => userInfo.city == city.title).title });
+    }
+  }, [userInfo?.city]);
 
-  if (!userInfo || !institutes) return null;
+  if (!userInfo || !schoolStudentship) return null;
 
   const handleStudentshipChange = (event) => {
-    setStudentship({
-      ...studentship,
+    setSchoolStudentship({
+      ...schoolStudentship,
       [event.target.name]: event.target.value,
     });
   };
 
   const submitStudentship = () => {
-    updateStudentShip({
-      id: userInfo.school_studentship.id,
-      ...studentship,
-    });
+    updateStudentShip(schoolStudentship);
   };
 
   const AddSchoolInstituteIcon = () => {
@@ -115,6 +113,8 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
     );
   };
 
+  console.log(schoolStudentship);
+
   return (
     <>
       <Grid container item spacing={2}>
@@ -127,15 +127,13 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
           <Grid item xs={12} sm={6}>
             <FormControl
               required
-              error={!studentship.school}
               fullWidth>
               <InputLabel>مدرسه</InputLabel>
               <Select
-                error={!institutes.find((institute) => institute.id === studentship.school)}
                 IconComponent={AddSchoolInstituteIcon}
                 onChange={handleStudentshipChange}
                 name="school"
-                value={institutes?.find((institute) => institute.id === studentship.school) ? studentship.school : ''}
+                value={institutes.find((institute) => institute.id === schoolStudentship.school) ? schoolStudentship.school : ''}
                 label="مدرسه">
                 {institutes.length > 0 ?
                   institutes.slice().sort((a, b) => {
@@ -160,7 +158,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
               <Select
                 onChange={handleStudentshipChange}
                 name="grade"
-                value={studentship.grade}
+                value={schoolStudentship.grade || ''}
                 label="پایه">
                 {GRADES.map((grade) => (
                   <MenuItem key={grade.value} value={grade.value}>
@@ -198,14 +196,11 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
 const mapStateToProps = (state) => ({
   newlyAddedInstitute: state.account.newlyAddedInstitute,
   userInfo: state.account.userInfo,
-  isFetching: state.account.isFetching,
-  payments: state.account.payments,
-  institutes: state.account.institutes,
+  institutes: state.account.institutes || [],
 });
 
 export default connect(mapStateToProps, {
   getInstitutes: getInstitutesAction,
-  updateUserAccount: updateUserInfoAction,
   getUserProfile: getUserProfileAction,
   updateStudentShip: updateStudentShipAction,
 })(StudentProfile);

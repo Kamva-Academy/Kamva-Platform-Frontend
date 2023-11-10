@@ -13,9 +13,7 @@ reduxStore.subscribe(() => {
     'rastaState',
     JSON.stringify({
       account: {
-        userInfo: {
-          ...state.account.userInfo,
-        },
+        userInfo: state.account.userInfo,
         token: state.account.token,
         refresh: state.account.refresh,
       },
