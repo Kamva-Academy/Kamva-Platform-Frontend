@@ -20,6 +20,7 @@ import {
   updateStudentShipAction,
 } from 'redux/slices/account';
 import Iran from 'utils/iran';
+import { toast } from 'react-toastify';
 
 const GRADES = [
   { value: 1, name: 'اول' },
@@ -49,6 +50,12 @@ type StudentProfilePropsType = {
   userInfo: any;
   institutes: any[];
   newlyAddedInstitute?: any;
+  onSubmit?: any;
+}
+
+const hasUserCompletedStudentshipInformation = (schoolStudentship) => {
+  const { grade, school } = schoolStudentship;
+  return grade && school;
 }
 
 const StudentProfile: FC<StudentProfilePropsType> = ({
@@ -57,6 +64,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
   userInfo,
   institutes,
   newlyAddedInstitute,
+  onSubmit,
 }) => {
   const [schoolStudentship, setSchoolStudentship] = useState<{ id: string; school: string; grade: number; }>(null);
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
@@ -88,21 +96,25 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
 
   if (!userInfo || !schoolStudentship) return null;
 
-  const handleStudentshipChange = (event) => {
+  const handleFieldsChange = (event) => {
     setSchoolStudentship({
       ...schoolStudentship,
       [event.target.name]: event.target.value,
     });
   };
 
-  const submitStudentship = () => {
+  const submitSchoolStudentship = () => {
+    if (!hasUserCompletedStudentshipInformation(schoolStudentship)) {
+      toast.error('لطفاً همه‌ی اطلاعات خواسته‌شده را وارد کنید');
+      return;
+    }
     updateStudentShip(schoolStudentship);
+    onSubmit?.();
   };
 
   const AddSchoolInstituteIcon = () => {
     return (
-      <Tooltip title={
-        userInfo.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
+      <Tooltip title={userInfo.city ? 'افزودن مدرسه‌ی جدید' : 'لطفاً ابتدا شهر خود را تعیین کنید.'} arrow>
         <IconButton
           size="small"
           onClick={userInfo.city ? () => setAddInstituteDialogStatus(true) : () => { }}>
@@ -128,7 +140,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
               <InputLabel>مدرسه</InputLabel>
               <Select
                 IconComponent={AddSchoolInstituteIcon}
-                onChange={handleStudentshipChange}
+                onChange={handleFieldsChange}
                 name="school"
                 value={institutes.find((institute) => institute.id === schoolStudentship.school) ? schoolStudentship.school : ''}
                 label="مدرسه">
@@ -153,7 +165,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
             <FormControl required fullWidth>
               <InputLabel>پایه</InputLabel>
               <Select
-                onChange={handleStudentshipChange}
+                onChange={handleFieldsChange}
                 name="grade"
                 value={schoolStudentship.grade || ''}
                 label="پایه">
@@ -169,7 +181,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
 
         <Grid item xs={12}>
           <Button
-            onClick={submitStudentship}
+            onClick={submitSchoolStudentship}
             fullWidth
             variant="contained"
             color="secondary">

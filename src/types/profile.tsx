@@ -1,4 +1,4 @@
-export type PersonalProfileType = {
+export type UserInfoType = {
   academic_studentship: AcademicStudentship;
   address: string | null;
   bio: string | null;

@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 export type directionType = 'rtl' | 'ltr';
 
 export type WidgetTypes =
@@ -11,7 +13,9 @@ export type WidgetTypes =
   'MultiChoiceProblem' |
   'UploadFileProblem';
 
-export type StepperStepType =
+export type RegistrationStepType = { name: RegistrationStepNameType, label: RegistrationStepLabelType; component: any };
+
+export type RegistrationStepLabelType =
   'تکمیل مشخصات شخصی' |
   'تکمیل مشخصات دانش‌آموزی' |
   'تکمیل مشخصات دانشجویی' |
@@ -19,3 +23,12 @@ export type StepperStepType =
   'وضعیت ثبت‌نام' |
   'پرداخت هزینه' |
   'ورود به دوره'
+
+export type RegistrationStepNameType =
+  'personal-profile' |
+  'student-profile' |
+  'academic-profile' |
+  'form' |
+  'status' |
+  'payment' |
+  'program'

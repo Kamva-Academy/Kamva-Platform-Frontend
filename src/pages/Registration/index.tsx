@@ -1,5 +1,5 @@
 import { Stack } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -9,15 +9,12 @@ import {
   getOneRegistrationFormAction,
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
-import PersonalProfile from 'components/template/profiles/PersonalProfile';
-import StudentProfile from 'components/template/profiles/StudentProfile';
-import AcademicProfile from 'components/template/profiles/AcademicProfile';
 import Form from './Form';
 import Status from './Status';
 import Payment from './Payment';
-import { StepperStepType } from 'types/global';
+import { RegistrationStepNameType, RegistrationStepType } from 'types/global';
 import { ProgramType, RegistrationFormType } from 'types/models';
-import { getUserProfileAction } from 'redux/slices/account';
+import Profiles from 'components/template/profiles';
 
 type RegistrationProcessPropsType = {
   registrationForm?: RegistrationFormType;
@@ -25,7 +22,6 @@ type RegistrationProcessPropsType = {
   program?: ProgramType;
   getOneRegistrationForm: any;
   getOneEventInfo: any;
-  getUserProfile: any;
 }
 
 const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
@@ -34,16 +30,10 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
   program,
   getOneRegistrationForm,
   getOneEventInfo,
-  getUserProfile,
 }) => {
   const navigate = useNavigate();
   const { programId } = useParams();
-
-  useEffect(() => {
-    if (userInfo?.id) {
-      getUserProfile({ id: userInfo.id });
-    }
-  }, [userInfo?.id]);
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
 
   useEffect(() => {
     getOneEventInfo({ programId });
@@ -55,6 +45,15 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     }
   }, [program?.registration_form]);
 
+  useEffect(() => {
+    if (['Waiting', 'Rejected'].includes(program?.user_registration_status)) {
+      setActiveStepIndex(getStepIndex('status'));
+    }
+    if (program?.merchandise && program?.user_registration_status === 'Accepted') {
+      setActiveStepIndex(getStepIndex('payment'));
+    }
+  }, [program])
+
   if (!program || !registrationForm || !userInfo) return null;
 
   if (program.is_user_participating) {
@@ -62,41 +61,77 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     return null;
   }
 
-  let activeStep: StepperStepType = 'تکمیل مشخصات شخصی';
+  const getRegistrationSteps = (program: ProgramType, registrationForm) => {
+    const goToNextStep = () => setActiveStepIndex((activeStepIndex) => activeStepIndex + 1)
 
-  const getStepComponent = () => {
-    if (!hasUserCompletedPrimaryInformation(userInfo)) {
-      activeStep = 'تکمیل مشخصات شخصی';
-      return <PersonalProfile />
+    const steps: RegistrationStepType[] = [
+      {
+        name: 'personal-profile',
+        label: 'تکمیل مشخصات شخصی',
+        component: <Profiles type='personal' onSubmit={goToNextStep} />
+      }
+    ]
+
+    if (program.audience_type === 'Student') {
+      steps.push({
+        name: 'student-profile',
+        label: 'تکمیل مشخصات دانش‌آموزی',
+        component: <Profiles type='student' onSubmit={goToNextStep} />
+      })
     }
-    if (!hasUserCompletedStudentshipInformation(userInfo)) {
-      activeStep = 'تکمیل مشخصات دانش‌آموزی';
-      return <StudentProfile />
+
+    if (program.audience_type === 'Academic') {
+      steps.push({
+        name: 'academic-profile',
+        label: 'تکمیل مشخصات دانشجویی',
+        component: <Profiles type='academic' onSubmit={goToNextStep} />
+      })
     }
-    if (!hasUserCompletedAcademicInformation(userInfo)) {
-      activeStep = 'تکمیل مشخصات دانشجویی';
-      return <AcademicProfile />
+
+    steps.push({
+      name: 'form',
+      label: 'تکمیل فرم ثبت‌نام',
+      component: <Form />
+    })
+
+    if (registrationForm.accepting_status == 'Manual') {
+      steps.push({
+        name: 'status',
+        label: 'وضعیت ثبت‌نام',
+        component: <Status />
+      })
     }
-    if (['Waiting', 'Rejected'].includes(program.user_registration_status)) {
-      activeStep = 'وضعیت ثبت‌نام';
-      return <Status />
+
+    if (program.merchandise) {
+      steps.push({
+        name: 'payment',
+        label: 'پرداخت هزینه',
+        component: <Payment />
+      })
     }
-    if (program.merchandise && program.user_registration_status === 'Accepted') {
-      activeStep = 'پرداخت هزینه';
-      return <Payment />
-    }
-    activeStep = 'تکمیل فرم ثبت‌نام';
-    return <Form />
+
+    steps.push({
+      name: 'program',
+      label: 'ورود به دوره',
+      component: <></>,
+    })
+
+    return steps;
   }
 
-  const stepComponent = getStepComponent();
+
+  const getStepIndex = (stepName: RegistrationStepNameType) => {
+    return steps.indexOf(steps.find(step => step.name === stepName))
+  }
+
+  const steps = getRegistrationSteps(program, registrationForm);
 
   return (
     <Layout>
       <Stack width={'100%'} spacing={2}>
-        <Stepper program={program} registrationForm={registrationForm} activeStep={activeStep} />
+        <Stepper steps={steps} activeStep={steps[activeStepIndex].name} />
         <Stack>
-          {stepComponent}
+          {steps[activeStepIndex].component}
         </Stack>
       </Stack>
     </Layout >
@@ -112,23 +147,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getOneRegistrationForm: getOneRegistrationFormAction,
   getOneEventInfo: getOneEventInfoAction,
-  getUserProfile: getUserProfileAction,
 })(RegistrationProcess);
-
-const hasUserCompletedPrimaryInformation = (userInfo) => {
-  const { first_name, last_name, national_code, birth_date, gender, province, city } = userInfo;
-  return first_name && last_name && national_code && birth_date && gender && province && city;
-}
-
-const hasUserCompletedStudentshipInformation = (userInfo) => {
-  if (userInfo.school_studentship) { // todo: why should some user have not school_studentship?
-    const { grade, school } = userInfo.school_studentship;
-    return grade && school;
-  }
-  return true;
-}
-
-const hasUserCompletedAcademicInformation = (userInfo) => {
-  // todo: not implemented yet
-  return true;
-}

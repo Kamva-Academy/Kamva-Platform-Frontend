@@ -51,7 +51,7 @@ const App = ({
           <SnackbarProvider>
             <ToastContainer
               rtl
-              position="top-left"
+              position="top-right"
               autoClose={3000}
               transition={Slide}
               newestOnTop

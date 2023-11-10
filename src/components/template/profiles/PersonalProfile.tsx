@@ -24,19 +24,27 @@ import {
 } from 'redux/slices/account';
 import Iran from 'utils/iran';
 import { toEnglishNumber } from 'utils/translateNumber';
-import { PersonalProfileType } from 'types/profile';
+import { UserInfoType } from 'types/profile';
 import isNumber from 'utils/validators/isNumber';
+import { toast } from 'react-toastify';
 
 const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 
 type PersonalProfilePropsType = {
   updateUserInfo: any;
-  userInfo: PersonalProfileType;
+  userInfo: UserInfoType;
+  onSubmit?: any;
+}
+
+const hasUserCompletedPrimaryInformation = (userInfo) => {
+  const { first_name, last_name, national_code, birth_date, gender, province, city } = userInfo;
+  return first_name && last_name && national_code && birth_date && gender && province && city;
 }
 
 const PersonalProfile: FC<PersonalProfilePropsType> = ({
   updateUserInfo,
   userInfo: initialUserInfo,
+  onSubmit,
 }) => {
   const [userInfo, setUserInfo] = useState(null);
 
@@ -57,7 +65,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     }
   };
 
-  const handleProfileChange = (event) => {
+  const handleFieldsChange = (event) => {
     setUserInfo({
       ...userInfo,
       [event.target.name]: toEnglishNumber(event.target.value),
@@ -73,10 +81,16 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
         newProfile[key] = newVal;
       }
     }
+    if (!hasUserCompletedPrimaryInformation(userInfo)) {
+      toast.error('لطفاً همه‌ی اطلاعات خواسته‌شده را وارد کنید');
+      return;
+    }
     updateUserInfo({
       id: userInfo.id,
       ...newProfile,
-    })
+    });
+    onSubmit?.();
+
   };
 
   const selectedProvince = Iran.Provinces.find(province => province.title == userInfo.province);
@@ -136,7 +150,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             fullWidth
             value={userInfo.first_name || ''}
             name="first_name"
-            onChange={handleProfileChange}
+            onChange={handleFieldsChange}
             label='نام'
           />
         </Grid>
@@ -147,7 +161,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             fullWidth
             value={userInfo.last_name || ''}
             name="last_name"
-            onChange={handleProfileChange}
+            onChange={handleFieldsChange}
             label="نام خانوادگی"
           />
         </Grid>
@@ -160,7 +174,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             name="national_code"
             onChange={(e) => {
               if (isNumber(e.target.value)) {
-                handleProfileChange(e);
+                handleFieldsChange(e);
               }
             }}
             inputProps={{ className: 'ltr-input' }}
@@ -176,7 +190,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             value={userInfo.phone_number || ''}
             onChange={(e) => {
               if (isNumber(e.target.value)) {
-                handleProfileChange(e);
+                handleFieldsChange(e);
               }
             }}
             name="phone_number"
@@ -205,7 +219,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             fullWidth
             value={userInfo.email || ''}
             name="email"
-            onChange={handleProfileChange}
+            onChange={handleFieldsChange}
             inputProps={{ className: 'ltr-input' }}
             label="ایمیل (اختیاری)"
           />
@@ -218,7 +232,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
               name="gender"
               row
               value={userInfo.gender || ''}
-              onChange={handleProfileChange}>
+              onChange={handleFieldsChange}>
               <FormControlLabel
                 value="Male"
                 control={<Radio />}
@@ -240,7 +254,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             <InputLabel>استان</InputLabel>
             <Select
               value={userInfo.province || ''}
-              onChange={handleProfileChange}
+              onChange={handleFieldsChange}
               name="province"
               label="استان">
               {Iran.Provinces.map((province) => (
@@ -258,7 +272,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             <Select
               disabled={!userInfo.province && !userInfo.city}
               value={userInfo.city || ''}
-              onChange={handleProfileChange}
+              onChange={handleFieldsChange}
               name="city"
               label="شهر">
               {Iran.Cities.filter((city) =>
@@ -280,7 +294,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             name="address"
             multiline
             rows={2}
-            onChange={handleProfileChange}
+            onChange={handleFieldsChange}
             label="آدرس منزل (اختیاری)"
           />
         </Grid>
@@ -292,7 +306,7 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
             value={userInfo.postal_code || ''}
             onChange={(e) => {
               if (isNumber(e.target.value)) {
-                handleProfileChange(e);
+                handleFieldsChange(e);
               }
             }}
             inputProps={{ className: 'ltr-input' }}
