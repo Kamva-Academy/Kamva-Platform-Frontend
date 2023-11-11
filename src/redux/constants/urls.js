@@ -128,7 +128,6 @@ export const registerOneUserUrl = ({ registrationFormId }) => `fsm/registration_
 // event:
 export const teamCRUDUrl = ({ teamId }) => teamId ? `fsm/team/${teamId}/` : 'fsm/team/';
 export const addMentorToWorkshopUrl = ({ fsmId }) => `/fsm/fsm/${fsmId}/add_mentor/`;
-export const getMentoredFsmsUrl = ({ programId }) => `/fsm/event/${programId}/get_mentored_fsms/`;
 export const registrationFormCRUDUrl = ({ registrationFormId }) => registrationFormId ? `fsm/registration/${registrationFormId}/` : 'fsm/registration/';
 
 

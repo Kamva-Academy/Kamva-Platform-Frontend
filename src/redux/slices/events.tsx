@@ -24,13 +24,11 @@ import {
   submitDiscountCodeUrl,
   submitRegistrationFormUrl,
   TeamCRUDUrl,
-  uploadFileUrl,
   addMentorToWorkshopUrl,
   registerUsersViaCSVUrl,
   addUserToTeamUrl,
   allRegistrationReceiptsUrl,
   eventInfoUrl,
-  getMentoredFsmsUrl,
   getPlayerFromTeamUrl,
   getTeamsUrl,
   makeTeamHeadUrl,
@@ -38,7 +36,6 @@ import {
   registrationFormCRUDUrl,
   validateRegistrationReceiptUrl,
   workshopCRUDUrl,
-  getAllWorkshopMentors,
   createTeamAndJoinActionUrl,
 } from '../constants/urls';
 import {
@@ -350,12 +347,6 @@ export const addUserToTeamAction = createAsyncThunkApi(
       error: 'اشکالی در اضافه‌کردن کاربر به گروه وجود داشت.'
     },
   }
-);
-
-export const getMentoredFsmsAction = createAsyncThunkApi(
-  'events/getMentoredFsms',
-  Apis.GET,
-  getMentoredFsmsUrl
 );
 
 export const editOneEventInfoAction = createAsyncThunkApi(
@@ -697,11 +688,6 @@ const eventSlice = createSlice({
       state.isFetching = false;
     },
     [getAllRegistrationReceiptsAction.rejected.toString()]: isNotFetching,
-
-    [getMentoredFsmsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.myWorkshops = response;
-    },
-
 
     [getEventTeamsAction.pending.toString()]: isFetching,
     [getEventTeamsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
