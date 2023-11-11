@@ -37,41 +37,6 @@
 
   <meta name="msapplication-TileImage" content="%PUBLIC_URL%/favicon/ms-icon-144x144.png" />
 
-  <script type="text/javascript">
-    !(function () {
-      var i = 'PhLmCZ',
-        a = window,
-        d = document;
-
-      function g() {
-        var g = d.createElement('script'),
-          s = 'https://www.goftino.com/widget/' + i,
-          l = localStorage.getItem('goftino_' + i);
-        (g.async = !0),
-          (
-            g.src = l ?
-              s + '?o=' + l :
-              s);
-        d
-          .getElementsByTagName('head')[0]
-          .appendChild(g);
-      }
-      'complete' === d.readyState ?
-        g() :
-        a.attachEvent ?
-          a.attachEvent('onload', g) :
-          a.addEventListener('load', g, !1);
-    })();
-  </script>
-
-  <script type="text/javascript">
-    (function (c, l, a, r, i, t, y) {
-      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
-    })(window, document, "clarity", "script", "jl8kwzhit8");
-  </script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-svg.min.js"
     integrity="sha512-9irB0qyXMAf4xUF5UEVOhb4NMCWo7xeKakVbl0lfJ09HyhrplRCqTFMtaW6lP7G0IbHfIcmSo3dFZrWcrsGnOA=="
     crossorigin="anonymous"></script>
