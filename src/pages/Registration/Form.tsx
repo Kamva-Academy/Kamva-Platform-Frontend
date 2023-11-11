@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Stack } from '@mui/material';
+import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 import React, { FC, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -81,11 +81,20 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
     setAnswers(newAnswers);
   };
 
-  const isSubmitFormActive = () => {
-    return program.user_registration_status == 'DeadlineMissed' ||
-      program.user_registration_status == 'NotPermitted' ||
-      program.user_registration_status == 'GradeNotAvailable' ||
-      program.user_registration_status == 'StudentshipDataIncomplete';
+  const isSubmitFormActive = (): { isActive: boolean; message: string; } => {
+    return {
+      isActive:
+        program.user_registration_status == 'DeadlineMissed' ||
+        program.user_registration_status == 'NotPermitted' ||
+        program.user_registration_status == 'GradeNotAvailable' ||
+        program.user_registration_status == 'StudentshipDataIncomplete',
+      message:
+        program.user_registration_status == 'DeadlineMissed' ? 'مهلت ثبت‌نام تمام شده است' :
+          program.user_registration_status == 'NotPermitted' ? 'با توجه به پایه تحصیلیتان، شما مجاز به شرکت در این رویداد نیستید' :
+            program.user_registration_status == 'GradeNotAvailable' ? 'ابتدا پایه‌ی تحصیلی خود را انتخاب کنید' :
+              program.user_registration_status == 'StudentshipDataIncomplete' ? 'مشخصات دانش‌آموزی‌تان کامل نیست' :
+                'خبری نیست، سلامتی!'
+    }
   }
 
   return (
@@ -102,8 +111,11 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
             />
           </Box>
         ))}
+        <Typography color={'red'} textAlign={'center'} fontSize={24} fontWeight={400}>
+          {isSubmitFormActive().message}
+        </Typography>
         <Button
-          disabled={isSubmitFormActive()}
+          disabled={isSubmitFormActive().isActive}
           variant="contained"
           color="primary"
           onClick={() => setDialogStatus(true)}>
