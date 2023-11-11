@@ -111,9 +111,11 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
             />
           </Box>
         ))}
-        <Typography color={'red'} textAlign={'center'} fontSize={24} fontWeight={400}>
-          {isSubmitFormActive().message}
-        </Typography>
+        {!isSubmitFormActive().isActive &&
+          <Typography color={'red'} textAlign={'center'} fontSize={24} fontWeight={400}>
+            {isSubmitFormActive().message}
+          </Typography>
+        }
         <Button
           disabled={isSubmitFormActive().isActive}
           variant="contained"
