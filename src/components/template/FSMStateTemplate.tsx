@@ -1,5 +1,5 @@
 import { Box, Divider, Grid, Paper, Typography, Stack } from '@mui/material';
-import React, { FC, useMemo } from 'react';
+import React, { FC, Fragment, useMemo } from 'react';
 import Widget from 'components/organisms/Widget';
 import BackButton from 'components/atoms/BackButton';
 import NextButton from 'components/atoms/NextButton';
@@ -44,12 +44,13 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
     )), [notQuestions]);
 
   return (
-    <>
-      <Grid container spacing={2} sx={{ paddingTop: 4 }} justifyContent="center">
+    <Fragment>
+      <Grid container spacing={2} justifyContent="center" alignItems='flex-start'>
         <Grid
           item xs={12}
           md={notQuestions.length > 0 ? 4 : 6}
-          lg={notQuestions.length > 0 ? 4 : 8}>
+          lg={notQuestions.length > 0 ? 4 : 8}
+          position={'sticky'} top={0}>
           <Stack spacing={2}>
             <Stack spacing={2} component={Paper} sx={{ padding: 2 }}>
               <Typography width={'fit-content'} alignSelf={'center'} textAlign={'center'} alignContent={'center'} position={'relative'} align="center" component="h2" variant="h3">
@@ -106,7 +107,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
           </Grid>
         )}
       </Grid >
-    </>
+    </Fragment>
   );
 }
 
