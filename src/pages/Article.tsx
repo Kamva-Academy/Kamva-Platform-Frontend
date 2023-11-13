@@ -3,10 +3,11 @@ import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
-import { WidgetModes } from '../components/organisms/Widget';
-import Widget from '../components/organisms/Widget';
-import { getArticleAction } from '../redux/slices/article';
+import { WidgetModes } from 'components/organisms/Widget';
+import Widget from 'components/organisms/Widget';
+import { getArticleAction } from 'redux/slices/article';
 import Layout from 'components/template/GeneralLayout';
+import isInIframe from 'utils/IsInIframe';
 
 type ArticlePropsType = {
   papers: any[];
@@ -23,7 +24,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
   }, []);
 
   return (
-    <Layout appbarMode='ARTICLE'>
+    <Layout appbarMode={isInIframe() ? null : 'ARTICLE'}>
       <Stack spacing={2} maxWidth='sm' sx={{ width: '100%', paddingBottom: 2 }}>
         <Typography
           align="center"

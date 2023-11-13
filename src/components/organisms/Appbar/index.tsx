@@ -21,8 +21,8 @@ type AppbarPropsType = {
   workshop: any;
   event: any;
   mode: string;
-  showBackOnScroll: boolean;
-  hideOnScroll: boolean;
+  showBackOnScroll?: boolean;
+  hideOnScroll?: boolean;
   position: "fixed" | "absolute" | "sticky" | "static" | "relative";
   mentorId: string;
 }

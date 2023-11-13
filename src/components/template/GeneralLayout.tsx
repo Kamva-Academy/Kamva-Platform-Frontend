@@ -13,7 +13,8 @@ const Layout = ({
   return (
     <Fragment>
       {programId ? <AppBar mode='PROGRAM' position="relative" />
-        : <AppBar mode={appbarMode} position="relative" />
+        : appbarMode ? <AppBar mode={appbarMode} position="relative" />
+          : null
       }
       <Container maxWidth='lg'
         sx={{
