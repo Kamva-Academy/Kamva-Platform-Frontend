@@ -105,7 +105,7 @@ function Meeting({ handleClose, displayName }) {
 }
 
 const mapStatesToProps = (state) => ({
-  displayName: state.account.userInfo.isMentor
+  displayName: state.account.userInfo?.isMentor
     ? `${state.account.userInfo?.first_name} ${state.account.userInfo?.last_name} (همیار)`
     : state.account.userInfo?.first_name + ' ' + state.account.userInfo?.last_name,
 });
