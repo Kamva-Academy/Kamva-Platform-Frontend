@@ -24,7 +24,7 @@ const Events = ({
 
   useEffect(() => {
     getAllEventsInfo();
-    getBanners({ parameters: [['banner_type', 'ProgramsPage']] });
+    getBanners({ parameters: { banner_type: 'ProgramsPage' } });
   }, []);
 
   const activeEvents: ProgramType[] = events.filter((event: ProgramType) => event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)

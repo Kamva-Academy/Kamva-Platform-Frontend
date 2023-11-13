@@ -17,9 +17,9 @@ export const createAsyncThunkApi: CreateAsyncThunkApiType = (typePrefix, api, ur
       let stringUrl = typeof url === 'function' ? url(arg) : url;
 
       if (arg?.parameters) {
-        for (const parameter of arg?.parameters) {
-          stringUrl += `?${parameter[0]}=${parameter[1]}`
-        }
+        Object.entries(arg?.parameters).map(entry => {
+          stringUrl += `?${entry[0]}=${entry[1]}`
+        })
       }
 
       const response = await api(stringUrl, body);
