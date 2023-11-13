@@ -1,11 +1,7 @@
-import { Toolbar } from '@mui/material';
-import Container from '@mui/material/Container';
-import { KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
 import { initParseServer } from 'parse/init';
-import ResponsiveAppBar from 'components/organisms/Appbar';
 import FSMStateTemplate from 'components/template/FSMStateTemplate';
 import { createTeamState, getChangeTeamStateSubscription, getTeamState } from '../parse/team';
 import {
@@ -22,10 +18,11 @@ import {
 import { addMentorToRoom, updateMentorTime } from 'parse/mentorsInRoom';
 import DraggableChatRoom from 'components/organisms/DraggableMeeting';
 import { getOneEventInfoAction } from 'redux/slices/events';
+import Layout from 'components/template/GeneralLayout';
 
 var moment = require('moment');
 
-export const StatePageContext = React.createContext();
+export const StatePageContext = React.createContext<any>({});
 
 const FSM = ({
   fsmState,
@@ -163,27 +160,16 @@ const FSM = ({
   if (!fsmState || !workshop) return null;
 
   return (
-    <StatePageContext.Provider
-      value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
-      <Container component="main"
-        sx={{
-          background: '#F7F9FC',
-          minHeight: '100vh',
-          paddingBottom: 4,
-        }}>
-        <ResponsiveAppBar mode={isMentor ? "MENTOR_FSM" : "FSM"} />
-        <Toolbar id="back-to-top-anchor" />
-        <FSMStateTemplate state={fsmState} playerId={playerId} />
-        {/* <ScrollTop>
-          <Fab color="secondary" size="small" aria-label="scroll back to top">
-            <KeyboardArrowUpIcon />
-          </Fab>
-        </ScrollTop> */}
-      </Container>
+    <Fragment>
+      <StatePageContext.Provider value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
+        <Layout appbarMode={isMentor ? "MENTOR_FSM" : "FSM"}>
+          <FSMStateTemplate state={fsmState} playerId={parseInt(playerId)} />
+        </Layout>
+      </StatePageContext.Provider>
       {(workshop.fsm_p_type == 'Team' || workshop.fsm_learning_type == 'Supervised') &&
         <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
       }
-    </StatePageContext.Provider>
+    </Fragment>
   );
 };
 
