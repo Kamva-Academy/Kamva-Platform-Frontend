@@ -81,9 +81,9 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
     setAnswers(newAnswers);
   };
 
-  const isSubmitFormActive = (): { isActive: boolean; message: string; } => {
+  const isSubmitButtonDisabled = (): { isDisabled: boolean; message: string; } => {
     return {
-      isActive:
+      isDisabled:
         program.user_registration_status == 'DeadlineMissed' ||
         program.user_registration_status == 'NotPermitted' ||
         program.user_registration_status == 'GradeNotAvailable' ||
@@ -111,13 +111,13 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
             />
           </Box>
         ))}
-        {!isSubmitFormActive().isActive &&
+        {isSubmitButtonDisabled().isDisabled &&
           <Typography color={'red'} textAlign={'center'} fontSize={24} fontWeight={400}>
-            {isSubmitFormActive().message}
+            {isSubmitButtonDisabled().message}
           </Typography>
         }
         <Button
-          disabled={isSubmitFormActive().isActive}
+          disabled={isSubmitButtonDisabled().isDisabled}
           variant="contained"
           color="primary"
           onClick={() => setDialogStatus(true)}>
