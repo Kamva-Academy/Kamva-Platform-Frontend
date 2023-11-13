@@ -1,28 +1,17 @@
-import { Box, Container } from '@mui/material';
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import { Container } from '@mui/material';
 
 import AppBar from 'components/organisms/Appbar';
 
 const Layout = ({
   appbarMode = 'STUDENT_DASHBOARD',
-  getUserProfile,
-  userInfo,
   ...props
 }) => {
   const { programId } = useParams();
 
   return (
-    <>
-      <Box
-        sx={{
-          width: '100%',
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          backgroundColor: '#EBECED',
-        }} />
+    <Fragment>
       {programId ? <AppBar mode='PROGRAM' position="relative" />
         : <AppBar mode={appbarMode} position="relative" />
       }
@@ -37,12 +26,9 @@ const Layout = ({
         }}>
         {props.children}
       </Container>
-    </>
+    </Fragment>
   );
 };
 
-const mapStateToProps = (state) => ({
-  userInfo: state.account.userInfo,
-});
 
-export default connect(mapStateToProps)(Layout);
+export default Layout;

@@ -9,7 +9,7 @@ import {
   getOneEventInfoAction,
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
-import Sidebar from '../../components/organisms/ProgramPageSidebar';
+import ProgramPageSidebar from 'components/organisms/ProgramPageSidebar';
 import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
 
 function Program({
@@ -48,7 +48,7 @@ function Program({
     <Layout>
       <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
         <Box width={{ xs: '100%', sm: 180, md: 300 }} position={{ xs: null, sm: 'sticky' }} sx={{ top: 16 }}>
-          <Sidebar />
+          <ProgramPageSidebar />
         </Box>
         <Stack width={'100%'} spacing={2}>
           <Typography component="h1" fontWeight={700} fontSize={32} gutterBottom>

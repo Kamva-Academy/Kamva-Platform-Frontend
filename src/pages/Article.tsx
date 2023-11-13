@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { WidgetModes } from '../components/organisms/Widget';
 import Widget from '../components/organisms/Widget';
 import { getArticleAction } from '../redux/slices/article';
-import ArticleLayout from 'components/template/ArticleLayout';
+import Layout from 'components/template/GeneralLayout';
 
 type ArticlePropsType = {
   papers: any[];
@@ -23,7 +23,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
   }, []);
 
   return (
-    <ArticleLayout appbarMode='ARTICLE'>
+    <Layout appbarMode='ARTICLE'>
       <Stack spacing={2} maxWidth='sm' sx={{ width: '100%', paddingBottom: 2 }}>
         <Typography
           align="center"
@@ -38,7 +38,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
           </Box>
         ))}
       </Stack>
-    </ArticleLayout>
+    </Layout>
   );
 };
 
