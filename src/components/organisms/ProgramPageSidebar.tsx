@@ -15,41 +15,46 @@ const ProgramPageSidebar = ({
 }) => {
   const navigate = useNavigate();
 
+  if (!program) return null;
+
   const doGetCertificate = () => {
-    getCertificate({ registrationReceiptId: program?.registration_receipt }).then((action) => {
+    getCertificate({ registrationReceiptId: program.registration_receipt }).then((action) => {
       if (action.meta.requestStatus === 'fulfilled') {
-        downloadFile(action.payload.response.certificate, `گواهی حضور ${program?.name}`, 'image/jpeg');
+        downloadFile(action.payload.response.certificate, `گواهی حضور ${program.name}`, 'image/jpeg');
       }
     });
   };
 
   return (
     <Stack spacing={2} alignItems="center" justifyContent={'space-between'}>
-      <Button
-        size='large'
-        disabled={program?.event_type == 'Individual'}
-        variant="contained"
-        color='info'
-        fullWidth
-        onClick={() => navigate(`/program/${program?.id}/team-selection/`)}>
-        {'گروه‌بندی'}
-      </Button>
-      <Button
-        size='large'
-        disabled={!program?.has_certificate || !program?.certificates_ready}
-        onClick={doGetCertificate}
-        color='info'
-        variant="contained"
-        fullWidth>
-        {'گواهی حضور'}
-      </Button>
+      {program.event_type === 'Team' &&
+        <Button
+          size='large'
+          variant="contained"
+          color='info'
+          fullWidth
+          onClick={() => navigate(`/program/${program.id}/team-selection/`)}>
+          {'گروه‌بندی'}
+        </Button>
+      }
+      {program.has_certificate &&
+        <Button
+          size='large'
+          disabled={!program.certificates_ready}
+          onClick={doGetCertificate}
+          color='info'
+          variant="contained"
+          fullWidth>
+          {'گواهی حضور'}
+        </Button>
+      }
       <ProgramPageHelpButton />
       {program.is_manager &&
         <Button
           variant="contained"
           color='info'
           fullWidth
-          onClick={() => navigate(`/program/${program?.id}/manage/info`)}>
+          onClick={() => navigate(`/program/${program.id}/manage/info`)}>
           {'مدیریت دوره'}
         </Button>
       }
@@ -68,7 +73,6 @@ const ProgramPageSidebar = ({
 
 const mapStateToProps = (state) => ({
   event: state.events.event,
-  registrationForm: state.events.registrationForm,
 });
 
 export default connect(mapStateToProps, {
