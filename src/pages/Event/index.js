@@ -1,18 +1,18 @@
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import WorkshopGridItems from 'components/organisms/WorkshopGridItems';
+import FSMsGrid from 'components/organisms/FSMsGrid';
 import {
   getEventWorkshopsAction,
   getOneEventInfoAction,
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
-import Sidebar from './Sidebar';
+import Sidebar from '../../components/organisms/ProgramPageSidebar';
 import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
 
-function Workshops({
+function Program({
   workshops,
   workshopsCount,
   event,
@@ -46,37 +46,31 @@ function Workshops({
 
   return (
     <Layout>
-      <Grid container justifyContent='space-evenly' alignItems='flex-start' spacing={2}>
-        <Grid container item xs={12} sm={3} direction='column' spacing={3}>
+      <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
+        <Box width={{ xs: '100%', sm: 180, md: 300 }} position={{ xs: null, sm: 'sticky' }} sx={{ top: 16 }}>
           <Sidebar />
-        </Grid>
-        <Grid container item xs={12} sm={9} direction='column' spacing={3}>
-          <Grid item>
-            <Typography variant="h1" align='center'>
-              {'کارگاه‌ها'}
-            </Typography>
-          </Grid>
-          <Grid container item spacing={3} justifyContent='flex-start'>
-            <WorkshopGridItems
+        </Box>
+        <Stack width={'100%'} spacing={2}>
+          <Typography component="h1" fontWeight={700} fontSize={32} gutterBottom>
+            {'کارگاه‌ها'}
+          </Typography>
+          <Stack>
+            <FSMsGrid
               programId={programId}
               workshops={workshops}
               isLoading={isLoading}
             />
-          </Grid>
-          <Grid item>
-            <Grid item>
-              <Pagination
-                variant="outlined"
-                color="primary"
-                shape='rounded'
-                count={Math.ceil(workshopsCount / ITEMS_PER_PAGE_NUMBER)}
-                page={pageNumber}
-                onChange={(e, value) => setPageNumber(value)}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+          </Stack>
+          <Pagination
+            variant="outlined"
+            color="primary"
+            shape='rounded'
+            count={Math.ceil(workshopsCount / ITEMS_PER_PAGE_NUMBER)}
+            page={pageNumber}
+            onChange={(e, value) => setPageNumber(value)}
+          />
+        </Stack>
+      </Stack>
     </Layout>
   );
 }
@@ -91,4 +85,4 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(mapStateToProps, {
   getEventWorkshops: getEventWorkshopsAction,
   getOneEventInfo: getOneEventInfoAction,
-})(Workshops);
+})(Program);

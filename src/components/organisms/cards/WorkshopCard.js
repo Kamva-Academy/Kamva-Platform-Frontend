@@ -127,44 +127,19 @@ export const WorkshopCard = ({
         </CardContent>
       </Box>
       <CardActions>
-        {!isLoading && workshop?.is_active &&
-          (workshop?.player !== 'NotStarted' ? (
-            <Button
-              size="large"
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={
-                workshop.has_lock
-                  ? () => setOpenPassword(true)
-                  : () => enterWorkshop({ fsmId: workshop.id,  programId })
-              }>
-              بزن بریم!
-            </Button>
-          ) : (
-            <Button
-              size="large"
-              fullWidth
-              variant="contained"
-              color="primary"
-              onClick={
-                workshop.has_lock
-                  ? () => setOpenPassword(true)
-                  : () => enterWorkshop({ fsmId: workshop.id,  programId })
-              }>
-              بزن بریم!
-            </Button>
-          ))}
-        {!isLoading && !workshop?.is_active &&
-          <Button
-            size="large"
-            fullWidth
-            disabled
-            variant="contained"
-            color="primary">
-            {'غیرفعال'}
-          </Button>
-        }
+        <Button
+          disabled={isLoading || !workshop?.is_active}
+          size="large"
+          fullWidth
+          variant="outlined"
+          color="primary"
+          onClick={
+            workshop?.has_lock
+              ? () => setOpenPassword(true)
+              : () => enterWorkshop({ fsmId: workshop.id, programId })
+          }>
+          {'بزن بریم!'}
+        </Button>
       </CardActions>
       <PasswordDialog
         open={openPassword}
