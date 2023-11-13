@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
@@ -57,7 +57,7 @@ function Program({
           <Stack>
             <FSMsGrid
               programId={programId}
-              workshops={workshops}
+              fsms={workshops}
               isLoading={isLoading}
             />
           </Stack>

@@ -3,7 +3,7 @@ import React from 'react';
 
 import WorkshopCard from 'components/organisms/cards/WorkshopCard';
 
-function FSMsGrid({ programId, workshops, isLoading }) {
+function FSMsGrid({ programId, fsms, isLoading }) {
 
   if (isLoading) {
     return (
@@ -17,8 +17,8 @@ function FSMsGrid({ programId, workshops, isLoading }) {
     );
   }
 
-  if (workshops.length > 0) {
-    let tmpArr = [...workshops].sort((workshop1, workshop2) => workshop2.id - workshop1.id)
+  if (fsms.length > 0) {
+    let tmpArr = [...fsms].sort((fsm1, fsm2) => fsm2.order_in_program - fsm1.order_in_program)
     return (
       <Grid container spacing={2}>
         {tmpArr.map((workshop) => (
