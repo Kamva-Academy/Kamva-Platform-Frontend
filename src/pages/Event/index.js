@@ -47,7 +47,7 @@ function Program({
   return (
     <Layout>
       <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
-        <Box width={{ xs: '100%', sm: 180, md: 300 }} position={{ xs: null, sm: 'sticky' }} sx={{ top: 16 }}>
+        <Box width={{ xs: '100%', sm: 180, md: 300 }} position={{ xs: null, sm: 'sticky' }} top={16}>
           <ProgramPageSidebar />
         </Box>
         <Stack width={'100%'} spacing={2}>

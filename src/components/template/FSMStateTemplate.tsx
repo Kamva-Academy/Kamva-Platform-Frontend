@@ -50,7 +50,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
           item xs={12}
           md={notQuestions.length > 0 ? 4 : 6}
           lg={notQuestions.length > 0 ? 4 : 8}
-          position={'sticky'} top={0}>
+          position={{ xs: null, md: 'sticky' }} top={0}>
           <Stack spacing={2}>
             <Stack spacing={2} component={Paper} sx={{ padding: 2 }}>
               <Typography width={'fit-content'} alignSelf={'center'} textAlign={'center'} alignContent={'center'} position={'relative'} align="center" component="h2" variant="h3">
