@@ -127,19 +127,21 @@ export const WorkshopCard = ({
         </CardContent>
       </Box>
       <CardActions>
-        <Button
-          disabled={isLoading || !workshop?.is_active}
-          size="large"
-          fullWidth
-          variant="outlined"
-          color="primary"
-          onClick={
-            workshop?.has_lock
-              ? () => setOpenPassword(true)
-              : () => enterWorkshop({ fsmId: workshop.id, programId })
-          }>
-          {'بزن بریم!'}
-        </Button>
+        {!isLoading &&
+          <Button
+            disabled={isLoading || !workshop?.is_active}
+            size="large"
+            fullWidth
+            variant="outlined"
+            color="primary"
+            onClick={
+              workshop?.has_lock
+                ? () => setOpenPassword(true)
+                : () => enterWorkshop({ fsmId: workshop.id, programId })
+            }>
+            {'بزن بریم!'}
+          </Button>
+        }
       </CardActions>
       <PasswordDialog
         open={openPassword}
