@@ -17,7 +17,7 @@ const ProgramHelperButton: FC<ProgramHelperButtonPropsType> = ({ }) => {
         onClick={() => setOpenDialog(true)}>
         {'راهنمای سایت'}
       </Button>
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)} disableScrollLock>
         <Box position={'relative'} width={{ xs: 300, sm: 400, md: 600 }} height={600} sx={{ overflowX: 'hidden' }}>
           <iframe style={{ position: 'absolute', left: -8, top: 0, width: '100%', height: '100%', border: 0 }} src='/article/1436' />
         </Box>
