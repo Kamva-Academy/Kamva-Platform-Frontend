@@ -50,7 +50,7 @@ type StudentProfilePropsType = {
   userInfo: any;
   institutes: any[];
   newlyAddedInstitute?: any;
-  onSubmit?: any;
+  onSuccess?: any;
 }
 
 const hasUserCompletedStudentshipInformation = (schoolStudentship) => {
@@ -64,7 +64,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
   userInfo,
   institutes,
   newlyAddedInstitute,
-  onSubmit,
+  onSuccess,
 }) => {
   const [schoolStudentship, setSchoolStudentship] = useState<{ id: string; school: string; grade: number; }>(null);
   const [addInstituteDialog, setAddInstituteDialogStatus] = useState(false);
@@ -108,8 +108,7 @@ const StudentProfile: FC<StudentProfilePropsType> = ({
       toast.error('لطفاً همه‌ی اطلاعات خواسته‌شده را وارد کنید');
       return;
     }
-    updateStudentShip(schoolStudentship);
-    onSubmit?.();
+    updateStudentShip({ ...schoolStudentship, onSuccess });
   };
 
   const AddSchoolInstituteIcon = () => {

@@ -11,14 +11,14 @@ type ProfilePropsType = {
   userInfo: UserInfoType;
   type: 'personal' | 'student' | 'academic';
   getUserProfile: any;
-  onSubmit?: any;
+  onSuccess?: any;
 }
 
 const Profile: FC<ProfilePropsType> = ({
   userInfo,
   type,
   getUserProfile,
-  onSubmit,
+  onSuccess,
 }) => {
 
   useEffect(() => {
@@ -27,9 +27,9 @@ const Profile: FC<ProfilePropsType> = ({
     }
   }, [userInfo?.id]);
 
-  if (type === 'personal') return <PersonalProfile onSubmit={onSubmit} />
-  if (type === 'student') return <StudentProfile onSubmit={onSubmit} />
-  if (type === 'academic') return <AcademicProfile onSubmit={onSubmit} />
+  if (type === 'personal') return <PersonalProfile onSuccess={onSuccess} />
+  if (type === 'student') return <StudentProfile onSuccess={onSuccess} />
+  if (type === 'academic') return <AcademicProfile onSuccess={onSuccess} />
 };
 
 const mapStateToProps = (state) => ({

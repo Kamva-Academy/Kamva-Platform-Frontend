@@ -68,7 +68,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       {
         name: 'personal-profile',
         label: 'تکمیل مشخصات شخصی',
-        component: <Profiles type='personal' onSubmit={goToNextStep} />
+        component: <Profiles type='personal' onSuccess={goToNextStep} />
       }
     ]
 
@@ -76,7 +76,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       steps.push({
         name: 'student-profile',
         label: 'تکمیل مشخصات دانش‌آموزی',
-        component: <Profiles type='student' onSubmit={goToNextStep} />
+        component: <Profiles type='student' onSuccess={goToNextStep} />
       })
     }
 
@@ -84,7 +84,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       steps.push({
         name: 'academic-profile',
         label: 'تکمیل مشخصات دانشجویی',
-        component: <Profiles type='academic' onSubmit={goToNextStep} />
+        component: <Profiles type='academic' onSuccess={goToNextStep} />
       })
     }
 

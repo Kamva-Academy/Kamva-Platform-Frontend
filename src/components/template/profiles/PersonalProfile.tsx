@@ -33,7 +33,7 @@ const PROFILE_PICTURE = process.env.PUBLIC_URL + '/images/profile.png';
 type PersonalProfilePropsType = {
   updateUserInfo: any;
   userInfo: UserInfoType;
-  onSubmit?: any;
+  onSuccess?: any;
 }
 
 const hasUserCompletedPrimaryInformation = (userInfo) => {
@@ -44,7 +44,7 @@ const hasUserCompletedPrimaryInformation = (userInfo) => {
 const PersonalProfile: FC<PersonalProfilePropsType> = ({
   updateUserInfo,
   userInfo: initialUserInfo,
-  onSubmit,
+  onSuccess,
 }) => {
   const [userInfo, setUserInfo] = useState(null);
 
@@ -88,9 +88,8 @@ const PersonalProfile: FC<PersonalProfilePropsType> = ({
     updateUserInfo({
       id: userInfo.id,
       ...newProfile,
+      onSuccess,
     });
-    onSubmit?.();
-
   };
 
   const selectedProvince = Iran.Provinces.find(province => province.title == userInfo.province);

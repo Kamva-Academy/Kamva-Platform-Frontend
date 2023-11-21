@@ -10,7 +10,7 @@ const hasUserCompletedAcademicInformation = (userInfo) => {
   }
 }
 
-function AcademicProfile({ onSubmit }) {
+function AcademicProfile({ onSuccess }) {
   return (
     <></>
   );
