@@ -24,6 +24,10 @@ export const createAsyncThunkApi: CreateAsyncThunkApiType = (typePrefix, api, ur
 
       const response = await api(stringUrl, body);
 
+      // component self onSuccess action
+      arg?.onSuccess?.();
+
+      // function self onSuccess action
       if (options?.onSuccessAction) {
         dispatch(options?.onSuccessAction({ response, arg, options }));
       }
@@ -35,6 +39,9 @@ export const createAsyncThunkApi: CreateAsyncThunkApiType = (typePrefix, api, ur
           : {})
       };
     } catch (error) {
+      // component self onFailure action
+      arg?.onFailure?.();
+      
       if ((getState() as any).Intl.locale == 'fa') {
         return errorHandler(
           getState(),
