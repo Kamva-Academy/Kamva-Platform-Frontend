@@ -1,4 +1,4 @@
-import { Step, StepLabel, Stepper } from '@mui/material';
+import { Step, StepButton, StepLabel, Stepper } from '@mui/material';
 import React, { FC } from 'react';
 import { RegistrationStepNameType, RegistrationStepType } from 'types/global';
 import useWidth from 'utils/UseWidth';
@@ -22,7 +22,7 @@ const MyStepper: FC<MyStepperPropsType> = ({
       {
         [...steps].map((step) => (
           <Step key={step.name}>
-            <StepLabel>{step.label}</StepLabel>
+            <StepButton onClick={step.onClick}>{step.label}</StepButton>
           </Step>
         ))
       }

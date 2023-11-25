@@ -13,7 +13,12 @@ export type WidgetTypes =
   'MultiChoiceProblem' |
   'UploadFileProblem';
 
-export type RegistrationStepType = { name: RegistrationStepNameType, label: RegistrationStepLabelType; component: any };
+export type RegistrationStepType = {
+  name: RegistrationStepNameType;
+  label: RegistrationStepLabelType;
+  component: any;
+  onClick?: any;
+};
 
 export type RegistrationStepLabelType =
   'تکمیل مشخصات شخصی' |
