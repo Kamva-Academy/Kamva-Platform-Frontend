@@ -63,11 +63,6 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     return null;
   }
 
-  const goToNextStep = (steps: RegistrationStepType[]) => {
-    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
-    setCurrentStepName(nextStepName);
-    setLastActiveStepName(nextStepName)
-  }
   const goToStep = (stepName: RegistrationStepNameType) => {
     setCurrentStepName(stepName);
     const indexOfCurrentStep = steps.indexOf(steps.find(step => step.name === currentStepName));
@@ -77,13 +72,18 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     }
   }
 
+  const goToNextStep = (currentStepName: RegistrationStepNameType, steps: RegistrationStepType[]) => {
+    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
+    goToStep(nextStepName);
+  }
+
   const getRegistrationSteps = (program: ProgramType, registrationForm) => {
     const steps: RegistrationStepType[] = [];
 
     steps.push({
       name: 'personal-profile',
       label: 'تکمیل مشخصات شخصی',
-      component: <Profiles type='personal' onSuccess={() => goToNextStep(steps)} />,
+      component: <Profiles type='personal' onSuccess={() => goToNextStep(currentStepName, steps)} />,
       onClick: () => goToStep('personal-profile'),
     })
 
@@ -91,7 +91,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       steps.push({
         name: 'student-profile',
         label: 'تکمیل مشخصات دانش‌آموزی',
-        component: <Profiles type='student' onSuccess={() => goToNextStep(steps)} />,
+        component: <Profiles type='student' onSuccess={() => goToNextStep(currentStepName, steps)} />,
         onClick: () => goToStep('student-profile')
       })
     }
@@ -100,7 +100,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       steps.push({
         name: 'academic-profile',
         label: 'تکمیل مشخصات دانشجویی',
-        component: <Profiles type='academic' onSuccess={() => goToNextStep(steps)} />,
+        component: <Profiles type='academic' onSuccess={() => goToNextStep(currentStepName, steps)} />,
         onClick: () => goToStep('academic-profile')
       })
     }
