@@ -1,11 +1,14 @@
+import { UserInfoType } from 'types/profile';
 import { updateToken } from '../../configs/axios';
 import createStore from './createStore';
 
-const persistedState = localStorage.getItem('rastaState')
-  ? JSON.parse(localStorage.getItem('rastaState'))
-  : {};
+export const getPersistedState = (): { userInfo: UserInfoType; token: string; refresh: string; } => {
+  return localStorage.getItem('rastaState')
+    ? JSON.parse(localStorage.getItem('rastaState'))
+    : {};
+}
 
-const reduxStore = createStore(persistedState);
+const reduxStore = createStore(getPersistedState());
 
 reduxStore.subscribe(() => {
   const state = reduxStore.getState();
