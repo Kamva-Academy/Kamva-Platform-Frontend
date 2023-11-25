@@ -47,10 +47,10 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   const width = useWidth();
 
   useEffect(() => {
-    if (!event) {
+    if (!event && programId) {
       getOneEventInfo({ programId });
     }
-  }, [event]);
+  }, [event, programId]);
 
   const {
     desktopLeftItems,
