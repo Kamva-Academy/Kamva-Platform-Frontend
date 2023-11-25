@@ -9,12 +9,14 @@ import {
   Toolbar,
   useScrollTrigger,
 } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
+import { EventAvailable, Menu as MenuIcon } from '@mui/icons-material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import HideOnScroll from './components/HideOnScroll';
 import modes from './modes';
 import useWidth from 'utils/UseWidth';
+import { useParams } from 'react-router-dom';
+import { getOneEventInfoAction } from 'redux/slices/events';
 
 type AppbarPropsType = {
   isMentor: boolean;
@@ -25,6 +27,7 @@ type AppbarPropsType = {
   hideOnScroll?: boolean;
   position: "fixed" | "absolute" | "sticky" | "static" | "relative";
   mentorId: string;
+  getOneEventInfo: any;
 }
 
 const ResponsiveAppBar: FC<AppbarPropsType> = ({
@@ -36,10 +39,18 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   hideOnScroll = false,
   position = 'fixed',
   mentorId,
+  getOneEventInfo,
 }) => {
+  const { programId } = useParams();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 30 });
   const width = useWidth();
+
+  useEffect(() => {
+    if (!event) {
+      getOneEventInfo({ programId });
+    }
+  }, [event]);
 
   const {
     desktopLeftItems,
@@ -126,4 +137,6 @@ const mapStateToProps = (state) => ({
   mentorId: state.account.userInfo?.id,
 })
 
-export default connect(mapStateToProps)(ResponsiveAppBar);
+export default connect(mapStateToProps, {
+  getOneEventInfo: getOneEventInfoAction,
+})(ResponsiveAppBar);
