@@ -1,4 +1,4 @@
-import { Stack, Box, Grid, Button, Divider } from '@mui/material';
+import { Stack, Grid, Button } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,9 +9,9 @@ import {
   getOneRegistrationFormAction,
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
-import Form from './Form';
-import Status from './Status';
-import Payment from './Payment';
+import Form from 'components/template/RegistrationForm';
+import Status from 'components/template/RegistrationStatus';
+import Payment from 'components/template/Payment';
 import { RegistrationStepNameType, RegistrationStepType } from 'types/global';
 import { ProgramType, RegistrationFormType } from 'types/models';
 import Profiles from 'components/template/Profile';

@@ -18,7 +18,7 @@ const Payment = ({
   discountedPrice,
   program,
 }) => {
-  const [discountCode, setDiscountCode] = useState();
+  const [discountCode, setDiscountCode] = useState(null);
   const [price, setPrice] = useState(0);
 
   useEffect(() => {

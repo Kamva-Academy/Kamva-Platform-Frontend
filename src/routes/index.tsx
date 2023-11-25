@@ -15,7 +15,6 @@ import Login from 'pages/Login';
 import FailedPayment from 'pages/Message/FailedPayment';
 import SuccessfulPayment from 'pages/Message/SuccessfulPayment';
 import Registration from 'pages/Registration';
-import Status from 'pages/Registration/Status';
 import TeamSelection from 'pages/TeamSelection';
 import Workshop from 'pages/FSM';
 import Article from 'pages/Article';
@@ -63,7 +62,6 @@ const Root = () => {
           path="/program/:programId/registration/"
           element={<Registration />}
         />
-        <Route path="/program/:programId/status/" element={<Status />} />
         <Route
           path="/program/:programId/team-selection/"
           element={<TeamSelection />}
