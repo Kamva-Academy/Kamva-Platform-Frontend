@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   ButtonGroup,
   Grid,
@@ -9,17 +8,15 @@ import {
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import React, { FC, useEffect, useState } from 'react';
-import { connect, ConnectedComponent } from 'react-redux';
+import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import('../../types/models')
 import PersonIcon from '@mui/icons-material/Person';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import InfoIcon from '@mui/icons-material/Info';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
-
 import {
   getEventTeamsAction,
   getOneEventInfoAction,
@@ -88,7 +85,7 @@ const FSMManagement: FC<EventPropsType> = ({
     }
   ]
 
-  const tabs = (workshop && workshop.id == fsmId && workshop.fsm_learning_type == 'Supervised') ?
+  const tabs: any[] = (workshop && workshop.id == fsmId && workshop.fsm_learning_type == 'Supervised') ?
     (workshop.fsm_p_type == 'Team') ?
       [
         ...initialTabs,
@@ -109,13 +106,14 @@ const FSMManagement: FC<EventPropsType> = ({
           },
         ] : initialTabs : initialTabs
 
-
-  // @ts-ignore
-  const [currentTab, setCurrentTab] = useState(tabs.find(({ name }) => name === section) ?? tabs[0]);
-  const TabComponent = currentTab?.component;
+  const [currentTab, setCurrentTab] = useState(null);
 
   useEffect(() => {
-    getOneEventInfo({  programId });
+    setCurrentTab(tabs.find(tab => tab.name === section) || tabs[0]);
+  }, [section])
+
+  useEffect(() => {
+    getOneEventInfo({ programId });
     getOneWorkshopsInfo({ fsmId });
   }, []);
 
@@ -124,6 +122,9 @@ const FSMManagement: FC<EventPropsType> = ({
       getEventTeams({ registrationFormId: event.registration_form });
     }
   }, [event]);
+
+  if (!currentTab) return null;
+  const TabComponent = currentTab.component;
 
   return (
     <Layout>
@@ -165,7 +166,7 @@ const FSMManagement: FC<EventPropsType> = ({
         </Grid>
         <Grid item sm={9} xs={12}>
           <Paper elevation={3} sx={{ padding: 2 }} >
-            {TabComponent ? <TabComponent {...currentTab?.props} /> : <></>}
+            {TabComponent ? <TabComponent {...currentTab} /> : <></>}
           </Paper>
         </Grid>
       </Grid>
