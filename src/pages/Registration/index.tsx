@@ -1,4 +1,4 @@
-import { Stack } from '@mui/material';
+import { Stack, Box, Grid } from '@mui/material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -113,7 +113,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     steps.push({
       name: 'program',
       label: 'ورود به دوره',
-      component: <></>,
+      component: null,
     })
 
     return steps;
@@ -128,12 +128,14 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
 
   return (
     <Layout>
-      <Stack width={'100%'} spacing={2}>
-        <Stepper steps={steps} activeStep={steps[activeStepIndex].name} />
-        <Stack>
+      <Grid container width={'100%'} spacing={2} direction={'row'} alignItems={'start'} justifyContent={'flex-start'}>
+        <Grid item xs={12} md={3}>
+          <Stepper steps={steps} activeStep={steps[activeStepIndex].name} />
+        </Grid>
+        <Grid item xs={12} md={9}>
           {steps[activeStepIndex].component}
-        </Stack>
-      </Stack>
+        </Grid>
+      </Grid>
     </Layout >
   );
 };
