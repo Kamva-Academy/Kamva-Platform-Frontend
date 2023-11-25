@@ -1,4 +1,4 @@
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000/';
+export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://backend.kamva.academy/';
 
 export const PARSE_SERVER_URL =
   process.env.NODE_ENV === 'development'

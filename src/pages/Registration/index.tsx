@@ -14,7 +14,7 @@ import Status from './Status';
 import Payment from './Payment';
 import { RegistrationStepNameType, RegistrationStepType } from 'types/global';
 import { ProgramType, RegistrationFormType } from 'types/models';
-import Profiles from 'components/template/profiles';
+import Profiles from 'components/template/Profile';
 
 type RegistrationProcessPropsType = {
   registrationForm?: RegistrationFormType;

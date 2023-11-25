@@ -3,9 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from 'components/template/GeneralLayout';
-import AcademicProfile from 'components/template/profiles/AcademicProfile';
-import PersonalProfile from 'components/template/profiles/PersonalProfile'
-import StudentProfile from 'components/template/profiles/StudentProfile';
+import ProfileTemplate from 'components/template/Profile';
 import { getUserProfileAction } from 'redux/slices/account';
 
 let tabs = [
@@ -13,21 +11,21 @@ let tabs = [
     name: 'personal',
     label: 'مشخصات فردی',
     icon: '',
-    component: PersonalProfile,
+    component: <ProfileTemplate type='personal' />,
     disabled: false,
   },
   {
     name: 'student',
     label: 'مشخصات دانش‌آموزی',
     icon: '',
-    component: StudentProfile,
+    component: <ProfileTemplate type='student' />,
     disabled: false,
   },
   {
     name: 'academic',
     label: 'مشخصات دانشجویی',
     icon: '',
-    component: AcademicProfile,
+    component: <ProfileTemplate type='academic' />,
     disabled: true,
   },
 ];
@@ -45,7 +43,6 @@ const Profile = ({
 }) => {
   const navigate = useNavigate();
   const { programId, section } = useParams();
-  const TabComponent = tabs[SECTIONS[section]].component;
 
   useEffect(() => {
     if (userInfo?.id) {
@@ -85,7 +82,7 @@ const Profile = ({
           </Grid>
         </Grid>
         <Grid container item xs={12} sm={9}>
-          <TabComponent tabs={tabs.map(tab => tab.name)} />
+          {tabs[SECTIONS[section]].component}
         </Grid>
       </Grid>
     </Layout>

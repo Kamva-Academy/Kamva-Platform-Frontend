@@ -1,9 +1,9 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import PersonalProfile from 'components/template/profiles/PersonalProfile';
-import StudentProfile from 'components/template/profiles/StudentProfile';
-import AcademicProfile from 'components/template/profiles/AcademicProfile';
+import PersonalProfile from 'components/template/Profile/PersonalProfile';
+import StudentProfile from 'components/template/Profile/StudentProfile';
+import AcademicProfile from 'components/template/Profile/AcademicProfile';
 import { getUserProfileAction } from 'redux/slices/account';
 import { UserInfoType } from 'types/profile';
 
