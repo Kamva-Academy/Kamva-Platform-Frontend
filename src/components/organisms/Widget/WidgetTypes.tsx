@@ -6,7 +6,7 @@ import ImageWidget, { ImageEditWidget } from './ImageWidget';
 import MiniGameWidget, { MiniGameEditWidget } from './MiniGameWidget';
 import MultiChoiceQuestionWidget, {
   MultiChoiceQuestionEditWidget,
-} from './MultiChoiceQuestionWidget';
+} from './MultiChoiceQuestion';
 import SmallAnswerProblemWidget, {
   SmallAnswerProblemEditWidget,
 } from './SmallAnswerProblemWidget';
@@ -36,12 +36,12 @@ const WIDGET_TYPES = {
     label: 'سوال تشریحی',
     backendType: 'BigAnswerProblem',
   },
-  // MultiChoiceProblem: {
-  //   WidgetComponent: MultiChoiceQuestionWidget,
-  //   EditWidgetDialog: MultiChoiceQuestionEditWidget,
-  //   label: 'سوال چند گزینه‌ای',
-  //   backendType: 'MultiChoiceProblem',
-  // },
+  MultiChoiceProblem: {
+    WidgetComponent: MultiChoiceQuestionWidget,
+    EditWidgetDialog: MultiChoiceQuestionEditWidget,
+    label: 'سوال چند گزینه‌ای',
+    backendType: 'MultiChoiceProblem',
+  },
   UploadFileProblem: {
     WidgetComponent: UploadFileProblemWidget,
     EditWidgetDialog: UploadFileProblemEditWidget,

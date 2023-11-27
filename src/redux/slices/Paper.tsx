@@ -68,15 +68,11 @@ export const sendInviteeUsernameResponseAction = ({ widgetId, username }) =>
     answer_type: 'InviteeUsernameResponse',
   });
 
-export const sendMultiChoiceAnswerAction = ({ playerId, problemId, answer }) =>
+export const sendMultiChoiceAnswerAction = ({ problemId, selectedChoices }) =>
   _sendWidgetAnswerAction({
-    player: playerId,
-    problem: problemId,
-    problem_type: 'ProblemMultiChoice',
-    answer: {
-      text: answer,
-      answer_type: 'MultiChoiceAnswer',
-    },
+    widgetId: problemId,
+    choices: selectedChoices,
+    answer_type: 'MultiChoiceAnswer',
   });
 
 
