@@ -17,7 +17,7 @@ import UploadFileProblemWidget, {
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 import AudioWidget, { AudioEditWidget } from './content/AudioWidget';
 
-const WIDGET_TYPES = {
+const WIDGET_TYPE_MAPPER = {
   // InviteeUsernameQuestion: {
   //   WidgetComponent: InviteeUsername,
   //   EditWidgetDialog: InviteeUsernameEdit,
@@ -39,7 +39,7 @@ const WIDGET_TYPES = {
   MultiChoiceProblem: {
     WidgetComponent: MultiChoiceQuestionWidget,
     EditWidgetDialog: MultiChoiceQuestionEditWidget,
-    label: 'سوال چند گزینه‌ای',
+    label: 'سوال چند‌گزینه‌ای',
     backendType: 'MultiChoiceProblem',
   },
   UploadFileProblem: {
@@ -79,4 +79,4 @@ const WIDGET_TYPES = {
     backendType: 'Game',
   },
 };
-export default WIDGET_TYPES;
+export default WIDGET_TYPE_MAPPER;

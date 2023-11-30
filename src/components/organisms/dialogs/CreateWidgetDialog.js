@@ -12,14 +12,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import WIDGET_TYPES from '../Widget/WidgetTypes';
+import WIDGET_TYPE_MAPPER from '../Widget/WidgetTypeMapper';
 
 export default function CreateWidgetDialog({ open, handleClose, paperId, showContent = true, showProblems = false }) {
   const [type, setType] = useState('');
   const t = useTranslate();
 
   if (type) {
-    const { EditWidgetDialog } = WIDGET_TYPES[type];
+    const { EditWidgetDialog } = WIDGET_TYPE_MAPPER[type];
     return (
       <EditWidgetDialog
         paperId={paperId}
@@ -43,11 +43,11 @@ export default function CreateWidgetDialog({ open, handleClose, paperId, showCon
             name='fsmId'
             value={type}
             label={t('widgetType')}>
-            {Object.keys(WIDGET_TYPES)
+            {Object.keys(WIDGET_TYPE_MAPPER)
               .filter((option, index) => (!option.includes('Problem') && showContent) || (option.includes('Problem') && showProblems))
               .map((option, index) => (
                 <MenuItem key={index} value={option}>
-                  {WIDGET_TYPES[option].label}
+                  {WIDGET_TYPE_MAPPER[option].label}
                 </MenuItem>
               ))}
           </Select>

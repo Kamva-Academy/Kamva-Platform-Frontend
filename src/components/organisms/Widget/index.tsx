@@ -3,7 +3,7 @@ import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/i
 import React, { FC, useMemo, useState } from 'react';
 
 import DeleteWidgetDialog from 'components/organisms/dialogs/DeleteWidgetDialog';
-import WIDGET_TYPES from 'components/organisms/Widget/WidgetTypes';
+import WIDGET_TYPE_MAPPER from 'components/organisms/Widget/WidgetTypeMapper';
 import EditHintsDialog from 'components/organisms/dialogs/EditHintsDialog';
 import { toPersianNumber } from 'utils/translateNumber';
 import WidgetHint from 'components/molecules/WidgetHint';
@@ -50,7 +50,7 @@ const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId,
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openEditHintDialog, setEditHintDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
-  const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPES[widgetType];
+  const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPE_MAPPER[widgetType];
 
   const Cover = useMemo(() =>
     coveredWithPaper

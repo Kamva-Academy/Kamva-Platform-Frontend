@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -6,22 +7,26 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
-  MenuItem,
-  TextField,
+  Stack,
 } from '@mui/material';
 import {
   AddCircle as AddCircleIcon,
-  RemoveCircle as RemoveCircleIcon,
 } from '@mui/icons-material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { createMultiChoicesQuestionWidgetAction } from 'redux/slices/Paper';
+import {
+  createMultiChoicesQuestionWidgetAction,
+  updateMultiChoicesQuestionWidgetAction,
+} from 'redux/slices/Paper';
 import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 import { toPersianNumber } from 'utils/translateNumber';
+import { ChoiceType } from 'types/widgets';
+import MultiChoiceQuestionChoice from 'components/molecules/MultiChoiceQuestionChoice';
 
 type MultiChoiceQuestionEditWidgetPropsType = {
+  text: string;
   open: boolean;
   handleClose: any;
   choices: any[];
@@ -30,48 +35,76 @@ type MultiChoiceQuestionEditWidgetPropsType = {
   paperId: any;
   id: string;
   createMultiChoicesQuestionWidget: any;
+  updateMultiChoicesQuestionWidget: any;
 }
 
 const MultiChoiceQuestionEditWidget: FC<MultiChoiceQuestionEditWidgetPropsType> = ({
-  open,
-  choices: initialQuestionChoices,
+  text: previousQuestionText,
+  choices: previousQuestionChoices,
   paperId,
   id: widgetId,
   handleClose,
+  open,
   createMultiChoicesQuestionWidget,
-  ...props
+  updateMultiChoicesQuestionWidget,
 }) => {
   const t = useTranslate();
 
-  const [questionText, setQuestionText] = useState(null);
-  const [correctAnswer, setCorrectAnswer] = useState(null);
-  const [questionChoices, setQuestionChoices] = useState([]);
+  const [questionText, setQuestionText] = useState(previousQuestionText);
+  const [questionChoices, setQuestionChoices] = useState<ChoiceType[]>(
+    previousQuestionChoices
+      ? previousQuestionChoices
+      : [
+        { text: 'گزینه ۱' },
+        { text: 'گزینه ۲' }
+      ]);
 
-  useEffect(() => {
-    if (initialQuestionChoices) {
-      setQuestionChoices(initialQuestionChoices);
-    }
-  }, [initialQuestionChoices])
-
-  const onChangeChoices = (newValue, index) => {
-    const newChoices = [...questionChoices];
-    newChoices[index].text = newValue;
-    setQuestionChoices(newChoices);
-  };
-
-  const handleClick = () => {
+  const handleSubmit = () => {
     if (widgetId) {
-      // TODO: edit mode
+      updateMultiChoicesQuestionWidget({
+        paper: paperId,
+        text: questionText,
+        choices: questionChoices,
+        widgetId,
+        onSuccess: handleClose,
+      })
     } else {
       createMultiChoicesQuestionWidget({
         paper: paperId,
         text: questionText,
-        answer: correctAnswer,
         choices: questionChoices,
         onSuccess: handleClose,
       });
     }
   };
+
+  const changeChoiceText = (newValue, choiceIndex) => {
+    const newChoices = [...questionChoices];
+    newChoices[choiceIndex] = {
+      ...newChoices[choiceIndex],
+      text: newValue
+    };
+    setQuestionChoices(newChoices);
+  };
+
+  const changeChoiceIsCorrect = (choiceIndex: number) => {
+    const newChoices = [...questionChoices];
+    newChoices[choiceIndex] = {
+      ...newChoices[choiceIndex],
+      is_correct: newChoices[choiceIndex].is_correct ? false : true
+    };
+    setQuestionChoices(newChoices);
+  }
+
+  const addNewChoice = () => {
+    setQuestionChoices([...questionChoices, { text: `گزینه ${toPersianNumber(questionChoices.length + 1)}` }]);
+  }
+
+  const deleteChoice = (choiceIndex: number) => {
+    const newChoices = [...questionChoices];
+    newChoices.splice(choiceIndex, 1);
+    setQuestionChoices(newChoices);
+  }
 
   return (
     <Dialog
@@ -80,54 +113,36 @@ const MultiChoiceQuestionEditWidget: FC<MultiChoiceQuestionEditWidgetPropsType> 
       onClose={handleClose}
       maxWidth="sm"
       fullWidth
-      // scroll="body"
       disableAutoFocus
       disableEnforceFocus>
       <DialogTitle>{t('multipleChoiceQuestions')}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          صورت سوال و گزینه‌های آن را وارد کنید.
-        </DialogContentText>
-        <label>{t('question')}</label>
-        <TinyEditorComponent
-          content={questionText}
-          onChange={(val) => setQuestionText(val)} />
-        <label>{t('options')}</label>
-        {questionChoices.map((choice, index) => (
-          <TextField
-            key={index}
-            fullWidth
-            value={choice.text}
-            variant="outlined"
-            sx={{ padding: 1 }}
-            onChange={(e) => onChangeChoices(e.target.value, index)}
-          />
-        ))}
-        <IconButton color="primary" onClick={() => setQuestionChoices([...questionChoices, { text: `گزینه ${toPersianNumber(questionChoices.length + 1)}` }])} size="large">
-          <AddCircleIcon />
-        </IconButton>
-        <IconButton
-          color="primary"
-          disabled={questionChoices.length < 3}
-          onClick={() => setQuestionChoices(questionChoices.slice(0, -1))}
-          size="large">
-          <RemoveCircleIcon />
-        </IconButton>
-        <TextField
-          fullWidth
-          select
-          label={t('answer')}
-          value={correctAnswer}
-          onChange={(e) => setCorrectAnswer(e.target.value)}>
+        <Stack spacing={1}>
+          <DialogContentText>
+            {'صورت سوال و گزینه‌های آن را وارد کنید.'}
+          </DialogContentText>
+          <label>{'صورت سوال'}</label>
+          <TinyEditorComponent content={questionText} onChange={(val) => setQuestionText(val)} />
+
+          <label>{t('options')}</label>
           {questionChoices.map((choice, index) => (
-            <MenuItem key={index} value={choice.text}>
-              {`${index + 1}- ${choice.text}`}
-            </MenuItem>
+            <Box key={index}>
+              <MultiChoiceQuestionChoice
+                choice={choice}
+                changeChoiceIsCorrect={() => changeChoiceIsCorrect(index)}
+                deleteChoice={() => deleteChoice(index)}
+                changeChoiceText={(event) => changeChoiceText(event.target.value, index)}
+              />
+            </Box>
           ))}
-        </TextField>
+
+          <IconButton color="primary" onClick={addNewChoice} sx={{ alignSelf: 'start', padding: 0 }}>
+            <AddCircleIcon fontSize='large' />
+          </IconButton>
+        </Stack>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} color="primary" variant="contained">
+        <Button onClick={handleSubmit} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
@@ -137,4 +152,5 @@ const MultiChoiceQuestionEditWidget: FC<MultiChoiceQuestionEditWidgetPropsType> 
 
 export default connect(null, {
   createMultiChoicesQuestionWidget: createMultiChoicesQuestionWidgetAction,
+  updateMultiChoicesQuestionWidget: updateMultiChoicesQuestionWidgetAction,
 })(MultiChoiceQuestionEditWidget);

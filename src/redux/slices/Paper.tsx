@@ -312,7 +312,7 @@ export const updateBigAnswerQuestionWidgetAction = ({ paper, text, widgetId }) =
     widgetId,
   });
 
-export const createMultiChoicesQuestionWidgetAction = ({ paper, text, solution, choices }) =>
+export const createMultiChoicesQuestionWidgetAction = ({ paper, text, solution, choices, ...props }) =>
   solution
     ? createWidgetAction({
       paper,
@@ -320,21 +320,24 @@ export const createMultiChoicesQuestionWidgetAction = ({ paper, text, solution, 
       text,
       solution,
       choices,
+      ...props
     })
     : createWidgetAction({
       paper,
       widget_type: 'MultiChoiceProblem',
       text,
       choices,
+      ...props
     })
 
-export const updateMultiChoicesQuestionWidgetAction = ({ paper, text, choices, widgetId }) =>
+export const updateMultiChoicesQuestionWidgetAction = ({ paper, text, choices, widgetId, ...props }) =>
   updateWidgetAction({
     paper,
     widget_type: 'MultiChoiceProblem',
     text,
     choices,
     widgetId,
+    ...props
   });
 
 //////////////// HINT ////////////////
