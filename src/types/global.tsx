@@ -3,7 +3,7 @@ import { FC } from "react";
 export type directionType = 'rtl' | 'ltr';
 
 export type WidgetTypes =
-  'Description' |
+  'TextWidget' |
   'Image' |
   'Video' |
   'Aparat' |

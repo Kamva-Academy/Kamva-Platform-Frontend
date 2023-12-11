@@ -48,11 +48,11 @@ const WIDGET_TYPE_MAPPER = {
     label: 'ارسال فایل',
     backendType: 'UploadFileProblem',
   },
-  Description: {
+  TextWidget: {
     WidgetComponent: TextWidget,
     EditWidgetDialog: TextEditWidget,
     label: 'متن',
-    backendType: 'Description',
+    backendType: 'TextWidget',
   },
   Image: {
     WidgetComponent: ImageWidget,

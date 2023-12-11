@@ -157,8 +157,6 @@ export const sendAnswerUrl = 'fsm/sendanswer/';
 
 export const startWorkshopUrl = 'fsm/startWorkshop/';
 
-export const getWorkshopsDescriptionUrl = 'fsm/getworkshopsdescription/';
-
 // scoring:
 export const answerCRUDUrl = ({ answerId }) => answerId ? `fsm/answers/${answerId}/` : 'fsm/answers/';
 export const getAnswerScoresAndCommentsUrl = 'scoring/get_answer_scores_and_comments/';

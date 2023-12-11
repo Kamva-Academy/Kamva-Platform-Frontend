@@ -19,7 +19,7 @@ const ANSWER_TYPES = {
   BigAnswerProblem: 'BigAnswer',
   UploadFileProblem: 'UploadFileAnswer',
   MultiChoiceProblem: 'MultiChoiceAnswer',
-  Description: 'Description',
+  TextWidget: 'TextWidget',
   Image: 'Image',
   Video: 'Video',
   Game: 'Game',

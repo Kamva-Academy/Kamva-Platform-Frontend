@@ -246,14 +246,14 @@ export const updateImageWidgetAction = (props) =>
 export const createTextWidgetAction = ({ paper, text }) =>
   createWidgetAction({
     paper,
-    widget_type: 'Description',
+    widget_type: 'TextWidget',
     text,
   });
 
 export const updateTextWidgetAction = ({ paper, text, widgetId }) =>
   updateWidgetAction({
     paper,
-    widget_type: 'Description',
+    widget_type: 'TextWidget',
     text,
     widgetId,
   });
