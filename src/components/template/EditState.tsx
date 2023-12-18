@@ -17,7 +17,7 @@ import {
 } from 'redux/slices/workshop';
 import AreYouSure from 'components/organisms/dialogs/AreYouSure';
 import CreateWidgetDialog from 'components/organisms/dialogs/CreateWidgetDialog';
-import EditWidgets from './EditWidgets';
+import { EditPaper } from './Paper';
 import EditHints from './EditHints';
 
 type EditStatePropsType = {
@@ -108,12 +108,12 @@ const EditState: FC<EditStatePropsType> = ({
           {'مسئله‌ها'}
         </Typography>
         <Divider />
-        <EditWidgets widgets={problems} paperId={paperId} mode='problems' />
+        <EditPaper widgets={problems} paperId={paperId} mode='problems' />
         <Typography variant='h2' gutterBottom>
           {'محتواها'}
         </Typography>
         <Divider />
-        <EditWidgets widgets={contents} paperId={paperId} mode='contents' />
+        <EditPaper widgets={contents} paperId={paperId} mode='contents' />
         <EditHints hints={hints} referenceId={paperId} />
       </Stack >
       <CreateWidgetDialog

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Layout from 'components/template/GeneralLayout';
-import EditWidgets from '../components/template/EditWidgets';
+import EditPaper from '../components/template/Paper/EditPaper';
 import { getArticleAction } from '../redux/slices/article';
 
 const EditArticle = ({
@@ -29,7 +29,7 @@ const EditArticle = ({
 					{article?.name}
 				</Typography>
 				{article && (
-					<EditWidgets
+					<EditPaper
 						widgets={article.widgets}
 						paperId={parseInt(articleId)}
 					/>

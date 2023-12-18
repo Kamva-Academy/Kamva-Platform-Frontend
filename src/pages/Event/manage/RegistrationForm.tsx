@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
-import EditWidgets from 'components/template/EditWidgets';
+import { EditPaper } from 'components/template/Paper';
 import { getRegistrationFormAction } from 'redux/slices/events';
 
 type RegistrationFormPropsType = {
@@ -24,7 +24,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
   return (
     <>
       {registrationForm &&
-        <EditWidgets
+        <EditPaper
           widgets={registrationForm.widgets}
           paperId={registrationFormId}
         />

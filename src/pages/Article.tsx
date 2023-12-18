@@ -8,6 +8,7 @@ import Widget from 'components/organisms/Widget';
 import { getArticleAction } from 'redux/slices/article';
 import Layout from 'components/template/GeneralLayout';
 import isInIframe from 'utils/IsInIframe';
+import Paper from 'components/template/Paper';
 
 type ArticlePropsType = {
   papers: any[];
@@ -33,11 +34,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
           gutterBottom>
           {article?.name}
         </Typography>
-        {article?.widgets.map((widget) => (
-          <Box key={widget.id}>
-            <Widget paperId={article.id} mode={WidgetModes.View} coveredWithPaper={false} widget={widget} />
-          </Box>
-        ))}
+        <Paper paper={article} />
       </Stack>
     </Layout>
   );

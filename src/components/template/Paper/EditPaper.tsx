@@ -2,16 +2,16 @@ import { Button, Stack, Typography } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import React, { useState, FC } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import Widget, { WidgetModes } from '../organisms/Widget';
-import CreateWidgetDialog from '../organisms/dialogs/CreateWidgetDialog';
+import Widget, { WidgetModes } from 'components/organisms/Widget';
+import CreateWidgetDialog from 'components/organisms/dialogs/CreateWidgetDialog';
 
-type EditWidgetsPropsType = {
+type EditPaperPropsType = {
   widgets: any[];
   paperId: number;
   mode?: 'contents' | 'problems' | 'all';
 }
 
-const EditWidgets: FC<EditWidgetsPropsType> = ({ widgets, paperId, mode = 'all' }) => {
+const EditPaper: FC<EditPaperPropsType> = ({ widgets, paperId, mode = 'all' }) => {
   const t = useTranslate();
   const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState(false);
 
@@ -57,4 +57,4 @@ const EditWidgets: FC<EditWidgetsPropsType> = ({ widgets, paperId, mode = 'all' 
   );
 }
 
-export default EditWidgets;
+export default EditPaper;
