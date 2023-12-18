@@ -258,6 +258,23 @@ export const updateTextWidgetAction = ({ paper, text, widgetId }) =>
     widgetId,
   });
 
+export const createDetailBoxWidgetAction = ({ paper, title, detail }) =>
+  createWidgetAction({
+    paper,
+    widget_type: 'DetailBoxWidget',
+    title,
+    detail,
+  });
+
+export const updateDetailBoxWidgetAction = ({ paper, title, detail, widgetId }) =>
+  updateWidgetAction({
+    paper,
+    widget_type: 'DetailBoxWidget',
+    title,
+    detail,
+    widgetId,
+  });
+
 export const createUploadFileWidgetAction = ({ paper, text, solution }) =>
   createWidgetAction({
     paper,
