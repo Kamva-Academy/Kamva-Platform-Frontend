@@ -12,7 +12,7 @@ export { BigAnswerProblemEditWidget as BigAnswerQuestionEditWidget };
 
 type BigAnswerProblemWidgetPropsType = {
   sendBigAnswer: any;
-  collectAnswers: any;
+  collectData: any;
   id: number;
   text: string;
   mode: WidgetModes;
@@ -21,7 +21,7 @@ type BigAnswerProblemWidgetPropsType = {
 
 const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
   sendBigAnswer,
-  collectAnswers,
+  collectData,
   id,
   text,
   mode,
@@ -34,7 +34,7 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
 
   const onChange = (val) => {
     if (mode === WidgetModes.InAnswerSheet) {
-      collectAnswers('text', val);
+      collectData('text', val);
     };
     setAnswer(val);
   }

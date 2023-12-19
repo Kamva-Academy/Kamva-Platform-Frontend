@@ -11,7 +11,7 @@ import Confetti from 'react-confetti'
 
 type SmallAnswerProblemWidgetPropsType = {
   sendSmallAnswer: any;
-  collectAnswers: any;
+  collectData: any;
   id: number;
   mode: WidgetModes;
   text: string;
@@ -21,7 +21,7 @@ type SmallAnswerProblemWidgetPropsType = {
 
 const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   sendSmallAnswer,
-  collectAnswers,
+  collectData,
   id: paperId,
   mode,
   text: problemText,
@@ -36,7 +36,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
 
   const changeText = (e) => {
     if (mode === WidgetModes.InAnswerSheet) {
-      collectAnswers('text', e.target.value);
+      collectData('text', e.target.value);
     }
     setAnswer(e.target.value);
   }

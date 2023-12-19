@@ -15,7 +15,7 @@ import { WidgetModes } from 'components/organisms/Widget';
 import { toast } from 'react-toastify';
 
 type UploadFileProblemWidgetPropsType = {
-  collectAnswers: any;
+  collectData: any;
   uploadFileAnswer: any;
   makeAnswerEmpty: any;
   id: number;
@@ -26,7 +26,7 @@ type UploadFileProblemWidgetPropsType = {
 }
 
 const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
-  collectAnswers,
+  collectData,
   uploadFileAnswer,
   makeAnswerEmpty,
   id: widgetId,
@@ -67,7 +67,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
       if (response.type?.endsWith('fulfilled')) {
         setFileLink(response.payload?.response?.answer_file);
         if (mode === WidgetModes.InAnswerSheet) {
-          collectAnswers('upload_file_answer', response.payload?.response?.id);
+          collectData('upload_file_answer', response.payload?.response?.id);
         }
       }
     })
@@ -79,7 +79,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
       if (response.type?.endsWith('fulfilled')) {
         setFileLink(null);
         if (mode === WidgetModes.InAnswerSheet) {
-          collectAnswers('upload_file_answer', null);
+          collectData('upload_file_answer', null);
         }
       }
     });

@@ -43,7 +43,6 @@ type WidgetPropsType = {
   widget: any;
   mode?: WidgetModes;
   paperId?: number;
-  collectAnswers?: any;
   collectData?: any;
   coveredWithPaper?: boolean;
 }
@@ -53,7 +52,6 @@ const Widget: FC<WidgetPropsType> = ({
   mode = WidgetModes.View,
   paperId,
   coveredWithPaper = true,
-  collectAnswers,
   collectData,
 }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
@@ -123,7 +121,7 @@ const Widget: FC<WidgetPropsType> = ({
         }
         {(mode === WidgetModes.View && widget?.hints?.length) ? <WidgetHint hints={widget.hints} /> : null}
       </Stack>
-      <WidgetComponent {...widget} mode={mode} collectAnswers={collectAnswers} />
+      <WidgetComponent {...widget} mode={mode} collectData={collectData} />
     </Cover>
   );
 };

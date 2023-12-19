@@ -22,7 +22,7 @@ type InviteeUsernamePropsType = {
   inviteeUserFirstName: string;
   inviteeUserLastName: string;
   isFetching: boolean;
-  collectAnswers: any;
+  collectData: any;
   id: number;
   mode: WidgetModes;
   text: string;
@@ -33,7 +33,7 @@ type InviteeUsernamePropsType = {
 const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   sendInviteeUsernameResponse,
   checkUsername,
-  collectAnswers,
+  collectData,
   id: paperId,
   inviteeUserFirstName,
   inviteeUserLastName,
@@ -55,7 +55,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
 
   const changeText = (e) => {
     if (mode === WidgetModes.InAnswerSheet) {
-      collectAnswers('username', e.target.value);
+      collectData('username', e.target.value);
     }
     setUsername(e.target.value);
   }

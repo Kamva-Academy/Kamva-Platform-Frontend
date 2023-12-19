@@ -55,30 +55,32 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
     });
   };
 
-  const collectAnswers = (problemId, widgetType) => (fieldName, answer) => {
-    let isFound = false;
-    const newAnswers = [...answers];
-    for (let i = 0; i < newAnswers.length; i++) {
-      if (newAnswers[i].problem === problemId) {
-        if (answer) {
-          newAnswers[i][fieldName] = answer;
-        } else {
-          newAnswers.splice(i, 1);
+  console.log(answers);
+
+  const collectAnswers = (widgetId: number, widgetType: string) => (fieldName: string, answer: any) => {
+    setAnswers(answers => {
+      let isFound = false;
+      const newAnswers = [...answers];
+      for (let i = 0; i < newAnswers.length; i++) {
+        if (newAnswers[i].problem === widgetId) {
+          if (answer) {
+            newAnswers[i][fieldName] = answer;
+          } else {
+            newAnswers.splice(i, 1);
+          }
+          isFound = true;
+          break;
         }
-        isFound = true;
-        break;
       }
-    }
-    if (!isFound) {
-      newAnswers.push({
-        [fieldName]: answer,
-        answer_type: widgetType,
-        problem: problemId,
-        // todo: fix TOF
-        question: problemId,
-      });
-    }
-    setAnswers(newAnswers);
+      if (!isFound) {
+        newAnswers.push({
+          [fieldName]: answer,
+          answer_type: widgetType,
+          problem: widgetId,
+        });
+      }
+      return newAnswers;
+    })
   };
 
   const isSubmitButtonDisabled = (): { isDisabled: boolean; message: string; } => {
@@ -106,7 +108,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
             <Widget
               coveredWithPaper={false}
               mode={WidgetModes.InAnswerSheet}
-              collectAnswers={collectAnswers(widget.id, ANSWER_TYPES[widget.widget_type])}
+              collectData={collectAnswers(widget.id, ANSWER_TYPES[widget.widget_type])}
               widget={widget}
             />
           </Box>
