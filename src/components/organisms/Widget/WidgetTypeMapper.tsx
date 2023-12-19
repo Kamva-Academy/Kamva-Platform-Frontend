@@ -16,7 +16,7 @@ import UploadFileProblemWidget, {
 } from './UploadFileProblemWidget';
 import VideoWidget, { VideoEditWidget } from './VideoWidget';
 import AudioWidget, { AudioEditWidget } from './content/AudioWidget';
-import DetailBoxWidget, { DetailBoxEditWidget } from './content/DetailBoxWidget';
+import DetailBoxWidget, { DetailBoxEditDialog } from './content/DetailBoxWidget';
 
 const WIDGET_TYPE_MAPPER = {
   // InviteeUsernameQuestion: {
@@ -57,7 +57,7 @@ const WIDGET_TYPE_MAPPER = {
   },
   DetailBoxWidget: {
     WidgetComponent: DetailBoxWidget,
-    EditWidgetDialog: DetailBoxEditWidget,
+    EditWidgetDialog: DetailBoxEditDialog,
     label: 'نکته',
     backendType: 'DetailBoxWidget',
   },

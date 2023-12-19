@@ -44,10 +44,18 @@ type WidgetPropsType = {
   mode?: WidgetModes;
   paperId?: number;
   collectAnswers?: any;
+  collectData?: any;
   coveredWithPaper?: boolean;
 }
 
-const Widget: FC<WidgetPropsType> = ({ widget, mode = WidgetModes.View, paperId, coveredWithPaper = true, collectAnswers }) => {
+const Widget: FC<WidgetPropsType> = ({
+  widget,
+  mode = WidgetModes.View,
+  paperId,
+  coveredWithPaper = true,
+  collectAnswers,
+  collectData,
+}) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openEditHintDialog, setEditHintDialog] = useState(false);

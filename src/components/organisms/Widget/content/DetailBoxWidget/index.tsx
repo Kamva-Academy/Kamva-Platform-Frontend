@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import TinyPreview from 'components/tiny_editor/react_tiny/Preview';
-import DetailBoxEditWidget from './edit';
+import DetailBoxEditDialog from './EditDialog';
+import Paper from 'components/template/Paper';
 
-export { DetailBoxEditWidget };
+export { DetailBoxEditDialog };
 
-const DetailBoxWidget = ({ text }) => {
+const DetailBoxWidget = ({ title, details }) => {
   return (
-    <TinyPreview
-      frameProps={{
-        frameBorder: '0',
-        scrolling: 'no',
-        width: '100%',
-      }}
-      content={text}
-    />
+    <Fragment>
+      <TinyPreview
+        frameProps={{
+          frameBorder: '0',
+          scrolling: 'no',
+          width: '100%',
+        }}
+        content={title}
+      />
+      <Paper paper={details} />
+    </Fragment>
   );
 };
 

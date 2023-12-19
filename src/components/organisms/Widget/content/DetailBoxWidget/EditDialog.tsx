@@ -15,10 +15,10 @@ import {
   updateDetailBoxWidgetAction,
 } from 'redux/slices/widget';
 import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
+import { EditPaper } from 'components/template/Paper';
 
-const DetailBoxEditWidget = ({
-  updateDetailBoxWidget,
-  createDetailBoxWidget,
+const DetailBoxEditDialog = ({
+  onSubmit,
 
   open,
   handleClose,
@@ -31,20 +31,14 @@ const DetailBoxEditWidget = ({
   const [title, setTitle] = useState(previousTitle);
   const [detail, setDetail] = useState(previousDetail);
 
-  const handleClick = () => {
-    if (widgetId) {
-      updateDetailBoxWidget({
-        paper: paperId,
-        title,
-        widgetId,
-      })
-    } else {
-      createDetailBoxWidget({
-        paper: paperId,
-        title,
-      });
-    }
-    handleClose();
+  const onSubmitWrapper = () => {
+    onSubmit({
+      paper: paperId,
+      title,
+      widgetId,
+      detail,
+      onSuccess: handleClose,
+    })
   };
 
   return (
@@ -53,16 +47,17 @@ const DetailBoxEditWidget = ({
       onClose={handleClose}
       disableAutoFocus
       disableEnforceFocus>
-      <DialogTitle>{t('text')}</DialogTitle>
+      <DialogTitle>{'عنوان'}</DialogTitle>
       <DialogContent>
         <DialogContentText>متن مورد نظر خود را وارد کنید.</DialogContentText>
         <TinyEditorComponent
           content={title}
           onChange={(text) => setTitle(text)}
         />
+        <EditPaper paperId={paperId} widgets={[]} mode='contents' />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} color="primary" variant="contained">
+        <Button onClick={onSubmitWrapper} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
@@ -70,7 +65,18 @@ const DetailBoxEditWidget = ({
   );
 }
 
-export default connect(null, {
-  createDetailBoxWidget: createDetailBoxWidgetAction,
-  updateDetailBoxWidget: updateDetailBoxWidgetAction,
-})(DetailBoxEditWidget);
+const mapDispatcherToProps = (dispatch, ownProps) => {
+  let onSubmit;
+  if (ownProps.collectData) {
+    onSubmit = ownProps.collectData;
+  } else if (ownProps.widgetId) {
+    onSubmit = (arg) => dispatch(updateDetailBoxWidgetAction(arg));
+  } else {
+    onSubmit = (arg) => dispatch(createDetailBoxWidgetAction(arg));
+  }
+  return {
+    onSubmit,
+  }
+}
+
+export default connect(null, mapDispatcherToProps)(DetailBoxEditDialog);
