@@ -41,7 +41,7 @@ const EventCard: FC<EventCardPropsType> = ({
       setEventButtonObj(<EventButton text={'ثبت‌نام تمام شده'} disabled />);
     }
     if (['Waiting', 'Rejected', 'Accepted'].includes(event.user_registration_status)) {
-      setEventButtonObj(<EventButton to={`/program/${event.id}/status/`} text={'مشاهده وضعیت ثبت‌نام'} />);
+      setEventButtonObj(<EventButton to={`/program/${event.id}/registration/`} text={'مشاهده وضعیت ثبت‌نام'} />);
     }
     if (event.is_user_participating) {
       setEventButtonObj(<EventButton to={`/program/${event.id}/`} text={'ورود'} />);
