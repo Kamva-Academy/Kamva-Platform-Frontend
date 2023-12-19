@@ -33,49 +33,9 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
 }) => {
   const navigate = useNavigate();
   const { programId } = useParams();
-  const [currentStepName, setCurrentStepName] = useState<RegistrationStepNameType>('personal-profile');
-  const [lastActiveStepName, setLastActiveStepName] = useState<RegistrationStepNameType>('personal-profile');
-
-  useEffect(() => {
-    getOneEventInfo({ programId });
-  }, []);
-
-  useEffect(() => {
-    if (program?.registration_form) {
-      getOneRegistrationForm({ id: program.registration_form });
-    }
-  }, [program?.registration_form]);
-
-
-  useEffect(() => {
-    if (['Waiting', 'Rejected'].includes(program?.user_registration_status)) {
-      setCurrentStepName('status');
-    }
-    if (program?.merchandise && program?.user_registration_status === 'Accepted') {
-      setCurrentStepName('payment');
-    }
-  }, [program])
-
-  if (!program || !registrationForm || !userInfo) return null;
-
-  if (program.is_user_participating) {
-    navigate(`/program/${programId}/`);
-    return null;
-  }
-
-  const goToStep = (stepName: RegistrationStepNameType) => {
-    setCurrentStepName(stepName);
-    const indexOfCurrentStep = steps.indexOf(steps.find(step => step.name === currentStepName));
-    const indexOfDestinationStep = steps.indexOf(steps.find(step => step.name === stepName));
-    if (indexOfDestinationStep > indexOfCurrentStep) {
-      setLastActiveStepName(stepName);
-    }
-  }
-
-  const goToNextStep = (currentStepName: RegistrationStepNameType, steps: RegistrationStepType[]) => {
-    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
-    goToStep(nextStepName);
-  }
+  const [currentStepName, _setCurrentStepName] = useState<RegistrationStepNameType>('personal-profile');
+  const [lastActiveStepName, _setLastActiveStepName] = useState<RegistrationStepNameType>('personal-profile');
+  const [steps, setSteps] = useState<RegistrationStepType[]>([])
 
   const getRegistrationSteps = (program: ProgramType, registrationForm) => {
     const steps: RegistrationStepType[] = [];
@@ -83,7 +43,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     steps.push({
       name: 'personal-profile',
       label: 'تکمیل مشخصات شخصی',
-      component: <Profiles type='personal' onSuccess={() => goToNextStep(currentStepName, steps)} />,
+      component: <Profiles type='personal' onSuccess={() => goToNextStep(currentStepName)} />,
       onClick: () => goToStep('personal-profile'),
     })
 
@@ -91,7 +51,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       steps.push({
         name: 'student-profile',
         label: 'تکمیل مشخصات دانش‌آموزی',
-        component: <Profiles type='student' onSuccess={() => goToNextStep(currentStepName, steps)} />,
+        component: <Profiles type='student' onSuccess={() => goToNextStep(currentStepName)} />,
         onClick: () => goToStep('student-profile')
       })
     }
@@ -100,7 +60,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       steps.push({
         name: 'academic-profile',
         label: 'تکمیل مشخصات دانشجویی',
-        component: <Profiles type='academic' onSuccess={() => goToNextStep(currentStepName, steps)} />,
+        component: <Profiles type='academic' onSuccess={() => goToNextStep(currentStepName)} />,
         onClick: () => goToStep('academic-profile')
       })
     }
@@ -139,7 +99,51 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     return steps;
   }
 
-  const steps = getRegistrationSteps(program, registrationForm);
+  const goToStep = (stepName: RegistrationStepNameType) => {
+    _setCurrentStepName(stepName);
+    const indexOfCurrentStep = steps.indexOf(steps.find(step => step.name === currentStepName));
+    const indexOfDestinationStep = steps.indexOf(steps.find(step => step.name === stepName));
+    if (indexOfDestinationStep >= indexOfCurrentStep) {
+      _setLastActiveStepName(stepName);
+    }
+  }
+
+  const goToNextStep = (currentStepName: RegistrationStepNameType) => {
+    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
+    goToStep(nextStepName);
+  }
+
+  useEffect(() => {
+    getOneEventInfo({ programId });
+  }, []);
+
+  useEffect(() => {
+    if (program?.registration_form) {
+      getOneRegistrationForm({ id: program.registration_form });
+    }
+  }, [program?.registration_form]);
+
+  useEffect(() => {
+    if (['Waiting', 'Rejected'].includes(program?.user_registration_status)) {
+      goToStep('status');
+    }
+    if (program?.merchandise && program?.user_registration_status === 'Accepted') {
+      goToStep('payment');
+    }
+  }, [program, steps])
+
+  useEffect(() => {
+    if (program && registrationForm) {
+      setSteps(getRegistrationSteps(program, registrationForm));
+    }
+  }, [program, registrationForm])
+
+  if (!program || !registrationForm || !userInfo) return null;
+
+  if (program.is_user_participating) {
+    navigate(`/program/${programId}/`);
+    return null;
+  }
 
   return (
     <Layout>
@@ -160,7 +164,9 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
         </Grid>
         <Grid item xs={12} md={9}>
           <Stack>
-            {steps.find(step => step.name === currentStepName).component}
+            {steps.find(step => step.name === currentStepName) ?
+              steps.find(step => step.name === currentStepName).component :
+              null}
           </Stack>
         </Grid>
       </Grid>
