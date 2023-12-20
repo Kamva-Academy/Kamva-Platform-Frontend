@@ -35,7 +35,21 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
   const { programId } = useParams();
   const [currentStepName, _setCurrentStepName] = useState<RegistrationStepNameType>('personal-profile');
   const [lastActiveStepName, _setLastActiveStepName] = useState<RegistrationStepNameType>('personal-profile');
-  const [steps, setSteps] = useState<RegistrationStepType[]>([])
+  const [steps, setSteps] = useState<RegistrationStepType[]>([]);
+
+  const goToStep = (stepName: RegistrationStepNameType) => {
+    _setCurrentStepName(stepName);
+    const indexOfCurrentStep = steps.indexOf(steps.find(step => step.name === currentStepName));
+    const indexOfDestinationStep = steps.indexOf(steps.find(step => step.name === stepName));
+    if (indexOfDestinationStep >= indexOfCurrentStep) {
+      _setLastActiveStepName(stepName);
+    }
+  }
+
+  const goToNextStep = (currentStepName: RegistrationStepNameType) => {
+    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
+    goToStep(nextStepName);
+  }
 
   const getRegistrationSteps = (program: ProgramType, registrationForm) => {
     const steps: RegistrationStepType[] = [];
@@ -97,20 +111,6 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
     })
 
     return steps;
-  }
-
-  const goToStep = (stepName: RegistrationStepNameType) => {
-    _setCurrentStepName(stepName);
-    const indexOfCurrentStep = steps.indexOf(steps.find(step => step.name === currentStepName));
-    const indexOfDestinationStep = steps.indexOf(steps.find(step => step.name === stepName));
-    if (indexOfDestinationStep >= indexOfCurrentStep) {
-      _setLastActiveStepName(stepName);
-    }
-  }
-
-  const goToNextStep = (currentStepName: RegistrationStepNameType) => {
-    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
-    goToStep(nextStepName);
   }
 
   useEffect(() => {
