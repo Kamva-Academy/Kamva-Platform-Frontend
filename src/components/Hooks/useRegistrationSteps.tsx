@@ -5,12 +5,17 @@ import Status from 'components/template/RegistrationStatus';
 import Payment from 'components/template/Payment';
 import { RegistrationStepNameType, RegistrationStepType } from 'types/global';
 import Profiles from 'components/template/Profile';
+import { ProgramType, RegistrationFormType } from 'types/models';
 
+type propsType = {
+  program: ProgramType;
+  registrationForm: RegistrationFormType;
+}
 
 const useRegistrationSteps = ({
   program,
   registrationForm,
-}) => {
+}: propsType) => {
   const [currentStepNameIndex, setCurrentStepIndex] = useState<number>(0);
   const [lastActiveStepIndex, setLastActiveIndex] = useState<number>(0);
   const [steps, setSteps] = useState<RegistrationStepType[]>([]);
