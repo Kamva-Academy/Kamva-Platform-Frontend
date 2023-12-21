@@ -7,19 +7,12 @@ import {
   Stack,
 } from '@mui/material';
 import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-
-import {
-  createBigAnswerQuestionWidgetAction,
-  updateBigAnswerQuestionWidgetAction,
-} from '../../../../redux/slices/widget';
-import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
+import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 
 type BigAnswerProblemEditWidgetPropsType = {
   handleClose: any;
-  createBigAnswerQuestionWidget: any;
-  updateBigAnswerQuestionWidget: any;
+  onEdit: any;
 
   open: boolean;
   text: string;
@@ -30,8 +23,7 @@ type BigAnswerProblemEditWidgetPropsType = {
 
 const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
   handleClose,
-  createBigAnswerQuestionWidget,
-  updateBigAnswerQuestionWidget,
+  onEdit,
 
   open,
   text: oldText,
@@ -44,28 +36,13 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
   const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleClick = () => {
-    if (widgetId) {
-      updateBigAnswerQuestionWidget({
-        widgetId,
-        paper: paperId,
-        text: text,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      })
-    } else {
-      createBigAnswerQuestionWidget({
-        paper: paperId,
-        text: text,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      })
-    }
+    onEdit({
+      widgetId,
+      paper: paperId,
+      text: text,
+      solution,
+      onSuccess: handleClose,
+    })
   };
 
   return (
@@ -101,10 +78,4 @@ const BigAnswerProblemEditWidget: FC<BigAnswerProblemEditWidgetPropsType> = ({
   );
 }
 
-export default connect(
-  null,
-  {
-    createBigAnswerQuestionWidget: createBigAnswerQuestionWidgetAction,
-    updateBigAnswerQuestionWidget: updateBigAnswerQuestionWidgetAction,
-  }
-)(BigAnswerProblemEditWidget);
+export default BigAnswerProblemEditWidget;

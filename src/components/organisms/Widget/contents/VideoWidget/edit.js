@@ -10,20 +10,13 @@ import {
   Stack,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import UploadFile from 'components/molecules/UploadFile';
 
-import {
-  createVideoWidgetAction,
-  updateVideoWidgetAction,
-} from 'redux/slices/widget';
 
 function VideoEditWidget({
-  updateVideoWidget,
-  createVideoWidget,
+  onEdit,
 
-  loading,
   paperId,
   open,
   link: oldLink,
@@ -51,22 +44,11 @@ function VideoEditWidget({
         link,
       }
     }
-    if (widgetId) {
-      updateVideoWidget({
-        ...payload,
-        widgetId,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    } else {
-      createVideoWidget(payload).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    }
+    onEdit({
+      ...payload,
+      widgetId,
+      onSuccess: handleClose,
+    });
   };
 
   return (
@@ -88,7 +70,7 @@ function VideoEditWidget({
         </Stack>
       </DialogContent>
       <DialogActions>
-        <Button disabled={loading} onClick={handleClick} color="primary" variant="contained">
+        <Button onClick={handleClick} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
@@ -96,11 +78,4 @@ function VideoEditWidget({
   );
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.widget.isFetching,
-});
-
-export default connect(mapStateToProps, {
-  createVideoWidget: createVideoWidgetAction,
-  updateVideoWidget: updateVideoWidgetAction,
-})(VideoEditWidget);
+export default VideoEditWidget;

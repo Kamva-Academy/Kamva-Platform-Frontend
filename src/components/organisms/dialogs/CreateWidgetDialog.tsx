@@ -3,27 +3,55 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import WIDGET_TYPE_MAPPER from '../Widget/WidgetTypeMapper';
+import WIDGET_TYPE_MAPPER from 'components/organisms/Widget/useWidgetFactory/WidgetTypeMapper';
+import useWidgetFactory from 'components/organisms/Widget/useWidgetFactory';
+import { WidgetModes } from 'components/organisms/Widget';
 
-export default function CreateWidgetDialog({ open, handleClose, paperId, showContent = true, showProblems = false }) {
+type CreateWidgetDialogPropsType = {
+  collectDataForPaper?: any;
+  handleClose: any;
+
+  open: boolean;
+  paperId: number;
+  showContent?: boolean;
+  showProblems?: boolean;
+}
+
+
+const CreateWidgetDialog: FC<CreateWidgetDialogPropsType> = ({
+  collectDataForPaper,
+  open,
+  handleClose,
+  paperId,
+  showContent = true,
+  showProblems = false,
+}) => {
   const [type, setType] = useState('');
   const t = useTranslate();
 
   if (type) {
-    const { EditWidgetDialog } = WIDGET_TYPE_MAPPER[type];
+    const {
+      onEdit,
+      EditWidgetDialog,
+    } = useWidgetFactory({
+      paperId,
+      widgetType: type,
+      mode: WidgetModes.Create,
+      collectDataForPaper,
+    });
     return (
       <EditWidgetDialog
         paperId={paperId}
         open={open}
+        onEdit={onEdit}
         handleClose={() => {
           setType('');
           handleClose();
@@ -59,3 +87,5 @@ export default function CreateWidgetDialog({ open, handleClose, paperId, showCon
     </Dialog>
   );
 }
+
+export default CreateWidgetDialog;

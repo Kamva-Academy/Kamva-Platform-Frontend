@@ -13,8 +13,7 @@ import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
   createSmallAnswerProblemWidgetAction,
   updateSmallAnswerProblemWidgetAction,
-} from '../../../../../redux/slices/Paper';
-import TinyEditorComponent from '../../../../tiny_editor/react_tiny/TinyEditorComponent';
+} from 'redux/slices/Paper';
 
 function InviteeUsernameEdit({
   createSmallAnswerProblemWidget,
@@ -72,7 +71,7 @@ function InviteeUsernameEdit({
       <DialogContent>
         <Stack spacing={1}>
           <TextField
-            sx={{ mt: 1}}
+            sx={{ mt: 1 }}
             variant='outlined'
             fullWidth
             value={answer}

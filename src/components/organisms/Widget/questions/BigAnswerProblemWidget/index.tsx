@@ -1,18 +1,18 @@
-import { Button, Grid, Paper, Stack, Typography } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
+import { Button, Stack, Typography } from '@mui/material';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import TinyPreview from '../../../tiny_editor/react_tiny/Preview';
-import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
-import { WidgetModes } from '..';
-import { sendBigAnswerAction } from '../../../../redux/slices/Paper';
+import TinyPreview from 'components/tiny_editor/react_tiny/Preview';
+import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
+import { WidgetModes } from 'components/organisms/Widget';
+import { sendBigAnswerAction } from 'redux/slices/Paper';
 import BigAnswerProblemEditWidget from './edit';
 
 export { BigAnswerProblemEditWidget as BigAnswerQuestionEditWidget };
 
 type BigAnswerProblemWidgetPropsType = {
-  sendBigAnswer: any;
-  collectData: any;
+  onAnswerSubmit: any;
+  onAnswerChange: any;
   id: number;
   text: string;
   mode: WidgetModes;
@@ -20,31 +20,30 @@ type BigAnswerProblemWidgetPropsType = {
 }
 
 const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
-  sendBigAnswer,
-  collectData,
+  onAnswerSubmit,
+  onAnswerChange,
   id,
   text,
   mode,
   last_submitted_answer,
-  ...props
 }) => {
   const t = useTranslate();
   const [answer, setAnswer] = useState<string>(last_submitted_answer?.text);
   const [isButtonDisabled, setButtonDisable] = useState(false);
 
-  const onChange = (val) => {
+  const onChangeWrapper = (val: string) => {
     if (mode === WidgetModes.InAnswerSheet) {
-      collectData('text', val);
+      onAnswerChange({ text: val });
     };
     setAnswer(val);
   }
 
-  const submitAnswer = (e) => {
+  const onSubmitWrappere = (e) => {
     setButtonDisable(true);
     setTimeout(() => {
       setButtonDisable(false);
     }, 20000)
-    sendBigAnswer({ widgetId: id, text: answer })
+    onAnswerSubmit({ widgetId: id, text: answer })
   }
 
   return (
@@ -60,7 +59,7 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
       {(mode === WidgetModes.View || mode === WidgetModes.InAnswerSheet) &&
         <TinyEditorComponent
           content={answer}
-          onChange={(val: string) => onChange(val)}
+          onChange={onChangeWrapper}
         />
       }
       {mode === WidgetModes.View &&
@@ -70,7 +69,7 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
           variant="outlined"
           color="primary"
           size="small"
-          onClick={submitAnswer}>
+          onClick={onSubmitWrappere}>
           {t('submitAnswer')}
         </Button>
       }

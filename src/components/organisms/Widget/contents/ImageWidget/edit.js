@@ -1,32 +1,25 @@
 import {
   Button,
-  Dialog,
   Divider,
+  Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  TextField,
   Stack,
+  TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import UploadFile from '../../../../molecules/UploadFile';
+import UploadFile from 'components/molecules/UploadFile';
 
-import {
-  createAudioWidgetAction,
-  updateAudioWidgetAction,
-} from '../../../../../redux/slices/widget';
-
-function AudioEditWidget({
-  updateAudioWidget,
-  createAudioWidget,
+function ImageEditWidget({
+  onEdit,
+  handleClose,
 
   paperId,
   open,
   link: oldLink,
-  handleClose,
   id: widgetId,
   file: previousFile,
 }) {
@@ -50,20 +43,17 @@ function AudioEditWidget({
         link,
       }
     }
-    if (widgetId) {
-      updateAudioWidget({
-        ...payload,
-        widgetId,
-      })
-    } else {
-      createAudioWidget(payload);
-    }
-    handleClose();
+
+    onEdit({
+      ...payload,
+      widgetId,
+      onSuccess: handleClose,
+    })
   };
 
   return (
     <Dialog disableScrollLock open={open} onClose={handleClose}>
-      <DialogTitle>صوت</DialogTitle>
+      <DialogTitle>{t('image')}</DialogTitle>
       <DialogContent>
         <Stack spacing={2}>
           <UploadFile widgetId={widgetId} paperId={paperId} file={file} setFile={setFile} previousFile={previousFile} />
@@ -71,10 +61,10 @@ function AudioEditWidget({
           <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
           <TextField
             fullWidth
-            label="آدرس صوت"
+            label="آدرس عکس"
             value={link}
             inputProps={{ className: 'ltr-input' }}
-            placeholder="http://example.com/example.mp3"
+            placeholder="http://example.com/example.png"
             onChange={(e) => setLink(e.target.value)}
           />
         </Stack>
@@ -88,7 +78,4 @@ function AudioEditWidget({
   );
 }
 
-export default connect(null, {
-  createAudioWidget: createAudioWidgetAction,
-  updateAudioWidget: updateAudioWidgetAction,
-})(AudioEditWidget);
+export default ImageEditWidget;

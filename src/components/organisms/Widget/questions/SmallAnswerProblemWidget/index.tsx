@@ -1,17 +1,16 @@
 import { Button, Stack, TextField, Typography } from '@mui/material';
-import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, Fragment, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { sendSmallAnswerAction } from '../../../../redux/slices/Paper';
-import TinyPreview from '../../../tiny_editor/react_tiny/Preview';
-import { WidgetModes } from '..';
+import TinyPreview from 'components/tiny_editor/react_tiny/Preview';
+import { WidgetModes } from 'components/organisms/Widget';
 import SmallAnswerProblemEditWidget from './edit';
 import { toast } from 'react-toastify';
 import Confetti from 'react-confetti'
 
 type SmallAnswerProblemWidgetPropsType = {
-  sendSmallAnswer: any;
-  collectData: any;
+  onAnswerChange: any;
+  onAnswerSubmit: any;
+
   id: number;
   mode: WidgetModes;
   text: string;
@@ -20,8 +19,9 @@ type SmallAnswerProblemWidgetPropsType = {
 }
 
 const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
-  sendSmallAnswer,
-  collectData,
+  onAnswerChange,
+  onAnswerSubmit,
+
   id: paperId,
   mode,
   text: problemText,
@@ -36,7 +36,7 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
 
   const changeText = (e) => {
     if (mode === WidgetModes.InAnswerSheet) {
-      collectData('text', e.target.value);
+      onAnswerChange({ text: e.target.value });
     }
     setAnswer(e.target.value);
   }
@@ -58,12 +58,12 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
       setTimeout(() => {
         setDisableSubmitButton(false);
       }, 20000);
-      sendSmallAnswer({ widgetId: paperId, text: answer });
+      onAnswerSubmit({ widgetId: paperId, text: answer });
     }
   }
 
   return (
-    <>
+    <Fragment>
       {hasAnsweredCorrectly &&
         <Confetti recycle={false} tweenDuration={6000} numberOfPieces={800} />
       }
@@ -118,16 +118,9 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
           }
         </Stack>
       </Stack>
-    </>
+    </Fragment>
   );
 };
 
-const mapStateToProps = (state) => ({
-  playerId: state.currentState.player?.id,
-});
-
-export default connect(mapStateToProps, {
-  sendSmallAnswer: sendSmallAnswerAction,
-})(SmallAnswerProblemWidget);
-
 export { SmallAnswerProblemEditWidget };
+export default SmallAnswerProblemWidget;

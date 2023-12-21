@@ -13,40 +13,33 @@ import {
   AddCircle as AddCircleIcon,
 } from '@mui/icons-material';
 import React, { FC, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import {
-  createMultiChoicesQuestionWidgetAction,
-  updateMultiChoicesQuestionWidgetAction,
-} from 'redux/slices/Paper';
 import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 import { toPersianNumber } from 'utils/translateNumber';
 import { ChoiceType } from 'types/widgets';
 import MultiChoiceQuestionChoice from 'components/molecules/MultiChoiceQuestionChoice';
 
 type MultiChoiceQuestionEditWidgetPropsType = {
+  onEdit: any;
+
   text: string;
   open: boolean;
   handleClose: any;
   choices: any[];
-  initQuestion: any;
-  initAnswer: any;
   paperId: any;
   id: string;
-  createMultiChoicesQuestionWidget: any;
-  updateMultiChoicesQuestionWidget: any;
 }
 
 const MultiChoiceQuestionEditWidget: FC<MultiChoiceQuestionEditWidgetPropsType> = ({
+  onEdit,
+
   text: previousQuestionText,
   choices: previousQuestionChoices,
   paperId,
   id: widgetId,
   handleClose,
   open,
-  createMultiChoicesQuestionWidget,
-  updateMultiChoicesQuestionWidget,
 }) => {
   const t = useTranslate();
 
@@ -60,22 +53,13 @@ const MultiChoiceQuestionEditWidget: FC<MultiChoiceQuestionEditWidgetPropsType> 
       ]);
 
   const handleSubmit = () => {
-    if (widgetId) {
-      updateMultiChoicesQuestionWidget({
-        paper: paperId,
-        text: questionText,
-        choices: questionChoices,
-        widgetId,
-        onSuccess: handleClose,
-      })
-    } else {
-      createMultiChoicesQuestionWidget({
-        paper: paperId,
-        text: questionText,
-        choices: questionChoices,
-        onSuccess: handleClose,
-      });
-    }
+    onEdit({
+      paper: paperId,
+      text: questionText,
+      choices: questionChoices,
+      widgetId,
+      onSuccess: handleClose,
+    });
   };
 
   const changeChoiceText = (newValue, choiceIndex) => {
@@ -150,7 +134,4 @@ const MultiChoiceQuestionEditWidget: FC<MultiChoiceQuestionEditWidgetPropsType> 
   );
 }
 
-export default connect(null, {
-  createMultiChoicesQuestionWidget: createMultiChoicesQuestionWidgetAction,
-  updateMultiChoicesQuestionWidget: updateMultiChoicesQuestionWidgetAction,
-})(MultiChoiceQuestionEditWidget);
+export default MultiChoiceQuestionEditWidget;

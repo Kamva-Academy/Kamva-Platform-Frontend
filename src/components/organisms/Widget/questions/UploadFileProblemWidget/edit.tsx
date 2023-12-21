@@ -3,25 +3,19 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import React, { useState, FC } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import {
-  createUploadFileWidgetAction,
-  updateUploadFileWidgetAction,
-} from '../../../../redux/slices/widget';
-import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
+import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 
 type UploadFileProblemEditWidgetPropsType = {
-  updateUploadFileWidget: any;
-  createUploadFileWidget: any;
+  onEdit: any;
   handleClose: any;
+
   open: boolean;
   text: string;
   paperId: number;
@@ -30,8 +24,7 @@ type UploadFileProblemEditWidgetPropsType = {
 }
 
 const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
-  updateUploadFileWidget,
-  createUploadFileWidget,
+  onEdit,
   handleClose,
 
   open,
@@ -45,28 +38,13 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleSubmit = () => {
-    if (widgetId) {
-      updateUploadFileWidget({
-        paper: paperId,
-        text: text,
-        widgetId,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    } else {
-      createUploadFileWidget({
-        paper: paperId,
-        text: text,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    }
+    onEdit({
+      paper: paperId,
+      text: text,
+      widgetId,
+      solution,
+      onSuccess: handleClose,
+    });
   };
 
   return (
@@ -100,7 +78,4 @@ const UploadFileProblemEditWidget: FC<UploadFileProblemEditWidgetPropsType> = ({
   );
 }
 
-export default connect(null, {
-  createUploadFileWidget: createUploadFileWidgetAction,
-  updateUploadFileWidget: updateUploadFileWidgetAction,
-})(UploadFileProblemEditWidget);
+export default UploadFileProblemEditWidget;

@@ -215,26 +215,27 @@ export const updateAudioWidgetAction = (props) =>
     widget_type: 'Audio',
   });
 
-export const createMiniGameWidgetAction = ({ paper, link }) =>
+export const createMiniGameWidgetAction = ({ paper, link, onSuccess }) =>
   createWidgetAction({
     paper,
     widget_type: 'Game',
     link,
+    onSuccess,
   });
 
-export const updateMiniGameWidgetAction = ({ paper, link, widgetId }) =>
+export const updateMiniGameWidgetAction = ({ paper, link, widgetId, onSuccess }) =>
   updateWidgetAction({
     paper,
     widget_type: 'Game',
     link,
     widgetId,
+    onSuccess,
   });
 
 export const createImageWidgetAction = (props) =>
   createWidgetAction({
     ...props,
     widget_type: 'Image',
-
   });
 
 export const updateImageWidgetAction = (props) =>
@@ -243,19 +244,21 @@ export const updateImageWidgetAction = (props) =>
     widget_type: 'Image',
   });
 
-export const createTextWidgetAction = ({ paper, text }) =>
+export const createTextWidgetAction = ({ paper, text, onSuccess }) =>
   createWidgetAction({
     paper,
     widget_type: 'TextWidget',
     text,
+    onSuccess,
   });
 
-export const updateTextWidgetAction = ({ paper, text, widgetId }) =>
+export const updateTextWidgetAction = ({ paper, text, widgetId, onSuccess }) =>
   updateWidgetAction({
     paper,
     widget_type: 'TextWidget',
     text,
     widgetId,
+    onSuccess,
   });
 
 export const createDetailBoxWidgetAction = ({ paper, title, detail }) =>
@@ -275,21 +278,23 @@ export const updateDetailBoxWidgetAction = ({ paper, title, detail, widgetId }) 
     widgetId,
   });
 
-export const createUploadFileWidgetAction = ({ paper, text, solution }) =>
+export const createUploadFileWidgetAction = ({ paper, text, solution, onSuccess }) =>
   createWidgetAction({
     paper,
     widget_type: 'UploadFileProblem',
     text,
     solution,
+    onSuccess,
   });
 
-export const updateUploadFileWidgetAction = ({ paper, text, widgetId, solution }) =>
+export const updateUploadFileWidgetAction = ({ paper, text, widgetId, solution, onSuccess }) =>
   updateWidgetAction({
     paper,
     widget_type: 'UploadFileProblem',
     text,
     widgetId,
     solution,
+    onSuccess,
   });
 
 export const createSmallAnswerQuestionWidgetAction = ({ paper, text, solution }) =>
@@ -317,21 +322,23 @@ export const updateSmallAnswerQuestionWidgetAction = ({ paper, text, widgetId })
     widgetId,
   });
 
-export const createBigAnswerQuestionWidgetAction = ({ paper, text, solution }) =>
+export const createBigAnswerQuestionWidgetAction = ({ paper, text, solution, onSuccess }) =>
   createWidgetAction({
     paper,
     widget_type: 'BigAnswerProblem',
     text,
     solution,
+    onSuccess,
   })
 
-export const updateBigAnswerQuestionWidgetAction = ({ paper, text, widgetId, solution }) =>
+export const updateBigAnswerQuestionWidgetAction = ({ paper, text, widgetId, solution, onSuccess }) =>
   updateWidgetAction({
     paper,
     widget_type: 'BigAnswerProblem',
     text,
     widgetId,
     solution,
+    onSuccess,
   });
 
 export const createMultiChoicesQuestionWidgetAction = ({ paper, text, solution, choices }) =>

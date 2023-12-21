@@ -5,20 +5,27 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import React from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { deleteWidgetAction } from '../../../redux/slices/Paper';
 
 function DeleteWidgetDialog({
   handleClose,
-  deleteWidget,
-
+  onDelete,
+  
   paperId,
   open,
   widgetId
 }) {
   const t = useTranslate();
+
+  const onDeleteWrapper = () => {
+    onDelete({
+      widgetId,
+      paperId,
+      onSuccess: handleClose,
+    });
+  }
+
   return (
     <Dialog disableScrollLock open={open} onClose={handleClose}>
       <DialogTitle>{t('removeWidget')}</DialogTitle>
@@ -30,10 +37,7 @@ function DeleteWidgetDialog({
           {'لغو'}
         </Button>
         <Button
-          onClick={() => {
-            deleteWidget({ widgetId, paperId });
-            handleClose();
-          }}
+          onClick={onDeleteWrapper}
           color="primary"
           variant="contained">
           {'حذف'}
@@ -43,6 +47,4 @@ function DeleteWidgetDialog({
   );
 }
 
-export default connect(null, { deleteWidget: deleteWidgetAction })(
-  DeleteWidgetDialog
-);
+export default DeleteWidgetDialog;

@@ -7,16 +7,17 @@ import CreateWidgetDialog from 'components/organisms/dialogs/CreateWidgetDialog'
 
 type EditPaperPropsType = {
   widgets: any[];
-  paperId?: number;
+  paperId: number | null;
   mode?: 'contents' | 'problems' | 'all';
-  collectData?: any;
+  addWidget?: any;
+  removeWidget?: any;
 }
 
-const EditPaper: FC<EditPaperPropsType> = ({ widgets, paperId, mode = 'all', collectData }) => {
+const EditPaper: FC<EditPaperPropsType> = ({ widgets, paperId, mode = 'all', addWidget, removeWidget }) => {
   const t = useTranslate();
   const [openCreateWidgetDialog, setOpenCreateWidgetDialog] = useState(false);
 
-  if (!paperId && !collectData) {
+  if (!paperId && !addWidget) {
     throw Error('Invalid Props In Editing Paper');
   }
 
@@ -34,7 +35,7 @@ const EditPaper: FC<EditPaperPropsType> = ({ widgets, paperId, mode = 'all', col
                 paperId={paperId}
                 widget={widget}
                 mode={WidgetModes.Edit}
-                collectData={collectData}
+                collectDataForPaper={addWidget}
               />
             ))}
           </Fragment>
@@ -54,6 +55,7 @@ const EditPaper: FC<EditPaperPropsType> = ({ widgets, paperId, mode = 'all', col
         paperId={paperId}
         open={openCreateWidgetDialog}
         handleClose={() => setOpenCreateWidgetDialog(false)}
+        collectDataForPaper={addWidget}
       />
     </Fragment>
   );

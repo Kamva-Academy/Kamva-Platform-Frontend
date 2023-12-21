@@ -7,18 +7,11 @@ import {
   DialogTitle,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-
-import {
-  createTextWidgetAction,
-  updateTextWidgetAction,
-} from '../../../../redux/slices/widget';
-import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
+import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 
 function TextEditWidget({
-  updateTextWidget,
-  createTextWidget,
+  onEdit,
 
   open,
   handleClose,
@@ -30,19 +23,12 @@ function TextEditWidget({
   const [text, setText] = useState(oldText);
 
   const handleClick = () => {
-    if (widgetId) {
-      updateTextWidget({
-        paper: paperId,
-        text,
-        widgetId,
-      })
-    } else {
-      createTextWidget({
-        paper: paperId,
-        text
-      });
-    }
-    handleClose();
+    onEdit({
+      paper: paperId,
+      text,
+      widgetId,
+      onSuccess: handleClose,
+    })
   };
 
   return (
@@ -55,7 +41,6 @@ function TextEditWidget({
       <DialogContent>
         <DialogContentText>متن مورد نظر خود را وارد کنید.</DialogContentText>
         <TinyEditorComponent
-          // id={`edit-question-${Math.floor(Math.random() * 1000)}`}
           content={text}
           onChange={(text) => setText(text)}
         />
@@ -69,10 +54,4 @@ function TextEditWidget({
   );
 }
 
-export default connect(
-  null,
-  {
-    createTextWidget: createTextWidgetAction,
-    updateTextWidget: updateTextWidgetAction,
-  }
-)(TextEditWidget);
+export default TextEditWidget;

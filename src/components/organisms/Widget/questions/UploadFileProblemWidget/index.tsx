@@ -7,7 +7,6 @@ import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
-  uploadFileAnswerAction,
   makeAnswerEmptyAction,
 } from 'redux/slices/Paper';
 import UploadFileProblemEditWidget from './edit';
@@ -15,8 +14,9 @@ import { WidgetModes } from 'components/organisms/Widget';
 import { toast } from 'react-toastify';
 
 type UploadFileProblemWidgetPropsType = {
-  collectData: any;
-  uploadFileAnswer: any;
+  onAnswerChange: any;
+  onAnswerSubmit: any;
+
   makeAnswerEmpty: any;
   id: number;
   text: string;
@@ -26,15 +26,15 @@ type UploadFileProblemWidgetPropsType = {
 }
 
 const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
-  collectData,
-  uploadFileAnswer,
+  onAnswerChange,
+  onAnswerSubmit,
+
   makeAnswerEmpty,
   id: widgetId,
   text = 'محل بارگذاری فایل:',
   last_submitted_answer,
   isFetching,
   mode,
-  ...props
 }) => {
   const t = useTranslate();
   const [fileLink, setFileLink] = useState(null);
@@ -59,7 +59,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
       toast.error('حجم فایل ارسالی باید کمتر از ۱۰ مگابایت باشد.')
       return;
     }
-    uploadFileAnswer({
+    onAnswerSubmit({
       problemId: widgetId,
       // fileName: file.name,
       answerFile: selectedFile,
@@ -67,7 +67,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
       if (response.type?.endsWith('fulfilled')) {
         setFileLink(response.payload?.response?.answer_file);
         if (mode === WidgetModes.InAnswerSheet) {
-          collectData('upload_file_answer', response.payload?.response?.id);
+          onAnswerChange({ upload_file_answer: response.payload?.response?.id });
         }
       }
     })
@@ -79,7 +79,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
       if (response.type?.endsWith('fulfilled')) {
         setFileLink(null);
         if (mode === WidgetModes.InAnswerSheet) {
-          collectData('upload_file_answer', null);
+          onAnswerChange({ 'upload_file_answer': null });
         }
       }
     });
@@ -146,7 +146,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  uploadFileAnswer: uploadFileAnswerAction,
   makeAnswerEmpty: makeAnswerEmptyAction,
 })(UploadFileProblemWidget);
 

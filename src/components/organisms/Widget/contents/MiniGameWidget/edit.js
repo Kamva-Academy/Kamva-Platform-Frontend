@@ -5,26 +5,17 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  MenuItem,
   TextField,
-  Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { Link } from 'react-router-dom'
 
-import {
-  createMiniGameWidgetAction,
-  updateMiniGameWidgetAction,
-} from '../../../../redux/slices/widget';
 
 function MiniGameEditWidget({
-  open,
   handleClose,
-  updateMiniGameWidget,
-  createMiniGameWidget,
+  onEdit,
 
+  open,
   paperId,
   link: oldLink,
   id: widgetId,
@@ -32,20 +23,13 @@ function MiniGameEditWidget({
   const [link, setLink] = useState(oldLink);
   const t = useTranslate();
 
-  const handleClick = () => {
-    if (widgetId) {
-      updateMiniGameWidget({
-        paper: paperId,
-        link,
-        widgetId,
-      })
-    } else {
-      createMiniGameWidget({
-        paper: paperId,
-        link
-      });
-    }
-    handleClose();
+  const onEditWrapper = () => {
+    onEdit({
+      paper: paperId,
+      link,
+      widgetId,
+      onSuccess: handleClose,
+    })
   };
 
   return (
@@ -64,7 +48,7 @@ function MiniGameEditWidget({
           onChange={(e) => setLink(e.target.value)} />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} color="primary" variant="contained">
+        <Button onClick={onEditWrapper} color="primary" variant="contained">
           {t('submit')}
         </Button>
       </DialogActions>
@@ -72,7 +56,4 @@ function MiniGameEditWidget({
   );
 }
 
-export default connect(null, {
-  createMiniGameWidget: createMiniGameWidgetAction,
-  updateMiniGameWidget: updateMiniGameWidgetAction,
-})(MiniGameEditWidget);
+export default MiniGameEditWidget;

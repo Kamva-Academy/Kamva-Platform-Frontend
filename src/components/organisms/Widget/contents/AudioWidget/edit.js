@@ -1,26 +1,21 @@
 import {
   Button,
-  Divider,
   Dialog,
+  Divider,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Stack,
   TextField,
+  Stack,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import UploadFile from '../../../molecules/UploadFile';
-import {
-  createImageWidgetAction,
-  updateImageWidgetAction,
-} from '../../../../redux/slices/widget';
+import UploadFile from 'components/molecules/UploadFile';
 
-function ImageEditWidget({
-  createImageWidget,
-  updateImageWidget,
+
+function AudioEditWidget({
+  onEdit,
   handleClose,
 
   paperId,
@@ -49,20 +44,16 @@ function ImageEditWidget({
         link,
       }
     }
-    if (widgetId) {
-      updateImageWidget({
-        ...payload,
-        widgetId,
-      })
-    } else {
-      createImageWidget(payload);
-    }
-    handleClose();
+    onEdit({
+      ...payload,
+      widgetId,
+      onSuccess: handleClose,
+    });
   };
 
   return (
     <Dialog disableScrollLock open={open} onClose={handleClose}>
-      <DialogTitle>{t('image')}</DialogTitle>
+      <DialogTitle>صوت</DialogTitle>
       <DialogContent>
         <Stack spacing={2}>
           <UploadFile widgetId={widgetId} paperId={paperId} file={file} setFile={setFile} previousFile={previousFile} />
@@ -70,10 +61,10 @@ function ImageEditWidget({
           <DialogContentText>{t('uploadFileFillUrl')}</DialogContentText>
           <TextField
             fullWidth
-            label="آدرس عکس"
+            label="آدرس صوت"
             value={link}
             inputProps={{ className: 'ltr-input' }}
-            placeholder="http://example.com/example.png"
+            placeholder="http://example.com/example.mp3"
             onChange={(e) => setLink(e.target.value)}
           />
         </Stack>
@@ -87,10 +78,4 @@ function ImageEditWidget({
   );
 }
 
-export default connect(
-  null,
-  {
-    createImageWidget: createImageWidgetAction,
-    updateImageWidget: updateImageWidgetAction,
-  }
-)(ImageEditWidget);
+export default AudioEditWidget;

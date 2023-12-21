@@ -2,28 +2,30 @@ import React, { FC, Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Stack } from '@mui/material';
 
-import { sendMultiChoiceAnswerAction } from 'redux/slices/Paper';
 import TinyPreview from 'components/tiny_editor/react_tiny/Preview';
-import { WidgetModes } from '..';
+import { WidgetModes } from 'components/organisms/Widget';
 import MultiChoiceQuestionEditWidget from './edit';
 export { MultiChoiceQuestionEditWidget };
 
 type MultiChoiceQuestionWidgetPropsType = {
+  onAnswerSubmit: any;
+  onAnswerChange: any;
   id: string;
   text: string;
   choices: any[];
   last_submitted_answer: any;
   mode: WidgetModes;
-  sendMultiChoiceAnswer: any;
 }
 
 const MultiChoiceQuestionWidget: FC<MultiChoiceQuestionWidgetPropsType> = ({
+  onAnswerSubmit,
+  onAnswerChange,
+
   id: widgetId,
   text: questionText,
   choices: questionChoices,
   last_submitted_answer,
   mode,
-  sendMultiChoiceAnswer,
 }) => {
   const [selectedChoices, setSelectedChoices] = useState<any[]>([]);
 
@@ -31,6 +33,12 @@ const MultiChoiceQuestionWidget: FC<MultiChoiceQuestionWidgetPropsType> = ({
     if (last_submitted_answer?.choices)
       setSelectedChoices(last_submitted_answer.choices)
   }, [last_submitted_answer?.choices])
+
+  const onAnswerSubmitWrapper = (choice) => {
+    if (mode === WidgetModes.Edit) return;
+    setSelectedChoices([choice])
+    onAnswerSubmit({ problemId: widgetId, selectedChoices: [choice] });
+  }
 
   return (
     <Fragment>
@@ -62,11 +70,7 @@ const MultiChoiceQuestionWidget: FC<MultiChoiceQuestionWidgetPropsType> = ({
                 }
               } : {})
             }}
-            onClick={() => {
-              if (mode === WidgetModes.Edit) return;
-              setSelectedChoices([choice])
-              sendMultiChoiceAnswer({ problemId: widgetId, selectedChoices: [choice] });
-            }}>
+            onClick={() => onAnswerSubmitWrapper(choice)}>
             {choice.text}
           </Button>
         )}
@@ -75,10 +79,4 @@ const MultiChoiceQuestionWidget: FC<MultiChoiceQuestionWidgetPropsType> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  playerId: state.currentState.player?.id,
-});
-
-export default connect(mapStateToProps, {
-  sendMultiChoiceAnswer: sendMultiChoiceAnswerAction,
-})(MultiChoiceQuestionWidget);
+export default MultiChoiceQuestionWidget;

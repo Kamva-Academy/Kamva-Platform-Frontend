@@ -1,18 +1,18 @@
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import AreYouSure from 'components/organisms/dialogs/AreYouSure';
 import Widget from 'components/organisms/Widget';
 import {
-  getOneEventInfoAction,
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
 } from 'redux/slices/events';
 import { WidgetModes } from 'components/organisms/Widget';
 import ProgramInfo from 'components/organisms/ProgramInfo';
 import { ProgramType, RegistrationFormType } from 'types/models';
+import useCollectWidgetsAnswers from 'components/Hooks/useCollectWidgetsAnswers';
 
 const ANSWER_TYPES = {
   SmallAnswerProblem: 'SmallAnswer',
@@ -30,22 +30,16 @@ type RegistrationFormPropsType = {
   program: ProgramType;
   registrationForm: RegistrationFormType;
   submitRegistrationForm: any;
-  getOneEventInfo: any;
 }
 
 const RegistrationForm: FC<RegistrationFormPropsType> = ({
   program,
   registrationForm,
   submitRegistrationForm,
-  getOneEventInfo,
 }) => {
   const { programId } = useParams();
   const [isDialogOpen, setDialogStatus] = useState(false);
-  const [answers, setAnswers] = useState([]);
-
-  useEffect(() => {
-    getOneEventInfo({ programId });
-  }, []);
+  const { answers, setAnswers, collectAnswers } = useCollectWidgetsAnswers([]);
 
   const submit = () => {
     submitRegistrationForm({
@@ -53,34 +47,6 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
       answers,
       programId,
     });
-  };
-
-  console.log(answers);
-
-  const collectAnswers = (widgetId: number, widgetType: string) => (fieldName: string, answer: any) => {
-    setAnswers(answers => {
-      let isFound = false;
-      const newAnswers = [...answers];
-      for (let i = 0; i < newAnswers.length; i++) {
-        if (newAnswers[i].problem === widgetId) {
-          if (answer) {
-            newAnswers[i][fieldName] = answer;
-          } else {
-            newAnswers.splice(i, 1);
-          }
-          isFound = true;
-          break;
-        }
-      }
-      if (!isFound) {
-        newAnswers.push({
-          [fieldName]: answer,
-          answer_type: widgetType,
-          problem: widgetId,
-        });
-      }
-      return newAnswers;
-    })
   };
 
   const isSubmitButtonDisabled = (): { isDisabled: boolean; message: string; } => {
@@ -108,7 +74,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
             <Widget
               coveredWithPaper={false}
               mode={WidgetModes.InAnswerSheet}
-              collectData={collectAnswers(widget.id, ANSWER_TYPES[widget.widget_type])}
+              collectDataForPaper={collectAnswers({ widgetId: widget.id, widgetType: ANSWER_TYPES[widget.widget_type] })}
               widget={widget}
             />
           </Box>
@@ -146,6 +112,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getOneRegistrationForm: getOneRegistrationFormAction,
-  getOneEventInfo: getOneEventInfoAction,
   submitRegistrationForm: submitRegistrationFormAction,
 })(RegistrationForm);

@@ -8,17 +8,11 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import {
-  createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidgetAction,
-} from '../../../../redux/slices/Paper';
-import TinyEditorComponent from '../../../tiny_editor/react_tiny/TinyEditorComponent';
+import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 
 function SmallAnswerProblemEditWidget({
-  createSmallAnswerProblemWidget,
-  updateSmallAnswerProblemWidget,
+  onEdit,
   handleClose,
 
   open,
@@ -34,30 +28,14 @@ function SmallAnswerProblemEditWidget({
   const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleSubmit = () => {
-    if (widgetId) {
-      updateSmallAnswerProblemWidget({
-        widgetId,
-        paper: paperId,
-        text: text,
-        answer,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    } else {
-      createSmallAnswerProblemWidget({
-        paper: paperId,
-        text: text,
-        answer,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    }
+    onEdit({
+      widgetId,
+      paper: paperId,
+      text: text,
+      answer,
+      solution,
+      onSuccess: handleClose,
+    });
   };
 
   return (
@@ -99,7 +77,4 @@ function SmallAnswerProblemEditWidget({
   );
 }
 
-export default connect(null, {
-  createSmallAnswerProblemWidget: createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidget: updateSmallAnswerProblemWidgetAction,
-})(SmallAnswerProblemEditWidget);
+export default SmallAnswerProblemEditWidget;

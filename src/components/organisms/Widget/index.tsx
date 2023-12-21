@@ -3,12 +3,13 @@ import { Delete as DeleteIcon, Edit as EditIcon, Help as HelpIcon } from '@mui/i
 import React, { FC, useMemo, useState } from 'react';
 
 import DeleteWidgetDialog from 'components/organisms/dialogs/DeleteWidgetDialog';
-import WIDGET_TYPE_MAPPER from 'components/organisms/Widget/WidgetTypeMapper';
 import EditHintsDialog from 'components/organisms/dialogs/EditHintsDialog';
 import { toPersianNumber } from 'utils/translateNumber';
 import WidgetHint from 'components/molecules/WidgetHint';
+import useWidgetFactory from './useWidgetFactory';
 
 export enum WidgetModes {
+  Create,
   View,
   Edit,
   Review,
@@ -42,9 +43,9 @@ enum AnswerType2WidgetType {
 type WidgetPropsType = {
   widget: any;
   mode?: WidgetModes;
-  paperId?: number;
-  collectData?: any;
+  paperId?: number | null;
   coveredWithPaper?: boolean;
+  collectDataForPaper?: any;
 }
 
 const Widget: FC<WidgetPropsType> = ({
@@ -52,13 +53,27 @@ const Widget: FC<WidgetPropsType> = ({
   mode = WidgetModes.View,
   paperId,
   coveredWithPaper = true,
-  collectData,
+  collectDataForPaper,
 }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openEditHintDialog, setEditHintDialog] = useState(false);
   const widgetType = widget.widget_type || AnswerType2WidgetType[widget.answer_type];
-  const { WidgetComponent, EditWidgetDialog } = WIDGET_TYPE_MAPPER[widgetType];
+  const {
+    onDelete,
+    onEdit,
+    onAnswerChange,
+    onAnswerSubmit,
+    onViwe,
+    WidgetComponent,
+    EditWidgetDialog,
+  } = useWidgetFactory({
+    widgetId: widget.id,
+    paperId,
+    widgetType,
+    mode,
+    collectDataForPaper,
+  });
 
   const Cover = useMemo(() =>
     coveredWithPaper
@@ -104,12 +119,14 @@ const Widget: FC<WidgetPropsType> = ({
               paperId={paperId}
               open={openEditDialog}
               handleClose={() => setOpenEditDialog(false)}
+              onEdit={onEdit}
             />
             <DeleteWidgetDialog
               paperId={paperId}
               widgetId={widget.id}
               open={openDeleteWidgetDialog}
               handleClose={() => setOpenDeleteWidgetDialog(false)}
+              onDelete={onDelete}
             />
             <EditHintsDialog
               hints={widget.hints}
@@ -121,7 +138,7 @@ const Widget: FC<WidgetPropsType> = ({
         }
         {(mode === WidgetModes.View && widget?.hints?.length) ? <WidgetHint hints={widget.hints} /> : null}
       </Stack>
-      <WidgetComponent {...widget} mode={mode} collectData={collectData} />
+      <WidgetComponent {...widget} mode={mode} onAnswerSubmit={onAnswerSubmit} onAnswerChange={onAnswerChange} />
     </Cover>
   );
 };
