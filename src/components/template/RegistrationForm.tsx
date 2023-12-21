@@ -43,7 +43,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
 
   const submit = () => {
     submitRegistrationForm({
-      id: program.registration_form,
+      id: registrationForm.id,
       answers,
       programId,
     });
@@ -65,6 +65,8 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
     }
   }
 
+  if (!program || !registrationForm) return null;
+
   return (
     <Stack spacing={2}>
       <ProgramInfo program={program} />
@@ -72,6 +74,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
         {registrationForm.widgets.map((widget) => (
           <Box key={widget.id}>
             <Widget
+              paperId={registrationForm.id}
               coveredWithPaper={false}
               mode={WidgetModes.InAnswerSheet}
               collectDataForPaper={collectAnswers({ widgetId: widget.id, widgetType: ANSWER_TYPES[widget.widget_type] })}

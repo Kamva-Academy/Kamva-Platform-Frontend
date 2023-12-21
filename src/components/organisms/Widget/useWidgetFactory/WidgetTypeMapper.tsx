@@ -32,6 +32,8 @@ import {
   updateVideoWidgetAction,
   createUploadFileWidgetAction,
   updateUploadFileWidgetAction,
+  createDetailBoxWidgetAction,
+  updateDetailBoxWidgetAction,
 } from 'redux/slices/widget';
 
 import {
@@ -94,12 +96,14 @@ const WIDGET_TYPE_MAPPER = {
     createAction: createTextWidgetAction,
     updateAction: updateTextWidgetAction,
   },
-  // DetailBoxWidget: {
-  //   WidgetComponent: DetailBoxWidget,
-  //   EditWidgetDialog: DetailBoxEditDialog,
-  //   label: 'نکته',
-  //   backendType: 'DetailBoxWidget',
-  // },
+  DetailBoxWidget: {
+    WidgetComponent: DetailBoxWidget,
+    EditWidgetDialog: DetailBoxEditDialog,
+    label: 'نکته',
+    backendType: 'DetailBoxWidget',
+    createAction: createDetailBoxWidgetAction,
+    updateAction: updateDetailBoxWidgetAction,
+  },
   Image: {
     WidgetComponent: ImageWidget,
     EditWidgetDialog: ImageEditWidget,

@@ -62,7 +62,8 @@ function RegistrationReceipt({
           <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>
             {answers?.length > 0 ?
               answers.map((answer, index) => (
-                <Widget key={index} coveredWithPaper={false} mode={WidgetModes.Review} widget={{ last_submitted_answer: answer, ...answer }} />
+                // todo: bug: answer should not use <Widget/> component
+                <Widget paperId={null} key={index} coveredWithPaper={false} mode={WidgetModes.Review} widget={{ last_submitted_answer: answer, ...answer }} />
               )) :
               <Typography variant='h4' sx={{ padding: 2 }} textAlign='center'>
                 {'پاسخی در این رسید ثبت‌نام وجود ندارد!'}

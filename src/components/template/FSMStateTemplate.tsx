@@ -28,7 +28,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
     questions.map((widget, index) => (
       <Stack key={widget.id}>
         <Divider style={{ marginBottom: 20 }} />
-        <Widget coveredWithPaper={false} key={widget.id} widget={widget} />
+        <Widget paperId={state.id} coveredWithPaper={false} key={widget.id} widget={widget} />
       </Stack>
     )), [questions]);
 
@@ -39,7 +39,7 @@ const FSMStateTemplate: FC<FSMStateTemplatePropsType> = ({ state = {}, playerId 
   const notQuestionWidgets = useMemo(() =>
     notQuestions.map((widget) => (
       <Stack key={widget.id}>
-        <Widget coveredWithPaper={false} widget={widget} />
+        <Widget paperId={state.id} coveredWithPaper={false} widget={widget} />
       </Stack>
     )), [notQuestions]);
 

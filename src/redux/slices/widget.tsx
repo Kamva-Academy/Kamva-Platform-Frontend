@@ -261,20 +261,20 @@ export const updateTextWidgetAction = ({ paper, text, widgetId, onSuccess }) =>
     onSuccess,
   });
 
-export const createDetailBoxWidgetAction = ({ paper, title, detail }) =>
+export const createDetailBoxWidgetAction = ({ paperId, widgetId, title, details }) =>
   createWidgetAction({
-    paper,
+    paper: paperId,
     widget_type: 'DetailBoxWidget',
     title,
-    detail,
+    details,
   });
 
-export const updateDetailBoxWidgetAction = ({ paper, title, detail, widgetId }) =>
+export const updateDetailBoxWidgetAction = ({ paperId, widgetId, title, details }) =>
   updateWidgetAction({
-    paper,
+    paper: paperId,
     widget_type: 'DetailBoxWidget',
     title,
-    detail,
+    details,
     widgetId,
   });
 

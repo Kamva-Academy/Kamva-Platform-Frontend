@@ -60,7 +60,8 @@ function Correction({
         <Grid item container spacing={2} xs={12} md={8}>
           <Paper sx={{ width: '100%', padding: 2 }}>
             {problemWithAnswer &&
-              <Widget coveredWithPaper={false} mode={WidgetModes.Review} widget={problemWithAnswer} />
+              // todo: bug: answer should not use <Widget/> component
+              <Widget paperId={null} coveredWithPaper={false} mode={WidgetModes.Review} widget={problemWithAnswer} />
             }
           </Paper>
         </Grid>

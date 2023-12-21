@@ -16,6 +16,8 @@ import useCollectWidgetsData from 'components/Hooks/useCollectWidgetsData';
 const DetailBoxEditDialog = ({
   onEdit,
 
+  paperId,
+  id: widgetId,
   open,
   handleClose,
   title: previousTitle,
@@ -26,7 +28,15 @@ const DetailBoxEditDialog = ({
   const { widgets, setWidgets, addWidget, removeWidget } = useCollectWidgetsData(details?.widgets || []);
 
   const onSubmitWrapper = () => {
-    onEdit({ title, widgets })
+    onEdit({
+      paperId,
+      widgetId,
+      title,
+      details: {
+        paper_type: 'General',
+        widgets,
+      }
+    })
   };
 
   return (
