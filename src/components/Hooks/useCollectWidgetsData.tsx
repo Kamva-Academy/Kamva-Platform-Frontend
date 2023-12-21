@@ -9,7 +9,6 @@ const useCollectWidgetsData = (initialWidgets: any[]) => {
   const [widgets, setWidgets] = useState(initialWidgets);
 
   const addWidget = ({ widgetType }: collectDataPropsType) => ({ onSuccess, ...widgetData }) => {
-    console.log(widgets, widgetType);
     setWidgets([
       ...widgets,
       {

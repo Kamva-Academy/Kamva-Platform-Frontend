@@ -29,8 +29,6 @@ const DetailBoxEditDialog = ({
     onEdit({ title, widgets })
   };
 
-  console.log(widgets)
-
   return (
     <Dialog disableScrollLock
       open={open}
