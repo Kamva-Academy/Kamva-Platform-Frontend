@@ -1,5 +1,5 @@
 import { Stack, Grid, Button } from '@mui/material';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -9,12 +9,8 @@ import {
   getOneRegistrationFormAction,
 } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
-import Form from 'components/template/RegistrationForm';
-import Status from 'components/template/RegistrationStatus';
-import Payment from 'components/template/Payment';
-import { RegistrationStepNameType, RegistrationStepType } from 'types/global';
 import { ProgramType, RegistrationFormType } from 'types/models';
-import Profiles from 'components/template/Profile';
+import useRegistrationSteps from 'components/Hooks/useRegistrationSteps';
 
 type RegistrationProcessPropsType = {
   registrationForm: RegistrationFormType;
@@ -33,85 +29,11 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
 }) => {
   const navigate = useNavigate();
   const { programId } = useParams();
-  const [currentStepName, _setCurrentStepName] = useState<RegistrationStepNameType>('personal-profile');
-  const [lastActiveStepName, _setLastActiveStepName] = useState<RegistrationStepNameType>('personal-profile');
-  const [steps, setSteps] = useState<RegistrationStepType[]>([])
-
-  const goToStep = (destinationStepName: RegistrationStepNameType) => {
-    _setCurrentStepName(destinationStepName);
-    const indexOfLastActiveStep = steps.indexOf(steps.find(step => step.name === lastActiveStepName));
-    const indexOfDestinationStep = steps.indexOf(steps.find(step => step.name === destinationStepName));
-    if (indexOfDestinationStep > indexOfLastActiveStep) {
-      _setLastActiveStepName(destinationStepName);
-    }
-  }
-
-  const goToNextStep = () => {
-    const nextStepName = steps[steps.indexOf(steps.find(step => step.name === currentStepName)) + 1].name;
-    goToStep(nextStepName);
-  }
-
-  const getRegistrationSteps = () => {
-    const steps: RegistrationStepType[] = [];
-
-    steps.push({
-      name: 'personal-profile',
-      label: 'تکمیل مشخصات شخصی',
-      component: <Profiles type='personal' onSuccess={() => goToNextStep()} />,
-      onClick: () => goToStep('personal-profile'),
-    })
-
-    if (program.audience_type === 'Student') {
-      steps.push({
-        name: 'student-profile',
-        label: 'تکمیل مشخصات دانش‌آموزی',
-        component: <Profiles type='student' onSuccess={() => goToNextStep()} />,
-        onClick: () => goToStep('student-profile')
-      })
-    }
-
-    if (program.audience_type === 'Academic') {
-      steps.push({
-        name: 'academic-profile',
-        label: 'تکمیل مشخصات دانشجویی',
-        component: <Profiles type='academic' onSuccess={() => goToNextStep()} />,
-        onClick: () => goToStep('academic-profile')
-      })
-    }
-
-    steps.push({
-      name: 'form',
-      label: 'تکمیل فرم ثبت‌نام',
-      component: <Form />,
-      onClick: () => goToStep('form')
-    })
-
-    if (registrationForm.accepting_status == 'Manual') {
-      steps.push({
-        name: 'status',
-        label: 'وضعیت ثبت‌نام',
-        component: <Status />,
-        onClick: () => goToStep('status'),
-      })
-    }
-
-    if (program.merchandise) {
-      steps.push({
-        name: 'payment',
-        label: 'پرداخت هزینه',
-        component: <Payment />,
-        onClick: () => goToStep('payment'),
-      })
-    }
-
-    steps.push({
-      name: 'program',
-      label: 'ورود به دوره',
-      component: null,
-    })
-
-    return steps;
-  }
+  const {
+    currentStepNameIndex,
+    lastActiveStepIndex,
+    steps,
+  } = useRegistrationSteps({ program, registrationForm });
 
   useEffect(() => {
     getOneEventInfo({ programId });
@@ -122,21 +44,6 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
       getOneRegistrationForm({ id: program.registration_form });
     }
   }, [program?.registration_form]);
-
-  useEffect(() => {
-    if (['Waiting', 'Rejected'].includes(program?.user_registration_status)) {
-      goToStep('status');
-    }
-    if (program?.merchandise && program?.user_registration_status === 'Accepted') {
-      goToStep('payment');
-    }
-  }, [program, steps])
-
-  useEffect(() => {
-    if (program && registrationForm) {
-      setSteps(getRegistrationSteps());
-    }
-  }, [program, registrationForm])
 
   if (!program || !registrationForm || !userInfo) return null;
 
@@ -152,7 +59,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
         justifyContent={{ xs: 'center', md: 'flex-start' }}>
         <Grid item xs={12} md={3} position={{ xs: null, md: 'sticky' }} top={0}>
           <Stack width={'100%'} spacing={2}>
-            <Stepper steps={steps} activeStep={lastActiveStepName} />
+            <Stepper steps={steps} activeStepIndex={lastActiveStepIndex} />
             <Button
               variant="outlined"
               color='warning'
@@ -164,8 +71,8 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
         </Grid>
         <Grid item xs={12} md={9}>
           <Stack>
-            {steps.find(step => step.name === currentStepName) ?
-              steps.find(step => step.name === currentStepName).component :
+            {steps[currentStepNameIndex] ?
+              steps[currentStepNameIndex].component :
               null}
           </Stack>
         </Grid>

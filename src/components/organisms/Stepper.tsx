@@ -5,19 +5,19 @@ import useWidth from 'utils/UseWidth';
 
 type MyStepperPropsType = {
   steps: RegistrationStepType[];
-  activeStep: RegistrationStepNameType;
+  activeStepIndex: number;
 }
 
 const MyStepper: FC<MyStepperPropsType> = ({
   steps,
-  activeStep,
+  activeStepIndex,
 }) => {
   const width = useWidth();
   return (
     <Stepper
       sx={{ width: '100%' }}
       orientation={width === 'xs' || width === 'sm' ? 'horizontal' : 'vertical'}
-      activeStep={steps.indexOf(steps.find(step => step.name === activeStep))}
+      activeStep={activeStepIndex}
       alternativeLabel={width === 'xs' || width === 'sm' ? true : false}>
       {
         [...steps].map((step) => (
