@@ -7,7 +7,7 @@ import downloadFile from 'utils/downloadFile';
 import {
   getCertificateAction,
 } from 'redux/slices/events';
-import ProgramPageHelpButton from 'components/molecules/ProgramPageHelpButton';
+import ProgramPageDashboardButton from 'components/molecules/ProgramPageDashboardButton';
 
 const ProgramPageSidebar = ({
   getCertificate,
@@ -48,7 +48,8 @@ const ProgramPageSidebar = ({
           {'گواهی حضور'}
         </Button>
       }
-      <ProgramPageHelpButton />
+      <ProgramPageDashboardButton paperId={1436} buttonLabel='راهنمای سایت' />
+      <ProgramPageDashboardButton paperId={2076} buttonLabel='سوالات متداول' />
       {program.is_manager &&
         <Button
           variant="contained"
