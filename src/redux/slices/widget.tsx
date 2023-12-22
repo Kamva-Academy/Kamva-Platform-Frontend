@@ -141,6 +141,19 @@ export const markSubmissionAction = createAsyncThunkApi(
 
 export const updateWidgetAction = createAsyncThunkApi(
   'widget/updateWidgetAction',
+  Apis.PATCH,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت به‌روز شد.',
+      error: 'مشکلی در به‌روز‌رسانی ویجت وجود داشت.'
+    },
+  }
+);
+
+export const updateFileWidgetAction = createAsyncThunkApi(
+  'widget/updateFileWidgetAction',
   Apis.PATCH_FORM_DATA,
   widgetCRUDUrl,
   {
@@ -152,8 +165,8 @@ export const updateWidgetAction = createAsyncThunkApi(
   }
 );
 
-export const longLastingUpdateWidgetAction = createAsyncThunkApi(
-  'widget/updateWidgetAction',
+export const longLastingUpdateFileWidgetAction = createAsyncThunkApi(
+  'widget/updateLongLastingFileWidgetAction',
   Apis.LONG_LASTING_PATCH_FORM_DATA,
   widgetCRUDUrl,
   {
@@ -167,6 +180,19 @@ export const longLastingUpdateWidgetAction = createAsyncThunkApi(
 
 export const createWidgetAction = createAsyncThunkApi(
   'widget/widget/create',
+  Apis.POST,
+  widgetCRUDUrl,
+  {
+    bodyCreator: (widget) => ({ ...widget }),
+    defaultNotification: {
+      success: 'ویجت با موفقیت اضافه شد.',
+      error: 'مشکلی در ایجاد ویجت وجود داشت.'
+    },
+  }
+);
+
+export const createFileWidgetAction = createAsyncThunkApi(
+  'widget/widget/createFileWidget',
   Apis.POST_FORM_DATA,
   widgetCRUDUrl,
   {
@@ -178,8 +204,8 @@ export const createWidgetAction = createAsyncThunkApi(
   }
 );
 
-export const longLastingCreateWidgetAction = createAsyncThunkApi(
-  'widget/widget/create',
+export const longLastingCreateFileWidgetAction = createAsyncThunkApi(
+  'widget/widget/createLongLastingFile',
   Apis.LONG_LASTING_POST_FORM_DATA,
   widgetCRUDUrl,
   {
@@ -192,25 +218,25 @@ export const longLastingCreateWidgetAction = createAsyncThunkApi(
 );
 
 export const createVideoWidgetAction = (props) =>
-  longLastingCreateWidgetAction({
+  longLastingCreateFileWidgetAction({
+    ...props,
+    widget_type: 'Video',
+  });
+
+export const updateVideoWidgetAction = (props) =>
+  longLastingUpdateFileWidgetAction({
     ...props,
     widget_type: 'Video',
   });
 
 export const createAudioWidgetAction = (props) =>
-  createWidgetAction({
+  createFileWidgetAction({
     ...props,
     widget_type: 'Audio',
   });
 
-export const updateVideoWidgetAction = (props) =>
-  longLastingUpdateWidgetAction({
-    ...props,
-    widget_type: 'Video',
-  });
-
 export const updateAudioWidgetAction = (props) =>
-  updateWidgetAction({
+  updateFileWidgetAction({
     ...props,
     widget_type: 'Audio',
   });
@@ -233,13 +259,13 @@ export const updateMiniGameWidgetAction = ({ paper, link, widgetId, onSuccess })
   });
 
 export const createImageWidgetAction = (props) =>
-  createWidgetAction({
+  createFileWidgetAction({
     ...props,
     widget_type: 'Image',
   });
 
 export const updateImageWidgetAction = (props) =>
-  updateWidgetAction({
+  updateFileWidgetAction({
     ...props,
     widget_type: 'Image',
   });
