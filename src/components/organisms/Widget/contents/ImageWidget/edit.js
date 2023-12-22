@@ -43,7 +43,6 @@ function ImageEditWidget({
         link,
       }
     }
-
     onEdit({
       ...payload,
       widgetId,

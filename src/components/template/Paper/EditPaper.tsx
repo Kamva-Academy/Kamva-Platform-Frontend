@@ -29,9 +29,9 @@ const EditPaper: FC<EditPaperPropsType> = ({ widgets, paperId, mode = 'all', add
         {widgets.length === 0 ?
           <Typography align="center">{t('thereIsNoItem')}</Typography> :
           <Fragment>
-            {widgets.map((widget) => (
+            {widgets.map((widget, index) => (
               <Widget
-                key={widget.id}
+                key={index}
                 paperId={paperId}
                 widget={widget}
                 mode={WidgetModes.Edit}
