@@ -12,7 +12,7 @@
     "@mui/styles": "^5.8.7",
     "@mui/x-date-pickers": "^5.0.0-beta.0",
     "@reduxjs/toolkit": "^1.6.1",
-    "@sentry/cli": "^2.20.5",
+    "@sentry/cli": "^2.23.1",
     "@sentry/react": "^7.62.0",
     "@sentry/tracing": "^7.62.0",
     "@tinymce/tinymce-react": "^3.11.0",
@@ -55,7 +55,7 @@
     "build": "react-scripts build && yarn run sentry:sourcemaps",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org rasta-kamva-academy --project kamva-platform-frontend ./build && sentry-cli --url https://sentry.hamravesh.com/ sourcemaps upload --org rasta-kamva-academy --release production --project kamva-platform-frontend ./build"
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org rasta-kamva-academy --project kamva-platform-frontend ./build && sentry-cli --url https://sentry.hamravesh.com/ sourcemaps upload --org rasta-kamva-academy --project kamva-platform-frontend ./build"
   },
   "browserslist": {
     "production": [
