@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Stack, Typography } from '@mui/material';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -8,6 +8,7 @@ import Widget from 'components/organisms/Widget';
 import {
   getOneRegistrationFormAction,
   submitRegistrationFormAction,
+  getOneEventInfoAction,
 } from 'redux/slices/events';
 import { WidgetModes } from 'components/organisms/Widget';
 import ProgramInfo from 'components/organisms/ProgramInfo';
@@ -27,12 +28,14 @@ const ANSWER_TYPES = {
 };
 
 type RegistrationFormPropsType = {
+  getOneEventInfo: any;
   program: ProgramType;
   registrationForm: RegistrationFormType;
   submitRegistrationForm: any;
 }
 
 const RegistrationForm: FC<RegistrationFormPropsType> = ({
+  getOneEventInfo,
   program,
   registrationForm,
   submitRegistrationForm,
@@ -48,6 +51,13 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
       programId,
     });
   };
+
+  // TODO: this redundant fetching should exist
+  // (because the user-registrationt-status is in
+  // the event fetched data, and should be updated)
+  useEffect(() => {
+    getOneEventInfo({ programId });
+  }, []);
 
   const isSubmitButtonDisabled = (): { isDisabled: boolean; message: string; } => {
     return {
@@ -114,6 +124,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  getOneEventInfo: getOneEventInfoAction,
   getOneRegistrationForm: getOneRegistrationFormAction,
   submitRegistrationForm: submitRegistrationFormAction,
 })(RegistrationForm);
