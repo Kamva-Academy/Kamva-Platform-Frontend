@@ -32,7 +32,7 @@ const useWidgetFactory = ({
     (widgetId ?
       (arg) => dispatcher(updateAction(arg)) :
       (arg) => dispatcher(createAction(arg))) :
-    // todo: fix TOF. لزوماً نباید با ?. هندلش کرد
+    // todo: fix TOF. لزوماً نباید با ?. هندلش کرد و لزوماً نباید اینجا صداش زد. اینجا صرفاً باید پاسش داد
     collectDataForPaper?.({ widgetId, widgetType });
 
   onAnswerChange = collectDataForPaper;
