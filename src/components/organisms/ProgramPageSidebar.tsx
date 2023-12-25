@@ -48,8 +48,12 @@ const ProgramPageSidebar = ({
           {'گواهی حضور'}
         </Button>
       }
-      <ProgramPageDashboardButton paperId={1436} buttonLabel='راهنمای سایت' />
-      <ProgramPageDashboardButton paperId={2076} buttonLabel='سوالات متداول' />
+      {program.site_help_paper_id &&
+        <ProgramPageDashboardButton paperId={program.site_help_paper_id} buttonLabel='راهنمای سایت' />
+      }
+      {program.FAQs_paper_id &&
+        <ProgramPageDashboardButton paperId={program.FAQs_paper_id} buttonLabel='سوالات متداول' />
+      }
       {program.is_manager &&
         <Button
           variant="contained"
