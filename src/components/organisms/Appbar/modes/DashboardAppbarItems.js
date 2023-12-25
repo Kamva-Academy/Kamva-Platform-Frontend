@@ -13,18 +13,19 @@ const DashboardAppbarItems = () => {
     }
   }, [])
 
-  const eventsButton = <DashboardButton name={'دوره‌‌ها'} to={'/programs/'} />;
+  const eventsButton = <DashboardButton name={'دوره‌ها'} to={'/programs/'} />;
   const articlesButton = <DashboardButton name={'مقاله‌ها'} to={'/articles/'} />;
-  const workshopButton = <DashboardButton name={'کارگاه‌ها'} to={'/fsms/'} />; // todo: add fsms section
+  const aboutUsButton = <DashboardButton name={'درباره ما'} onClick={() => window.location.href = 'https://kamva.academy/about-us/'} />;
+  const contactUsButton = <DashboardButton name={'تماس با ما'} onClick={() => window.location.href = 'https://kamva.academy/contact-us/'} />;
   const brand = <Brand />
   const userInfo = <UserInfo />
 
   return {
     desktopLeftItems: [userInfo],
-    desktopRightItems: [brand, eventsButton, articlesButton],
+    desktopRightItems: [brand, eventsButton, articlesButton, aboutUsButton, contactUsButton],
     mobileLeftItems: [userInfo],
     mobileRightItems: [],
-    mobileMenuListItems: [eventsButton, articlesButton],
+    mobileMenuListItems: [eventsButton, articlesButton, aboutUsButton, contactUsButton],
   };
 };
 
