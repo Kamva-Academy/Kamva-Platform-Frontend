@@ -1,35 +1,21 @@
-import { Button, Dialog, Grid, Paper, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { Button, Dialog, DialogActions, DialogContent, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import { toPersianNumber } from 'utils/translateNumber';
-
-import Widget from 'components/organisms/Widget';
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    padding: theme.spacing(1),
-  },
-  widgets: {
-    padding: theme.spacing(2, 0),
-  },
-}));
+import Paper from 'components/template/Paper';
 
 function HelpDialog({ open, handleClose, helps }) {
   const t = useTranslate();
-  const classes = useStyles();
   const [index, setIndex] = useState(0);
 
   const help = helps[index];
   return (
-    <Dialog disableScrollLock open={open} onClose={handleClose} maxWidth="xs" fullWidth>
-      <Paper className={classes.paper} key={help.id}>
+    <Dialog disableScrollLock open={open} onClose={handleClose} maxWidth="xs" fullWidth >
+      <DialogContent>
         <Typography>{t('helpNumber') + " " + (toPersianNumber(index + 1))}</Typography>
-        <div className={classes.widgets}>
-          {help.widgets.map((widget) => (
-            <Widget key={widget.id} coveredWithPaper={false} widget={widget} />
-          ))}
-        </div>
+        <Paper paper={help} />
+      </DialogContent>
+      <DialogActions>
         <Grid container justifyContent="space-between">
           <Grid item>
             {index > 0 && (
@@ -50,7 +36,7 @@ function HelpDialog({ open, handleClose, helps }) {
             )}
           </Grid>
         </Grid>
-      </Paper>
+      </DialogActions>
     </Dialog>
   );
 }
