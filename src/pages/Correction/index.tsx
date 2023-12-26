@@ -15,7 +15,7 @@ import {
 } from '../../redux/slices/scoring';
 import {
   getWidgetAction,
-} from '../../redux/slices/Paper';
+} from '../../redux/slices/widget';
 import Layout from 'components/template/GeneralLayout';
 import ScoringColumn from './ScoringColumn';
 

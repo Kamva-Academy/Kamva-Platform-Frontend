@@ -8,7 +8,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 
-import { deleteStateAction } from '../../../redux/slices/widget';
+import { deleteStateAction } from 'redux/slices/Paper';
 
 function DeleteStateDialog({ open, handleClose, deleteState, paperId }) {
   const t = useTranslate();

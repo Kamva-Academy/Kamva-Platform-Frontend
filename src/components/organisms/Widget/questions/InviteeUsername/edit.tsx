@@ -8,16 +8,10 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import {
-  createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidgetAction,
-} from 'redux/slices/Paper';
 
 function InviteeUsernameEdit({
-  createSmallAnswerProblemWidget,
-  updateSmallAnswerProblemWidget,
+  onEdit,
   handleClose,
 
   open,
@@ -33,30 +27,14 @@ function InviteeUsernameEdit({
   const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleSubmit = () => {
-    if (widgetId) {
-      updateSmallAnswerProblemWidget({
-        widgetId,
-        paper: paperId,
-        text: text,
-        answer,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    } else {
-      createSmallAnswerProblemWidget({
-        paper: paperId,
-        text: text,
-        answer,
-        solution,
-      }).then((response) => {
-        if (response.type?.endsWith('fulfilled')) {
-          handleClose();
-        }
-      });
-    }
+    onEdit({
+      widgetId,
+      paper: paperId,
+      text: text,
+      answer,
+      solution,
+      onSuccess: handleClose,
+    });
   };
 
   return (
@@ -89,7 +67,4 @@ function InviteeUsernameEdit({
   );
 }
 
-export default connect(null, {
-  createSmallAnswerProblemWidget: createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidget: updateSmallAnswerProblemWidgetAction,
-})(InviteeUsernameEdit);
+export default InviteeUsernameEdit;

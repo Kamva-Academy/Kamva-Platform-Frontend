@@ -7,8 +7,8 @@ import {
   CloudUpload as CloudUploadIcon,
 } from '@mui/icons-material';
 import ClearIcon from '@mui/icons-material/Clear';
-import React, { FC, useState } from 'react';
-import { makeWidgetFileEmptyAction } from '../../redux/slices/Paper';
+import React, { FC } from 'react';
+import { makeWidgetFileEmptyAction } from 'redux/slices/widget';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify'
 

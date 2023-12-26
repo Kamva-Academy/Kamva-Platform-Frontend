@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { WidgetModes } from 'components/organisms/Widget';
 import WIDGET_TYPE_MAPPER from './WidgetTypeMapper';
-import { deleteWidgetAction } from 'redux/slices/Paper';
+import { deleteWidgetAction } from 'redux/slices/widget';
 
 type WidgetFactoryType = {
   widgetId?: number;

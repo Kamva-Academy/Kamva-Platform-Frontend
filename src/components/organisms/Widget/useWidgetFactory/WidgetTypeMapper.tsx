@@ -1,55 +1,52 @@
-import BigAnswerProblemWidget, {
-  BigAnswerQuestionEditWidget,
-} from '../questions/BigAnswerProblemWidget';
+import BigAnswerProblemWidget, { BigAnswerQuestionEditWidget } from '../questions/BigAnswerProblemWidget';
 import ImageWidget, { ImageEditWidget } from '../contents/ImageWidget';
 import MiniGameWidget, { MiniGameEditWidget } from '../contents/MiniGameWidget';
-import MultiChoiceQuestionWidget, {
-  MultiChoiceQuestionEditWidget,
-} from '../questions/MultiChoiceQuestion';
-import SmallAnswerProblemWidget, {
-  SmallAnswerProblemEditWidget,
-} from '../questions/SmallAnswerProblemWidget';
+import MultiChoiceQuestionWidget, { MultiChoiceQuestionEditWidget } from '../questions/MultiChoiceQuestion';
+import SmallAnswerProblemWidget, { SmallAnswerProblemEditWidget } from '../questions/SmallAnswerProblemWidget';
 import TextWidget, { TextEditWidget } from '../contents/TextWidget';
-import UploadFileProblemWidget, {
-  UploadFileProblemEditWidget,
-} from '../questions/UploadFileProblemWidget';
+import UploadFileProblemWidget, { UploadFileProblemEditWidget } from '../questions/UploadFileProblemWidget';
 import VideoWidget, { VideoEditWidget } from '../contents/VideoWidget';
 import AudioWidget, { AudioEditWidget } from '../contents/AudioWidget';
 import DetailBoxWidget, { DetailBoxEditDialog } from '../contents/DetailBoxWidget';
 
 import {
+  sendSmallAnswerAction,
+  createSmallAnswerProblemWidgetAction,
+  updateSmallAnswerProblemWidgetAction,
+
+  sendBigAnswerAction,
   createBigAnswerQuestionWidgetAction,
   updateBigAnswerQuestionWidgetAction,
+
   createImageWidgetAction,
   updateImageWidgetAction,
+
   createMiniGameWidgetAction,
   updateMiniGameWidgetAction,
+
   createAudioWidgetAction,
   updateAudioWidgetAction,
+
   createTextWidgetAction,
   updateTextWidgetAction,
+
   createVideoWidgetAction,
   updateVideoWidgetAction,
+
+  uploadFileAnswerAction,
   createUploadFileWidgetAction,
   updateUploadFileWidgetAction,
+
   createDetailBoxWidgetAction,
   updateDetailBoxWidgetAction,
-} from 'redux/slices/widget';
-
-import {
-  sendBigAnswerAction,
 
   sendMultiChoiceAnswerAction,
   createMultiChoicesQuestionWidgetAction,
   updateMultiChoicesQuestionWidgetAction,
 
-  sendSmallAnswerAction,
-  createSmallAnswerProblemWidgetAction,
-  updateSmallAnswerProblemWidgetAction,
-
-  uploadFileAnswerAction
-} from 'redux/slices/Paper';
-
+  sendInviteeUsernameResponseAction,
+} from 'redux/slices/widget';
+import InviteeUsername, { InviteeUsernameEdit } from '../questions/InviteeUsername';
 
 const WIDGET_TYPE_MAPPER = {
   SmallAnswerProblem: {
@@ -78,6 +75,15 @@ const WIDGET_TYPE_MAPPER = {
     createAction: createMultiChoicesQuestionWidgetAction,
     updateAction: updateMultiChoicesQuestionWidgetAction,
     submitAnswerAction: sendMultiChoiceAnswerAction,
+  },
+  InviteeUsername: {
+    WidgetComponent: InviteeUsername,
+    EditWidgetDialog: InviteeUsernameEdit,
+    label: 'سوال کد معرف',
+    backendType: 'InviteeUsernameProblem',
+    createAction: createSmallAnswerProblemWidgetAction,
+    updateAction: updateSmallAnswerProblemWidgetAction,
+    submitAnswerAction: sendInviteeUsernameResponseAction,
   },
   UploadFileProblem: {
     WidgetComponent: UploadFileProblemWidget,

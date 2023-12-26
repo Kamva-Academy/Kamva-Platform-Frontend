@@ -38,9 +38,6 @@ import {
   workshopCRUDUrl,
   createTeamAndJoinActionUrl,
 } from '../constants/urls';
-import {
-  createWidgetAction,
-} from './widget';
 import { getRequests, deleteRequest } from 'parse/mentor'
 import { InitialState } from 'types/redux/event'
 
@@ -742,10 +739,6 @@ const eventSlice = createSlice({
     [registerUsersViaCSVAction.pending.toString()]: isFetching,
     [registerUsersViaCSVAction.fulfilled.toString()]: isNotFetching,
     [registerUsersViaCSVAction.rejected.toString()]: isNotFetching,
-
-    [createWidgetAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.widgets = [...state.widgets, response];
-    },
 
 
     [removeFromTeamAction.pending.toString()]: isFetching,

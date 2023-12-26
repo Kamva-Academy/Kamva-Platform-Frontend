@@ -9,20 +9,20 @@ import {
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
-import { sendInviteeUsernameResponseAction } from '../../../../../redux/slices/Paper';
-import { checkUsernameAction } from '../../../../../redux/slices/Question';
-import TinyPreview from '../../../../tiny_editor/react_tiny/Preview';
+import { checkUsernameAction } from 'redux/slices/Question';
+import TinyPreview from 'components/tiny_editor/react_tiny/Preview';
 import { WidgetModes } from '../..';
 import InviteeUsernameEdit from './edit';
-import isPhoneNumber from '../../../../../utils/validators/isPhoneNumber';
+import isPhoneNumber from 'utils/validators/isPhoneNumber';
 
 type InviteeUsernamePropsType = {
-  sendInviteeUsernameResponse: any;
+  onAnswerSubmit: any;
+  onAnswerChange: any;
+
   checkUsername: any;
   inviteeUserFirstName: string;
   inviteeUserLastName: string;
   isFetching: boolean;
-  collectData: any;
   id: number;
   mode: WidgetModes;
   text: string;
@@ -31,9 +31,10 @@ type InviteeUsernamePropsType = {
 }
 
 const InviteeUsername: FC<InviteeUsernamePropsType> = ({
-  sendInviteeUsernameResponse,
+  onAnswerSubmit,
+  onAnswerChange,
+
   checkUsername,
-  collectData,
   id: paperId,
   inviteeUserFirstName,
   inviteeUserLastName,
@@ -54,9 +55,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
   }, [username])
 
   const changeText = (e) => {
-    if (mode === WidgetModes.InAnswerSheet) {
-      collectData('username', e.target.value);
-    }
+    onAnswerChange({ username: e.target.value });
     setUsername(e.target.value);
   }
 
@@ -68,7 +67,7 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
     setTimeout(() => {
       setDisableSubmitButton(false);
     }, 20000);
-    sendInviteeUsernameResponse({ widgetId: paperId, username });
+    onAnswerSubmit({ widgetId: paperId, username });
   }
 
   return (
@@ -138,14 +137,12 @@ const InviteeUsername: FC<InviteeUsernamePropsType> = ({
 };
 
 const mapStateToProps = (state) => ({
-  playerId: state.currentState.player?.id,
   inviteeUserFirstName: state.question.inviteeUserFirstName,
   inviteeUserLastName: state.question.inviteeUserLastName,
   isFetching: state.question.isFetching,
 });
 
 export default connect(mapStateToProps, {
-  sendInviteeUsernameResponse: sendInviteeUsernameResponseAction,
   checkUsername: checkUsernameAction,
 })(InviteeUsername);
 

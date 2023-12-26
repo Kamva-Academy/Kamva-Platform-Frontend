@@ -4,108 +4,21 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   hintUrl,
   widgetHintUrl,
-  uploadFileUrl,
   stateCRUDUrl,
-  widgetCRUDUrl,
-  markSubmissionUrl,
-  sendWidgetAnswerUrl,
-  makeAnswerEmptyUrl,
-  makeWidgetFileEmptyUrl,
+  statesCRUDUrl,
 } from '../constants/urls';
-import { InitialStateType } from '../../types/redux/Paper';
+import { InitialStateType } from 'types/redux/Paper';
 import { getArticleAction } from './article';
 import { getRegistrationFormAction } from './events';
-
-//////////////// SEND ANSWER ////////////////
-
-export const uploadFileAnswerAction = createAsyncThunkApi(
-  'widget/uploadFileAnswerAction',
-  Apis.POST_FORM_DATA,
-  uploadFileUrl,
-  {
-    bodyCreator: ({ problemId, answerFile }) => ({
-      problem: problemId,
-      answer_file: answerFile,
-      is_final_answer: true,
-    }),
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت ثبت شد.',
-      error: 'مشکلی در ثبت پاسخ وجود داشت.',
-    },
-  }
-);
-
-const _sendWidgetAnswerAction = createAsyncThunkApi(
-  'widget/sendWidgetAnswerAction',
-  Apis.POST,
-  sendWidgetAnswerUrl,
-  {
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت ثبت شد.',
-      error: 'مشکلی در ثبت پاسخ وجود داشت.',
-    },
-  }
-);
-
-export const sendBigAnswerAction = ({ widgetId, text }) =>
-  _sendWidgetAnswerAction({
-    widgetId,
-    text,
-    answer_type: 'BigAnswer',
-  });
-
-export const sendSmallAnswerAction = ({ widgetId, text }) =>
-  _sendWidgetAnswerAction({
-    widgetId,
-    text,
-    answer_type: 'SmallAnswer',
-  });
-
-export const sendInviteeUsernameResponseAction = ({ widgetId, username }) =>
-  _sendWidgetAnswerAction({
-    widgetId,
-    username,
-    answer_type: 'InviteeUsernameResponse',
-  });
-
-export const sendMultiChoiceAnswerAction = ({ problemId, selectedChoices }) =>
-  _sendWidgetAnswerAction({
-    widgetId: problemId,
-    choices: selectedChoices,
-    answer_type: 'MultiChoiceAnswer',
-  });
-
-
-export const makeAnswerEmptyAction = createAsyncThunkApi(
-  'widget/sendWidgetAnswerAction',
-  Apis.GET,
-  makeAnswerEmptyUrl,
-  {
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت حذف شد.',
-      error: 'مشکلی در حذف‌کردن پاسخ وجود داشت.',
-    },
-  }
-);
-
+import {
+  _createWidgetAction,
+  deleteWidgetAction,
+  getWidgetAction,
+  makeWidgetFileEmptyAction,
+  _updateWidgetAction,
+} from './widget';
 
 //////////////// متفرقه ////////////////
-
-export const markSubmissionAction = createAsyncThunkApi(
-  'workshops/markSubmission',
-  Apis.POST,
-  markSubmissionUrl,
-  {
-    bodyCreator: ({ submissionId, score, description }) => ({
-      submission_id: submissionId,
-      score,
-      description,
-    }),
-    defaultNotification: {
-      success: 'نمره با موفقیت ثبت شد!',
-    },
-  }
-);
 
 export const getOneStateAction = createAsyncThunkApi(
   'workshop/getOneStateAction',
@@ -113,232 +26,11 @@ export const getOneStateAction = createAsyncThunkApi(
   stateCRUDUrl
 );
 
-
-//////////////// GET, CREATE, UPDATE & DELETE WIDGETS ////////////////
-
-export const makeWidgetFileEmptyAction = createAsyncThunkApi(
-  'widget/makeWidgetFileEmptyAction',
-  Apis.GET,
-  makeWidgetFileEmptyUrl,
-  {
-    defaultNotification: {
-      error: 'مشکلی در حذف فایل وجود داشت.'
-    },
-  }
-);
-
-export const getWidgetAction = createAsyncThunkApi(
-  'widget/getWidgetAction',
-  Apis.GET,
-  widgetCRUDUrl,
-);
-
-export const updateWidgetAction = createAsyncThunkApi(
-  'widget/updateWidgetAction',
-  Apis.PATCH,
-  widgetCRUDUrl,
-  {
-    bodyCreator: (widget) => ({ ...widget }),
-    defaultNotification: {
-      success: 'ویجت با موفقیت به‌روز شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
-    },
-  }
-);
-
-export const createWidgetAction = createAsyncThunkApi(
-  'widget/widget/create',
-  Apis.POST,
-  widgetCRUDUrl,
-  {
-    bodyCreator: (widget) => ({ ...widget }),
-    defaultNotification: {
-      success: 'ویجت با موفقیت اضافه شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
-    },
-  }
-);
-
-export const deleteWidgetAction = createAsyncThunkApi(
-  'widget/widgets/delete',
+export const deleteStateAction = createAsyncThunkApi(
+  'widget/delete',
   Apis.DELETE,
-  widgetCRUDUrl,
-  {
-    bodyCreator: (widget) => ({ ...widget }),
-    defaultNotification: {
-      success: 'ویجت با موفقیت حذف شد.',
-      error: 'مشکلی وجود داشت. دوباره تلاش کنید.'
-    },
-  }
+  statesCRUDUrl,
 );
-
-export const createVideoWidgetAction = ({ paper, link }) =>
-  createWidgetAction({
-    paper,
-    widget_type: 'Video',
-    link,
-  });
-
-export const updateVideoWidgetAction = ({ paper, link, widgetId }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'Video',
-    link,
-    widgetId,
-  });
-
-export const createMiniGameWidgetAction = ({ paper, link }) =>
-  createWidgetAction({
-    paper,
-    widget_type: 'Game',
-    link,
-  });
-
-export const updateMiniGameWidgetAction = ({ paper, link, widgetId }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'Game',
-    link,
-    widgetId,
-  });
-
-export const createImageWidgetAction = ({ paper, link }) =>
-  createWidgetAction({
-    paper,
-    widget_type: 'Image',
-    link,
-  });
-
-export const updateImageWidgetAction = ({ paper, link, widgetId }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'Image',
-    link,
-    widgetId,
-  });
-
-export const createTextWidgetAction = ({ paper, text }) =>
-  createWidgetAction({
-    paper,
-    widget_type: 'TextWidget',
-    text,
-  });
-
-export const updateTextWidgetAction = ({ paper, text, widgetId }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'TextWidget',
-    text,
-    widgetId,
-  });
-
-export const createUploadFileWidgetAction = ({ paper, text }) =>
-  createWidgetAction({
-    paper,
-    widget_type: 'UploadFileProblem',
-    text,
-  });
-
-export const updateUploadFileWidgetAction = ({ paper, text, widgetId }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'UploadFileProblem',
-    text,
-    widgetId,
-  });
-
-export const createSmallAnswerProblemWidgetAction = ({ paper, text, answer, solution }) =>
-  answer
-    ? createWidgetAction({
-      paper,
-      widget_type: 'SmallAnswerProblem',
-      text,
-      solution,
-      answer: {
-        text: answer,
-        answer_type: 'SmallAnswer',
-      },
-    })
-    : createWidgetAction({
-      paper,
-      widget_type: 'SmallAnswerProblem',
-      text,
-      solution,
-    })
-
-export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId, answer, solution }) =>
-  answer
-    ? updateWidgetAction({
-      paper,
-      widget_type: 'SmallAnswerProblem',
-      text,
-      widgetId,
-      solution,
-      answer: {
-        text: answer,
-        answer_type: 'SmallAnswer',
-      },
-    })
-    : updateWidgetAction({
-      paper,
-      widget_type: 'SmallAnswerProblem',
-      text,
-      widgetId,
-      solution,
-    })
-
-export const createBigAnswerQuestionWidgetAction = ({ paper, text, solution }) =>
-  solution
-    ? createWidgetAction({
-      paper,
-      widget_type: 'BigAnswerProblem',
-      text,
-      solution: {
-        text: solution,
-        answer_type: 'BigAnswer',
-      },
-    })
-    : createWidgetAction({
-      paper,
-      widget_type: 'BigAnswerProblem',
-      text,
-    })
-
-export const updateBigAnswerQuestionWidgetAction = ({ paper, text, widgetId }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'BigAnswerProblem',
-    text,
-    widgetId,
-  });
-
-export const createMultiChoicesQuestionWidgetAction = ({ paper, text, solution, choices, ...props }) =>
-  solution
-    ? createWidgetAction({
-      paper,
-      widget_type: 'MultiChoiceProblem',
-      text,
-      solution,
-      choices,
-      ...props
-    })
-    : createWidgetAction({
-      paper,
-      widget_type: 'MultiChoiceProblem',
-      text,
-      choices,
-      ...props
-    })
-
-export const updateMultiChoicesQuestionWidgetAction = ({ paper, text, choices, widgetId, ...props }) =>
-  updateWidgetAction({
-    paper,
-    widget_type: 'MultiChoiceProblem',
-    text,
-    choices,
-    widgetId,
-    ...props
-  });
 
 //////////////// HINT ////////////////
 
@@ -374,7 +66,6 @@ export const deleteWidgetHintAction = createAsyncThunkApi(
   Apis.DELETE,
   widgetHintUrl,
 );
-
 
 //////////////// UTILITIES ////////////////
 
@@ -431,13 +122,13 @@ const PaperSlice = createSlice({
     [getWidgetAction.rejected.toString()]: isNotFetching,
 
 
-    [createWidgetAction.pending.toString()]: isFetching,
-    [createWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+    [_createWidgetAction.pending.toString()]: isFetching,
+    [_createWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.papers[arg.paper] ||= {};
       state.papers[arg.paper].widgets = [...(state.papers[arg.paper].widgets || []), response];
       state.isFetching = false;
     },
-    [createWidgetAction.rejected.toString()]: isNotFetching,
+    [_createWidgetAction.rejected.toString()]: isNotFetching,
 
 
     [deleteWidgetAction.pending.toString()]: isFetching,
@@ -455,8 +146,8 @@ const PaperSlice = createSlice({
     [deleteWidgetAction.rejected.toString()]: isNotFetching,
 
 
-    [updateWidgetAction.pending.toString()]: isFetching,
-    [updateWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
+    [_updateWidgetAction.pending.toString()]: isFetching,
+    [_updateWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.papers[arg.paper] ||= {};
       const newWidgets = [...(state.papers[arg.paper].widgets || [])];
       for (let i = 0; i < newWidgets.length; i++) {
@@ -467,7 +158,7 @@ const PaperSlice = createSlice({
       state.papers[arg.paper].widgets = newWidgets;
       state.isFetching = false;
     },
-    [updateWidgetAction.rejected.toString()]: isNotFetching,
+    [_updateWidgetAction.rejected.toString()]: isNotFetching,
 
 
     [createHintAction.pending.toString()]: isFetching,
@@ -502,21 +193,6 @@ const PaperSlice = createSlice({
       state.isFetching = false;
     },
     [deleteWidgetHintAction.rejected.toString()]: isNotFetching,
-
-
-    [uploadFileAnswerAction.pending.toString()]: isFetching,
-    [uploadFileAnswerAction.fulfilled.toString()]: (state, action) => {
-      // state.uploadedFile = {
-      //   link: action.payload?.response?.answer_file,
-      //   id: action.payload?.response?.id,
-      //   name: action?.meta?.arg?.answerFile?.name,
-      // };
-      state.isFetching = false;
-    },
-    [uploadFileAnswerAction.rejected.toString()]: (state) => {
-      // state.uploadedFile = null;
-      state.isFetching = false;
-    },
 
     [makeWidgetFileEmptyAction.pending.toString()]: isFetching,
     [makeWidgetFileEmptyAction.fulfilled.toString()]: (state, { meta: { arg } }) => {

@@ -7,8 +7,8 @@ import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
-  makeAnswerEmptyAction,
-} from 'redux/slices/Paper';
+  makeAnswerFileEmptyAction,
+} from 'redux/slices/widget';
 import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from 'components/organisms/Widget';
 import { toast } from 'react-toastify';
@@ -17,7 +17,7 @@ type UploadFileProblemWidgetPropsType = {
   onAnswerChange: any;
   onAnswerSubmit: any;
 
-  makeAnswerEmpty: any;
+  makeAnswerFileEmpty: any;
   id: number;
   text: string;
   last_submitted_answer: any;
@@ -29,7 +29,7 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
   onAnswerChange,
   onAnswerSubmit,
 
-  makeAnswerEmpty,
+  makeAnswerFileEmpty,
   id: widgetId,
   text = 'محل بارگذاری فایل:',
   last_submitted_answer,
@@ -66,21 +66,17 @@ const UploadFileProblemWidget: FC<UploadFileProblemWidgetPropsType> = ({
     }).then((response) => {
       if (response.type?.endsWith('fulfilled')) {
         setFileLink(response.payload?.response?.answer_file);
-        if (mode === WidgetModes.InAnswerSheet) {
-          onAnswerChange({ upload_file_answer: response.payload?.response?.id });
-        }
+        onAnswerChange({ upload_file_answer: response.payload?.response?.id });
       }
     })
   };
 
   const clearFile = (e) => {
     e.preventDefault();
-    makeAnswerEmpty({ widgetId }).then((response) => {
+    makeAnswerFileEmpty({ widgetId }).then((response) => {
       if (response.type?.endsWith('fulfilled')) {
         setFileLink(null);
-        if (mode === WidgetModes.InAnswerSheet) {
-          onAnswerChange({ 'upload_file_answer': null });
-        }
+        onAnswerChange({ 'upload_file_answer': null });
       }
     });
   }
@@ -146,7 +142,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  makeAnswerEmpty: makeAnswerEmptyAction,
+  makeAnswerEmpty: makeAnswerFileEmptyAction,
 })(UploadFileProblemWidget);
 
 export { UploadFileProblemEditWidget };

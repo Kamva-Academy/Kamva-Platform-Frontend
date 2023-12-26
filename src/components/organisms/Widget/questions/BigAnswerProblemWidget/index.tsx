@@ -1,11 +1,9 @@
 import { Button, Stack, Typography } from '@mui/material';
 import React, { FC, useState } from 'react';
-import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import TinyPreview from 'components/tiny_editor/react_tiny/Preview';
 import TinyEditorComponent from 'components/tiny_editor/react_tiny/TinyEditorComponent';
 import { WidgetModes } from 'components/organisms/Widget';
-import { sendBigAnswerAction } from 'redux/slices/Paper';
 import BigAnswerProblemEditWidget from './edit';
 
 export { BigAnswerProblemEditWidget as BigAnswerQuestionEditWidget };
@@ -94,13 +92,4 @@ const BigAnswerProblemWidget: FC<BigAnswerProblemWidgetPropsType> = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  playerId: state.currentState.player?.id,
-});
-
-export default connect(
-  mapStateToProps,
-  {
-    sendBigAnswer: sendBigAnswerAction,
-  }
-)(BigAnswerProblemWidget);
+export default BigAnswerProblemWidget;
