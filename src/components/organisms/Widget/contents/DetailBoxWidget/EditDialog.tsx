@@ -4,7 +4,6 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
@@ -26,7 +25,7 @@ const DetailBoxEditDialog = ({
 }) => {
   const t = useTranslate();
   const [title, setTitle] = useState(previousTitle);
-  const { widgets, setWidgets, addWidget, removeWidget } = useCollectWidgetsData(details?.widgets || []);
+  const { widgets, ...collectWidgetDataToolkit } = useCollectWidgetsData(details?.widgets || []);
 
   const onSubmitWrapper = () => {
     onEdit({
@@ -56,7 +55,12 @@ const DetailBoxEditDialog = ({
         />
         <Typography mt={2} variant='h5' gutterBottom>{'جزئیات بیشتر'}</Typography>
         <DialogContentText gutterBottom>ویجت‌هایی را که می‌خواهید به‌صورت پنهان‌شونده باشند، اینجا بگذارید.</DialogContentText>
-        <EditPaper paperId={details?.id} widgets={widgets} mode='contents' addWidget={addWidget} removeWidget={removeWidget} />
+        <EditPaper
+          paperId={details?.id}
+          collectWidgetDataToolkit={collectWidgetDataToolkit}
+          widgets={widgets}
+          mode='contents'
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={onSubmitWrapper} color="primary" variant="contained">

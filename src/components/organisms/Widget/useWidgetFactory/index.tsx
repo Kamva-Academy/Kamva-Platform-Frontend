@@ -8,7 +8,8 @@ type WidgetFactoryType = {
   paperId?: number;
   widgetType: string;
   mode: WidgetModes;
-  collectDataForPaper?: any;
+  collectWidgetDataToolkit?: any;
+  collectAnswerData?: any;
 }
 
 const useWidgetFactory = ({
@@ -16,7 +17,8 @@ const useWidgetFactory = ({
   paperId,
   widgetType,
   mode,
-  collectDataForPaper,
+  collectWidgetDataToolkit,
+  collectAnswerData,
 }: WidgetFactoryType) => {
   const dispatcher = useDispatch();
   let onDelete, onEdit, onAnswerChange, onViwe, onAnswerSubmit;
@@ -33,9 +35,11 @@ const useWidgetFactory = ({
       (arg) => dispatcher(updateAction(arg)) :
       (arg) => dispatcher(createAction(arg))) :
     // todo: fix TOF. لزوماً نباید با ?. هندلش کرد و لزوماً نباید اینجا صداش زد. اینجا صرفاً باید پاسش داد
-    collectDataForPaper?.({ widgetId, widgetType });
+    (widgetId ?
+      collectWidgetDataToolkit.updateWidget :
+      collectWidgetDataToolkit.addWidget?.({ widgetType }));
 
-  onAnswerChange = collectDataForPaper;
+  onAnswerChange = collectAnswerData;
 
   onAnswerSubmit = (arg) => dispatcher(submitAnswerAction(arg));
 

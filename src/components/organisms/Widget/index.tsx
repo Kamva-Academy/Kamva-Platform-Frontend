@@ -45,7 +45,8 @@ type WidgetPropsType = {
   mode?: WidgetModes;
   paperId: number | null;
   coveredWithPaper?: boolean;
-  collectDataForPaper?: any;
+  collectWidgetDataToolkit?: any;
+  collectAnswerData?: any;
 }
 
 const Widget: FC<WidgetPropsType> = ({
@@ -53,7 +54,8 @@ const Widget: FC<WidgetPropsType> = ({
   mode = WidgetModes.View,
   paperId,
   coveredWithPaper = true,
-  collectDataForPaper,
+  collectWidgetDataToolkit,
+  collectAnswerData,
 }) => {
   const [openDeleteWidgetDialog, setOpenDeleteWidgetDialog] = useState(false);
   const [openEditDialog, setOpenEditDialog] = useState(false);
@@ -72,7 +74,8 @@ const Widget: FC<WidgetPropsType> = ({
     paperId,
     widgetType,
     mode,
-    collectDataForPaper,
+    collectWidgetDataToolkit,
+    collectAnswerData,
   });
 
   const Cover = useMemo(() =>

@@ -87,7 +87,7 @@ const RegistrationForm: FC<RegistrationFormPropsType> = ({
               paperId={registrationForm.id}
               coveredWithPaper={false}
               mode={WidgetModes.InAnswerSheet}
-              collectDataForPaper={collectAnswers({ widgetId: widget.id, widgetType: ANSWER_TYPES[widget.widget_type] })}
+              collectAnswerData={collectAnswers({ widgetId: widget.id, widgetType: ANSWER_TYPES[widget.widget_type] })}
               widget={widget}
             />
           </Box>
