@@ -18,8 +18,9 @@ type DeleteWidgetPropsType = {
 }
 
 const useCollectWidgetsData = (initialWidgets: WidgetType[]) => {
-  const [id, _setId] = useState<number>(1); // pid means private id
-  const increaseId = () => _setId(pid => pid + 1)
+  const AN_ALMOST_RANDOM_BIG_NEGATIVE_NUMBER = -100;
+  const [tid, _setTid] = useState<number>(AN_ALMOST_RANDOM_BIG_NEGATIVE_NUMBER); // tid means temporary id
+  const increaseTid = () => _setTid(pid => pid + 1)
   const [widgets, setWidgets] = useState<WidgetType[]>(initialWidgets);
 
   const addWidget = ({ widgetType }) => ({ onSuccess, ...widgetData }: AddWidgetPropsType) => {
@@ -28,10 +29,10 @@ const useCollectWidgetsData = (initialWidgets: WidgetType[]) => {
       {
         ...widgetData,
         widget_type: widgetType,
-        id,
+        id: tid,
       }
     ]);
-    increaseId();
+    increaseTid();
     onSuccess?.();
   };
 
