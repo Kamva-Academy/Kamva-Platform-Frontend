@@ -43,7 +43,9 @@ const useWidgetFactory = ({
 
   onAnswerSubmit = (arg) => dispatcher(submitAnswerAction(arg));
 
-  onDelete = (arg) => dispatcher<any>(deleteWidgetAction(arg));
+  onDelete = paperId ?
+    (arg) => dispatcher<any>(deleteWidgetAction(arg)) :
+    collectWidgetDataToolkit?.removeWidget;
 
   return {
     onDelete,

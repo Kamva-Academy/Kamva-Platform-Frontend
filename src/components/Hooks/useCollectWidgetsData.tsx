@@ -8,12 +8,12 @@ type AddWidgetPropsType = {
 }
 
 type UpdateWidgetPropsType = {
-  pid: number;
+  widgetId: number;
   onSuccess?: any;
 }
 
 type DeleteWidgetPropsType = {
-  pid: number;
+  widgetId: number;
   onSuccess?: any;
 }
 
@@ -36,10 +36,10 @@ const useCollectWidgetsData = (initialWidgets: WidgetType[]) => {
     onSuccess?.();
   };
 
-  const updateWidget = ({ pid, onSuccess, ...updatedWidgetData }: UpdateWidgetPropsType) => {
+  const updateWidget = ({ widgetId, onSuccess, ...updatedWidgetData }: UpdateWidgetPropsType) => {
     const newWidgets = [...widgets];
     newWidgets.forEach((widget, index) => {
-      if (widget.pid == pid) {
+      if (widget.id == widgetId) {
         newWidgets[index] = {
           ...widget,
           ...updatedWidgetData,
@@ -50,10 +50,10 @@ const useCollectWidgetsData = (initialWidgets: WidgetType[]) => {
     onSuccess?.();
   }
 
-  const removeWidget = ({ pid, onSuccess }: DeleteWidgetPropsType) => {
+  const removeWidget = ({ widgetId, onSuccess }: DeleteWidgetPropsType) => {
     const newWidgets = [...widgets];
     newWidgets.forEach((widget, index) => {
-      if (widget.pid == pid) {
+      if (widget.id == widgetId) {
         newWidgets.splice(index, 1);
       }
     })
