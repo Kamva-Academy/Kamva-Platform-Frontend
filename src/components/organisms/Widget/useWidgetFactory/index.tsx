@@ -36,8 +36,8 @@ const useWidgetFactory = ({
       (arg) => dispatcher(createAction(arg))) :
     // todo: fix TOF. لزوماً نباید با ?. هندلش کرد و لزوماً نباید اینجا صداش زد. اینجا صرفاً باید پاسش داد
     (widgetId ?
-      collectWidgetDataToolkit.updateWidget :
-      collectWidgetDataToolkit.addWidget?.({ widgetType }));
+      collectWidgetDataToolkit?.updateWidget :
+      collectWidgetDataToolkit?.addWidget?.({ widgetType }));
 
   onAnswerChange = collectAnswerData;
 
