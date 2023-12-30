@@ -13,18 +13,20 @@ const DetailBoxWidget = ({ title, details }) => {
 
   return (
     <Fragment>
-      <Stack direction={'row'}>
-        <IconButton onClick={() => setOpenRoadMap(!openRoadMap)} sx={{ padding: 0, marginRight: 1, marginTop: -1 }}>
+      <Stack direction={'row'} justifyContent={'center'} alignItems={'start'} spacing={1}>
+        <IconButton onClick={() => setOpenRoadMap(!openRoadMap)} sx={{ padding: 0, marginTop: -1 }}>
           <ArrowDropDownCircleIcon sx={{ transform: openRoadMap ? 'rotate(-180deg)' : null }} />
         </IconButton>
-        <TinyPreview
-          frameProps={{
-            frameBorder: '0',
-            scrolling: 'no',
-            width: '100%',
-          }}
-          content={title}
-        />
+        <Box width={'100%'}>
+          <TinyPreview
+            frameProps={{
+              frameBorder: '0',
+              scrolling: 'no',
+              width: '100%',
+            }}
+            content={title}
+          />
+        </Box>
       </Stack>
       <Collapse in={openRoadMap}>
         <Paper paper={details} />
