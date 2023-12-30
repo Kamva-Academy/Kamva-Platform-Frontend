@@ -4,7 +4,6 @@ import React, { FC, useMemo, useState } from 'react';
 
 import DeleteWidgetDialog from 'components/organisms/dialogs/DeleteWidgetDialog';
 import EditHintsDialog from 'components/organisms/dialogs/EditHintsDialog';
-import { toPersianNumber } from 'utils/translateNumber';
 import WidgetHint from 'components/molecules/WidgetHint';
 import useWidgetFactory from './useWidgetFactory';
 
@@ -16,11 +15,12 @@ export enum WidgetModes {
   InAnswerSheet,
 };
 
-enum WidgetTypes {
+export enum WidgetTypes {
   SmallAnswerProblem = 'SmallAnswerProblem',
   BigAnswerProblem = 'BigAnswerProblem',
   UploadFileProblem = 'UploadFileProblem',
   MultiChoiceProblem = 'MultiChoiceProblem',
+  InviteeUsername = 'InviteeUsername',
   TextWidget = 'TextWidget',
   DetailBoxWidget = 'DetailBoxWidget',
   Image = 'Image',
@@ -94,7 +94,7 @@ const Widget: FC<WidgetPropsType> = ({
           <Stack>
             <Stack direction='row' alignItems='center' justifyContent='space-between'>
               <Typography variant='h3' gutterBottom>
-                {widget.name ? widget.name : `ویجت ${toPersianNumber(widget.id)}`}
+                {widget.name}
               </Typography>
               <Box>
                 <Tooltip title='راهنمایی‌ها' arrow>
