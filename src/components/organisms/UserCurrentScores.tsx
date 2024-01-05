@@ -22,16 +22,20 @@ const UserCurrentScores: FC<UserCurrentScoresPropsType> = ({
   }, [])
 
   return (
-    <Stack padding={2} spacing={2}>
+    <Stack padding={2} spacing={4}>
       <Typography variant='h2' align='center' gutterBottom>
         {'امتیازات'}
       </Typography>
-      {Object.entries(scores).map(([scoreType, scoreValue], index) => (
+      {Object.entries(scores).length > 0 ? Object.entries(scores).map(([scoreType, scoreValue], index) => (
         <Stack direction={'row'} key={index} spacing={2} justifyContent={'space-between'}>
           <Typography>{scoreType}</Typography>
           <Typography>{scoreValue}</Typography>
         </Stack>
-      ))}
+      )) :
+        <Typography variant='h4' align='center'>
+          {'هنوز امتیازی وجود ندارد'}
+        </Typography>
+      }
     </Stack>
   );
 }
