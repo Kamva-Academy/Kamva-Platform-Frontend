@@ -9,7 +9,7 @@ import { getArticleAction } from 'redux/slices/article';
 import Layout from 'components/template/GeneralLayout';
 import isInIframe from 'utils/IsInIframe';
 import Paper from 'components/template/Paper';
-import { AppBarModes } from 'components/organisms/Appbar/modes';
+import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 type ArticlePropsType = {
   papers: any[];

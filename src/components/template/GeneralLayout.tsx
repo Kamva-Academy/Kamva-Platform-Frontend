@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Container } from '@mui/material';
 
 import AppBar from 'components/organisms/Appbar';
-import { AppBarModes } from 'components/organisms/Appbar/modes';
+import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 const Layout = ({
   appbarMode = AppBarModes.STUDENT_DASHBOARD,

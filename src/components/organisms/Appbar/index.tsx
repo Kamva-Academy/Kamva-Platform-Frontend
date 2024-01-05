@@ -13,11 +13,11 @@ import { EventAvailable, Menu as MenuIcon } from '@mui/icons-material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import HideOnScroll from './components/HideOnScroll';
-import { AppBarModes } from './modes';
+import { AppBarModes } from './useAppbarModes';
 import useWidth from 'utils/UseWidth';
 import { useParams } from 'react-router-dom';
 import { getOneEventInfoAction } from 'redux/slices/events';
-import useAppbarModes from './modes';
+import useAppbarModes from './useAppbarModes';
 
 type AppbarPropsType = {
   isMentor: boolean;

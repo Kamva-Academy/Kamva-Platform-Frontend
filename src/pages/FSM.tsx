@@ -19,7 +19,7 @@ import { addMentorToRoom, updateMentorTime } from 'parse/mentorsInRoom';
 import DraggableChatRoom from 'components/organisms/DraggableMeeting';
 import { getOneEventInfoAction } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
-import { AppBarModes } from 'components/organisms/Appbar/modes';
+import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 var moment = require('moment');
 

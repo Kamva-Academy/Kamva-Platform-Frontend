@@ -18,7 +18,7 @@ import {
 } from 'redux/slices/widget';
 import Layout from 'components/template/GeneralLayout';
 import ScoringColumn from './ScoringColumn';
-import { AppBarModes } from 'components/organisms/Appbar/modes';
+import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 function Correction({
   getAnswer,

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Layout from 'components/template/GeneralLayout';
 import EditPaper from '../components/template/Paper/EditPaper';
 import { getArticleAction } from '../redux/slices/article';
-import { AppBarModes } from 'components/organisms/Appbar/modes';
+import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 const EditArticle = ({
 	papers,

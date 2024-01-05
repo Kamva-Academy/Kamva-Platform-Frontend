@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import React, { Fragment } from 'react';
 import AppBar from 'components/organisms/Appbar';
-import { AppBarModes } from 'components/organisms/Appbar/modes';
+import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 const Layout = ({
   ...props

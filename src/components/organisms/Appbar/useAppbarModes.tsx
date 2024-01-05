@@ -26,7 +26,13 @@ const mode2component = {
 }
 
 const useAppbarModes = ({ mode, workshop, event, isMentor, mentorId }) => {
-  if (mode == AppBarModes.None) return null;
+  if (mode == AppBarModes.None) return {
+    desktopLeftItems: [],
+    desktopRightItems: [],
+    mobileLeftItems: [],
+    mobileRightItems: [],
+    mobileMenuListItems: [],
+  };
   const appbarComponent = mode2component[mode];
   return appbarComponent({ workshop, event, isMentor, mentorId })
 }
