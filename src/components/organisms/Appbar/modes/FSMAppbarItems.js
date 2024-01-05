@@ -8,6 +8,7 @@ import ReviewAnswersButton from '../components/ReviewAnswersButton';
 import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
+import ScoresDialogButton from '../components/ScoresDialogButton';
 
 const FSMAppbarItems = ({ workshop, isMentor }) => {
 
@@ -28,6 +29,7 @@ const FSMAppbarItems = ({ workshop, isMentor }) => {
   const mentorButton = <MentorButton />;
   const teamAvatar = <TeamAvatar />;
   const programLogoButton = <ProgramLogoButton />;
+  const scoresDialogButton = <ScoresDialogButton />
 
   const desktopLeftItems = [];
   const desktopRightItems = [];
@@ -53,6 +55,9 @@ const FSMAppbarItems = ({ workshop, isMentor }) => {
     mobileRightItems.push(programLogoButton);
     desktopRightItems.push(programLogoButton);
   }
+
+  desktopLeftItems.push(scoresDialogButton);
+  mobileMenuListItems.push(scoresDialogButton);
 
   return {
     desktopLeftItems,

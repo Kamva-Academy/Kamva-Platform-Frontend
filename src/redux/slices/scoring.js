@@ -8,6 +8,7 @@ import {
   getAnswerScoresAndCommentsUrl,
   setAnswerScoreUrl,
   transactionUrl,
+  scoreTypeUrl,
 } from '../constants/urls';
 
 
@@ -59,13 +60,24 @@ export const createCommentAction = createAsyncThunkApi(
   }
 );
 
-export const getScoresInProgramAction = createAsyncThunkApi(
-  'scoring/getScoresInProgramAction',
+export const getUserCurrentScoresAction = createAsyncThunkApi(
+  'scoring/getUserCurrentScoresAction',
   Apis.POST,
   transactionUrl({ actionUrl: 'get_current_scores' }),
   {
     defaultNotification: {
       error: 'مشکلی در دریافت امتیازات وجود داشت',
+    },
+  }
+);
+
+export const getScoreTypesAction = createAsyncThunkApi(
+  'scoring/getScoreTypesAction',
+  Apis.GET,
+  scoreTypeUrl({ actionUrl: null }),
+  {
+    defaultNotification: {
+      error: 'مشکلی در دریافت انواع امتیازات وجود داشت',
     },
   }
 );
@@ -118,12 +130,12 @@ const scoringSlice = createSlice({
     [createCommentAction.rejected.toString()]: isNotFetching,
 
 
-    [getScoresInProgramAction.pending.toString()]: isFetching,
-    [getScoresInProgramAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+    [getUserCurrentScoresAction.pending.toString()]: isFetching,
+    [getUserCurrentScoresAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.scores = response;
       state.isFetching = false;
     },
-    [getScoresInProgramAction.rejected.toString()]: isNotFetching,
+    [getUserCurrentScoresAction.rejected.toString()]: isNotFetching,
   },
 });
 
