@@ -10,7 +10,7 @@ import WhiteboardButton from '../components/WhiteboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import ScoresDialogButton from '../components/ScoresDialogButton';
 
-const FSMAppbarItems = ({ workshop, isMentor }) => {
+const FSMAppbarItems = ({ program, workshop, isMentor }) => {
 
   useEffect(() => {
     if (workshop?.name) {
@@ -56,8 +56,10 @@ const FSMAppbarItems = ({ workshop, isMentor }) => {
     desktopRightItems.push(programLogoButton);
   }
 
-  desktopLeftItems.push(scoresDialogButton);
-  mobileMenuListItems.push(scoresDialogButton);
+  if (program.show_scores) {
+    desktopLeftItems.push(scoresDialogButton);
+    mobileMenuListItems.push(scoresDialogButton);
+  }
 
   return {
     desktopLeftItems,

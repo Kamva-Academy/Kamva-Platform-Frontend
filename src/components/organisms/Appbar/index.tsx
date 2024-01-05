@@ -59,7 +59,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = useAppbarModes({ mode, workshop, event, isMentor, mentorId });
+  } = useAppbarModes({ mode, workshop, program: event, isMentor, mentorId });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;

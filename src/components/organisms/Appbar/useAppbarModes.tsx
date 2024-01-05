@@ -25,7 +25,7 @@ const mode2component = {
   ARTICLE: GeneralAppbarItems,
 }
 
-const useAppbarModes = ({ mode, workshop, event, isMentor, mentorId }) => {
+const useAppbarModes = ({ mode, workshop, program, isMentor, mentorId }) => {
   if (mode == AppBarModes.None) return {
     desktopLeftItems: [],
     desktopRightItems: [],
@@ -34,7 +34,7 @@ const useAppbarModes = ({ mode, workshop, event, isMentor, mentorId }) => {
     mobileMenuListItems: [],
   };
   const appbarComponent = mode2component[mode];
-  return appbarComponent({ workshop, event, isMentor, mentorId })
+  return appbarComponent({ workshop, program, isMentor, mentorId })
 }
 
 export default useAppbarModes;
