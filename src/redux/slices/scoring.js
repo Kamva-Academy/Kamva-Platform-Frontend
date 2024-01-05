@@ -7,6 +7,7 @@ import {
   createCommentUrl,
   getAnswerScoresAndCommentsUrl,
   setAnswerScoreUrl,
+  transactionUrl,
 } from '../constants/urls';
 
 
@@ -58,11 +59,23 @@ export const createCommentAction = createAsyncThunkApi(
   }
 );
 
+export const getScoresInProgramAction = createAsyncThunkApi(
+  'scoring/getScoresInProgramAction',
+  Apis.POST,
+  transactionUrl({ actionUrl: 'get_current_scores' }),
+  {
+    defaultNotification: {
+      error: 'مشکلی در دریافت امتیازات وجود داشت',
+    },
+  }
+);
+
 const initialState = {
   token: null,
   refresh: null,
   user: {},
   discountCodes: [],
+  scores: [],
 };
 
 
@@ -87,6 +100,7 @@ const scoringSlice = createSlice({
     },
     [getAnswerAction.rejected.toString()]: isNotFetching,
 
+
     [getScoresAndCommentsAction.pending.toString()]: isFetching,
     [getScoresAndCommentsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.scores = response.scores;
@@ -102,6 +116,14 @@ const scoringSlice = createSlice({
       state.isFetching = false;
     },
     [createCommentAction.rejected.toString()]: isNotFetching,
+
+
+    [getScoresInProgramAction.pending.toString()]: isFetching,
+    [getScoresInProgramAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.scores = response;
+      state.isFetching = false;
+    },
+    [getScoresInProgramAction.rejected.toString()]: isNotFetching,
   },
 });
 

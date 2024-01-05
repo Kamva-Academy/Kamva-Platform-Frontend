@@ -162,6 +162,7 @@ export const answerCRUDUrl = ({ answerId }) => answerId ? `fsm/answers/${answerI
 export const getAnswerScoresAndCommentsUrl = 'scoring/get_answer_scores_and_comments/';
 export const setAnswerScoreUrl = 'scoring/set_answer_score/';
 export const createCommentUrl = 'scoring/create_comment/';
+export const transactionUrl = ({ actionUrl }) => `scoring/transaction/${actionUrl}/`;
 
 // question
 export const checkUsernameUrl = 'question/check_username/';

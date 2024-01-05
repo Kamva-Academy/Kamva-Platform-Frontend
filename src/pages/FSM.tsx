@@ -19,6 +19,7 @@ import { addMentorToRoom, updateMentorTime } from 'parse/mentorsInRoom';
 import DraggableChatRoom from 'components/organisms/DraggableMeeting';
 import { getOneEventInfoAction } from 'redux/slices/events';
 import Layout from 'components/template/GeneralLayout';
+import { AppBarModes } from 'components/organisms/Appbar/modes';
 
 var moment = require('moment');
 
@@ -162,7 +163,7 @@ const FSM = ({
   return (
     <Fragment>
       <StatePageContext.Provider value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
-        <Layout appbarMode={isMentor ? "MENTOR_FSM" : "FSM"}>
+        <Layout appbarMode={isMentor ? AppBarModes.MENTOR_FSM : AppBarModes.FSM}>
           <FSMStateTemplate state={fsmState} playerId={parseInt(playerId)} />
         </Layout>
       </StatePageContext.Provider>

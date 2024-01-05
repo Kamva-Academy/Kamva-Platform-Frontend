@@ -13,16 +13,17 @@ import { EventAvailable, Menu as MenuIcon } from '@mui/icons-material';
 import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import HideOnScroll from './components/HideOnScroll';
-import modes from './modes';
+import { AppBarModes } from './modes';
 import useWidth from 'utils/UseWidth';
 import { useParams } from 'react-router-dom';
 import { getOneEventInfoAction } from 'redux/slices/events';
+import useAppbarModes from './modes';
 
 type AppbarPropsType = {
   isMentor: boolean;
   workshop: any;
   event: any;
-  mode: string;
+  mode: AppBarModes;
   showBackOnScroll?: boolean;
   hideOnScroll?: boolean;
   position: "fixed" | "absolute" | "sticky" | "static" | "relative";
@@ -34,7 +35,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
   isMentor,
   workshop,
   event,
-  mode = 'FSM',
+  mode = AppBarModes.FSM,
   showBackOnScroll = false,
   hideOnScroll = false,
   position = 'fixed',
@@ -58,7 +59,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = modes[mode]({ workshop, event, isMentor, mentorId });
+  } = useAppbarModes({ mode, workshop, event, isMentor, mentorId });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;

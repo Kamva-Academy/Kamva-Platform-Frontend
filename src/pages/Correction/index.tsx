@@ -12,12 +12,13 @@ import {
   getAnswerAction,
   getScoresAndCommentsAction,
   setScoreAction,
-} from '../../redux/slices/scoring';
+} from 'redux/slices/scoring';
 import {
   getWidgetAction,
-} from '../../redux/slices/widget';
+} from 'redux/slices/widget';
 import Layout from 'components/template/GeneralLayout';
 import ScoringColumn from './ScoringColumn';
+import { AppBarModes } from 'components/organisms/Appbar/modes';
 
 function Correction({
   getAnswer,
@@ -50,7 +51,7 @@ function Correction({
   };
 
   return (
-    <Layout appbarMode='GENERAL'>
+    <Layout appbarMode={AppBarModes.GENERAL}>
       <Grid container spacing={4} justifyContent='center' alignItems='flex-start'>
         <Grid item xs={12}>
           <Typography variant="h1" align='center'>

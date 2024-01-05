@@ -3,18 +3,21 @@ import { useParams } from 'react-router-dom';
 import { Container } from '@mui/material';
 
 import AppBar from 'components/organisms/Appbar';
+import { AppBarModes } from 'components/organisms/Appbar/modes';
 
 const Layout = ({
-  appbarMode = 'STUDENT_DASHBOARD',
+  appbarMode = AppBarModes.STUDENT_DASHBOARD,
   ...props
 }) => {
   const { programId } = useParams();
+  const { fsmId } = useParams();
 
   return (
     <Fragment>
-      {programId ? <AppBar mode='PROGRAM' position="relative" />
-        : appbarMode ? <AppBar mode={appbarMode} position="relative" />
-          : null
+      {fsmId ? <AppBar mode={AppBarModes.FSM} position="relative" /> :
+        programId ? <AppBar mode={AppBarModes.PROGRAM} position="relative" />
+          : appbarMode ? <AppBar mode={appbarMode} position="relative" />
+            : null
       }
       <Container maxWidth='lg'
         sx={{
