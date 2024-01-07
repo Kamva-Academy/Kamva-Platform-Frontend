@@ -2,13 +2,17 @@ import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 
 import WorkshopCard from 'components/organisms/cards/WorkshopCard';
+import useWidth from 'utils/UseWidth';
 
 function FSMsGrid({ programId, fsms, isLoading }) {
+  const width = useWidth();
+
+  const numberOfSkeleton = width === 'sm' || width === 'md' ? 4 : 3;
 
   if (isLoading) {
     return (
       <Grid container spacing={2}>
-        {[...Array(3)].map((e, i) => (
+        {[...Array(numberOfSkeleton)].map((e, i) => (
           <Grid item key={i} xs={12} sm={6} lg={4}>
             <WorkshopCard isLoading={true} />
           </Grid>
