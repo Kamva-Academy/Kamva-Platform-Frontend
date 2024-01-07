@@ -29,7 +29,7 @@ const ScoreDialogButton: FC<ScoreDialogButtonPropsType> = ({
           <SportsScoreIcon />
         </IconButton>
       </Tooltip>
-      <Dialog maxWidth='xs' fullWidth open={openScoresDialog} onClose={() => setOpenScoresDialog(openScoresDialog => !openScoresDialog)}>
+      <Dialog disableScrollLock maxWidth='xs' fullWidth open={openScoresDialog} onClose={() => setOpenScoresDialog(openScoresDialog => !openScoresDialog)}>
         <UserCurrentScores />
       </Dialog>
       {openScoresDialog}
