@@ -166,10 +166,10 @@ const FSM = ({
         <Layout appbarMode={isMentor ? AppBarModes.MENTOR_FSM : AppBarModes.FSM}>
           <FSMStateTemplate state={fsmState} playerId={parseInt(playerId)} />
         </Layout>
+        {(workshop.fsm_p_type == 'Team' || workshop.fsm_learning_type == 'Supervised') &&
+          <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
+        }
       </StatePageContext.Provider>
-      {(workshop.fsm_p_type == 'Team' || workshop.fsm_learning_type == 'Supervised') &&
-        <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
-      }
     </Fragment>
   );
 };
