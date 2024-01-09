@@ -145,7 +145,7 @@ const TeamSelection: FC<TeamSelectionPropsType> = ({
   teamInvitations = teamInvitations.slice().sort((team1, team2) => team2.id - team1.id);
 
   return (
-    <Layout>
+    <Layout appbarMode='PROGRAM'>
       <Grid
         container
         justifyContent="space-between"

@@ -102,7 +102,7 @@ const Event: FC<EventType> = ({
   }, [event?.registration_form]);
 
   return (
-    <Layout>
+    <Layout appbarMode='PROGRAM'>
       <Grid container spacing={2} direction="row" justifyContent="center">
         <Grid
           container

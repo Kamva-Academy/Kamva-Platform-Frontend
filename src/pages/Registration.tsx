@@ -53,7 +53,7 @@ const RegistrationProcess: FC<RegistrationProcessPropsType> = ({
   }
 
   return (
-    <Layout>
+    <Layout appbarMode='PROGRAM'>
       <Grid container spacing={2}
         alignItems={{ xs: 'center', md: 'start' }}
         justifyContent={{ xs: 'center', md: 'flex-start' }}>

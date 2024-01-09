@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import Layout from 'components/template/GeneralLayout';
 import EditPaper from '../components/template/Paper/EditPaper';
 import { getArticleAction } from '../redux/slices/article';
-import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 const EditArticle = ({
 	papers,
@@ -20,7 +19,7 @@ const EditArticle = ({
 	const article = papers[articleId];
 
 	return (
-		<Layout appbarMode={AppBarModes.ARTICLE}>
+		<Layout appbarMode='ARTICLE'>
 			<Stack spacing={2} maxWidth='md' sx={{ width: '100%', paddingBottom: 2 }}>
 				<Typography
 					align="center"

@@ -4,20 +4,8 @@ import GeneralAppbarItems from './modes/GeneralAppbarItems';
 import FSMAppbarItems from './modes/FSMAppbarItems';
 import MentorFSMAppBar from './modes/MentorFSMAppbarItems';
 
-enum AppBarModes {
-  STUDENT_DASHBOARD = 'STUDENT_DASHBOARD',
-  FSM = 'FSM',
-  MENTOR_FSM = 'MENTOR_FSM',
-  PROGRAM = 'PROGRAM',
-  GENERAL = 'GENERAL',
-  ARTICLE = 'ARTICLE',
-  None = 'None',
-}
-
-export { AppBarModes };
-
 const mode2component = {
-  STUDENT_DASHBOARD: StudentDashboardItems,
+  DASHBOARD: StudentDashboardItems,
   FSM: FSMAppbarItems,
   MENTOR_FSM: MentorFSMAppBar,
   PROGRAM: ProgramAppBarItems,
@@ -26,13 +14,6 @@ const mode2component = {
 }
 
 const useAppbarModes = ({ mode, workshop, program, isMentor, mentorId }) => {
-  if (mode == AppBarModes.None) return {
-    desktopLeftItems: [],
-    desktopRightItems: [],
-    mobileLeftItems: [],
-    mobileRightItems: [],
-    mobileMenuListItems: [],
-  };
   const appbarComponent = mode2component[mode];
   return appbarComponent({ workshop, program, isMentor, mentorId })
 }

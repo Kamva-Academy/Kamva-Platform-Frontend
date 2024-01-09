@@ -127,7 +127,7 @@ const FSMManagement: FC<EventPropsType> = ({
   const TabComponent = currentTab.component;
 
   return (
-    <Layout>
+    <Layout appbarMode='PROGRAM'>
       <Grid container spacing={2} direction="row" justifyContent="center">
         <Grid container item sm={3} xs={12} direction="column" justifyContent="flex-start">
           <Stack spacing={2}>

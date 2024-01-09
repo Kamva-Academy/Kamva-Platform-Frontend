@@ -41,11 +41,11 @@ function Program({
   // todo: handle event not found
   // todo: handle in a better way  
   if (event?.is_user_participating == undefined) {
-    return (<Layout></Layout>)
+    return (<Layout appbarMode='PROGRAM'></Layout>)
   }
 
   return (
-    <Layout>
+    <Layout appbarMode='PROGRAM'>
       <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
         <Box width={{ xs: '100%', sm: 180, md: 300 }} position={{ xs: null, sm: 'sticky' }} top={16}>
           <ProgramPageSidebar />

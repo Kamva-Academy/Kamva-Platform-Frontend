@@ -61,7 +61,7 @@ const Events = ({
   )
 
   return (
-    <Layout>
+    <Layout appbarMode='DASHBOARD'>
       <Stack width={'100%'} spacing={4} justifyContent='center'>
         <Banner banners={banners} />
         <Typography variant="h1" align='center'>

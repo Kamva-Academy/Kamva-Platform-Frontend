@@ -21,7 +21,7 @@ const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articles
   }, [pageNumber]);
 
   return (
-    <Layout>
+    <Layout appbarMode='DASHBOARD'>
       <Grid container spacing={4} justifyContent='center'>
         <Grid item xs={12}>
           <Typography variant="h1" align='center'>

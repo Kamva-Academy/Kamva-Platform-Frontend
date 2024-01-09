@@ -1,14 +1,13 @@
 import { Container } from '@mui/material';
 import React, { Fragment } from 'react';
 import AppBar from 'components/organisms/Appbar';
-import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 const Layout = ({
   ...props
 }) => {
   return (
     <Fragment>
-      <AppBar mode={AppBarModes.STUDENT_DASHBOARD} position='relative' showBackOnScroll={false} hideOnScroll={false} />
+      <AppBar mode='DASHBOARD' position='relative' showBackOnScroll={false} hideOnScroll={false} />
       <Container sx={{
         padding: 4,
         display: 'flex',

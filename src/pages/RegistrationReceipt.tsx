@@ -56,7 +56,7 @@ function RegistrationReceipt({
   }
 
   return (
-    <Layout>
+    <Layout appbarMode='MENTOR_FSM'>
       <Grid container spacing={2} alignItems='flex-start'>
         <Grid xs={12} sm={8} container item>
           <Stack component={Paper} spacing={2} sx={{ padding: 1, width: '100%' }}>

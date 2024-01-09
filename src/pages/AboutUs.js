@@ -1,26 +1,17 @@
 import { Paper, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect } from 'react';
 
 import Layout from 'components/template/GeneralLayout';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: '100%',
-    padding: theme.spacing(2),
-  },
-}));
-
 function AboutUs() {
-  const classes = useStyles();
 
   useEffect(() => {
     document.title = 'کاموا';
   }, [])
 
   return (
-    <Layout appbarMode='GENERAL'>
-      <Paper className={classes.paper}>
+    <Layout appbarMode='DASHBOARD'>
+      <Paper sx={{ padding: 2 }}>
         <Typography component="h2" variant="h3" gutterBottom>
           کاموا چیست؟
         </Typography>

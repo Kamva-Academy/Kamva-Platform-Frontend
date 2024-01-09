@@ -18,7 +18,6 @@ import {
 } from 'redux/slices/widget';
 import Layout from 'components/template/GeneralLayout';
 import ScoringColumn from './ScoringColumn';
-import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 function Correction({
   getAnswer,
@@ -51,7 +50,7 @@ function Correction({
   };
 
   return (
-    <Layout appbarMode={AppBarModes.GENERAL}>
+    <Layout appbarMode='GENERAL'>
       <Grid container spacing={4} justifyContent='center' alignItems='flex-start'>
         <Grid item xs={12}>
           <Typography variant="h1" align='center'>

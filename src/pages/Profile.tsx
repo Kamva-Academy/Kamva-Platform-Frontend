@@ -59,7 +59,7 @@ const Profile = ({
   }
 
   return (
-    <Layout>
+    <Layout appbarMode='PROGRAM'>
       <Grid
         container
         justifyContent="center"

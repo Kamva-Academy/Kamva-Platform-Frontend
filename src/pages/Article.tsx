@@ -9,7 +9,6 @@ import { getArticleAction } from 'redux/slices/article';
 import Layout from 'components/template/GeneralLayout';
 import isInIframe from 'utils/IsInIframe';
 import Paper from 'components/template/Paper';
-import { AppBarModes } from 'components/organisms/Appbar/useAppbarModes';
 
 type ArticlePropsType = {
   papers: any[];
@@ -26,7 +25,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
   }, []);
 
   return (
-    <Layout appbarMode={isInIframe() ? AppBarModes.None : AppBarModes.ARTICLE}>
+    <Layout appbarMode={isInIframe() ? 'None' : 'DASHBOARD'}>
       <Stack spacing={2} maxWidth='sm' sx={{ width: '100%', paddingBottom: 2 }}>
         <Typography
           align="center"
@@ -37,7 +36,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
         </Typography>
         <Paper paper={article} />
       </Stack>
-    </Layout>
+    </Layout >
   );
 };
 
