@@ -25,7 +25,7 @@ const Article: FC<ArticlePropsType> = ({ papers, getArticle }) => {
   }, []);
 
   return (
-    <Layout appbarMode={isInIframe() ? 'None' : 'DASHBOARD'}>
+    <Layout appbarMode={isInIframe() ? null : 'DASHBOARD'}>
       <Stack spacing={2} maxWidth='sm' sx={{ width: '100%', paddingBottom: 2 }}>
         <Typography
           align="center"
