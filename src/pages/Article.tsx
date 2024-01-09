@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { WidgetModes } from 'components/organisms/Widget';
 import Widget from 'components/organisms/Widget';
 import { getArticleAction } from 'redux/slices/article';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import isInIframe from 'utils/IsInIframe';
 import Paper from 'components/template/Paper';
 

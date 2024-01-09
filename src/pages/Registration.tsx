@@ -8,7 +8,7 @@ import {
   getOneEventInfoAction,
   getOneRegistrationFormAction,
 } from 'redux/slices/events';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import { ProgramType, RegistrationFormType } from 'types/models';
 import useRegistrationSteps from 'components/Hooks/useRegistrationSteps';
 

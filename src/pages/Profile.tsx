@@ -2,7 +2,7 @@ import { Grid, Tab, Tabs } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import ProfileTemplate from 'components/template/Profile';
 import { getUserProfileAction } from 'redux/slices/account';
 

@@ -1,7 +1,7 @@
 import { Paper, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 
 function AboutUs() {
 

@@ -18,7 +18,7 @@ import {
 import { addMentorToRoom, updateMentorTime } from 'parse/mentorsInRoom';
 import DraggableChatRoom from 'components/organisms/DraggableMeeting';
 import { getOneEventInfoAction } from 'redux/slices/events';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 
 var moment = require('moment');
 

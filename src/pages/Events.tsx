@@ -8,7 +8,7 @@ import {
 import {
   getBannersAction,
 } from 'redux/slices/WebSiteAppearance';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import { ProgramType } from 'types/models';
 import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 import Banner from 'components/molecules/Banner';

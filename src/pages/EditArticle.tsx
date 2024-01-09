@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import EditPaper from '../components/template/Paper/EditPaper';
 import { getArticleAction } from '../redux/slices/article';
 

@@ -8,7 +8,7 @@ import {
   getEventWorkshopsAction,
   getOneEventInfoAction,
 } from 'redux/slices/events';
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import ProgramPageSidebar from 'components/organisms/ProgramPageSidebar';
 import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
 

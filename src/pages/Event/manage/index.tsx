@@ -18,7 +18,7 @@ import {
   getOneEventInfoAction,
 } from 'redux/slices/events';
 
-import Layout from 'components/template/GeneralLayout';
+import Layout from 'components/template/Layout';
 import DiscountCode from './DiscountCode';
 import Info from './Info';
 import RegistrationForm from './RegistrationForm';
