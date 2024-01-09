@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
 import {
   makeAnswerFileEmptyAction,
-} from 'redux/slices/widget';
+} from 'redux/slices/Answer';
 import UploadFileProblemEditWidget from './edit';
 import { WidgetModes } from 'components/organisms/Widget';
 import { toast } from 'react-toastify';

@@ -2,24 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Apis } from '../apis';
 import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
-  makeAnswerEmptyUrl,
-  sendWidgetAnswerUrl,
   widgetCRUDUrl,
-  uploadFileUrl,
   makeWidgetFileEmptyUrl,
 } from '../constants/urls';
 
-import { InitialStateType } from 'types/redux/widget';
+export type InitialStateType = {
+  isFetching: boolean;
+  widgets: object;
+}
 
 const initialState: InitialStateType = {
-  hints: {},
   isFetching: false,
-  workshops: [],
-  articles: [],
-  teams: [],
-  notifications: [],
-  problems: [],
-  submissions: [],
   widgets: {},
 }
 
@@ -30,78 +23,6 @@ const isFetching = (state) => {
 const isNotFetching = (state) => {
   state.isFetching = false;
 };
-
-/////////////////////////// SEND ANSWER ///////////////////////////
-
-const _sendWidgetAnswerAction = createAsyncThunkApi(
-  'widget/sendWidgetAnswerAction',
-  Apis.POST,
-  sendWidgetAnswerUrl,
-  {
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت ثبت شد.',
-      error: 'مشکلی در ثبت پاسخ وجود داشت.',
-    },
-  }
-);
-
-export const sendBigAnswerAction = ({ widgetId, text }) =>
-  _sendWidgetAnswerAction({
-    widgetId,
-    text,
-    answer_type: 'BigAnswer',
-  });
-
-export const sendSmallAnswerAction = ({ widgetId, text }) =>
-  _sendWidgetAnswerAction({
-    widgetId,
-    text,
-    answer_type: 'SmallAnswer',
-  });
-
-export const sendInviteeUsernameResponseAction = ({ widgetId, username }) =>
-  _sendWidgetAnswerAction({
-    widgetId,
-    username,
-    answer_type: 'InviteeUsernameResponse',
-  });
-
-export const sendMultiChoiceAnswerAction = ({ problemId, selectedChoices }) =>
-  _sendWidgetAnswerAction({
-    widgetId: problemId,
-    choices: selectedChoices,
-    answer_type: 'MultiChoiceAnswer',
-  });
-
-
-export const uploadFileAnswerAction = createAsyncThunkApi(
-  'widget/uploadFileAnswerAction',
-  Apis.POST_FORM_DATA,
-  uploadFileUrl,
-  {
-    bodyCreator: ({ problemId, answerFile }) => ({
-      problem: problemId,
-      answer_file: answerFile,
-      is_final_answer: true,
-    }),
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت ثبت شد.',
-      error: 'مشکلی در ثبت پاسخ وجود داشت.',
-    },
-  }
-);
-
-export const makeAnswerFileEmptyAction = createAsyncThunkApi(
-  'widget/makeAnswerFileEmptyAction',
-  Apis.GET,
-  makeAnswerEmptyUrl,
-  {
-    defaultNotification: {
-      success: 'پاسخ شما با موفقیت حذف شد.',
-      error: 'مشکلی در حذف‌کردن پاسخ وجود داشت.',
-    },
-  }
-);
 
 
 //////////////// GET AND DELETE WIDGETS ////////////////
@@ -408,22 +329,12 @@ const widgetSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: {
-    [_sendWidgetAnswerAction.pending.toString()]: isFetching,
-    [_sendWidgetAnswerAction.fulfilled.toString()]: isNotFetching,
-    [_sendWidgetAnswerAction.rejected.toString()]: isNotFetching,
-
-
     [_createWidgetAction.pending.toString()]: isFetching,
     [_createWidgetAction.fulfilled.toString()]: (state, { payload: { response }, meta: { arg } }) => {
       state.widgets[arg.paper] = [...(state.widgets[arg.paper] || []), response];
       state.isFetching = false;
     },
     [_createWidgetAction.rejected.toString()]: isNotFetching,
-
-    
-    [uploadFileAnswerAction.pending.toString()]: isFetching,
-    [uploadFileAnswerAction.fulfilled.toString()]: isNotFetching,
-    [uploadFileAnswerAction.rejected.toString()]: isNotFetching,
   },
 });
 

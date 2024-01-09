@@ -15,6 +15,7 @@ import { scoringReducer } from './scoring';
 import { questionReducer } from './Question';
 import { WebSiteAppearanceReducer } from './WebSiteAppearance';
 import { RoadmapReducer } from './Roadmap';
+import { AnswerReducer } from './Answer';
 
 const allReducers = combineReducers({
   paper: paperReducer,
@@ -32,6 +33,7 @@ const allReducers = combineReducers({
   Intl: translatorReducer,
   scoring: scoringReducer,
   question: questionReducer,
+  answer: AnswerReducer,
 });
 
 export default allReducers;

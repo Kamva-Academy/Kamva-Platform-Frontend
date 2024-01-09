@@ -10,11 +10,9 @@ import AudioWidget, { AudioEditWidget } from '../contents/AudioWidget';
 import DetailBoxWidget, { DetailBoxEditDialog } from '../contents/DetailBoxWidget';
 
 import {
-  sendSmallAnswerAction,
   createSmallAnswerProblemWidgetAction,
   updateSmallAnswerProblemWidgetAction,
 
-  sendBigAnswerAction,
   createBigAnswerQuestionWidgetAction,
   updateBigAnswerQuestionWidgetAction,
 
@@ -33,19 +31,27 @@ import {
   createVideoWidgetAction,
   updateVideoWidgetAction,
 
-  uploadFileAnswerAction,
   createUploadFileWidgetAction,
   updateUploadFileWidgetAction,
 
   createDetailBoxWidgetAction,
   updateDetailBoxWidgetAction,
 
-  sendMultiChoiceAnswerAction,
   createMultiChoicesQuestionWidgetAction,
   updateMultiChoicesQuestionWidgetAction,
 
-  sendInviteeUsernameResponseAction,
 } from 'redux/slices/widget';
+
+import {
+  sendSmallAnswerAction,
+  sendBigAnswerAction,
+  uploadFileAnswerAction,
+  sendMultiChoiceAnswerAction,
+  sendInviteeUsernameResponseAction,
+} from 'redux/slices/Answer';
+
+
+
 import InviteeUsername, { InviteeUsernameEdit } from '../questions/InviteeUsername';
 
 const WIDGET_TYPE_MAPPER = {
