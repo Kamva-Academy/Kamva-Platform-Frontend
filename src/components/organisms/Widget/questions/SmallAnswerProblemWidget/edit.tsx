@@ -18,13 +18,13 @@ function SmallAnswerProblemEditWidget({
   open,
   text: oldText,
   solution: oldSolution,
-  answer: oldAnswer,
+  correct_answer: oldCorrectAnswer,
   paperId,
   id: widgetId,
 }) {
   const t = useTranslate();
   const [text, setText] = useState<string>(oldText);
-  const [answer, setAnswer] = useState<string>(oldAnswer?.text || '');
+  const [correctAnswer, setCorrectAnswer] = useState<string>(oldCorrectAnswer?.text || '');
   const [solution, setSolution] = useState<string>(oldSolution || '');
 
   const handleSubmit = () => {
@@ -32,7 +32,7 @@ function SmallAnswerProblemEditWidget({
       widgetId,
       paper: paperId,
       text: text,
-      answer,
+      correct_answer: correctAnswer,
       solution,
       onSuccess: handleClose,
     });
@@ -54,12 +54,12 @@ function SmallAnswerProblemEditWidget({
             content={text}
             onChange={(text) => setText(text)}
           />
-          <label>{t('answer')}</label>
+          <label>{'پاسخ صحیح'}</label>
           <TextField
             variant='outlined'
             fullWidth
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
+            value={correctAnswer}
+            onChange={(e) => setCorrectAnswer(e.target.value)}
           />
           <label>{'راه‌حل'}</label>
           <TinyEditorComponent
