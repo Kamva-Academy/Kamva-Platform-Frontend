@@ -5,10 +5,10 @@ import AboutUs from 'pages/AboutUs';
 import ResetPassword from 'pages/ResetPassword';
 import CreateAccount from 'pages/CreateAccount';
 import RegistrationReceipt from 'pages/RegistrationReceipt';
-import Events from 'pages/Events';
+import Programs from 'pages/Programs';
 import Profile from 'pages/Profile';
-import Event from 'pages/Event';
-import ManageEvent from 'pages/Event/manage';
+import Program from 'pages/Program';
+import ProgramManagement from 'pages/ProgramManagement';
 import Landing from 'pages/Landing';
 import NotFoundPage from 'pages/NotFoundPage';
 import Login from 'pages/Login';
@@ -54,7 +54,7 @@ const Root = () => {
         />
         <Route path="/registration-receipt/:registrationReceiptId/" element={<RegistrationReceipt />} />
         <Route path="/profile/:section/" element={<Profile />} />
-        <Route path="/programs/" element={<Events />} />
+        <Route path="/programs/" element={<Programs />} />
         <Route path="/articles/" element={<Articles />} />
         <Route path="/program/:programId/fsm/:fsmId/" element={<Workshop />} />
         <Route path="/program/:programId/profile/:section/" element={<Profile />} />
@@ -66,10 +66,10 @@ const Root = () => {
           path="/program/:programId/team-selection/"
           element={<TeamSelection />}
         />
-        <Route path="/program/:programId/" element={<Event />} />
+        <Route path="/program/:programId/" element={<Program />} />
 
         {/* only mentors can visit: */}
-        <Route path="/program/:programId/manage/:section" element={<ManageEvent />} />
+        <Route path="/program/:programId/manage/:section" element={<ProgramManagement />} />
         <Route path="/program/:programId/fsm/:fsmId/manage/correction/:answerId/" element={<Correction />} />
         <Route path="/program/:programId/fsm/:fsmId/manage/:section" element={<FSMManagement />} />
       </Route>

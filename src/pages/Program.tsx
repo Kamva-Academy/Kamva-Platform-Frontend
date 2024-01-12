@@ -41,7 +41,7 @@ function Program({
   // todo: handle event not found
   // todo: handle in a better way  
   if (event?.is_user_participating == undefined) {
-    return (<Layout appbarMode='PROGRAM'></Layout>)
+    return null;
   }
 
   return (

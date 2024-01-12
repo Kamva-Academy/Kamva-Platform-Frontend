@@ -14,7 +14,7 @@ import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 import Banner from 'components/molecules/Banner';
 
 
-const Events = ({
+const Programs = ({
   getAllEventsInfo,
   getBanners,
   events,
@@ -96,4 +96,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAllEventsInfo: getAllEventsInfoAction,
   getBanners: getBannersAction,
-})(Events);
+})(Programs);
