@@ -386,12 +386,6 @@ export const createWorkshopAction = createAsyncThunkApi(
   workshopCRUDUrl
 );
 
-export const getAllWorkshopsInfoAction = createAsyncThunkApi(
-  'events/getAllWorkshopsInfoAction',
-  Apis.GET,
-  workshopCRUDUrl
-);
-
 export const addMentorToWorkshopAction = createAsyncThunkApi(
   'events/addMentorToWorkshopAction',
   Apis.POST,

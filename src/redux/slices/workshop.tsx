@@ -17,22 +17,18 @@ import {
   getAllWorkshopMentors,
   removeMentorURL,
 } from 'redux/constants/urls';
-import { InitialStateType } from 'types/redux/workshop';
 
-const initialState: InitialStateType = {
+type FSMInitialStateType = any;
+
+const initialState: FSMInitialStateType = {
   currentState: {
     widgets: [],
   },
   isFetching: false,
   allStates: [],
   allWorkshopEdges: [],
-  fetchedTeamsObjects: [],
-  requestedTeams: [],
-  getWorkshopsLoading: false,
-  registrableWorkshops: [],
   workshop: null,
   answers: [],
-  allWorkshops: [],
   players: null,
   allWorkshopMentors: [],
 };
@@ -41,12 +37,6 @@ export const getOneWorkshopAction = createAsyncThunkApi(
   'workshop/getOneWorkshopAction',
   Apis.GET,
   getOneWorkshopUrl
-);
-
-export const getRegistrableWorkshopsAction = createAsyncThunkApi(
-  'workshop/getRegistrableWorkshopsAction',
-  Apis.GET,
-  getRegistrableWorkshopsUrl
 );
 
 export const getAnswersForReviewAction = createAsyncThunkApi(
@@ -70,23 +60,13 @@ export const getFSMPlayersAction = createAsyncThunkApi(
   getFSMPlayersUrl,
 )
 
-export const getOneTeamInfoAction = createAsyncThunkApi(
-  'workshop/getOneTeamInfoAction',
-  Apis.GET,
-  teamCRUDUrl,
-)
-
 export const getOneWorkshopsInfoAction = createAsyncThunkApi(
   'workshop/getOneWorkshopsInfoAction',
   Apis.GET,
   workshopCRUDUrl
 );
 
-export const getAllWorkshopsInfoAction = createAsyncThunkApi(
-  'workshop/getAllWorkshopsInfoAction',
-  Apis.GET,
-  workshopCRUDUrl
-);
+
 
 export const addMentorToWorkshopAction = createAsyncThunkApi(
   'workshop/addMentorToWorkshopAction',
@@ -206,13 +186,6 @@ const IndexSlice = createSlice({
   reducers: {},
   extraReducers: {
 
-    [getRegistrableWorkshopsAction.pending.toString()]: isFetching,
-    [getRegistrableWorkshopsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.registrableWorkshops = response.results;
-      state.isFetching = false;
-    },
-    [getRegistrableWorkshopsAction.rejected.toString()]: isNotFetching,
-
     [getOneWorkshopAction.pending.toString()]: isFetching,
     [getOneWorkshopAction.fulfilled.toString()]: (state, { payload: { response } }) => {
       state.workshop = response;
@@ -227,16 +200,6 @@ const IndexSlice = createSlice({
     },
     [getAnswersForReviewAction.rejected.toString()]: isNotFetching,
 
-    // for mentors
-    [getAllWorkshopsInfoAction.pending.toString()]: isFetching,
-    [getAllWorkshopsInfoAction.fulfilled.toString()]: (
-      state,
-      { payload: { response } }
-    ) => {
-      state.allWorkshops = response;
-      state.isFetching = false;
-    },
-    [getAllWorkshopsInfoAction.rejected.toString()]: isNotFetching,
 
     [getOneWorkshopsInfoAction.pending.toString()]: isFetching,
     [getOneWorkshopsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
@@ -329,12 +292,6 @@ const IndexSlice = createSlice({
     [removeEdgeAction.rejected.toString()]: isNotFetching,
 
 
-    [getOneTeamInfoAction.pending.toString()]: isFetching,
-    [getOneTeamInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.fetchedTeamsObjects = [response, ...state.fetchedTeamsObjects];
-      state.isFetching = false;
-    },
-    [getOneTeamInfoAction.rejected.toString()]: isNotFetching,
 
 
     [getFSMPlayersAction.pending.toString()]: isFetching,
