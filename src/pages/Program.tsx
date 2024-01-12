@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import FSMsGrid from 'components/organisms/FSMsGrid';
@@ -11,28 +11,48 @@ import {
 import Layout from 'components/template/Layout';
 import ProgramPageSidebar from 'components/organisms/ProgramPageSidebar';
 import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
+import Banner from 'components/molecules/Banner';
+import {
+  getBannersAction,
+} from 'redux/slices/WebSiteAppearance';
 
-function Program({
-  workshops,
-  workshopsCount,
-  event,
-  isLoading,
+type ProgramPropsType = {
+  getEventWorkshops: any;
+  getOneEventInfo: any;
+  getBanners: any;
+
+  program: any;
+  isLoading: any;
+  workshops: any;
+  workshopsCount: number;
+  banners: any;
+}
+
+const Program: FC<ProgramPropsType> = ({
   getEventWorkshops,
   getOneEventInfo,
-}) {
+  getBanners,
+
+  program,
+  isLoading,
+  workshops,
+  workshopsCount,
+  banners,
+}) => {
   const { programId } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     getOneEventInfo({ programId });
+    getBanners({ parameters: { banner_type: 'ProgramPage' } });
   }, []);
 
   useEffect(() => {
-    if (event?.is_user_participating != undefined && !event?.is_user_participating) {
+    if (program?.is_user_participating != undefined && !program?.is_user_participating) {
       navigate(`/program/${programId}/registration/`);
     }
-  }, [event])
+  }, [program])
 
   useEffect(() => {
     getEventWorkshops({ programId, pageNumber });
@@ -40,17 +60,18 @@ function Program({
 
   // todo: handle event not found
   // todo: handle in a better way  
-  if (event?.is_user_participating == undefined) {
+  if (program?.is_user_participating == undefined) {
     return null;
   }
 
   return (
     <Layout appbarMode='PROGRAM'>
       <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
-        <Box width={{ xs: '100%', sm: 180, md: 300 }} position={{ xs: null, sm: 'sticky' }} top={16}>
+        <Box width={{ xs: '100%', sm: '25%', md: '20%' }} position={{ xs: null, sm: 'sticky' }} top={16}>
           <ProgramPageSidebar />
         </Box>
-        <Stack width={'100%'} spacing={2}>
+        <Stack width={{ xs: '100%', sm: '75%', md: '80%' }} spacing={2}>
+          <Banner banners={banners} />
           <Typography component="h1" fontWeight={700} fontSize={32} gutterBottom>
             {'کارگاه‌ها'}
           </Typography>
@@ -78,11 +99,13 @@ function Program({
 const mapStateToProps = (state, ownProps) => ({
   workshops: state.events.workshops,
   isLoading: state.events.getWorkshopsLoading,
-  event: state.events.event,
+  program: state.events.event,
   workshopsCount: state.events.workshopsCount,
+  banners: state.WebSiteAppearance.banners,
 });
 
 export default connect(mapStateToProps, {
   getEventWorkshops: getEventWorkshopsAction,
   getOneEventInfo: getOneEventInfoAction,
+  getBanners: getBannersAction,
 })(Program);
