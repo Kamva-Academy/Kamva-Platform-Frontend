@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Container, Grid, Typography } from '@mui/material'
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import appendPreviousParams from '../utils/AppendPreviousParams';
+import appendPreviousParams from 'utils/AppendPreviousParams';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
