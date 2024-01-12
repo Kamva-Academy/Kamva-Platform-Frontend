@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 
-import WorkshopCard from 'components/organisms/cards/WorkshopCard';
+import FSMCard from 'components/organisms/cards/FSMCard';
 import useWidth from 'utils/UseWidth';
 
 function FSMsGrid({ programId, fsms, isLoading }) {
@@ -14,7 +14,7 @@ function FSMsGrid({ programId, fsms, isLoading }) {
       <Grid container spacing={2}>
         {[...Array(numberOfSkeleton)].map((e, i) => (
           <Grid item key={i} xs={12} sm={6} lg={4}>
-            <WorkshopCard isLoading={true} />
+            <FSMCard isLoading={true} />
           </Grid>
         ))}
       </Grid>
@@ -27,7 +27,7 @@ function FSMsGrid({ programId, fsms, isLoading }) {
       <Grid container spacing={2}>
         {tmpArr.map((workshop) => (
           <Grid item key={workshop.id} xs={12} sm={6} lg={4}>
-            <WorkshopCard programId={programId} workshop={workshop} />
+            <FSMCard programId={programId} workshop={workshop} />
           </Grid>
         ))}
       </Grid>

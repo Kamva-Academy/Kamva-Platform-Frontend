@@ -7,7 +7,7 @@ import { Pagination } from '@mui/material';
 import React, { useEffect, useState, FC } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import WorkshopCard from 'components/organisms/cards/WorkshopCardForMentors';
+import FSMCard from 'components/organisms/cards/WorkshopCardForMentors';
 import CreateWorkshopDialog from 'components/organisms/dialogs/CreateWorkshopDialog';
 import { ITEMS_PER_PAGE_NUMBER } from 'configs/Constants';
 import {
@@ -65,7 +65,7 @@ function Index({
           })}>
           {allEventWorkshops?.map((workshop) => (
             <Grid container item xs={12} sm={6} md={4} key={workshop.id} alignItems='center' justifyContent='center'>
-              <WorkshopCard {...workshop} />
+              <FSMCard {...workshop} />
             </Grid>
           ))}
         </Grid>
