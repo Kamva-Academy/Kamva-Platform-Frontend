@@ -116,7 +116,7 @@ const ProgramCard: FC<ProgramCardPropsType> = ({
                 sx={{ color: '#4d4a70' }}>
                 {event.name}
               </Typography>
-              <Tooltip title='تعداد کسانی که در رویداد ثبت‌نام کرده‌اند' arrow>
+              <Tooltip title='تعداد کسانی که در این برنامه ثبت‌نام کرده‌اند' arrow>
                 <Chip
                   size='small'
                   sx={{ userSelect: 'none' }}
