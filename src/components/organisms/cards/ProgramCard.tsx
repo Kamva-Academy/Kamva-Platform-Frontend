@@ -1,4 +1,12 @@
-import { Box, Button, Card, Chip, Grid, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Card,
+  Chip,
+  Grid,
+  Stack,
+  Typography,
+  Tooltip,
+} from '@mui/material';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslate } from 'react-redux-multilingual/lib/context';
@@ -7,8 +15,19 @@ import { toPersianNumber } from 'utils/translateNumber';
 import { ProgramType } from 'types/models';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 
-const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to, text, disabled = false }) => {
+type EventButtonPropsType = {
+  to?: string;
+  text: string;
+  disabled?: boolean;
+}
+
+const EventButton: FC<EventButtonPropsType> = ({
+  to,
+  text,
+  disabled = false,
+}) => {
   const navigate = useNavigate();
+
   return (
     <Button
       size="small"
@@ -16,17 +35,16 @@ const EventButton: FC<{ to?: string; text: string; disabled?: boolean }> = ({ to
       fullWidth
       color="secondary"
       disabled={disabled}
-      onClick={to ? () => navigate(to) : null}
-    >
+      onClick={to ? () => navigate(to) : null}>
       {text}
     </Button>)
 }
 
-type EventCardPropsType = {
+type ProgramCardPropsType = {
   event: ProgramType;
 }
 
-const EventCard: FC<EventCardPropsType> = ({
+const ProgramCard: FC<ProgramCardPropsType> = ({
   event
 }) => {
   const t = useTranslate();
@@ -48,7 +66,9 @@ const EventCard: FC<EventCardPropsType> = ({
     }
   }, [event]);
 
-  if (!event) return <></>
+  if (!event) return null;
+
+  console.log(event)
 
   return (
     <Card
@@ -91,12 +111,20 @@ const EventCard: FC<EventCardPropsType> = ({
             paddingLeft: 2,
           }}>
           <Stack justifyContent="space-between" spacing={2} sx={{ width: '100%' }}>
-            <Typography variant="h3"
-              sx={{
-                color: '#4d4a70',
-              }}>
-              {event.name}
-            </Typography>
+            <Stack direction={'row'} justifyContent={'space-between'} alignItems={'start'}>
+              <Typography variant="h3"
+                sx={{ color: '#4d4a70' }}>
+                {event.name}
+              </Typography>
+              <Tooltip title='تعداد کسانی که در رویداد ثبت‌نام کرده‌اند' arrow>
+                <Chip
+                  size='small'
+                  sx={{ userSelect: 'none' }}
+                  icon={<PeopleAltIcon fontSize='small' />}
+                  label={toPersianNumber(event.participants_count)}
+                />
+              </Tooltip>
+            </Stack>
             <Typography variant="body2" color="textSecondary">
               {event.description}
             </Typography>
@@ -134,4 +162,4 @@ const EventCard: FC<EventCardPropsType> = ({
   );
 };
 
-export default EventCard;
+export default ProgramCard;

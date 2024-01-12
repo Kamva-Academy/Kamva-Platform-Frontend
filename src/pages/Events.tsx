@@ -1,7 +1,7 @@
 import { Divider, Grid, Typography, Stack } from '@mui/material';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import EventCard from 'components/organisms/cards/Event';
+import ProgramCard from 'components/organisms/cards/ProgramCard';
 import {
   getAllEventsInfoAction,
 } from 'redux/slices/events';
@@ -34,7 +34,7 @@ const Events = ({
     <Grid item container spacing={2} xs={12}>
       {activeEvents.map((event, index) => (
         <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-          <EventCard event={event} />
+          <ProgramCard event={event} />
         </Grid>
       ))}
     </Grid>
@@ -44,7 +44,7 @@ const Events = ({
     <Grid item container spacing={2} xs={12}>
       {inactiveEvents.map((event, index) => (
         <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-          <EventCard event={event} />
+          <ProgramCard event={event} />
         </Grid>
       ))}
     </Grid>

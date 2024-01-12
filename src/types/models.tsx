@@ -22,7 +22,7 @@ export type ProgramType = {
   maximum_participant: number | null;
   merchandise: Merchandise | null;
   name: string;
-  participants_size: number;
+  participants_count: number;
   registration_form: number;
   registration_receipt: string | null;
   registration_since: string | null;
