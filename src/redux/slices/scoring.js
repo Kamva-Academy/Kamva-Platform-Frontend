@@ -63,7 +63,7 @@ export const createCommentAction = createAsyncThunkApi(
 export const getUserCurrentScoresAction = createAsyncThunkApi(
   'scoring/getUserCurrentScoresAction',
   Apis.POST,
-  transactionUrl({ actionUrl: 'get_current_scores' }),
+  transactionUrl({ actionUrl: 'get_user_current_scores' }),
   {
     defaultNotification: {
       error: 'مشکلی در دریافت امتیازات وجود داشت',

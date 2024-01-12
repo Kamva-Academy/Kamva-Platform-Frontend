@@ -6,27 +6,34 @@ import { WidgetModes } from 'components/organisms/Widget';
 import SmallAnswerProblemEditWidget from './edit';
 import { toast } from 'react-toastify';
 import Confetti from 'react-confetti'
+import CostDialog from 'components/organisms/dialogs/CostDialog';
 
 type SmallAnswerProblemWidgetPropsType = {
   onAnswerChange: any;
   onAnswerSubmit: any;
 
+  reward: any;
+  cost: any,
   id: number;
   mode: WidgetModes;
   text: string;
-  answer: any;
+  correct_answer: any;
   last_submitted_answer: any;
+  be_corrected: boolean;
 }
 
 const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
   onAnswerChange,
   onAnswerSubmit,
 
+  reward,
+  cost,
   id: paperId,
   mode,
   text: problemText,
   last_submitted_answer,
-  answer: mainAnswer,
+  correct_answer: correctAnswer,
+  be_corrected: beCorrected,
 }) => {
   const t = useTranslate();
   const [answer, setAnswer] = useState<string>(last_submitted_answer ? last_submitted_answer.text : '');
@@ -45,28 +52,11 @@ const SmallAnswerProblemWidget: FC<SmallAnswerProblemWidgetPropsType> = ({
     if (!answer) {
       return;
     }
-    if (mainAnswer && answer.trim() === mainAnswer.text) {
-      toast.success('آفرین! جوابت درست بود 🥳');
-      setHasAnswered(true);
-      setHasAnsweredCorrectly(true);
-      return;
-    }
-    else if (mainAnswer) {
-      setHasAnswered(true);
-    } else {
-      setDisableSubmitButton(true);
-      setTimeout(() => {
-        setDisableSubmitButton(false);
-      }, 20000);
-      onAnswerSubmit({ widgetId: paperId, text: answer });
-    }
+    onAnswerSubmit({ widgetId: paperId, text: answer });
   }
 
   return (
     <Fragment>
-      {hasAnsweredCorrectly &&
-        <Confetti recycle={false} tweenDuration={6000} numberOfPieces={800} />
-      }
       <Stack spacing={1}>
         <TinyPreview
           frameProps={{

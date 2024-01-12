@@ -32,7 +32,7 @@ function SmallAnswerProblemEditWidget({
       widgetId,
       paper: paperId,
       text: text,
-      correct_answer: correctAnswer,
+      correctAnswer,
       solution,
       onSuccess: handleClose,
     });

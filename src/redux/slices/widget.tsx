@@ -233,15 +233,15 @@ export const updateUploadFileWidgetAction = ({ paper, text, widgetId, solution, 
     onSuccess,
   });
 
-export const createSmallAnswerProblemWidgetAction = ({ paper, text, answer, solution, onSuccess }) =>
-  answer
+export const createSmallAnswerProblemWidgetAction = ({ paper, text, correctAnswer, solution, onSuccess }) =>
+  correctAnswer
     ? _createWidgetAction({
       paper,
       widget_type: 'SmallAnswerProblem',
       text,
       solution,
-      answer: {
-        text: answer,
+      correct_answer: {
+        text: correctAnswer,
         answer_type: 'SmallAnswer',
       },
       onSuccess,
@@ -254,16 +254,16 @@ export const createSmallAnswerProblemWidgetAction = ({ paper, text, answer, solu
       onSuccess,
     })
 
-export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId, answer, solution, onSuccess }) =>
-  answer
+export const updateSmallAnswerProblemWidgetAction = ({ paper, text, widgetId, correctAnswer, solution, onSuccess }) =>
+  correctAnswer
     ? _updateWidgetAction({
       paper,
       widget_type: 'SmallAnswerProblem',
       text,
       widgetId,
       solution,
-      answer: {
-        text: answer,
+      correct_answer: {
+        text: correctAnswer,
         answer_type: 'SmallAnswer',
       },
       onSuccess,

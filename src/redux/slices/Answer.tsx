@@ -39,32 +39,36 @@ const _sendWidgetAnswerAction = createAsyncThunkApi(
   }
 );
 
-export const sendBigAnswerAction = ({ widgetId, text }) =>
+export const sendBigAnswerAction = ({ widgetId, text, onSuccess }) =>
   _sendWidgetAnswerAction({
     widgetId,
     text,
     answer_type: 'BigAnswer',
+    onSuccess,
   });
 
-export const sendSmallAnswerAction = ({ widgetId, text }) =>
+export const sendSmallAnswerAction = ({ widgetId, text, onSuccess }) =>
   _sendWidgetAnswerAction({
     widgetId,
     text,
     answer_type: 'SmallAnswer',
+    onSuccess,
   });
 
-export const sendInviteeUsernameResponseAction = ({ widgetId, username }) =>
+export const sendInviteeUsernameResponseAction = ({ widgetId, username, onSuccess }) =>
   _sendWidgetAnswerAction({
     widgetId,
     username,
     answer_type: 'InviteeUsernameResponse',
+    onSuccess,
   });
 
-export const sendMultiChoiceAnswerAction = ({ problemId, selectedChoices }) =>
+export const sendMultiChoiceAnswerAction = ({ problemId, selectedChoices, onSuccess }) =>
   _sendWidgetAnswerAction({
     widgetId: problemId,
     choices: selectedChoices,
     answer_type: 'MultiChoiceAnswer',
+    onSuccess,
   });
 
 
@@ -73,10 +77,11 @@ export const uploadFileAnswerAction = createAsyncThunkApi(
   Apis.POST_FORM_DATA,
   uploadFileUrl,
   {
-    bodyCreator: ({ problemId, answerFile }) => ({
+    bodyCreator: ({ problemId, answerFile, onSuccess }) => ({
       problem: problemId,
       answer_file: answerFile,
       is_final_answer: true,
+      onSuccess,
     }),
     defaultNotification: {
       success: 'پاسخ شما با موفقیت ثبت شد.',

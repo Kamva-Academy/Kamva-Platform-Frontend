@@ -102,4 +102,7 @@ export const persianMessages = { //todo: handle english
   '5004': 'each event/fsm must have a registration form, given one doesn\'t',
 
   '4059': 'ظرفیت گروه پر است.',
+
+  '6000': 'شما قبلاً به این سوال پاسخ درست داده‌اید',
+  '6001': 'شما به اندازه‌ی کافی امتیاز ندارید',
 }
