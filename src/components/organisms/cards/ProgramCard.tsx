@@ -81,10 +81,10 @@ const ProgramCard: FC<ProgramCardPropsType> = ({
         textDecoration: 'none',
         overflow: 'hidden',
         boxShadow: '0 0 1px 0rem rgba(0, 0, 0, 0.5)',
-        transition: 'transform 0.1s ease-in-out',
+        transition: 'all 0.1s ease-in-out',
         '&:hover': {
-          transform: 'translateY(-0.1rem) scale(1.01)',
-          boxShadow: '0 0.5em 1rem -1rem rgba(0, 0, 0, 0.5)',
+          transform: 'translateY(-0.1rem) scale(1.02)',
+          boxShadow: '0 0.5em 2rem -1rem rgba(0, 0, 0, 0.5)',
         },
       }}>
       <Grid
