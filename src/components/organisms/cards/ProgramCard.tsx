@@ -68,8 +68,6 @@ const ProgramCard: FC<ProgramCardPropsType> = ({
 
   if (!event) return null;
 
-  console.log(event)
-
   return (
     <Card
       sx={{
