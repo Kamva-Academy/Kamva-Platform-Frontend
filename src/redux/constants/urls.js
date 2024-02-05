@@ -60,7 +60,7 @@ export const TeamCRUDUrl = ({ teamId }) =>
 export const createTeamAndJoinActionUrl = 'fsm/team/create_team_and_join/';
 
 
-export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/articles/${articleId}` : `fsm/articles/?page=${pageNumber}`;
+export const articlesUrl = ({ pageNumber, articleId }) => articleId ? `fsm/article/${articleId}` : `fsm/article/?page=${pageNumber}`;
 
 export const statesUrl = 'fsm/state/';
 
