@@ -20,13 +20,13 @@ const WidgetHint: FC<WidgetHintPropsType> = ({ hints }) => {
           color='secondary'
           sx={{
             color: 'white',
-            opacity: 0,
-            animation: !hasClickedHintDialog ? "starred 9s infinite" : 'none',
+            opacity: 0.4,
+            animation: !hasClickedHintDialog ? "starred 15s infinite" : 'none',
             ":hover": { opacity: 1, animation: 'none' },
           }}
           onClick={() => { setViewHintDialog(true); setClickedHintDialog(true); }}
           icon={<HelpIcon />}
-          label="راهنما" />
+          label="راهنمایی" />
       </Box>
       <HelpDialog
         open={openViewHintDialog}
