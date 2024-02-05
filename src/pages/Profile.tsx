@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import Layout from 'components/template/Layout';
 import ProfileTemplate from 'components/template/Profile';
-import { getUserProfileAction } from 'redux/slices/account';
+import {
+  getUserProfileAction,
+} from 'redux/slices/account';
+import {
+  getOneEventInfoAction,
+} from 'redux/slices/events';
+
 
 let tabs = [
   {
@@ -38,6 +44,8 @@ const SECTIONS = {
 
 const Profile = ({
   getUserProfile,
+  getOneEventInfo,
+
   userInfo,
   event,
 }) => {
@@ -45,6 +53,9 @@ const Profile = ({
   const { programId, section } = useParams();
 
   useEffect(() => {
+    if (programId) {
+      getOneEventInfo({ programId });
+    }
     if (userInfo?.id) {
       getUserProfile({ id: userInfo.id });
     }
@@ -59,7 +70,7 @@ const Profile = ({
   }
 
   return (
-    <Layout appbarMode='PROGRAM'>
+    <Layout appbarMode={programId ? 'PROGRAM' : 'DASHBOARD'}>
       <Grid
         container
         justifyContent="center"
@@ -96,4 +107,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getUserProfile: getUserProfileAction,
+  getOneEventInfo: getOneEventInfoAction,
 })(Profile);
