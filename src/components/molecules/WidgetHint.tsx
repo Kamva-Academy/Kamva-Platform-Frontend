@@ -14,7 +14,7 @@ const WidgetHint: FC<WidgetHintPropsType> = ({ hints }) => {
 
   return (
     <>
-      <Box sx={{ position: 'absolute', right: 4 }}>
+      <Box sx={{ position: 'absolute', right: -20, top: -10, rotate: '-24deg' }}>
         <Chip
           size='small'
           color='secondary'
@@ -25,7 +25,7 @@ const WidgetHint: FC<WidgetHintPropsType> = ({ hints }) => {
             ":hover": { opacity: 1, animation: 'none' },
           }}
           onClick={() => { setViewHintDialog(true); setClickedHintDialog(true); }}
-          icon={<HelpIcon />}
+          icon={<HelpIcon fontSize='small' />}
           label="راهنمایی" />
       </Box>
       <HelpDialog
