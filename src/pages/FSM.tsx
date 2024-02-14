@@ -25,7 +25,7 @@ var moment = require('moment');
 export const StatePageContext = React.createContext<any>({});
 
 const FSM = ({
-  fsmState,
+  currentState,
   needUpdateState,
   paperId,
   studentPlayerId,
@@ -119,8 +119,8 @@ const FSM = ({
     setParseTeamState(teamState.get('paperId'));
 
   // useEffect(() => {
-  //   if (!fsmState?.id || !parseTeamState) return;
-  //   if (+parseTeamState !== +fsmState.id) {
+  //   if (!currentState?.id || !parseTeamState) return;
+  //   if (+parseTeamState !== +currentState.id) {
   //     if (isMentor) {
   //       addNotification({
   //         type: 'info',
@@ -138,11 +138,11 @@ const FSM = ({
   // }, [parseTeamState]);
 
   useEffect(() => {
-    if (!teamId || !fsmState) return;
+    if (!teamId || !currentState) return;
     const subscribe = async (teamId) => {
       const teamState = await getTeamState(teamId)
       if (!teamState) {
-        await createTeamState(teamId, fsmState.id.toString(), fsmState.name, moment().format('HH:mm:ss'))
+        await createTeamState(teamId, currentState.id.toString(), currentState.name, moment().format('HH:mm:ss'))
       }
       const subscriber = await getChangeTeamStateSubscription({
         uuid: teamId,
@@ -155,15 +155,19 @@ const FSM = ({
     return () => {
       subscriberRef.current?.unsubscribe();
     }
-  }, [teamId, fsmState]);
+  }, [teamId, currentState]);
 
-  if (!fsmState || !workshop) return null;
+  useEffect(() => {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }, [currentState])
+
+  if (!currentState || !workshop) return null;
 
   return (
     <Fragment>
       <StatePageContext.Provider value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
         <Layout appbarMode={isMentor ? 'MENTOR_FSM' : 'FSM'}>
-          <FSMStateTemplate state={fsmState} playerId={parseInt(playerId)} />
+          <FSMStateTemplate state={currentState} playerId={parseInt(playerId)} />
         </Layout>
         {(workshop.fsm_p_type == 'Team' || workshop.fsm_learning_type == 'Supervised') &&
           <DraggableChatRoom open={openChatRoom} handleClose={() => changeOpenChatRoom()} />
@@ -177,7 +181,7 @@ const mapStateToProps = (state, ownProps) => ({
   openChatRoom: state.currentState.openChatRoom,
   teamRoom: state.currentState.teamRoom,
   myTeam: state.currentState.myTeam,
-  fsmState: state.currentState.fsmState,
+  currentState: state.currentState.fsmState,
   needUpdateState: state.currentState.needUpdateState,
   studentPlayerId: state.currentState.playerId,
   teamId: state.currentState.teamId,
