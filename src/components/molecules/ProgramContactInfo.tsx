@@ -49,7 +49,7 @@ const ProgramContactInfo: FC<ProgramContactInfoPropsType> = ({
 
   return (
     <Stack alignItems={'center'} spacing={3}>
-      <Stack width={'100%'} direction={'row'} justifyContent={{ xs: 'space-evenly', sm: 'space-between' }} alignContent={'space-between'}>
+      <Stack width={'100%'} direction={'row'} justifyContent={'space-evenly'} alignContent={'space-between'}>
         {sociaMedias.filter(socialMedia => socialMedia.href).map((socialMedia, index) =>
           <IconButton key={index} href={socialMedia.href} sx={{
             padding: 0,
