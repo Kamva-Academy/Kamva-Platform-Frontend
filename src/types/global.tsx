@@ -37,3 +37,10 @@ export type RegistrationStepNameType =
   'status' |
   'payment' |
   'program'
+
+export type PartyType = {
+  party_type: 'individual' | 'company';
+  uuid: string;
+  name: string;
+  local_name: string;
+}

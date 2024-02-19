@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import { accountReducer } from './account';
 import { currentStateReducer } from './currentState';
 import { eventsReducer } from './events';
@@ -17,7 +15,7 @@ import { WebSiteAppearanceReducer } from './WebSiteAppearance';
 import { RoadmapReducer } from './Roadmap';
 import { AnswerReducer } from './Answer';
 
-const allReducers = combineReducers({
+const allReducers = {
   paper: paperReducer,
   account: accountReducer,
   currentState: currentStateReducer,
@@ -34,6 +32,6 @@ const allReducers = combineReducers({
   scoring: scoringReducer,
   question: questionReducer,
   answer: AnswerReducer,
-});
+};
 
 export default allReducers;
