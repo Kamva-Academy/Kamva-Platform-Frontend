@@ -193,12 +193,7 @@ function AboutUs() {
           </li>
           <li>
             <Typography variant="subtitle1">
-              تلگرام: <a href='//t.me/rastaiha_info'>@Rastaiha_Info</a>
-            </Typography>
-          </li>
-          <li>
-            <Typography variant="subtitle1">
-              اینستاگرام: <a href='//instagram.com/rastaiha'>@Rastaiha</a>
+              ایتا: <a href='//eitaa.com/Rastaiha'>@Rastaiha</a>
             </Typography>
           </li>
           <li>
