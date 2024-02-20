@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { BACKEND_URL } from 'configs/Constants'
 
 
-export const api = createApi({
+export const mainBackendApi = createApi({
+  reducerPath: 'mainBackendApi',
   baseQuery: fetchBaseQuery({
     // Fill in your own server starting URL here
-    baseUrl: 'https://mps.sepid.org/api/',
+    baseUrl: BACKEND_URL + 'api/',
   }),
   endpoints: build => ({
     // // A query endpoint with no arguments

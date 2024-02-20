@@ -12,20 +12,27 @@ import Layout from 'components/template/Layout';
 import { ProgramType } from 'types/models';
 import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 import Banner from 'components/molecules/Banner';
+import { useGetProgramsQuery } from 'redux/features/ProgramSlice';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 
 const Programs = ({
-  getPrograms,
   getBanners,
-  programs,
   banners,
-  isLoading
 }) => {
 
   useEffect(() => {
-    getPrograms();
     getBanners({ parameters: { banner_type: 'ProgramsPage' } });
   }, []);
+
+  const { data: party } = useGetPartyQuery();
+
+  const {
+    data: programs = [],
+    isLoading,
+  } = useGetProgramsQuery(party?.uuid);
+
+
 
   const activeEvents: ProgramType[] = programs.filter((event: ProgramType) => event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
   const inactiveEvents: ProgramType[] = programs.filter((event: ProgramType) => !event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
@@ -87,9 +94,6 @@ const Programs = ({
 };
 
 const mapStateToProps = (state) => ({
-  programs: state.events.programs,
-  registrableWorkshops: state.workshop.registrableWorkshops,
-  isLoading: state.events.isFetching,
   banners: state.WebSiteAppearance.banners,
 });
 
