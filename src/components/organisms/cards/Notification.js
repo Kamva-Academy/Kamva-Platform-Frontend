@@ -7,22 +7,6 @@ import makeStyles from '@mui/styles/makeStyles';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
-
-  statImage: {
-    height: '40vh',
-    background: `url(${process.env.PUBLIC_URL + '/logo.png'})`,
-    backgroundSize: 'contain',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-  },
-  title: {
-    fontSize: 60,
-    color: '#fbebd1',
-    textShadow: '-2px 2px #888',
-    [theme.breakpoints.down('md')]: {
-      fontSize: 40,
-    },
-  },
   notificationTitle: {
     fontSize: 30,
     color: '#4d4a70',

@@ -27,7 +27,7 @@ const Layout: FC<LayoutPropsType> = ({
     refetch,
   } = useGetPartyQuery();
 
-  if (isLoading && !data) {
+  if (!data) {
     return null;
   }
 
