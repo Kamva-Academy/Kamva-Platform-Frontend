@@ -17,7 +17,7 @@ export type InitialState = {
   getWorkshopsLoading: boolean,
   workshops: Workshop[],
   workshopsCount: number,
-  events: ProgramType[],
+  programs: ProgramType[],
   event: Event,
   registeredEvents: ProgramType[],
   uploadedFile: UploadedFile,

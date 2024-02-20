@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import ProgramCard from 'components/organisms/cards/ProgramCard';
 import {
-  getAllEventsInfoAction,
+  getProgramsAction,
 } from 'redux/slices/events';
 import {
   getBannersAction,
@@ -15,20 +15,20 @@ import Banner from 'components/molecules/Banner';
 
 
 const Programs = ({
-  getAllEventsInfo,
+  getPrograms,
   getBanners,
-  events,
+  programs,
   banners,
   isLoading
 }) => {
 
   useEffect(() => {
-    getAllEventsInfo();
+    getPrograms();
     getBanners({ parameters: { banner_type: 'ProgramsPage' } });
   }, []);
 
-  const activeEvents: ProgramType[] = events.filter((event: ProgramType) => event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
-  const inactiveEvents: ProgramType[] = events.filter((event: ProgramType) => !event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
+  const activeEvents: ProgramType[] = programs.filter((event: ProgramType) => event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
+  const inactiveEvents: ProgramType[] = programs.filter((event: ProgramType) => !event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
 
   const activeEventsElement = (
     <Grid item container spacing={2} xs={12}>
@@ -87,13 +87,13 @@ const Programs = ({
 };
 
 const mapStateToProps = (state) => ({
-  events: state.events.events || [],
+  programs: state.events.programs,
   registrableWorkshops: state.workshop.registrableWorkshops,
   isLoading: state.events.isFetching,
   banners: state.WebSiteAppearance.banners,
 });
 
 export default connect(mapStateToProps, {
-  getAllEventsInfo: getAllEventsInfoAction,
+  getPrograms: getProgramsAction,
   getBanners: getBannersAction,
 })(Programs);

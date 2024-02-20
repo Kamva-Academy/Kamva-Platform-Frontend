@@ -5,7 +5,7 @@ import { createAsyncThunkApi } from '../apis/cerateApiAsyncThunk';
 import {
   applyDiscountUrl,
   deleteInvitationUrl,
-  getAllEventsInfoUrl,
+  getProgramsUrl,
   getAllUserMerchandisesUrl,
   getCertificateUrl,
   getEventRegistrationInfoUrl,
@@ -46,7 +46,7 @@ const initialState: InitialState = {
   getWorkshopsLoading: false,
   workshops: [],
   workshopsCount: 0,
-  events: [],
+  programs: [],
   event: null,
   registeredEvents: [],
   uploadedFile: { link: '', name: '', id: '' },
@@ -73,10 +73,10 @@ export const getEventWorkshopsAction = createAsyncThunkApi(
   getWorkshopsUrl
 );
 
-export const getAllEventsInfoAction = createAsyncThunkApi(
-  'events/getAllEventsInfoAction',
+export const getProgramsAction = createAsyncThunkApi(
+  'events/getProgramsAction',
   Apis.GET,
-  getAllEventsInfoUrl
+  getProgramsUrl
 );
 
 export const getOneEventInfoAction = createAsyncThunkApi(
@@ -511,12 +511,12 @@ const eventSlice = createSlice({
       state.getWorkshopsLoading = false;
     },
 
-    [getAllEventsInfoAction.pending.toString()]: isFetching,
-    [getAllEventsInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {
-      state.events = response;
+    [getProgramsAction.pending.toString()]: isFetching,
+    [getProgramsAction.fulfilled.toString()]: (state, { payload: { response } }) => {
+      state.programs = response;
       state.isFetching = false;
     },
-    [getAllEventsInfoAction.rejected.toString()]: isNotFetching,
+    [getProgramsAction.rejected.toString()]: isNotFetching,
 
     [getOneEventInfoAction.pending.toString()]: isFetching,
     [getOneEventInfoAction.fulfilled.toString()]: (state, { payload: { response } }) => {

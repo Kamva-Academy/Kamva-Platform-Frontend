@@ -33,7 +33,7 @@ export const getWorkshopsUrl = ({ programId, pageNumber }) => {
 export const getRegistrableWorkshopsUrl = 'fsm/fsm/?registrable=true';
 export const reviewAnswersUrl = ({ fsmId }) => `fsm/fsm/${fsmId}/review/`;
 
-export const getAllEventsInfoUrl = 'fsm/event/';
+export const getProgramsUrl = 'fsm/event/';
 export const getOneEventInfoUrl = ({ programId }) => `fsm/event/${programId}/`;
 export const getOneRegistrationFormUrl = ({ id }) => `fsm/registration/${id}/`;
 export const submitRegistrationFormUrl = ({ id }) =>
