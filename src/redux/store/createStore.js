@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import allReducers from '../slices/allReducers';
 import { api } from 'redux/features/apiSlice'
-import { mainBackendApi } from 'redux/features/mainBackendApiSlice'
+import { mainBackendBaseApi } from 'redux/features/mainBackendApiSlice'
 
 
 const createStore = (preloadedState) => {
@@ -9,12 +9,12 @@ const createStore = (preloadedState) => {
     reducer: {
       ...allReducers,
       [api.reducerPath]: api.reducer,
-      [mainBackendApi.reducerPath]: mainBackendApi.reducer,
+      [mainBackendBaseApi.reducerPath]: mainBackendBaseApi.reducer,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware()
         .concat(api.middleware)
-        .concat(mainBackendApi.middleware),
+        .concat(mainBackendBaseApi.middleware),
     devTools: process.env.NODE_ENV === 'development',
     preloadedState,
   });
