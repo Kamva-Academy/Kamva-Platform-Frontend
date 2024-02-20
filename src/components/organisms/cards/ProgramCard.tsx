@@ -41,32 +41,32 @@ const EventButton: FC<EventButtonPropsType> = ({
 }
 
 type ProgramCardPropsType = {
-  event: ProgramType;
+  program: ProgramType;
 }
 
 const ProgramCard: FC<ProgramCardPropsType> = ({
-  event
+  program
 }) => {
   const t = useTranslate();
-  const [eventButtonObj, setEventButtonObj] = useState(event ? <EventButton to={`/program/${event.id}/registration/`} text={t('register')} /> : null);
+  const [eventButtonObj, setEventButtonObj] = useState(program ? <EventButton to={`/program/${program.id}/registration/`} text={t('register')} /> : null);
 
   useEffect(() => {
-    if (!event) return;
-    if (event.user_registration_status === 'NotStarted') {
+    if (!program) return;
+    if (program.user_registration_status === 'NotStarted') {
       setEventButtonObj(<EventButton text={'ثبت‌نام شروع نشده'} disabled />);
     }
-    if (event.user_registration_status === 'DeadlineMissed') {
+    if (program.user_registration_status === 'DeadlineMissed') {
       setEventButtonObj(<EventButton text={'ثبت‌نام تمام شده'} disabled />);
     }
-    if (['Waiting', 'Rejected', 'Accepted'].includes(event.user_registration_status)) {
-      setEventButtonObj(<EventButton to={`/program/${event.id}/registration/`} text={'مشاهده وضعیت ثبت‌نام'} />);
+    if (['Waiting', 'Rejected', 'Accepted'].includes(program.user_registration_status)) {
+      setEventButtonObj(<EventButton to={`/program/${program.id}/registration/`} text={'مشاهده وضعیت ثبت‌نام'} />);
     }
-    if (event.is_user_participating) {
-      setEventButtonObj(<EventButton to={`/program/${event.id}/`} text={'ورود'} />);
+    if (program.is_user_participating) {
+      setEventButtonObj(<EventButton to={`/program/${program.id}/`} text={'ورود'} />);
     }
-  }, [event]);
+  }, [program]);
 
-  if (!event) return null;
+  if (!program) return null;
 
   return (
     <Card
@@ -96,7 +96,7 @@ const ProgramCard: FC<ProgramCardPropsType> = ({
           },
         })}>
         <Grid sx={{ padding: 0 }} item container justifyContent="center" alignItems="center" xs={12} md={5}>
-          <img src={event.cover_page} alt=""
+          <img src={program.cover_page} alt=""
             style={{
               height: '100%',
               width: '100%',
@@ -112,19 +112,19 @@ const ProgramCard: FC<ProgramCardPropsType> = ({
             <Stack direction={'row'} justifyContent={'space-between'} alignItems={'start'}>
               <Typography variant="h3"
                 sx={{ color: '#4d4a70' }}>
-                {event.name}
+                {program.name}
               </Typography>
               <Tooltip title='تعداد کسانی که در این برنامه ثبت‌نام کرده‌اند' arrow>
                 <Chip
                   size='small'
                   sx={{ userSelect: 'none' }}
                   icon={<PeopleAltIcon fontSize='small' />}
-                  label={toPersianNumber(event.participants_count)}
+                  label={toPersianNumber(program.participants_count)}
                 />
               </Tooltip>
             </Stack>
             <Typography variant="body2" color="textSecondary">
-              {event.description}
+              {program.description}
             </Typography>
             <Stack spacing={1}>
               <Grid container direction={'row'} spacing={1}>
@@ -134,13 +134,13 @@ const ProgramCard: FC<ProgramCardPropsType> = ({
                     sx={{ userSelect: 'none' }}
                     icon={<PeopleAltIcon />}
                     label={
-                      event.event_type === 'Individual'
+                      program.event_type === 'Individual'
                         ? 'انفرادی'
-                        : `${toPersianNumber(event.team_size)} ${t('person')}`
+                        : `${toPersianNumber(program.team_size)} ${t('person')}`
                     }
                   />
                 </Grid>
-                {(!event.merchandise || event.merchandise.price === 0) &&
+                {(!program.merchandise || program.merchandise.price === 0) &&
                   <Grid item>
                     <Chip
                       color='success'

@@ -10,7 +10,7 @@ import {
 } from 'redux/slices/WebSiteAppearance';
 import Layout from 'components/template/Layout';
 import { ProgramType } from 'types/models';
-import EventSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
+import ProgramSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 import Banner from 'components/molecules/Banner';
 import { useGetProgramsQuery } from 'redux/features/ProgramSlice';
 import { useGetPartyQuery } from 'redux/features/PartySlice';
@@ -34,24 +34,24 @@ const Programs = ({
 
 
 
-  const activeEvents: ProgramType[] = programs.filter((event: ProgramType) => event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
-  const inactiveEvents: ProgramType[] = programs.filter((event: ProgramType) => !event?.is_active).sort((event1: ProgramType, event2: ProgramType) => event2.id - event1.id)
+  const activePrograms: ProgramType[] = programs.filter((program: ProgramType) => program.is_active).sort((program1: ProgramType, program2: ProgramType) => program2.id - program1.id)
+  const inactivePrograms: ProgramType[] = programs.filter((program: ProgramType) => !program.is_active).sort((program1: ProgramType, program2: ProgramType) => program2.id - program1.id)
 
-  const activeEventsElement = (
+  const activeProgramsElement = (
     <Grid item container spacing={2} xs={12}>
-      {activeEvents.map((event, index) => (
+      {activePrograms.map((program, index) => (
         <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-          <ProgramCard event={event} />
+          <ProgramCard program={program} />
         </Grid>
       ))}
     </Grid>
   );
 
-  const inactiveEventsElement = (
+  const inactiveProgramsElement = (
     <Grid item container spacing={2} xs={12}>
-      {inactiveEvents.map((event, index) => (
+      {inactivePrograms.map((program, index) => (
         <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-          <ProgramCard event={event} />
+          <ProgramCard program={program} />
         </Grid>
       ))}
     </Grid>
@@ -61,7 +61,7 @@ const Programs = ({
     <Grid item container spacing={2} xs={12}>
       {[...Array(6)].map((_, index) => (
         <Grid key={index} container item xs={12} sm={6} md={4} justifyContent='center' alignItems='flex-start' >
-          <EventSkeletonCard />
+          <ProgramSkeletonCard />
         </Grid>
       ))}
     </Grid>
@@ -79,14 +79,14 @@ const Programs = ({
         </Typography>
         <Divider />
         <Grid container>
-          {isLoading ? skeletonElements : activeEventsElement}
+          {isLoading ? skeletonElements : activeProgramsElement}
         </Grid>
         <Typography variant='h2' gutterBottom>
           {'دوره‌‌های گذشته'}
         </Typography>
         <Divider />
         <Grid container>
-          {isLoading ? skeletonElements : inactiveEventsElement}
+          {isLoading ? skeletonElements : inactiveProgramsElement}
         </Grid>
       </Stack>
     </Layout>
