@@ -1,12 +1,20 @@
+import {
+  createSelector,
+} from '@reduxjs/toolkit';
 import { PartyType } from 'types/global';
 import { api } from './apiSlice'
 
-export const PartyApiSlice = api.injectEndpoints({
+export const PartySlice = api.injectEndpoints({
   endpoints: builder => ({
-    getParty: builder.query<PartyType, number>({
-      query: (page) => `party-manager/get_party_by_domain/`,
+    getParty: builder.query<PartyType, void>({
+      query: () => `party-manager/get_party_by_domain/`,
     })
   })
 })
 
-export const { useGetPartyQuery } = PartyApiSlice;
+export const selectPartyUUID = createSelector(
+  PartySlice.endpoints.getParty.select(),
+  reponse => reponse.data?.uuid,
+)
+
+export const { useGetPartyQuery } = PartySlice;

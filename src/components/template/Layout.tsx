@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Container } from '@mui/material';
 
 import AppBar from 'components/organisms/Appbar';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 type LayoutPropsType = {
   appbarMode: 'DASHBOARD' | 'FSM' | 'MENTOR_FSM' | 'PROGRAM' | 'GENERAL' | 'ARTICLE' | 'None';
@@ -15,6 +16,20 @@ const Layout: FC<LayoutPropsType> = ({
 }) => {
   const { programId } = useParams();
   const { fsmId } = useParams();
+
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+  } = useGetPartyQuery();
+
+  if (isLoading && !data) {
+    return null;
+  }
 
   return (
     <Fragment>

@@ -5,7 +5,7 @@ import { BACKEND_URL } from 'configs/Constants';
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     // Fill in your own server starting URL here
-    baseUrl: 'http://localhost:9000/api/',
+    baseUrl: 'https://mps.sepid.org/api/',
   }),
   endpoints: build => ({
     // // A query endpoint with no arguments
