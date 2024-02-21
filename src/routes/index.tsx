@@ -33,11 +33,10 @@ const Root = () => {
 
       <Route path="/about-us/" element={<AboutUs />} />
 
-      <Route path="/" element={<Landing />} />
-
+      <Route path="/" element={<Login />} />
+      <Route path="/login/" element={<Login />} />
       <Route path="/reset-password/" element={<ResetPassword />} />
       <Route path="/create-account/" element={<CreateAccount />} />
-      <Route path="/login/" element={<Login />} />
       <Route path="/articles/" element={<Articles />} />
       <Route path="/article/:articleId/" element={<Article />} />
 
