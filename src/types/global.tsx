@@ -43,4 +43,27 @@ export type PartyType = {
   uuid: string;
   name: string;
   local_name: string;
+  logo: LogoType;
+  main_page_header_data: HeaderData;
+  main_page_og_metadata: OpenGraphMetaData;
+}
+
+export type LogoType = {
+  desktop_image: string;
+  mobile_image: string;
+}
+
+export type HeaderData = {
+  title: string;
+  description: string;
+  theme_color: string;
+  icon: string;
+}
+
+export type OpenGraphMetaData = {
+  title: string;
+  description: string;
+  type: string;
+  image: string;
+  url: string;
 }
