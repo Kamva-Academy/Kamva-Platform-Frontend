@@ -9,7 +9,6 @@ import Programs from 'pages/Programs';
 import Profile from 'pages/Profile';
 import Program from 'pages/Program';
 import ProgramManagement from 'pages/ProgramManagement';
-import Landing from 'pages/Landing';
 import NotFoundPage from 'pages/Message/NotFoundPage';
 import Login from 'pages/Login';
 import FailedPayment from 'pages/Message/FailedPayment';
