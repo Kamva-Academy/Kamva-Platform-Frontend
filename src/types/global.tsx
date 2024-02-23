@@ -1,6 +1,14 @@
-import { FC } from "react";
-
 export type directionType = 'rtl' | 'ltr';
+
+export type AppbarModes = 'DASHBOARD' | 'FSM' | 'MENTOR_FSM' | 'PROGRAM' | 'GENERAL' | 'ARTICLE' | 'None';
+
+export type AppbarItemsType = {
+  desktopLeftItems: any[];
+  desktopRightItems: any[];
+  mobileLeftItems: any[];
+  mobileRightItems: any[];
+  mobileMenuListItems: any[];
+}
 
 export type WidgetTypes =
   'TextWidget' |

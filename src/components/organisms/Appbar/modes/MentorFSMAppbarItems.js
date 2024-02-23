@@ -7,17 +7,20 @@ import ChatRoomButton from '../components/ChatRoomButton';
 import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import { announceMentorDeparture } from 'parse/mentorsInRoom';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
-const MentorFSMAppbarItems = ({ workshop, isMentor, mentorId }) => {
+const MentorFSMAppbarItems = ({ fsm, mentorId }) => {
+
+  const { data: party } = useGetPartyQuery();
 
   useEffect(() => {
-    if (workshop?.name) {
-      document.title = workshop?.name;
+    if (fsm?.name) {
+      document.title = fsm?.name;
     }
     return () => {
-      document.title = 'کاموا';
+      document.title = party.main_page_header_data.title;
     }
-  }, [workshop?.name])
+  }, [fsm?.name])
 
   const { programId, fsmId } = useParams();
   const search = useLocation().search;
@@ -34,7 +37,7 @@ const MentorFSMAppbarItems = ({ workshop, isMentor, mentorId }) => {
   const mobileRightItems = [];
   const mobileMenuListItems = [];
 
-  if (workshop?.fsm_p_type == 'Individual') {
+  if (fsm?.fsm_p_type == 'Individual') {
     desktopRightItems.push(userAvatar);
   } else {
     desktopRightItems.push(teamAvatar);

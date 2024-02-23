@@ -4,11 +4,7 @@ import React, { useEffect } from 'react';
 import Layout from 'components/template/Layout';
 
 function AboutUs() {
-
-  useEffect(() => {
-    document.title = 'کاموا';
-  }, [])
-
+  
   return (
     <Layout appbarMode='DASHBOARD'>
       <Paper sx={{ padding: 2 }}>

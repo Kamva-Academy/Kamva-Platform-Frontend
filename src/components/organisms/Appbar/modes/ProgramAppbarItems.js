@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import UserInfo from '../components/UserInfo';
 
-const ProgramAppbarItems = ({ event }) => {
+const ProgramAppbarItems = ({ program }) => {
 
   useEffect(() => {
-    if (event?.name) {
-      document.title = event.name;
+    if (program?.name) {
+      document.title = program.name;
     }
-  }, [event])
+  }, [program])
 
   const programLogoButton = <ProgramLogoButton />;
   const userInfo = <UserInfo />

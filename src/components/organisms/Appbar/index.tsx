@@ -16,13 +16,14 @@ import HideOnScroll from './components/HideOnScroll';
 import useWidth from 'utils/UseWidth';
 import { useParams } from 'react-router-dom';
 import { getOneEventInfoAction } from 'redux/slices/events';
-import useAppbarModes from './useAppbarModes';
+import useAppbarItems from './useAppbarModes';
+import { AppbarModes } from 'types/global';
 
 type AppbarPropsType = {
   isMentor: boolean;
   workshop: any;
   event: any;
-  mode: string;
+  mode: AppbarModes;
   showBackOnScroll?: boolean;
   hideOnScroll?: boolean;
   position: "fixed" | "absolute" | "sticky" | "static" | "relative";
@@ -52,7 +53,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
     }
   }, [event, programId]);
 
-  if (!mode) return <></>
+  if (mode === 'None') return null;
 
   const {
     desktopLeftItems,
@@ -60,7 +61,7 @@ const ResponsiveAppBar: FC<AppbarPropsType> = ({
     mobileLeftItems,
     mobileRightItems,
     mobileMenuListItems,
-  } = useAppbarModes({ mode, workshop, program: event, isMentor, mentorId });
+  } = useAppbarItems({ mode, fsm: workshop, program: event, mentorId });
 
   const rightItems = width === 'xs' ? mobileRightItems : desktopRightItems;
   const leftItems = width === 'xs' ? mobileLeftItems : desktopLeftItems;

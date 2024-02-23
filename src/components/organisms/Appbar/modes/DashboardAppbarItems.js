@@ -4,14 +4,7 @@ import DashboardButton from '../components/DashboardButton';
 import Brand from '../components/Brand';
 import UserInfo from '../components/UserInfo';
 
-const DashboardAppbarItems = () => {
-
-  useEffect(() => {
-    document.title = 'کاموا';
-    return () => {
-      document.title = 'کاموا';
-    }
-  }, [])
+const DashboardAppbarItems = ({}) => {
 
   const eventsButton = <DashboardButton name={'دوره‌ها'} to={'/programs/'} />;
   const articlesButton = <DashboardButton name={'مقاله‌ها'} to={'/articles/'} />;

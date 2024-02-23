@@ -8,17 +8,20 @@ import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import ScoresDialogButton from '../components/ScoresDialogButton';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
-const FSMAppbarItems = ({ program, workshop, isMentor }) => {
+const FSMAppbarItems = ({ program, fsm }) => {
+
+  const { data: party } = useGetPartyQuery();
 
   useEffect(() => {
-    if (workshop?.name) {
-      document.title = workshop?.name;
+    if (fsm?.name) {
+      document.title = fsm?.name;
     }
     return () => {
-      document.title = 'کاموا';
+      document.title = party.main_page_header_data.title;
     }
-  }, [workshop?.name])
+  }, [fsm?.name])
 
   const { programId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
@@ -35,7 +38,7 @@ const FSMAppbarItems = ({ program, workshop, isMentor }) => {
   const mobileRightItems = [programLogoButton];
   const mobileMenuListItems = [];
 
-  if (workshop?.first_state?.is_exam) {
+  if (fsm?.first_state?.is_exam) {
     desktopLeftItems.push(reviewAnswers);
     mobileMenuListItems.push(reviewAnswers);
   }
@@ -45,17 +48,17 @@ const FSMAppbarItems = ({ program, workshop, isMentor }) => {
     mobileMenuListItems.push(scoresDialogButton);
   }
 
-  if (workshop?.fsm_learning_type == 'Supervised') {
+  if (fsm?.fsm_learning_type == 'Supervised') {
     desktopLeftItems.push(mentorButton);
     mobileLeftItems.push(mentorButton);
   }
 
-  if (workshop?.fsm_learning_type == 'Supervised' || workshop?.fsm_p_type == 'Team') {
+  if (fsm?.fsm_learning_type == 'Supervised' || fsm?.fsm_p_type == 'Team') {
     desktopLeftItems.push(whiteboardButton, chatRoomButton);
     mobileRightItems.push(whiteboardButton, chatRoomButton);
   }
 
-  if (workshop?.fsm_p_type == 'Team') {
+  if (fsm?.fsm_p_type == 'Team') {
     desktopLeftItems.push(teamAvatar);
   }
 

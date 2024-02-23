@@ -5,9 +5,10 @@ import { Helmet } from "react-helmet";
 
 import AppBar from 'components/organisms/Appbar';
 import { useGetPartyQuery } from 'redux/features/PartySlice';
+import { AppbarModes } from 'types/global';
 
 type LayoutPropsType = {
-  appbarMode: 'DASHBOARD' | 'FSM' | 'MENTOR_FSM' | 'PROGRAM' | 'GENERAL' | 'ARTICLE' | 'None';
+  appbarMode: AppbarModes;
   children: any;
 }
 
