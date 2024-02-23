@@ -15,8 +15,7 @@ import selectTheme from './configs/themes';
 import Notifier from './components/molecules/Notifications';
 import { initParseServer } from './parse/init';
 import { resetRedirectAction } from './redux/slices/redirect';
-import { getUserProfileAction } from 'redux/slices/account';
-
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 import Root from './routes';
 import translations from './translations';
 import LinearLoading from 'components/atoms/LinearLoading';
@@ -28,6 +27,8 @@ const App = ({
   loading,
 }) => {
   const navigate = useNavigate();
+
+  useGetPartyQuery();
 
   useEffect(() => {
     if (redirectTo !== null) {
