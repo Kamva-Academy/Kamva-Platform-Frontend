@@ -27,7 +27,7 @@ const useAppbarItems = ({
   program,
   mentorId,
 }: UseAppbarItemsPropsType): AppbarItemsType => {
-  if (mode === 'None') {
+  if (!mode || mode === 'None') {
     throw new Error("None type appbar does not have any item");
   }
   const appbarComponent = mode2component[mode];
