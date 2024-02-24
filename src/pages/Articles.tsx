@@ -1,24 +1,29 @@
 import { Grid, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { connect } from 'react-redux';
 import ArticleCard from 'components/organisms/cards/ArticleCard';
 import { getAllArticlesAction } from '../redux/slices/article';
 import Layout from 'components/template/Layout';
 
-import { ArticleType } from '../types/redux/article';
 import { ITEMS_PER_PAGE_NUMBER } from '../configs/Constants';
+import { useGetArticlesQuery } from 'redux/features/ArticleSlice';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
-const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articlesCount: number }> = ({
-  getAllArticles,
-  articles,
+type ArticlesPropsType = {
+  articlesCount: number;
+}
+
+const Articles: FC<ArticlesPropsType> = ({
   articlesCount,
 }) => {
   const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    getAllArticles({ pageNumber });
-  }, [pageNumber]);
+  const { data: party } = useGetPartyQuery();
+
+  const {
+    data: articles = [],
+  } = useGetArticlesQuery({ partyUuid: party?.uuid, pageNumber });
 
   return (
     <Layout appbarMode='DASHBOARD'>
@@ -51,7 +56,6 @@ const Articles: FC<{ getAllArticles: Function; articles: ArticleType[]; articles
 };
 
 const mapStateToProps = (state) => ({
-  articles: state.article.articles,
   articlesCount: state.article.articlesCount,
 });
 

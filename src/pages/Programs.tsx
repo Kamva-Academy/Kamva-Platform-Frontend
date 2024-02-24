@@ -30,7 +30,7 @@ const Programs = ({
   const {
     data: programs = [],
     isLoading,
-  } = useGetProgramsQuery(party?.uuid);
+  } = useGetProgramsQuery({ partyUuid: party?.uuid });
 
 
 

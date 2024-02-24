@@ -3,8 +3,8 @@ import { mainBackendBaseApi } from './mainBackendApiSlice';
 
 export const ProgramSlice = mainBackendBaseApi.injectEndpoints({
   endpoints: builder => ({
-    getPrograms: builder.query<ProgramType[], string | undefined>({
-      query: (partyUuid) => partyUuid ? `fsm/event/?party=${partyUuid}&is_private=False` : null,
+    getPrograms: builder.query<ProgramType[], { partyUuid: string | undefined, pageNumber?: number }>({
+      query: ({ partyUuid, pageNumber = 1 }) => partyUuid ? `fsm/event/?party=${partyUuid}&page=${pageNumber}&is_private=False` : null,
       transformResponse: (respons: any): ProgramType[] => {
         return respons.results;
       },
