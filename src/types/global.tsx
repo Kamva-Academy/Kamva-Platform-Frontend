@@ -50,7 +50,7 @@ export type PartyType = {
   party_type: 'individual' | 'company';
   uuid: string;
   name: string;
-  local_name: string;
+  display_name: string;
   logo: LogoType;
   main_page_header_data: HeaderData;
   main_page_og_metadata: OpenGraphMetaData;

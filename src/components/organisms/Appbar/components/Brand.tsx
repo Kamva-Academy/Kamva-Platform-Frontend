@@ -22,7 +22,7 @@ const Brand = () => {
     <Stack direction='row' alignItems={'center'} justifyContent={'center'} sx={{ userSelect: 'none' }} spacing={1}>
       <img alt="kamva-logo" src={party.logo.desktop_image} width={50} />
       <Typography fontFamily={"Lalezar"} sx={{ color: "#3498DB", fontSize: { xs: 36, md: 40 }, fontWeight: 500 }}>
-        {party.local_name}
+        {party.display_name}
       </Typography>
     </Stack>
   )
