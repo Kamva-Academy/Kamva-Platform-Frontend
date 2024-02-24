@@ -11,19 +11,21 @@ import { useGetArticlesQuery } from 'redux/features/ArticleSlice';
 import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 type ArticlesPropsType = {
-  articlesCount: number;
 }
 
 const Articles: FC<ArticlesPropsType> = ({
-  articlesCount,
 }) => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const { data: party } = useGetPartyQuery();
 
   const {
-    data: articles = [],
+    isLoading,
+    data,
   } = useGetArticlesQuery({ partyUuid: party?.uuid, pageNumber });
+
+  const articles = data?.articles || [];
+  const count = data?.count || 0;
 
   return (
     <Layout appbarMode='DASHBOARD'>
@@ -45,7 +47,7 @@ const Articles: FC<ArticlesPropsType> = ({
             variant="outlined"
             color="primary"
             shape='rounded'
-            count={Math.ceil(articlesCount / ITEMS_PER_PAGE_NUMBER)}
+            count={Math.ceil(count / ITEMS_PER_PAGE_NUMBER)}
             page={pageNumber}
             onChange={(e, value) => setPageNumber(value)}
           />
