@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { BACKEND_URL } from 'configs/Constants'
 
 
-export const mainBackendBaseApi = createApi({
-  reducerPath: 'mainBackendApi',
+export const ManageContentServiceApi = createApi({
+  reducerPath: 'manage-content-service',
   baseQuery: fetchBaseQuery({
     // Fill in your own server starting URL here
     baseUrl: BACKEND_URL + 'api/',

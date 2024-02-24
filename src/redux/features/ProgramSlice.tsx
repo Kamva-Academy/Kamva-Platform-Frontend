@@ -1,7 +1,7 @@
 import { ProgramType } from 'types/models';
-import { mainBackendBaseApi } from './mainBackendApiSlice';
+import { ManageContentServiceApi } from './ManageContentServiceApi';
 
-export const ProgramSlice = mainBackendBaseApi.injectEndpoints({
+export const ProgramSlice = ManageContentServiceApi.injectEndpoints({
   endpoints: builder => ({
     getPrograms: builder.query<ProgramType[], { partyUuid: string | undefined, pageNumber?: number }>({
       query: ({ partyUuid, pageNumber = 1 }) => partyUuid ? `fsm/event/?party=${partyUuid}&page=${pageNumber}&is_private=False` : null,
