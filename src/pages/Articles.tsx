@@ -18,12 +18,7 @@ const Articles: FC<ArticlesPropsType> = ({
   const [pageNumber, setPageNumber] = useState(1);
 
   const { data: party } = useGetPartyQuery();
-
-  const {
-    isLoading,
-    data,
-  } = useGetArticlesQuery({ partyUuid: party?.uuid, pageNumber });
-
+  const { data } = useGetArticlesQuery({ partyUuid: party?.uuid, pageNumber }, { skip: !Boolean(party) });
   const articles = data?.articles || [];
   const count = data?.count || 0;
 

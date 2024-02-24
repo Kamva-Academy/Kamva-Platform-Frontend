@@ -30,9 +30,7 @@ const Programs = ({
   const {
     data: programs = [],
     isLoading,
-  } = useGetProgramsQuery({ partyUuid: party?.uuid });
-
-
+  } = useGetProgramsQuery({ partyUuid: party?.uuid }, { skip: !Boolean(party) });
 
   const activePrograms: ProgramType[] = programs.filter((program: ProgramType) => program.is_active).sort((program1: ProgramType, program2: ProgramType) => program2.id - program1.id)
   const inactivePrograms: ProgramType[] = programs.filter((program: ProgramType) => !program.is_active).sort((program1: ProgramType, program2: ProgramType) => program2.id - program1.id)
