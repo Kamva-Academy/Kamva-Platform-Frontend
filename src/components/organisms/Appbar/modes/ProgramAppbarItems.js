@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import UserInfo from '../components/UserInfo';
 
 const ProgramAppbarItems = ({ program }) => {
-
-  useEffect(() => {
-    if (program?.name) {
-      document.title = program.name;
-    }
-  }, [program])
-
   const programLogoButton = <ProgramLogoButton />;
   const userInfo = <UserInfo />
 

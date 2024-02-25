@@ -28,7 +28,10 @@ const App = ({
 }) => {
   const navigate = useNavigate();
 
-  useGetPartyQuery();
+  const { data: party } = useGetPartyQuery();
+  useEffect(() => {
+    if (party) document.title = party.main_page_header_data.title;
+  }, [party])
 
   useEffect(() => {
     if (redirectTo !== null) {

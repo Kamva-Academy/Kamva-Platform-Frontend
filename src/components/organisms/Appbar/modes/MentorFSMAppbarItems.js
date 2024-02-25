@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, useLocation } from 'react-router-dom'
 
 import UserAvatar from '../components/Avatar';
@@ -7,21 +7,8 @@ import ChatRoomButton from '../components/ChatRoomButton';
 import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import { announceMentorDeparture } from 'parse/mentorsInRoom';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 const MentorFSMAppbarItems = ({ fsm, mentorId }) => {
-
-  const { data: party } = useGetPartyQuery();
-
-  useEffect(() => {
-    if (fsm?.name) {
-      document.title = fsm?.name;
-    }
-    return () => {
-      document.title = party.main_page_header_data.title;
-    }
-  }, [fsm?.name])
-
   const { programId, fsmId } = useParams();
   const search = useLocation().search;
   let teamId = new URLSearchParams(search).get('teamId');

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom'
 
 import ChatRoomButton from '../components/ChatRoomButton';
@@ -8,22 +8,8 @@ import TeamAvatar from '../components/UsersAvatar';
 import WhiteboardButton from '../components/WhiteboardButton';
 import ProgramLogoButton from '../components/ProgramLogoButton';
 import ScoresDialogButton from '../components/ScoresDialogButton';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 const FSMAppbarItems = ({ program, fsm }) => {
-
-  const { data: party } = useGetPartyQuery();
-
-  useEffect(() => {
-    if (fsm?.name) {
-      document.title = fsm?.name;
-    }
-    return () => {
-      document.title = party.main_page_header_data.title;
-    }
-  }, [fsm?.name])
-
-  const { programId } = useParams();
   const reviewAnswers = <ReviewAnswersButton />
   const chatRoomButton = <ChatRoomButton />;
   const whiteboardButton = <WhiteboardButton />;
