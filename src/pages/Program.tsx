@@ -1,8 +1,10 @@
 import { Box, Stack, Typography } from '@mui/material';
 import Pagination from '@mui/material/Pagination';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Helmet } from "react-helmet";
+
 import FSMsGrid from 'components/organisms/FSMsGrid';
 import {
   getEventWorkshopsAction,
@@ -15,6 +17,7 @@ import Banner from 'components/molecules/Banner';
 import {
   getBannersAction,
 } from 'redux/slices/WebSiteAppearance';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 type ProgramPropsType = {
   getEventWorkshops: any;
@@ -42,6 +45,7 @@ const Program: FC<ProgramPropsType> = ({
   const { programId } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
+  const { data: party } = useGetPartyQuery();
 
   useEffect(() => {
     getOneEventInfo({ programId });
@@ -65,34 +69,41 @@ const Program: FC<ProgramPropsType> = ({
   }
 
   return (
-    <Layout appbarMode='PROGRAM'>
-      <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
-        <Box width={{ xs: '100%', sm: '25%', md: '20%' }} position={{ xs: null, sm: 'sticky' }} top={16}>
-          <ProgramPageSidebar />
-        </Box>
-        <Stack width={{ xs: '100%', sm: '75%', md: '80%' }} spacing={2}>
-          <Banner banners={banners} />
-          <Typography component="h1" fontWeight={700} fontSize={32} gutterBottom>
-            {'کارگاه‌ها'}
-          </Typography>
-          <Stack>
-            <FSMsGrid
-              programId={programId}
-              fsms={workshops}
-              isLoading={isLoading}
+    <Fragment>
+      {party && program &&
+        <Helmet>
+          <title>{party.main_page_header_data.title + ' | ' + program.name}</title>
+        </Helmet>
+      }
+      <Layout appbarMode='PROGRAM'>
+        <Stack width={'100%'} direction={{ xs: 'column', sm: 'row' }} alignItems='flex-start' spacing={2}>
+          <Box width={{ xs: '100%', sm: '25%', md: '20%' }} position={{ xs: null, sm: 'sticky' }} top={16}>
+            <ProgramPageSidebar />
+          </Box>
+          <Stack width={{ xs: '100%', sm: '75%', md: '80%' }} spacing={2}>
+            <Banner banners={banners} />
+            <Typography component="h1" fontWeight={700} fontSize={32} gutterBottom>
+              {'کارگاه‌ها'}
+            </Typography>
+            <Stack>
+              <FSMsGrid
+                programId={programId}
+                fsms={workshops}
+                isLoading={isLoading}
+              />
+            </Stack>
+            <Pagination
+              variant="outlined"
+              color="primary"
+              shape='rounded'
+              count={Math.ceil(workshopsCount / ITEMS_PER_PAGE_NUMBER)}
+              page={pageNumber}
+              onChange={(e, value) => setPageNumber(value)}
             />
           </Stack>
-          <Pagination
-            variant="outlined"
-            color="primary"
-            shape='rounded'
-            count={Math.ceil(workshopsCount / ITEMS_PER_PAGE_NUMBER)}
-            page={pageNumber}
-            onChange={(e, value) => setPageNumber(value)}
-          />
         </Stack>
-      </Stack>
-    </Layout>
+      </Layout>
+    </Fragment>
   );
 }
 

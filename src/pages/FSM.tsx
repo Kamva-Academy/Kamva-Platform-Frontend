@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useLocation } from 'react-router-dom';
+import { Helmet } from "react-helmet";
+
 import { initParseServer } from 'parse/init';
 import FSMStateTemplate from 'components/template/FSMStateTemplate';
 import { createTeamState, getChangeTeamStateSubscription, getTeamState } from '../parse/team';
@@ -165,6 +167,11 @@ const FSM = ({
 
   return (
     <Fragment>
+      {workshop &&
+        <Helmet>
+          <title>{workshop.name}</title>
+        </Helmet>
+      }
       <StatePageContext.Provider value={{ fsmId, paperId, playerId, teamId, isMentor, myTeam, teamRoom }}>
         <Layout appbarMode={isMentor ? 'MENTOR_FSM' : 'FSM'}>
           <FSMStateTemplate state={currentState} playerId={parseInt(playerId)} />

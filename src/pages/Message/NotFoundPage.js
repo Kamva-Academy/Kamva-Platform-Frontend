@@ -1,53 +1,61 @@
 import { Button, ButtonGroup, Container, Grid, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 
 import appendPreviousParams from 'utils/AppendPreviousParams';
+import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
-  useEffect(() => {
-    document.title = 'کاموا - خطای ۴۰۴';
-  }, [])
+
+  const { data: party } = useGetPartyQuery();
 
   return (
-    <Container>
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        sx={{
-          minHeight: '100vh',
-        }}>
+    <Fragment>
+      {party &&
+        <Helmet>
+          <title>{party.main_page_header_data.title + ' | خطای ۴۰۴'}</title>
+        </Helmet>
+      }
+      <Container>
         <Grid
-          direction="column"
-          item
           container
-          spacing={2}
+          justifyContent="center"
           alignItems="center"
-          justifyContent="space-around"
-          xs={12}
-          md={6}>
-          <Grid item>
-            <Typography variant="h1" align="center">
-            🧶 خطای ۴۰۴ 🧶🐈
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h3" align="center">
+          sx={{
+            minHeight: '100vh',
+          }}>
+          <Grid
+            direction="column"
+            item
+            container
+            spacing={2}
+            alignItems="center"
+            justifyContent="space-around"
+            xs={12}
+            md={6}>
+            <Grid item>
+              <Typography variant="h1" align="center">
+                🧶 خطای ۴۰۴ 🧶🐈
+              </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h3" align="center">
                 کاموای این رنگی رو تموم کردیم؛ اما رنگای دیگه‌ای داریم.
-            </Typography>
-          </Grid>
-          <Grid item>
-            <ButtonGroup size="large" variant="contained" color="primary">
-              <Button onClick={() => navigate(appendPreviousParams("/"))}>
-                صفحه اصلی
-              </Button>
-            </ButtonGroup>
+              </Typography>
+            </Grid>
+            <Grid item>
+              <ButtonGroup size="large" variant="contained" color="primary">
+                <Button onClick={() => navigate(appendPreviousParams("/"))}>
+                  صفحه اصلی
+                </Button>
+              </ButtonGroup>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Fragment>
   );
 };
 
