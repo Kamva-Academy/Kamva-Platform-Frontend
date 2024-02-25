@@ -1,5 +1,5 @@
 import { ProgramType } from 'types/models';
-import { ManageContentServiceApi } from './ManageContentServiceApi';
+import { ManageContentServiceApi } from './ManageContentServiceApiSlice';
 
 export const ProgramSlice = ManageContentServiceApi.injectEndpoints({
   endpoints: builder => ({

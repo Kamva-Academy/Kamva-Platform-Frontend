@@ -2,9 +2,9 @@ import {
   createSelector,
 } from '@reduxjs/toolkit';
 import { PartyType } from 'types/global';
-import { api } from './apiSlice'
+import { ManagePartyServiceApi } from './ManagePartyServiceApiSlice'
 
-export const PartySlice = api.injectEndpoints({
+export const PartySlice = ManagePartyServiceApi.injectEndpoints({
   endpoints: builder => ({
     getParty: builder.query<PartyType, void>({
       query: () => `party-manager/get_party_by_domain/`,

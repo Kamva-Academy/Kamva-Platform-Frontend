@@ -1,19 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import allReducers from '../slices/allReducers';
-import { api } from 'redux/features/apiSlice'
-import { ManageContentServiceApi } from 'redux/features/ManageContentServiceApi'
-
+import { ManagePartyServiceApi } from 'redux/features/ManagePartyServiceApiSlice'
+import { ManageContentServiceApi } from 'redux/features/ManageContentServiceApiSlice'
 
 const createStore = (preloadedState) => {
   return configureStore({
     reducer: {
       ...allReducers,
-      [api.reducerPath]: api.reducer,
+      [ManagePartyServiceApi.reducerPath]: ManagePartyServiceApi.reducer,
       [ManageContentServiceApi.reducerPath]: ManageContentServiceApi.reducer,
     },
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware()
-        .concat(api.middleware)
+        .concat(ManagePartyServiceApi.middleware)
         .concat(ManageContentServiceApi.middleware),
     devTools: process.env.NODE_ENV === 'development',
     preloadedState,
