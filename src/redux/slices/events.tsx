@@ -312,7 +312,7 @@ export const getRegistrationFormAction = createAsyncThunkApi(
 
 export const registerUsersViaCSVAction = createAsyncThunkApi(
   'events/registerUsersViaCSVAction',
-  Apis.POST_FORM_DATA,
+  Apis.LONG_LASTING_POST_FORM_DATA,
   registerUsersViaCSVUrl,
   {
     defaultNotification: {
