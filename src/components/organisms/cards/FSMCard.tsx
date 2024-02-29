@@ -102,14 +102,14 @@ export const FSMCard = ({
                 <Typography gutterBottom variant="h4" component="h2">
                   {workshop.name}
                 </Typography>
-                <Tooltip title='تعداد کسانی که کارگاه را شروع کرده‌اند' arrow>
+                {/* <Tooltip title='تعداد کسانی که کارگاه را شروع کرده‌اند' arrow>
                   <Chip
                     size='small'
                     sx={{ userSelect: 'none' }}
                     icon={<PeopleAltIcon fontSize='small' />}
                     label={toPersianNumber(workshop.players_count)}
                   />
-                </Tooltip>
+                </Tooltip> */}
               </Stack>
               <Typography variant="body2" color="textSecondary" component="p">
                 {workshop.description}
