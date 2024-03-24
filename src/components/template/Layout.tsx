@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { Container } from '@mui/material';
 
 import AppBar from 'components/organisms/Appbar';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
 import { AppbarModes } from 'types/global';
 
 type LayoutPropsType = {
@@ -17,8 +16,6 @@ const Layout: FC<LayoutPropsType> = ({
 }) => {
   const { programId } = useParams();
   const { fsmId } = useParams();
-
-  const { data: party } = useGetPartyQuery();
 
   return (
     <Fragment>

@@ -8,7 +8,6 @@ import Layout from 'components/template/Layout';
 
 import { ITEMS_PER_PAGE_NUMBER } from '../configs/Constants';
 import { useGetArticlesQuery } from 'redux/features/ArticleSlice';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 type ArticlesPropsType = {
 }
@@ -17,8 +16,7 @@ const Articles: FC<ArticlesPropsType> = ({
 }) => {
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { data: party } = useGetPartyQuery();
-  const { data } = useGetArticlesQuery({ partyUuid: party?.uuid, pageNumber }, { skip: !Boolean(party) });
+  const { data } = useGetArticlesQuery({ pageNumber });
   const articles = data?.articles || [];
   const count = data?.count || 0;
 

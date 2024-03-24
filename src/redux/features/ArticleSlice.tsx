@@ -3,7 +3,6 @@ import { ManageContentServiceApi } from './ManageContentServiceApiSlice';
 import { ArticleType } from 'types/redux/article';
 
 type GetArticlesInputType = {
-  partyUuid: string;
   pageNumber: number;
 }
 
@@ -15,7 +14,7 @@ type GetArticlesOutputType = {
 export const ArticleSlice = ManageContentServiceApi.injectEndpoints({
   endpoints: builder => ({
     getArticles: builder.query<GetArticlesOutputType, GetArticlesInputType>({
-      query: ({ partyUuid, pageNumber }) => `fsm/article/?party=${partyUuid}&page=${pageNumber}&is_private=False`,
+      query: ({  pageNumber }) => `fsm/article/?page=${pageNumber}&is_private=False`,
       transformResponse: (respons: any): GetArticlesOutputType => {
         return {
           count: respons.count,

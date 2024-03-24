@@ -13,8 +13,6 @@ import { ProgramType } from 'types/models';
 import ProgramSkeletonCard from 'components/organisms/cards/EventSkeletonCard';
 import Banner from 'components/molecules/Banner';
 import { useGetProgramsQuery } from 'redux/features/ProgramSlice';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
-
 
 const Programs = ({
   getBanners,
@@ -25,12 +23,10 @@ const Programs = ({
     getBanners({ parameters: { banner_type: 'ProgramsPage' } });
   }, []);
 
-  const { data: party } = useGetPartyQuery();
-
   const {
     data: programs = [],
     isLoading,
-  } = useGetProgramsQuery({ partyUuid: party?.uuid }, { skip: !Boolean(party) });
+  } = useGetProgramsQuery({ pageNumber: 1 });
 
   const activePrograms: ProgramType[] = programs.filter((program: ProgramType) => program.is_active).sort((program1: ProgramType, program2: ProgramType) => program2.id - program1.id)
   const inactivePrograms: ProgramType[] = programs.filter((program: ProgramType) => !program.is_active).sort((program1: ProgramType, program2: ProgramType) => program2.id - program1.id)

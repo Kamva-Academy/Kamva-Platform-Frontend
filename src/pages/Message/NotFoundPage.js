@@ -4,20 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
 import appendPreviousParams from 'utils/AppendPreviousParams';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
 
-  const { data: party } = useGetPartyQuery();
-
   return (
     <Fragment>
-      {party &&
-        <Helmet>
-          <title>{party.main_page_header_data.title + ' | خطای ۴۰۴'}</title>
-        </Helmet>
-      }
+      <Helmet>
+        <title>{'کاموا | خطای ۴۰۴'}</title>
+      </Helmet>
       <Container>
         <Grid
           container

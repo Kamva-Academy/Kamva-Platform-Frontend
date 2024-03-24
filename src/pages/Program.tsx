@@ -17,7 +17,6 @@ import Banner from 'components/molecules/Banner';
 import {
   getBannersAction,
 } from 'redux/slices/WebSiteAppearance';
-import { useGetPartyQuery } from 'redux/features/PartySlice';
 
 type ProgramPropsType = {
   getEventWorkshops: any;
@@ -45,7 +44,6 @@ const Program: FC<ProgramPropsType> = ({
   const { programId } = useParams();
   const navigate = useNavigate();
   const [pageNumber, setPageNumber] = useState(1);
-  const { data: party } = useGetPartyQuery();
 
   useEffect(() => {
     getOneEventInfo({ programId });
@@ -70,9 +68,9 @@ const Program: FC<ProgramPropsType> = ({
 
   return (
     <Fragment>
-      {party && program &&
+      {program &&
         <Helmet>
-          <title>{party.main_page_header_data.title + ' | ' + program.name}</title>
+          <title>{'آکادمی کاموا | ' + program.name}</title>
         </Helmet>
       }
       <Layout appbarMode='PROGRAM'>
